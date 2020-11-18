@@ -12,6 +12,7 @@ export interface Ban {
 }
 
 export interface Guild extends PartialGuild {
+    icon: string
 	icon_hash?: Nullable<string>;
 	discovery_splash: Nullable<string>;
 	owner?: boolean;
