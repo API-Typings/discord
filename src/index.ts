@@ -9,6 +9,6 @@ export * from './Member';
 export * from './Message';
 export * from './User';
 
-export const DiscordEpoch = 1420070400000
+export const DiscordEpoch = 1420070400000;
 
 export type Nullable<T> = T | null;

@@ -61,9 +61,9 @@ export interface CreateEmojiReq {
 }
 
 export interface CreateGlobalCommandReq {
-    name: string
-    description: string
-    options?: CommandOption[]
+	name: string;
+	description: string;
+	options?: CommandOption[];
 }
 
 export interface CreateGuildReq {
@@ -282,11 +282,11 @@ export interface GuildPruneReq {
 	include_roles?: string[];
 }
 
-export type CreateGuildCommandReq = CreateGlobalCommandReq
+export type CreateGuildCommandReq = CreateGlobalCommandReq;
 
-export type EditGlobalCommandReq = CreateGlobalCommandReq
+export type EditGlobalCommandReq = CreateGlobalCommandReq;
 
-export type EditGuildCommandReq = CreateGlobalCommandReq
+export type EditGuildCommandReq = CreateGlobalCommandReq;
 
 export type EditRoleReq = CreateRoleReq;
 

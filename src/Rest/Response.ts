@@ -39,11 +39,11 @@ export type CreateDM = DMChannel;
 
 export type CreateEmoji = Emoji;
 
-export type CreateGlobalCommand = HTTPCodes.Ok & Command
+export type CreateGlobalCommand = HTTPCodes.Ok & Command;
 
 export type CreateGuild = Guild;
 
-export type CreateGuildCommand = HTTPCodes.Ok & Command
+export type CreateGuildCommand = HTTPCodes.Ok & Command;
 
 export type CreateIntegration = HTTPCodes.NoContent;
 
@@ -67,7 +67,7 @@ export type DeleteChannelPermission = HTTPCodes.NoContent;
 
 export type DeleteEmoji = HTTPCodes.NoContent;
 
-export type DeleteGlobalCommand = HTTPCodes.NoContent
+export type DeleteGlobalCommand = HTTPCodes.NoContent;
 
 export type DeleteGuild = HTTPCodes.NoContent;
 
@@ -109,7 +109,7 @@ export type EditCurrentUserNick = HTTPCodes.Ok;
 
 export type EditEmoji = Emoji;
 
-export type EditGlobalCommand = CreateGlobalCommand
+export type EditGlobalCommand = CreateGlobalCommand;
 
 export type EditGuild = Guild;
 
@@ -161,11 +161,11 @@ export type GetEmoji = Emoji;
 
 export type GetEmojis = Emoji[];
 
-export type GetGlobalCommands = Command[]
+export type GetGlobalCommands = Command[];
 
 export type GetGuild = Guild;
 
-export type GetGuildCommands = Command[]
+export type GetGuildCommands = Command[];
 
 export type GetGuildPreview = GuildPreview;
 
