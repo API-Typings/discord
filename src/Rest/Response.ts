@@ -19,6 +19,7 @@ import {
 	WidgetSettings
 } from '../Guild';
 import { HTTPCodes } from '../Gateway';
+import { Command } from '../Command';
 
 export type AddMember = (HTTPCodes.Created & Member) | HTTPCodes.NoContent;
 
@@ -38,7 +39,11 @@ export type CreateDM = DMChannel;
 
 export type CreateEmoji = Emoji;
 
+export type CreateGlobalCommand = HTTPCodes.Ok & Command
+
 export type CreateGuild = Guild;
+
+export type CreateGuildCommand = HTTPCodes.Ok & Command
 
 export type CreateIntegration = HTTPCodes.NoContent;
 
@@ -62,7 +67,11 @@ export type DeleteChannelPermission = HTTPCodes.NoContent;
 
 export type DeleteEmoji = HTTPCodes.NoContent;
 
+export type DeleteGlobalCommand = HTTPCodes.NoContent
+
 export type DeleteGuild = HTTPCodes.NoContent;
+
+export type DeleteGuildCommand = HTTPCodes.NoContent;
 
 export type DeleteIntegration = HTTPCodes.NoContent;
 
@@ -100,7 +109,11 @@ export type EditCurrentUserNick = HTTPCodes.Ok;
 
 export type EditEmoji = Emoji;
 
+export type EditGlobalCommand = CreateGlobalCommand
+
 export type EditGuild = Guild;
+
+export type EditGuildCommand = HTTPCodes.Ok & Command;
 
 export type EditIntegration = HTTPCodes.NoContent;
 
@@ -148,7 +161,11 @@ export type GetEmoji = Emoji;
 
 export type GetEmojis = Emoji[];
 
+export type GetGlobalCommands = Command[]
+
 export type GetGuild = Guild;
+
+export type GetGuildCommands = Command[]
 
 export type GetGuildPreview = GuildPreview;
 

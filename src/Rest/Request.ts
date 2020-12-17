@@ -4,6 +4,7 @@ import { Nullable, WidgetStyle } from '..';
 import { AuditLogEvent } from '../AuditLog';
 import { AllowedMentions } from '../Message';
 import { Overwrite, PartialChannel } from '../Channel';
+import { CommandOption } from '../Command';
 
 export interface AddGroupDMRecipientReq {
 	access_token: string;
@@ -57,6 +58,12 @@ export interface CreateEmojiReq {
 	name: string;
 	image: string;
 	roles: string[];
+}
+
+export interface CreateGlobalCommandReq {
+    name: string
+    description: string
+    options?: CommandOption[]
 }
 
 export interface CreateGuildReq {
@@ -274,6 +281,12 @@ export interface GuildPruneReq {
 	compute_prune_count: boolean;
 	include_roles?: string[];
 }
+
+export type CreateGuildCommandReq = CreateGlobalCommandReq
+
+export type EditGlobalCommandReq = CreateGlobalCommandReq
+
+export type EditGuildCommandReq = CreateGlobalCommandReq
 
 export type EditRoleReq = CreateRoleReq;
 
