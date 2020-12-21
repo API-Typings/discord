@@ -123,7 +123,8 @@ export enum MessageFlags {
 	IsCrosspost = 1 << 1,
 	SuppressEmbeds = 1 << 2,
 	SourceMessageDeleted = 1 << 3,
-	Urgent = 1 << 4
+	Urgent = 1 << 4,
+	Ephemeral = 1 << 6
 }
 
 export enum MessageType {
@@ -154,3 +155,43 @@ export enum StickerFormat {
 export type AllowedMentionsType = 'role' | 'user' | 'everyone';
 
 export type PartialEmoji = Pick<Emoji, 'id' | 'name' | 'animated'>;
+
+// - ========= - //
+// - ENDPOINTS - //
+// - ========= - //
+
+export interface PostCreateMessage {
+	content?: string;
+	nonce?: number | string;
+	tts?: boolean;
+	file?: unknown;
+	embed?: Embed;
+	payload_json?: string;
+	allowed_mentions?: AllowedMentions;
+}
+export interface GetReactions {
+	before?: string;
+	after?: string;
+	limit?: number;
+}
+
+export interface PatchEditMessage {
+	content?: string;
+	embed?: Embed;
+	flags?: number;
+}
+
+export interface PostBulkDeleteMessages {
+	messages: string[];
+}
+
+export interface PostCreateEmoji {
+	name: string;
+	image: string;
+	roles: string[];
+}
+
+export interface PatchModifyEmoji {
+	name: string;
+	roles: Nullable<string[]>;
+}

@@ -1,3 +1,4 @@
+import { Nullable } from '.';
 import { PartialIntegration } from './Guild';
 
 export interface Connection {
@@ -61,3 +62,27 @@ export enum VisibilityType {
 }
 
 export type PartialUser = Pick<User, 'id' | 'username' | 'avatar' | 'discriminator'>;
+
+// - ========= - //
+// - ENDPOINTS - //
+// - ========= - //
+
+export interface PatchModifyCurrentUser {
+	username?: string;
+	avatar?: Nullable<string>;
+}
+
+export interface GetCurrentUserGuilds {
+	before?: string;
+	after?: string;
+	limit?: number;
+}
+
+export interface PostCreateDM {
+	recipient_id: string;
+}
+
+export interface PostCreateGroupDM {
+	access_tokens: string[];
+	nicks: { [id: string]: string };
+}

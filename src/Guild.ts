@@ -1,15 +1,10 @@
-import { Activity, Nullable } from '.';
-import { Presence } from './Activity';
-import { Channel, PartialChannel } from './Channel';
-import { UpdateStatusData } from './Gateway';
-import { Member, Role, VoiceRegion, VoiceState } from './Member';
 import { Emoji } from './Message';
+import { Presence } from './Activity';
+import { Activity, Nullable } from '.';
+import { UpdateStatusPayload } from './Gateway';
 import { PartialUser, TargetUser, User } from './User';
-
-export interface Ban {
-	reason: Nullable<string>;
-	user: User;
-}
+import { Channel, PermissionOverwrite, PartialChannel } from './Channel';
+import { VoiceRegion, Role, VoiceState, BitwisePermission, Member } from './Member';
 
 export interface Guild extends PartialGuild {
 	icon: string;
@@ -54,6 +49,11 @@ export interface Guild extends PartialGuild {
 	max_video_channel_users?: number;
 	approximate_member_count?: number;
 	approximate_presence_count?: number;
+}
+
+export interface GuildBan {
+	reason: Nullable<string>;
+	user: User;
 }
 
 export interface GuildPreview {
@@ -150,18 +150,6 @@ export interface Template {
 	is_dirty: Nullable<boolean>;
 }
 
-export interface Webhook {
-	id: string;
-	type: WebhookType;
-	guild_id?: string;
-	channel_id: string;
-	user?: User;
-	name: Nullable<string>;
-	avatar: Nullable<string>;
-	token?: string;
-	application_id: Nullable<string>;
-}
-
 export interface Widget {
 	id: string;
 	name: string;
@@ -182,7 +170,7 @@ export interface WidgetMember {
 	username: string;
 	discriminator: string;
 	avatar: Nullable<string>;
-	status: UpdateStatusData;
+	status: UpdateStatusPayload;
 	activity?: Pick<Activity, 'name'>;
 	avatar_url: string;
 }
@@ -233,11 +221,6 @@ export enum VerificationLevel {
 	VeryHigh
 }
 
-export enum WebhookType {
-	Incoming = 1,
-	ChannelFollower
-}
-
 export type Features =
 	| 'INVITE_SPLASH'
 	| 'VIP_REGIONS'
@@ -253,10 +236,145 @@ export type Features =
 	| 'BANNER'
 	| 'WELCOME_SCREEN_ENABLED';
 
+export type Permission = keyof typeof BitwisePermission;
+
 export type PartialIntegration = Pick<Integration, 'id' | 'name' | 'type' | 'account'>;
 
 export type PartialInvite = Pick<InviteMetadata, 'code' | 'uses'>;
 
+export type PartialRole = Pick<Role, 'name' | 'id'>;
+
 export type UnavailableGuild = Pick<Guild, 'id' | 'unavailable'>;
 
 export type WidgetStyle = 'shield' | 'banner1' | 'banner2' | 'banner3' | 'banner4';
+
+// - ========= - //
+// - ENDPOINTS - //
+// - ========= - //
+
+export interface PostCreateGuild {
+	name: string;
+	region?: string;
+	icon?: string;
+	verification_level?: number;
+	default_message_notifications?: number;
+	explicit_content_filter?: number;
+	roles?: Role[];
+	channels?: PartialChannel;
+	afk_channel_id?: string;
+	afk_timeout?: number;
+	system_channel_id?: string;
+}
+
+export interface GetGuild {
+	with_counts?: boolean;
+}
+
+export interface PatchModifyGuild {
+	name: string;
+	region: Nullable<string>;
+	verification_level: Nullable<number>;
+	default_message_notifications: Nullable<number>;
+	explicit_content_filter: Nullable<number>;
+	icon: Nullable<string>;
+	owner_id: string;
+	splash: Nullable<string>;
+	banner: Nullable<string>;
+	system_channel_id: Nullable<string>;
+	rules_channel_id: Nullable<string>;
+	public_updates_channel_id: Nullable<string>;
+	preferred_locale: Nullable<string>;
+}
+
+export interface PostCreateChannel {
+	name: string;
+	type?: number;
+	topic?: string;
+	bitrate?: number;
+	user_limit?: number;
+	rate_limit_per_user?: number;
+	position?: number;
+	permission_overwrites?: PermissionOverwrite[];
+	parent_id?: string;
+	nsfw?: boolean;
+}
+
+export interface PatchModifyChannelPositions {
+	id: string;
+	position: Nullable<number>;
+}
+
+export interface PatchModifyCurrentUserNick {
+	nick?: Nullable<string>;
+}
+
+export interface PostCreateBan {
+	delete_messages_days?: number;
+	reason?: string;
+}
+
+export interface PostCreateRole {
+	name?: string;
+	permissions?: string;
+	color?: number;
+	hoist?: boolean;
+	mentionable?: boolean;
+}
+
+export interface PatchModifyRolePositions {
+	id: string;
+	position?: Nullable<number>;
+}
+
+export interface PatchModifyRole {
+	name?: Nullable<string>;
+	permissions?: Nullable<string>;
+	color?: Nullable<number>;
+	hoist?: Nullable<boolean>;
+	mentionable?: Nullable<boolean>;
+}
+
+export interface GetPruneCount {
+	days: number;
+	include_roles?: string[];
+}
+
+export interface PostBeginPrune {
+	days: number;
+	compute_prune_count: boolean;
+	include_roles?: string[];
+}
+
+export interface PostCreateIntegration {
+	type: string;
+	id: string;
+}
+
+export interface PatchEditIntegration {
+	expire_behavior?: number;
+	expire_grace_period?: number;
+	enable_emoticons?: boolean;
+}
+
+export interface GetWidgetImage {
+	style?: WidgetStyle;
+}
+
+export interface GetGuildInvite {
+	with_counts?: boolean;
+}
+
+export interface PostCreateGuildFromTemplate {
+	name: string;
+	icon?: string;
+}
+
+export interface PostCreateTemplate {
+	name: string;
+	description?: Nullable<string>;
+}
+
+export interface PatchModifyTemplate {
+	name?: string;
+	description?: Nullable<string>;
+}

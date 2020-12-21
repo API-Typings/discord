@@ -6,7 +6,7 @@ export interface Channel {
 	type: ChannelType;
 	guild_id: string;
 	position: number;
-	permission_overwrites: Overwrite[];
+	permission_overwrites: PermissionOverwrite[];
 	name: string;
 	topic: Nullable<string>;
 	nsfw: boolean;
@@ -30,9 +30,9 @@ export interface GroupDMChannel extends DMChannel {
 	owner_id: string;
 }
 
-export interface Overwrite {
+export interface PermissionOverwrite {
 	id: string;
-	type: OverwriteType;
+	type: PermissionOverwriteType;
 	allow: string;
 	deny: string;
 }
@@ -58,7 +58,7 @@ export enum ChannelType {
 	GuildStore
 }
 
-export enum OverwriteType {
+export enum PermissionOverwriteType {
 	Role,
 	Member
 }
@@ -68,3 +68,51 @@ export type Category = Omit<Channel, 'topic'>;
 export type NewsChannel = Omit<TextChannel, 'rate_limit_per_user'>;
 
 export type PartialChannel = Pick<Channel, 'id' | 'name' | 'type'>;
+
+// - ========= - //
+// - ENDPOINTS - //
+// - ========= - //
+
+export interface PatchModifyChannel {
+	name?: string;
+	type?: number;
+	position?: Nullable<number>;
+	topic?: Nullable<string>;
+	nsfw?: Nullable<boolean>;
+	rate_limit_per_user?: Nullable<number>;
+	bitrate?: Nullable<number>;
+	user_limit?: Nullable<number>;
+	permission_overwrites?: Nullable<PermissionOverwrite[]>;
+	parent_id?: Nullable<string>;
+}
+
+export interface GetChannelMessages {
+	around?: string;
+	before?: string;
+	after?: string;
+	limit?: number;
+}
+
+export interface PutEditChannelPermissions {
+	allow?: string;
+	deny?: string;
+	type?: number;
+}
+
+export interface PostCreateChannelInvite {
+	max_age: number;
+	max_uses: number;
+	temporary: boolean;
+	unique: boolean;
+	target_user?: string;
+	target_user_type?: number;
+}
+
+export interface PostFollowNewsChannel {
+	webhook_channel_id: string;
+}
+
+export interface PostGroupDMAddRecipient {
+	access_token: string;
+	nick: string;
+}

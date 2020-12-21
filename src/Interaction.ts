@@ -1,6 +1,7 @@
 import { Embed } from './Embed';
 import { Member } from './Member';
 import { AllowedMentions } from './Message';
+import { PostExecuteWebhook, PatchEditWebhookMessage } from './Webhook';
 
 export interface Interaction {
 	id: string;
@@ -49,3 +50,13 @@ export enum InteractionType {
 	Ping = 1,
 	ApplicationCommand = 2
 }
+
+// - ========= - //
+// - ENDPOINTS - //
+// - ========= - //
+
+export type PatchEditInteractionResponse = PatchEditWebhookMessage;
+
+export type PostCreateFollowupMessage = PostExecuteWebhook;
+
+export type PatchEditFollowupMessage = PatchEditWebhookMessage;

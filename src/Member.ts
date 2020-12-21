@@ -90,3 +90,28 @@ export enum BitwisePermission {
 export type PartialRole = Pick<Role, 'name' | 'id'>;
 
 export type Permission = keyof typeof BitwisePermission;
+
+// - ========= - //
+// - ENDPOINTS - //
+// - ========= - //
+
+export interface GetListMembers {
+	limit?: number;
+	after?: string;
+}
+
+export interface PutAddMember {
+	access_token: string;
+	nick?: string;
+	roles?: string[];
+	mute?: boolean;
+	deaf?: boolean;
+}
+
+export interface PatchModifyMember {
+	nick?: Nullable<string>;
+	roles?: Nullable<string[]>;
+	mute?: Nullable<boolean>;
+	deaf?: Nullable<boolean>;
+	channel_id?: Nullable<string>;
+}

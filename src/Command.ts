@@ -43,3 +43,19 @@ export enum CommandOptionType {
 	Channel,
 	Role
 }
+
+// - ========= - //
+// - ENDPOINTS - //
+// - ========= - //
+
+export interface PostCreateGlobalCommand {
+	name: string;
+	description: string;
+	options?: CommandOption[];
+}
+
+export type PatchEditGlobalCommand = PostCreateGlobalCommand;
+
+export type PostCreateGuildCommand = PostCreateGlobalCommand;
+
+export type PatchEditGuildCommand = PostCreateGlobalCommand;

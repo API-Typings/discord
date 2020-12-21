@@ -1,8 +1,9 @@
 import { User } from './User';
+import { Webhook } from './Webhook';
 import { PartialRole } from './Member';
-import { PartialIntegration, Webhook } from './Guild';
+import { PartialIntegration } from './Guild';
 
-interface AuditLogChangeType<K extends AuditLogChangeKey, T> {
+interface AuditLogChangeType<K extends string, T> {
 	new_value?: T;
 	old_value?: T;
 	key: K;
@@ -122,50 +123,13 @@ export type AuditLogChange =
 	| AuditLogChangeType<'expire_behavior', number>
 	| AuditLogChangeType<'expire_grace_period', number>;
 
-export type AuditLogChangeKey =
-	| 'name'
-	| 'icon_hash'
-	| 'splash_hash'
-	| 'owner_id'
-	| 'region'
-	| 'afk_channel_id'
-	| 'afk_timeout'
-	| 'mfa_level'
-	| 'verification_level'
-	| 'explicit_content_filter'
-	| 'default_message_notifications'
-	| 'vanity_url_code'
-	| '$add'
-	| '$remove'
-	| 'prune_delete_days'
-	| 'widget_enabled'
-	| 'widget_channel_id'
-	| 'system_channel_id'
-	| 'position'
-	| 'topic'
-	| 'bitrate'
-	| 'permission_overwrites'
-	| 'nsfw'
-	| 'application_id'
-	| 'rate_limit_per_user'
-	| 'permissions'
-	| 'color'
-	| 'hoist'
-	| 'mentionalble'
-	| 'allow'
-	| 'deny'
-	| 'code'
-	| 'channel_id'
-	| 'inviter_id'
-	| 'max_uses'
-	| 'uses'
-	| 'temporary'
-	| 'deaf'
-	| 'mute'
-	| 'nick'
-	| 'avatar_hash'
-	| 'id'
-	| 'type'
-	| 'enable_emoticons'
-	| 'expire_behavior'
-	| 'expire_grace_period';
+// - ========= - //
+// - ENDPOINTS - //
+// - ========= - //
+
+export interface GetAuditLog {
+	user_id?: string;
+	action_type?: AuditLogEvent;
+	before?: string;
+	limit?: number;
+}
