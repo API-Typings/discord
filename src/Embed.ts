@@ -40,4 +40,14 @@ export interface EmbedProvider {
 	url?: string;
 }
 
+export enum EmbedLimits {
+	Title = 256,
+	Description = 2048,
+	Fields = 25,
+	FieldName = 256,
+	FieldValue = 1024,
+	Footer = 2048,
+	Author = 256
+}
+
 export type EmbedType = 'rich' | 'image' | 'video' | 'gifv' | 'article' | 'link';
