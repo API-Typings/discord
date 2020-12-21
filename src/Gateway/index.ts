@@ -1,9 +1,8 @@
 export * from './Codes';
 export * from './Commands';
-export * from './Errors';
 export * from './Events';
 
-import { Nullable, OPCodes } from '..';
+import { EncodingType, JSONErrorCodes, Nullable, OPCodes, Events } from '..';
 
 export interface BasePayload {
 	op: OPCodes;
@@ -12,44 +11,27 @@ export interface BasePayload {
 	t: Nullable<Events>;
 }
 
-export enum Events {
-	Ready = 'READY',
-	Resumed = 'RESUMED',
-	GuildCreate = 'GUILD_CREATE',
-	GuildDelete = 'GUILD_DELETE',
-	GuildUpdate = 'GUILD_UPDATE',
-	InviteCreate = 'INVITE_CREATE',
-	InviteDelete = 'INVITE_DELETE',
-	GuildMemberAdd = 'GUILD_MEMBER_ADD',
-	GuildMemberRemove = 'GUILD_MEMBER_REMOVE',
-	GuildMemberUpdate = 'GUILD_MEMBER_UPDATE',
-	GuildMembersChunk = 'GUILD_MEMBERS_CHUNK',
-	GuildIntegrationsUpdate = 'GUILD_INTEGRATIONS_UPDATE',
-	GuildRoleCreate = 'GUILD_ROLE_CREATE',
-	GuildRoleDelete = 'GUILD_ROLE_DELETE',
-	GuildRoleUpdate = 'GUILD_ROLE_UPDATE',
-	GuildBanAdd = 'GUILD_BAN_ADD',
-	GuildBanRemove = 'GUILD_BAN_REMOVE',
-	GuildEmojisUpdate = 'GUILD_EMOJIS_UPDATE',
-	InteractionCreate = 'INTERACTION_CREATE',
-	ChannelCreate = 'CHANNEL_CREATE',
-	ChannelDelete = 'CHANNEL_DELETE',
-	ChannelUpdate = 'CHANNEL_UPDATE',
-	ChannelPinsUpdate = 'CHANNEL_PINS_UPDATE',
-	MessageCreate = 'MESSAGE_CREATE',
-	MessageDelete = 'MESSAGE_DELETE',
-	MessageUpdate = 'MESSAGE_UPDATE',
-	MessageDeleteBulk = 'MESSAGE_DELETE_BULK',
-	MessageReactionAdd = 'MESSAGE_REACTION_ADD',
-	MessageReactionRemove = 'MESSAGE_REACTION_REMOVE',
-	MessageReactionRemoveAll = 'MESSAGE_REACTION_REMOVE_ALL',
-	MessageReactionRemoveEmoji = 'MESSAGE_REACTION_REMOVE_EMOJI',
-	UserUpdate = 'USER_UPDATE',
-	PresenceUpdate = 'PRESENCE_UPDATE',
-	TypingStart = 'TYPING_START',
-	VoiceStateUpdate = 'VOICE_STATE_UPDATE',
-	VoiceServerUpdate = 'VOICE_SERVER_UPDATE',
-	WebhooksUpdate = 'WEBHOOKS_UPDATE'
+export interface BotGatewayData {
+	url: string;
+	shards: number;
+	session_start_limit: SessionStartLimit;
+}
+
+export interface GetBotGateway {
+	v: number;
+	encoding: EncodingType;
+	compress?: 'zlib-stream';
+}
+
+export interface JSONError {
+	message: string;
+	code: JSONErrorCodes;
+}
+
+export interface SessionStartLimit {
+	total: number;
+	remaining: number;
+	reset_after: number;
 }
 
 export enum Intents {
