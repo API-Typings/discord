@@ -31,6 +31,8 @@ export interface EmojisPayload extends GuildPayload {
 	emojis: Emoji[];
 }
 
+export type GuildMemberAddPayload = Member & GuildPayload;
+
 export interface GuildMemberRemovePayload extends GuildPayload {
 	user: User;
 }
@@ -230,9 +232,7 @@ export type GuildIntegrationsUpdate = Event<
 	GuildIntegrationsPayload
 >;
 
-export type GuildMemberAdd = Event<Events.GuildMemberAdd, GuildMemberPayload>;
-
-export type GuildMemberPayload = GuildPayload;
+export type GuildMemberAdd = Event<Events.GuildMemberAdd, GuildPayload>;
 
 export type GuildMemberRemove = Event<Events.GuildMemberRemove, GuildMemberRemovePayload>;
 
