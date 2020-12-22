@@ -3,8 +3,8 @@ import { Presence } from './Activity';
 import { Activity, Nullable } from '.';
 import { UpdateStatusPayload } from './Gateway';
 import { PartialUser, TargetUser, User } from './User';
+import { VoiceRegion, Role, VoiceState, Member } from './Member';
 import { Channel, PermissionOverwrite, PartialChannel } from './Channel';
-import { VoiceRegion, Role, VoiceState, BitwisePermission, Member } from './Member';
 
 export interface Guild extends PartialGuild {
 	icon: string;
@@ -236,13 +236,9 @@ export type Features =
 	| 'BANNER'
 	| 'WELCOME_SCREEN_ENABLED';
 
-export type Permission = keyof typeof BitwisePermission;
-
 export type PartialIntegration = Pick<Integration, 'id' | 'name' | 'type' | 'account'>;
 
 export type PartialInvite = Pick<InviteMetadata, 'code' | 'uses'>;
-
-export type PartialRole = Pick<Role, 'name' | 'id'>;
 
 export type UnavailableGuild = Pick<Guild, 'id' | 'unavailable'>;
 

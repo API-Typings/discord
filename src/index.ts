@@ -6,8 +6,10 @@ export * from './Embed';
 export * from './Gateway';
 export * from './Guild';
 export * from './Interaction';
+export * from './Member';
 export * from './Message';
 export * from './User';
+export * from './Webhook';
 
 export const DiscordEpoch = 1420070400000;
 
