@@ -1,170 +1,370 @@
 import { Nullable } from '..';
 import { Channel } from '../Channel';
+import { Message } from '../Message';
+import { VoiceState } from '../Voice';
+import { TargetUser } from '../Invite';
 import { BasePayload, OPCodes } from '.';
+import { Member, Role } from '../Member';
+import { PartialUser, User } from '../User';
+import { Emoji, PartialEmoji } from '../Emoji';
 import { Guild, UnavailableGuild } from '../Guild';
-import { Member, Role, VoiceState } from '../Member';
-import { PartialUser, TargetUser, User } from '../User';
-import { Emoji, Message, PartialEmoji } from '../Message';
 import { Activity, ClientStatus, Presence } from '../Activity';
+import { Interaction } from '../Interaction';
 
-interface Event<E extends Events, P = unknown> extends BasePayload {
+interface EventPayload<E extends Events, D = Record<string, any>> extends BasePayload {
 	op: OPCodes.Dispatch;
 	t: E;
-	d: P;
+	d: D;
 }
 
-interface GuildPayload {
+interface GuildData {
+	/**
+	 * The ID of the guild
+	 */
 	guild_id: string;
 }
 
-export interface ChannelPinsPayload {
+/**
+ * Sent when a message is pinned or unpinned in a text channel
+ *
+ * @source {@link https://discord.com/developers/docs/topics/gateway#channel-pins-update Gateway}
+ */
+export interface ChannelPinsUpdate extends EventPayload<Events.ChannelPinsUpdate, ChannelPinsUpdate> {
+	/**
+	 * The ID of the guild
+	 */
 	guild_id?: string;
+
+	/**
+	 * The ID of the channel
+	 */
 	channel_id: string;
+
+	/**
+	 * The time at which the most recent pinned message was pinned
+	 */
 	last_pin_timestamp?: Nullable<string>;
 }
 
-export interface GuildBanPayload extends GuildPayload {
-	user: User;
-}
-
-export interface EmojisPayload extends GuildPayload {
-	emojis: Emoji[];
-}
-
-export type GuildMemberAddPayload = Member & GuildPayload;
-
-export interface GuildMemberRemovePayload extends GuildPayload {
-	user: User;
-}
-
-export interface GuildMembersChunkPayload {
+/**
+ * Sent in response to {@link https://discord.com/developers/docs/topics/gateway#request-guild-members Guild Request Members}
+ *
+ * @source {@link https://discord.com/developers/docs/topics/gateway#guild-members-chunk Gateway}
+ */
+export interface GuildMembersChunk extends GuildData, EventPayload<Events.GuildMembersChunk, GuildMembersChunk> {
+	/**
+	 * Set of guild members
+	 */
 	members: Member[];
+
+	/**
+	 * The chunk index in the expected chunks for this response (0 <= chunk_index < chunk_count)
+	 */
 	chunk_index: number;
+
+	/**
+	 * The total number of expected chunks for this response
+	 */
 	chunk_count: number;
+
+	/**
+	 * If passing an invalid ID to `REQUEST_GUILD_MEMBERS`, it will be returned here
+	 */
 	not_found?: string[];
+
+	/**
+	 * If passing true to `REQUEST_GUILD_MEMBERS`, presences of the returned members will be here
+	 */
 	presences?: Presence[];
+
+	/**
+	 * The nonce used in the {@link https://discord.com/developers/docs/topics/gateway#request-guild-members Guild Members Request}
+	 */
 	nonce?: string;
 }
 
-export interface GuildMemberUpdatePayload extends GuildPayload {
+/**
+ * Sent when a guild member is updated
+ *
+ * @source {@link https://discord.com/developers/docs/topics/gateway#guild-member-update Gateway}
+ */
+export interface GuildMemberUpdate extends GuildData, EventPayload<Events.GuildMemberUpdate, GuildMemberUpdate> {
+	/**
+	 * User role IDs
+	 */
 	roles: string[];
+
+	/**
+	 * The user
+	 */
 	user: User;
+
+	/**
+	 * Nickname of the user in the guild
+	 */
 	nick?: Nullable<string>;
+
+	/**
+	 * When the user joined the guild
+	 */
 	joined_at: string;
+
+	/**
+	 * When the user starting {@link https://support.discord.com/hc/en-us/articles/360028038352-Server-Boosting- boosting} the guild
+	 */
 	premium_since?: Nullable<string>;
 }
 
-export interface GuildRolePayload extends GuildPayload {
-	role: Role;
-}
-
-export interface GuildRoleDeletePayload extends GuildPayload {
-	role_id: string;
-}
-
+/**
+ * Sent on connection to the websocket. Defines the heartbeat interval that the client should heartbeat to
+ *
+ * @source {@link https://discord.com/developers/docs/topics/gateway#hello-hello-structure Gateway}
+ */
 export interface Hello {
 	op: OPCodes.Hello;
-	d: HelloPayload;
+	d: {
+		/**
+		 * The interval (in milliseconds) the client should heartbeat with
+		 */
+		heartbeat_interval: number;
+	};
 }
 
-export interface HelloPayload {
-	heartbeat_interval: number;
-}
-
+/**
+ * Sent in response to receiving a heartbeat to acknowledge that it has been received
+ */
 export interface HeartbeatAck {
 	op: OPCodes.HeartbeatAck;
 }
 
+/**
+ * Sent when:
+ *
+ * 1. The gateway could not initialize a session after receiving an {@link https://discord.com/developers/docs/topics/gateway#identify Opcode 2 Identify}
+ * 2. The gateway could not resume a previous session after receiving an {@link https://discord.com/developers/docs/topics/gateway#resume Opcode 6 Resume}
+ * 3. The gateway has invalidated an active session and is requesting client action
+ *
+ * @source {@link https://discord.com/developers/docs/topics/gateway#invalid-session Gateway}
+ */
 export interface InvalidSession {
 	op: OPCodes.InvalidSession;
+
+	/**
+	 * A boolean that indicates whether the session may be resumable
+	 */
 	d: boolean;
 }
 
-export interface InviteCreatePayload {
+/**
+ * Sent when a new invite to a channel is created
+ *
+ * @source {@link https://discord.com/developers/docs/topics/gateway#invite-create Gateway}
+ */
+export interface InviteCreate extends GuildData, EventPayload<Events.InviteCreate, InviteCreate> {
+	/**
+	 * The channel the invite is for
+	 */
 	channel_id: string;
+
+	/**
+	 * The unique invite {@link https://discord.com/developers/docs/resources/invite#invite-object code}
+	 */
 	code: string;
+
+	/**
+	 * The time at which the invite was created
+	 */
 	created_at: string;
-	guild_id?: string;
+
+	/**
+	 * The user that created the invite
+	 */
 	inviter?: User;
+
+	/**
+	 * How long the invite is valid for (in seconds)
+	 */
 	max_age: number;
+
+	/**
+	 * The maximum number of times the invite can be used
+	 */
 	max_uses: number;
+
+	/**
+	 * The target user for this invite
+	 */
 	target_user?: PartialUser;
+
+	/**
+	 * The {@link https://discord.com/developers/docs/resources/invite#invite-object-target-user-types type of user target} for this invite
+	 */
 	target_user_type?: TargetUser;
+
+	/**
+	 * Whether or not the invite is temporary (invited users will be kicked on disconnect unless they're assigned a role)
+	 */
 	temporary: boolean;
+
+	/**
+	 * How many times the invite has been used (always will be 0)
+	 */
 	uses: number;
 }
 
-export interface InviteDeletePayload {
-	channel_id: string;
-	guild_id?: string;
-	code: string;
-}
-
-export interface MessageBulkDeletePayload extends Omit<MessageDeletePayload, 'id'> {
-	ids: string[];
-}
-
-export interface MessageDeletePayload {
+/**
+ * Sent when a message is deleted
+ *
+ * @source {@link https://discord.com/developers/docs/topics/gateway#message-delete Gateway}
+ */
+export interface MessageDelete extends Partial<GuildData>, EventPayload<Events.MessageDelete, MessageDelete> {
+	/**
+	 * The ID of the message
+	 */
 	id: string;
+
+	/**
+	 * The ID of the channel
+	 */
 	channel_id: string;
-	guild_id?: string;
 }
 
-export interface MessageReactionAddPayload extends MessageReactionPayload {
+export interface MessageReactionData extends Partial<GuildData> {
+	/**
+	 * The ID of the user
+	 */
 	user_id: string;
-	emoji: PartialEmoji;
-}
 
-export interface MessageReactionPayload {
+	/**
+	 * The ID of the channel
+	 */
 	channel_id: string;
+
+	/**
+	 * The id of the message
+	 */
 	message_id: string;
-	guild_id?: string;
-}
 
-export interface MessageReactionRemovePayload extends MessageReactionPayload {
-	user_id: string;
-	member?: Member;
-}
-
-export interface MessageReactionRemoveEmojiPayload extends MessageReactionPayload {
+	/**
+	 * The emoji used to react
+	 */
 	emoji: PartialEmoji;
 }
 
-export interface PresenceUpdatePayload {
-	user: User;
-	guild_id: string;
-	status: string;
-	activities: Activity[];
-	client_status: ClientStatus;
+/**
+ * Sent when a user's presence or info, such as name or avatar, is updated
+ *
+ * @source {@link https://discord.com/developers/docs/topics/gateway#presence-update Gateway}
+ */
+export interface PresenceUpdate extends Partial<GuildData>, EventPayload<Events.PresenceUpdate, PresenceUpdate> {
+	/**
+	 * tThe user presence is being updated for
+	 */
+	user?: Partial<User>;
+
+	/**
+	 * Either "idle", "dnd", "online", or "offline"
+	 */
+	status?: string;
+
+	/**
+	 * User's current activities
+	 */
+	activities?: Activity[];
+
+	/**
+	 * User's platform-dependent status
+	 */
+	client_status?: ClientStatus;
 }
 
-export interface ReadyPayload {
+/**
+ * Dispatched when a client has completed the initial handshake with the gateway (for new sessions)
+ */
+export interface Ready extends EventPayload<Events.Ready, Ready> {
+	/**
+	 * {@link https://discord.com/developers/docs/topics/gateway#gateways-gateway-versions Gateway version}
+	 */
 	v: number;
-	user_settings: unknown;
+
+	/**
+	 * Information about the user including email
+	 */
 	user: PartialUser;
+
+	/**
+	 * Empty array
+	 */
 	private_channels: [];
+
+	/**
+	 * The guilds the user is in
+	 */
 	guilds: UnavailableGuild[];
+
+	/**
+	 * Used for resuming connections
+	 */
 	session_id: string;
+
+	/**
+	 * The shard information associated with this session, if sent when identifying
+	 */
 	shard?: [number, number];
+
+	/**
+	 * Contains `id` and `flags`
+	 */
+	application: {
+		/**
+		 * The ID of the app
+		 */
+		id: string;
+
+		/**
+		 * The application's public flags
+		 */
+		flags: number;
+	};
 }
 
-export interface TypingStartPayload {
+/**
+ * Sent when a user starts typing in a channel
+ *
+ * @source {@link https://discord.com/developers/docs/topics/gateway#typing-start Gateway}
+ */
+export interface TypingStart extends Partial<GuildData>, EventPayload<Events.TypingStart, TypingStart> {
+	/**
+	 * ID of the channel
+	 */
 	channel_id: string;
-	guild_id?: string;
+
+	/**
+	 * ID of the user
+	 */
 	user_id: string;
+
+	/**
+	 * Unix time (in seconds) of when the user started typing
+	 */
 	timestamp: number;
+
+	/**
+	 * The member who started typing if this happened in a guild
+	 */
 	member?: Member;
 }
 
-export interface VoiceServerUpdatePayload {
+export interface VoiceServerUpdate extends GuildData, EventPayload<Events.VoiceServerUpdate, VoiceServerUpdate> {
+	/**
+	 * Coice connection token
+	 */
 	token: string;
-	guild_id: string;
-	endpoint: string;
-}
 
-export interface WebhooksUpdatePayload {
-	guild_id: string;
-	channel_id: string;
+	/**
+	 * The voice server host
+	 */
+	endpoint: string;
 }
 
 export enum Events {
@@ -207,82 +407,286 @@ export enum Events {
 	WebhooksUpdate = 'WEBHOOKS_UPDATE'
 }
 
-export type ChannelCreate = Event<Events.ChannelCreate, Channel>;
+/**
+ * Sent when a new guild channel is created, relevant to the current user
+ *
+ * @source {@link https://discord.com/developers/docs/topics/gateway#channel-create Gateway}
+ */
+export type ChannelCreate = EventPayload<Events.ChannelCreate, Channel>;
 
-export type ChannelDelete = Event<Events.ChannelDelete, Channel>;
+/**
+ * Sent when a channel relevant to the current user is deleted
+ *
+ * @source {@link https://discord.com/developers/docs/topics/gateway#channel-delete Gateway}
+ */
+export type ChannelDelete = EventPayload<Events.ChannelDelete, Channel>;
 
-export type ChannelPinsUpdate = Event<Events.ChannelPinsUpdate, Channel>;
+/**
+ * Sent when a channel is updated
+ *
+ * @source {@link https://discord.com/developers/docs/topics/gateway#channel-update Gateway}
+ */
+export type ChannelUpdate = EventPayload<Events.ChannelUpdate, Channel>;
 
-export type ChannelUpdate = Event<Events.ChannelUpdate, Channel>;
-
-export type GuildBanAdd = Event<Events.GuildBanAdd, GuildBanPayload>;
-
-export type GuildBanRemove = Event<Events.GuildBanRemove, GuildBanPayload>;
-
-export type GuildCreate = Event<Events.GuildCreate, Guild>;
-
-export type GuildDelete = Event<Events.GuildDelete, Guild>;
-
-export type GuildEmojisUpdate = Event<Events.GuildEmojisUpdate, EmojisPayload>;
-
-export type GuildIntegrationsPayload = GuildPayload;
-
-export type GuildIntegrationsUpdate = Event<
-	Events.GuildIntegrationsUpdate,
-	GuildIntegrationsPayload
+/**
+ * Sent when a user is banned from a guild
+ *
+ * @source {@link https://discord.com/developers/docs/topics/gateway#guild-ban-add Gateway}
+ */
+export type GuildBanAdd = EventPayload<
+	Events.GuildBanAdd,
+	GuildData & {
+		/**
+		 * The banned user
+		 */
+		user: User;
+	}
 >;
 
-export type GuildMemberAdd = Event<Events.GuildMemberAdd, GuildPayload>;
+/**
+ * Sent when a user is unbanned from a guild
+ *
+ * @source {@link https://discord.com/developers/docs/topics/gateway#guild-ban-remove Gateway}
+ */
+export type GuildBanRemove = EventPayload<
+	Events.GuildBanRemove,
+	GuildData & {
+		/**
+		 * The unbanned user
+		 */
+		user: User;
+	}
+>;
 
-export type GuildMemberRemove = Event<Events.GuildMemberRemove, GuildMemberRemovePayload>;
+/**
+ * Sent when:
+ *
+ * 1. A user is initially connecting, to lazily load and backfill information for all unavailable guilds sent in the {@link https://discord.com/developers/docs/topics/gateway#ready Ready} event
+ * 2. A Guild becomes available again to the client
+ * 3. The current user joines a new Guild
+ *
+ * @source {@link https://discord.com/developers/docs/topics/gateway#guild-create Gateway}
+ */
+export type GuildCreate = EventPayload<Events.GuildCreate, Guild>;
 
-export type GuildMemberUpdate = Event<Events.GuildMemberUpdate, GuildMemberUpdatePayload>;
+/**
+ * Sent when a guild becomes or was already unavailable due to an outage, or when the user leaves or is removed from a guild
+ *
+ * @source {@link https://discord.com/developers/docs/topics/gateway#guild-delete Gateway}
+ */
+export type GuildDelete = EventPayload<Events.GuildDelete, Guild>;
 
-export type GuildRoleCreate = Event<Events.GuildRoleCreate, GuildRolePayload>;
+/**
+ * Sent when a guild's emojis have been updated
+ *
+ * @source {@link https://discord.com/developers/docs/topics/gateway#guild-emojis-update Gateway}
+ */
+export type GuildEmojisUpdate = EventPayload<
+	Events.GuildEmojisUpdate,
+	GuildData & {
+		/**
+		 * Array of {@link https://discord.com/developers/docs/resources/emoji#emoji-object} emojis
+		 */
+		emojis: Emoji[];
+	}
+>;
 
-export type GuildRoleDelete = Event<Events.GuildRoleDelete, GuildRoleDeletePayload>;
+/**
+ * Sent when a guild integration is updated
+ *
+ * @source {@link https://discord.com/developers/docs/topics/gateway#guild-integrations-update Gateway}
+ */
+export type GuildIntegrationsUpdate = EventPayload<Events.GuildIntegrationsUpdate, GuildData>;
 
-export type GuildRoleUpdate = Event<Events.GuildRoleUpdate, GuildRolePayload>;
+/**
+ * Sent when a new user joins a guild
+ *
+ * @source {@link https://discord.com/developers/docs/topics/gateway#guild-member-add Gateway}
+ */
+export type GuildMemberAdd = EventPayload<Events.GuildMemberAdd, Member & GuildData>;
 
-export type GuildUpdate = Event<Events.GuildUpdate, Guild>;
+/**
+ * Sent when a user is removed from a guild (leave/kick/ban)
+ *
+ * @source {@link https://discord.com/developers/docs/topics/gateway#guild-member-remove Gateway}
+ */
+export type GuildMemberRemove = EventPayload<
+	Events.GuildMemberRemove,
+	GuildData & {
+		/**
+		 * The user who was removed
+		 */
+		user: User;
+	}
+>;
 
-export type InviteCreate = Event<Events.InviteCreate, InviteCreatePayload>;
+/**
+ * Sent when a guild role is created
+ *
+ * @source {@link https://discord.com/developers/docs/topics/gateway#guild-role-create Gateway}
+ */
+export type GuildRoleCreate = EventPayload<
+	Events.GuildRoleCreate,
+	GuildData & {
+		/**
+		 * The role created
+		 */
+		role: Role;
+	}
+>;
 
-export type InviteDelete = Event<Events.InviteDelete, InviteDeletePayload>;
+/**
+ * Sent when a guild role is deleted
+ *
+ * @source {@link https://discord.com/developers/docs/topics/gateway#guild-role-delete Gateway}
+ */
+export type GuildRoleDelete = EventPayload<
+	Events.GuildRoleDelete,
+	GuildData & {
+		/**
+		 * ID of the role
+		 */
+		role_id: string;
+	}
+>;
 
-export type MessageBulkDelete = Event<Events.MessageDeleteBulk, MessageBulkDeletePayload>;
+/**
+ * Sent when a guild role is updated
+ *
+ * @source {@link https://discord.com/developers/docs/topics/gateway#guild-role-update Gateway}
+ */
+export type GuildRoleUpdate = EventPayload<
+	Events.GuildRoleUpdate,
+	GuildData & {
+		/**
+		 * The role updated
+		 */
+		role: Role;
+	}
+>;
 
-export type MessageCreate = Event<Events.MessageCreate, Message>;
+/**
+ * Sent when a guild is updated
+ *
+ * @source {@link https://discord.com/developers/docs/topics/gateway#guild-update Gateway}
+ */
+export type GuildUpdate = EventPayload<Events.GuildUpdate, Guild>;
 
-export type MessageDelete = Event<Events.MessageDelete, Message>;
+/**
+ * Sent when a user in a guild uses a {@link https://discord.com/developers/docs/interactions/slash-commands Slash Command}
+ *
+ * @source {@link https://discord.com/developers/docs/topics/gateway#interaction-create Gateway}
+ */
+export type InteractionCreate = EventPayload<Events.InteractionCreate, Interaction>;
 
-export type MessageReactionAdd = Event<Events.MessageReactionAdd, MessageReactionAddPayload>;
+/**
+ * Sent when an invite is deleted
+ *
+ * @source {@link https://discord.com/developers/docs/topics/gateway#invite-delete Gateway}
+ */
+export type InviteDelete = EventPayload<Events.InviteDelete, Pick<InviteCreate, 'guild_id' | 'channel_id' | 'code'>>;
 
-export type MessageReactionRemoveEmoji = Event<
+/**
+ * Sent when multiple messages are deleted at once
+ *
+ * @source {@link https://discord.com/developers/docs/topics/gateway#message-delete-bulk Gateway}
+ */
+export type MessageBulkDelete = EventPayload<
+	Events.MessageDeleteBulk,
+	Pick<MessageDelete, 'channel_id' | 'guild_id'> & {
+		/**
+		 * The IDs of the messages
+		 */
+		ids: string[];
+	}
+>;
+
+/**
+ * Sent when a message is created
+ *
+ * @source {@link https://discord.com/developers/docs/topics/gateway#message-create Gateway}
+ */
+export type MessageCreate = EventPayload<Events.MessageCreate, Message>;
+
+/**
+ * Sent when a user removes a reaction from a message
+ *
+ * @source {@link https://discord.com/developers/docs/topics/gateway#message-reaction-remove Gateway}
+ */
+export type MessageReactionRemove = EventPayload<Events.MessageReactionRemove, MessageReactionData>;
+
+/**
+ * Sent when a bot removes all instances of a given emoji from the reactions of a message
+ *
+ * @source {@link https://discord.com/developers/docs/topics/gateway#message-reaction-remove-emoji Gateway}
+ */
+export type MessageReactionRemoveEmoji = EventPayload<
 	Events.MessageReactionRemoveEmoji,
-	MessageReactionRemoveEmojiPayload
+	Pick<MessageReactionData, 'channel_id' | 'guild_id' | 'message_id'> & {
+		/**
+		 * The emoji that was removed
+		 */
+		emoji: PartialEmoji;
+	}
 >;
 
-export type MessageReactionRemove = Event<
-	Events.MessageReactionRemove,
-	MessageReactionRemovePayload
+/**
+ * Sent when a user adds a reaction to a message
+ *
+ * @source {@link https://discord.com/developers/docs/topics/gateway#message-reaction-add Gateway}
+ */
+export type MessageReactionAdd = EventPayload<
+	Events.MessageReactionAdd,
+	Omit<MessageReactionData, 'emoji'> & {
+		/**
+		 * The member who reacted if this happened in a guild
+		 */
+		member?: Member;
+	}
 >;
 
-export type MessageReactionRemoveAll = Event<
+/**
+ * Sent when a user explicitly removes all reactions from a message
+ *
+ * @source {@link https://discord.com/developers/docs/topics/gateway#message-reaction-remove-all Gateway}
+ */
+export type MessageReactionRemoveAll = EventPayload<
 	Events.MessageReactionRemoveAll,
-	MessageReactionPayload
+	Omit<MessageReactionRemoveEmoji, 'o' | 'd' | 't' | 'emoji'>
 >;
 
-export type MessageUpdate = Event<Events.MessageUpdate, Message>;
+/**
+ * Sent when a message is updated
+ *
+ * @source {@link https://discord.com/developers/docs/topics/gateway#message-update Gateway}
+ */
+export type MessageUpdate = EventPayload<Events.MessageUpdate, Message>;
 
-export type PresenceUpdate = Event<Events.PresenceUpdate, PresenceUpdatePayload>;
+/**
+ * Sent when properties about the user change
+ *
+ * @source {@link https://discord.com/developers/docs/topics/gateway#user-update Gateway}
+ */
+export type UserUpdate = EventPayload<Events.UserUpdate, User>;
 
-export type TypingStart = Event<Events.TypingStart, TypingStartPayload>;
+/**
+ * Sent when someone joins/leaves/moves voice channels
+ *
+ * @source {@link https://discord.com/developers/docs/topics/gateway#voice-state-update Gateway}
+ */
+export type VoiceStateUpdate = EventPayload<Events.VoiceStateUpdate, VoiceState>;
 
-export type UserUpdate = Event<Events.UserUpdate, User>;
-
-export type VoiceServerUpdate = Event<Events.VoiceServerUpdate, VoiceServerUpdatePayload>;
-
-export type VoiceStateUpdate = Event<Events.VoiceStateUpdate, VoiceState>;
-
-export type WebhooksUpdate = Event<Events.WebhooksUpdate, WebhooksUpdatePayload>;
+/**
+ * Sent when a guild channel's webhook is created, updated, or deleted
+ *
+ * @source {@link https://discord.com/developers/docs/topics/gateway#webhooks-update Gateway}
+ */
+export type WebhooksUpdate = EventPayload<
+	Events.WebhooksUpdate,
+	GuildData & {
+		/**
+		 * ID of the channel
+		 */
+		channel_id: string;
+	}
+>;

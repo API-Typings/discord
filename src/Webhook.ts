@@ -1,57 +1,195 @@
 import { User, Nullable, Embed, AllowedMentions } from '.';
 
+/**
+ * Represents a low-effort way to post messages to channels
+ *
+ * @source {@link https://discord.com/developers/docs/resources/webhook#webhook-object-webhook-structure Webhook}
+ */
 export interface Webhook {
+	/**
+	 * The ID of the webhook
+	 */
 	id: string;
+
+	/**
+	 * The {@link https://discord.com/developers/docs/resources/webhook#webhook-object-webhook-types type} of the webhook
+	 */
 	type: WebhookType;
+
+	/**
+	 * The guild ID this webhook is for
+	 */
 	guild_id?: string;
+
+	/**
+	 * The channel ID this webhook is for
+	 */
 	channel_id: string;
+
+	/**
+	 * The user this webhook was created by (not returned when getting a webhook with its token)
+	 */
 	user?: User;
+
+	/**
+	 * The default name of the webhook
+	 */
 	name: Nullable<string>;
+
+	/**
+	 * The default avatar of the webhook
+	 */
 	avatar: Nullable<string>;
+
+	/**
+	 * The secure token of the webhook (returned for Incoming Webhooks)
+	 */
 	token?: string;
+
+	/**
+	 * The bot/OAuth2 application that created this webhook
+	 */
 	application_id: Nullable<string>;
 }
 
+/**
+ * @source {@link https://discord.com/developers/docs/resources/webhook#webhook-object-webhook-types Webhook}
+ */
 export enum WebhookType {
+	/**
+	 * Incoming Webhooks can post messages to channels with a generated token
+	 */
 	Incoming = 1,
+
+	/**
+	 * Channel Follower Webhooks are internal webhooks used with Channel Following to post new messages into channels
+	 */
 	ChannelFollower
 }
 
-// - ========= - //
-// - ENDPOINTS - //
-// - ========= - //
+// - ENDPOINTS
 
-export interface PostCreateWebhook {
+/**
+ * Create a new webhook
+ *
+ * @endpoint [POST](https://discord.com/developers/docs/resources/webhook#create-webhook) `/channels/{channel.id}/webhooks`
+ *
+ * @returns A {@link https://discord.com/developers/docs/resources/webhook#webhook-object webhook} object on success
+ */
+export interface CreateWebhook {
+	/**
+	 * Name of the webhook (1-80 characters)
+	 */
 	name: string;
+
+	/**
+	 * Image for the default webhook avatar
+	 */
 	avatar: Nullable<string>;
 }
 
-export interface PatchModifyWebhook {
+/**
+ * Modify a webhook
+ *
+ * @endpoint [PATCH](https://discord.com/developers/docs/resources/webhook#modify-webhook) `/webhooks/{webhook.id}`
+ *
+ * @returns The {@link https://discord.com/developers/docs/resources/webhook#webhook-object webhook} object on success
+ */
+export interface ModifyWebhook {
+	/**
+	 * The default name of the webhook
+	 */
 	name?: string;
+
+	/**
+	 * Image for the default webhook avatar
+	 */
 	avatar?: Nullable<string>;
+
+	/**
+	 * The new channel id this webhook should be moved to
+	 */
 	channel_id?: Nullable<string>;
 }
 
-export type PatchModifyWebhookWithToken = Omit<PatchModifyWebhook, 'channel_id'>;
+/**
+ * @endpoint [PATCH](https://discord.com/developers/docs/resources/webhook#modify-webhook-with-token) `/webhooks/{webhook.id}/{webhook.token}`
+ */
+export type ModifyWebhookWithToken = Omit<ModifyWebhook, 'channel_id'>;
 
-export interface PostExecuteWebhook {
+/**
+ * @endpoint [POST](https://discord.com/developers/docs/resources/webhook#execute-webhook)
+ */
+export interface ExecuteWebhook {
+	/**
+	 * Waits for server confirmation of message send before response, and returns the created message body
+	 * (defaults to `false`; when `false` a message that is not saved does not return an error)
+	 */
 	wait?: boolean;
+
+	/**
+	 * The message contents (up to 2000 characters)
+	 */
 	content: string;
+
+	/**
+	 * Override the default username of the webhook
+	 */
 	username?: string;
+
+	/**
+	 * Override the default avatar of the webhook
+	 */
 	avatar_url?: string;
+
+	/**
+	 * True if this is a TTS message
+	 */
 	tts?: boolean;
+
+	/**
+	 * The contents of the file being sent
+	 */
 	file: unknown;
+
+	/**
+	 * Embedded `rich` content
+	 */
 	embeds: Embed[];
 	payload_json?: string;
+
+	/**
+	 * Allowed mentions for the message
+	 */
 	allowed_mentions?: AllowedMentions;
 }
 
-export type PostExecuteSlackWebhook = Pick<PostExecuteWebhook, 'wait'>;
+/**
+ * @endpoint [POST](https://discord.com/developers/docs/resources/webhook#execute-slackcompatible-webhook) `/webhooks/{webhook.id}/{webhook.token}/slack`
+ */
+export type ExecuteSlackWebhook = Pick<ExecuteWebhook, 'wait'>;
 
-export type PostExecuteGitHubWebhook = Pick<PostExecuteWebhook, 'wait'>;
+/**
+ * @endpoint [POST](https://discord.com/developers/docs/resources/webhook#execute-githubcompatible-webhook) `/webhooks/{webhook.id}/{webhook.token}/github`
+ */
+export type ExecuteGitHubWebhook = Pick<ExecuteWebhook, 'wait'>;
 
-export interface PatchEditWebhookMessage {
+/**
+ * @endpoint [PATCH](https://discord.com/developers/docs/resources/webhook#edit-webhook-message) `/webhooks/{webhook.id}/{webhook.token}/messages/{message.id}`
+ */
+export interface EditWebhookMessage {
+	/**
+	 * The message contents (up to 2000 characters)
+	 */
 	content?: Nullable<string>;
+
+	/**
+	 * Embedded `rich` content
+	 */
 	embeds?: Nullable<Embed[]>;
+
+	/**
+	 * Allowed mentions for the message
+	 */
 	allowed_mentions?: Nullable<AllowedMentions>;
 }

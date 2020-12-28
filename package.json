@@ -1,6 +1,6 @@
 {
 	"name": "@api-typings/discord",
-	"version": "2.0.2",
+	"version": "3.0.0",
 	"description": "API Typings for the Discord API",
 	"main": "dist/index.js",
 	"typings": "dist/typings/index.d.ts",
@@ -20,16 +20,16 @@
 		"eslint": "^7.13.0",
 		"prettier": "^2.1.2",
 		"typescript": "^4.0.5"
-    },
-    "prettier": {
-        "printWidth": 100,
-        "semi": true,
-        "singleQuote": true,
-        "tabWidth": 4,
-        "trailingComma": "none",
-        "useTabs": true
-    },
-    "publishConfig": {
-        "access": "public"
-    }
+	},
+	"prettier": {
+		"printWidth": 120,
+		"semi": true,
+		"singleQuote": true,
+		"tabWidth": 4,
+		"trailingComma": "none",
+		"useTabs": true
+	},
+	"publishConfig": {
+		"access": "public"
+	}
 }
