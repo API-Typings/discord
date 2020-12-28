@@ -106,7 +106,7 @@ export interface InteractionDataOption {
 	/**
 	 * The value of the pair
 	 */
-	value?: Record<string, any>;
+	value?: any
 
 	/**
 	 * Present if this option is a group or subcommand
