@@ -530,7 +530,7 @@ export interface CreateMessage {
 	/**
 	 * Include to make your message a reply
 	 */
-	message_reference: MessageReference;
+	message_reference?: MessageReference;
 }
 
 /**
