@@ -190,5 +190,6 @@ export enum Intents {
 	/**
 	 * - `TYPING_START`
 	 */
-	DirectMessageTyping = 1 << 14
+    DirectMessageTyping = 1 << 14,
+    All = (1 << 15) - 1
 }
