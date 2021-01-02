@@ -118,7 +118,7 @@ export interface ModifyWebhook {
 export type ModifyWebhookWithToken = Omit<ModifyWebhook, 'channel_id'>;
 
 /**
- * @endpoint [POST](https://discord.com/developers/docs/resources/webhook#execute-webhook)
+ * @endpoint [POST](https://discord.com/developers/docs/resources/webhook#execute-webhook) `/webhooks/{webhook.id}/{webhook.token}`
  */
 export interface ExecuteWebhook {
 	/**
@@ -130,7 +130,7 @@ export interface ExecuteWebhook {
 	/**
 	 * The message contents (up to 2000 characters)
 	 */
-	content: string;
+	content?: string;
 
 	/**
 	 * Override the default username of the webhook
@@ -150,18 +150,19 @@ export interface ExecuteWebhook {
 	/**
 	 * The contents of the file being sent
 	 */
-	file: unknown;
+	file?: unknown;
 
 	/**
 	 * Embedded `rich` content
 	 */
-	embeds: Embed[];
+	embeds?: Embed[];
 	payload_json?: string;
 
 	/**
 	 * Allowed mentions for the message
 	 */
-	allowed_mentions?: AllowedMentions;
+    allowed_mentions?: AllowedMentions;
+    flags?: number
 }
 
 /**
