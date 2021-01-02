@@ -27,12 +27,7 @@ export interface ConnectionProperties {
 	$device: string;
 }
 
-/**
- * Used to trigger the initial handshake with the gateway
- *
- * @source {@link https://discord.com/developers/docs/topics/gateway#identify-identify-structure Gateway}
- */
-export interface Identify extends CommandPayload<OPCodes.Identify, Identify> {
+export interface IdentifyData {
 	/**
 	 * Authentication token
 	 */
@@ -61,7 +56,7 @@ export interface Identify extends CommandPayload<OPCodes.Identify, Identify> {
 	/**
 	 * Presence structure for initial presence information
 	 */
-	presence?: UpdateStatus;
+	presence?: Omit<UpdateStatus, 'op' | 'd'>;
 
 	/**
 	 * Enables dispatching of guild subscription events (presence and typing events)
@@ -74,12 +69,7 @@ export interface Identify extends CommandPayload<OPCodes.Identify, Identify> {
 	intents: number;
 }
 
-/**
- * Used to request all members for a guild or a list of guilds
- *
- * @source {@link https://discord.com/developers/docs/topics/gateway#request-guild-members-guild-request-members-structure Gateway}
- */
-export interface RequestMembers extends CommandPayload<OPCodes.RequestGuildMembers, RequestMembers> {
+export interface RequestMembersData {
 	/**
 	 * ID of the guild to get members for
 	 */
@@ -111,12 +101,7 @@ export interface RequestMembers extends CommandPayload<OPCodes.RequestGuildMembe
 	nonce?: string;
 }
 
-/**
- * Used to replay missed events when a disconnected client resumes
- *
- * @source {@link https://discord.com/developers/docs/topics/gateway#resume-resume-structure Gateway}
- */
-export interface Resume extends CommandPayload<OPCodes.Resume, Resume> {
+export interface ResumeData {
 	/**
 	 * Session token
 	 */
@@ -132,12 +117,7 @@ export interface Resume extends CommandPayload<OPCodes.Resume, Resume> {
 	seq: number;
 }
 
-/**
- * Sent by the client to indicate a presence or status update
- *
- * @source {@link https://discord.com/developers/docs/topics/gateway#update-status-gateway-status-update-structure Gateway}
- */
-export interface UpdateStatus extends CommandPayload<OPCodes.StatusUpdate, UpdateStatus> {
+export interface UpdateStatusData {
 	/**
 	 * Unix time (in milliseconds) of when the client went idle, or null if the client is not idle
 	 */
@@ -159,12 +139,7 @@ export interface UpdateStatus extends CommandPayload<OPCodes.StatusUpdate, Updat
 	afk: boolean;
 }
 
-/**
- * Sent when a client wants to join, move, or disconnect from a voice channel
- *
- * @source {@link https://discord.com/developers/docs/topics/gateway#update-voice-state-gateway-voice-state-update-structure Gateway}
- */
-export interface UpdateVoice extends CommandPayload<OPCodes.VoiceStateUpdate, UpdateVoice> {
+export interface UpdateVoiceData {
 	/**
 	 * ID of the guild
 	 */
@@ -193,3 +168,38 @@ export interface UpdateVoice extends CommandPayload<OPCodes.VoiceStateUpdate, Up
  * @source {@link https://discord.com/developers/docs/topics/gateway#heartbeat Gateway}
  */
 export type Heartbeat = CommandPayload<OPCodes.Heartbeat, Nullable<number>>;
+
+/**
+ * Used to trigger the initial handshake with the gateway
+ *
+ * @source {@link https://discord.com/developers/docs/topics/gateway#identify-identify-structure Gateway}
+ */
+export type Identify = CommandPayload<OPCodes.Identify, IdentifyData>
+
+/**
+ * Used to request all members for a guild or a list of guilds
+ *
+ * @source {@link https://discord.com/developers/docs/topics/gateway#request-guild-members-guild-request-members-structure Gateway}
+ */
+export type RequestMembers = CommandPayload<OPCodes.RequestGuildMembers, RequestMembersData>
+
+/**
+ * Used to replay missed events when a disconnected client resumes
+ *
+ * @source {@link https://discord.com/developers/docs/topics/gateway#resume-resume-structure Gateway}
+ */
+export type Resume = CommandPayload<OPCodes.Resume, ResumeData>
+
+/**
+ * Sent by the client to indicate a presence or status update
+ *
+ * @source {@link https://discord.com/developers/docs/topics/gateway#update-status-gateway-status-update-structure Gateway}
+ */
+export type UpdateStatus = CommandPayload<OPCodes.StatusUpdate, UpdateStatusData>
+
+/**
+ * Sent when a client wants to join, move, or disconnect from a voice channel
+ *
+ * @source {@link https://discord.com/developers/docs/topics/gateway#update-voice-state-gateway-voice-state-update-structure Gateway}
+ */
+export type UpdateVoice = CommandPayload<OPCodes.VoiceStateUpdate, UpdateVoiceData>
