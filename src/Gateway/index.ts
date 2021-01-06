@@ -2,7 +2,7 @@ export * from './Codes';
 export * from './Commands';
 export * from './Events';
 
-import { EncodingType, JSONErrorCodes, Nullable, OPCodes, Events } from '..';
+import { EncodingType, JSONErrorCodes, Nullable, OPCodes, Event } from '..';
 
 /**
  * @source {@link https://discord.com/developers/docs/topics/gateway#payloads-gateway-payload-structure Gateway}
@@ -26,7 +26,7 @@ export interface BasePayload {
 	/**
 	 * The event name for this payload
 	 */
-	t: Nullable<Events>;
+	t: Nullable<Event>;
 }
 
 export interface BotGateway {
@@ -88,9 +88,7 @@ export interface SessionStartLimit {
 }
 
 /**
- * @source
- * [Topics > Gateway > Gateway Intents > List of Intents](
- * https://discord.com/developers/docs/topics/gateway#list-of-intents)
+ * @source {@link https://discord.com/developers/docs/topics/gateway#list-of-intents Gateway}
  */
 export enum Intents {
 	/**
@@ -112,7 +110,7 @@ export enum Intents {
 	 * - `GUILD_MEMBER_UPDATE`
 	 * - `GUILD_MEMBER_REMOVE`
 	 */
-	GuildMembers = 1 << 1,
+	Members = 1 << 1,
 
 	/**
 	 * - `GUILD_BAN_ADD`
@@ -123,33 +121,33 @@ export enum Intents {
 	/**
 	 * - `GUILD_EMOJIS_UPDATE`
 	 */
-	GuildEmojis = 1 << 3,
+	Emojis = 1 << 3,
 
 	/**
 	 * - `GUILD_INTEGRATIONS_UPDATE`
 	 */
-	GuildIntegrations = 1 << 4,
+	Integrations = 1 << 4,
 
 	/**
 	 * - `WEBHOOKS_UPDATE`
 	 */
-	GuildWebhooks = 1 << 5,
+	Webhooks = 1 << 5,
 
 	/**
 	 * - `INVITE_CREATE`
 	 * - `INVITE_DELETE`
 	 */
-	GuildInvites = 1 << 6,
+	Invites = 1 << 6,
 
 	/**
 	 * - `VOICE_STATE_UPDATE`
 	 */
-	GuildVoiceStates = 1 << 7,
+	VoiceStates = 1 << 7,
 
 	/**
 	 * - `PRESENCE_UPDATE`
 	 */
-	GuildPresences = 1 << 8,
+	Presences = 1 << 8,
 
 	/**
 	 * - `MESSAGE_CREATE`
@@ -157,7 +155,7 @@ export enum Intents {
 	 * - `MESSAGE_DELETE`
 	 * - `MESSAGE_DELETE_BULK`
 	 */
-	GuildMessages = 1 << 9,
+	Messages = 1 << 9,
 
 	/**
 	 * - `MESSAGE_REACTION_REMOVE`
@@ -165,12 +163,12 @@ export enum Intents {
 	 * - `MESSAGE_REACTION_REMOVE_ALL`
 	 * - `MESSAGE_REACTION_REMOVE_EMOJI`
 	 */
-	GuildMessageReactions = 1 << 10,
+	MessageReactions = 1 << 10,
 
 	/**
 	 * - `TYPING_START`
 	 */
-	GuildMessageTyping = 1 << 11,
+	MessageTyping = 1 << 11,
 
 	/**
 	 * - `MESSAGE_CREATE`
@@ -190,6 +188,6 @@ export enum Intents {
 	/**
 	 * - `TYPING_START`
 	 */
-    DirectMessageTyping = 1 << 14,
-    All = (1 << 15) - 1
+	DirectMessageTyping = 1 << 14,
+	All = (1 << 15) - 1
 }

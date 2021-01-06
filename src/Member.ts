@@ -16,7 +16,7 @@ export interface Member {
 	nick?: Nullable<string>;
 
 	/**
-	 * Array of {@link https://discord.com/developers/docs/topics/permissions#role-object} role object IDs
+	 * Array of {@link https://discord.com/developers/docs/topics/permissions#role-object role} object IDs
 	 */
 	roles: string[];
 

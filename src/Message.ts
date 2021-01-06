@@ -406,7 +406,7 @@ export enum MessageFlags {
 	/**
 	 * The source message for this crosspost has been deleted (via Channel Following)
 	 */
-	SourceMessageDeleted = 1 << 3,
+	SourceDeleted = 1 << 3,
 
 	/**
 	 * This message came from the urgent message system

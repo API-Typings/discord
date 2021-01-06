@@ -161,7 +161,7 @@ export interface EmbedProvider {
  *
  * @source {@link https://discord.com/developers/docs/resources/channel#embed-limits-limits Channel}
  */
-export enum EmbedLimits {
+export enum EmbedLimit {
 	Title = 256,
 	Description = 2048,
 	Fields = 25,

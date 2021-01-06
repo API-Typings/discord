@@ -174,32 +174,32 @@ export type Heartbeat = CommandPayload<OPCodes.Heartbeat, Nullable<number>>;
  *
  * @source {@link https://discord.com/developers/docs/topics/gateway#identify-identify-structure Gateway}
  */
-export type Identify = CommandPayload<OPCodes.Identify, IdentifyData>
+export type Identify = CommandPayload<OPCodes.Identify, IdentifyData>;
 
 /**
  * Used to request all members for a guild or a list of guilds
  *
  * @source {@link https://discord.com/developers/docs/topics/gateway#request-guild-members-guild-request-members-structure Gateway}
  */
-export type RequestMembers = CommandPayload<OPCodes.RequestGuildMembers, RequestMembersData>
+export type RequestMembers = CommandPayload<OPCodes.RequestGuildMembers, RequestMembersData>;
 
 /**
  * Used to replay missed events when a disconnected client resumes
  *
  * @source {@link https://discord.com/developers/docs/topics/gateway#resume-resume-structure Gateway}
  */
-export type Resume = CommandPayload<OPCodes.Resume, ResumeData>
+export type Resume = CommandPayload<OPCodes.Resume, ResumeData>;
 
 /**
  * Sent by the client to indicate a presence or status update
  *
  * @source {@link https://discord.com/developers/docs/topics/gateway#update-status-gateway-status-update-structure Gateway}
  */
-export type UpdateStatus = CommandPayload<OPCodes.StatusUpdate, UpdateStatusData>
+export type UpdateStatus = CommandPayload<OPCodes.StatusUpdate, UpdateStatusData>;
 
 /**
  * Sent when a client wants to join, move, or disconnect from a voice channel
  *
  * @source {@link https://discord.com/developers/docs/topics/gateway#update-voice-state-gateway-voice-state-update-structure Gateway}
  */
-export type UpdateVoice = CommandPayload<OPCodes.VoiceStateUpdate, UpdateVoiceData>
+export type UpdateVoice = CommandPayload<OPCodes.VoiceStateUpdate, UpdateVoiceData>;

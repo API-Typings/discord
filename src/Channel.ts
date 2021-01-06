@@ -229,7 +229,7 @@ export type PartialChannel = Pick<Channel, 'id' | 'name' | 'type'>;
  *
  * @endpoint [PATCH](https://discord.com/developers/docs/resources/channel#modify-channel) `/channels/{channel.id}`
  *
- * @returns A {@link https://discord.com/developers/docs/resources/channel#channel-object channel} on success, and a 400 BAD REQUEST on invalid parameters
+ * @returns A {@link https://discord.com/developers/docs/resources/channel#channel-object channel} on success
  * @fires A {@link https://discord.com/developers/docs/topics/gateway#channel-update Channel Update} Gateway event
  */
 export interface ModifyChannel {

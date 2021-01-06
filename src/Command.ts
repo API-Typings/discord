@@ -1,3 +1,5 @@
+import { Nullable } from '.';
+
 /**
  * An application command is the base "command" model that belongs to an application. This is what you are creating when you POST a new command
  *
@@ -31,7 +33,7 @@ export interface Command {
 }
 
 /**
- * @source {@link https://discord.com/developers/docs/interactions/slash-commands#interaction-applicationcommandinteractiondata Application Command}
+ * @source {@link https://discord.com/developers/docs/interactions/slash-commands#interaction-applicationcommandinteractiondata Interaction}
  */
 export interface CommandData {
 	/**
@@ -55,7 +57,7 @@ export interface CommandData {
  */
 export interface CommandOption {
 	/**
-	 * Value of {@link https://discord.com/developers/docs/interactions/slash-commands#applicationcommandoptiontype Application Command Option Type}
+	 * Value of {@link https://discord.com/developers/docs/interactions/slash-commands#applicationcommandoptiontype Application Command}
 	 */
 	type: CommandOptionType;
 
@@ -110,6 +112,8 @@ export interface CommandOptionChoice {
 /**
  * All options have names, and an option can either be a parameter and input value--in which case value will be set--
  * or it can denote a subcommand or group--in which case it will contain a top-level key and another array of options
+ *
+ * @source {@link https://discord.com/developers/docs/interactions/slash-commands#interaction-applicationcommandinteractiondataoption Interaction}
  */
 export interface CommandOptionData {
 	/**
@@ -132,7 +136,14 @@ export interface CommandOptionData {
  * @source {@link https://discord.com/developers/docs/interactions/slash-commands#applicationcommandoptiontype Application Command}
  */
 export enum CommandOptionType {
+	/**
+	 * Organized commands grouped by specifying actions within a command or group
+	 */
 	SubCommand = 1,
+
+	/**
+	 * Organized subcommands grouped by subcommands with similar actions or resources within a command
+	 */
 	SubCommandGroup,
 	String,
 	Integer,
@@ -149,8 +160,13 @@ export enum CommandOptionType {
  * 2. Edit a global/guild command
  *
  * @endpoint
- * 1. [POST](https://discord.com/developers/docs/interactions/slash-commands#create-global-application-command) `/applications/{application.id}/commands`
- * 2. [PATCH](https://discord.com/developers/docs/interactions/slash-commands#edit-global-application-command) `/applications/{application.id}/commands/{command.id}`
+ * 1. [POST](https://discord.com/developers/docs/interactions/slash-commands#create-global-application-command)
+ * - `/applications/{application.id}/commands`
+ * - `/applications/{application.id}/guilds/{guild.id}/commands`
+ *
+ * 2. [PATCH](https://discord.com/developers/docs/interactions/slash-commands#edit-global-application-command)
+ * - `/applications/{application.id}/commands/{command.id}`
+ * - `/applications/{application.id}/guilds/{guild.id}/commands/{command.id}`
  *
  * @returns
  * 1. `201` and an {@link https://discord.com/developers/docs/interactions/slash-commands#applicationcommand Application Command} object
@@ -160,15 +176,15 @@ export interface CommandRequest {
 	/**
 	 * 3-32 character command name
 	 */
-	name: string;
+	name?: string;
 
 	/**
 	 * 1-100 character description
 	 */
-	description: string;
+	description?: string;
 
 	/**
 	 * The parameters for the command
 	 */
-	options?: CommandOption[];
+	options?: Nullable<CommandOption[]>;
 }

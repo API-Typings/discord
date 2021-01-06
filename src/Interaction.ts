@@ -1,3 +1,4 @@
+import { CommandData } from './Command';
 import { Embed } from './Embed';
 import { Member } from './Member';
 import { AllowedMentions } from './Message';
@@ -21,7 +22,7 @@ export interface Interaction {
 	/**
 	 * The command data payload
 	 */
-	data?: InteractionData;
+	data?: CommandData;
 
 	/**
 	 * The guild it was sent from
@@ -52,7 +53,7 @@ export interface Interaction {
 /**
  * @source {@link https://discord.com/developers/docs/interactions/slash-commands#interaction-response-interactionapplicationcommandcallbackdata Interaction}
  */
-export interface InteractionCommandCallbackData {
+export interface InteractionCallback {
 	/**
 	 * Is the response TTS
 	 */
@@ -75,46 +76,6 @@ export interface InteractionCommandCallbackData {
 }
 
 /**
- * @source {@link https://discord.com/developers/docs/interactions/slash-commands#interaction-applicationcommandinteractiondata Interaction}
- */
-export interface InteractionData {
-	/**
-	 * The ID of the invoked command
-	 */
-	id: string;
-
-	/**
-	 * The name of the invoked command
-	 */
-	name: string;
-
-	/**
-	 * The params + values from the user
-	 */
-	options: InteractionDataOption[];
-}
-
-/**
- * @source {@link https://discord.com/developers/docs/interactions/slash-commands#interaction-applicationcommandinteractiondataoption Interaction}
- */
-export interface InteractionDataOption {
-	/**
-	 * The name of the parameter
-	 */
-	name: string;
-
-	/**
-	 * The value of the pair
-	 */
-	value?: any
-
-	/**
-	 * Present if this option is a group or subcommand
-	 */
-	options?: InteractionDataOption[];
-}
-
-/**
  * @source {@link https://discord.com/developers/docs/interactions/slash-commands#interaction-response Interaction}
  */
 export interface InteractionResponse {
@@ -126,7 +87,7 @@ export interface InteractionResponse {
 	/**
 	 * An optional response message
 	 */
-	data?: InteractionCommandCallbackData;
+	data?: InteractionCallback;
 }
 
 /**
@@ -164,5 +125,5 @@ export enum InteractionResponseType {
  */
 export enum InteractionType {
 	Ping = 1,
-	ApplicationCommand
+	Command
 }

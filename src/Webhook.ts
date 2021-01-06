@@ -161,8 +161,8 @@ export interface ExecuteWebhook {
 	/**
 	 * Allowed mentions for the message
 	 */
-    allowed_mentions?: AllowedMentions;
-    flags?: number
+	allowed_mentions?: AllowedMentions;
+	flags?: number;
 }
 
 /**
