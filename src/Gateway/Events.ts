@@ -401,45 +401,35 @@ export type ChannelUpdate = EventPayload<Event.ChannelUpdate, Channel>;
  *
  * @source {@link https://discord.com/developers/docs/topics/gateway#guild-emojis-update Gateway}
  */
-export type EmojisUpdate = EventPayload<
-	Event.EmojisUpdate,
-	GuildData & {
-		/**
-		 * Array of {@link https://discord.com/developers/docs/resources/emoji#emoji-object emojis}
-		 */
-		emojis: Emoji[];
-	}
->;
+export type EmojisUpdate = EventPayload<Event.EmojisUpdate, EmojisUpdateData>;
+
+export type EmojisUpdateData = GuildData & {
+	/**
+	 * Array of {@link https://discord.com/developers/docs/resources/emoji#emoji-object emojis}
+	 */
+	emojis: Emoji[];
+};
 
 /**
  * Sent when a user is banned from a guild
  *
  * @source {@link https://discord.com/developers/docs/topics/gateway#guild-ban-add Gateway}
  */
-export type GuildBanAdd = EventPayload<
-	Event.GuildBanAdd,
-	GuildData & {
-		/**
-		 * The banned user
-		 */
-		user: User;
-	}
->;
+export type GuildBanAdd = EventPayload<Event.GuildBanAdd, GuildBanData>;
+
+export type GuildBanData = GuildData & {
+	/**
+	 * The banned user
+	 */
+	user: User;
+};
 
 /**
  * Sent when a user is unbanned from a guild
  *
  * @source {@link https://discord.com/developers/docs/topics/gateway#guild-ban-remove Gateway}
  */
-export type GuildBanRemove = EventPayload<
-	Event.GuildBanRemove,
-	GuildData & {
-		/**
-		 * The unbanned user
-		 */
-		user: User;
-	}
->;
+export type GuildBanRemove = EventPayload<Event.GuildBanRemove, GuildBanData>;
 
 /**
  * Sent when:
@@ -493,14 +483,18 @@ export type InviteCreate = EventPayload<Event.InviteCreate, InviteCreateData>;
  *
  * @source {@link https://discord.com/developers/docs/topics/gateway#invite-delete Gateway}
  */
-export type InviteDelete = EventPayload<Event.InviteDelete, Pick<InviteCreateData, 'guild_id' | 'channel_id' | 'code'>>;
+export type InviteDelete = EventPayload<Event.InviteDelete, InviteDeleteData>;
+
+export type InviteDeleteData = Pick<InviteCreateData, 'guild_id' | 'channel_id' | 'code'>;
 
 /**
  * Sent when a new user joins a guild
  *
  * @source {@link https://discord.com/developers/docs/topics/gateway#guild-member-add Gateway}
  */
-export type MemberAdd = EventPayload<Event.MemberAdd, Member & GuildData>;
+export type MemberAdd = EventPayload<Event.MemberAdd, MemberAddData>;
+
+export type MemberAddData = Member & GuildData;
 
 /**
  * Sent in response to {@link https://discord.com/developers/docs/topics/gateway#request-guild-members Guild Request Members}
@@ -514,15 +508,14 @@ export type MemberChunk = EventPayload<Event.MemberChunk, MemberChunkData>;
  *
  * @source {@link https://discord.com/developers/docs/topics/gateway#guild-member-remove Gateway}
  */
-export type MemberRemove = EventPayload<
-	Event.MemberRemove,
-	GuildData & {
-		/**
-		 * The user who was removed
-		 */
-		user: User;
-	}
->;
+export type MemberRemove = EventPayload<Event.MemberRemove, MemberRemoveData>;
+
+export type MemberRemoveData = GuildData & {
+	/**
+	 * The user who was removed
+	 */
+	user: User;
+};
 
 /**
  * Sent when a guild member is updated
@@ -536,15 +529,14 @@ export type MemberUpdate = EventPayload<Event.MemberUpdate, MemberUpdateData>;
  *
  * @source {@link https://discord.com/developers/docs/topics/gateway#message-delete-bulk Gateway}
  */
-export type MessageBulkDelete = EventPayload<
-	Event.MessageDeleteBulk,
-	Pick<MessageDeleteData, 'channel_id' | 'guild_id'> & {
-		/**
-		 * The IDs of the messages
-		 */
-		ids: string[];
-	}
->;
+export type MessageBulkDelete = EventPayload<Event.MessageDeleteBulk, MessageBulkDeleteData>;
+
+export type MessageBulkDeleteData = Pick<MessageDeleteData, 'channel_id' | 'guild_id'> & {
+	/**
+	 * The IDs of the messages
+	 */
+	ids: string[];
+};
 
 /**
  * Sent when a message is created
@@ -572,40 +564,37 @@ export type MessageReactionRemove = EventPayload<Event.MessageReactionRemove, Me
  *
  * @source {@link https://discord.com/developers/docs/topics/gateway#message-reaction-remove-emoji Gateway}
  */
-export type MessageReactionRemoveEmoji = EventPayload<
-	Event.MessageReactionRemoveEmoji,
-	Pick<MessageReactionData, 'channel_id' | 'guild_id' | 'message_id'> & {
-		/**
-		 * The emoji that was removed
-		 */
-		emoji: PartialEmoji;
-	}
->;
+export type MessageReactionRemoveEmoji = EventPayload<Event.MessageReactionRemoveEmoji, MessageReactionRemoveEmojiData>;
+
+export type MessageReactionRemoveEmojiData = Pick<MessageReactionData, 'channel_id' | 'guild_id' | 'message_id'> & {
+	/**
+	 * The emoji that was removed
+	 */
+	emoji: PartialEmoji;
+};
 
 /**
  * Sent when a user adds a reaction to a message
  *
  * @source {@link https://discord.com/developers/docs/topics/gateway#message-reaction-add Gateway}
  */
-export type MessageReactionAdd = EventPayload<
-	Event.MessageReactionAdd,
-	Omit<MessageReactionData, 'emoji'> & {
-		/**
-		 * The member who reacted if this happened in a guild
-		 */
-		member?: Member;
-	}
->;
+export type MessageReactionAdd = EventPayload<Event.MessageReactionAdd, MessageReactionAddData>;
+
+export type MessageReactionAddData = Omit<MessageReactionData, 'emoji'> & {
+	/**
+	 * The member who reacted if this happened in a guild
+	 */
+	member?: Member;
+};
 
 /**
  * Sent when a user explicitly removes all reactions from a message
  *
  * @source {@link https://discord.com/developers/docs/topics/gateway#message-reaction-remove-all Gateway}
  */
-export type MessageReactionRemoveAll = EventPayload<
-	Event.MessageReactionRemoveAll,
-	Omit<MessageReactionRemoveEmoji, 'o' | 'd' | 't' | 'emoji'>
->;
+export type MessageReactionRemoveAll = EventPayload<Event.MessageReactionRemoveAll, MessageReactionRemoveAllData>;
+
+export type MessageReactionRemoveAllData = Omit<MessageReactionRemoveEmoji, 'o' | 'd' | 't' | 'emoji'>;
 
 /**
  * Sent when a message is updated
@@ -631,45 +620,35 @@ export type Ready = EventPayload<Event.Ready, ReadyData>;
  *
  * @source {@link https://discord.com/developers/docs/topics/gateway#guild-role-create Gateway}
  */
-export type RoleCreate = EventPayload<
-	Event.RoleCreate,
-	GuildData & {
-		/**
-		 * The role created
-		 */
-		role: Role;
-	}
->;
+export type RoleCreate = EventPayload<Event.RoleCreate, RoleData>;
+
+export type RoleData = GuildData & {
+	/**
+	 * The role created/updated
+	 */
+	role: Role;
+};
 
 /**
  * Sent when a guild role is deleted
  *
  * @source {@link https://discord.com/developers/docs/topics/gateway#guild-role-delete Gateway}
  */
-export type RoleDelete = EventPayload<
-	Event.RoleDelete,
-	GuildData & {
-		/**
-		 * ID of the role
-		 */
-		role_id: string;
-	}
->;
+export type RoleDelete = EventPayload<Event.RoleDelete, RoleDeleteData>;
+
+export type RoleDeleteData = GuildData & {
+	/**
+	 * ID of the role
+	 */
+	role_id: string;
+};
 
 /**
  * Sent when a guild role is updated
  *
  * @source {@link https://discord.com/developers/docs/topics/gateway#guild-role-update Gateway}
  */
-export type RoleUpdate = EventPayload<
-	Event.RoleUpdate,
-	GuildData & {
-		/**
-		 * The role updated
-		 */
-		role: Role;
-	}
->;
+export type RoleUpdate = EventPayload<Event.RoleUpdate, RoleData>;
 
 /**
  * Sent when a user starts typing in a channel
@@ -702,12 +681,11 @@ export type VoiceStateUpdate = EventPayload<Event.VoiceStateUpdate, VoiceState>;
  *
  * @source {@link https://discord.com/developers/docs/topics/gateway#webhooks-update Gateway}
  */
-export type WebhooksUpdate = EventPayload<
-	Event.WebhooksUpdate,
-	GuildData & {
-		/**
-		 * ID of the channel
-		 */
-		channel_id: string;
-	}
->;
+export type WebhooksUpdate = EventPayload<Event.WebhooksUpdate, WebhooksUpdateData>;
+
+export type WebhooksUpdateData = GuildData & {
+	/**
+	 * ID of the channel
+	 */
+	channel_id: string;
+};
