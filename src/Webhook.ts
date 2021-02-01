@@ -1,4 +1,6 @@
-import { User, Nullable, Embed, AllowedMentions } from '.';
+import { AllowedMentions, Embed, Nullable, User } from './';
+import { Channel } from './Channel';
+import { Guild } from './Guild';
 
 /**
  * Represents a low-effort way to post messages to channels
@@ -50,6 +52,16 @@ export interface Webhook {
 	 * The bot/OAuth2 application that created this webhook
 	 */
 	application_id: Nullable<string>;
+
+	/**
+	 * The guild of the channel that this webhook is following (returned for Channel Follower Webhooks)
+	 */
+	source_guild?: Pick<Guild, 'id' | 'name' | 'icon'>;
+
+	/**
+	 * The channel that this webhook is following (returned for Channel Follower Webhooks)
+	 */
+	source_channel?: Pick<Channel, 'id' | 'name'>;
 }
 
 /**
@@ -177,6 +189,8 @@ export type ExecuteGitHubWebhook = Pick<ExecuteWebhook, 'wait'>;
 
 /**
  * @endpoint [PATCH](https://discord.com/developers/docs/resources/webhook#edit-webhook-message) `/webhooks/{webhook.id}/{webhook.token}/messages/{message.id}`
+ *
+ * @returns A {@link https://discord.com/developers/docs/resources/channel#message-object message} object on success
  */
 export interface EditWebhookMessage {
 	/**
