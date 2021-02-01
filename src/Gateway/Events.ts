@@ -1,15 +1,16 @@
-import { Nullable } from '..';
+import { Nullable } from '../';
+import { Activity, ClientStatus, Presence } from '../Activity';
 import { Channel } from '../Channel';
-import { Message } from '../Message';
-import { VoiceState } from '../Voice';
-import { TargetUser } from '../Invite';
-import { BasePayload, OPCodes } from '.';
-import { Member, Role } from '../Member';
-import { PartialUser, User } from '../User';
+import { Command } from '../Command';
 import { Emoji, PartialEmoji } from '../Emoji';
 import { Guild, UnavailableGuild } from '../Guild';
-import { Activity, ClientStatus, Presence } from '../Activity';
 import { Interaction } from '../Interaction';
+import { TargetUser } from '../Invite';
+import { Member, Role } from '../Member';
+import { Message } from '../Message';
+import { PartialUser, User } from '../User';
+import { VoiceState } from '../Voice';
+import { BasePayload, OPCodes } from './';
 
 interface EventPayload<E extends Event, D = Record<string, any>> extends BasePayload {
 	op: OPCodes.Dispatch;
@@ -61,6 +62,21 @@ export interface Hello {
  */
 export interface HeartbeatAck {
 	op: OPCodes.HeartbeatAck;
+}
+
+/**
+ * Sent when an integration is deleted
+ */
+export interface IntegrationDeleteData extends GuildData {
+	/**
+	 * Integration ID
+	 */
+	id: string;
+
+	/**
+	 * ID of the bot/OAuth2 application for this discord integration
+	 */
+	application_id?: string;
 }
 
 /**
@@ -163,33 +179,6 @@ export interface MemberChunkData extends GuildData {
 	 * The nonce used in the {@link https://discord.com/developers/docs/topics/gateway#request-guild-members Guild Members Request}
 	 */
 	nonce?: string;
-}
-
-export interface MemberUpdateData extends GuildData {
-	/**
-	 * User role IDs
-	 */
-	roles: string[];
-
-	/**
-	 * The user
-	 */
-	user: User;
-
-	/**
-	 * Nickname of the user in the guild
-	 */
-	nick?: Nullable<string>;
-
-	/**
-	 * When the user joined the guild
-	 */
-	joined_at: string;
-
-	/**
-	 * When the user starting {@link https://support.discord.com/hc/en-us/articles/360028038352-Server-Boosting- boosting} the guild
-	 */
-	premium_since?: Nullable<string>;
 }
 
 export interface MessageDeleteData extends Partial<GuildData> {
@@ -326,7 +315,7 @@ export interface VoiceServerUpdateData extends GuildData {
 	/**
 	 * The voice server host
 	 */
-	endpoint: string;
+	endpoint: Nullable<string>;
 }
 
 export enum Event {
@@ -341,7 +330,10 @@ export enum Event {
 	MemberRemove = 'GUILD_MEMBER_REMOVE',
 	MemberUpdate = 'GUILD_MEMBER_UPDATE',
 	MemberChunk = 'GUILD_MEMBERS_CHUNK',
-	IntegrationsUpdate = 'GUILD_INTEGRATIONS_UPDATE',
+	GuildIntegrationsUpdate = 'GUILD_INTEGRATIONS_UPDATE',
+	IntegrationCreate = 'INTEGRATION_CREATE',
+	IntegrationUpdate = 'INTEGRATION_UPDATE',
+	IntegrationDelete = 'INTEGRATION_DELETE',
 	RoleCreate = 'GUILD_ROLE_CREATE',
 	RoleDelete = 'GUILD_ROLE_DELETE',
 	RoleUpdate = 'GUILD_ROLE_UPDATE',
@@ -349,6 +341,9 @@ export enum Event {
 	GuildBanRemove = 'GUILD_BAN_REMOVE',
 	EmojisUpdate = 'GUILD_EMOJIS_UPDATE',
 	InteractionCreate = 'INTERACTION_CREATE',
+	ApplicationCommandCreate = 'APPLICATION_COMMAND_CREATE',
+	ApplicationCommandUpdate = 'APPLICATION_COMMAND_UPDATE',
+	ApplicationCommandDelete = 'APPLICATION_COMMAND_DELETE',
 	ChannelCreate = 'CHANNEL_CREATE',
 	ChannelDelete = 'CHANNEL_DELETE',
 	ChannelUpdate = 'CHANNEL_UPDATE',
@@ -368,6 +363,21 @@ export enum Event {
 	VoiceServerUpdate = 'VOICE_SERVER_UPDATE',
 	WebhooksUpdate = 'WEBHOOKS_UPDATE'
 }
+
+/**
+ * Sent when a new {@link https://discord.com/developers/docs/interactions/slash-commands#applicationcommand Slash Command} is created, relevant to the current user
+ */
+export type ApplicationCommandCreate = EventPayload<Event.ApplicationCommandCreate, Command & GuildData>;
+
+/**
+ * Sent when a new {@link https://discord.com/developers/docs/interactions/slash-commands#applicationcommand Slash Command} relevant to the current user is updated
+ */
+export type ApplicationCommandDelete = EventPayload<Event.ApplicationCommandDelete, Command & GuildData>;
+
+/**
+ * Sent when a new {@link https://discord.com/developers/docs/interactions/slash-commands#applicationcommand Slash Command} relevant to the current user is deleted
+ */
+export type ApplicationCommandUpdate = EventPayload<Event.ApplicationCommandUpdate, Command & GuildData>;
 
 /**
  * Sent when a new guild channel is created, relevant to the current user
@@ -455,7 +465,7 @@ export type GuildDelete = EventPayload<Event.GuildDelete, Guild>;
  *
  * @source {@link https://discord.com/developers/docs/topics/gateway#guild-integrations-update Gateway}
  */
-export type IntegrationsUpdate = EventPayload<Event.IntegrationsUpdate, GuildData>;
+export type IntegrationsUpdate = EventPayload<Event.GuildIntegrationsUpdate, GuildData>;
 
 /**
  * Sent when a guild is updated
@@ -523,6 +533,15 @@ export type MemberRemoveData = GuildData & {
  * @source {@link https://discord.com/developers/docs/topics/gateway#guild-member-update Gateway}
  */
 export type MemberUpdate = EventPayload<Event.MemberUpdate, MemberUpdateData>;
+
+export type MemberUpdateData = GuildData &
+	Required<Pick<Member, 'user'>> &
+	Partial<Pick<Member, 'deaf' | 'mute'>> & {
+		/**
+		 * User role IDs
+		 */
+		roles: string[];
+	};
 
 /**
  * Sent when multiple messages are deleted at once
