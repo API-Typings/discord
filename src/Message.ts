@@ -1,9 +1,9 @@
-import { User } from './User';
-import { Embed } from './Embed';
-import { Member } from './Member';
-import { Nullable } from '.';
+import { Nullable } from './';
 import { ChannelType } from './Channel';
+import { Embed } from './Embed';
 import { PartialEmoji } from './Emoji';
+import { Member } from './Member';
+import { User } from './User';
 
 /**
  * The allowed mention field allows for more granular control over mentions without various hacks to the message content.
@@ -83,7 +83,7 @@ export interface CrosspostedMessage extends Message {
 	mention_channels?: MentionedChannel[];
 
 	/**
-	 * Reference data sent with crossposted messages and replies
+	 * Data showing the source of a crosspost, channel follow add, pin, or reply message
 	 */
 	message_reference: MessageReference;
 }
@@ -290,6 +290,21 @@ export interface MessageApplication {
 }
 
 /**
+ * There are four situations in which a message has a message_reference object:
+ *
+ * 1. **Crosspost messages**: messages that originated from another channel (IS_CROSSPOST flag).
+ * 	  These messages have all three fields, with data of the original message that was crossposted
+ *
+ * 2. Channel Follow Add messages: automatic messages sent when a channel is followed into the current channel (type 12).
+ *    These messages have the `channel_id` and `guild_id` fields, with data of the followed announcement channel
+ *
+ * 3. Pin messages: automatic messages sent when a message is pinned (type 6).
+ *    These messages have `message_id` and `channel_id`, and `guild_id` if it is in a guild, with data of the message that was pinned
+ *
+ * 4. Replies: messages replying to a previous message (type 19).
+ *    These messages have `message_id` and `channel_id`, and `guild_id` if it is in a guild, with data of the message that was replied to.
+ *    The channel_id and guild_id will be the same as the reply. Replies are created by including a message_reference when sending a message. When sending, only `message_id` is required
+ *
  * @source {@link https://discord.com/developers/docs/resources/channel#message-object-message-reference-structure Channel}
  */
 export interface MessageReference {
@@ -434,7 +449,9 @@ export enum MessageType {
 	ChannelFollowAdd,
 	GuildDiscoveryDisqualified = 14,
 	GuildDiscoveryRequalified,
-	InlineReply = 19,
+	GuildDiscoveryGracePeriodInitialWarning,
+	GuildDiscoveryGracePeriodFinalWarning,
+	Reply = 19,
 	ApplicationCommand
 }
 
@@ -459,7 +476,7 @@ export type AllowedMentionsType = 'roles' | 'users' | 'everyone';
  *
  * @endpoint [GET](https://discord.com/developers/docs/resources/channel#get-channel-messages) `/channels/{channel.id}/messages`
  *
- * @returns An array of {@link https://discord.com/developers/docs/resources/channel#message-object message} objects on success
+ * @returns An array of {@link https://discord.com/developers/docs/resources/channel#message-object message} objects on success, sorted by their ID in descending order
  */
 export interface GetMessages {
 	/**
@@ -498,7 +515,7 @@ export interface CreateMessage {
 	content?: string;
 
 	/**
-	 * A nonce that can be used for optimistic message sending
+	 * A nonce that can be used for optimistic message sending (up to 25 characters)
 	 */
 	nonce?: number | string;
 
@@ -538,14 +555,9 @@ export interface CreateMessage {
  *
  * @endpoint [GET](https://discord.com/developers/docs/resources/channel#get-reactions) `/channels/{channel.id}/messages/{message.id}/reactions/{emoji.id}
  *
- * @returns An array of {@link https://discord.com/developers/docs/resources/user#user-object user} objects on success
+ * @returns An array of {@link https://discord.com/developers/docs/resources/user#user-object user} objects on success, sorted by their id in ascending order
  */
 export interface GetReactions {
-	/**
-	 * Get users before this user ID
-	 */
-	before?: string;
-
 	/**
 	 * Get users after this user ID
 	 */
