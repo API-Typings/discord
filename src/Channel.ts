@@ -1,4 +1,4 @@
-import { Nullable } from '.';
+import { Nullable } from './';
 import { User } from './User';
 
 /**
@@ -53,6 +53,18 @@ export interface Channel {
 	parent_id: Nullable<string>;
 }
 
+export interface ChannelNickname {
+	/**
+	 * The ID of the user this nickname is applied to
+	 */
+	id: string;
+
+	/**
+	 * The user's nickname
+	 */
+	nick: string;
+}
+
 /**
  * A direct message between users
  */
@@ -88,7 +100,12 @@ export interface FollowedChannel {
 /**
  * A direct message between multiple users
  */
-export interface GroupDMChannel extends DMChannel {
+export interface GroupDMChannel extends DMChannel, Nullable<Pick<Channel, 'name'>> {
+	/**
+	 * The nicknames that are set for a group DM channel's recipients
+	 */
+	nicks: ChannelNickname[];
+
 	/**
 	 * Icon hash
 	 */
@@ -158,6 +175,31 @@ export interface VoiceChannel extends Channel {
 	 * The user limit of the voice channel
 	 */
 	user_limit: number;
+}
+
+/**
+ * @source {@link https://discord.com/developers/docs/resources/guild#welcome-screen-object Guild}
+ */
+export interface WelcomeScreenChannel {
+	/**
+	 * The channel's ID
+	 */
+	channel_id: string;
+
+	/**
+	 * The description shown for the channel
+	 */
+	description: string;
+
+	/**
+	 * The {@link https://discord.com/developers/docs/reference#image-formatting emoji ID}, if the emoji is custom
+	 */
+	emoji_id: Nullable<string>;
+
+	/**
+	 * The emoji name if custom, the unicode character if standard, or `null` if no emoji is set
+	 */
+	emoji_name: Nullable<string>;
 }
 
 /**
@@ -303,6 +345,13 @@ export interface ModifyChannel {
 	 * @channel Text, News, Store, Voice
 	 */
 	parent_id?: Nullable<string>;
+
+	/**
+	 * Image for the channel icon
+	 *
+	 * @channel Group DM
+	 */
+	icon?: string;
 }
 
 /**
@@ -361,10 +410,10 @@ export interface CreateChannelInvite {
 	/**
 	 * The target user id for this invite
 	 */
-	target_user?: string;
+	target_user_id?: string;
 
 	/**
-	 * The type of target user for this invite
+	 * The {@link https://discord.com/developers/docs/resources/invite#invite-object-target-user-types type of user target} for this invite
 	 */
 	target_user_type?: number;
 }
@@ -478,4 +527,14 @@ export interface ModifyChannelPositions {
 	 * Sorting position of the channel
 	 */
 	position: Nullable<number>;
+
+	/**
+	 * Syncs the permission overwrites with the new parent, if moving to a new category
+	 */
+	lock_permissions: Nullable<boolean>;
+
+	/**
+	 * The new parent ID for the channel that is moved
+	 */
+	parent_id: string;
 }

@@ -1,11 +1,11 @@
-import { Nullable } from '.';
-import { User } from './User';
-import { Emoji } from './Emoji';
+import { Nullable } from './';
 import { Activity, Presence } from './Activity';
-import { Role, Member } from './Member';
+import { Channel, PartialChannel, WelcomeScreenChannel } from './Channel';
+import { Emoji } from './Emoji';
 import { UpdateStatus } from './Gateway';
+import { Member, Role } from './Member';
+import { User } from './User';
 import { VoiceRegion, VoiceState } from './Voice';
-import { Channel, PartialChannel } from './Channel';
 
 /**
  * Represents an isolated collection of users and channels, and are often referred to as "servers" in the UI
@@ -222,6 +222,11 @@ export interface Guild extends PartialGuild {
 	 * Approximate number of non-offline members in this guild, returned from the `GET /guilds/<id>` endpoint when `with_counts` is `true`
 	 */
 	approximate_presence_count?: number;
+
+	/**
+	 * The welcome screen of a Community guild, shown to new members, returned when in the invite object
+	 */
+	welcome_screen?: WelcomeScreen;
 }
 
 /**
@@ -289,7 +294,7 @@ export interface GuildPreview {
 	approximate_presence_count: number;
 
 	/**
-	 * The description for the guild
+	 * The description for the guild, if the guild is discoverable
 	 */
 	description: Nullable<string>;
 }
@@ -419,11 +424,19 @@ export interface IntegrationApplication {
 	summary: string;
 
 	/**
+	 * If this application is a game sold on Discord, this field will be the hash of the image on store embeds
+	 */
+	cover_image?: string;
+
+	/**
 	 * The bot associated with this application
 	 */
 	bot?: User;
 }
 
+/**
+ * @source {@link https://discord.com/developers/docs/resources/user#get-current-user-guilds-example-partial-guild User}
+ */
 export interface PartialGuild {
 	/**
 	 * Guild ID
@@ -473,6 +486,21 @@ export interface PartialGuild {
 
 export interface Prune {
 	pruned: number;
+}
+
+/**
+ * @source {@link https://discord.com/developers/docs/resources/guild#welcome-screen-object-welcome-screen-structure Guild}
+ */
+export interface WelcomeScreen {
+	/**
+	 * The server description shown in the welcome screen
+	 */
+	description: Nullable<string>;
+
+	/**
+	 * The channels shown in the welcome screen, up to 5
+	 */
+	welcome_channels: WelcomeScreenChannel[];
 }
 
 export interface Widget {
@@ -613,6 +641,7 @@ export type GuildFeatures =
 	| 'COMMERCE'
 	| 'NEWS'
 	| 'DISCOVERABLE'
+	| 'DISCOVERABLE_DISABLED'
 	| 'FEATURABLE'
 	| 'ANIMATED_ICON'
 	| 'BANNER'
@@ -697,6 +726,11 @@ export interface CreateGuild {
 	 * The ID of the channel where guild notices such as welcome messages and boost events are posted
 	 */
 	system_channel_id?: string;
+
+	/**
+	 * {@link https://discord.com/developers/docs/resources/guild#guild-object-system-channel-flags System channel flags}
+	 */
+	system_channel_flags?: SystemChannelFlags;
 }
 
 /**
@@ -781,6 +815,11 @@ export interface ModifyGuild {
 	system_channel_id?: Nullable<string>;
 
 	/**
+	 * {@link https://discord.com/developers/docs/resources/guild#guild-object-system-channel-flags System channel flags}
+	 */
+	system_channel_flags?: SystemChannelFlags;
+
+	/**
 	 * The ID of the channel where Community guilds display rules and/or guidelines
 	 */
 	rules_channel_id?: Nullable<string>;
@@ -794,6 +833,16 @@ export interface ModifyGuild {
 	 * The preferred locale of a Community guild used in server discovery and notices from Discord; defaults to "en-US"
 	 */
 	preferred_locale?: Nullable<string>;
+
+	/**
+	 * Enabled guild features
+	 */
+	features?: GuildFeatures[];
+
+	/**
+	 * The description for the guild, if the guild is discoverable
+	 */
+	description: string;
 }
 
 /**
@@ -871,7 +920,7 @@ export interface CreateRole {
  *
  * @endpoint [PATCH](https://discord.com/developers/docs/resources/guild#modify-guild-role-positions) `/guilds/{guild.id}/roles`
  *
- * @returns A list of all of the guild's {@link https://discord.com/developers/docs/topics/permissions#role-object role} objects on success
+ * @returns A list of all of the guild's {@link https://discord.com/developers/docs/topics/permissions#role-object role} objects on success, sorted by their ID in ascending order
  * @fires Multiple {@link https://discord.com/developers/docs/topics/gateway#guild-role-update Guild Role Update} Gateway events
  */
 export interface ModifyRolePositions {
@@ -928,7 +977,7 @@ export interface ModifyRole {
  */
 export interface GetPruneCount {
 	/**
-	 * Number of days to count prune for (1 or more)
+	 * Number of days to count prune for (1-30)
 	 */
 	days: number;
 
@@ -948,7 +997,7 @@ export interface GetPruneCount {
  */
 export interface BeginPrune {
 	/**
-	 * Number of days to prune (1 or more)
+	 * Number of days to prune (1-30)
 	 */
 	days: number;
 
@@ -1019,4 +1068,28 @@ export interface GetWidgetImage {
 	 * Style of the widget image returned
 	 */
 	style?: WidgetStyle;
+}
+
+/**
+ * Modify the guild's {@link https://discord.com/developers/docs/resources/guild#welcome-screen-object Welcome Screen}
+ *
+ * @endpoint PATCH `/guilds/{guild.id}/welcome-screen`
+ *
+ * @returns The updated {@link https://discord.com/developers/docs/resources/guild#welcome-screen-object Welcome Screen} object
+ */
+export interface ModifyWelcomeScreen {
+	/**
+	 * Whether the welcome screen is enabled
+	 */
+	enabled: boolean;
+
+	/**
+	 * Channels linked in the welcome screen and their display options
+	 */
+	welcome_channels: WelcomeScreenChannel[];
+
+	/**
+	 * The server description to show in the welcome screen
+	 */
+	description: string;
 }
