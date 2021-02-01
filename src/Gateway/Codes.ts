@@ -47,7 +47,9 @@ export enum JSONErrorCodes {
 	UnknownBranch,
 	UnknownRedistributable = 10036,
 	UnknownGuildTemplate = 10057,
+	UnknownDiscoveryCategory = 10059,
 	UnknownInteraction = 10062,
+	UnknownApplicationCommand,
 	ForbiddenBotEndpoint = 20001,
 	BotOnlyEndpoint,
 	AnnouncementRateLimit = 200022,
@@ -61,7 +63,8 @@ export enum JSONErrorCodes {
 	MaximumChannelsReached = 30013,
 	MaximumAttachmentsReached = 30015,
 	MaximumInvitesReached,
-	GuildTemplateExists = 30031,
+	MaximumDiscoverySubcategories = 30030,
+	GuildTemplateExists,
 	Unauthorized = 40001,
 	VerifiedAccountRequired,
 	MaximumRequestSizeReached = 40005,
@@ -97,6 +100,7 @@ export enum JSONErrorCodes {
 	InvalidAPIVersion = 50041,
 	RequiredCommunityChannel = 50074,
 	InvalidStickerSent = 50081,
+	TwoFactorAuthRequired = 60003,
 	ReactionBlocked = 90001,
 	APIOverloaded = 130000
 }
