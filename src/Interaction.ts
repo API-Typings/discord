@@ -35,7 +35,7 @@ export interface Interaction {
 	channel_id: string;
 
 	/**
-	 * Guild member data for the invoking user
+	 * Guild member data for the invoking user, including permissions
 	 */
 	member: Member;
 
