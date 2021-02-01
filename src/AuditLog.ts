@@ -1,7 +1,8 @@
+import { Nullable } from './';
+import { PartialIntegration } from './Guild';
+import { PartialRole } from './Member';
 import { User } from './User';
 import { Webhook } from './Webhook';
-import { PartialRole } from './Member';
-import { PartialIntegration } from './Guild';
 
 /**
  * @source {@link https://discord.com/developers/docs/resources/audit-log#audit-log-change-object-audit-log-change-structure Audit Log}
@@ -40,7 +41,7 @@ export interface AuditLog {
 	users: User[];
 
 	/**
-	 * List of audit log entries
+	 * List of audit log entries, sorted by id in descending order
 	 */
 	audit_log_entries: AuditLogEntry[];
 
@@ -67,7 +68,7 @@ export interface AuditLogEntry {
 	/**
 	 * The user who made the changes
 	 */
-	user_id: string;
+	user_id: Nullable<string>;
 
 	/**
 	 * ID of the entry
