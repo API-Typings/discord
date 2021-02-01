@@ -2,7 +2,7 @@ export * from './Codes';
 export * from './Commands';
 export * from './Events';
 
-import { EncodingType, JSONErrorCodes, Nullable, OPCodes, Event } from '..';
+import { EncodingType, Event, JSONErrorCodes, Nullable, OPCodes } from '../';
 
 /**
  * @source {@link https://discord.com/developers/docs/topics/gateway#payloads-gateway-payload-structure Gateway}
@@ -125,6 +125,9 @@ export enum Intents {
 
 	/**
 	 * - `GUILD_INTEGRATIONS_UPDATE`
+	 * - `INTEGRATION_CREATE`
+	 * - `INTEGRATION_UPDATE`
+	 * - `INTEGRATION_DELETE`
 	 */
 	Integrations = 1 << 4,
 
