@@ -126,7 +126,7 @@ export interface EmbedImage {
 	url?: string;
 
 	/**
-	 * A proxied url of the thumbnail or image
+	 * A proxied url of the thumbnail, image, or video
 	 */
 	proxy_url?: string;
 
