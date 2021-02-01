@@ -1,4 +1,4 @@
-import { Nullable } from '.';
+import { Nullable } from './';
 
 /**
  * An application command is the base "command" model that belongs to an application. This is what you are creating when you POST a new command
@@ -70,11 +70,6 @@ export interface CommandOption {
 	 * 1-100 character description
 	 */
 	description: string;
-
-	/**
-	 * The first `required` option for the user to complete--only one option can be `default`
-	 */
-	default?: boolean;
 
 	/**
 	 * If the parameter is required or optional--default `false`
