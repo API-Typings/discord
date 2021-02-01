@@ -1,10 +1,13 @@
-import { Nullable } from '.';
+import { Nullable } from './';
 import { User } from './User';
 
 /**
  * @source {@link https://discord.com/developers/docs/topics/gateway#activity-object-activity-structure Gateway}
  */
 export interface Activity {
+	/**
+	 * The activity's ID
+	 */
 	id?: string;
 
 	/**
@@ -31,7 +34,15 @@ export interface Activity {
 	 * Unix timestamps for start and/or end of the game
 	 */
 	timestamps?: ActivityTimestamp;
+
+	/**
+	 * The ID of the song on Spotify
+	 */
 	sync_id?: string;
+
+	/**
+	 * The platform the game is being played on ("desktop", "samsung", or "xbox")
+	 */
 	platform?: string;
 
 	/**
@@ -53,6 +64,10 @@ export interface Activity {
 	 * The emoji used for a custom status
 	 */
 	emoji?: Nullable<ActivityEmoji>;
+
+	/**
+	 * The ID of the game or Spotify session
+	 */
 	session_id?: string;
 
 	/**
@@ -79,6 +94,11 @@ export interface Activity {
 	 * {@link https://discord.com/developers/docs/topics/gateway#activity-object-activity-flags Activity flags} `OR`d together, describes what the payload includes
 	 */
 	flags?: ActivityFlags;
+
+	/**
+	 * The custom buttons shown in the Rich Presence (max 2)
+	 */
+	buttons?: ActivityButton[];
 }
 
 /**
@@ -104,6 +124,23 @@ export interface ActivityAssets {
 	 * Text displayed when hovering over the small image of the activity
 	 */
 	small_text?: string;
+}
+
+/**
+ * When received over the gateway, the `buttons` field is an array of strings, which are the button labels. Bots cannot access a user's activity button URLs
+ *
+ * @source null
+ */
+export interface ActivityButton {
+	/**
+	 * The text shown on the button (1-32 characters)
+	 */
+	label: string;
+
+	/**
+	 * The url opened when clicking the button (1-512 characters)
+	 */
+	url: string;
 }
 
 /**
