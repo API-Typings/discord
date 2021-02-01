@@ -1,4 +1,4 @@
-import { Nullable } from '.';
+import { Nullable } from './';
 import { User } from './User';
 
 /**
@@ -28,7 +28,7 @@ export interface Member {
 	/**
 	 * When the user started {@link https://support.discord.com/hc/en-us/articles/360028038352-Server-Boosting- boosting} the guild
 	 */
-	premium_since?: Nullable<string>;
+	premium_since: Nullable<string>;
 
 	/**
 	 * Whether the user is deafened in voice channels
@@ -44,18 +44,63 @@ export interface Member {
 	 * Whether the user has not yet passed the guild's Membership Screening requirements
 	 */
 	pending?: boolean;
+
+	/**
+	 * Total permissions of the member in the channel, including overrides, returned when in the interaction object
+	 */
+	permissions?: string;
 }
 
+/**
+ * In guilds with {@link https://support.discord.com/hc/en-us/articles/1500000466882 Membership Screening} enabled, when a member joins,
+ * {@link https://discord.com/developers/docs/topics/gateway#guild-member-add Guild Member Add} will be emitted but they will initially be restricted from doing any
+ * actions in the guild, and `pending` will be true in the {@link https://discord.com/developers/docs/resources/guild#guild-member-object member object}. When the member
+ * completes the screening, {@link https://discord.com/developers/docs/topics/gateway#guild-member-update Guild Member Update} will be emitted and `pending` will be false.
+ *
+ * Giving the member a role will bypass Membership Screening as well as the guild's verification level, giving the member immediate access to chat.
+ * Therefore, instead of giving a role when the member joins, it is recommended to not give the role until the user is no longer `pending`.
+ *
+ * @source {@link https://discord.com/developers/docs/resources/guild#membership-screening-object Guild}
+ */
 export interface MembershipScreening {
+	/**
+	 * When the fields were last updated
+	 */
 	version: string;
+
+	/**
+	 * The steps in the screening form
+	 */
 	form_fields: ScreeningField[];
+
+	/**
+	 * The server description shown in the screening form
+	 */
 	description: Nullable<string>;
 }
 
+/**
+ * @source {@link https://discord.com/developers/docs/resources/guild#membership-screening-object-membership-screening-field-structure Guild}
+ */
 export interface ScreeningField {
+	/**
+	 * The type of field (currently "TERMS" is the only type)
+	 */
 	field_type: ScreeningFieldType;
+
+	/**
+	 * The title of the field
+	 */
 	label: string;
+
+	/**
+	 * The list of rules
+	 */
 	values?: string[];
+
+	/**
+	 * Whether the user has to fill out the field
+	 */
 	required: boolean;
 }
 
@@ -169,6 +214,9 @@ export enum PermissionFlags {
 	MANAGE_EMOJIS = 0x40000000
 }
 
+/**
+ * @source {@link https://discord.com/developers/docs/resources/guild#membership-screening-object-membership-screening-field-types Guild}
+ */
 export enum ScreeningFieldType {
 	Terms = 'Server Rules'
 }
@@ -182,7 +230,7 @@ export type Permission = keyof typeof PermissionFlags;
 /**
  * @endpoint [GET](https://discord.com/developers/docs/resources/guild#list-guild-members) `/guilds/{guild.id}/members`
  *
- * @returns A list of {@link https://discord.com/developers/docs/resources/guild#guild-member-object guild member} objects that are members of the guild
+ * @returns A list of {@link https://discord.com/developers/docs/resources/guild#guild-member-object guild member} objects that are members of the guild, sorted by their ID in ascending order
  */
 export interface ListMembers {
 	/**
@@ -247,7 +295,7 @@ export interface AddMember {
  *
  * @endpoint [PATCH](https://discord.com/developers/docs/resources/guild#modify-guild-member) `/guilds/{guild.id}/members/{user.id}`
  *
- * @returns A 204 empty response on success
+ * @returns A 200 OK with the {@link https://discord.com/developers/docs/resources/guild#guild-member-object guild member} as the body
  * @fires A {@link https://discord.com/developers/docs/topics/gateway#guild-member-update Guild Member Update} Gateway event
  */
 export interface ModifyMember {
@@ -287,8 +335,43 @@ export interface ModifyMember {
 	channel_id?: Nullable<string>;
 }
 
+/**
+ * Modify the guild's {@link https://discord.com/developers/docs/resources/guild#membership-screening-object Membership Screening} form
+ *
+ * @endpoint [PATCH](https://discord.com/developers/docs/resources/guild#membership-screening-object) `/guilds/{guild.id}/member-verification`
+ *
+ * @returns The updated {@link Membership Screening} object
+ */
 export interface ModifyMembershipScreening {
-	enabled: boolean;
-	form_fields: ScreeningField[];
-	description: string;
+	/**
+	 * Whether Membership Screening is enabled
+	 */
+	enabled?: boolean;
+
+	/**
+	 * Array of {@link https://discord.com/developers/docs/resources/guild#membership-screening-object-membership-screening-field-structure field} objects serialized in a string
+	 */
+	form_fields?: string;
+
+	/**
+	 * The server description to show in the screening form
+	 */
+	description?: string;
+}
+
+/**
+ * @endpoint GET `/guilds/{guild.id}/members/search`
+ *
+ * @returns A list of {@link https://discord.com/developers/docs/resources/guild#guild-member-object guild member} objects whose username or nickname starts with a provided string
+ */
+export interface SearchMembers {
+	/**
+	 * Query string to match username(s) and nickname(s) against
+	 */
+	query: string;
+
+	/**
+	 * Max numbers of members to return (1-1000)
+	 */
+	limit?: number;
 }
