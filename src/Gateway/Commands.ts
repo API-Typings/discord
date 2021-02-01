@@ -1,6 +1,6 @@
-import { Nullable } from '..';
-import { BasePayload, OPCodes } from '.';
+import { Nullable } from '../';
 import { Activity, StatusType } from '../Activity';
+import { BasePayload, OPCodes } from './';
 
 interface CommandPayload<O extends OPCodes, D = Record<string, any>> extends Omit<BasePayload, 't' | 's'> {
 	op: O;
@@ -57,11 +57,6 @@ export interface IdentifyData {
 	 * Presence structure for initial presence information
 	 */
 	presence?: Omit<UpdateStatus, 'op' | 'd'>;
-
-	/**
-	 * Enables dispatching of guild subscription events (presence and typing events)
-	 */
-	guild_subscriptions?: boolean;
 
 	/**
 	 * The {@link https://discord.com/developers/docs/topics/gateway#gateway-intents Gateway Intents} you wish to receive
