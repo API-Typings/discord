@@ -225,7 +225,7 @@ export type PartialRole = Pick<Role, 'name' | 'id'>;
 
 export type Permission = keyof typeof PermissionFlags;
 
-// - ENDPOINTS
+// SECTION Endpoints
 
 /**
  * @endpoint [GET](https://discord.com/developers/docs/resources/guild#list-guild-members) `/guilds/{guild.id}/members`
@@ -375,3 +375,5 @@ export interface SearchMembers {
 	 */
 	limit?: number;
 }
+
+// !SECTION

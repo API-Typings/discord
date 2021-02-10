@@ -264,7 +264,7 @@ export type StoreChannel = Omit<Channel, 'topic'>;
 
 export type PartialChannel = Pick<Channel, 'id' | 'name' | 'type'>;
 
-// - ENDPOINTS
+// SECTION Endpoints
 
 /**
  * Update a channel's settings. Requires the `MANAGE_CHANNELS` permission for the guild
@@ -538,3 +538,5 @@ export interface ModifyChannelPositions {
 	 */
 	parent_id: Snowflake;
 }
+
+// !SECTION

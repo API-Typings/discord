@@ -88,7 +88,7 @@ export enum TargetUser {
 
 export type PartialInvite = Pick<InviteMetadata, 'code' | 'uses'>;
 
-// - ENDPOINTS
+// SECTION Endpoints
 
 /**
  * @endpoint [GET](https://discord.com/developers/docs/resources/invite#get-invite) `/invites/{invite.code}`
@@ -101,3 +101,5 @@ export interface GetInvite {
 	 */
 	with_counts?: boolean;
 }
+
+// !SECTION

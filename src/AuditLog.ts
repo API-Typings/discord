@@ -277,7 +277,7 @@ export type AuditLogChange =
  */
 export type OverwriteType = '0' | '1';
 
-// - ENDPOINTS
+// SECTION Endpoints
 
 /**
  * @endpoint [GET](https://discord.com/developers/docs/resources/audit-log#get-guild-audit-log) `/guilds/{guild.id}/audit-logs`
@@ -305,3 +305,5 @@ export interface GetAuditLog {
 	 */
 	limit?: number;
 }
+
+// !SECTION

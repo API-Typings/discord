@@ -173,7 +173,7 @@ export enum VisibilityType {
 
 export type PartialUser = Pick<User, 'id' | 'username' | 'avatar' | 'discriminator'>;
 
-// - ENDPOINTS
+// SECTION Endpoints
 
 /**
  * Modify the requester's user account settings
@@ -248,3 +248,5 @@ export interface CreateGroupDM {
 	 */
 	nicks: Record<Snowflake, string>;
 }
+
+// !SECTION

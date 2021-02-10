@@ -47,7 +47,7 @@ export interface Emoji {
 
 export type PartialEmoji = Pick<Emoji, 'id' | 'name' | 'animated'>;
 
-// - ENDPOINTS
+// SECTION Endpoints
 
 /**
  * Create a new emoji for the guild
@@ -93,3 +93,5 @@ export interface PatchModifyEmoji {
 	 */
 	roles: Nullable<Snowflake[]>;
 }
+
+// !SECTION

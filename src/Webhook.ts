@@ -79,7 +79,7 @@ export enum WebhookType {
 	ChannelFollower
 }
 
-// - ENDPOINTS
+// SECTION Endpoints
 
 /**
  * Create a new webhook
@@ -208,3 +208,5 @@ export interface EditWebhookMessage {
 	 */
 	allowed_mentions?: Nullable<AllowedMentions>;
 }
+
+// !SECTION

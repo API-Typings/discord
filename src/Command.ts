@@ -17,7 +17,7 @@ export interface Command {
 	application_id: Snowflake;
 
 	/**
-	 * 3-32 character name matching `^[\w-]{3,32}$`
+	 * 1-32 character name matching `^[\w-]{1,32}$`
 	 */
 	name: string;
 
@@ -148,7 +148,7 @@ export enum CommandOptionType {
 	Role
 }
 
-// - ENDPOINTS
+// SECTION Endpoints
 
 /**
  * 1. Create a new global/guild command
@@ -169,7 +169,7 @@ export enum CommandOptionType {
  */
 export interface CommandRequest {
 	/**
-	 * 3-32 character command name
+	 * 1-32 character name matching `^[\w-]{1,32}$`
 	 */
 	name?: string;
 
@@ -183,3 +183,5 @@ export interface CommandRequest {
 	 */
 	options?: Nullable<CommandOption[]>;
 }
+
+// !SECTION

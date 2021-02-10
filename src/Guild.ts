@@ -661,7 +661,7 @@ export type UnavailableGuild = { [K in keyof Pick<Guild, 'id' | 'unavailable'>]-
 
 export type WidgetStyle = 'shield' | 'banner1' | 'banner2' | 'banner3' | 'banner4';
 
-// - ENDPOINTS
+// SECTION Endpoints
 
 /**
  * Create a new guild.
@@ -1093,3 +1093,5 @@ export interface ModifyWelcomeScreen {
 	 */
 	description: string;
 }
+
+// !SECTION

@@ -90,7 +90,7 @@ export interface ValidDiscoverySearchTerm {
 	valid: boolean;
 }
 
-// - ENDPOINTS
+// SECTION Endpoints
 
 /**
  * @endpoint GET `/discovery/valid-term`
@@ -125,3 +125,5 @@ export interface ModifyDiscoveryMetadata {
 	 */
 	emoji_discoverability_enabled?: Nullable<boolean>;
 }
+
+// !SECTION

@@ -291,20 +291,24 @@ export interface MessageApplication {
 }
 
 /**
- * There are four situations in which a message has a message_reference object:
+ * There are four situations in which a message has a `message_reference` object:
  *
- * 1. **Crosspost messages**: messages that originated from another channel (IS_CROSSPOST flag).
- * 	  These messages have all three fields, with data of the original message that was crossposted
+ * - **Crosspost Messages** – messages that originated from another channel (`IS_CROSSPOST` flag)
  *
- * 2. Channel Follow Add messages: automatic messages sent when a channel is followed into the current channel (type 12).
- *    These messages have the `channel_id` and `guild_id` fields, with data of the followed announcement channel
+ * These messages have all three fields, with data of the original message that was crossposted
  *
- * 3. Pin messages: automatic messages sent when a message is pinned (type 6).
- *    These messages have `message_id` and `channel_id`, and `guild_id` if it is in a guild, with data of the message that was pinned
+ * - **Channel Follow Add Messages** – automatic messages sent when a channel is followed into the current channel (Type 12)
  *
- * 4. Replies: messages replying to a previous message (type 19).
- *    These messages have `message_id` and `channel_id`, and `guild_id` if it is in a guild, with data of the message that was replied to.
- *    The channel_id and guild_id will be the same as the reply. Replies are created by including a message_reference when sending a message. When sending, only `message_id` is required
+ * These messages have the `channel_id` and `guild_id` fields, with data of the followed announcement channel
+ *
+ * - **Pin Messages** – automatic messages sent when a message is pinned (Type 6)
+ *
+ * These messages have `message_id` and `channel_id`, and `guild_id` if it is in a guild, with data of the message that was pinned
+ *
+ * - **Replies** – messages replying to a previous message (Type 19)
+ *
+ * These messages have `message_id` and `channel_id`, and `guild_id` if it is in a guild, with data of the message that was replied to. The `channel_id` and
+ * `guild_id` will be the same as the reply. Replies are created by including a message_reference when sending a message. When sending, only `message_id` is required
  *
  * @source {@link https://discord.com/developers/docs/resources/channel#message-object-message-reference-structure Channel}
  */
@@ -323,6 +327,11 @@ export interface MessageReference {
 	 * ID of the originating message's guild
 	 */
 	guild_id?: Snowflake;
+
+	/**
+	 * When sending, whether to error if the referenced message doesn't exist instead of sending as a normal (non-reply) message, default true
+	 */
+	fail_if_not_exists?: boolean;
 }
 
 /**
@@ -470,7 +479,7 @@ export enum StickerFormat {
  */
 export type AllowedMentionsType = 'roles' | 'users' | 'everyone';
 
-// - ENDPOINTS
+// SECTION Endpoints
 
 /**
  * Returns the messages for a channel
@@ -531,7 +540,7 @@ export interface CreateMessage {
 	file?: unknown;
 
 	/**
-	 * Embedded `rich` content
+	 * Embedded rich content
 	 */
 	embed?: Embed;
 
@@ -614,3 +623,5 @@ export interface BulkDeleteMessages {
 	 */
 	messages: Snowflake[];
 }
+
+// !SECTION

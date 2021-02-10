@@ -62,7 +62,7 @@ export interface Template {
 	is_dirty: Nullable<boolean>;
 }
 
-// - ENDPOINTS
+// SECTION Endpoints
 
 /**
  * Create a new guild based on a template
@@ -121,3 +121,5 @@ export interface ModifyTemplate {
 	 */
 	description?: Nullable<string>;
 }
+
+// !SECTION
