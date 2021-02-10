@@ -1,4 +1,4 @@
-import { PartialGuild, PartialChannel, User, PartialUser } from '.';
+import { PartialChannel, PartialGuild, PartialUser, User } from './';
 
 /**
  * Represents a code that when used, adds a user to a guild or group DM channel
@@ -6,13 +6,44 @@ import { PartialGuild, PartialChannel, User, PartialUser } from '.';
  * @source {@link https://discord.com/developers/docs/resources/invite#invite-object-invite-structure Invite}
  */
 export interface Invite {
+	/**
+	 * The invite code (unique ID)
+	 */
 	code: string;
+
+	/**
+	 * The guild this invite is for
+	 */
 	guild?: PartialGuild;
+
+	/**
+	 * The channel this invite is for
+	 */
 	channel: PartialChannel;
+
+	/**
+	 * The user who created the invite
+	 */
 	inviter?: User;
+
+	/**
+	 * The target user for this invite
+	 */
 	target_user?: PartialUser;
+
+	/**
+	 * The {@link https://discord.com/developers/docs/resources/invite#invite-object-target-user-types type of user target} for this invite
+	 */
 	target_user_type?: TargetUser;
+
+	/**
+	 * Approximate count of online members (only present when `target_user` is set)
+	 */
 	approximate_presence_count?: number;
+
+	/**
+	 * Approximate count of total members
+	 */
 	approximate_member_count?: number;
 }
 

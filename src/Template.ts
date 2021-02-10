@@ -1,4 +1,4 @@
-import { Nullable, User, PartialGuild } from '.';
+import { Nullable, PartialGuild, Snowflake, User } from './';
 
 /**
  * Represents a code that when used, creates a guild based on a snapshot of an existing one
@@ -29,7 +29,7 @@ export interface Template {
 	/**
 	 * The ID of the user who created the template
 	 */
-	creator_id: string;
+	creator_id: Snowflake;
 
 	/**
 	 * The user who created the template
@@ -49,7 +49,7 @@ export interface Template {
 	/**
 	 * The ID of the guild this template is based on
 	 */
-	source_guild_id: string;
+	source_guild_id: Snowflake;
 
 	/**
 	 * The guild snapshot this template contains
@@ -73,7 +73,14 @@ export interface Template {
  * @fires A {@link https://discord.com/developers/docs/topics/gateway#guild-create Guild Create} Gateway event
  */
 export interface CreateGuildFromTemplate {
+	/**
+	 * Name of the guild (2-100 characters)
+	 */
 	name: string;
+
+	/**
+	 * Base64 128x128 image for the guild icon
+	 */
 	icon?: string;
 }
 
@@ -104,6 +111,13 @@ export interface CreateTemplate {
  * @returns The {@link https://discord.com/developers/docs/resources/template#template-object template} object on success
  */
 export interface ModifyTemplate {
+	/**
+	 * Name of the template (1-100 characters)
+	 */
 	name?: string;
+
+	/**
+	 * Description for the template (0-120 characters)
+	 */
 	description?: Nullable<string>;
 }
