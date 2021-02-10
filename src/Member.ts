@@ -1,4 +1,4 @@
-import { Nullable } from './';
+import { Nullable, Snowflake } from './';
 import { User } from './User';
 
 /**
@@ -18,7 +18,7 @@ export interface Member {
 	/**
 	 * Array of {@link https://discord.com/developers/docs/topics/permissions#role-object role} object IDs
 	 */
-	roles: string[];
+	roles: Snowflake[];
 
 	/**
 	 * When the user joined the guild
@@ -114,7 +114,7 @@ export interface Role {
 	/**
 	 * Role ID
 	 */
-	id: string;
+	id: Snowflake;
 
 	/**
 	 * Role name
@@ -164,12 +164,12 @@ export interface RoleTag {
 	/**
 	 * The ID of the bot this role belongs to
 	 */
-	bot_id?: string;
+	bot_id?: Snowflake;
 
 	/**
 	 * The ID of the integration this role belongs to
 	 */
-	integration_id?: string;
+	integration_id?: Snowflake;
 
 	/**
 	 * Whether this is the guild's premium subscriber role
@@ -241,7 +241,7 @@ export interface ListMembers {
 	/**
 	 * The highest user ID in the previous page
 	 */
-	after?: string;
+	after?: Snowflake;
 }
 
 /**
@@ -273,7 +273,7 @@ export interface AddMember {
 	 *
 	 * @permission `MANAGE_ROLES`
 	 */
-	roles?: string[];
+	roles?: Snowflake[];
 
 	/**
 	 * Whether the user is muted in voice channels
@@ -311,7 +311,7 @@ export interface ModifyMember {
 	 *
 	 * @permission `MANAGE_ROLES`
 	 */
-	roles?: Nullable<string[]>;
+	roles?: Nullable<Snowflake[]>;
 
 	/**
 	 * Whether the user is muted in voice channels
@@ -332,7 +332,7 @@ export interface ModifyMember {
 	 *
 	 * @permission `MOVE_MEMBERS`
 	 */
-	channel_id?: Nullable<string>;
+	channel_id?: Nullable<Snowflake>;
 }
 
 /**

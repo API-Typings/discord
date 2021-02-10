@@ -1,4 +1,4 @@
-import { Nullable } from './';
+import { Nullable, Snowflake } from './';
 
 /**
  * An application command is the base "command" model that belongs to an application. This is what you are creating when you POST a new command
@@ -9,12 +9,12 @@ export interface Command {
 	/**
 	 * Unique ID of the command
 	 */
-	id: string;
+	id: Snowflake;
 
 	/**
 	 * Unique ID of the parent application
 	 */
-	application_id: string;
+	application_id: Snowflake;
 
 	/**
 	 * 3-32 character name matching `^[\w-]{3,32}$`
@@ -39,7 +39,7 @@ export interface CommandData {
 	/**
 	 * The ID of the invoked command
 	 */
-	id: string;
+	id: Snowflake;
 
 	/**
 	 * The name of the invoked command

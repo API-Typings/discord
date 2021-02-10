@@ -1,4 +1,4 @@
-import { Nullable, Member } from '.';
+import { Member, Nullable, Snowflake } from './';
 
 /**
  * @source {@link https://discord.com/developers/docs/resources/voice#voice-region-object-voice-region-structure Voice}
@@ -7,7 +7,7 @@ export interface VoiceRegion {
 	/**
 	 * Unique ID for the region
 	 */
-	id: string;
+	id: Snowflake;
 
 	/**
 	 * Name of the region
@@ -44,17 +44,17 @@ export interface VoiceState {
 	/**
 	 * The guild ID this voice state is for
 	 */
-	guild_id?: string;
+	guild_id?: Snowflake;
 
 	/**
 	 * The channel ID this user is connected to
 	 */
-	channel_id: Nullable<string>;
+	channel_id: Nullable<Snowflake>;
 
 	/**
 	 * The user ID this voice state is for
 	 */
-	user_id: string;
+	user_id: Snowflake;
 
 	/**
 	 * The guild member this voice state is for

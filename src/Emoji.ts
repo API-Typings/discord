@@ -1,4 +1,4 @@
-import { Nullable, User } from '.';
+import { Nullable, Snowflake, User } from './';
 
 /**
  * @source {@link https://discord.com/developers/docs/resources/emoji#emoji-object-emoji-structure Emoji}
@@ -7,7 +7,7 @@ export interface Emoji {
 	/**
 	 * {@link https://discord.com/developers/docs/reference#image-formatting Emoji ID}
 	 */
-	id: Nullable<string>;
+	id: Nullable<Snowflake>;
 
 	/**
 	 * Emoji name
@@ -71,7 +71,7 @@ export interface PostCreateEmoji {
 	/**
 	 * Roles for which this emoji will be whitelisted
 	 */
-	roles: string[];
+	roles: Snowflake[];
 }
 
 /**
@@ -91,5 +91,5 @@ export interface PatchModifyEmoji {
 	/**
 	 * Roles for which this emoji will be whitelisted
 	 */
-	roles: Nullable<string[]>;
+	roles: Nullable<Snowflake[]>;
 }

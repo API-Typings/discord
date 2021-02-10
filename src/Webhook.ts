@@ -1,4 +1,4 @@
-import { AllowedMentions, Embed, Nullable, User } from './';
+import { AllowedMentions, Embed, Nullable, Snowflake, User } from './';
 import { Channel } from './Channel';
 import { Guild } from './Guild';
 
@@ -11,7 +11,7 @@ export interface Webhook {
 	/**
 	 * The ID of the webhook
 	 */
-	id: string;
+	id: Snowflake;
 
 	/**
 	 * The {@link https://discord.com/developers/docs/resources/webhook#webhook-object-webhook-types type} of the webhook
@@ -21,12 +21,12 @@ export interface Webhook {
 	/**
 	 * The guild ID this webhook is for
 	 */
-	guild_id?: string;
+	guild_id?: Snowflake;
 
 	/**
 	 * The channel ID this webhook is for
 	 */
-	channel_id: string;
+	channel_id: Snowflake;
 
 	/**
 	 * The user this webhook was created by (not returned when getting a webhook with its token)
@@ -51,7 +51,7 @@ export interface Webhook {
 	/**
 	 * The bot/OAuth2 application that created this webhook
 	 */
-	application_id: Nullable<string>;
+	application_id: Nullable<Snowflake>;
 
 	/**
 	 * The guild of the channel that this webhook is following (returned for Channel Follower Webhooks)
@@ -121,7 +121,7 @@ export interface ModifyWebhook {
 	/**
 	 * The new channel id this webhook should be moved to
 	 */
-	channel_id?: Nullable<string>;
+	channel_id?: Nullable<Snowflake>;
 }
 
 /**

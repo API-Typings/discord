@@ -1,4 +1,4 @@
-import { Nullable } from '../';
+import { Nullable, Snowflake } from '../';
 import { Activity, ClientStatus, Presence } from '../Activity';
 import { Channel } from '../Channel';
 import { Command } from '../Command';
@@ -22,19 +22,19 @@ interface GuildData {
 	/**
 	 * The ID of the guild
 	 */
-	guild_id: string;
+	guild_id: Snowflake;
 }
 
 export interface ChannelPinsUpdateData {
 	/**
 	 * The ID of the guild
 	 */
-	guild_id?: string;
+	guild_id?: Snowflake;
 
 	/**
 	 * The ID of the channel
 	 */
-	channel_id: string;
+	channel_id: Snowflake;
 
 	/**
 	 * The time at which the most recent pinned message was pinned
@@ -43,7 +43,7 @@ export interface ChannelPinsUpdateData {
 }
 
 /**
- * Sent on connection to the websocket. Defines the heartbeat interval that the client should heartbeat to
+ * Sent on connection to the websocket. Defines the heartbeat interval that the client should heartbeat to.
  *
  * @source {@link https://discord.com/developers/docs/topics/gateway#hello-hello-structure Gateway}
  */
@@ -71,20 +71,24 @@ export interface IntegrationDeleteData extends GuildData {
 	/**
 	 * Integration ID
 	 */
-	id: string;
+	id: Snowflake;
 
 	/**
 	 * ID of the bot/OAuth2 application for this discord integration
 	 */
-	application_id?: string;
+	application_id?: Snowflake;
 }
 
 /**
- * Sent when:
+ * Sent to indicate one of at least three different situations:
  *
- * 1. The gateway could not initialize a session after receiving an {@link https://discord.com/developers/docs/topics/gateway#identify Opcode 2 Identify}
- * 2. The gateway could not resume a previous session after receiving an {@link https://discord.com/developers/docs/topics/gateway#resume Opcode 6 Resume}
- * 3. The gateway has invalidated an active session and is requesting client action
+ * - The gateway could not initialize a session after receiving an {@link https://discord.com/developers/docs/topics/gateway#identify Opcode 2 Identify}
+ * - The gateway could not resume a previous session after receiving an {@link https://discord.com/developers/docs/topics/gateway#resume Opcode 6 Resume}
+ * - The gateway has invalidated an active session and is requesting client action
+ *
+ * The inner `d` key is a boolean that indicates whether the session may be resumable. See
+ * {@link https://discord.com/developers/docs/topics/gateway#connecting Connecting} and
+ * {@link https://discord.com/developers/docs/topics/gateway#resuming Resuming} for more information.
  *
  * @source {@link https://discord.com/developers/docs/topics/gateway#invalid-session Gateway}
  */
@@ -101,7 +105,7 @@ export interface InviteCreateData extends GuildData {
 	/**
 	 * The channel the invite is for
 	 */
-	channel_id: string;
+	channel_id: Snowflake;
 
 	/**
 	 * The unique invite {@link https://discord.com/developers/docs/resources/invite#invite-object code}
@@ -168,7 +172,7 @@ export interface MemberChunkData extends GuildData {
 	/**
 	 * If passing an invalid ID to `REQUEST_GUILD_MEMBERS`, it will be returned here
 	 */
-	not_found?: string[];
+	not_found?: Snowflake[];
 
 	/**
 	 * If passing true to `REQUEST_GUILD_MEMBERS`, presences of the returned members will be here
@@ -185,29 +189,29 @@ export interface MessageDeleteData extends Partial<GuildData> {
 	/**
 	 * The ID of the message
 	 */
-	id: string;
+	id: Snowflake;
 
 	/**
 	 * The ID of the channel
 	 */
-	channel_id: string;
+	channel_id: Snowflake;
 }
 
 export interface MessageReactionData extends Partial<GuildData> {
 	/**
 	 * The ID of the user
 	 */
-	user_id: string;
+	user_id: Snowflake;
 
 	/**
 	 * The ID of the channel
 	 */
-	channel_id: string;
+	channel_id: Snowflake;
 
 	/**
 	 * The id of the message
 	 */
-	message_id: string;
+	message_id: Snowflake;
 
 	/**
 	 * The emoji used to react
@@ -275,7 +279,7 @@ export interface ReadyData {
 		/**
 		 * The ID of the app
 		 */
-		id: string;
+		id: Snowflake;
 
 		/**
 		 * The application's public flags
@@ -288,12 +292,12 @@ export interface TypingStartData extends Partial<GuildData> {
 	/**
 	 * ID of the channel
 	 */
-	channel_id: string;
+	channel_id: Snowflake;
 
 	/**
 	 * ID of the user
 	 */
-	user_id: string;
+	user_id: Snowflake;
 
 	/**
 	 * Unix time (in seconds) of when the user started typing
@@ -380,27 +384,33 @@ export type ApplicationCommandDelete = EventPayload<Event.ApplicationCommandDele
 export type ApplicationCommandUpdate = EventPayload<Event.ApplicationCommandUpdate, Command & GuildData>;
 
 /**
- * Sent when a new guild channel is created, relevant to the current user
+ * Sent when a new guild channel is created, relevant to the current user. The inner payload is
+ * a {@link https://discord.com/developers/docs/resources/channel#channel-object channel} object.
  *
  * @source {@link https://discord.com/developers/docs/topics/gateway#channel-create Gateway}
  */
 export type ChannelCreate = EventPayload<Event.ChannelCreate, Channel>;
 
 /**
- * Sent when a channel relevant to the current user is deleted
+ * Sent when a channel relevant to the current user is deleted. The inner payload is
+ * a {@link https://discord.com/developers/docs/resources/channel#channel-object channel} object.
  *
  * @source {@link https://discord.com/developers/docs/topics/gateway#channel-delete Gateway}
  */
 export type ChannelDelete = EventPayload<Event.ChannelDelete, Channel>;
 
 /**
- * Sent when a message is pinned or unpinned in a text channel
+ * Sent when a message is pinned or unpinned in a text channel. This is not sent when a pinned message is deleted.
  *
  * @source {@link https://discord.com/developers/docs/topics/gateway#channel-pins-update Gateway}
  */
 export type ChannelPinsUpdate = EventPayload<Event.ChannelPinsUpdate, ChannelPinsUpdateData>;
 /**
- * Sent when a channel is updated
+ * Sent when a channel is updated. The inner payload is a {@link https://discord.com/developers/docs/resources/channel#channel-object channel} object.
+ *
+ * @remarks
+ * This is not sent when the field `last_message_id` is altered. To keep track of the `last_message_id` changes, you
+ * must listen for {@link https://discord.com/developers/docs/topics/gateway#message-create Message Create} events.
  *
  * @source {@link https://discord.com/developers/docs/topics/gateway#channel-update Gateway}
  */
@@ -421,7 +431,7 @@ export type EmojisUpdateData = GuildData & {
 };
 
 /**
- * Sent when a user is banned from a guild
+ * Sent when a user is banned from a guild.
  *
  * @source {@link https://discord.com/developers/docs/topics/gateway#guild-ban-add Gateway}
  */
@@ -442,19 +452,28 @@ export type GuildBanData = GuildData & {
 export type GuildBanRemove = EventPayload<Event.GuildBanRemove, GuildBanData>;
 
 /**
- * Sent when:
+ * This event can be sent in three different scenarios:
  *
- * 1. A user is initially connecting, to lazily load and backfill information for all
- *    unavailable guilds sent in the {@link https://discord.com/developers/docs/topics/gateway#ready Ready} event
- * 2. A Guild becomes available again to the client
- * 3. The current user joines a new Guild
+ * 1. When a user is initially connecting, to lazily load and backfill information for all unavailable guilds sent in
+ * 	  the {@link https://discord.com/developers/docs/topics/gateway#ready Ready} event. Guilds that are unavailable due
+ *    to an outage will send a {@link https://discord.com/developers/docs/topics/gateway#guild-delete Guild Delete} event.
+ * 2. When a Guild becomes available again to the client.
+ * 3. When the current user joins a new Guild.
+ *
+ * The inner payload is a {@link https://discord.com/developers/docs/resources/guild#guild-object guild} object, with all the extra fields specified.
+ *
+ * @warning
+ * If you are using Gateway Intents, members and presences returned in this event will only
+ * contain your bot and users in voice channels unless you specify the `GUILD_PRESENCES` intent.
  *
  * @source {@link https://discord.com/developers/docs/topics/gateway#guild-create Gateway}
  */
 export type GuildCreate = EventPayload<Event.GuildCreate, Guild>;
 
 /**
- * Sent when a guild becomes or was already unavailable due to an outage, or when the user leaves or is removed from a guild
+ * Sent when a guild becomes or was already unavailable due to an outage, or when the user leaves or is removed from a guild. The
+ * inner payload is an {@link https://discord.com/developers/docs/resources/guild#unavailable-guild-object unavailable guild} object.
+ * If the unavailable `field` is not set, the user was removed from the guild.
  *
  * @source {@link https://discord.com/developers/docs/topics/gateway#guild-delete Gateway}
  */
@@ -468,7 +487,7 @@ export type GuildDelete = EventPayload<Event.GuildDelete, Guild>;
 export type IntegrationsUpdate = EventPayload<Event.GuildIntegrationsUpdate, GuildData>;
 
 /**
- * Sent when a guild is updated
+ * Sent when a guild is updated. The inner payload is a {@link https://discord.com/developers/docs/resources/guild#guild-object guild} object.
  *
  * @source {@link https://discord.com/developers/docs/topics/gateway#guild-update Gateway}
  */
@@ -498,7 +517,10 @@ export type InviteDelete = EventPayload<Event.InviteDelete, InviteDeleteData>;
 export type InviteDeleteData = Pick<InviteCreateData, 'guild_id' | 'channel_id' | 'code'>;
 
 /**
- * Sent when a new user joins a guild
+ * Sent when a new user joins a guild. The inner payload is a
+ * {@link https://discord.com/developers/docs/resources/guild#guild-member-object guild member} object with an extra `guild_id` key
+ *
+ * @warning If using Gateway Intents, the `GUILD_MEMBERS` intent will be required to receive this event.
  *
  * @source {@link https://discord.com/developers/docs/topics/gateway#guild-member-add Gateway}
  */
@@ -507,14 +529,17 @@ export type MemberAdd = EventPayload<Event.MemberAdd, MemberAddData>;
 export type MemberAddData = Member & GuildData;
 
 /**
- * Sent in response to {@link https://discord.com/developers/docs/topics/gateway#request-guild-members Guild Request Members}
+ * Sent in response to {@link https://discord.com/developers/docs/topics/gateway#request-guild-members Guild Request Members}.
+ * You can use the `chunk_index` and `chunk_count` to calculate how many chunks are left for your request.
  *
  * @source {@link https://discord.com/developers/docs/topics/gateway#guild-members-chunk Gateway}
  */
 export type MemberChunk = EventPayload<Event.MemberChunk, MemberChunkData>;
 
 /**
- * Sent when a user is removed from a guild (leave/kick/ban)
+ * Sent when a user is removed from a guild (leave/kick/ban).
+ *
+ * @warning If using Gateway Intents, the `GUILD_MEMBERS` intent will be required to receive this event.
  *
  * @source {@link https://discord.com/developers/docs/topics/gateway#guild-member-remove Gateway}
  */
@@ -528,7 +553,9 @@ export type MemberRemoveData = GuildData & {
 };
 
 /**
- * Sent when a guild member is updated
+ * Sent when a guild member is updated. This will also fire when the user object of a guild member changes.
+ *
+ * @warning If using Gateway Intents, the `GUILD_MEMBERS` intent will be required to receive this event.
  *
  * @source {@link https://discord.com/developers/docs/topics/gateway#guild-member-update Gateway}
  */
@@ -540,11 +567,11 @@ export type MemberUpdateData = GuildData &
 		/**
 		 * User role IDs
 		 */
-		roles: string[];
+		roles: Snowflake[];
 	};
 
 /**
- * Sent when multiple messages are deleted at once
+ * Sent when multiple messages are deleted at once.
  *
  * @source {@link https://discord.com/developers/docs/topics/gateway#message-delete-bulk Gateway}
  */
@@ -554,32 +581,32 @@ export type MessageBulkDeleteData = Pick<MessageDeleteData, 'channel_id' | 'guil
 	/**
 	 * The IDs of the messages
 	 */
-	ids: string[];
+	ids: Snowflake[];
 };
 
 /**
- * Sent when a message is created
+ * Sent when a message is created. The inner payload is a {@link https://discord.com/developers/docs/resources/channel#message-object message} object.
  *
  * @source {@link https://discord.com/developers/docs/topics/gateway#message-create Gateway}
  */
 export type MessageCreate = EventPayload<Event.MessageCreate, Message>;
 
 /**
- * Sent when a message is deleted
+ * Sent when a message is deleted.
  *
  * @source {@link https://discord.com/developers/docs/topics/gateway#message-delete Gateway}
  */
 export type MessageDelete = EventPayload<Event.MessageDelete, MessageDeleteData>;
 
 /**
- * Sent when a user removes a reaction from a message
+ * Sent when a user removes a reaction from a message.
  *
  * @source {@link https://discord.com/developers/docs/topics/gateway#message-reaction-remove Gateway}
  */
 export type MessageReactionRemove = EventPayload<Event.MessageReactionRemove, MessageReactionData>;
 
 /**
- * Sent when a bot removes all instances of a given emoji from the reactions of a message
+ * Sent when a bot removes all instances of a given emoji from the reactions of a message.
  *
  * @source {@link https://discord.com/developers/docs/topics/gateway#message-reaction-remove-emoji Gateway}
  */
@@ -593,7 +620,7 @@ export type MessageReactionRemoveEmojiData = Pick<MessageReactionData, 'channel_
 };
 
 /**
- * Sent when a user adds a reaction to a message
+ * Sent when a user adds a reaction to a message.
  *
  * @source {@link https://discord.com/developers/docs/topics/gateway#message-reaction-add Gateway}
  */
@@ -607,7 +634,7 @@ export type MessageReactionAddData = Omit<MessageReactionData, 'emoji'> & {
 };
 
 /**
- * Sent when a user explicitly removes all reactions from a message
+ * Sent when a user explicitly removes all reactions from a message.
  *
  * @source {@link https://discord.com/developers/docs/topics/gateway#message-reaction-remove-all Gateway}
  */
@@ -616,21 +643,36 @@ export type MessageReactionRemoveAll = EventPayload<Event.MessageReactionRemoveA
 export type MessageReactionRemoveAllData = Omit<MessageReactionRemoveEmoji, 'o' | 'd' | 't' | 'emoji'>;
 
 /**
- * Sent when a message is updated
+ * Sent when a message is updated. The inner payload is a {@link https://discord.com/developers/docs/resources/channel#message-object message} object.
+ *
+ * @warning Unlike creates, message updates may contain only a subset of the full message object payload (but will always contain an `id` and `channel_id`).
  *
  * @source {@link https://discord.com/developers/docs/topics/gateway#message-update Gateway}
  */
 export type MessageUpdate = EventPayload<Event.MessageUpdate, Message>;
 
 /**
- * Sent when a user's presence or info, such as name or avatar, is updated
+ * Sent when a user's presence or info, such as name or avatar, is updated.
+ *
+ * @warning
+ * - If you are using Gateway Intents, you must specify the `GUILD_PRESENCES` intent in order to receive Presence Update events
+ * - The user object within this event can be partial, the only field which must be sent is the `id` field, everything else is optional. Along with this
+ *   limitation, no fields are required, and the types of the fields are not validated. Your client should expect any combination of fields and types within this event.
  *
  * @source {@link https://discord.com/developers/docs/topics/gateway#presence-update Gateway}
  */
 export type PresenceUpdate = EventPayload<Event.PresenceUpdate, PresenceUpdateData>;
 
 /**
- * Dispatched when a client has completed the initial handshake with the gateway (for new sessions)
+ * Dispatched when a client has completed the initial handshake with the gateway (for new sessions).
+ *
+ * @remarks
+ * The ready event can be the largest and most complex event the gateway will send, as it contains
+ * all the state required for a client to begin interacting with the rest of the platform.
+ *
+ * `guilds` are the guilds of which your bot is a member. They start out as unavailable when you connect to the gateway. As they become available, your bot
+ *  will be notified via {@link https://discord.com/developers/docs/topics/gateway#guild-create Guild Create} events. `private_channels` will be an empty array.
+ *  As bots receive private messages, they will be notified via {@link https://discord.com/developers/docs/topics/gateway#channel-create Channel Create} events.
  */
 export type Ready = EventPayload<Event.Ready, ReadyData>;
 
@@ -649,7 +691,7 @@ export type RoleData = GuildData & {
 };
 
 /**
- * Sent when a guild role is deleted
+ * Sent when a guild role is deleted.
  *
  * @source {@link https://discord.com/developers/docs/topics/gateway#guild-role-delete Gateway}
  */
@@ -659,44 +701,44 @@ export type RoleDeleteData = GuildData & {
 	/**
 	 * ID of the role
 	 */
-	role_id: string;
+	role_id: Snowflake;
 };
 
 /**
- * Sent when a guild role is updated
+ * Sent when a guild role is updated.
  *
  * @source {@link https://discord.com/developers/docs/topics/gateway#guild-role-update Gateway}
  */
 export type RoleUpdate = EventPayload<Event.RoleUpdate, RoleData>;
 
 /**
- * Sent when a user starts typing in a channel
+ * Sent when a user starts typing in a channel.
  *
  * @source {@link https://discord.com/developers/docs/topics/gateway#typing-start Gateway}
  */
 export type TypingStart = EventPayload<Event.TypingStart, TypingStartData>;
 
 /**
- * Sent when properties about the user change
+ * Sent when properties about the user change.
  *
  * @source {@link https://discord.com/developers/docs/topics/gateway#user-update Gateway}
  */
 export type UserUpdate = EventPayload<Event.UserUpdate, User>;
 
 /**
- * Sent when a guild's voice server is updated
+ * Sent when a guild's voice server is updated.
  */
 export type VoiceServerUpdate = EventPayload<Event.VoiceServerUpdate, VoiceServerUpdateData>;
 
 /**
- * Sent when someone joins/leaves/moves voice channels
+ * Sent when someone joins/leaves/moves voice channels.
  *
  * @source {@link https://discord.com/developers/docs/topics/gateway#voice-state-update Gateway}
  */
 export type VoiceStateUpdate = EventPayload<Event.VoiceStateUpdate, VoiceState>;
 
 /**
- * Sent when a guild channel's webhook is created, updated, or deleted
+ * Sent when a guild channel's webhook is created, updated, or deleted.
  *
  * @source {@link https://discord.com/developers/docs/topics/gateway#webhooks-update Gateway}
  */
@@ -706,5 +748,5 @@ export type WebhooksUpdateData = GuildData & {
 	/**
 	 * ID of the channel
 	 */
-	channel_id: string;
+	channel_id: Snowflake;
 };

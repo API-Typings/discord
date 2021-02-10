@@ -1,4 +1,4 @@
-import { Nullable } from './';
+import { Nullable, Snowflake } from './';
 import { User } from './User';
 
 /**
@@ -10,7 +10,7 @@ export interface Channel {
 	/**
 	 * The ID of this channel
 	 */
-	id: string;
+	id: Snowflake;
 
 	/**
 	 * The {@link https://discord.com/developers/docs/resources/channel#channel-object-channel-types type of channel}
@@ -20,7 +20,7 @@ export interface Channel {
 	/**
 	 * The ID of the guild
 	 */
-	guild_id: string;
+	guild_id: Snowflake;
 
 	/**
 	 * Sorting position of the channel
@@ -57,7 +57,7 @@ export interface ChannelNickname {
 	/**
 	 * The ID of the user this nickname is applied to
 	 */
-	id: string;
+	id: Snowflake;
 
 	/**
 	 * The user's nickname
@@ -79,7 +79,7 @@ export interface DMChannel
 	/**
 	 * Application ID of the group DM creator if it is bot-created
 	 */
-	application_id?: string;
+	application_id?: Snowflake;
 }
 
 /**
@@ -87,14 +87,14 @@ export interface DMChannel
  */
 export interface FollowedChannel {
 	/**
-	 * Source channel id
+	 * Source channel ID
 	 */
-	channel_id: string;
+	channel_id: Snowflake;
 
 	/**
-	 * Created target webhook id
+	 * Created target webhook ID
 	 */
-	webhook_id: string;
+	webhook_id: Snowflake;
 }
 
 /**
@@ -114,7 +114,7 @@ export interface GroupDMChannel extends DMChannel, Nullable<Pick<Channel, 'name'
 	/**
 	 * ID of the DM creator
 	 */
-	owner_id: string;
+	owner_id: Snowflake;
 }
 
 /**
@@ -124,7 +124,7 @@ export interface PermissionOverwrite {
 	/**
 	 * Role or user ID
 	 */
-	id: string;
+	id: Snowflake;
 
 	/**
 	 * Either 0 (role) or 1 (member)
@@ -149,7 +149,7 @@ export interface TextChannel extends Channel {
 	/**
 	 * The ID of the last message sent in this channel (may not point to an existing or valid message)
 	 */
-	last_message_id: Nullable<string>;
+	last_message_id: Nullable<Snowflake>;
 
 	/**
 	 * Amount of seconds a user has to wait before sending another message (0-21600); bots, as well as users with the permission `manage_messages` or `manage_channel`, are unaffected
@@ -184,7 +184,7 @@ export interface WelcomeScreenChannel {
 	/**
 	 * The channel's ID
 	 */
-	channel_id: string;
+	channel_id: Snowflake;
 
 	/**
 	 * The description shown for the channel
@@ -194,7 +194,7 @@ export interface WelcomeScreenChannel {
 	/**
 	 * The {@link https://discord.com/developers/docs/reference#image-formatting emoji ID}, if the emoji is custom
 	 */
-	emoji_id: Nullable<string>;
+	emoji_id: Nullable<Snowflake>;
 
 	/**
 	 * The emoji name if custom, the unicode character if standard, or `null` if no emoji is set
@@ -314,7 +314,7 @@ export interface ModifyChannel {
 	/**
 	 * Amount of seconds a user has to wait before sending another message (0-21600); bots, as well as users with the permission `manage_messages` or `manage_channel`, are unaffected
 	 *
-	 * @channel Tet
+	 * @channel Text
 	 */
 	rate_limit_per_user?: Nullable<number>;
 
@@ -344,7 +344,7 @@ export interface ModifyChannel {
 	 *
 	 * @channel Text, News, Store, Voice
 	 */
-	parent_id?: Nullable<string>;
+	parent_id?: Nullable<Snowflake>;
 
 	/**
 	 * Image for the channel icon
@@ -410,7 +410,7 @@ export interface CreateChannelInvite {
 	/**
 	 * The target user id for this invite
 	 */
-	target_user_id?: string;
+	target_user_id?: Snowflake;
 
 	/**
 	 * The {@link https://discord.com/developers/docs/resources/invite#invite-object-target-user-types type of user target} for this invite
@@ -429,7 +429,7 @@ export interface FollowNewsChannel {
 	/**
 	 * ID of target channel
 	 */
-	webhook_channel_id: string;
+	webhook_channel_id: Snowflake;
 }
 
 /**
@@ -501,7 +501,7 @@ export interface PostCreateChannel {
 	/**
 	 * ID of the parent category for a channel
 	 */
-	parent_id?: string;
+	parent_id?: Snowflake;
 
 	/**
 	 * Whether the channel is nsfw
@@ -521,7 +521,7 @@ export interface ModifyChannelPositions {
 	/**
 	 * Channel ID
 	 */
-	id: string;
+	id: Snowflake;
 
 	/**
 	 * Sorting position of the channel
@@ -536,5 +536,5 @@ export interface ModifyChannelPositions {
 	/**
 	 * The new parent ID for the channel that is moved
 	 */
-	parent_id: string;
+	parent_id: Snowflake;
 }

@@ -1,4 +1,4 @@
-import { Nullable } from './';
+import { Nullable, Snowflake } from './';
 import { Activity, Presence } from './Activity';
 import { Channel, PartialChannel, WelcomeScreenChannel } from './Channel';
 import { Emoji } from './Emoji';
@@ -36,7 +36,7 @@ export interface Guild extends PartialGuild {
 	/**
 	 * ID of owner
 	 */
-	owner_id: string;
+	owner_id: Snowflake;
 
 	/**
 	 * Total permissions for {@link https://discord.com/developers/docs/resources/user#get-current-user-guilds the user} in the guild (excludes overrides)
@@ -51,7 +51,7 @@ export interface Guild extends PartialGuild {
 	/**
 	 * ID of AFK channel
 	 */
-	afk_channel_id: Nullable<string>;
+	afk_channel_id: Nullable<Snowflake>;
 
 	/**
 	 * AFK timeout in seconds
@@ -66,7 +66,7 @@ export interface Guild extends PartialGuild {
 	/**
 	 * The channel id that the widget will generate an invite to, or `null` if set to no invite
 	 */
-	widget_channel_id?: Nullable<string>;
+	widget_channel_id?: Nullable<Snowflake>;
 
 	/**
 	 * {@link https://discord.com/developers/docs/resources/guild#guild-object-verification-level Verification level} required for the guild
@@ -106,12 +106,12 @@ export interface Guild extends PartialGuild {
 	/**
 	 * Application ID of the guild creator if it is bot-created
 	 */
-	application_id: Nullable<string>;
+	application_id: Nullable<Snowflake>;
 
 	/**
 	 * The ID of the channel where guild notices such as welcome messages and boost events are posted
 	 */
-	system_channel_id: Nullable<string>;
+	system_channel_id: Nullable<Snowflake>;
 
 	/**
 	 * {@link https://discord.com/developers/docs/resources/guild#guild-object-system-channel-flags System channel flags}
@@ -121,7 +121,7 @@ export interface Guild extends PartialGuild {
 	/**
 	 * The ID of the channel where Community guilds can display rules and/or guidelines
 	 */
-	rules_channel_id: Nullable<string>;
+	rules_channel_id: Nullable<Snowflake>;
 
 	/**
 	 * When this guild was joined at
@@ -206,7 +206,7 @@ export interface Guild extends PartialGuild {
 	/**
 	 * The ID of the channel where admins and moderators of Community guilds receive notices from Discord
 	 */
-	public_updates_channel_id: Nullable<string>;
+	public_updates_channel_id: Nullable<Snowflake>;
 
 	/**
 	 * The maximum amount of users in a video channel
@@ -251,7 +251,7 @@ export interface GuildPreview {
 	/**
 	 * Guild ID
 	 */
-	id: string;
+	id: Snowflake;
 
 	/**
 	 * Guild name
@@ -306,7 +306,7 @@ export interface Integration {
 	/**
 	 * Integration ID
 	 */
-	id: string;
+	id: Snowflake;
 
 	/**
 	 * Integration name
@@ -331,7 +331,7 @@ export interface Integration {
 	/**
 	 * ID that this integration uses for "subscribers"
 	 */
-	role_id?: string;
+	role_id?: Snowflake;
 
 	/**
 	 * Whether emoticons should be synced for this integration (twitch only currently)
@@ -386,7 +386,7 @@ export interface IntegrationAccount {
 	/**
 	 * ID of the account
 	 */
-	id: string;
+	id: Snowflake;
 
 	/**
 	 * Name of the account
@@ -401,7 +401,7 @@ export interface IntegrationApplication {
 	/**
 	 * The ID of the app
 	 */
-	id: string;
+	id: Snowflake;
 
 	/**
 	 * The name of the app
@@ -441,7 +441,7 @@ export interface PartialGuild {
 	/**
 	 * Guild ID
 	 */
-	id: string;
+	id: Snowflake;
 
 	/**
 	 * Guild name (2-100 characters, excluding trailing and leading whitespace)
@@ -504,7 +504,7 @@ export interface WelcomeScreen {
 }
 
 export interface Widget {
-	id: string;
+	id: Snowflake;
 	name: string;
 	instant_invite: string;
 	channels: WidgetChannel[];
@@ -513,13 +513,13 @@ export interface Widget {
 }
 
 export interface WidgetChannel {
-	id: string;
+	id: Snowflake;
 	name: string;
 	position: number;
 }
 
 export interface WidgetMember {
-	id: string;
+	id: Snowflake;
 	username: string;
 	discriminator: string;
 	avatar: Nullable<string>;
@@ -537,7 +537,7 @@ export interface WidgetSettings {
 	/**
 	 * The widget channel ID
 	 */
-	channel_id?: string;
+	channel_id?: Snowflake;
 }
 
 /**
@@ -715,7 +715,7 @@ export interface CreateGuild {
 	/**
 	 * ID for AFK channel
 	 */
-	afk_channel_id?: string;
+	afk_channel_id?: Snowflake;
 
 	/**
 	 * AFK timeout in seconds
@@ -725,7 +725,7 @@ export interface CreateGuild {
 	/**
 	 * The ID of the channel where guild notices such as welcome messages and boost events are posted
 	 */
-	system_channel_id?: string;
+	system_channel_id?: Snowflake;
 
 	/**
 	 * {@link https://discord.com/developers/docs/resources/guild#guild-object-system-channel-flags System channel flags}
@@ -782,7 +782,7 @@ export interface ModifyGuild {
 	/**
 	 * ID for AFK channel
 	 */
-	afk_channel_id?: Nullable<string>;
+	afk_channel_id?: Nullable<Snowflake>;
 
 	/**
 	 * AFK timeout in seconds
@@ -797,7 +797,7 @@ export interface ModifyGuild {
 	/**
 	 * User ID to transfer guild ownership to (must be owner)
 	 */
-	owner_id?: string;
+	owner_id?: Snowflake;
 
 	/**
 	 * Base64 16:9 png/jpeg image for the guild splash (when the server has `INVITE_SPLASH` feature)
@@ -812,7 +812,7 @@ export interface ModifyGuild {
 	/**
 	 * The ID of the channel where guild notices such as welcome messages and boost events are posted
 	 */
-	system_channel_id?: Nullable<string>;
+	system_channel_id?: Nullable<Snowflake>;
 
 	/**
 	 * {@link https://discord.com/developers/docs/resources/guild#guild-object-system-channel-flags System channel flags}
@@ -822,12 +822,12 @@ export interface ModifyGuild {
 	/**
 	 * The ID of the channel where Community guilds display rules and/or guidelines
 	 */
-	rules_channel_id?: Nullable<string>;
+	rules_channel_id?: Nullable<Snowflake>;
 
 	/**
 	 * The ID of the channel where admins and moderators of Community guilds receive notices from Discord
 	 */
-	public_updates_channel_id?: Nullable<string>;
+	public_updates_channel_id?: Nullable<Snowflake>;
 
 	/**
 	 * The preferred locale of a Community guild used in server discovery and notices from Discord; defaults to "en-US"
@@ -927,7 +927,7 @@ export interface ModifyRolePositions {
 	/**
 	 * Role
 	 */
-	id: string;
+	id: Snowflake;
 
 	/**
 	 * Sorting position of the role
@@ -984,7 +984,7 @@ export interface GetPruneCount {
 	/**
 	 * Role(s) to include
 	 */
-	include_roles?: string[];
+	include_roles?: Snowflake[];
 }
 
 /**
@@ -1009,7 +1009,7 @@ export interface BeginPrune {
 	/**
 	 * Role(s) to include
 	 */
-	include_roles?: string[];
+	include_roles?: Snowflake[];
 }
 
 /**
@@ -1029,7 +1029,7 @@ export interface CreateIntegration {
 	/**
 	 * The integration ID
 	 */
-	id: string;
+	id: Snowflake;
 }
 
 /**

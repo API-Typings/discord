@@ -1,4 +1,4 @@
-import { Nullable } from './';
+import { Nullable, Snowflake } from './';
 import { User } from './User';
 
 /**
@@ -48,7 +48,7 @@ export interface Activity {
 	/**
 	 * Application ID for the game
 	 */
-	application_id?: string;
+	application_id?: Snowflake;
 
 	/**
 	 * What the player is currently doing
@@ -155,7 +155,7 @@ export interface ActivityEmoji {
 	/**
 	 * The ID of the emoji
 	 */
-	id?: string;
+	id?: Snowflake;
 
 	/**
 	 * Whether this emojis is animated
@@ -168,7 +168,7 @@ export interface ActivityEmoji {
  */
 export interface ActivityParty {
 	/**
-	 * The id of the party
+	 * The ID of the party
 	 */
 	id?: string;
 
@@ -239,27 +239,30 @@ export interface ClientStatus {
  * A user's presence is their current state on a guild
  */
 export interface Presence {
-	user: User;
+	/**
+	 * The user presence is being updated for
+	 */
+	user?: Required<Pick<User, 'id'>> & Partial<Omit<User, 'id'>>;
 
 	/**
 	 * ID of the guild
 	 */
-	guild_id: string;
+	guild_id?: Snowflake;
 
 	/**
 	 * Either "idle", "dnd", "online", or "offline"
 	 */
-	status: StatusType;
+	status?: StatusType;
 
 	/**
 	 * User's current activities
 	 */
-	activities: Activity[];
+	activities?: Activity[];
 
 	/**
 	 * User's platform-dependent status
 	 */
-	client_status: ClientStatus;
+	client_status?: ClientStatus;
 }
 
 /**

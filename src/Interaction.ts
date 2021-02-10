@@ -1,3 +1,4 @@
+import { Snowflake } from './';
 import { CommandData } from './Command';
 import { Embed } from './Embed';
 import { Member } from './Member';
@@ -12,7 +13,7 @@ export interface Interaction {
 	/**
 	 * ID of the interaction
 	 */
-	id: string;
+	id: Snowflake;
 
 	/**
 	 * The type of interaction
@@ -27,12 +28,12 @@ export interface Interaction {
 	/**
 	 * The guild it was sent from
 	 */
-	guild_id: string;
+	guild_id: Snowflake;
 
 	/**
 	 * The channel it was sent from
 	 */
-	channel_id: string;
+	channel_id: Snowflake;
 
 	/**
 	 * Guild member data for the invoking user, including permissions

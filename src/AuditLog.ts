@@ -1,4 +1,4 @@
-import { Nullable } from './';
+import { Nullable, Snowflake } from './';
 import { PartialIntegration } from './Guild';
 import { PartialRole } from './Member';
 import { User } from './User';
@@ -58,7 +58,7 @@ export interface AuditLogEntry {
 	/**
 	 * ID of the affected entity (webhook, user, role, etc.)
 	 */
-	target_id: string;
+	target_id: Nullable<string>;
 
 	/**
 	 * Changes made to the `target_id`
@@ -68,12 +68,12 @@ export interface AuditLogEntry {
 	/**
 	 * The user who made the changes
 	 */
-	user_id: Nullable<string>;
+	user_id: Snowflake;
 
 	/**
 	 * ID of the entry
 	 */
-	id: string;
+	id: Snowflake;
 
 	/**
 	 * Type of action that occurred
@@ -120,7 +120,7 @@ export interface AuditLogEntryInfo {
 	 * - `MESSAGE_UNPIN`
 	 * - `MESSAGE_DELETE`
 	 */
-	channel_id: string;
+	channel_id: Snowflake;
 
 	/**
 	 * ID of the message that was targeted
@@ -129,7 +129,7 @@ export interface AuditLogEntryInfo {
 	 * - `MESSAGE_PIN`
 	 * - `MESSAGE_UNPIN`
 	 */
-	message_id: string;
+	message_id: Snowflake;
 
 	/**
 	 * Number of entities that were targeted
@@ -150,7 +150,7 @@ export interface AuditLogEntryInfo {
 	 * - `CHANNEL_OVERWRITE_UPDATE`
 	 * - `CHANNEL_OVERWRITE_DELETE`
 	 */
-	id: string;
+	id: Snowflake;
 
 	/**
 	 * Type of overwritten entity - "0" for "role" or "1" for "member"
@@ -221,9 +221,9 @@ export type AuditLogChange =
 	| AuditLogChangeType<'name', string>
 	| AuditLogChangeType<'icon_hash', string>
 	| AuditLogChangeType<'splash_hash', string>
-	| AuditLogChangeType<'owner_id', string>
+	| AuditLogChangeType<'owner_id', Snowflake>
 	| AuditLogChangeType<'region', string>
-	| AuditLogChangeType<'afk_channel_id', string>
+	| AuditLogChangeType<'afk_channel_id', Snowflake>
 	| AuditLogChangeType<'afk_timeout', number>
 	| AuditLogChangeType<'mfa_level', number>
 	| AuditLogChangeType<'verification_level', number>
@@ -234,14 +234,14 @@ export type AuditLogChange =
 	| AuditLogChangeType<'$remove', PartialRole[]>
 	| AuditLogChangeType<'prune_delete_days', number>
 	| AuditLogChangeType<'widget_enabled', boolean>
-	| AuditLogChangeType<'widget_channel_id', string>
-	| AuditLogChangeType<'system_channel_id', string>
+	| AuditLogChangeType<'widget_channel_id', Snowflake>
+	| AuditLogChangeType<'system_channel_id', Snowflake>
 	| AuditLogChangeType<'position', number>
 	| AuditLogChangeType<'topic', string>
 	| AuditLogChangeType<'bitrate', number>
 	| AuditLogChangeType<'permission_overwrites', any>
 	| AuditLogChangeType<'nsfw', boolean>
-	| AuditLogChangeType<'application_id', string>
+	| AuditLogChangeType<'application_id', Snowflake>
 	| AuditLogChangeType<'rate_limit_per_user', number>
 	| AuditLogChangeType<'permissions', string>
 	| AuditLogChangeType<'color', number>
@@ -250,15 +250,15 @@ export type AuditLogChange =
 	| AuditLogChangeType<'allow', string>
 	| AuditLogChangeType<'deny', string>
 	| AuditLogChangeType<'code', string>
-	| AuditLogChangeType<'channel_id', string>
-	| AuditLogChangeType<'inviter_id', string>
+	| AuditLogChangeType<'channel_id', Snowflake>
+	| AuditLogChangeType<'inviter_id', Snowflake>
 	| AuditLogChangeType<'max_uses', number>
 	| AuditLogChangeType<'uses', number>
 	| AuditLogChangeType<'temporary', boolean>
 	| AuditLogChangeType<'deaf', boolean>
 	| AuditLogChangeType<'mute', boolean>
-	| AuditLogChangeType<'nick', string>
-	| AuditLogChangeType<'avatar_hash', string>
+	| AuditLogChangeType<'nick', Snowflake>
+	| AuditLogChangeType<'avatar_hash', Snowflake>
 	| AuditLogChangeType<'id', string>
 	| AuditLogChangeType<'type', any>
 	| AuditLogChangeType<'enable_emoticons', boolean>
@@ -281,7 +281,7 @@ export interface GetAuditLog {
 	/**
 	 * Filter the log for actions made by a user
 	 */
-	user_id?: string;
+	user_id?: Snowflake;
 
 	/**
 	 * The type of {@link https://discord.com/developers/docs/resources/audit-log#audit-log-entry-object-audit-log-events audit log event}
@@ -289,9 +289,9 @@ export interface GetAuditLog {
 	action_type?: AuditLogEvent;
 
 	/**
-	 * Filter the log before a certain entry id
+	 * Filter the log before a certain entry ID
 	 */
-	before?: string;
+	before?: Snowflake;
 
 	/**
 	 * How many entries are returned (default 50, minimum 1, maximum 100)

@@ -1,4 +1,4 @@
-import { Nullable } from './';
+import { Nullable, Snowflake } from './';
 
 export interface DiscoveryCategory {
 	/**
@@ -38,7 +38,7 @@ export interface DiscoveryMetadata {
 	/**
 	 * The guild ID
 	 */
-	guild_id: string;
+	guild_id: Snowflake;
 
 	/**
 	 * The ID of the primary discovery category
@@ -75,7 +75,7 @@ export interface DiscoverySubcategory {
 	/**
 	 * The guild ID the subcategory was added to
 	 */
-	guild_id: string;
+	guild_id: Snowflake;
 
 	/**
 	 * The ID of the subcategory added

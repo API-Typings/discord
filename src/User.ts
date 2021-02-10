@@ -1,4 +1,4 @@
-import { Nullable } from '.';
+import { Nullable, Snowflake } from './';
 import { PartialIntegration } from './Guild';
 
 /**
@@ -10,7 +10,7 @@ export interface Connection {
 	/**
 	 * ID of the connection account
 	 */
-	id: string;
+	id: Snowflake;
 
 	/**
 	 * The username of the connection account
@@ -62,7 +62,7 @@ export interface User {
 	/**
 	 * The user's ID
 	 */
-	id: string;
+	id: Snowflake;
 
 	/**
 	 * The user's username, not unique across the platform
@@ -203,12 +203,12 @@ export interface GetCurrentUserGuilds {
 	/**
 	 * Get guilds before this guild ID
 	 */
-	before?: string;
+	before?: Snowflake;
 
 	/**
 	 * Get guilds after this guild ID
 	 */
-	after?: string;
+	after?: Snowflake;
 
 	/**
 	 * Max number of guilds to return (1-100)
@@ -227,7 +227,7 @@ export interface CreateDM {
 	/**
 	 * The recipient to open a DM channel with
 	 */
-	recipient_id: string;
+	recipient_id: Snowflake;
 }
 
 /**
@@ -246,5 +246,5 @@ export interface CreateGroupDM {
 	/**
 	 * A dictionary of user IDs to their respective nicknames
 	 */
-	nicks: Record<string, string>;
+	nicks: Record<Snowflake, string>;
 }
