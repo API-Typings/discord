@@ -7,7 +7,7 @@ import { Webhook } from './Webhook';
 /**
  * @source {@link https://discord.com/developers/docs/resources/audit-log#audit-log-change-object-audit-log-change-structure Audit Log}
  */
-interface AuditLogChangeType<K extends string, T> {
+interface AuditLogChangeType<K extends string, T = string> {
 	/**
 	 * New value of the key
 	 */
@@ -218,18 +218,24 @@ export enum AuditLogEvent {
  * @source {@link https://discord.com/developers/docs/resources/audit-log#audit-log-change-object-audit-log-change-key Audit Log}
  */
 export type AuditLogChange =
-	| AuditLogChangeType<'name', string>
-	| AuditLogChangeType<'icon_hash', string>
-	| AuditLogChangeType<'splash_hash', string>
+	| AuditLogChangeType<'name'>
+	| AuditLogChangeType<'guild'>
+	| AuditLogChangeType<'icon_hash'>
+	| AuditLogChangeType<'splash_hash'>
+	| AuditLogChangeType<'discovery_splash_hash'>
+	| AuditLogChangeType<'banner_hash'>
 	| AuditLogChangeType<'owner_id', Snowflake>
-	| AuditLogChangeType<'region', string>
+	| AuditLogChangeType<'region'>
+	| AuditLogChangeType<'preferred_locale'>
 	| AuditLogChangeType<'afk_channel_id', Snowflake>
 	| AuditLogChangeType<'afk_timeout', number>
+	| AuditLogChangeType<'rules_channel_id', Snowflake>
+	| AuditLogChangeType<'public_updates_channel_id', Snowflake>
 	| AuditLogChangeType<'mfa_level', number>
 	| AuditLogChangeType<'verification_level', number>
 	| AuditLogChangeType<'explicit_content_filter', number>
 	| AuditLogChangeType<'default_message_notifications', number>
-	| AuditLogChangeType<'vanity_url_code', string>
+	| AuditLogChangeType<'vanity_url_code'>
 	| AuditLogChangeType<'$add', PartialRole[]>
 	| AuditLogChangeType<'$remove', PartialRole[]>
 	| AuditLogChangeType<'prune_delete_days', number>
@@ -237,19 +243,19 @@ export type AuditLogChange =
 	| AuditLogChangeType<'widget_channel_id', Snowflake>
 	| AuditLogChangeType<'system_channel_id', Snowflake>
 	| AuditLogChangeType<'position', number>
-	| AuditLogChangeType<'topic', string>
+	| AuditLogChangeType<'topic'>
 	| AuditLogChangeType<'bitrate', number>
 	| AuditLogChangeType<'permission_overwrites', any>
 	| AuditLogChangeType<'nsfw', boolean>
 	| AuditLogChangeType<'application_id', Snowflake>
 	| AuditLogChangeType<'rate_limit_per_user', number>
-	| AuditLogChangeType<'permissions', string>
+	| AuditLogChangeType<'permissions'>
 	| AuditLogChangeType<'color', number>
 	| AuditLogChangeType<'hoist', boolean>
 	| AuditLogChangeType<'mentionalble', boolean>
-	| AuditLogChangeType<'allow', string>
-	| AuditLogChangeType<'deny', string>
-	| AuditLogChangeType<'code', string>
+	| AuditLogChangeType<'allow'>
+	| AuditLogChangeType<'deny'>
+	| AuditLogChangeType<'code'>
 	| AuditLogChangeType<'channel_id', Snowflake>
 	| AuditLogChangeType<'inviter_id', Snowflake>
 	| AuditLogChangeType<'max_uses', number>
@@ -263,7 +269,8 @@ export type AuditLogChange =
 	| AuditLogChangeType<'type', any>
 	| AuditLogChangeType<'enable_emoticons', boolean>
 	| AuditLogChangeType<'expire_behavior', number>
-	| AuditLogChangeType<'expire_grace_period', number>;
+	| AuditLogChangeType<'expire_grace_period', number>
+	| AuditLogChangeType<'user_limit', number>;
 
 /**
  * Type of overwritten entity - "0" for "role" or "1" for "member"
