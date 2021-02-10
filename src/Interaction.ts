@@ -3,9 +3,11 @@ import { CommandData } from './Command';
 import { Embed } from './Embed';
 import { Member } from './Member';
 import { AllowedMentions } from './Message';
+import { User } from './User';
 
 /**
- * An interaction is the base "thing" that is sent when a user invokes a command, and is the same for Slash Commands and other future interaction types
+ * An interaction is the base "thing" that is sent when a user invokes a command,
+ * and is the same for Slash Commands and other future interaction types
  *
  * @source {@link https://discord.com/developers/docs/interactions/slash-commands#interaction Interaction}
  */
@@ -28,17 +30,22 @@ export interface Interaction {
 	/**
 	 * The guild it was sent from
 	 */
-	guild_id: Snowflake;
+	guild_id?: Snowflake;
 
 	/**
 	 * The channel it was sent from
 	 */
-	channel_id: Snowflake;
+	channel_id?: Snowflake;
 
 	/**
 	 * Guild member data for the invoking user, including permissions
 	 */
-	member: Member;
+	member?: Member;
+
+	/**
+	 * User object for the invoking user, if invoked in a DM
+	 */
+	user?: User;
 
 	/**
 	 * A continuation token for responding to the interaction
