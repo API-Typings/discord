@@ -1,7 +1,7 @@
-import { Nullable, PartialGuild, Snowflake, User } from './';
+import type { Nullable, PartialGuild, Snowflake, User } from '..';
 
 /**
- * Represents a code that when used, creates a guild based on a snapshot of an existing one
+ * Represents a code that when used, creates a guild based on a snapshot of an existing one.
  *
  * @source {@link https://discord.com/developers/docs/resources/template#template-object-template-structure Template}
  */
@@ -65,12 +65,19 @@ export interface Template {
 // SECTION Endpoints
 
 /**
- * Create a new guild based on a template
+ * Create a new guild based on a template.
  *
- * @endpoint [POST](https://discord.com/developers/docs/resources/template#create-guild-from-template) `/guilds/templates/{template.code}`
+ * @warning
+ * This endpoint can be used only by bots in less than 10 guilds.
  *
- * @returns A {@link https://discord.com/developers/docs/resources/guild#guild-object guild} object on success
- * @fires A {@link https://discord.com/developers/docs/topics/gateway#guild-create Guild Create} Gateway event
+ * @endpoint [POST] `/guilds/templates/{template.code}`
+ *
+ * @returns A [guild][1] object on success.
+ * @fires A [Guild Create][2] Gateway event.
+ *
+ * [POST]: https://discord.com/developers/docs/resources/template#create-guild-from-template
+ * [1]: https://discord.com/developers/docs/resources/guild#guild-object
+ * [2]: https://discord.com/developers/docs/topics/gateway#guild-create
  */
 export interface CreateGuildFromTemplate {
 	/**
@@ -85,13 +92,16 @@ export interface CreateGuildFromTemplate {
 }
 
 /**
- * Creates a template for the guild
+ * Creates a template for the guild. Requires the `MANAGE_GUILD` permission.
  *
- * @endpoint [POST](https://discord.com/developers/docs/resources/template#create-guild-template) `/guilds/{guild.id}/templates`
+ * @endpoint [POST] `/guilds/{guild.id}/templates`
  *
- * @returns The created {@link https://discord.com/developers/docs/resources/template#template-object template} object on success
+ * @returns The created [template][1] object on success.
+ *
+ * [POST]: https://discord.com/developers/docs/resources/template#create-guild-template
+ * [1]: https://discord.com/developers/docs/resources/template#template-object
  */
-export interface CreateTemplate {
+export interface CreateGuildTemplate {
 	/**
 	 * Name of the template (1-100 characters)
 	 */
@@ -104,13 +114,16 @@ export interface CreateTemplate {
 }
 
 /**
- * Modifies the template's metadata
+ * Modifies the template's metadata. Requires the `MANAGE_GUILD` permission.
  *
- * @endpoint [PATCH](https://discord.com/developers/docs/resources/template#modify-guild-template) `/guilds/{guild.id}/templates/{template.code}`
+ * @endpoint [PATCH] `/guilds/{guild.id}/templates/{template.code}`
  *
- * @returns The {@link https://discord.com/developers/docs/resources/template#template-object template} object on success
+ * @returns The [template][1] object on success.
+ *
+ * [PATCH]: https://discord.com/developers/docs/resources/template#modify-guild-template
+ * [1]: https://discord.com/developers/docs/resources/template#template-object
  */
-export interface ModifyTemplate {
+export interface ModifyGuildTemplate {
 	/**
 	 * Name of the template (1-100 characters)
 	 */

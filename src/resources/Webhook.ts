@@ -1,9 +1,7 @@
-import { AllowedMentions, Embed, Nullable, Snowflake, User } from './';
-import { Channel } from './Channel';
-import { Guild } from './Guild';
+import type { AllowedMentions, Embed, Nullable, Snowflake, User, Channel, Guild } from '..';
 
 /**
- * Represents a low-effort way to post messages to channels
+ * Represents a low-effort way to post messages to channels. They do not require a bot user or authentication to use.
  *
  * @source {@link https://discord.com/developers/docs/resources/webhook#webhook-object-webhook-structure Webhook}
  */
@@ -82,11 +80,19 @@ export enum WebhookType {
 // SECTION Endpoints
 
 /**
- * Create a new webhook
+ * Create a new webhook. Requires the `MANAGE_WEBHOOKS` permission.
  *
- * @endpoint [POST](https://discord.com/developers/docs/resources/webhook#create-webhook) `/channels/{channel.id}/webhooks`
+ * @remarks
+ * Webhook names follow the naming restrictions that can be found in the [Usernames and Nicknames][1] documentation, with the following additional stipulations:
+ * - Webhook names cannot be: `clyde`
  *
- * @returns A {@link https://discord.com/developers/docs/resources/webhook#webhook-object webhook} object on success
+ * @endpoint [POST] `/channels/{channel.id}/webhooks`
+ *
+ * @returns A [webhook][2] object on success.
+ *
+ * [POST]: https://discord.com/developers/docs/resources/webhook#create-webhook
+ * [1]: https://discord.com/developers/docs/resources/user#usernames-and-nicknames
+ * [2]: https://discord.com/developers/docs/resources/webhook#webhook-object
  */
 export interface CreateWebhook {
 	/**
@@ -101,11 +107,14 @@ export interface CreateWebhook {
 }
 
 /**
- * Modify a webhook
+ * Modify a webhook. Requires the `MANAGE_WEBHOOKS` permission.
  *
- * @endpoint [PATCH](https://discord.com/developers/docs/resources/webhook#modify-webhook) `/webhooks/{webhook.id}`
+ * @endpoint [PATCH] `/webhooks/{webhook.id}`
  *
- * @returns The {@link https://discord.com/developers/docs/resources/webhook#webhook-object webhook} object on success
+ * @returns The [webhook][1] object on success.
+ *
+ * [PATCH]: https://discord.com/developers/docs/resources/webhook#modify-webhook
+ * [1]: https://discord.com/developers/docs/resources/webhook#webhook-object
  */
 export interface ModifyWebhook {
 	/**
@@ -125,12 +134,18 @@ export interface ModifyWebhook {
 }
 
 /**
- * @endpoint [PATCH](https://discord.com/developers/docs/resources/webhook#modify-webhook-with-token) `/webhooks/{webhook.id}/{webhook.token}`
- */
-export type ModifyWebhookWithToken = Omit<ModifyWebhook, 'channel_id'>;
-
-/**
- * @endpoint [POST](https://discord.com/developers/docs/resources/webhook#execute-webhook) `/webhooks/{webhook.id}/{webhook.token}`
+ * @info
+ * For the webhook embed objects, you can set every field except `type` (it will be `rich` regardless of if
+ * you try to set it), `provider`, `video`, and any `height`, `width`, or `proxy_url` values for images.
+ *
+ * @warning
+ * This endpoint supports both JSON and form data bodies. It does require `multipart/form-data` requests instead of the normal JSON
+ * request type when uploading files. Make sure you set your `Content-Type` to `multipart/form-data` if you're doing that. Note that
+ * in that case, the `embeds` field cannot be used, but you can pass an url-encoded JSON body as a form value for `payload_json`.
+ *
+ * @endpoint [POST] `/webhooks/{webhook.id}/{webhook.token}`
+ *
+ * [POST]: https://discord.com/developers/docs/resources/webhook#execute-webhook
  */
 export interface ExecuteWebhook {
 	/**
@@ -178,19 +193,14 @@ export interface ExecuteWebhook {
 }
 
 /**
- * @endpoint [POST](https://discord.com/developers/docs/resources/webhook#execute-slackcompatible-webhook) `/webhooks/{webhook.id}/{webhook.token}/slack`
- */
-export type ExecuteSlackWebhook = Pick<ExecuteWebhook, 'wait'>;
-
-/**
- * @endpoint [POST](https://discord.com/developers/docs/resources/webhook#execute-githubcompatible-webhook) `/webhooks/{webhook.id}/{webhook.token}/github`
- */
-export type ExecuteGitHubWebhook = Pick<ExecuteWebhook, 'wait'>;
-
-/**
- * @endpoint [PATCH](https://discord.com/developers/docs/resources/webhook#edit-webhook-message) `/webhooks/{webhook.id}/{webhook.token}/messages/{message.id}`
+ * Edits a previously-sent webhook message from the same token.
  *
- * @returns A {@link https://discord.com/developers/docs/resources/channel#message-object message} object on success
+ * @endpoint [PATCH] `/webhooks/{webhook.id}/{webhook.token}/messages/{message.id}`
+ *
+ * @returns A [message] object on success.
+ *
+ * [PATCH]: https://discord.com/developers/docs/resources/webhook#edit-webhook-message
+ * [1]: https://discord.com/developers/docs/resources/channel#message-object
  */
 export interface EditWebhookMessage {
 	/**
@@ -199,7 +209,7 @@ export interface EditWebhookMessage {
 	content?: Nullable<string>;
 
 	/**
-	 * Embedded `rich` content
+	 * Embedded rich content
 	 */
 	embeds?: Nullable<Embed[]>;
 

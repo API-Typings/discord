@@ -1,38 +1,7 @@
-import { Nullable, Snowflake } from './';
-
-export interface DiscoveryCategory {
-	/**
-	 * Numeric ID of the category
-	 */
-	id: number;
-
-	/**
-	 * The name of this category, in multiple languages
-	 */
-	name: DiscoveryCategoryName;
-
-	/**
-	 * Whether this category can be set as a guild's primary category
-	 */
-	is_primary: boolean;
-}
-
-export interface DiscoveryCategoryName {
-	/**
-	 * The name in English
-	 */
-	default: string;
-
-	/**
-	 * The name in other languages
-	 */
-	localizations?: Record<string, string>;
-}
+import type { Nullable, Snowflake } from '..';
 
 /**
- * Used to represent a guild's Discovery settings
- *
- * @source null
+ * Used to represent a guild's Discovery settings.
  */
 export interface DiscoveryMetadata {
 	/**
@@ -71,6 +40,35 @@ export interface DiscoveryMetadata {
 	category_ids: number[];
 }
 
+export interface DiscoveryCategory {
+	/**
+	 * Numeric ID of the category
+	 */
+	id: number;
+
+	/**
+	 * The name of this category, in multiple languages
+	 */
+	name: DiscoveryCategoryName;
+
+	/**
+	 * Whether this category can be set as a guild's primary category
+	 */
+	is_primary: boolean;
+}
+
+export interface DiscoveryCategoryName {
+	/**
+	 * The name in English
+	 */
+	default: string;
+
+	/**
+	 * The name in other languages
+	 */
+	localizations?: Record<string, string>;
+}
+
 export interface DiscoverySubcategory {
 	/**
 	 * The guild ID the subcategory was added to
@@ -100,30 +98,6 @@ export interface ValidateDiscoverySearchTerm {
 	 * The search term to check
 	 */
 	term: string;
-}
-
-/**
- * Modify the discovery metadata for the guild
- *
- * @endpoint PATCH `/guilds/{guild.id}/discovery-metadata`
- *
- * @returns The updated discovery metadata object on success
- */
-export interface ModifyDiscoveryMetadata {
-	/**
-	 * The ID of the primary discovery category
-	 */
-	primary_category_id?: Nullable<number>;
-
-	/**
-	 * Up to 10 discovery search keywords
-	 */
-	keywords?: Nullable<string[]>;
-
-	/**
-	 * Whether guild info is shown when custom emojis are clicked
-	 */
-	emoji_discoverability_enabled?: Nullable<boolean>;
 }
 
 // !SECTION

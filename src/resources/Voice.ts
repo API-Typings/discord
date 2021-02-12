@@ -1,44 +1,9 @@
-import { Member, Nullable, Snowflake } from './';
+import type { GuildMember, Nullable, Snowflake } from '..';
 
 /**
- * @source {@link https://discord.com/developers/docs/resources/voice#voice-region-object-voice-region-structure Voice}
- */
-export interface VoiceRegion {
-	/**
-	 * Unique ID for the region
-	 */
-	id: Snowflake;
-
-	/**
-	 * Name of the region
-	 */
-	name: string;
-
-	/**
-	 * True if this is a VIP-only server
-	 */
-	vip: boolean;
-
-	/**
-	 * True for a single server that is closest to the current user's client
-	 */
-	optimal: boolean;
-
-	/**
-	 * Whether this is a deprecated voice region (avoid switching to these)
-	 */
-	deprecated: boolean;
-
-	/**
-	 * Whether this is a custom voice region (used for events/etc)
-	 */
-	custom: boolean;
-}
-
-/**
- * Represents a user's voice connection status
+ * Represents a user's voice connection status.
  *
- * @source {@link https://discord.com/developers/docs/resources/voice#voice-state-object-voice-state-structure User}
+ * @source {@link https://discord.com/developers/docs/resources/voice#voice-state-object-voice-state-structure Voice}
  */
 export interface VoiceState {
 	/**
@@ -59,7 +24,7 @@ export interface VoiceState {
 	/**
 	 * The guild member this voice state is for
 	 */
-	member?: Member;
+	member?: GuildMember;
 
 	/**
 	 * The session ID for this voice state
@@ -100,4 +65,39 @@ export interface VoiceState {
 	 * Whether this user is muted by the current user
 	 */
 	suppress: boolean;
+}
+
+/**
+ * @source {@link https://discord.com/developers/docs/resources/voice#voice-region-object-voice-region-structure Voice}
+ */
+export interface VoiceRegion {
+	/**
+	 * Unique ID for the region
+	 */
+	id: Snowflake;
+
+	/**
+	 * Name of the region
+	 */
+	name: string;
+
+	/**
+	 * True if this is a VIP-only server
+	 */
+	vip: boolean;
+
+	/**
+	 * True for a single server that is closest to the current user's client
+	 */
+	optimal: boolean;
+
+	/**
+	 * Whether this is a deprecated voice region (avoid switching to these)
+	 */
+	deprecated: boolean;
+
+	/**
+	 * Whether this is a custom voice region (used for events/etc)
+	 */
+	custom: boolean;
 }
