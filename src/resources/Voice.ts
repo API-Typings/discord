@@ -4,7 +4,7 @@ import type { GuildMember, Snowflake } from '../';
 /**
  * Represents a user's voice connection status.
  *
- * @source {@link https://discord.com/developers/docs/resources/voice#voice-state-object-voice-state-structure Voice}
+ * @source {@link https://discord.com/developers/docs/resources/voice#voice-state-object-voice-state-structure|Voice}
  */
 export interface VoiceState {
 	/**
@@ -69,7 +69,7 @@ export interface VoiceState {
 }
 
 /**
- * @source {@link https://discord.com/developers/docs/resources/voice#voice-region-object-voice-region-structure Voice}
+ * @source {@link https://discord.com/developers/docs/resources/voice#voice-region-object-voice-region-structure|Voice}
  */
 export interface VoiceRegion {
 	/**

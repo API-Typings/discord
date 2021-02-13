@@ -9,7 +9,7 @@ import type { AllowedMentions, Embed, GuildMember, Snowflake, User } from '../';
  * @info
  * A command, or each individual subcommand, can have a maximum of 10 `options`.
  *
- * @source {@link https://discord.com/developers/docs/interactions/slash-commands#applicationcommand Slash Commands}
+ * @source {@link https://discord.com/developers/docs/interactions/slash-commands#applicationcommand|Slash Commands}
  */
 export interface ApplicationCommand {
 	/**
@@ -42,16 +42,16 @@ export interface ApplicationCommand {
  * @info
  * You can specify a maximum of 10 `choices` per option.
  *
- * @source {@link https://discord.com/developers/docs/interactions/slash-commands#applicationcommandoption Slash Commands}
+ * @source {@link https://discord.com/developers/docs/interactions/slash-commands#applicationcommandoption|Slash Commands}
  */
 export interface ApplicationCommandOption {
 	/**
-	 * Value of {@link https://discord.com/developers/docs/interactions/slash-commands#applicationcommandoptiontype Slash Commands}
+	 * Value of {@link https://discord.com/developers/docs/interactions/slash-commands#applicationcommandoptiontype|Slash Commands}
 	 */
 	type: ApplicationCommandOptionType;
 
 	/**
-	 * 1-32 character name matching ^[\w-]{1,32}$
+	 * 1-32 character name matching ^[\\w-]\{1,32\}$
 	 */
 	name: string;
 
@@ -77,7 +77,7 @@ export interface ApplicationCommandOption {
 }
 
 /**
- * @source {@link https://discord.com/developers/docs/interactions/slash-commands#applicationcommandoptiontype Application Command}
+ * @source {@link https://discord.com/developers/docs/interactions/slash-commands#applicationcommandoptiontype|Application Command}
  */
 export enum ApplicationCommandOptionType {
 	/**
@@ -100,7 +100,7 @@ export enum ApplicationCommandOptionType {
 /**
  * If you specify `choices` for an option, they are the only valid values for a user to pick
  *
- * @source {@link https://discord.com/developers/docs/interactions/slash-commands#applicationcommandoptionchoice Slash Commands}
+ * @source {@link https://discord.com/developers/docs/interactions/slash-commands#applicationcommandoptionchoice|Slash Commands}
  */
 export interface ApplicationCommandOptionChoice {
 	/**
@@ -122,7 +122,7 @@ export interface ApplicationCommandOptionChoice {
  * An interaction is the base "thing" that is sent when a user invokes a command,
  * and is the same for Slash Commands and other future interaction types
  *
- * @source {@link https://discord.com/developers/docs/interactions/slash-commands#interaction Slash Commands}
+ * @source {@link https://discord.com/developers/docs/interactions/slash-commands#interaction|Slash Commands}
  */
 export interface Interaction {
 	/**
@@ -175,7 +175,7 @@ export interface Interaction {
 }
 
 /**
- * @source {@link https://discord.com/developers/docs/interactions/slash-commands#interaction-interactiontype Slash Commands}
+ * @source {@link https://discord.com/developers/docs/interactions/slash-commands#interaction-interactiontype|Slash Commands}
  */
 export enum InteractionType {
 	Ping = 1,
@@ -183,7 +183,7 @@ export enum InteractionType {
 }
 
 /**
- * @source {@link https://discord.com/developers/docs/interactions/slash-commands#interaction-applicationcommandinteractiondata Slash Commands}
+ * @source {@link https://discord.com/developers/docs/interactions/slash-commands#interaction-applicationcommandinteractiondata|Slash Commands}
  */
 export interface ApplicationCommandInteractionData {
 	/**
@@ -208,7 +208,7 @@ export interface ApplicationCommandInteractionData {
  *
  * `value` and `options` are mutually exclusive.
  *
- * @source {@link https://discord.com/developers/docs/interactions/slash-commands#interaction-applicationcommandinteractiondataoption Slash Commands}
+ * @source {@link https://discord.com/developers/docs/interactions/slash-commands#interaction-applicationcommandinteractiondataoption|Slash Commands}
  */
 export interface ApplicationCommandInteractionOptionData {
 	/**
@@ -219,7 +219,7 @@ export interface ApplicationCommandInteractionOptionData {
 	/**
 	 * The value of the pair
 	 */
-	value?: any;
+	value?: unknown;
 
 	/**
 	 * Present if this option is a group or subcommand
@@ -228,7 +228,7 @@ export interface ApplicationCommandInteractionOptionData {
 }
 
 /**
- * @source {@link https://discord.com/developers/docs/interactions/slash-commands#interaction-response Slash Commands}
+ * @source {@link https://discord.com/developers/docs/interactions/slash-commands#interaction-response|Slash Commands}
  */
 export interface InteractionResponse {
 	/**
@@ -243,7 +243,7 @@ export interface InteractionResponse {
 }
 
 /**
- * @source {@link https://discord.com/developers/docs/interactions/slash-commands#interaction-response-interactionresponsetype Slash Commands}
+ * @source {@link https://discord.com/developers/docs/interactions/slash-commands#interaction-response-interactionresponsetype|Slash Commands}
  */
 export enum InteractionResponseType {
 	/**
@@ -273,7 +273,7 @@ export enum InteractionResponseType {
 }
 
 /**
- * @source {@link https://discord.com/developers/docs/interactions/slash-commands#interaction-response-interactionapplicationcommandcallbackdata Slash Commands}
+ * @source {@link https://discord.com/developers/docs/interactions/slash-commands#interaction-response-interactionapplicationcommandcallbackdata|Slash Commands}
  */
 export interface InteractionApplicationCommandCallbackData {
 	/**
@@ -292,7 +292,7 @@ export interface InteractionApplicationCommandCallbackData {
 	embeds?: Embed[];
 
 	/**
-	 * {@link https://discord.com/developers/docs/resources/channel#allowed-mentions-object Allowed mentions} object
+	 * {@link https://discord.com/developers/docs/resources/channel#allowed-mentions-object|Allowed mentions} object
 	 */
 	allowed_mentions?: AllowedMentions;
 }
@@ -306,7 +306,7 @@ export interface InteractionApplicationCommandCallbackData {
  * - **Guild:** new guild commands will be available in the guild immediately
  * - **Global:** new global commands will be available in all guilds after 1 hour
  *
- * @danger
+ * @warning
  * Creating a command with the same name as an existing command for your application will overwrite the old command.
  *
  * @endpoint POST [[1][P1]] [[2][P2]]

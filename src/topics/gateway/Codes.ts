@@ -5,7 +5,7 @@
 /**
  * Your connection to the gateway may sometimes close. When it does, you will receive a close code that tells you what happened.
  *
- * @source {@link https://discord.com/developers/docs/topics/opcodes-and-status-codes#gateway-gateway-close-event-codes Opcodes and Status Codes}
+ * @source {@link https://discord.com/developers/docs/topics/opcodes-and-status-codes#gateway-gateway-close-event-codes|Opcodes and Status Codes}
  */
 export enum GatewayCloseCode {
 	/**
@@ -14,22 +14,22 @@ export enum GatewayCloseCode {
 	UnknownError = 4000,
 
 	/**
-	 * You sent an invalid {@link https://discord.com/developers/docs/topics/gateway#payloads-and-opcodes Gateway opcode} or an invalid payload for an opcode
+	 * You sent an invalid {@link https://discord.com/developers/docs/topics/gateway#payloads-and-opcodes|Gateway opcode} or an invalid payload for an opcode
 	 */
 	UnknownOPCode,
 
 	/**
-	 * You sent an invalid {@link https://discord.com/developers/docs/topics/gateway#sending-payloads payload}
+	 * You sent an invalid {@link https://discord.com/developers/docs/topics/gateway#sending-payloads|payload}
 	 */
 	DecodeError,
 
 	/**
-	 * You sent a payload prior to {@link https://discord.com/developers/docs/topics/gateway#identify identifying}
+	 * You sent a payload prior to {@link https://discord.com/developers/docs/topics/gateway#identify|identifying}
 	 */
 	NotAuthenticated,
 
 	/**
-	 * The account token sent with your {@link https://discord.com/developers/docs/topics/gateway#identify identify payload} is incorrect
+	 * The account token sent with your {@link https://discord.com/developers/docs/topics/gateway#identify|identify payload} is incorrect
 	 */
 	AuthenticationFailed,
 
@@ -39,7 +39,7 @@ export enum GatewayCloseCode {
 	AlreadyAuthenticated,
 
 	/**
-	 * The sequence sent when {@link https://discord.com/developers/docs/topics/gateway#resume resuming} the session was invalid. Reconnect and start a new session
+	 * The sequence sent when {@link https://discord.com/developers/docs/topics/gateway#resume|resuming} the session was invalid. Reconnect and start a new session
 	 */
 	InvalidSequence = 4007,
 
@@ -54,12 +54,12 @@ export enum GatewayCloseCode {
 	SessionTimedOut,
 
 	/**
-	 * You sent an invalid {@link https://discord.com/developers/docs/topics/gateway#sharding shard when identifying}
+	 * You sent an invalid {@link https://discord.com/developers/docs/topics/gateway#sharding|shard when identifying}
 	 */
 	InvalidShard,
 
 	/**
-	 * The session would have handled too many guilds - you are required to {@link https://discord.com/developers/docs/topics/gateway#sharding shard} your connection in order to connect
+	 * The session would have handled too many guilds - you are required to {@link https://discord.com/developers/docs/topics/gateway#sharding|shard} your connection in order to connect
 	 */
 	ShardingRequired,
 
@@ -69,13 +69,13 @@ export enum GatewayCloseCode {
 	InvalidAPIVersion,
 
 	/**
-	 * You sent an invalid intent for a {@link https://discord.com/developers/docs/topics/gateway#gateway-intents Gateway Intent}. You may have incorrectly calculated the bitwise value
+	 * You sent an invalid intent for a {@link https://discord.com/developers/docs/topics/gateway#gateway-intents|Gateway Intent}. You may have incorrectly calculated the bitwise value
 	 */
 	InvalidIntents,
 
 	/**
-	 * You sent a disallowed intent for a {@link https://discord.com/developers/docs/topics/gateway#gateway-intents Gateway Intent}.
-	 * You may have tried to specify an intent that you {@link https://discord.com/developers/docs/topics/gateway#privileged-intents have not enabled or are not whitelisted for}.
+	 * You sent a disallowed intent for a {@link https://discord.com/developers/docs/topics/gateway#gateway-intents|Gateway Intent}.
+	 * You may have tried to specify an intent that you {@link https://discord.com/developers/docs/topics/gateway#privileged-intents|have not enabled or are not whitelisted for}.
 	 */
 	DisallowedIntents
 }
@@ -85,7 +85,7 @@ export enum GatewayCloseCode {
 /**
  * All gateway events in Discord are tagged with an opcode that denotes the payload type.
  *
- * @source {@link https://discord.com/developers/docs/topics/opcodes-and-status-codes#gateway-gateway-opcodes Opcodes and Status Codes}
+ * @source {@link https://discord.com/developers/docs/topics/opcodes-and-status-codes#gateway-gateway-opcodes|Opcodes and Status Codes}
  */
 export enum GatewayOPCode {
 	/**
@@ -175,7 +175,7 @@ export enum GatewayOPCode {
  * The API can return more detailed error codes through a `code` key in a JSON error response.
  * The response will also contain a `message` key containing a more friendly error string.
  *
- * @source {@link https://discord.com/developers/docs/topics/opcodes-and-status-codes#json-json-error-codes Opcodes and Status Codes}
+ * @source {@link https://discord.com/developers/docs/topics/opcodes-and-status-codes#json-json-error-codes|Opcodes and Status Codes}
  */
 export enum JSONErrorCode {
 	/**
@@ -539,7 +539,7 @@ export enum JSONErrorCode {
 	InvalidRecipients = 50033,
 
 	/**
-	 * A message provided was too old to bulk delete (> 14 days)
+	 * A message provided was too old to bulk delete (\> 14 days)
 	 */
 	MaximumMessageAgeReached,
 
@@ -585,7 +585,7 @@ export enum JSONErrorCode {
 // ANCHOR Close Codes
 
 /**
- * @source {@link https://discord.com/developers/docs/topics/opcodes-and-status-codes#rpc-rpc-close-event-codes Opcodes and Status Codes}
+ * @source {@link https://discord.com/developers/docs/topics/opcodes-and-status-codes#rpc-rpc-close-event-codes|Opcodes and Status Codes}
  */
 export enum RPCCloseCode {
 	/**
@@ -622,7 +622,7 @@ export enum RPCCloseCode {
 // ANCHOR Error Codes
 
 /**
- * @source {@link https://discord.com/developers/docs/topics/opcodes-and-status-codes#rpc-rpc-error-codes Opcodes and Status Codes}
+ * @source {@link https://discord.com/developers/docs/topics/opcodes-and-status-codes#rpc-rpc-error-codes|Opcodes and Status Codes}
  */
 export enum RPCErrorCode {
 	/**
@@ -713,31 +713,31 @@ export enum RPCErrorCode {
 // ANCHOR Close Codes
 
 /**
- * @source {@link https://discord.com/developers/docs/topics/opcodes-and-status-codes#voice-voice-close-event-codes Opcodes and Status Codes}
+ * @source {@link https://discord.com/developers/docs/topics/opcodes-and-status-codes#voice-voice-close-event-codes|Opcodes and Status Codes}
  */
 export enum VoiceCloseCode {
 	/**
-	 * You sent an invalid {@link https://discord.com/developers/docs/topics/opcodes-and-status-codes#voice-voice-opcodes opcode}
+	 * You sent an invalid {@link https://discord.com/developers/docs/topics/opcodes-and-status-codes#voice-voice-opcodes|opcode}
 	 */
 	UnknownOPCode = 4001,
 
 	/**
-	 * You sent an invalid payload in your {@link https://discord.com/developers/docs/topics/gateway#gateway-identify identifying} to the Gateway
+	 * You sent an invalid payload in your {@link https://discord.com/developers/docs/topics/gateway#gateway-identify|identifying} to the Gateway
 	 */
 	DecodeFailure,
 
 	/**
-	 * You sent a payload before {@link https://discord.com/developers/docs/topics/gateway#gateway-identify identifying} with the gateway
+	 * You sent a payload before {@link https://discord.com/developers/docs/topics/gateway#gateway-identify|identifying} with the gateway
 	 */
 	NotAuthenticated,
 
 	/**
-	 * The token you sent in your {@link https://discord.com/developers/docs/topics/gateway#gateway-identify identify} payload is incorrect
+	 * The token you sent in your {@link https://discord.com/developers/docs/topics/gateway#gateway-identify|identify} payload is incorrect
 	 */
 	AuthenticationFailed,
 
 	/**
-	 * You sent more than one {@link https://discord.com/developers/docs/topics/gateway#gateway-identify identify} payload
+	 * You sent more than one {@link https://discord.com/developers/docs/topics/gateway#gateway-identify|identify} payload
 	 */
 	AlreadyAuthenticated,
 
@@ -757,7 +757,7 @@ export enum VoiceCloseCode {
 	ServerNotFound = 4011,
 
 	/**
-	 * The {@link https://discord.com/developers/docs/topics/voice-connections#establishing-a-voice-udp-connection-example-select-protocol-payload protocol} you sent wasn't recognized
+	 * The {@link https://discord.com/developers/docs/topics/voice-connections#establishing-a-voice-udp-connection-example-select-protocol-payload|protocol} you sent wasn't recognized
 	 */
 	UnknownProtocol,
 
@@ -767,12 +767,12 @@ export enum VoiceCloseCode {
 	Disconnected = 4014,
 
 	/**
-	 * The server crashed. Try {@link https://discord.com/developers/docs/topics/voice-connections#resuming-voice-connection resuming}
+	 * The server crashed. Try {@link https://discord.com/developers/docs/topics/voice-connections#resuming-voice-connection|resuming}
 	 */
 	VoiceServerCrashed,
 
 	/**
-	 * Your {@link https://discord.com/developers/docs/topics/voice-connections#encrypting-and-sending-voice encryption} wasn't recognized
+	 * Your {@link https://discord.com/developers/docs/topics/voice-connections#encrypting-and-sending-voice|encryption} wasn't recognized
 	 */
 	UnknownEncryptionMode
 }
@@ -780,7 +780,7 @@ export enum VoiceCloseCode {
 // ANCHOR OP Codes
 
 /**
- * @source {@link https://discord.com/developers/docs/topics/opcodes-and-status-codes#voice-voice-opcodes Opcodes and Status Codes}
+ * @source {@link https://discord.com/developers/docs/topics/opcodes-and-status-codes#voice-voice-opcodes|Opcodes and Status Codes}
  */
 export enum VoiceOPCode {
 	/**

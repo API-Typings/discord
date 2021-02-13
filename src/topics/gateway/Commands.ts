@@ -10,7 +10,7 @@ interface CommandPayload<O extends GatewayOPCode> extends GatewayPayload {
 }
 
 /**
- * @source {@link https://discord.com/developers/docs/topics/gateway#identify-identify-connection-properties Gateway}
+ * @source {@link https://discord.com/developers/docs/topics/gateway#identify-identify-connection-properties|Gateway}
  */
 export interface ConnectionProperties {
 	/**
@@ -45,7 +45,7 @@ export interface ConnectionProperties {
  * shards, but does not include `RESUME` calls. Upon hitting this limit, all active sessions for the bot will be terminated,
  * the bot's token will be reset, and the owner will receive an email notification.
  *
- * @source {@link https://discord.com/developers/docs/topics/gateway#identify Gateway}
+ * @source {@link https://discord.com/developers/docs/topics/gateway#identify|Gateway}
  *
  * [1]: https://discord.com/developers/docs/topics/gateway#ready
  * [2]: https://discord.com/developers/docs/topics/gateway#session-start-limit-object
@@ -60,7 +60,7 @@ export interface Identify extends CommandPayload<GatewayOPCode.Identify> {
 		token: string;
 
 		/**
-		 * {@link https://discord.com/developers/docs/topics/gateway#identify-identify-connection-properties Connection properties}
+		 * {@link https://discord.com/developers/docs/topics/gateway#identify-identify-connection-properties|Connection properties}
 		 */
 		properties: ConnectionProperties;
 
@@ -80,17 +80,17 @@ export interface Identify extends CommandPayload<GatewayOPCode.Identify> {
 		large_threshold?: RangeOf<50, 250>;
 
 		/**
-		 * Used for {@link https://discord.com/developers/docs/topics/gateway#sharding Guild Sharding}
+		 * Used for {@link https://discord.com/developers/docs/topics/gateway#sharding|Guild Sharding}
 		 */
 		shard?: [shard_id: number, num_shards: number];
 
 		/**
 		 * Presence structure for initial presence information
 		 */
-		presence?: Omit<UpdateStatus, 'op' | 'd'>;
+		presence?: Omit<UpdateStatus, 'op'|'d'>;
 
 		/**
-		 * The {@link https://discord.com/developers/docs/topics/gateway#gateway-intents Gateway Intents} you wish to receive
+		 * The {@link https://discord.com/developers/docs/topics/gateway#gateway-intents|Gateway Intents} you wish to receive
 		 */
 		intents: number;
 	};
@@ -101,7 +101,7 @@ export interface Identify extends CommandPayload<GatewayOPCode.Identify> {
 /**
  * Used to replay missed events when a disconnected client resumes.
  *
- * @source {@link https://discord.com/developers/docs/topics/gateway#resume Gateway}
+ * @source {@link https://discord.com/developers/docs/topics/gateway#resume|Gateway}
  */
 export interface Resume extends CommandPayload<GatewayOPCode.Resume> {
 	d: {
@@ -130,7 +130,7 @@ export interface Resume extends CommandPayload<GatewayOPCode.Resume> {
  * Must be sent every `heartbeat_interval` milliseconds after the [Opcode 10 Hello][1] payload is received. The inner
  * `d` key is the last sequence number—`s`—received by the client. If you have not yet received one, send `null`.
  *
- * @source {@link https://discord.com/developers/docs/topics/gateway#heartbeat Gateway}
+ * @source {@link https://discord.com/developers/docs/topics/gateway#heartbeat|Gateway}
  *
  * [1]: https://discord.com/developers/docs/topics/gateway#hello
  */
@@ -146,8 +146,8 @@ export interface Heartbeat extends CommandPayload<GatewayOPCode.Heartbeat> {
  * @remarks
  * When initially connecting, if you are using [Gateway Intents][1] and don't have the `GUILD_PRESENCES` intent, or if the guild is over
  * 75k members, it will only send members who are in voice, plus the member for you (the connecting user). Otherwise, if a guild has over
- * `large_threshold` members (value in the [Gateway Identify][2]), it will only send members who are online, have a role, have a nickname, or
- * are in a voice channel, and if it has under `large_threshold` members, it will send all members.
+ * `large_threshold` members (value in the [Gateway Identify][2]), it will only send members who are online, have a role, have a nickname,
+ * or are in a voice channel, and if it has under `large_threshold` members, it will send all members.
  *
  * @limitations
  * - `GUILD_PRESENCES` intent is required to set `presences = true`. Otherwise, it will always be false
@@ -156,7 +156,7 @@ export interface Heartbeat extends CommandPayload<GatewayOPCode.Heartbeat> {
  * - Requesting a prefix (`query` parameter) will return a maximum of 100 members
  * - Requesting `user_ids` will continue to be limited to returning 100 members
  *
- * @source {@link https://discord.com/developers/docs/topics/gateway#request-guild-members Gateway}
+ * @source {@link https://discord.com/developers/docs/topics/gateway#request-guild-members|Gateway}
  *
  * [1]: https://discord.com/developers/docs/topics/gateway#gateway-intents
  * [2]: https://discord.com/developers/docs/topics/gateway#identify
@@ -187,10 +187,10 @@ export interface RequestGuildMembers extends CommandPayload<GatewayOPCode.Reques
 		/**
 		 * Used to specify which users you wish to fetch
 		 */
-		user_ids?: Snowflake | Snowflake[];
+		user_ids?: Snowflake|Snowflake[];
 
 		/**
-		 * Nonce to identify the {@link https://discord.com/developers/docs/topics/gateway#guild-members-chunk Guild Members Chunk} response
+		 * Nonce to identify the {@link https://discord.com/developers/docs/topics/gateway#guild-members-chunk|Guild Members Chunk} response
 		 */
 		nonce?: string;
 	};
@@ -201,7 +201,7 @@ export interface RequestGuildMembers extends CommandPayload<GatewayOPCode.Reques
 /**
  * Sent when a client wants to join, move, or disconnect from a voice channel.
  *
- * @source {@link https://discord.com/developers/docs/topics/gateway#update-voice-state Gateway}
+ * @source {@link https://discord.com/developers/docs/topics/gateway#update-voice-state|Gateway}
  */
 export interface UpdateVoiceState {
 	/**
@@ -230,7 +230,7 @@ export interface UpdateVoiceState {
 /**
  * Sent by the client to indicate a presence or status update.
  *
- * @source {@link https://discord.com/developers/docs/topics/gateway#update-status Gateway}
+ * @source {@link https://discord.com/developers/docs/topics/gateway#update-status|Gateway}
  */
 export interface UpdateStatus extends CommandPayload<GatewayOPCode.PresenceUpdate> {
 	d: {
@@ -245,7 +245,7 @@ export interface UpdateStatus extends CommandPayload<GatewayOPCode.PresenceUpdat
 		activities: Nullable<Activity[]>;
 
 		/**
-		 * The user's new {@link https://discord.com/developers/docs/topics/gateway#update-status-status-types status}
+		 * The user's new {@link https://discord.com/developers/docs/topics/gateway#update-status-status-types|status}
 		 */
 		status: StatusType;
 
@@ -257,8 +257,8 @@ export interface UpdateStatus extends CommandPayload<GatewayOPCode.PresenceUpdat
 }
 
 /**
- * @source {@link https://discord.com/developers/docs/topics/gateway#update-status-status-types Gateway}
+ * @source {@link https://discord.com/developers/docs/topics/gateway#update-status-status-types|Gateway}
  */
-export type StatusType = 'idle' | 'dnd' | 'online' | 'offline' | 'invisbile';
+export type StatusType = 'idle'|'dnd'|'online'|'offline'|'invisbile';
 
 // !SECTION

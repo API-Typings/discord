@@ -4,7 +4,7 @@ import type { PartialGuild, Snowflake, User } from '../';
 /**
  * Represents a code that when used, creates a guild based on a snapshot of an existing one.
  *
- * @source {@link https://discord.com/developers/docs/resources/template#template-object-template-structure Template}
+ * @source {@link https://discord.com/developers/docs/resources/template#template-object-template-structure|Template}
  */
 export interface Template {
 	/**

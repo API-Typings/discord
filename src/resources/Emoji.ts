@@ -4,11 +4,11 @@ import type { Snowflake, User } from '../';
 // ANCHOR Partial Emoji
 
 /**
- * @source {@link https://discord.com/developers/docs/resources/emoji#emoji-object-gateway-reaction-standard-emoji-example Emoji}
+ * @source {@link https://discord.com/developers/docs/resources/emoji#emoji-object-gateway-reaction-standard-emoji-example|Emoji}
  */
 export interface PartialEmoji {
 	/**
-	 * {@link https://discord.com/developers/docs/reference#image-formatting Emoji ID}
+	 * {@link https://discord.com/developers/docs/reference#image-formatting|Emoji ID}
 	 */
 	id: Nullable<Snowflake>;
 
@@ -31,7 +31,7 @@ export interface PartialEmoji {
  * routes are specifically limited on a per-guild basis to prevent abuse. This means that
  * the quota returned by the API may be inaccurate, and you may encounter `429`s.
  *
- * @source {@link https://discord.com/developers/docs/resources/emoji#emoji-object-emoji-structure Emoji}
+ * @source {@link https://discord.com/developers/docs/resources/emoji#emoji-object-emoji-structure|Emoji}
  */
 export interface Emoji extends PartialEmoji {
 	/**

@@ -12,7 +12,7 @@ export interface PartialChannel {
 	id: Snowflake;
 
 	/**
-	 * The {@link https://discord.com/developers/docs/resources/channel#channel-object-channel-types type of channel}
+	 * The {@link https://discord.com/developers/docs/resources/channel#channel-object-channel-types|type of Channel}
 	 */
 	type: ChannelType;
 
@@ -25,7 +25,7 @@ export interface PartialChannel {
 /**
  * Represents a guild or DM channel within Discord.
  *
- * @source {@link https://discord.com/developers/docs/resources/channel#channel-object-channel-structure Channel}
+ * @source {@link https://discord.com/developers/docs/resources/channel#channel-object-channel-structure|Channel}
  */
 export interface Channel extends PartialChannel {
 	/**
@@ -62,7 +62,7 @@ export interface Channel extends PartialChannel {
 // ANCHOR Channel Type Enum
 
 /**
- * @source {@link https://discord.com/developers/docs/resources/channel#channel-object-channel-types Channel}
+ * @source {@link https://discord.com/developers/docs/resources/channel#channel-object-channel-types|Channel}
  */
 export enum ChannelType {
 	/**
@@ -86,17 +86,17 @@ export enum ChannelType {
 	GroupDM,
 
 	/**
-	 * An {@link https://support.discord.com/hc/en-us/articles/115001580171-Channel-Categories-101 organizational category} that contains up to 50 channels
+	 * An {@link https://support.discord.com/hc/en-us/articles/115001580171-Channel-Categories-101|organizational category} that contains up to 50 channels
 	 */
 	GuildCategory,
 
 	/**
-	 * A channel that {@link https://support.discord.com/hc/en-us/articles/360032008192 users can follow and crosspost into their own server}
+	 * A channel that {@link https://support.discord.com/hc/en-us/articles/360032008192|users can follow and crosspost into their own server}
 	 */
 	GuildNews,
 
 	/**
-	 * A channel in which game developers can {@link https://discord.com/developers/docs/game-and-server-management/special-channels sell their game on Discord}
+	 * A channel in which game developers can {@link https://discord.com/developers/docs/game-and-server-management/special-channels|sell their game on Discord}
 	 */
 	GuildStore
 }
@@ -106,7 +106,7 @@ export enum ChannelType {
 /**
  * A text channel within a server.
  *
- * @source {@link https://discord.com/developers/docs/resources/channel#channel-object-example-guild-text-channel}
+ * @source {@link https://discord.com/developers/docs/resources/channel#channel-object-example-guild-text-|Channel}
  */
 export interface TextChannel extends Channel {
 	/**
@@ -133,7 +133,7 @@ export interface TextChannel extends Channel {
  * @remarks
  * Bots can post or publish messages in this type of channel if they have the proper permissions.
  *
- * @source {@link https://discord.com/developers/docs/resources/channel#channel-object-example-guild-news-channel Channel}
+ * @source {@link https://discord.com/developers/docs/resources/channel#channel-object-example-guild-news-channel|Channel}
  *
  * [1]: https://support.discord.com/hc/en-us/articles/360032008192
  */
@@ -144,7 +144,7 @@ export type NewsChannel = Omit<TextChannel, 'rate_limit_per_user'>;
 /**
  * A voice channel within a server.
  *
- * @source {@link https://discord.com/developers/docs/resources/channel#channel-object-example-guild-voice-channel Channel}
+ * @source {@link https://discord.com/developers/docs/resources/channel#channel-object-example-guild-voice-channel|Channel}
  */
 export interface VoiceChannel extends Channel {
 	/**
@@ -163,10 +163,10 @@ export interface VoiceChannel extends Channel {
 /**
  * A direct message between users
  *
- * @source {@link https://discord.com/developers/docs/resources/channel#channel-object-example-dm-channel Channel}
+ * @source {@link https://discord.com/developers/docs/resources/channel#channel-object-example-dm-channel|Channel}
  */
 // prettier-ignore
-export interface DMChannel extends Pick<Channel, 'id' | 'type'>, Pick<TextChannel, 'last_message_id' | 'last_pin_timestamp'> {
+export interface DMChannel extends Pick<Channel, 'id'|'type'>, Pick<TextChannel, 'last_message_id'|'last_pin_timestamp'> {
 	/**
 	 * The recipients of the DM
 	 */
@@ -183,7 +183,7 @@ export interface DMChannel extends Pick<Channel, 'id' | 'type'>, Pick<TextChanne
 /**
  * A direct message between multiple users.
  *
- * @source {@link https://discord.com/developers/docs/resources/channel#channel-object-example-group-dm-channel Channel}
+ * @source {@link https://discord.com/developers/docs/resources/channel#channel-object-example-group-dm-channel|Channel}
  */
 export interface GroupDMChannel extends DMChannel, Nullable<Pick<Channel, 'name'>> {
 	/**
@@ -207,7 +207,7 @@ export interface GroupDMChannel extends DMChannel, Nullable<Pick<Channel, 'name'
 /**
  * An [organizational category] that contains up to 50 channels.
  *
- * @source {@link https://discord.com/developers/docs/resources/channel#channel-object-example-channel-category Channel}
+ * @source {@link https://discord.com/developers/docs/resources/channel#channel-object-example-channel-category|Channel}
  *
  * [1]: https://support.discord.com/hc/en-us/articles/115001580171-Channel-Categories-101
  */
@@ -221,7 +221,7 @@ export type ChannelCategory = Omit<Channel, 'topic'>;
  * @remarks
  * Bots can neither send or read messages from this channel type (as it is a store page).
  *
- * @source {@link https://discord.com/developers/docs/resources/channel#channel-object-example-store-channel Channel}
+ * @source {@link https://discord.com/developers/docs/resources/channel#channel-object-example-store-channel|Channel}
  *
  * [1]: https://discord.com/developers/docs/game-and-server-management/special-channels
  */
@@ -234,7 +234,7 @@ export type StoreChannel = Omit<Channel, 'topic'>;
 /**
  * Represents a message sent in a channel within Discord
  *
- * @source {@link https://discord.com/developers/docs/resources/channel#message-object-message-structure Channel}
+ * @source {@link https://discord.com/developers/docs/resources/channel#message-object-message-structure|Channel}
  */
 export interface Message {
 	/**
@@ -347,7 +347,7 @@ export interface Message {
 	webhook_id?: Snowflake;
 
 	/**
-	 * {@link https://discord.com/developers/docs/resources/channel#message-object-message-types Type of message}
+	 * {@link https://discord.com/developers/docs/resources/channel#message-object-message-types|Type of message}
 	 */
 	type: MessageType;
 
@@ -362,7 +362,8 @@ export interface Message {
 	application?: MessageApplication;
 
 	/**
-	 * {@link https://discord.com/developers/docs/resources/channel#message-object-message-flags Message flags} combined as a {@link https://en.wikipedia.org/wiki/Bit_field bitfield}
+	 * {@link https://discord.com/developers/docs/resources/channel#message-object-message-flags|Message flags}
+	 * combined as a {@link https://en.wikipedia.org/wiki/Bit_field|bitfield}
 	 */
 	flags?: MessageFlags;
 
@@ -387,7 +388,7 @@ export interface UserMention extends User {
 }
 
 /**
- * @source {@link https://discord.com/developers/docs/resources/channel#message-object-message-types Channel}
+ * @source {@link https://discord.com/developers/docs/resources/channel#message-object-message-types|Channel}
  */
 export enum MessageType {
 	Default,
@@ -412,22 +413,22 @@ export enum MessageType {
 }
 
 /**
- * @source {@link https://discord.com/developers/docs/resources/channel#message-object-message-activity-structure Channel}
+ * @source {@link https://discord.com/developers/docs/resources/channel#message-object-message-activity-structure|Channel}
  */
 export interface MessageActivity {
 	/**
-	 * {@link https://discord.com/developers/docs/resources/channel#message-object-message-activity-types Type of message activity}
+	 * {@link https://discord.com/developers/docs/resources/channel#message-object-message-activity-types|Type of message activity}
 	 */
 	type: MessageActivityType;
 
 	/**
-	 * `party_id` from a {@link https://discord.com/developers/docs/rich-presence/how-to#updating-presence-update-presence-payload-fields Rich Presence event}
+	 * `party_id` from a {@link https://discord.com/developers/docs/rich-presence/how-to#updating-presence-update-presence-payload-fields|Rich Presence event}
 	 */
 	party_id?: string;
 }
 
 /**
- * @source {@link https://discord.com/developers/docs/resources/channel#message-object-message-application-structure Channel}
+ * @source {@link https://discord.com/developers/docs/resources/channel#message-object-message-application-structure|Channel}
  */
 export interface MessageApplication {
 	/**
@@ -473,7 +474,7 @@ export interface MessageApplication {
  *   that was replied to. The `channel_id` and `guild_id` will be the same as the reply. Replies are created by including
  *   a `message_reference` when sending a message. When sending, only `message_id` is required.
  *
- * @source {@link https://discord.com/developers/docs/resources/channel#message-object-message-reference-structure Channel}
+ * @source {@link https://discord.com/developers/docs/resources/channel#message-object-message-reference-structure|Channel}
  */
 export interface MessageReference {
 	/**
@@ -503,7 +504,7 @@ export interface MessageReference {
 }
 
 /**
- * @source {@link https://discord.com/developers/docs/resources/channel#message-object-message-activity-types Channel}
+ * @source {@link https://discord.com/developers/docs/resources/channel#message-object-message-activity-types|Channel}
  */
 export enum MessageActivityType {
 	Join = 1,
@@ -513,7 +514,7 @@ export enum MessageActivityType {
 }
 
 /**
- * @source {@link https://discord.com/developers/docs/resources/channel#message-object-message-flags Channel}
+ * @source {@link https://discord.com/developers/docs/resources/channel#message-object-message-flags|Channel}
  */
 export enum MessageFlags {
 	/**
@@ -546,7 +547,7 @@ export enum MessageFlags {
 // ANCHOR Sticker
 
 /**
- * @source {@link https://discord.com/developers/docs/resources/channel#message-object-message-sticker-structure Channel}
+ * @source {@link https://discord.com/developers/docs/resources/channel#message-object-message-sticker-structure|Channel}
  */
 export interface Sticker {
 	/**
@@ -585,13 +586,13 @@ export interface Sticker {
 	preview_asset: string;
 
 	/**
-	 * {@link https://discord.com/developers/docs/resources/channel#message-object-message-sticker-format-types Type of sticker format}
+	 * {@link https://discord.com/developers/docs/resources/channel#message-object-message-sticker-format-types|Type of sticker format}
 	 */
 	format_type: StickerFormat;
 }
 
 /**
- * @source {@link https://discord.com/developers/docs/resources/channel#message-object-message-sticker-format-types Channel}
+ * @source {@link https://discord.com/developers/docs/resources/channel#message-object-message-sticker-format-types|Channel}
  */
 export enum StickerFormat {
 	PNG = 1,
@@ -600,7 +601,7 @@ export enum StickerFormat {
 }
 
 /**
- * @source {@link https://discord.com/developers/docs/resources/channel#message-object-example-crossposted-message Channel}
+ * @source {@link https://discord.com/developers/docs/resources/channel#message-object-example-crossposted-message|Channel}
  */
 export interface CrosspostedMessage extends Message {
 	/**
@@ -617,7 +618,7 @@ export interface CrosspostedMessage extends Message {
 // !SECTION
 
 /**
- * @source {@link https://discord.com/developers/docs/resources/channel#followed-channel-object-followed-channel-structure Channel}
+ * @source {@link https://discord.com/developers/docs/resources/channel#followed-channel-object-followed-channel-structure|Channel}
  */
 export interface FollowedChannel {
 	/**
@@ -634,7 +635,7 @@ export interface FollowedChannel {
 // ANCHOR Reaction
 
 /**
- * @source {@link https://discord.com/developers/docs/resources/channel#reaction-object-reaction-structure Channel}
+ * @source {@link https://discord.com/developers/docs/resources/channel#reaction-object-reaction-structure|Channel}
  */
 export interface Reaction {
 	/**
@@ -656,7 +657,7 @@ export interface Reaction {
 // ANCHOR Overwrite
 
 /**
- * @source {@link https://discord.com/developers/docs/resources/channel#overwrite-object-overwrite-structure Channel}
+ * @source {@link https://discord.com/developers/docs/resources/channel#overwrite-object-overwrite-structure|Channel}
  */
 export interface Overwrite {
 	/**
@@ -683,7 +684,7 @@ export interface Overwrite {
 // SECTION Embed
 
 /**
- * @source {@link https://discord.com/developers/docs/resources/channel#embed-object-embed-structure Channel}
+ * @source {@link https://discord.com/developers/docs/resources/channel#embed-object-embed-structure|Channel}
  */
 export interface Embed {
 	/**
@@ -692,7 +693,7 @@ export interface Embed {
 	title?: string;
 
 	/**
-	 * {@link https://discord.com/developers/docs/resources/channel#embed-object-embed-types Type of embed} (always "rich" for webhook embeds)
+	 * {@link https://discord.com/developers/docs/resources/channel#embed-object-embed-types|Type of embed} (always "rich" for webhook embeds)
 	 */
 	type?: EmbedType;
 
@@ -756,7 +757,7 @@ export interface Embed {
  * Embed types are "loosely defined" and, for the most part, are not used by our clients for rendering.
  * Embed attributes power what is rendered. Embed types should be considered deprecated and might be removed in a future API version
  *
- * @source {@link https://discord.com/developers/docs/resources/channel#embed-object-embed-types Channel}
+ * @source {@link https://discord.com/developers/docs/resources/channel#embed-object-embed-types|Channel}
  */
 export type EmbedType = 'rich' | 'image' | 'video' | 'gifv' | 'article' | 'link';
 
@@ -789,7 +790,7 @@ export interface EmbedMedia {
 }
 
 /**
- * @source {@link https://discord.com/developers/docs/resources/channel#embed-object-embed-provider-structure Channel}
+ * @source {@link https://discord.com/developers/docs/resources/channel#embed-object-embed-provider-structure|Channel}
  */
 export interface EmbedProvider {
 	/**
@@ -804,12 +805,12 @@ export interface EmbedProvider {
 }
 
 /**
- * @source {@link https://discord.com/developers/docs/resources/channel#embed-object-embed-author-structure Channel}
+ * @source {@link https://discord.com/developers/docs/resources/channel#embed-object-embed-author-structure|Channel}
  */
 export type EmbedAuthor = Omit<EmbedFooter, 'text'> & EmbedProvider;
 
 /**
- * @source {@link https://discord.com/developers/docs/resources/channel#embed-object-embed-footer-structure Channel}
+ * @source {@link https://discord.com/developers/docs/resources/channel#embed-object-embed-footer-structure|Channel}
  */
 export interface EmbedFooter {
 	/**
@@ -829,7 +830,7 @@ export interface EmbedFooter {
 }
 
 /**
- * @source {@link https://discord.com/developers/docs/resources/channel#embed-object-embed-field-structure Channel}
+ * @source {@link https://discord.com/developers/docs/resources/channel#embed-object-embed-field-structure|Channel}
  */
 export interface EmbedField {
 	/**
@@ -851,7 +852,7 @@ export interface EmbedField {
 // !SECTION
 
 /**
- * @source {@link https://discord.com/developers/docs/resources/channel#attachment-object-attachment-structure Channel}
+ * @source {@link https://discord.com/developers/docs/resources/channel#attachment-object-attachment-structure|Channel}
  */
 export interface Attachment {
 	/**
@@ -891,7 +892,7 @@ export interface Attachment {
 }
 
 /**
- * @source {@link https://discord.com/developers/docs/resources/channel#channel-mention-object-channel-mention-structure Channel}
+ * @source {@link https://discord.com/developers/docs/resources/channel#channel-mention-object-channel-mention-structure|Channel}
  */
 export interface ChannelMention {
 	/**
@@ -905,7 +906,7 @@ export interface ChannelMention {
 	guild_id: Snowflake;
 
 	/**
-	 * The {@link https://discord.com/developers/docs/resources/channel#channel-object-channel-types type of channel}
+	 * The {@link https://discord.com/developers/docs/resources/channel#channel-object-channel-types|type of Channel}
 	 */
 	type: ChannelType;
 
@@ -916,7 +917,7 @@ export interface ChannelMention {
 }
 
 /**
- * @source {@link https://discord.com/developers/docs/resources/channel#allowed-mentions-object-allowed-mention-types Channel}
+ * @source {@link https://discord.com/developers/docs/resources/channel#allowed-mentions-object-allowed-mention-types|Channel}
  */
 export type AllowedMentionsType = 'roles' | 'users' | 'everyone';
 
@@ -925,11 +926,11 @@ export type AllowedMentionsType = 'roles' | 'users' | 'everyone';
  * This will always validate against message content to avoid phantom pings (e.g. to ping everyone, you must still have
  * `@everyone` in the message content), and check against user/bot permissions
  *
- * @source {@link https://discord.com/developers/docs/resources/channel#allowed-mentions-object-allowed-mentions-structure Channel}
+ * @source {@link https://discord.com/developers/docs/resources/channel#allowed-mentions-object-allowed-mentions-structure|Channel}
  */
 export interface AllowedMentions {
 	/**
-	 * An array of {@link https://discord.com/developers/docs/resources/channel#allowed-mentions-object-allowed-mention-types allowed mention types} to parse from the content
+	 * An array of {@link https://discord.com/developers/docs/resources/channel#allowed-mentions-object-allowed-mention-types|allowed mention types} to parse from the content
 	 */
 	parse: AllowedMentionsType[];
 
@@ -954,7 +955,7 @@ export interface AllowedMentions {
 /**
  * All of the following limits are measured inclusively. Leading and trailing whitespace characters are not included (they are trimmed automatically).
  *
- * @source {@link https://discord.com/developers/docs/resources/channel#embed-limits-limits Channel}
+ * @source {@link https://discord.com/developers/docs/resources/channel#embed-limits-limits|Channel}
  */
 export enum EmbedLimit {
 	/**
@@ -968,7 +969,7 @@ export enum EmbedLimit {
 	Description = 2048,
 
 	/**
-	 * Up to 25 {@link https://discord.com/developers/docs/resources/channel#embed-object-embed-field-structure field} objects
+	 * Up to 25 {@link https://discord.com/developers/docs/resources/channel#embed-object-embed-field-structure|field} objects
 	 */
 	Fields = 25,
 
@@ -1037,7 +1038,7 @@ export interface ModifyChannel {
 	name?: string;
 
 	/**
-	 * The {@link https://discord.com/developers/docs/resources/channel#channel-object-channel-types type of channel};
+	 * The {@link https://discord.com/developers/docs/resources/channel#channel-object-channel-types|type of Channel};
 	 * only conversion between text and news is supported and only in guilds with the "NEWS" feature
 	 *
 	 * @channel Text, News
@@ -1279,7 +1280,7 @@ export interface CreateMessageFormData {
 /**
  * Get a list of users that reacted with this emoji.
  *
- * @endpoint [GET] `/channels/{channel.id}/messages/{message.id}/reactions/{emoji.id}
+ * @endpoint [GET] `/channels/{channel.id}/messages/{message.id}/reactions/{emoji.id}`
  *
  * @remarks
  * The `emoji` must be [URL Encoded][1] or the request will fail with `10014: Unknown Emoji`.
@@ -1333,7 +1334,7 @@ export interface EditMessage {
 	embed?: Nullable<Embed>;
 
 	/**
-	 * Edit the {@link https://discord.com/developers/docs/resources/channel#message-object-message-flags flags} of a message (only `SUPPRESS_EMBEDS` can currently be set/unset)
+	 * Edit the {@link https://discord.com/developers/docs/resources/channel#message-object-message-flags|flags} of a message (only `SUPPRESS_EMBEDS` can currently be set/unset)
 	 */
 	flags?: Nullable<number>;
 

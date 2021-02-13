@@ -7,7 +7,7 @@ import type { Snowflake, StatusType } from '../../';
  * Active sessions are indicated with an `online`, `idle`, or `dnd` string per platform.
  * If a user is offline or invisible, the corresponding field is not present.
  *
- * @source {@link https://discord.com/developers/docs/topics/gateway#client-status-object Gateway}
+ * @source {@link https://discord.com/developers/docs/topics/gateway#client-status-object|Gateway}
  */
 export interface ClientStatus {
 	/**
@@ -34,7 +34,7 @@ export type ClientStatusType = Omit<StatusType, 'offline' | 'invisible'>;
  * @info
  * Bots are only able to send `name`, `type`, and optionally `url`.
  *
- * @source {@link https://discord.com/developers/docs/topics/gateway#activity-object-activity-structure Gateway}
+ * @source {@link https://discord.com/developers/docs/topics/gateway#activity-object-activity-structure|Gateway}
  */
 export interface Activity {
 	/**
@@ -48,7 +48,7 @@ export interface Activity {
 	name: string;
 
 	/**
-	 * {@link https://discord.com/developers/docs/topics/gateway#activity-object-activity-types Activity type}
+	 * {@link https://discord.com/developers/docs/topics/gateway#activity-object-activity-types|Activity type}
 	 */
 	type: ActivityType;
 
@@ -123,7 +123,7 @@ export interface Activity {
 	instance?: boolean;
 
 	/**
-	 * {@link https://discord.com/developers/docs/topics/gateway#activity-object-activity-flags Activity flags} `OR`d together, describes what the payload includes
+	 * {@link https://discord.com/developers/docs/topics/gateway#activity-object-activity-flags|Activity flags} `OR`d together, describes what the payload includes
 	 */
 	flags?: ActivityFlags;
 
@@ -137,37 +137,37 @@ export interface Activity {
  * @info
  * The streaming type currently only supports Twitch and YouTube. Only `https://twitch.tv/` and `https://youtube.com/` urls will work.
  *
- * @source {@link https://discord.com/developers/docs/topics/gateway#activity-object-activity-types Gateway}
+ * @source {@link https://discord.com/developers/docs/topics/gateway#activity-object-activity-types|Gateway}
  */
 export enum ActivityType {
 	/**
-	 * @format Playing {name}
+	 * @format Playing \{name\}
 	 */
 	Game,
 
 	/**
-	 * @format Streaming {details}
+	 * @format Streaming \{details\}
 	 */
 	Streaming,
 
 	/**
-	 * @format Listening to {name}
+	 * @format Listening to \{name\}
 	 */
 	Listening,
 
 	/**
-	 * @format {emoji} {name}
+	 * @format \{emoji\} \{name\}
 	 */
 	Custom,
 
 	/**
-	 * @format Competing in {name}
+	 * @format Competing in \{name\}
 	 */
 	Competing
 }
 
 /**
- * @source {@link https://discord.com/developers/docs/topics/gateway#activity-object-activity-timestamps Gateway}
+ * @source {@link https://discord.com/developers/docs/topics/gateway#activity-object-activity-timestamps|Gateway}
  */
 export interface ActivityTimestamp {
 	/**
@@ -182,7 +182,7 @@ export interface ActivityTimestamp {
 }
 
 /**
- * @source {@link https://discord.com/developers/docs/topics/gateway#activity-object-activity-emoji Gateway}
+ * @source {@link https://discord.com/developers/docs/topics/gateway#activity-object-activity-emoji|Gateway}
  */
 export interface ActivityEmoji {
 	/**
@@ -202,7 +202,7 @@ export interface ActivityEmoji {
 }
 
 /**
- * @source {@link https://discord.com/developers/docs/topics/gateway#activity-object-activity-party Gateway}
+ * @source {@link https://discord.com/developers/docs/topics/gateway#activity-object-activity-party|Gateway}
  */
 export interface ActivityParty {
 	/**
@@ -217,7 +217,7 @@ export interface ActivityParty {
 }
 
 /**
- * @source {@link https://discord.com/developers/docs/topics/gateway#activity-object-activity-assets Gateway}
+ * @source {@link https://discord.com/developers/docs/topics/gateway#activity-object-activity-assets|Gateway}
  */
 export interface ActivityAssets {
 	/**
@@ -242,7 +242,7 @@ export interface ActivityAssets {
 }
 
 /**
- * @source {@link https://discord.com/developers/docs/topics/gateway#activity-object-activity-secrets Gateway}
+ * @source {@link https://discord.com/developers/docs/topics/gateway#activity-object-activity-secrets|Gateway}
  */
 export interface ActivitySecrets {
 	/**
@@ -262,7 +262,7 @@ export interface ActivitySecrets {
 }
 
 /**
- * @source {@link https://discord.com/developers/docs/topics/gateway#activity-object-activity-flags Gateway}
+ * @source {@link https://discord.com/developers/docs/topics/gateway#activity-object-activity-flags|Gateway}
  */
 export enum ActivityFlags {
 	Instance = 1 << 0,

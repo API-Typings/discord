@@ -11,7 +11,7 @@ import type {
 /**
  * Represents a low-effort way to post messages to channels. They do not require a bot user or authentication to use.
  *
- * @source {@link https://discord.com/developers/docs/resources/webhook#webhook-object-webhook-structure Webhook}
+ * @source {@link https://discord.com/developers/docs/resources/webhook#webhook-object-webhook-structure|Webhook}
  */
 export interface Webhook {
 	/**
@@ -20,7 +20,7 @@ export interface Webhook {
 	id: Snowflake;
 
 	/**
-	 * The {@link https://discord.com/developers/docs/resources/webhook#webhook-object-webhook-types type} of the webhook
+	 * The {@link https://discord.com/developers/docs/resources/webhook#webhook-object-webhook-types|type} of the webhook
 	 */
 	type: WebhookType;
 
@@ -71,7 +71,7 @@ export interface Webhook {
 }
 
 /**
- * @source {@link https://discord.com/developers/docs/resources/webhook#webhook-object-webhook-types Webhook}
+ * @source {@link https://discord.com/developers/docs/resources/webhook#webhook-object-webhook-types|Webhook}
  */
 export enum WebhookType {
 	/**

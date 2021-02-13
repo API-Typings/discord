@@ -1,10 +1,11 @@
 import type { Nullable, RangeOf } from '@api-typings/core';
 import type { PartialIntegration, PartialRole, Snowflake, User, Webhook } from '../';
+import { ChannelType, Overwrite } from './Channel';
 
 /**
  * Whenever an admin action is performed on the API, an entry is added to the respective guild's audit log.
  *
- * @source {@link https://discord.com/developers/docs/resources/audit-log#audit-log-object-audit-log-structure Audit Log}
+ * @source {@link https://discord.com/developers/docs/resources/audit-log#audit-log-object-audit-log-structure|Audit Log}
  */
 export interface AuditLog {
 	/**
@@ -29,7 +30,7 @@ export interface AuditLog {
 }
 
 /**
- * @source {@link https://discord.com/developers/docs/resources/audit-log#audit-log-entry-object-audit-log-entry-structure Audit Log}
+ * @source {@link https://discord.com/developers/docs/resources/audit-log#audit-log-entry-object-audit-log-entry-structure|Audit Log}
  */
 export interface AuditLogEntry {
 	/**
@@ -69,7 +70,7 @@ export interface AuditLogEntry {
 }
 
 /**
- * @source {@link https://discord.com/developers/docs/resources/audit-log#audit-log-entry-object-audit-log-events Audit Log}
+ * @source {@link https://discord.com/developers/docs/resources/audit-log#audit-log-entry-object-audit-log-events|Audit Log}
  */
 export enum AuditLogEvent {
 	GuildUpdate = 1,
@@ -110,7 +111,7 @@ export enum AuditLogEvent {
 }
 
 /**
- * @source {@link https://discord.com/developers/docs/resources/audit-log#audit-log-entry-object-optional-audit-entry-info Audit Log}
+ * @source {@link https://discord.com/developers/docs/resources/audit-log#audit-log-entry-object-optional-audit-entry-info|Audit Log}
  */
 export interface AuditLogEntryInfo {
 	/**
@@ -195,7 +196,7 @@ export interface AuditLogEntryInfo {
  * @info
  * If `new_value` is not present in the change object, while `old_value` is, that means the property that was changed has been reset, or set to `null`.
  *
- * @source {@link https://discord.com/developers/docs/resources/audit-log#audit-log-change-object-audit-log-change-structure Audit Log}
+ * @source {@link https://discord.com/developers/docs/resources/audit-log#audit-log-change-object-audit-log-change-structure|Audit Log}
  */
 export interface AuditLogChange<K extends string, T = string> {
 	/**
@@ -215,7 +216,7 @@ export interface AuditLogChange<K extends string, T = string> {
 }
 
 /**
- * @source {@link https://discord.com/developers/docs/resources/audit-log#audit-log-change-object-audit-log-change-key Audit Log}
+ * @source {@link https://discord.com/developers/docs/resources/audit-log#audit-log-change-object-audit-log-change-key|Audit Log}
  */
 export type AuditLogChangeType =
 	| AuditLogChange<'name'>
@@ -245,7 +246,7 @@ export type AuditLogChangeType =
 	| AuditLogChange<'position', number>
 	| AuditLogChange<'topic'>
 	| AuditLogChange<'bitrate', number>
-	| AuditLogChange<'permission_overwrites', any>
+	| AuditLogChange<'permission_overwrites', Overwrite[]>
 	| AuditLogChange<'nsfw', boolean>
 	| AuditLogChange<'application_id', Snowflake>
 	| AuditLogChange<'rate_limit_per_user', number>
@@ -266,7 +267,7 @@ export type AuditLogChangeType =
 	| AuditLogChange<'nick', Snowflake>
 	| AuditLogChange<'avatar_hash', Snowflake>
 	| AuditLogChange<'id', string>
-	| AuditLogChange<'type', any>
+	| AuditLogChange<'type', ChannelType | string>
 	| AuditLogChange<'enable_emoticons', boolean>
 	| AuditLogChange<'expire_behavior', number>
 	| AuditLogChange<'expire_grace_period', number>
@@ -291,7 +292,7 @@ export interface GetGuildAuditLog {
 	user_id?: Snowflake;
 
 	/**
-	 * The type of {@link https://discord.com/developers/docs/resources/audit-log#audit-log-entry-object-audit-log-events audit log event}
+	 * The type of {@link https://discord.com/developers/docs/resources/audit-log#audit-log-entry-object-audit-log-events|audit log event}
 	 */
 	action_type?: AuditLogEvent;
 

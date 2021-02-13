@@ -7,7 +7,7 @@ import type { Snowflake } from '../';
  * different roles. When these roles are attached to users, they grant or revoke specific privileges within the guild. Along with the guild-level
  * permissions, Discord also supports permission overwrites that can be assigned to individual guild roles or guild members on a per-channel basis.
  *
- * @source {@link https://discord.com/developers/docs/topics/permissions#permissions-bitwise-permission-flags Permissions}
+ * @source {@link https://discord.com/developers/docs/topics/permissions#permissions-bitwise-permission-flags|Permissions}
  */
 export enum PermissionFlags {
 	/**
@@ -21,7 +21,7 @@ export enum PermissionFlags {
 	 * Allows kicking members
 	 *
 	 * @remarks
-	 * This permissions requires the owner account to use {@link https://discord.com/developers/docs/topics/oauth2#twofactor-authentication-requirement two-factor authentication}
+	 * This permissions requires the owner account to use {@link https://discord.com/developers/docs/topics/oauth2#twofactor-authentication-requirement|two-factor authentication}
 	 * when used on a guild that has server-wide 2FA enabled.
 	 */
 	KICK_MEMBERS = 0x00000002,
@@ -30,7 +30,7 @@ export enum PermissionFlags {
 	 * Allows banning members
 	 *
 	 * @remarks
-	 * This permissions requires the owner account to use {@link https://discord.com/developers/docs/topics/oauth2#twofactor-authentication-requirement two-factor authentication}
+	 * This permissions requires the owner account to use {@link https://discord.com/developers/docs/topics/oauth2#twofactor-authentication-requirement|two-factor authentication}
 	 * when used on a guild that has server-wide 2FA enabled.
 	 */
 	BAN_MEMBERS = 0x00000004,
@@ -39,7 +39,7 @@ export enum PermissionFlags {
 	 * Allows all permissions and bypasses channel permission overwrites
 	 *
 	 * @remarks
-	 * This permissions requires the owner account to use {@link https://discord.com/developers/docs/topics/oauth2#twofactor-authentication-requirement two-factor authentication}
+	 * This permissions requires the owner account to use {@link https://discord.com/developers/docs/topics/oauth2#twofactor-authentication-requirement|two-factor authentication}
 	 * when used on a guild that has server-wide 2FA enabled.
 	 */
 	ADMINISTRATOR = 0x00000008,
@@ -48,7 +48,7 @@ export enum PermissionFlags {
 	 * Allows management and editing of channels
 	 *
 	 * @remarks
-	 * This permissions requires the owner account to use {@link https://discord.com/developers/docs/topics/oauth2#twofactor-authentication-requirement two-factor authentication}
+	 * This permissions requires the owner account to use {@link https://discord.com/developers/docs/topics/oauth2#twofactor-authentication-requirement|two-factor authentication}
 	 * when used on a guild that has server-wide 2FA enabled.
 	 *
 	 * @channel Text, Voice
@@ -59,7 +59,7 @@ export enum PermissionFlags {
 	 * Allows management and editing of the guild
 	 *
 	 * @remarks
-	 * This permissions requires the owner account to use {@link https://discord.com/developers/docs/topics/oauth2#twofactor-authentication-requirement two-factor authentication}
+	 * This permissions requires the owner account to use {@link https://discord.com/developers/docs/topics/oauth2#twofactor-authentication-requirement|two-factor authentication}
 	 * when used on a guild that has server-wide 2FA enabled.
 	 */
 	MANAGE_GUILD = 0x00000020,
@@ -115,7 +115,7 @@ export enum PermissionFlags {
 	 * Allows for deletion of other users messages
 	 *
 	 * @remarks
-	 * This permissions requires the owner account to use {@link https://discord.com/developers/docs/topics/oauth2#twofactor-authentication-requirement two-factor authentication}
+	 * This permissions requires the owner account to use {@link https://discord.com/developers/docs/topics/oauth2#twofactor-authentication-requirement|two-factor authentication}
 	 * when used on a guild that has server-wide 2FA enabled.
 	 *
 	 * @channel Text
@@ -218,7 +218,7 @@ export enum PermissionFlags {
 	 * Allows management and editing of roles
 	 *
 	 * @remarks
-	 * This permissions requires the owner account to use {@link https://discord.com/developers/docs/topics/oauth2#twofactor-authentication-requirement two-factor authentication}
+	 * This permissions requires the owner account to use {@link https://discord.com/developers/docs/topics/oauth2#twofactor-authentication-requirement|two-factor authentication}
 	 * when used on a guild that has server-wide 2FA enabled.
 	 *
 	 * @channel Text, Voice
@@ -229,7 +229,7 @@ export enum PermissionFlags {
 	 * Allows management and editing of webhooks
 	 *
 	 * @remarks
-	 * This permissions requires the owner account to use {@link https://discord.com/developers/docs/topics/oauth2#twofactor-authentication-requirement two-factor authentication}
+	 * This permissions requires the owner account to use {@link https://discord.com/developers/docs/topics/oauth2#twofactor-authentication-requirement|two-factor authentication}
 	 * when used on a guild that has server-wide 2FA enabled.
 	 *
 	 * @channel Text, Voice
@@ -240,7 +240,7 @@ export enum PermissionFlags {
 	 * Allows management and editing of emojis
 	 *
 	 * @remarks
-	 * This permissions requires the owner account to use {@link https://discord.com/developers/docs/topics/oauth2#twofactor-authentication-requirement two-factor authentication}
+	 * This permissions requires the owner account to use {@link https://discord.com/developers/docs/topics/oauth2#twofactor-authentication-requirement|two-factor authentication}
 	 * when used on a guild that has server-wide 2FA enabled.
 	 */
 	MANAGE_EMOJIS = 0x40000000
@@ -253,7 +253,7 @@ export type Permission = keyof typeof PermissionFlags;
 // ANCHOR Partial Role
 
 /**
- * @source {@link https://discord.com/developers/docs/resources/audit-log#audit-log-change-object-example-partial-role-object Audit Log}
+ * @source {@link https://discord.com/developers/docs/resources/audit-log#audit-log-change-object-example-partial-role-object|Audit Log}
  */
 export interface PartialRole {
 	/**
@@ -277,7 +277,7 @@ export interface PartialRole {
  * @remarks
  * Roles without colors (`color == 0`) do not count towards the final computed color in the user list.
  *
- * @source {@link https://discord.com/developers/docs/topics/permissions#role-object-role-structure Permissions}
+ * @source {@link https://discord.com/developers/docs/topics/permissions#role-object-role-structure|Permissions}
  */
 export interface Role extends PartialRole {
 	/**
@@ -317,7 +317,7 @@ export interface Role extends PartialRole {
 }
 
 /**
- * @source {@link https://discord.com/developers/docs/topics/permissions#role-object-role-tags-structure Permissions}
+ * @source {@link https://discord.com/developers/docs/topics/permissions#role-object-role-tags-structure|Permissions}
  */
 export interface RoleTag {
 	/**

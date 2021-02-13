@@ -26,7 +26,7 @@ export interface PartialUser {
 	discriminator: string;
 
 	/**
-	 * The user's {@link https://discord.com/developers/docs/reference#image-formatting avatar hash}
+	 * The user's {@link https://discord.com/developers/docs/reference#image-formatting|avatar hash}
 	 *
 	 * @scope `identify`
 	 */
@@ -40,7 +40,7 @@ export interface PartialUser {
  * much more. Users are separated by a distinction of "bot" vs "normal." Although they are similar, bot users are automated users that
  * are "owned" by another user. Unlike normal users, bot users do not have a limitation on the number of Guilds they can be a part of.
  *
- * @source {@link https://discord.com/developers/docs/resources/user#user-object-user-structure User}
+ * @source {@link https://discord.com/developers/docs/resources/user#user-object-user-structure|User}
  */
 export interface User extends PartialUser {
 	/**
@@ -86,21 +86,21 @@ export interface User extends PartialUser {
 	email?: Nullable<string>;
 
 	/**
-	 * The {@link https://discord.com/developers/docs/resources/user#user-object-user-flags flags} on a user's account
+	 * The {@link https://discord.com/developers/docs/resources/user#user-object-user-flags|flags} on a user's account
 	 *
 	 * @scope `identify`
 	 */
 	flags?: UserFlags;
 
 	/**
-	 * The {@link https://discord.com/developers/docs/resources/user#user-object-premium-types type of Nitro subscription} on a user's account
+	 * The {@link https://discord.com/developers/docs/resources/user#user-object-premium-types|type of Nitro subscription} on a user's account
 	 *
 	 * @scope `identify`
 	 */
 	premium_type?: PremiumType;
 
 	/**
-	 * The public {@link https://discord.com/developers/docs/resources/user#user-object-user-flags flags} on a user's account
+	 * The public {@link https://discord.com/developers/docs/resources/user#user-object-user-flags|flags} on a user's account
 	 *
 	 * @scope `identify`
 	 */
@@ -108,7 +108,7 @@ export interface User extends PartialUser {
 }
 
 /**
- * @source {@link https://discord.com/developers/docs/resources/user#user-object-user-flags User}
+ * @source {@link https://discord.com/developers/docs/resources/user#user-object-user-flags|User}
  */
 export enum UserFlags {
 	None,
@@ -130,7 +130,7 @@ export enum UserFlags {
 /**
  * Premium types denote the level of premium a user has.
  *
- * @source {@link https://discord.com/developers/docs/resources/user#user-object-premium-types User}
+ * @source {@link https://discord.com/developers/docs/resources/user#user-object-premium-types|User}
  */
 export enum PremiumType {
 	None,
@@ -143,7 +143,7 @@ export enum PremiumType {
 /**
  * The connection object that the user has attached.
  *
- * @source {@link https://discord.com/developers/docs/resources/user#connection-object-connection-structure User}
+ * @source {@link https://discord.com/developers/docs/resources/user#connection-object-connection-structure|User}
  */
 export interface Connection {
 	/**
@@ -167,7 +167,7 @@ export interface Connection {
 	revoked?: boolean;
 
 	/**
-	 * An array of partial {@link https://discord.com/developers/docs/resources/guild#integration-object server integrations}
+	 * An array of partial {@link https://discord.com/developers/docs/resources/guild#integration-object|server integrations}
 	 */
 	integrations?: PartialIntegration[];
 
@@ -187,13 +187,13 @@ export interface Connection {
 	show_activity: boolean;
 
 	/**
-	 * {@link https://discord.com/developers/docs/resources/user#user-object-visibility-types Visibility} of this connection
+	 * {@link https://discord.com/developers/docs/resources/user#user-object-visibility-types|Visibility} of this connection
 	 */
 	visibility: VisibilityType;
 }
 
 /**
- * @source {@link https://discord.com/developers/docs/resources/user#connection-object-visibility-types User}
+ * @source {@link https://discord.com/developers/docs/resources/user#connection-object-visibility-types|User}
  */
 export enum VisibilityType {
 	/**

@@ -3,7 +3,7 @@ import type { PartialChannel, PartialGuild, PartialUser, User } from './';
 // ANCHOR Partial Invite
 
 /**
- * @source {@link https://discord.com/developers/docs/resources/guild#get-guild-vanity-url-example-partial-invite-object Guild}
+ * @source {@link https://discord.com/developers/docs/resources/guild#get-guild-vanity-url-example-partial-invite-object|Guild}
  */
 export interface PartialInvite {
 	/**
@@ -22,7 +22,7 @@ export interface PartialInvite {
 /**
  * Represents a code that when used, adds a user to a guild or group DM channel.
  *
- * @source {@link https://discord.com/developers/docs/resources/invite#invite-object-invite-structure Invite}
+ * @source {@link https://discord.com/developers/docs/resources/invite#invite-object-invite-structure|Invite}
  */
 export interface Invite extends Pick<PartialInvite, 'code'> {
 	/**
@@ -46,7 +46,7 @@ export interface Invite extends Pick<PartialInvite, 'code'> {
 	target_user?: PartialUser;
 
 	/**
-	 * The {@link https://discord.com/developers/docs/resources/invite#invite-object-target-user-types type of user target} for this invite
+	 * The {@link https://discord.com/developers/docs/resources/invite#invite-object-target-user-types|type of user target} for this invite
 	 */
 	target_user_type?: TargetUser;
 
@@ -62,7 +62,7 @@ export interface Invite extends Pick<PartialInvite, 'code'> {
 }
 
 /**
- * @source {@link https://discord.com/developers/docs/resources/invite#invite-object-target-user-types Invite}
+ * @source {@link https://discord.com/developers/docs/resources/invite#invite-object-target-user-types|Invite}
  */
 export enum TargetUser {
 	Stream = 1
@@ -71,7 +71,7 @@ export enum TargetUser {
 /**
  * Extra information about an invite.
  *
- * @source {@link https://discord.com/developers/docs/resources/invite#invite-metadata-object-invite-metadata-structure Invite}
+ * @source {@link https://discord.com/developers/docs/resources/invite#invite-metadata-object-invite-metadata-structure|Invite}
  */
 export interface InviteMetadata extends Invite, Pick<PartialInvite, 'uses'> {
 	/**
