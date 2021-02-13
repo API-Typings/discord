@@ -87,7 +87,7 @@ export interface Identify extends CommandPayload<GatewayOPCode.Identify> {
 		/**
 		 * Presence structure for initial presence information
 		 */
-		presence?: Omit<UpdateStatus, 'op'|'d'>;
+		presence?: Omit<UpdateStatus, 'op' | 'd'>;
 
 		/**
 		 * The {@link https://discord.com/developers/docs/topics/gateway#gateway-intents|Gateway Intents} you wish to receive
@@ -187,7 +187,7 @@ export interface RequestGuildMembers extends CommandPayload<GatewayOPCode.Reques
 		/**
 		 * Used to specify which users you wish to fetch
 		 */
-		user_ids?: Snowflake|Snowflake[];
+		user_ids?: Snowflake | Snowflake[];
 
 		/**
 		 * Nonce to identify the {@link https://discord.com/developers/docs/topics/gateway#guild-members-chunk|Guild Members Chunk} response
@@ -259,6 +259,6 @@ export interface UpdateStatus extends CommandPayload<GatewayOPCode.PresenceUpdat
 /**
  * @source {@link https://discord.com/developers/docs/topics/gateway#update-status-status-types|Gateway}
  */
-export type StatusType = 'idle'|'dnd'|'online'|'offline'|'invisbile';
+export type StatusType = 'idle' | 'dnd' | 'online' | 'offline' | 'invisbile';
 
 // !SECTION

@@ -1,12 +1,5 @@
 import type { Nullable } from '@api-typings/core';
-import type {
-	AllowedMentions,
-	Channel,
-	Embed,
-	Guild,
-	Snowflake,
-	User
-} from '../';
+import type { AllowedMentions, Channel, Embed, Guild, Snowflake, User } from '../';
 
 /**
  * Represents a low-effort way to post messages to channels. They do not require a bot user or authentication to use.
