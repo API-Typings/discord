@@ -27,9 +27,9 @@ export interface PartialEmoji {
 
 /**
  * @warning
- * Routes for controlling emojis do not follow the normal rate limit conventions. These
- * routes are specifically limited on a per-guild basis to prevent abuse. This means that
- * the quota returned by the API may be inaccurate, and you may encounter `429`s.
+ * Routes for controlling emojis do not follow the normal rate limit conventions. These routes are
+ * specifically limited on a per-guild basis to prevent abuse. This means that the quota returned
+ * by the API may be inaccurate, and you may encounter `429`s.
  *
  * @source {@link https://discord.com/developers/docs/resources/emoji#emoji-object-emoji-structure|Emoji}
  */
@@ -66,8 +66,9 @@ export interface Emoji extends PartialEmoji {
  * Create a new emoji for the guild. Requires the `MANAGE_EMOJIS` permission.
  *
  * @warning
- * Emojis and animated emojis have a maximum file size of 256kb. Attempting to upload an emoji larger than
- * this limit will fail and return `400 BAD REQUEST` and an error message, but not a JSON status code.
+ * Emojis and animated emojis have a maximum file size of 256kb. Attempting to upload an emoji
+ * larger than this limit will fail and return `400 BAD REQUEST` and an error message, but not a
+ * JSON status code.
  *
  * @endpoint [POST] `/guilds/{guild.id}/emojis`
  *

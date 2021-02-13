@@ -26,7 +26,8 @@ export interface DiscoveryMetadata {
 	emoji_discoverability_enabled: boolean;
 
 	/**
-	 * When the server's partner application was accepted or denied, for applications via Server Settings
+	 * When the server's partner application was accepted or denied, for applications via Server
+	 * Settings
 	 */
 	partner_actioned_timestamp: Nullable<string>;
 

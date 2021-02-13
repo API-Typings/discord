@@ -51,7 +51,7 @@ export interface ApplicationCommandOption {
 	type: ApplicationCommandOptionType;
 
 	/**
-	 * 1-32 character name matching ^[\\w-]\{1,32\}$
+	 * 1-32 character name matching `^[\w-]{1,32}$`
 	 */
 	name: string;
 
@@ -71,7 +71,8 @@ export interface ApplicationCommandOption {
 	choices?: ApplicationCommandOptionChoice[];
 
 	/**
-	 * If the option is a subcommand or subcommand group type, this nested options will be the parameters
+	 * If the option is a subcommand or subcommand group type, this nested options will be the
+	 * parameters
 	 */
 	options?: ApplicationCommandOption[];
 }
@@ -86,7 +87,8 @@ export enum ApplicationCommandOptionType {
 	SubCommand = 1,
 
 	/**
-	 * Organized subcommands grouped by subcommands with similar actions or resources within a command
+	 * Organized subcommands grouped by subcommands with similar actions or resources within a
+	 * command
 	 */
 	SubCommandGroup,
 	String,
@@ -119,8 +121,8 @@ export interface ApplicationCommandOptionChoice {
 // ANCHOR Interaction
 
 /**
- * An interaction is the base "thing" that is sent when a user invokes a command,
- * and is the same for Slash Commands and other future interaction types
+ * An interaction is the base "thing" that is sent when a user invokes a command, and is the same
+ * for Slash Commands and other future interaction types.
  *
  * @source {@link https://discord.com/developers/docs/interactions/slash-commands#interaction|Slash Commands}
  */
@@ -139,7 +141,8 @@ export interface Interaction {
 	 * The command data payload
 	 *
 	 * @remarks
-	 * This is always present on `ApplicationCommand` interaction types. It is optional for future-proofing against new interaction types.
+	 * This is always present on `ApplicationCommand` interaction types. It is optional for
+	 * future-proofing against new interaction types.
 	 */
 	data?: ApplicationCommandInteractionData;
 
@@ -203,8 +206,9 @@ export interface ApplicationCommandInteractionData {
 }
 
 /**
- * All options have names, and an option can either be a parameter and input value–in which case `value` will be set–
- * or it can denote a subcommand or group–in which case it will contain a top-level key and another array of `options`.
+ * All options have names, and an option can either be a parameter and input value–in which case
+ * `value` will be set–or it can denote a subcommand or group–in which case it will contain a
+ * top-level key and another array of `options`.
  *
  * `value` and `options` are mutually exclusive.
  *
@@ -307,7 +311,8 @@ export interface InteractionApplicationCommandCallbackData {
  * - **Global:** new global commands will be available in all guilds after 1 hour
  *
  * @warning
- * Creating a command with the same name as an existing command for your application will overwrite the old command.
+ * Creating a command with the same name as an existing command for your application will
+ * overwrite the old command.
  *
  * @endpoint POST [[1][P1]] [[2][P2]]
  * - **Guild:** `/applications/{application.id}/guilds/{guild.id}/commands`

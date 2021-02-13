@@ -3,9 +3,11 @@ import type { Snowflake } from '../';
 // ANCHOR Permission Flags
 
 /**
- * Permissions in Discord are a way to limit and grant certain abilities to users. A set of base permissions can be configured at the guild level for
- * different roles. When these roles are attached to users, they grant or revoke specific privileges within the guild. Along with the guild-level
- * permissions, Discord also supports permission overwrites that can be assigned to individual guild roles or guild members on a per-channel basis.
+ * Permissions in Discord are a way to limit and grant certain abilities to users. A set of base
+ * permissions can be configured at the guild level for different roles. When these roles are
+ * attached to users, they grant or revoke specific privileges within the guild. Along with the
+ * guild-level permissions, Discord also supports permission overwrites that can be assigned to
+ * individual guild roles or guild members on a per-channel basis.
  *
  * @source {@link https://discord.com/developers/docs/topics/permissions#permissions-bitwise-permission-flags|Permissions}
  */
@@ -144,7 +146,8 @@ export enum PermissionFlags {
 	READ_MESSAGE_HISTORY = 0x00010000,
 
 	/**
-	 * Allows for using the `@everyone` tag to notify all users in a channel, and the `@here` tag to notify all online users in a channel
+	 * Allows for using the `@everyone` tag to notify all users in a channel, and the `@here` tag
+	 * to notify all online users in a channel
 	 *
 	 * @channel Text
 	 */
@@ -270,12 +273,14 @@ export interface PartialRole {
 // ANCHOR Role
 
 /**
- * Roles represent a set of permissions attached to a group of users. Roles have unique names, colors, and can be "pinned" to the
- * side bar, causing their members to be listed separately. Roles are unique per guild, and can have separate permission profiles
- * for the global context (guild) and channel context. The `@everyone` role has the same ID as the guild it belongs to.
+ * Roles represent a set of permissions attached to a group of users. Roles have unique names,
+ * colors, and can be "pinned" to the side bar, causing their members to be listed separately.
+ * Roles are unique per guild, and can have separate permission profiles for the global context
+ * (guild) and channel context. The `@everyone` role has the same ID as the guild it belongs to.
  *
  * @remarks
- * Roles without colors (`color == 0`) do not count towards the final computed color in the user list.
+ * Roles without colors (`color == 0`) do not count towards the final computed color in the user
+ * list.
  *
  * @source {@link https://discord.com/developers/docs/topics/permissions#role-object-role-structure|Permissions}
  */

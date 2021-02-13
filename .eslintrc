@@ -13,6 +13,15 @@
 		"sourceType": "module"
 	},
 	"rules": {
-		"tsdoc/syntax": "warn"
+		"tsdoc/syntax": "warn",
+		"max-len": [
+			"error",
+			{
+				"code": 100,
+				"tabWidth": 4,
+				"ignoreComments": false,
+				"ignoreUrls": true
+			}
+		]
 	}
 }

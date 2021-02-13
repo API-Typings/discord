@@ -37,13 +37,15 @@ export interface ConnectionProperties {
  * Used to trigger the initial handshake with the gateway.
  *
  * @remarks
- * If the payload is valid, the gateway will respond with a [Ready][1] event. Clients are limited by [maximum concurrency][2]
- * when [Identify][3]ing; if they exceed this limit, the gateway will respond with an [Opcode 9 Invalid Session][4].
+ * If the payload is valid, the gateway will respond with a [Ready][1] event. Clients are limited
+ * by [maximum concurrency][2] when [Identify][3]ing; if they exceed this limit, the gateway will
+ * respond with an [Opcode 9 Invalid Session][4].
  *
  * @warning
- * Clients are limited to 1000 `IDENTIFY` calls to the websocket in a 24-hour period. This limit is global and across all
- * shards, but does not include `RESUME` calls. Upon hitting this limit, all active sessions for the bot will be terminated,
- * the bot's token will be reset, and the owner will receive an email notification.
+ * Clients are limited to 1000 `IDENTIFY` calls to the websocket in a 24-hour period. This limit is
+ * global and across all shards, but does not include `RESUME` calls. Upon hitting this limit, all
+ * active sessions for the bot will be terminated, the bot's token will be reset, and the owner will
+ * receive an email notification.
  *
  * @source {@link https://discord.com/developers/docs/topics/gateway#identify|Gateway}
  *
@@ -72,8 +74,8 @@ export interface Identify extends CommandPayload<GatewayOPCode.Identify> {
 		compress?: boolean;
 
 		/**
-		 * Value between 50 and 250, total number of members where the gateway
-		 * will stop sending offline members in the guild member list
+		 * Value between 50 and 250, total number of members where the gateway will stop sending
+		 * offline members in the guild member list
 		 *
 		 * @default 50
 		 */
@@ -127,8 +129,9 @@ export interface Resume extends CommandPayload<GatewayOPCode.Resume> {
  * Used to maintain an active gateway connection.
  *
  * @remarks
- * Must be sent every `heartbeat_interval` milliseconds after the [Opcode 10 Hello][1] payload is received. The inner
- * `d` key is the last sequence number—`s`—received by the client. If you have not yet received one, send `null`.
+ * Must be sent every `heartbeat_interval` milliseconds after the [Opcode 10 Hello][1] payload is
+ * received. The inner `d` key is the last sequence number—`s`—received by the client. If you have
+ * not yet received one, send `null`.
  *
  * @source {@link https://discord.com/developers/docs/topics/gateway#heartbeat|Gateway}
  *
@@ -144,13 +147,16 @@ export interface Heartbeat extends CommandPayload<GatewayOPCode.Heartbeat> {
  * Used to request all members for a guild or a list of guilds.
  *
  * @remarks
- * When initially connecting, if you are using [Gateway Intents][1] and don't have the `GUILD_PRESENCES` intent, or if the guild is over
- * 75k members, it will only send members who are in voice, plus the member for you (the connecting user). Otherwise, if a guild has over
- * `large_threshold` members (value in the [Gateway Identify][2]), it will only send members who are online, have a role, have a nickname,
- * or are in a voice channel, and if it has under `large_threshold` members, it will send all members.
+ * When initially connecting, if you are using [Gateway Intents][1] and don't have the
+ * `GUILD_PRESENCES` intent, or if the guild is over 75k members, it will only send members who are
+ * in voice, plus the member for you (the connecting user). Otherwise, if a guild has over
+ * `large_threshold` members (value in the [Gateway Identify][2]), it will only send members who
+ * are online, have a role, have a nickname, or are in a voice channel, and if it has under
+ * `large_threshold` members, it will send all members.
  *
  * @limitations
- * - `GUILD_PRESENCES` intent is required to set `presences = true`. Otherwise, it will always be false
+ * - `GUILD_PRESENCES` intent is required to set `presences = true`. Otherwise, it will always be
+ *   false
  * - `GUILD_MEMBERS` intent is required to request the entire member list—`(query=‘’, limit=0<=n)`
  * - You will be limited to requesting 1 `guild_id` per request
  * - Requesting a prefix (`query` parameter) will return a maximum of 100 members
@@ -174,8 +180,8 @@ export interface RequestGuildMembers extends CommandPayload<GatewayOPCode.Reques
 		query?: string;
 
 		/**
-		 * Maximum number of members to send matching the `query`; a limit of `0`
-		 * can be used with an empty string `query` to return all members
+		 * Maximum number of members to send matching the `query`; a limit of `0` can be used with
+		 * an empty string `query` to return all members
 		 */
 		limit: number;
 
@@ -235,7 +241,8 @@ export interface UpdateVoiceState {
 export interface UpdateStatus extends CommandPayload<GatewayOPCode.PresenceUpdate> {
 	d: {
 		/**
-		 * Unix time (in milliseconds) of when the client went idle, or null if the client is not idle
+		 * Unix time (in milliseconds) of when the client went idle, or null if the client is not
+		 * idle
 		 */
 		since: Nullable<number>;
 

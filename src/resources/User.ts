@@ -36,9 +36,11 @@ export interface PartialUser {
 // ANCHOR User
 
 /**
- * Represents a base entity that can spawn across the entire platform, be members of guilds, participate in text and voice chat, and
- * much more. Users are separated by a distinction of "bot" vs "normal." Although they are similar, bot users are automated users that
- * are "owned" by another user. Unlike normal users, bot users do not have a limitation on the number of Guilds they can be a part of.
+ * Represents a base entity that can spawn across the entire platform, be members of guilds,
+ * participate in text and voice chat, and much more. Users are separated by a distinction of "bot"
+ * vs "normal." Although they are similar, bot users are automated users that are "owned" by another
+ * user. Unlike normal users, bot users do not have a limitation on the number of Guilds they can be
+ * a part of.
  *
  * @source {@link https://discord.com/developers/docs/resources/user#user-object-user-structure|User}
  */
@@ -235,8 +237,9 @@ export interface ModifyCurrentUser {
  * Requires the `guilds` OAuth2 scope.
  *
  * @info
- * This endpoint returns 100 guilds by default, which is the maximum number of guilds a non-bot user can join.
- * Therefore, pagination is **not needed** for integrations that need to get a list of the users' guilds.
+ * This endpoint returns 100 guilds by default, which is the maximum number of guilds a non-bot user
+ * can join. Therefore, pagination is **not needed** for integrations that need to get a list of the
+ * users' guilds.
  *
  * @endpoint [GET] `/users/@me/guilds`
  *
@@ -268,8 +271,9 @@ export interface GetCurrentUserGuilds {
  * Create a new DM channel with a user.
  *
  * @warning
- * You should not use this endpoint to DM everyone in a server about something. DMs should generally be initiated by a user action.
- * If you open a significant amount of DMs too quickly, your bot may be rate limited or blocked from opening new ones.
+ * You should not use this endpoint to DM everyone in a server about something. DMs should generally
+ * be initiated by a user action. If you open a significant amount of DMs too quickly, your bot may
+ * be rate limited or blocked from opening new ones.
  *
  * @endpoint [POST] `/users/@me/channels`
  *

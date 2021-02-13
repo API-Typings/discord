@@ -4,8 +4,8 @@ import type { Snowflake, StatusType } from '../../';
 // ANCHOR Client Status
 
 /**
- * Active sessions are indicated with an `online`, `idle`, or `dnd` string per platform.
- * If a user is offline or invisible, the corresponding field is not present.
+ * Active sessions are indicated with an `online`, `idle`, or `dnd` string per platform. If a user
+ * is offline or invisible, the corresponding field is not present.
  *
  * @source {@link https://discord.com/developers/docs/topics/gateway#client-status-object|Gateway}
  */
@@ -73,7 +73,7 @@ export interface Activity {
 	sync_id?: string;
 
 	/**
-	 * The platform the game is being played on ("desktop", "samsung", or "xbox")
+	 * The platform the game is being played on (`desktop`, `samsung`, or `xbox`)
 	 */
 	platform?: string;
 
@@ -274,8 +274,9 @@ export enum ActivityFlags {
 }
 
 /**
- * When received over the gateway, the `buttons` field is an array of strings, which are the button labels.
- * Bots cannot access a user's activity button URLs. When sending, the `buttons` field must be an array.
+ * When received over the gateway, the `buttons` field is an array of strings, which are the button
+ * labels. Bots cannot access a user's activity button URLs. When sending, the `buttons` field must
+ * be an array.
  */
 export interface ActivityButton {
 	/**

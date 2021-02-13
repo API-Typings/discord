@@ -69,7 +69,8 @@ export interface PartialGuild {
 // ANCHOR Guild
 
 /**
- * Represents an isolated collection of users and channels, and are often referred to as "servers" in the UI.
+ * Represents an isolated collection of users and channels, and are often referred to as "servers"
+ * in the UI.
  *
  * @source {@link https://discord.com/developers/docs/resources/guild#guild-object-guild-structure|Guild}
  */
@@ -178,7 +179,8 @@ export interface Guild extends PartialGuild {
 	application_id: Nullable<Snowflake>;
 
 	/**
-	 * The ID of the channel where guild notices such as welcome messages and boost events are posted
+	 * The ID of the channel where guild notices such as welcome messages and boost events are
+	 * posted
 	 */
 	system_channel_id: Nullable<Snowflake>;
 
@@ -249,7 +251,8 @@ export interface Guild extends PartialGuild {
 	channels?: Channel[];
 
 	/**
-	 * Presences of the members in the guild, will only include non-offline members if the size is greater than `large threshold`
+	 * Presences of the members in the guild, will only include non-offline members if the size is
+	 * greater than `large threshold`
 	 *
 	 * @remarks
 	 * This field is only sent within the {@link https://discord.com/developers/docs/topics/gateway#guild-create|`GUILD_CREATE`} event
@@ -257,7 +260,8 @@ export interface Guild extends PartialGuild {
 	presences?: Partial<PresenceUpdate['d']>[];
 
 	/**
-	 * The maximum number of presences for the guild (the default value, currently 25000, is in effect when `null` is returned)
+	 * The maximum number of presences for the guild (the default value, currently 25000, is in
+	 * effect when `null` is returned)
 	 */
 	max_presences?: Nullable<number>;
 
@@ -292,12 +296,14 @@ export interface Guild extends PartialGuild {
 	premium_subscription_count?: number;
 
 	/**
-	 * The preferred locale of a Community guild; used in server discovery and notices from Discord; defaults to "en-US"
+	 * The preferred locale of a Community guild; used in server discovery and notices from Discord;
+	 * defaults to "en-US"
 	 */
 	preferred_locale: string;
 
 	/**
-	 * The ID of the channel where admins and moderators of Community guilds receive notices from Discord
+	 * The ID of the channel where admins and moderators of Community guilds receive notices from
+	 * Discord
 	 */
 	public_updates_channel_id: Nullable<Snowflake>;
 
@@ -307,17 +313,20 @@ export interface Guild extends PartialGuild {
 	max_video_channel_users?: number;
 
 	/**
-	 * Approximate number of members in this guild, returned from the `GET /guilds/{guild.id}` endpoint when `with_counts` is `true`
+	 * Approximate number of members in this guild, returned from the `GET /guilds/{guild.id}`
+	 * endpoint when `with_counts` is `true`
 	 */
 	approximate_member_count?: number;
 
 	/**
-	 * Approximate number of non-offline members in this guild, returned from the `GET /guilds/{guild.id}` endpoint when `with_counts` is `true`
+	 * Approximate number of non-offline members in this guild, returned from the
+	 * `GET /guilds/{guild.id}` endpoint when `with_counts` is `true`
 	 */
 	approximate_presence_count?: number;
 
 	/**
-	 * The welcome screen of a Community guild, shown to new members, returned when in the invite object
+	 * The welcome screen of a Community guild, shown to new members, returned when in the invite
+	 * object
 	 */
 	welcome_screen?: WelcomeScreen;
 }
@@ -424,7 +433,8 @@ export type GuildFeatures =
 	| 'PREVIEW_ENABLED';
 
 /**
- * Represents an Offline Guild, or a Guild whose information has not been provided through [Guild Create][1] events during the Gateway connect.
+ * Represents an Offline Guild, or a Guild whose information has not been provided through [Guild
+ * Create][1] events during the Gateway connect.
  *
  * [1]: https://discord.com/developers/docs/topics/gateway#guild-create
  */
@@ -544,9 +554,10 @@ export interface GuildWidgetMember {
 
 /**
  * @info
- * - The field `user` won't be included in the member object attached to `MESSAGE_CREATE` and `MESSAGE_UPDATE` gateway events
- * - In `GUILD_` events, `pending` will always be included as `true` or `false`. In non `GUILD_` events which can only be
- * 	 triggered by non-`pending` users, `pending` will not be included
+ * - The field `user` won't be included in the member object attached to `MESSAGE_CREATE` and
+ *   `MESSAGE_UPDATE` gateway events
+ * - In `GUILD_` events, `pending` will always be included as `true` or `false`. In non `GUILD_`
+ *   events which can only be triggered by non-`pending` users, `pending` will not be included
  *
  * @source {@link https://discord.com/developers/docs/resources/guild#guild-member-object-guild-member-structure|Guild}
  */
@@ -592,7 +603,8 @@ export interface GuildMember {
 	pending?: boolean;
 
 	/**
-	 * Total permissions of the member in the channel, including overrides, returned when in the interaction object
+	 * Total permissions of the member in the channel, including overrides, returned when in the
+	 * interaction object
 	 */
 	permissions?: string;
 }
@@ -782,7 +794,8 @@ export interface IntegrationApplication {
 	summary: string;
 
 	/**
-	 * If this application is a game sold on Discord, this field will be the hash of the image on store embeds
+	 * If this application is a game sold on Discord, this field will be the hash of the image on
+	 * store embeds
 	 */
 	cover_image?: string;
 
@@ -860,11 +873,13 @@ export interface WelcomeScreenChannel {
 // SECTION Membership Screening
 
 /**
- * In guilds with [Membership Screening][1] enabled, when a member joins, [Guild Member Add][2] will be emitted but they
- * will initially be restricted from doing any actions in the guild, and `pending` will be true in the [member object][3].
- * When the member completes the screening, [Guild Member Update][4] will be emitted and `pending` will be false.
+ * In guilds with [Membership Screening][1] enabled, when a member joins, [Guild Member Add][2] will
+ * be emitted but they will initially be restricted from doing any actions in the guild, and
+ * `pending`will be true in the [member object][3]. When the member completes the screening, [Guild
+ * Member Update][4] will be emitted and `pending` will be false.
  *
- * Giving the member a role will bypass Membership Screening as well as the guild's verification level, giving the member immediate access to chat.
+ * Giving the member a role will bypass Membership Screening as well as the guild's verification
+ * level, giving the member immediate access to chat.
  *
  * @source {@link https://discord.com/developers/docs/resources/guild#membership-screening-object|Guild}
  *
@@ -934,8 +949,8 @@ export enum ScreeningFieldType {
  *
  * @endpoint [POST] `/guilds`
  *
- * @returns A [guild][1] object on success
- * @fires A [Guild Create][2] Gateway event
+ * @returns A [guild][1] object on success.
+ * @fires A [Guild Create][2] Gateway event.
  *
  * [POST]: https://discord.com/developers/docs/resources/guild#create-guild
  * [1]: https://discord.com/developers/docs/resources/guild#guild-object
@@ -979,8 +994,9 @@ export interface CreateGuild {
 	 * When using the `roles` parameter:
 	 * - The first member of the array is used to change properties of the guild's `@everyone` role.
 	 *   If you are trying to bootstrap a guild with additional roles, keep this in mind.
-	 * - The required `id` field within each role object is an integer placeholder, and will be replaced by the API upon consumption. Its
-	 * 	 purpose is to allow you to overwrite a role's permissions in a channel when also passing in channels with the channels array.
+	 * - The required `id` field within each role object is an integer placeholder, and will be
+	 *   replaced by the API upon consumption. Its purpose is to allow you to overwrite a role's
+	 *   permissions in a channel when also passing in channels with the channels array.
 	 */
 	roles?: Role[];
 
@@ -990,9 +1006,10 @@ export interface CreateGuild {
 	 * @remarks
 	 * When using the `channels` parameter:
 	 * - The `position` field is ignored, and none of the default channels are created.
-	 * - The `id` field within each channel object may be set to an integer placeholder, and will be replaced by the API
-	 *   upon consumption. Its purpose is to allow you to create `GUILD_CATEGORY` channels by setting the `parent_id` field
-	 *   on any children to the category's `id` field. Category channels must be listed before any children.
+	 * - The `id` field within each channel object may be set to an integer placeholder, and will
+	 *   be replaced by the API upon consumption. Its purpose is to allow you to create
+	 *   `GUILD_CATEGORY` channels by setting the `parent_id` field on any children to the
+	 *   category's `id` field. Category channels must be listed before any children.
 	 */
 	channels?: PartialChannel;
 
@@ -1007,7 +1024,8 @@ export interface CreateGuild {
 	afk_timeout?: number;
 
 	/**
-	 * The ID of the channel where guild notices such as welcome messages and boost events are posted
+	 * The ID of the channel where guild notices such as welcome messages and boost events are
+	 * posted
 	 */
 	system_channel_id?: Snowflake;
 
@@ -1019,7 +1037,8 @@ export interface CreateGuild {
 
 /**
  * @remarks
- * If `with_counts` is set to true, this endpoint will also return `approximate_member_count` and `approximate_presence_count` for the guild.
+ * If `with_counts` is set to true, this endpoint will also return `approximate_member_count` and
+ * `approximate_presence_count` for the guild.
  *
  * @endpoint [GET] `/guilds/{guild.id}`
  *
@@ -1086,7 +1105,8 @@ export interface ModifyGuild {
 	afk_timeout?: Nullable<number>;
 
 	/**
-	 * Base64 1024x1024 png/jpeg/gif image for the guild icon (can be animated gif when the server has `ANIMATED_ICON` feature)
+	 * Base64 1024x1024 png/jpeg/gif image for the guild icon (can be animated gif when the server
+	 * has `ANIMATED_ICON` feature)
 	 */
 	icon?: Nullable<string>;
 
@@ -1106,7 +1126,8 @@ export interface ModifyGuild {
 	banner?: Nullable<string>;
 
 	/**
-	 * The ID of the channel where guild notices such as welcome messages and boost events are posted
+	 * The ID of the channel where guild notices such as welcome messages and boost events are
+	 * posted
 	 */
 	system_channel_id?: Nullable<Snowflake>;
 
@@ -1121,12 +1142,14 @@ export interface ModifyGuild {
 	rules_channel_id?: Nullable<Snowflake>;
 
 	/**
-	 * The ID of the channel where admins and moderators of Community guilds receive notices from Discord
+	 * The ID of the channel where admins and moderators of Community guilds receive notices from
+	 * Discord
 	 */
 	public_updates_channel_id?: Nullable<Snowflake>;
 
 	/**
-	 * The preferred locale of a Community guild used in server discovery and notices from Discord; defaults to "en-US"
+	 * The preferred locale of a Community guild used in server discovery and notices from Discord;
+	 * defaults to "en-US"
 	 */
 	preferred_locale?: Nullable<string>;
 
@@ -1145,8 +1168,8 @@ export interface ModifyGuild {
  * Create a new [channel][1] object for the guild. Requires the `MANAGE_CHANNELS` permission.
  *
  * @remarks
- * If setting permission overwrites, only permissions your bot has in the guild can be allowed/denied.
- * Setting `MANAGE_ROLES` permission in channels is only possible for guild administrators.
+ * If setting permission overwrites, only permissions your bot has in the guild can be allowed/
+ * denied. Setting `MANAGE_ROLES` permission in channels is only possible for guild administrators.
  *
  * @endpoint [POST] `/guilds/{guild.id}/channels`
  *
@@ -1211,7 +1234,8 @@ export interface CreateGuildChannel {
 }
 
 /**
- * Modify the positions of a set of [channel][1] objects for the guild. Requires `MANAGE_CHANNELS` permission.
+ * Modify the positions of a set of [channel][1] objects for the guild. Requires `MANAGE_CHANNELS`
+ * permission.
  *
  * @endpoint [PATCH] `/guilds/{guild.id}/channels`
  *
@@ -1247,7 +1271,8 @@ export interface ModifyGuildChannelPositions {
 /**
  * @endpoint [GET] `/guilds/{guild.id}/members`
  *
- * @returns A list of [guild member][1] objects that are members of the guild, sorted by their ID in ascending order.
+ * @returns A list of [guild member][1] objects that are members of the guild, sorted by their ID
+ * in ascending order.
  *
  * [GET]: https://discord.com/developers/docs/resources/guild#list-guild-members
  * [1]: https://discord.com/developers/docs/resources/guild#guild-member-object-guild-member-structure
@@ -1271,7 +1296,8 @@ export interface ListGuildMembers {
 /**
  * @endpoint GET `/guilds/{guild.id}/members/search`
  *
- * @returns A list of [guild member][1] objects whose username or nickname starts with a provided string.
+ * @returns A list of [guild member][1] objects whose username or nickname starts with a provided
+ * string.
  *
  * [1]: https://discord.com/developers/docs/resources/guild#guild-member-object
  */
@@ -1290,15 +1316,18 @@ export interface SearchGuildMembers {
 }
 
 /**
- * Adds a user to the guild, provided you have a valid OAuth2 access token for the user with the `guilds.join` scope.
+ * Adds a user to the guild, provided you have a valid OAuth2 access token for the user with the
+ * `guilds.join` scope.
  *
  * @info
- * The Authorization header must be a Bot token (belonging to the same application used for authorization),
- * and the bot must be a member of the guild with `CREATE_INSTANT_INVITE` permission.
+ * The Authorization header must be a Bot token (belonging to the same application used for
+ * authorization), and the bot must be a member of the guild with `CREATE_INSTANT_INVITE`
+ * permission.
  *
  * @endpoint [PUT] `/guilds/{guild.id}/members/{user.id}`
  *
- * @returns A `201 CREATED` with the [guild member][1] as the body, or `204 NO CONTENT` if the user is already a member of the guild
+ * @returns A `201 CREATED` with the [guild member][1] as the body, or `204 NO CONTENT` if the user
+ * is already a member of the guild
  *
  * @fires A [Guild Member Add][2] Gateway event.
  *
@@ -1308,7 +1337,8 @@ export interface SearchGuildMembers {
  */
 export interface AddGuildMember {
 	/**
-	 * An OAuth2 access token granted with the `guilds.join` to the bot's application for the user you want to add to the guild
+	 * An OAuth2 access token granted with the `guilds.join` to the bot's application for the user
+	 * you want to add to the guild
 	 */
 	access_token: string;
 
@@ -1345,10 +1375,12 @@ export interface AddGuildMember {
  * Modify attributes of a [guild member][1].
  *
  * @remarks
- * If the `channel_id` is set to `null`, this will force the target user to be disconnected from voice.
+ * If the `channel_id` is set to `null`, this will force the target user to be disconnected from
+ * voice.
  *
  * @info
- * When moving members to channels, the API user *must* have permissions to both connect to the channel and have the `MOVE_MEMBERS` permission.
+ * When moving members to channels, the API user *must* have permissions to both connect to the
+ * channel and have the `MOVE_MEMBERS` permission.
  *
  * @endpoint [PATCH] `/guilds/{guild.id}/members/{user.id}`
  *
@@ -1417,7 +1449,8 @@ export interface ModifyCurrentUserNick {
 }
 
 /**
- * Create a guild ban, and optionally delete previous messages sent by the banned user. Requires the `BAN_MEMBERS` permission.
+ * Create a guild ban, and optionally delete previous messages sent by the banned user. Requires
+ * the `BAN_MEMBERS` permission.
  *
  * @endpoint [PUT] `/guilds/{guild.id}/bans/{user.id}`
  *
@@ -1489,11 +1522,13 @@ export interface CreateGuildRole {
 }
 
 /**
- * Modify the positions of a set of [role][1] objects for the guild. Requires the `MANAGE_ROLES` permission.
+ * Modify the positions of a set of [role][1] objects for the guild. Requires the `MANAGE_ROLES`
+ * permission.
  *
  * @endpoint [PATCH] `/guilds/{guild.id}/roles`
  *
- * @returns A list of all of the guild's [role][1] objects on success, sorted by their ID in ascending order.
+ * @returns A list of all of the guild's [role][1] objects on success, sorted by their ID in
+ * ascending order.
  * @fires Multiple [Guild Role Update][2] Gateway events.
  *
  * [PATCH]: https://discord.com/developers/docs/resources/guild#modify-guild-role-positions
@@ -1555,12 +1590,14 @@ export interface ModifyGuildRole {
  * Requires the `KICK_MEMBERS` permission.
  *
  * @remarks
- * By default, prune will not remove users with roles. You can optionally include specific roles in your prune by providing the `include_roles`
- * parameter. Any inactive user that has a subset of the provided role(s) will be counted in the prune and users with additional roles will not.
+ * By default, prune will not remove users with roles. You can optionally include specific roles in
+ * your prune by providing the `include_roles` parameter. Any inactive user that has a subset of the
+ * provided role(s) will be counted in the prune and users with additional roles will not.
  *
  * @endpoint [GET] `/guilds/{guild.id}/prune`
  *
- * @returns An object with one `pruned` key indicating the number of members that would be removed in a prune operation.
+ * @returns An object with one `pruned` key indicating the number of members that would be removed
+ * in a prune operation.
  *
  * [GET]: https://discord.com/developers/docs/resources/guild#get-guild-prune-count
  */
@@ -1582,14 +1619,17 @@ export interface GetGuildPruneCount {
  * Begin a prune operation. Requires the `KICK_MEMBERS` permission.
  *
  * @remarks
- * For large guilds it's recommended to set the `compute_prune_count` option to `false`, forcing `pruned` to `null`.
+ * For large guilds it's recommended to set the `compute_prune_count` option to `false`, forcing
+ * `pruned` to `null`.
  *
- * By default, prune will not remove users with roles. You can optionally include specific roles in your prune by providing the `include_roles`
- * parameter. Any inactive user that has a subset of the provided role(s) will be counted in the prune and users with additional roles will not.
+ * By default, prune will not remove users with roles. You can optionally include specific roles in
+ * your prune by providing the `include_roles` parameter. Any inactive user that has a subset of
+ * the provided role(s) will be counted in the prune and users with additional roles will not.
  *
  * @endpoint [POST] `/guilds/{guild.id}/prune`
  *
- * @returns An object with one `pruned` key indicating the number of members that were removed in the prune operation.
+ * @returns An object with one `pruned` key indicating the number of members that were removed in
+ * the prune operation.
  * @fires Multiple [Guild Member Remove][1] Gateway events.
  *
  * [POST]: https://discord.com/developers/docs/resources/guild#begin-guild-prune
@@ -1617,7 +1657,8 @@ export interface BeginGuildPrune {
 }
 
 /**
- * Attach an [integration][1] object from the current user to the guild. Requires the `MANAGE_GUILD` permission.
+ * Attach an [integration][1] object from the current user to the guild. Requires the `MANAGE_GUILD`
+ * permission.
  *
  * @endpoint [POST] `/guilds/{guild.id}/integrations`
  *
@@ -1641,7 +1682,8 @@ export interface CreateGuildIntegration {
 }
 
 /**
- * Modify the behavior and settings of an [integration][1] object for the guild. Requires the `MANAGE_GUILD` permission.
+ * Modify the behavior and settings of an [integration][1] object for the guild. Requires the
+ * `MANAGE_GUILD` permission.
  *
  * @endpoint [PATCH] `/guilds/{guild.id}/integrations/{integration.id}`
  *
@@ -1673,7 +1715,7 @@ export interface EditIntegration {
 /**
  * @endpoint [GET] `/guilds/{guild.id}/widget.png`
  *
- * @returns A PNG image widget for the guild
+ * @returns A PNG image widget for the guild.
  *
  * [GET]: https://discord.com/developers/docs/resources/guild#get-guild-widget-image
  */

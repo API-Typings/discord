@@ -1,8 +1,16 @@
 import type { Nullable } from '@api-typings/core';
-import type { AllowedMentions, Channel, Embed, Guild, Snowflake, User } from '../';
+import type {
+	AllowedMentions,
+	Channel,
+	Embed,
+	Guild,
+	Snowflake,
+	User
+} from '../';
 
 /**
- * Represents a low-effort way to post messages to channels. They do not require a bot user or authentication to use.
+ * Represents a low-effort way to post messages to channels. They do not require a bot user or
+ * authentication to use.
  *
  * @source {@link https://discord.com/developers/docs/resources/webhook#webhook-object-webhook-structure|Webhook}
  */
@@ -53,7 +61,8 @@ export interface Webhook {
 	application_id: Nullable<Snowflake>;
 
 	/**
-	 * The guild of the channel that this webhook is following (returned for Channel Follower Webhooks)
+	 * The guild of the channel that this webhook is following (returned for Channel Follower
+	 * Webhooks)
 	 */
 	source_guild?: Pick<Guild, 'id' | 'name' | 'icon'>;
 
@@ -73,7 +82,8 @@ export enum WebhookType {
 	Incoming = 1,
 
 	/**
-	 * Channel Follower Webhooks are internal webhooks used with Channel Following to post new messages into channels
+	 * Channel Follower Webhooks are internal webhooks used with Channel Following to post new
+	 * messages into channels
 	 */
 	ChannelFollower
 }
@@ -84,7 +94,8 @@ export enum WebhookType {
  * Create a new webhook. Requires the `MANAGE_WEBHOOKS` permission.
  *
  * @remarks
- * Webhook names follow the naming restrictions that can be found in the [Usernames and Nicknames][1] documentation, with the following additional stipulations:
+ * Webhook names follow the naming restrictions that can be found in the [Usernames and
+ * Nicknames][1]documentation, with the following additional stipulations:
  * - Webhook names cannot be: `clyde`
  *
  * @endpoint [POST] `/channels/{channel.id}/webhooks`
@@ -136,13 +147,16 @@ export interface ModifyWebhook {
 
 /**
  * @info
- * For the webhook embed objects, you can set every field except `type` (it will be `rich` regardless of if
- * you try to set it), `provider`, `video`, and any `height`, `width`, or `proxy_url` values for images.
+ * For the webhook embed objects, you can set every field except `type` (it will be `rich`
+ * regardless of if you try to set it), `provider`, `video`, and any `height`, `width`, or
+ * `proxy_url` values for images.
  *
  * @warning
- * This endpoint supports both JSON and form data bodies. It does require `multipart/form-data` requests instead of the normal JSON
- * request type when uploading files. Make sure you set your `Content-Type` to `multipart/form-data` if you're doing that. Note that
- * in that case, the `embeds` field cannot be used, but you can pass an url-encoded JSON body as a form value for `payload_json`.
+ * This endpoint supports both JSON and form data bodies. It does require `multipart/form-data`
+ * requests instead of the normal JSON request type when uploading files. Make sure you set your
+ * `Content-Type` to `multipart/form-data` if you're doing that. Note that in that case, the
+ * `embeds` field cannot be used, but you can pass an url-encoded JSON body as a form value for
+ * `payload_json`.
  *
  * @endpoint [POST] `/webhooks/{webhook.id}/{webhook.token}`
  *
@@ -150,8 +164,9 @@ export interface ModifyWebhook {
  */
 export interface ExecuteWebhook {
 	/**
-	 * Waits for server confirmation of message send before response, and returns the created message body
-	 * (defaults to `false`; when `false` a message that is not saved does not return an error)
+	 * Waits for server confirmation of message send before response, and returns the created
+	 * message body (defaults to `false`; when `false` a message that is not saved does not return
+	 * an error)
 	 */
 	wait?: boolean;
 

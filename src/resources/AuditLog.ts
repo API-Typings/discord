@@ -3,7 +3,8 @@ import type { PartialIntegration, PartialRole, Snowflake, User, Webhook } from '
 import { ChannelType, Overwrite } from './Channel';
 
 /**
- * Whenever an admin action is performed on the API, an entry is added to the respective guild's audit log.
+ * Whenever an admin action is performed on the API, an entry is added to the respective guild's
+ * audit log.
  *
  * @source {@link https://discord.com/developers/docs/resources/audit-log#audit-log-object-audit-log-structure|Audit Log}
  */
@@ -194,7 +195,8 @@ export interface AuditLogEntryInfo {
 
 /**
  * @info
- * If `new_value` is not present in the change object, while `old_value` is, that means the property that was changed has been reset, or set to `null`.
+ * If `new_value` is not present in the change object, while `old_value` is, that means the
+ * property that was changed has been reset, or set to `null`.
  *
  * @source {@link https://discord.com/developers/docs/resources/audit-log#audit-log-change-object-audit-log-change-structure|Audit Log}
  */

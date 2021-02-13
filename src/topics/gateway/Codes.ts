@@ -3,7 +3,8 @@
 // ANCHOR Close Codes
 
 /**
- * Your connection to the gateway may sometimes close. When it does, you will receive a close code that tells you what happened.
+ * Your connection to the gateway may sometimes close. When it does, you will receive a close code
+ * that tells you what happened.
  *
  * @source {@link https://discord.com/developers/docs/topics/opcodes-and-status-codes#gateway-gateway-close-event-codes|Opcodes and Status Codes}
  */
@@ -544,7 +545,8 @@ export enum JSONErrorCode {
 	MaximumMessageAgeReached,
 
 	/**
-	 * Invalid form body (returned for both `application/json` and `multipart/form-data` bodies), or invalid `Content-Type` provided
+	 * Invalid form body (returned for both `application/json` and `multipart/form-data` bodies),
+	 * or invalid `Content-Type` provided
 	 */
 	InvalidFormBody,
 
