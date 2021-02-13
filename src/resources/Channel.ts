@@ -1144,26 +1144,114 @@ export interface GetChannelMessages {
 	limit?: number;
 }
 
+// SECTION Create Message
+
+// ANCHOR JSON
+
 /**
  * Post a message to a guild text or DM channel.
  *
+ * @remarks
+ * You may create a message as a reply to another message. To do so, include a [`message_reference`][1] with a `message_id`.
+ * The `channel_id` and `guild_id` in the `message_reference` are optional, but will be validated if provided.
+ *
+ * @limitations
+ * - When operating on a guild channel, the current user must have the `SEND_MESSAGES` permission
+ * - When sending a message with `tts` (text-to-speech) set to `true`, the current user must have the `SEND_TTS_MESSAGES` permission
+ * - When creating a message as a reply to another message, the current user must have the `READ_MESSAGE_HISTORY` permission
+ * - The referenced message must exist and cannot be a system message
+ * - The maximum request size when sending a message is **8MB**
+ * - For the embed object, you can set every field except `type` (it will be `rich` regardless of if you
+ *   try to set it), `provider`, `video`, and any `height`, `width`, or `proxy_url` values for images
+ * - **Files can only be uploaded when using the `multipart/form-data` content type**
+ *
  * @endpoint [POST] `/channels/{channel.id}/messages`
  *
- * @returns A [message][1] object.
- * @fires A [Message Create][2] Gateway event.
+ * @returns A [message][2] object.
+ * @fires A [Message Create][3] Gateway event.
  *
  * [POST]: https://discord.com/developers/docs/resources/channel#create-message
- * [1]: https://discord.com/developers/docs/resources/channel#message-object
- * [2]: https://discord.com/developers/docs/topics/gateway#message-create
+ * [1]: https://discord.com/developers/docs/resources/channel#message-object-message-reference-structure
+ * [2]: https://discord.com/developers/docs/resources/channel#message-object
+ * [3]: https://discord.com/developers/docs/topics/gateway#message-create
  */
-export interface CreateMessage {
+export interface CreateMessageJSON {
 	/**
 	 * The message contents (up to 2000 characters)
 	 */
 	content?: string;
 
 	/**
-	 * A nonce that can be used for optimistic message sending (up to 25 characters)
+	 * A nonce that can be used for optimistic message sending
+	 */
+	nonce?: number | string;
+
+	/**
+	 * True if this is a TTS message
+	 */
+	tts?: boolean;
+
+	/**
+	 * Embedded rich content
+	 */
+	embed?: Embed;
+
+	/**
+	 * Allowed mentions for a message
+	 */
+	allowed_mentions?: AllowedMentions;
+
+	/**
+	 * Include to make your message a reply
+	 */
+	message_reference?: MessageReference;
+}
+
+// ANCHOR Form-Data
+
+/**
+ * Post a message to a guild text or DM channel.
+ *
+ * @remarks
+ * - Some fields can be provided as `form-data` fields, but **if you supply a `payload_json`, all fields except for `file` fields will be ignored**.
+ * - You may create a message as a reply to another message. To do so, include a [`message_reference`][1] with a `message_id`.
+ *   The `channel_id` and `guild_id` in the `message_reference` are optional, but will be validated if provided.
+ *
+ * @info
+ * Note that when sending `multipart/form-data`, you must provide a value for at **least one of** `content`, `embed`
+ * or `file`. For a `file` attachment, the `Content-Disposition` subpart header MUST contain a `filename` parameter.
+ *
+ * @warning
+ * This endpoint supports **all** the same fields as its `application/json` counterpart, however they must be set in `payload_json` rather than provided as form fields.
+ *
+ * @limitations
+ * - When operating on a guild channel, the current user must have the `SEND_MESSAGES` permission
+ * - When sending a message with `tts` (text-to-speech) set to `true`, the current user must have the `SEND_TTS_MESSAGES` permission
+ * - When creating a message as a reply to another message, the current user must have the `READ_MESSAGE_HISTORY` permission
+ * - The referenced message must exist and cannot be a system message
+ * - The maximum request size when sending a message is **8MB**
+ * - For the embed object, you can set every field except `type` (it will be `rich` regardless of if you
+ *   try to set it), `provider`, `video`, and any `height`, `width`, or `proxy_url` values for images
+ * - **Files can only be uploaded when using the `multipart/form-data` content type**
+ *
+ * @endpoint [POST] `/channels/{channel.id}/messages`
+ *
+ * @returns A [message][2] object.
+ * @fires A [Message Create][3] Gateway event.
+ *
+ * [POST]: https://discord.com/developers/docs/resources/channel#create-message
+ * [1]: https://discord.com/developers/docs/resources/channel#message-object-message-reference-structure
+ * [2]: https://discord.com/developers/docs/resources/channel#message-object
+ * [3]: https://discord.com/developers/docs/topics/gateway#message-create
+ */
+export interface CreateMessageFormData {
+	/**
+	 * The message contents (up to 2000 characters)
+	 */
+	content?: string;
+
+	/**
+	 * A nonce that can be used for optimistic message sending
 	 */
 	nonce?: number | string;
 
@@ -1178,25 +1266,12 @@ export interface CreateMessage {
 	file?: unknown;
 
 	/**
-	 * Embedded rich content
-	 */
-	embed?: Embed;
-
-	/**
 	 * JSON encoded body of any additional request fields
 	 */
 	payload_json?: string;
-
-	/**
-	 * Allowed mentions for a message
-	 */
-	allowed_mentions?: AllowedMentions;
-
-	/**
-	 * Include to make your message a reply
-	 */
-	message_reference?: MessageReference;
 }
+
+// !SECTION
 
 /**
  * Get a list of users that reacted with this emoji.
