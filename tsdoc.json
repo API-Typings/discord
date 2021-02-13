@@ -1,0 +1,57 @@
+{
+	"$schema": "https://developer.microsoft.com/json-schemas/tsdoc/v0/tsdoc.schema.json",
+	"tagDefinitions": [
+		{
+			"tagName": "@source",
+			"syntaxKind": "block"
+		},
+		{
+			"tagName": "@info",
+			"syntaxKind": "block"
+		},
+		{
+			"tagName": "@warning",
+			"syntaxKind": "block"
+		},
+		{
+			"tagName": "@channel",
+			"syntaxKind": "block"
+		},
+		{
+			"tagName": "@action",
+			"syntaxKind": "block"
+		},
+		{
+			"tagName": "@endpoint",
+			"syntaxKind": "block"
+		},
+		{
+			"tagName": "@limitations",
+			"syntaxKind": "block"
+		},
+		{
+			"tagName": "@permission",
+			"syntaxKind": "block"
+		},
+		{
+			"tagName": "@scope",
+			"syntaxKind": "block"
+		},
+		{
+			"tagName": "@format",
+			"syntaxKind": "block"
+		},
+		{
+			"tagName": "@sender",
+			"syntaxKind": "block"
+		},
+		{
+			"tagName": "@default",
+			"syntaxKind": "block"
+		},
+		{
+			"tagName": "@fires",
+			"syntaxKind": "block"
+		}
+	]
+}
