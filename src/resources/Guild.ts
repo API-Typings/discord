@@ -1,8 +1,8 @@
+import type { Nullable } from '@api-typings/core';
 import type {
 	Activity,
 	Channel,
 	Emoji,
-	Nullable,
 	Overwrite,
 	PartialChannel,
 	PresenceUpdate,

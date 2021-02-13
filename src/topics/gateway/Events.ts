@@ -1,3 +1,4 @@
+import type { Nullable } from '@api-typings/core';
 import type {
 	Activity,
 	ApplicationCommand,
@@ -11,7 +12,6 @@ import type {
 	Integration,
 	Interaction,
 	Message,
-	Nullable,
 	PartialEmoji,
 	PartialUser,
 	Role,

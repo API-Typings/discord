@@ -1,4 +1,5 @@
-import type { GuildMember, Nullable, Snowflake } from '../';
+import type { Nullable } from '@api-typings/core';
+import type { GuildMember, Snowflake } from '../';
 
 /**
  * Represents a user's voice connection status.

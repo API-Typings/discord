@@ -1,9 +1,9 @@
+import type { Nullable } from '@api-typings/core';
 import type {
 	AllowedMentions,
 	Channel,
 	Embed,
 	Guild,
-	Nullable,
 	Snowflake,
 	User
 } from '../';

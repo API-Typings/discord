@@ -1,4 +1,5 @@
-import type { Event, GatewayOPCode, Nullable } from '../../';
+import type { Nullable } from '@api-typings/core';
+import type { Event, GatewayOPCode } from '../../';
 
 export * from './Activity';
 export * from './Codes';

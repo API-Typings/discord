@@ -1,4 +1,5 @@
-import type { GuildMember, Nullable, PartialEmoji, Snowflake, User } from '../';
+import type { Nullable } from '@api-typings/core';
+import type { GuildMember, PartialEmoji, Snowflake, User } from '../';
 
 // SECTION Channel Types
 

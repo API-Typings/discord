@@ -25,5 +25,3 @@ export enum BaseURL {
  * @source {@link https://discord.com/developers/docs/reference#snowflakes Reference}
  */
 export type Snowflake = `${bigint}`;
-
-export type Nullable<T> = T | null;

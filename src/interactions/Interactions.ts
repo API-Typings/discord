@@ -1,11 +1,5 @@
-import type {
-	AllowedMentions,
-	Embed,
-	GuildMember,
-	Nullable,
-	Snowflake,
-	User
-} from '../';
+import type { Nullable } from '@api-typings/core';
+import type { AllowedMentions, Embed, GuildMember, Snowflake, User } from '../';
 
 // SECTION Application Command
 

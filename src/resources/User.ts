@@ -1,4 +1,5 @@
-import type { Nullable, PartialIntegration, Snowflake } from '../';
+import type { Nullable } from '@api-typings/core';
+import type { PartialIntegration, Snowflake } from '../';
 
 // ANCHOR Partial User
 

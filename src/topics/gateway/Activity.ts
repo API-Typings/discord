@@ -1,4 +1,5 @@
-import type { Nullable, Snowflake, StatusType } from '../../';
+import type { Nullable } from '@api-typings/core';
+import type { Snowflake, StatusType } from '../../';
 
 // ANCHOR Client Status
 

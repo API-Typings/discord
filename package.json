@@ -17,6 +17,7 @@
 	"author": "Bread <developernamedbread@gmail.com>",
 	"license": "MIT",
 	"devDependencies": {
+		"@api-typings/core": "^1.0.1",
 		"eslint": "^7.13.0",
 		"prettier": "^2.1.2",
 		"typescript": "^4.0.5"
