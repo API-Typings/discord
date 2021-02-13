@@ -1,4 +1,4 @@
-import type { Nullable, Snowflake } from '..';
+import type { Nullable, Snowflake } from '../';
 
 /**
  * Used to represent a guild's Discovery settings.

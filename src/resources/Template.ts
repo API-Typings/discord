@@ -1,4 +1,4 @@
-import type { Nullable, PartialGuild, Snowflake, User } from '..';
+import type { Nullable, PartialGuild, Snowflake, User } from '../';
 
 /**
  * Represents a code that when used, creates a guild based on a snapshot of an existing one.

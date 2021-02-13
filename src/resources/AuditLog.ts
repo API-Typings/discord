@@ -1,4 +1,11 @@
-import type { Nullable, Snowflake, Webhook, User, PartialIntegration, PartialRole } from '..';
+import type {
+	Nullable,
+	PartialIntegration,
+	PartialRole,
+	Snowflake,
+	User,
+	Webhook
+} from '../';
 
 /**
  * Whenever an admin action is performed on the API, an entry is added to the respective guild's audit log.

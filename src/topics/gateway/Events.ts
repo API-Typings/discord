@@ -20,7 +20,7 @@ import type {
 	UnavailableGuild,
 	User,
 	VoiceState
-} from '../..';
+} from '../../';
 
 // ANCHOR Event Payload
 

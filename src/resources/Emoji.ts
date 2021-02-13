@@ -1,4 +1,4 @@
-import type { Nullable, Snowflake, User } from '..';
+import type { Nullable, Snowflake, User } from '../';
 
 // ANCHOR Partial Emoji
 

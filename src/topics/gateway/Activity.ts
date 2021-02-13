@@ -1,4 +1,4 @@
-import type { Nullable, Snowflake, StatusType } from '../..';
+import type { Nullable, Snowflake, StatusType } from '../../';
 
 // ANCHOR Client Status
 

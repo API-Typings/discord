@@ -1,4 +1,4 @@
-import type { Nullable, Snowflake, PartialIntegration } from '..';
+import type { Nullable, PartialIntegration, Snowflake } from '../';
 
 // ANCHOR Partial User
 

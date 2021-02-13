@@ -1,4 +1,4 @@
-import type { PartialChannel, PartialGuild, PartialUser, User } from '.';
+import type { PartialChannel, PartialGuild, PartialUser, User } from './';
 
 // ANCHOR Partial Invite
 

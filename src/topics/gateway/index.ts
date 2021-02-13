@@ -1,9 +1,9 @@
+import type { Event, GatewayOPCode, Nullable } from '../../';
+
 export * from './Activity';
 export * from './Codes';
 export * from './Commands';
 export * from './Events';
-
-import type { Event, Nullable, GatewayOPCode } from '../..';
 
 // ANCHOR Gateway Payload
 

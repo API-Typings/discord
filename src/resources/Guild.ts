@@ -12,7 +12,7 @@ import type {
 	User,
 	VoiceRegion,
 	VoiceState
-} from '..';
+} from '../';
 
 // ANCHOR Partial Guild
 

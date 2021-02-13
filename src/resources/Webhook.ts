@@ -1,4 +1,12 @@
-import type { AllowedMentions, Embed, Nullable, Snowflake, User, Channel, Guild } from '..';
+import type {
+	AllowedMentions,
+	Channel,
+	Embed,
+	Guild,
+	Nullable,
+	Snowflake,
+	User
+} from '../';
 
 /**
  * Represents a low-effort way to post messages to channels. They do not require a bot user or authentication to use.

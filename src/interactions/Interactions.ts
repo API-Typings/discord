@@ -1,4 +1,11 @@
-import type { AllowedMentions, Embed, GuildMember, Nullable, Snowflake, User } from '..';
+import type {
+	AllowedMentions,
+	Embed,
+	GuildMember,
+	Nullable,
+	Snowflake,
+	User
+} from '../';
 
 // SECTION Application Command
 

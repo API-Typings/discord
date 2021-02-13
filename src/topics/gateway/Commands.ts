@@ -1,4 +1,4 @@
-import type { Nullable, Snowflake, Activity, GatewayOPCode, GatewayPayload } from '../..';
+import type { Activity, GatewayOPCode, GatewayPayload, Nullable, Snowflake } from '../../';
 
 // ANCHOR Command Payload
 
