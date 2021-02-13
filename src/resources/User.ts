@@ -1,4 +1,4 @@
-import type { Nullable } from '@api-typings/core';
+import type { Nullable, RangeOf } from '@api-typings/core';
 import type { PartialIntegration, Snowflake } from '../';
 
 // ANCHOR Partial User
@@ -261,7 +261,7 @@ export interface GetCurrentUserGuilds {
 	 *
 	 * @default 100
 	 */
-	limit?: number;
+	limit?: RangeOf<1, 100>;
 }
 
 /**

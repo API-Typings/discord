@@ -1,4 +1,4 @@
-import type { Nullable } from '@api-typings/core';
+import type { Nullable, RangeOf } from '@api-typings/core';
 import type {
 	Activity,
 	Channel,
@@ -1258,7 +1258,7 @@ export interface ListGuildMembers {
 	 *
 	 * @default 1
 	 */
-	limit?: number;
+	limit?: RangeOf<1, 1000>;
 
 	/**
 	 * The highest user ID in the previous page
@@ -1286,7 +1286,7 @@ export interface SearchGuildMembers {
 	 *
 	 * @default 1
 	 */
-	limit?: number;
+	limit?: RangeOf<1, 1000>;
 }
 
 /**
@@ -1431,7 +1431,7 @@ export interface CreateGuildBan {
 	/**
 	 * Number of days to delete messages for (0-7)
 	 */
-	delete_messages_days?: number;
+	delete_messages_days?: RangeOf<0, 7>;
 
 	/**
 	 * Reason for the ban
@@ -1570,7 +1570,7 @@ export interface GetGuildPruneCount {
 	 *
 	 * @default 7
 	 */
-	days?: number;
+	days?: RangeOf<1, 30>;
 
 	/**
 	 * Role(s) to include
@@ -1598,13 +1598,17 @@ export interface GetGuildPruneCount {
 export interface BeginGuildPrune {
 	/**
 	 * Number of days to prune (1-30)
+	 *
+	 * @default 7
 	 */
-	days: number;
+	days?: RangeOf<1, 30>;
 
 	/**
 	 * Whether 'pruned' is returned, discouraged for large guilds
+	 *
+	 * @default true
 	 */
-	compute_prune_count: boolean;
+	compute_prune_count?: boolean;
 
 	/**
 	 * Role(s) to include

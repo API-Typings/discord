@@ -1,4 +1,4 @@
-import type { Nullable } from '@api-typings/core';
+import type { Nullable, RangeOf } from '@api-typings/core';
 import type { PartialIntegration, PartialRole, Snowflake, User, Webhook } from '../';
 
 /**
@@ -301,9 +301,11 @@ export interface GetGuildAuditLog {
 	before?: Snowflake;
 
 	/**
-	 * How many entries are returned (default 50, minimum 1, maximum 100)
+	 * How many entries are returned
+	 *
+	 * @default 50
 	 */
-	limit?: number;
+	limit?: RangeOf<1, 100>;
 }
 
 // !SECTION

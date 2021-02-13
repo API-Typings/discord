@@ -1,4 +1,4 @@
-import type { Nullable } from '@api-typings/core';
+import type { Nullable, RangeOf } from '@api-typings/core';
 import type { Activity, GatewayOPCode, GatewayPayload, Snowflake } from '../../';
 
 // ANCHOR Command Payload
@@ -77,12 +77,12 @@ export interface Identify extends CommandPayload<GatewayOPCode.Identify> {
 		 *
 		 * @default 50
 		 */
-		large_threshold?: number;
+		large_threshold?: RangeOf<50, 250>;
 
 		/**
 		 * Used for {@link https://discord.com/developers/docs/topics/gateway#sharding Guild Sharding}
 		 */
-		shard?: [number, number];
+		shard?: [shard_id: number, num_shards: number];
 
 		/**
 		 * Presence structure for initial presence information

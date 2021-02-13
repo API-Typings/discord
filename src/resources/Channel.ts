@@ -1,4 +1,4 @@
-import type { Nullable } from '@api-typings/core';
+import type { Nullable, RangeOf } from '@api-typings/core';
 import type { GuildMember, PartialEmoji, Snowflake, User } from '../';
 
 // SECTION Channel Types
@@ -1141,8 +1141,10 @@ export interface GetChannelMessages {
 
 	/**
 	 * Max number of messages to return (1-100)
+	 *
+	 * @default 50
 	 */
-	limit?: number;
+	limit?: RangeOf<1, 100>;
 }
 
 // SECTION Create Message
@@ -1299,7 +1301,7 @@ export interface GetReactions {
 	 *
 	 * @default 25
 	 */
-	limit?: number;
+	limit?: RangeOf<1, 100>;
 }
 
 /**
