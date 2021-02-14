@@ -46,12 +46,12 @@
 			"syntaxKind": "block"
 		},
 		{
-			"tagName": "@default",
+			"tagName": "@fires",
 			"syntaxKind": "block"
 		},
 		{
-			"tagName": "@fires",
-			"syntaxKind": "block"
+			"tagName": "@whitelist",
+			"syntaxKind": "modifier"
 		}
 	]
 }

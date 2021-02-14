@@ -513,7 +513,7 @@ export interface MessageReference {
 	 * When sending, whether to error if the referenced message doesn't exist instead of sending as
 	 * a normal (non-reply) message
 	 *
-	 * @default true
+	 * @defaultValue true
 	 */
 	fail_if_not_exists?: boolean;
 }
@@ -1165,7 +1165,7 @@ export interface GetChannelMessages {
 	/**
 	 * Max number of messages to return (1-100)
 	 *
-	 * @default 50
+	 * @defaultValue 50
 	 */
 	limit?: RangeOf<1, 100>;
 }
@@ -1334,7 +1334,7 @@ export interface GetReactions {
 	/**
 	 * Max number of users to return (1-100)
 	 *
-	 * @default 25
+	 * @defaultValue 25
 	 */
 	limit?: RangeOf<1, 100>;
 }
@@ -1460,21 +1460,21 @@ export interface CreateChannelInvite {
 	/**
 	 * Duration of invite in seconds before expiry, or 0 for never. Between 0 and 604800 (7 days)
 	 *
-	 * @default 86400 (24 hours)
+	 * @defaultValue 86400 (24 hours)
 	 */
 	max_age?: number;
 
 	/**
 	 * Max number of uses or 0 for unlimited. Between 0 and 100
 	 *
-	 * @default 0
+	 * @defaultValue 0
 	 */
 	max_uses?: number;
 
 	/**
 	 * Whether this invite only grants temporary membership
 	 *
-	 * @default false
+	 * @defaultValue false
 	 */
 	temporary?: boolean;
 
@@ -1482,7 +1482,7 @@ export interface CreateChannelInvite {
 	 * If true, don't try to reuse a similar invite (useful for creating many unique one time use
 	 * invites)
 	 *
-	 * @default false
+	 * @defaultValue false
 	 */
 	unique?: boolean;
 

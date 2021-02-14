@@ -69,7 +69,7 @@ export interface Identify extends GatewayCommandPayload<GatewayOPCode.Identify> 
 		/**
 		 * Whether this connection supports compression of packets
 		 *
-		 * @default false
+		 * @defaultValue false
 		 */
 		compress?: boolean;
 
@@ -77,7 +77,7 @@ export interface Identify extends GatewayCommandPayload<GatewayOPCode.Identify> 
 		 * Value between 50 and 250, total number of members where the gateway will stop sending
 		 * offline members in the guild member list
 		 *
-		 * @default 50
+		 * @defaultValue 50
 		 */
 		large_threshold?: RangeOf<50, 250>;
 

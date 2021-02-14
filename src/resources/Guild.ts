@@ -1051,7 +1051,7 @@ export interface GetGuild {
 	/**
 	 * When `true`, will return approximate member and presence counts for the guild
 	 *
-	 * @default false
+	 * @defaultValue false
 	 */
 	with_counts?: boolean;
 }
@@ -1281,14 +1281,14 @@ export interface ListGuildMembers {
 	/**
 	 * Max number of members to return (1-1000)
 	 *
-	 * @default 1
+	 * @defaultValue 1
 	 */
 	limit?: RangeOf<1, 1000>;
 
 	/**
 	 * The highest user ID in the previous page
 	 *
-	 * @default 0
+	 * @defaultValue 0
 	 */
 	after?: Snowflake;
 }
@@ -1310,7 +1310,7 @@ export interface SearchGuildMembers {
 	/**
 	 * Max numbers of members to return (1-1000)
 	 *
-	 * @default 1
+	 * @defaultValue 1
 	 */
 	limit?: RangeOf<1, 1000>;
 }
@@ -1488,35 +1488,35 @@ export interface CreateGuildRole {
 	/**
 	 * Name of the role
 	 *
-	 * @default 'new role'
+	 * @defaultValue 'new role'
 	 */
 	name?: string;
 
 	/**
 	 * Bitwise value of the enabled/disabled permissions
 	 *
-	 * @default `@everyone` permissions in guild
+	 * @defaultValue `@everyone` permissions in guild
 	 */
 	permissions?: string;
 
 	/**
 	 * RGB color value
 	 *
-	 * @default 0
+	 * @defaultValue 0
 	 */
 	color?: number;
 
 	/**
 	 * Whether the role should be displayed separately in the sidebar
 	 *
-	 * @default false
+	 * @defaultValue false
 	 */
 	hoist?: boolean;
 
 	/**
 	 * Whether the role should be mentionable
 	 *
-	 * @default false
+	 * @defaultValue false
 	 */
 	mentionable?: boolean;
 }
@@ -1605,7 +1605,7 @@ export interface GetGuildPruneCount {
 	/**
 	 * Number of days to count prune for (1-30)
 	 *
-	 * @default 7
+	 * @defaultValue 7
 	 */
 	days?: RangeOf<1, 30>;
 
@@ -1639,14 +1639,14 @@ export interface BeginGuildPrune {
 	/**
 	 * Number of days to prune (1-30)
 	 *
-	 * @default 7
+	 * @defaultValue 7
 	 */
 	days?: RangeOf<1, 30>;
 
 	/**
 	 * Whether 'pruned' is returned, discouraged for large guilds
 	 *
-	 * @default true
+	 * @defaultValue true
 	 */
 	compute_prune_count?: boolean;
 
@@ -1723,7 +1723,7 @@ export interface GetWidgetImage {
 	/**
 	 * Style of the widget image returned
 	 *
-	 * @default `shield`
+	 * @defaultValue `shield`
 	 */
 	style?: WidgetStyle;
 }
