@@ -1,8 +1,7 @@
 import type { Nullable } from '@api-typings/core';
-import type { Event, GatewayOPCode } from '../../';
+import type { GatewayEvent, GatewayOPCode } from '../../';
 
 export * from './Activity';
-export * from './Codes';
 export * from './Commands';
 export * from './Events';
 
@@ -36,7 +35,7 @@ export interface GatewayPayload {
 	 * @remarks
 	 * `s` and `t` are `null` when `op` is not `0` (Gateway Dispatch Opcode)
 	 */
-	t: Nullable<Event>;
+	t: Nullable<GatewayEvent>;
 }
 
 /**

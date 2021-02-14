@@ -24,7 +24,7 @@ import type {
 
 // ANCHOR Event Payload
 
-interface EventPayload<E extends Event> extends GatewayPayload {
+interface GatewayEventPayload<E extends GatewayEvent> extends GatewayPayload {
 	op: GatewayOPCode.Dispatch;
 	t: E;
 }
@@ -47,7 +47,7 @@ export interface HeartbeatAck {
  *
  * @source {@link https://discord.com/developers/docs/topics/gateway#commands-and-events-gateway-events|Gateway}
  */
-export enum Event {
+export enum GatewayEvent {
 	/**
 	 * Contains the initial state information
 	 */
@@ -301,7 +301,7 @@ export interface Hello {
  * [1]: https://discord.com/developers/docs/topics/gateway#guild-create
  * [2]: https://discord.com/developers/docs/topics/gateway#channel-create
  */
-export interface Ready extends EventPayload<Event.Ready> {
+export interface Ready extends GatewayEventPayload<GatewayEvent.Ready> {
 	d: {
 		/**
 		 * {@link https://discord.com/developers/docs/topics/gateway#gateways-gateway-versions|Gateway version}
@@ -388,7 +388,7 @@ export interface InvalidSession {
  *
  * [1]: https://discord.com/developers/docs/resources/channel#channel-object
  */
-export interface ChannelCreate extends EventPayload<Event.ChannelCreate> {
+export interface ChannelCreate extends GatewayEventPayload<GatewayEvent.ChannelCreate> {
 	d: Channel;
 }
 
@@ -404,7 +404,7 @@ export interface ChannelCreate extends EventPayload<Event.ChannelCreate> {
  *
  * @source {@link https://discord.com/developers/docs/topics/gateway#channel-update|Gateway}
  */
-export interface ChannelUpdate extends EventPayload<Event.ChannelUpdate> {
+export interface ChannelUpdate extends GatewayEventPayload<GatewayEvent.ChannelUpdate> {
 	d: Channel;
 }
 
@@ -416,7 +416,7 @@ export interface ChannelUpdate extends EventPayload<Event.ChannelUpdate> {
  *
  * @source {@link https://discord.com/developers/docs/topics/gateway#channel-delete|Gateway}
  */
-export interface ChannelDelete extends EventPayload<Event.ChannelDelete> {
+export interface ChannelDelete extends GatewayEventPayload<GatewayEvent.ChannelDelete> {
 	d: Channel;
 }
 
@@ -426,7 +426,7 @@ export interface ChannelDelete extends EventPayload<Event.ChannelDelete> {
  *
  * @source {@link https://discord.com/developers/docs/topics/gateway#channel-pins-update|Gateway}
  */
-export interface ChannelPinsUpdate extends EventPayload<Event.ChannelPinsUpdate> {
+export interface ChannelPinsUpdate extends GatewayEventPayload<GatewayEvent.ChannelPinsUpdate> {
 	d: {
 		/**
 		 * The ID of the guild
@@ -470,7 +470,7 @@ export interface ChannelPinsUpdate extends EventPayload<Event.ChannelPinsUpdate>
  * [2]: https://discord.com/developers/docs/topics/gateway#guild-delete
  * [3]: https://discord.com/developers/docs/resources/guild#guild-object
  */
-export interface GuildCreate extends EventPayload<Event.GuildCreate> {
+export interface GuildCreate extends GatewayEventPayload<GatewayEvent.GuildCreate> {
 	d: Guild;
 }
 
@@ -481,7 +481,7 @@ export interface GuildCreate extends EventPayload<Event.GuildCreate> {
  *
  * [1]: https://discord.com/developers/docs/resources/guild#guild-object
  */
-export interface GuildUpdate extends EventPayload<Event.GuildUpdate> {
+export interface GuildUpdate extends GatewayEventPayload<GatewayEvent.GuildUpdate> {
 	d: Guild;
 }
 
@@ -496,7 +496,7 @@ export interface GuildUpdate extends EventPayload<Event.GuildUpdate> {
  *
  * [1]: https://discord.com/developers/docs/resources/guild#unavailable-guild-object
  */
-export interface GuildDelete extends EventPayload<Event.GuildDelete> {
+export interface GuildDelete extends GatewayEventPayload<GatewayEvent.GuildDelete> {
 	d: UnavailableGuild;
 }
 
@@ -505,7 +505,7 @@ export interface GuildDelete extends EventPayload<Event.GuildDelete> {
  *
  * @source {@link https://discord.com/developers/docs/topics/gateway#guild-ban-add|Gateway}
  */
-export interface GuildBanAdd extends EventPayload<Event.GuildBanAdd> {
+export interface GuildBanAdd extends GatewayEventPayload<GatewayEvent.GuildBanAdd> {
 	d: {
 		/**
 		 * ID of the guild
@@ -524,7 +524,7 @@ export interface GuildBanAdd extends EventPayload<Event.GuildBanAdd> {
  *
  * @source {@link https://discord.com/developers/docs/topics/gateway#guild-ban-remove|Gateway}
  */
-export interface GuildBanRemove extends EventPayload<Event.GuildBanRemove> {
+export interface GuildBanRemove extends GatewayEventPayload<GatewayEvent.GuildBanRemove> {
 	d: {
 		/**
 		 * ID of the guild
@@ -543,7 +543,7 @@ export interface GuildBanRemove extends EventPayload<Event.GuildBanRemove> {
  *
  * @source {@link https://discord.com/developers/docs/topics/gateway#guild-emojis-update|Gateway}
  */
-export interface GuildEmojisUpdate extends EventPayload<Event.GuildEmojisUpdate> {
+export interface GuildEmojisUpdate extends GatewayEventPayload<GatewayEvent.GuildEmojisUpdate> {
 	d: {
 		/**
 		 * ID of the guild
@@ -562,7 +562,7 @@ export interface GuildEmojisUpdate extends EventPayload<Event.GuildEmojisUpdate>
  *
  * @source {@link https://discord.com/developers/docs/topics/gateway#guild-integrations-update|Gateway}
  */
-export interface GuildIntegrationsUpdate extends EventPayload<Event.GuildIntegrationsUpdate> {
+export interface GuildIntegrationsUpdate extends GatewayEventPayload<GatewayEvent.GuildIntegrationsUpdate> {
 	d: {
 		/**
 		 * ID of the guild whose integrations were updated
@@ -584,7 +584,7 @@ export interface GuildIntegrationsUpdate extends EventPayload<Event.GuildIntegra
  *
  * [1]: https://discord.com/developers/docs/resources/guild#guild-member-object
  */
-export interface GuildMemberAdd extends EventPayload<Event.GuildMemberAdd> {
+export interface GuildMemberAdd extends GatewayEventPayload<GatewayEvent.GuildMemberAdd> {
 	d: GuildMember & {
 		/**
 		 * ID of the guild
@@ -601,7 +601,7 @@ export interface GuildMemberAdd extends EventPayload<Event.GuildMemberAdd> {
  *
  * @source {@link https://discord.com/developers/docs/topics/gateway#guild-member-remove|Gateway}
  */
-export interface GuildMemberRemove extends EventPayload<Event.GuildMemberRemove> {
+export interface GuildMemberRemove extends GatewayEventPayload<GatewayEvent.GuildMemberRemove> {
 	d: {
 		/**
 		 * The ID of the guild
@@ -624,7 +624,7 @@ export interface GuildMemberRemove extends EventPayload<Event.GuildMemberRemove>
  *
  * @source {@link https://discord.com/developers/docs/topics/gateway#guild-member-update|Gateway}
  */
-export interface GuildMemberUpdate extends EventPayload<Event.GuildMemberUpdate> {
+export interface GuildMemberUpdate extends GatewayEventPayload<GatewayEvent.GuildMemberUpdate> {
 	d: {
 		/**
 		 * The ID of the guild
@@ -674,7 +674,7 @@ export interface GuildMemberUpdate extends EventPayload<Event.GuildMemberUpdate>
  *
  * [1]: https://discord.com/developers/docs/topics/gateway#request-guild-members
  */
-export interface GuildMemberChunk extends EventPayload<Event.GuildMemberChunk> {
+export interface GuildMemberChunk extends GatewayEventPayload<GatewayEvent.GuildMemberChunk> {
 	d: {
 		/**
 		 * The ID of the guild
@@ -724,7 +724,7 @@ export interface GuildMemberChunk extends EventPayload<Event.GuildMemberChunk> {
  *
  * @source {@link https://discord.com/developers/docs/topics/gateway#guild-role-create|Gateway}
  */
-export interface GuildRoleCreate extends EventPayload<Event.GuildRoleCreate> {
+export interface GuildRoleCreate extends GatewayEventPayload<GatewayEvent.GuildRoleCreate> {
 	d: {
 		/**
 		 * The ID of the guild
@@ -743,7 +743,7 @@ export interface GuildRoleCreate extends EventPayload<Event.GuildRoleCreate> {
  *
  * @source {@link https://discord.com/developers/docs/topics/gateway#guild-role-update|Gateway}
  */
-export interface GuildRoleUpdate extends EventPayload<Event.GuildRoleUpdate> {
+export interface GuildRoleUpdate extends GatewayEventPayload<GatewayEvent.GuildRoleUpdate> {
 	d: {
 		/**
 		 * The ID of the guild
@@ -762,7 +762,7 @@ export interface GuildRoleUpdate extends EventPayload<Event.GuildRoleUpdate> {
  *
  * @source {@link https://discord.com/developers/docs/topics/gateway#guild-role-delete|Gateway}
  */
-export interface GuildRoleDelete extends EventPayload<Event.GuildRoleDelete> {
+export interface GuildRoleDelete extends GatewayEventPayload<GatewayEvent.GuildRoleDelete> {
 	d: {
 		/**
 		 * ID of the guild
@@ -788,7 +788,7 @@ export interface GuildRoleDelete extends EventPayload<Event.GuildRoleDelete> {
  *
  * [1]: https://discord.com/developers/docs/resources/guild#integration-object
  */
-export interface IntegrationCreate extends EventPayload<Event.IntegrationCreate> {
+export interface IntegrationCreate extends GatewayEventPayload<GatewayEvent.IntegrationCreate> {
 	d: Integration & {
 		/**
 		 * ID of the guild
@@ -803,7 +803,7 @@ export interface IntegrationCreate extends EventPayload<Event.IntegrationCreate>
  *
  * [1]: https://discord.com/developers/docs/resources/guild#integration-object
  */
-export interface IntegrationUpdate extends EventPayload<Event.IntegrationUpdate> {
+export interface IntegrationUpdate extends GatewayEventPayload<GatewayEvent.IntegrationUpdate> {
 	d: Integration & {
 		/**
 		 * ID of the guild
@@ -815,7 +815,7 @@ export interface IntegrationUpdate extends EventPayload<Event.IntegrationUpdate>
 /**
  * Sent when an integration is deleted.
  */
-export interface IntegrationDelete extends EventPayload<Event.IntegrationDelete> {
+export interface IntegrationDelete extends GatewayEventPayload<GatewayEvent.IntegrationDelete> {
 	d: {
 		/**
 		 * ID of the guild
@@ -842,7 +842,7 @@ export interface IntegrationDelete extends EventPayload<Event.IntegrationDelete>
  *
  * @source {@link https://discord.com/developers/docs/topics/gateway#invite-create|Gateway}
  */
-export interface InviteCreate extends EventPayload<Event.InviteCreate> {
+export interface InviteCreate extends GatewayEventPayload<GatewayEvent.InviteCreate> {
 	d: {
 		/**
 		 * The channel the invite is for
@@ -907,7 +907,7 @@ export interface InviteCreate extends EventPayload<Event.InviteCreate> {
  *
  * @source {@link https://discord.com/developers/docs/topics/gateway#invite-delete|Gateway}
  */
-export interface InviteDelete extends EventPayload<Event.InviteDelete> {
+export interface InviteDelete extends GatewayEventPayload<GatewayEvent.InviteDelete> {
 	d: Pick<InviteCreate['d'], 'guild_id' | 'code'> & {
 		/**
 		 * The channel of the invite
@@ -927,7 +927,7 @@ export interface InviteDelete extends EventPayload<Event.InviteDelete> {
  *
  * [1]: https://discord.com/developers/docs/resources/channel#message-object
  */
-export interface MessageCreate extends EventPayload<Event.MessageCreate> {
+export interface MessageCreate extends GatewayEventPayload<GatewayEvent.MessageCreate> {
 	d: Message;
 }
 
@@ -942,7 +942,7 @@ export interface MessageCreate extends EventPayload<Event.MessageCreate> {
  *
  * [1]: https://discord.com/developers/docs/resources/channel#message-object
  */
-export interface MessageUpdate extends EventPayload<Event.MessageUpdate> {
+export interface MessageUpdate extends GatewayEventPayload<GatewayEvent.MessageUpdate> {
 	d: Message;
 }
 
@@ -951,7 +951,7 @@ export interface MessageUpdate extends EventPayload<Event.MessageUpdate> {
  *
  * @source {@link https://discord.com/developers/docs/topics/gateway#message-delete|Gateway}
  */
-export interface MessageDelete extends EventPayload<Event.MessageDelete> {
+export interface MessageDelete extends GatewayEventPayload<GatewayEvent.MessageDelete> {
 	d: {
 		/**
 		 * The ID of the message
@@ -975,7 +975,7 @@ export interface MessageDelete extends EventPayload<Event.MessageDelete> {
  *
  * @source {@link https://discord.com/developers/docs/topics/gateway#message-delete-bulk|Gateway}
  */
-export interface MessageDeleteBulk extends EventPayload<Event.MessageDeleteBulk> {
+export interface MessageDeleteBulk extends GatewayEventPayload<GatewayEvent.MessageDeleteBulk> {
 	d: Pick<MessageDelete['d'], 'channel_id' | 'guild_id'> & {
 		/**
 		 * The IDs of the messages
@@ -989,7 +989,7 @@ export interface MessageDeleteBulk extends EventPayload<Event.MessageDeleteBulk>
  *
  * @source {@link https://discord.com/developers/docs/topics/gateway#message-reaction-add|Gateway}
  */
-export interface MessageReactionAdd extends EventPayload<Event.MessageReactionAdd> {
+export interface MessageReactionAdd extends GatewayEventPayload<GatewayEvent.MessageReactionAdd> {
 	d: {
 		/**
 		 * The ID of the user
@@ -1028,7 +1028,7 @@ export interface MessageReactionAdd extends EventPayload<Event.MessageReactionAd
  *
  * @source {@link https://discord.com/developers/docs/topics/gateway#message-reaction-remove|Gateway}
  */
-export interface MessageReactionRemove extends EventPayload<Event.MessageReactionRemove> {
+export interface MessageReactionRemove extends GatewayEventPayload<GatewayEvent.MessageReactionRemove> {
 	d: Omit<MessageReactionAdd['d'], 'member'>;
 }
 
@@ -1037,7 +1037,7 @@ export interface MessageReactionRemove extends EventPayload<Event.MessageReactio
  *
  * @source {@link https://discord.com/developers/docs/topics/gateway#message-reaction-remove-all|Gateway}
  */
-export interface MessageReactionRemoveAll extends EventPayload<Event.MessageReactionRemoveAll> {
+export interface MessageReactionRemoveAll extends GatewayEventPayload<GatewayEvent.MessageReactionRemoveAll> {
 	d: Omit<MessageReactionRemove, 'user_id' | 'emoji'>;
 }
 
@@ -1046,7 +1046,7 @@ export interface MessageReactionRemoveAll extends EventPayload<Event.MessageReac
  *
  * @source {@link https://discord.com/developers/docs/topics/gateway#message-reaction-remove-emoji|Gateway}
  */
-export interface MessageReactionRemoveEmoji extends EventPayload<Event.MessageReactionRemoveEmoji> {
+export interface MessageReactionRemoveEmoji extends GatewayEventPayload<GatewayEvent.MessageReactionRemoveEmoji> {
 	d: MessageReactionRemoveAll & {
 		/**
 		 * The emoji that was removed
@@ -1072,7 +1072,7 @@ export interface MessageReactionRemoveEmoji extends EventPayload<Event.MessageRe
  *
  * @source {@link https://discord.com/developers/docs/topics/gateway#presence-update|Gateway}
  */
-export interface PresenceUpdate extends EventPayload<Event.PresenceUpdate> {
+export interface PresenceUpdate extends GatewayEventPayload<GatewayEvent.PresenceUpdate> {
 	d: {
 		/**
 		 * The user presence is being updated for
@@ -1108,7 +1108,7 @@ export interface PresenceUpdate extends EventPayload<Event.PresenceUpdate> {
  *
  * @source {@link https://discord.com/developers/docs/topics/gateway#typing-start|Gateway}
  */
-export interface TypingStart extends EventPayload<Event.TypingStart> {
+export interface TypingStart extends GatewayEventPayload<GatewayEvent.TypingStart> {
 	d: {
 		/**
 		 * ID of the channel
@@ -1146,7 +1146,7 @@ export interface TypingStart extends EventPayload<Event.TypingStart> {
  *
  * [1]: https://discord.com/developers/docs/resources/user#user-object
  */
-export interface UserUpdate extends EventPayload<Event.UserUpdate> {
+export interface UserUpdate extends GatewayEventPayload<GatewayEvent.UserUpdate> {
 	d: User;
 }
 
@@ -1159,7 +1159,7 @@ export interface UserUpdate extends EventPayload<Event.UserUpdate> {
  *
  * [1]: https://discord.com/developers/docs/resources/voice#voice-state-object
  */
-export interface VoiceStateUpdate extends EventPayload<Event.VoiceStateUpdate> {
+export interface VoiceStateUpdate extends GatewayEventPayload<GatewayEvent.VoiceStateUpdate> {
 	d: VoiceState;
 }
 
@@ -1167,7 +1167,7 @@ export interface VoiceStateUpdate extends EventPayload<Event.VoiceStateUpdate> {
  * Sent when a guild's voice server is updated. This is sent when initially connecting to voice, and
  * when the current voice instance fails over to a new server.
  */
-export interface VoiceServerUpdate extends EventPayload<Event.VoiceServerUpdate> {
+export interface VoiceServerUpdate extends GatewayEventPayload<GatewayEvent.VoiceServerUpdate> {
 	d: {
 		/**
 		 * Voice connection token
@@ -1195,7 +1195,7 @@ export interface VoiceServerUpdate extends EventPayload<Event.VoiceServerUpdate>
  *
  * @source {@link https://discord.com/developers/docs/topics/gateway#webhooks-update|Gateway}
  */
-export interface WebhooksUpdate extends EventPayload<Event.WebhooksUpdate> {
+export interface WebhooksUpdate extends GatewayEventPayload<GatewayEvent.WebhooksUpdate> {
 	d: {
 		/**
 		 * ID of the guild
@@ -1220,7 +1220,7 @@ export interface WebhooksUpdate extends EventPayload<Event.WebhooksUpdate> {
  * [1]: https://discord.com/developers/docs/interactions/slash-commands
  * [2]: https://discord.com/developers/docs/interactions/slash-commands#applicationcommand
  */
-export interface ApplicationCommandCreate extends EventPayload<Event.ApplicationCommandCreate> {
+export interface ApplicationCommandCreate extends GatewayEventPayload<GatewayEvent.ApplicationCommandCreate> {
 	d: ApplicationCommand & {
 		/**
 		 * ID of the guild the command is in
@@ -1238,7 +1238,7 @@ export interface ApplicationCommandCreate extends EventPayload<Event.Application
  * [1]: https://discord.com/developers/docs/interactions/slash-commands
  * [2]: https://discord.com/developers/docs/interactions/slash-commands#applicationcommand
  */
-export interface ApplicationCommandDelete extends EventPayload<Event.ApplicationCommandDelete> {
+export interface ApplicationCommandDelete extends GatewayEventPayload<GatewayEvent.ApplicationCommandDelete> {
 	d: ApplicationCommand & {
 		/**
 		 * ID of the guild the command is in
@@ -1256,7 +1256,7 @@ export interface ApplicationCommandDelete extends EventPayload<Event.Application
  * [1]: https://discord.com/developers/docs/interactions/slash-commands
  * [2]: https://discord.com/developers/docs/interactions/slash-commands#applicationcommand
  */
-export interface ApplicationCommandUpdate extends EventPayload<Event.ApplicationCommandUpdate> {
+export interface ApplicationCommandUpdate extends GatewayEventPayload<GatewayEvent.ApplicationCommandUpdate> {
 	d: ApplicationCommand & {
 		/**
 		 * ID of the guild the command is in
@@ -1277,7 +1277,7 @@ export interface ApplicationCommandUpdate extends EventPayload<Event.Application
  * [1]: https://discord.com/developers/docs/interactions/slash-commands
  * [2]: https://discord.com/developers/docs/interactions/slash-commands#interaction
  */
-export interface InteractionCreate extends EventPayload<Event.InteractionCreate> {
+export interface InteractionCreate extends GatewayEventPayload<GatewayEvent.InteractionCreate> {
 	d: Interaction;
 }
 

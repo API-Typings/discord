@@ -3,7 +3,7 @@ import type { Activity, GatewayOPCode, GatewayPayload, Snowflake } from '../../'
 
 // ANCHOR Command Payload
 
-interface CommandPayload<O extends GatewayOPCode> extends GatewayPayload {
+interface GatewayCommandPayload<O extends GatewayOPCode> extends GatewayPayload {
 	op: O;
 	t: null;
 	s: null;
@@ -54,7 +54,7 @@ export interface ConnectionProperties {
  * [3]: https://discord.com/developers/docs/topics/gateway#identify
  * [4]: https://discord.com/developers/docs/topics/gateway#invalid-session
  */
-export interface Identify extends CommandPayload<GatewayOPCode.Identify> {
+export interface Identify extends GatewayCommandPayload<GatewayOPCode.Identify> {
 	d: {
 		/**
 		 * Authentication token
@@ -105,7 +105,7 @@ export interface Identify extends CommandPayload<GatewayOPCode.Identify> {
  *
  * @source {@link https://discord.com/developers/docs/topics/gateway#resume|Gateway}
  */
-export interface Resume extends CommandPayload<GatewayOPCode.Resume> {
+export interface Resume extends GatewayCommandPayload<GatewayOPCode.Resume> {
 	d: {
 		/**
 		 * Session token
@@ -137,7 +137,7 @@ export interface Resume extends CommandPayload<GatewayOPCode.Resume> {
  *
  * [1]: https://discord.com/developers/docs/topics/gateway#hello
  */
-export interface Heartbeat extends CommandPayload<GatewayOPCode.Heartbeat> {
+export interface Heartbeat extends GatewayCommandPayload<GatewayOPCode.Heartbeat> {
 	d: Nullable<number>;
 }
 
@@ -167,7 +167,8 @@ export interface Heartbeat extends CommandPayload<GatewayOPCode.Heartbeat> {
  * [1]: https://discord.com/developers/docs/topics/gateway#gateway-intents
  * [2]: https://discord.com/developers/docs/topics/gateway#identify
  */
-export interface RequestGuildMembers extends CommandPayload<GatewayOPCode.RequestGuildMembers> {
+// prettier-ignore
+export interface RequestGuildMembers extends GatewayCommandPayload<GatewayOPCode.RequestGuildMembers> {
 	d: {
 		/**
 		 * ID of the guild to get members for
@@ -238,7 +239,7 @@ export interface UpdateVoiceState {
  *
  * @source {@link https://discord.com/developers/docs/topics/gateway#update-status|Gateway}
  */
-export interface UpdateStatus extends CommandPayload<GatewayOPCode.PresenceUpdate> {
+export interface UpdateStatus extends GatewayCommandPayload<GatewayOPCode.PresenceUpdate> {
 	d: {
 		/**
 		 * Unix time (in milliseconds) of when the client went idle, or null if the client is not
