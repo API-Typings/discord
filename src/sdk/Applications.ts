@@ -2,7 +2,7 @@ import type { Discord } from '../';
 import type { User } from './Users';
 
 /**
- * @source {@link https://discord.com/developers/docs/game-sdk/applications#data-models-oauth2token-struct|Game SDK}
+ * @source {@link https://discord.com/developers/docs/game-sdk/applications#data-models-oauth2token-struct|Applications}
  */
 export interface OAuth2Token {
 	/**
@@ -23,7 +23,7 @@ export interface OAuth2Token {
 }
 
 /**
- * @source {@link https://discord.com/developers/docs/game-sdk/applications#data-models-signedappticket-struct|Game SDK}
+ * @source {@link https://discord.com/developers/docs/game-sdk/applications#data-models-signedappticket-struct|Applications}
  */
 export interface SignedAppTicket {
 	/**
@@ -48,7 +48,7 @@ export interface SignedAppTicket {
 }
 
 /**
- * @source {@link https://discord.com/developers/docs/game-sdk/applications|Game SDK}
+ * @source {@link https://discord.com/developers/docs/game-sdk/applications|Applications}
  */
 export interface ApplicationManager {
 	/**

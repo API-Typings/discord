@@ -2,7 +2,7 @@ import type { RangeOf } from '@api-typings/core';
 import type { Discord } from '../';
 
 /**
- * @source {@link https://discord.com/developers/docs/game-sdk/achievements#data-models-achievement-struct|Game SDK}
+ * @source {@link https://discord.com/developers/docs/game-sdk/achievements#data-models-achievement-struct|Achievements}
  */
 export interface Achievement {
 	/**
@@ -48,7 +48,7 @@ export interface Achievement {
 }
 
 /**
- * @source {@link https://discord.com/developers/docs/game-sdk/achievements#data-models-achievement-locale-object|Game SDK}
+ * @source {@link https://discord.com/developers/docs/game-sdk/achievements#data-models-achievement-locale-object|Achievements}
  */
 export interface AchievementLocale {
 	/**
@@ -65,7 +65,7 @@ export interface AchievementLocale {
 }
 
 /**
- * @source {@link https://discord.com/developers/docs/game-sdk/achievements#data-models-user-achievement-struct|Game SDK}
+ * @source {@link https://discord.com/developers/docs/game-sdk/achievements#data-models-user-achievement-struct|Achievements}
  */
 export interface UserAchievement {
 	/**
@@ -90,7 +90,7 @@ export interface UserAchievement {
 }
 
 /**
- * @source {@link https://discord.com/developers/docs/game-sdk/achievements|Game SDK}
+ * @source {@link https://discord.com/developers/docs/game-sdk/achievements|Achievements}
  */
 export interface AchievementManager extends NodeJS.EventEmitter {
 	/**

@@ -2,7 +2,7 @@ import type { Discord } from '../';
 import type { User } from './Users';
 
 /**
- * @source {@link https://discord.com/developers/docs/game-sdk/activities#data-models-activity-struct|Game SDK}
+ * @source {@link https://discord.com/developers/docs/game-sdk/activities#data-models-activity-struct|Activities}
  */
 export interface Activity {
 	/**
@@ -54,7 +54,7 @@ export interface Activity {
 }
 
 /**
- * @source {@link https://discord.com/developers/docs/game-sdk/activities#data-models-activitytimestamps-struct|Game SDK}
+ * @source {@link https://discord.com/developers/docs/game-sdk/activities#data-models-activitytimestamps-struct|Activities}
  */
 export interface ActivityTimestamps {
 	/**
@@ -69,7 +69,7 @@ export interface ActivityTimestamps {
 }
 
 /**
- * @source {@link https://discord.com/developers/docs/game-sdk/activities#data-models-activityassets-struct|Game SDK}
+ * @source {@link https://discord.com/developers/docs/game-sdk/activities#data-models-activityassets-struct|Activities}
  */
 export interface ActivityAssets {
 	/**
@@ -94,7 +94,7 @@ export interface ActivityAssets {
 }
 
 /**
- * @source {@link https://discord.com/developers/docs/game-sdk/activities#data-models-activityparty-struct|Game SDK}
+ * @source {@link https://discord.com/developers/docs/game-sdk/activities#data-models-activityparty-struct|Activities}
  */
 export interface ActivityParty {
 	/**
@@ -109,7 +109,7 @@ export interface ActivityParty {
 }
 
 /**
- * @source {@link https://discord.com/developers/docs/game-sdk/activities#data-models-partysize-struct|Game SDK}
+ * @source {@link https://discord.com/developers/docs/game-sdk/activities#data-models-partysize-struct|Activities}
  */
 export interface PartySize {
 	/**
@@ -124,7 +124,7 @@ export interface PartySize {
 }
 
 /**
- * @source {@link https://discord.com/developers/docs/game-sdk/activities#data-models-activitysecrets-struct|Game SDK}
+ * @source {@link https://discord.com/developers/docs/game-sdk/activities#data-models-activitysecrets-struct|Activities}
  */
 export interface ActivitySecrets {
 	/**
@@ -148,7 +148,7 @@ export interface ActivitySecrets {
  * though the SDK/our API will not reject a payload with an `ActivityType` sent, it will be
  * discarded and will not change anything in the client.
  *
- * @source {@link https://discord.com/developers/docs/game-sdk/activities#data-models-activitytype-enum|Game SDK}
+ * @source {@link https://discord.com/developers/docs/game-sdk/activities#data-models-activitytype-enum|Activities}
  */
 export enum ActivityType {
 	Playing,
@@ -159,7 +159,7 @@ export enum ActivityType {
 }
 
 /**
- * @source {@link https://discord.com/developers/docs/game-sdk/activities#data-models-activityjoinrequestreply-enum|Game SDK}
+ * @source {@link https://discord.com/developers/docs/game-sdk/activities#data-models-activityjoinrequestreply-enum|Activities}
  */
 export enum ActivityJoinRequestReply {
 	No,
@@ -168,7 +168,7 @@ export enum ActivityJoinRequestReply {
 }
 
 /**
- * @source {@link https://discord.com/developers/docs/game-sdk/activities#data-models-activityactiontype-enum|Game SDK}
+ * @source {@link https://discord.com/developers/docs/game-sdk/activities#data-models-activityactiontype-enum|Activities}
  */
 export enum ActivityActionType {
 	Join = 1,
@@ -176,7 +176,7 @@ export enum ActivityActionType {
 }
 
 /**
- * @source {@link https://discord.com/developers/docs/game-sdk/activities|Game SDK}
+ * @source {@link https://discord.com/developers/docs/game-sdk/activities|Activities}
  */
 export interface ActivityManager extends NodeJS.EventEmitter {
 	/**
