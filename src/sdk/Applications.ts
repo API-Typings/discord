@@ -1,4 +1,5 @@
 import type { Discord } from '../';
+import { Entitlement } from './Store';
 import type { User } from './Users';
 
 /**
@@ -39,7 +40,7 @@ export interface SignedAppTicket {
 	/**
 	 * The list of the user's entitlements for this application
 	 */
-	entitlements: any; // TODO Entitlements
+	entitlements: Pick<Entitlement, 'SkuId'>[];
 
 	/**
 	 * The ISO 8601 timestamp for the ticket
