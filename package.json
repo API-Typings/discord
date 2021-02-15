@@ -1,6 +1,6 @@
 {
 	"name": "@api-typings/discord",
-	"version": "4.0.1",
+	"version": "4.1.0",
 	"description": "API Typings for the Discord API",
 	"main": "dist/index.js",
 	"typings": "dist/typings/index.d.ts",
@@ -22,8 +22,9 @@
 	},
 	"license": "BSD-3-Clause",
 	"devDependencies": {
-		"@api-typings/core": "^1.0.1",
+		"@api-typings/core": "^1.0.3",
 		"@microsoft/tsdoc-config": "^0.14.0",
+		"@types/node": "^14.14.28",
 		"@typescript-eslint/eslint-plugin": "^4.15.0",
 		"@typescript-eslint/parser": "^4.15.0",
 		"eslint": "^7.20.0",
