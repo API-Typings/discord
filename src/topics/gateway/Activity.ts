@@ -65,7 +65,7 @@ export interface Activity {
 	/**
 	 * Unix timestamps for start and/or end of the game
 	 */
-	timestamps?: ActivityTimestamp;
+	timestamps?: ActivityTimestamps;
 
 	/**
 	 * The ID of the song on Spotify
@@ -171,7 +171,7 @@ export enum ActivityType {
 /**
  * @source {@link https://discord.com/developers/docs/topics/gateway#activity-object-activity-timestamps|Gateway}
  */
-export interface ActivityTimestamp {
+export interface ActivityTimestamps {
 	/**
 	 * Unix time (in milliseconds) of when the activity started
 	 */
