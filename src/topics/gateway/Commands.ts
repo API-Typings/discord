@@ -1,5 +1,13 @@
-import type { Nullable, RangeOf } from '@api-typings/core';
-import type { Activity, GatewayOPCode, GatewayPayload, Snowflake } from '../../';
+import type {
+	Nullable,
+	RangeOf
+} from '@api-typings/core';
+import type {
+	Activity,
+	GatewayOPCode,
+	GatewayPayload,
+	Snowflake
+} from '../../';
 
 // ANCHOR Command Payload
 
@@ -89,7 +97,7 @@ export interface Identify extends GatewayCommandPayload<GatewayOPCode.Identify> 
 		/**
 		 * Presence structure for initial presence information
 		 */
-		presence?: Omit<UpdateStatus, 'op' | 'd'>;
+		presence?: UpdateStatus['d'];
 
 		/**
 		 * The {@link https://discord.com/developers/docs/topics/gateway#gateway-intents|Gateway Intents} you wish to receive
