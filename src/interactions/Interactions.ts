@@ -1,5 +1,11 @@
 import type { Nullable } from '@api-typings/core';
-import type { AllowedMentions, Embed, GuildMember, Snowflake, User } from '../';
+import type {
+	AllowedMentions,
+	Embed,
+	GuildMember,
+	Snowflake,
+	User
+} from '../';
 
 // SECTION Application Command
 
@@ -232,7 +238,20 @@ export interface ApplicationCommandInteractionOptionData {
 }
 
 /**
+ * After receiving an interaction, you must respond to acknowledge it. You can choose to respond
+ * with a message immediately using type `4`, or you can choose to send a deferred response with
+ * type `5`. If choosing a deferred response, the user will see a loading state for the interaction,
+ * and you'll have up to 15 minutes to edit the original deferred response using [Edit Original
+ * Interaction Response][1].
+ *
+ * Interaction responses can also be public—everyone can see it—or "ephemeral"—only the invoking
+ * user can see it. That is determined by setting `flags` to `64` on the
+ * [InteractionApplicationCommandCallbackData][2].
+ *
  * @source {@link https://discord.com/developers/docs/interactions/slash-commands#interaction-response|Slash Commands}
+ *
+ * [1]: https://discord.com/developers/docs/interactions/slash-commands#edit-original-interaction-response
+ * [2]: https://discord.com/developers/docs/interactions/slash-commands#interaction-response-interactionapplicationcommandcallbackdata
  */
 export interface InteractionResponse {
 	/**
@@ -256,24 +275,14 @@ export enum InteractionResponseType {
 	Pong = 1,
 
 	/**
-	 * ACK a command without sending a message, eating the user's input
+	 * Respond to an interaction with a message
 	 */
-	Acknowledge,
+	ChannelMessageSource = 4,
 
 	/**
-	 * Respond with a message, eating the user's input
+	 * ACK an interaction and send a response later, the user sees a loading stat
 	 */
-	ChannelMessage,
-
-	/**
-	 * Respond with a message, showing the user's input
-	 */
-	ChannelMessageSource,
-
-	/**
-	 * ACK a command without sending a message, showing the user's input
-	 */
-	AcknowledgeSource
+	DeferredChannelMessageSource
 }
 
 /**
@@ -299,6 +308,11 @@ export interface InteractionApplicationCommandCallbackData {
 	 * {@link https://discord.com/developers/docs/resources/channel#allowed-mentions-object|Allowed mentions} object
 	 */
 	allowed_mentions?: AllowedMentions;
+
+	/**
+	 * Set to `64` to make your response ephemeral
+	 */
+	flags?: number;
 }
 
 // SECTION Endpoints
