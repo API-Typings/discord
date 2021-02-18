@@ -384,7 +384,14 @@ export interface Guild extends PartialGuild {
  * @source {@link https://discord.com/developers/docs/resources/guild#guild-object-default-message-notification-level|Guild}
  */
 export enum NotificationLevel {
+	/**
+	 * Members will receive notifications for all messages by default.
+	 */
 	AllMessages,
+
+	/**
+	 * Members will receive notifications only for messages that \@mention them by default.
+	 */
 	OnlyMentions
 }
 
@@ -392,8 +399,19 @@ export enum NotificationLevel {
  * @source {@link https://discord.com/developers/docs/resources/guild#guild-object-explicit-content-filter-level|Guild}
  */
 export enum ExplicitFilterLevel {
+	/**
+	 * No media content will be scanned.
+	 */
 	Disabled,
+
+	/**
+	 * Media content sent by members without any roles will be scanned.
+	 */
 	GuildMembersWithoutRoles,
+
+	/**
+	 * Media content sent by any member will be scanned.
+	 */
 	AllGuildMembers
 }
 
@@ -401,7 +419,14 @@ export enum ExplicitFilterLevel {
  * @source {@link https://discord.com/developers/docs/resources/guild#guild-object-mfa-level|Guild}
  */
 export enum MFALevel {
+	/**
+	 * Guild has no MFA/2FA requirement.
+	 */
 	None,
+
+	/**
+	 * Guild has a 2FA requirement for moderation actions.
+	 */
 	Elevated
 }
 
@@ -439,9 +464,24 @@ export enum VerificationLevel {
  * @source {@link https://discord.com/developers/docs/resources/guild#guild-object-premium-tier|Guild}
  */
 export enum PremiumTier {
+	/**
+	 * Guild has not unlocked any Server Boost perks.
+	 */
 	None,
+
+	/**
+	 * Guild has unlocked Server Boost level 1 perks (2+ boosts).
+	 */
 	Tier1,
+
+	/**
+	 * Guild has unlocked Server Boost level 2 perks (15+ boosts).
+	 */
 	Tier2,
+
+	/**
+	 * Guild has unlocked Server Boost level 3 perks (30+ boosts).
+	 */
 	Tier3
 }
 
