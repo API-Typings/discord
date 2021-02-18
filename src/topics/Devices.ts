@@ -3,59 +3,51 @@
  */
 export interface Device {
 	/**
-	 * The type of device
+	 * The type of device.
 	 */
 	type: DeviceType;
 
 	/**
-	 * The device's Windows UUID
+	 * The device's Windows UUID.
 	 */
 	id: string;
 
 	/**
-	 * The hardware vendor
+	 * The hardware vendor.
 	 */
 	vendor: Vendor;
 
 	/**
-	 * The model of the product
+	 * The model of the product.
 	 */
 	model: Model;
 
 	/**
-	 * UUIDs of related devices
+	 * UUIDs of related devices.
 	 */
 	related: string[];
 
 	/**
-	 * If the device's native echo cancellation is enabled
-	 *
-	 * @remarks
-	 * This field is only applicable for `AUDIO_INPUT` device types
+	 * If the device's native echo cancellation is enabled. This field is only applicable for
+	 * `AUDIO_INPUT` device types.
 	 */
 	echo_cancellation?: boolean;
 
 	/**
-	 * If the device's native noise supression is enabled
-	 *
-	 * @remarks
-	 * This field is only applicable for `AUDIO_INPUT` device types
+	 * If the device's native noise supression is enabled. This field is only applicable for
+	 * `AUDIO_INPUT` device types.
 	 */
 	noise_supression?: boolean;
 
 	/**
-	 * If the device's native automatic gain control is enabled
-	 *
-	 * @remarks
-	 * This field is only applicable for `AUDIO_INPUT` device types
+	 * If the device's native automatic gain control is enabled. This field is only applicable for
+	 * `AUDIO_INPUT` device types.
 	 */
 	automatic_gain_control?: boolean;
 
 	/**
-	 * If the device is hardware muted
-	 *
-	 * @remarks
-	 * This field is only applicable for `AUDIO_INPUT` device types
+	 * If the device is hardware muted. This field is only applicable for `AUDIO_INPUT` device
+	 * types.
 	 */
 	hardware_mute?: boolean;
 }
@@ -65,12 +57,12 @@ export interface Device {
  */
 export interface Vendor {
 	/**
-	 * Name of the vendor
+	 * Name of the vendor.
 	 */
 	name: string;
 
 	/**
-	 * URL for the vendor
+	 * URL for the vendor.
 	 */
 	url: string;
 }
@@ -80,12 +72,12 @@ export interface Vendor {
  */
 export interface Model {
 	/**
-	 * Name of the model
+	 * Name of the model.
 	 */
 	name: string;
 
 	/**
-	 * URL for the model
+	 * URL for the model.
 	 */
 	url: string;
 }
@@ -96,5 +88,5 @@ export interface Model {
 export enum DeviceType {
 	AudioInput = 'audioinput',
 	AudioOutput = 'audiooutput',
-	VideoInput = 'VideoInput'
+	VideoInput = 'videoinput'
 }

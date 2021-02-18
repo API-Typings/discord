@@ -8,17 +8,19 @@ import type { Snowflake, User } from '../';
  */
 export interface PartialEmoji {
 	/**
-	 * {@link https://discord.com/developers/docs/reference#image-formatting|Emoji ID}
+	 * [Emoji ID][1].
+	 *
+	 * [1]: https://discord.com/developers/docs/reference#image-formatting
 	 */
 	id: Nullable<Snowflake>;
 
 	/**
-	 * Emoji name
+	 * Emoji name.
 	 */
 	name: Nullable<string>;
 
 	/**
-	 * Whether this emoji is animated
+	 * Whether this emoji is animated.
 	 */
 	animated?: boolean;
 }
@@ -35,27 +37,27 @@ export interface PartialEmoji {
  */
 export interface Emoji extends PartialEmoji {
 	/**
-	 * Roles this emoji is whitelisted to
+	 * Roles this emoji is whitelisted to.
 	 */
 	roles?: string[];
 
 	/**
-	 * User that created this emoji
+	 * User that created this emoji.
 	 */
 	user?: User;
 
 	/**
-	 * Whether this emoji must be wrapped in colons
+	 * Whether this emoji must be wrapped in colons.
 	 */
 	require_colons?: boolean;
 
 	/**
-	 * Whether this emoji is managed
+	 * Whether this emoji is managed.
 	 */
 	managed?: boolean;
 
 	/**
-	 * Whether this emoji can be used, may be false due to loss of Server Boosts
+	 * Whether this emoji can be used, may be false due to loss of Server Boosts.
 	 */
 	available?: boolean;
 }
@@ -81,17 +83,17 @@ export interface Emoji extends PartialEmoji {
  */
 export interface CreateEmoji {
 	/**
-	 * Name of the emoji
+	 * Name of the emoji.
 	 */
 	name: string;
 
 	/**
-	 * The 128x128 emoji image
+	 * The 128x128 emoji image.
 	 */
 	image: string;
 
 	/**
-	 * Roles for which this emoji will be whitelisted
+	 * Roles for which this emoji will be whitelisted.
 	 */
 	roles: Snowflake[];
 }
@@ -110,12 +112,12 @@ export interface CreateEmoji {
  */
 export interface ModifyEmoji {
 	/**
-	 * Name of the emoji
+	 * Name of the emoji.
 	 */
 	name?: string;
 
 	/**
-	 * Roles for which this emoji will be whitelisted
+	 * Roles for which this emoji will be whitelisted.
 	 */
 	roles?: Nullable<Snowflake[]>;
 }

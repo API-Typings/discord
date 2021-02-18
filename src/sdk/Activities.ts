@@ -6,49 +6,51 @@ import type { User } from './Users';
  */
 export interface Activity {
 	/**
-	 * Your application ID
+	 * Your application ID.
 	 *
 	 * @readonly
 	 */
 	readonly ApplicationId: bigint;
 
 	/**
-	 * Name of the application
+	 * Name of the application.
+	 *
+	 * @readonly
 	 */
 	readonly Name: string;
 
 	/**
-	 * The player's current party status
+	 * The player's current party status.
 	 */
 	State: string;
 
 	/**
-	 * What the player is currently doing
+	 * What the player is currently doing.
 	 */
 	Details: string;
 
 	/**
-	 * Helps create elapsed/remaining timestamps on a player's profile
+	 * Helps create elapsed/remaining timestamps on a player's profile.
 	 */
 	Timestamps: ActivityTimestamps;
 
 	/**
-	 * Assets to display on the player's profile
+	 * Assets to display on the player's profile.
 	 */
 	Assets: ActivityAssets;
 
 	/**
-	 * Information about the player's party
+	 * Information about the player's party.
 	 */
 	Party: ActivityParty;
 
 	/**
-	 * Secret passwords for joining and spectating the player's game
+	 * Secret passwords for joining and spectating the player's game.
 	 */
 	Secrets: ActivitySecrets;
 
 	/**
-	 * Whether this activity is an instanced context, like a match
+	 * Whether this activity is an instanced context, like a match.
 	 */
 	Instance: boolean;
 }
@@ -58,12 +60,12 @@ export interface Activity {
  */
 export interface ActivityTimestamps {
 	/**
-	 * Unix timestamp – send this to have an "elapsed" timer
+	 * Unix timestamp–send this to have an "elapsed" timer.
 	 */
 	Start: bigint;
 
 	/**
-	 * Unix timestamp – send this to have a "remaining" timer
+	 * Unix timestamp–send this to have a "remaining" timer.
 	 */
 	End: bigint;
 }
@@ -73,22 +75,22 @@ export interface ActivityTimestamps {
  */
 export interface ActivityAssets {
 	/**
-	 * Keyname of an asset to display
+	 * Keyname of an asset to display.
 	 */
 	LargeImage: string;
 
 	/**
-	 * Hover text for the large image
+	 * Hover text for the large image.
 	 */
 	LargeText: string;
 
 	/**
-	 * Keyname of an asset to display
+	 * Keyname of an asset to display.
 	 */
 	SmallImage: string;
 
 	/**
-	 * Hover text for the large image
+	 * Hover text for the large image.
 	 */
 	SmallText: string;
 }
@@ -98,12 +100,12 @@ export interface ActivityAssets {
  */
 export interface ActivityParty {
 	/**
-	 * A unique identifier for this party
+	 * A unique identifier for this party.
 	 */
 	Id: string;
 
 	/**
-	 * Info about the size of the party
+	 * Info about the size of the party.
 	 */
 	Size: PartySize;
 }
@@ -113,12 +115,12 @@ export interface ActivityParty {
  */
 export interface PartySize {
 	/**
-	 * The current size of the party
+	 * The current size of the party.
 	 */
 	CurrentSize: number;
 
 	/**
-	 * The max possible size of the party
+	 * The max possible size of the party.
 	 */
 	MaxSize: number;
 }
@@ -128,17 +130,17 @@ export interface PartySize {
  */
 export interface ActivitySecrets {
 	/**
-	 * Unique hash for the given match context
+	 * Unique hash for the given match context.
 	 */
 	Match: string;
 
 	/**
-	 * Unique hash for chat invites and Ask to Join
+	 * Unique hash for chat invites and Ask to Join.
 	 */
 	Join: string;
 
 	/**
-	 * Unique hash for Spectate button
+	 * Unique hash for Spectate button.
 	 */
 	Spectate: string;
 }

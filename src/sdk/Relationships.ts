@@ -6,17 +6,17 @@ import type { Activity, User } from './';
  */
 export interface Relationship {
 	/**
-	 * What kind of relationship it is
+	 * What kind of relationship it is.
 	 */
 	Type: RelationshipType;
 
 	/**
-	 * The user the relationship is for
+	 * The user the relationship is for.
 	 */
 	User: User;
 
 	/**
-	 * That user's current presence
+	 * That user's current presence.
 	 */
 	Presence: Presence;
 }
@@ -26,32 +26,32 @@ export interface Relationship {
  */
 export enum RelationshipType {
 	/**
-	 * User has no intrinsic relationship
+	 * User has no intrinsic relationship.
 	 */
 	None,
 
 	/**
-	 * User is a friend
+	 * User is a friend.
 	 */
 	Friend,
 
 	/**
-	 * User is blocked
+	 * User is blocked.
 	 */
 	Blocked,
 
 	/**
-	 * User has a pending incoming friend request to connected user
+	 * User has a pending incoming friend request to connected user.
 	 */
 	PendingIncoming,
 
 	/**
-	 * Current user has a pending outgoing friend request to user
+	 * Current user has a pending outgoing friend request to user.
 	 */
 	PendingOutgoing,
 
 	/**
-	 * User is not friends, but interacts with current user often (frequency + recency)
+	 * User is not friends, but interacts with current user often (frequency + recency).
 	 */
 	Implicit
 }
@@ -61,12 +61,12 @@ export enum RelationshipType {
  */
 export interface Presence {
 	/**
-	 * The user's current online status
+	 * The user's current online status.
 	 */
 	Status: Status;
 
 	/**
-	 * The user's current activity
+	 * The user's current activity.
 	 */
 	Activity: Activity;
 }

@@ -8,62 +8,62 @@ import type { GuildMember, Snowflake } from '../';
  */
 export interface VoiceState {
 	/**
-	 * The guild ID this voice state is for
+	 * The guild ID this voice state is for.
 	 */
 	guild_id?: Snowflake;
 
 	/**
-	 * The channel ID this user is connected to
+	 * The channel ID this user is connected to.
 	 */
 	channel_id: Nullable<Snowflake>;
 
 	/**
-	 * The user ID this voice state is for
+	 * The user ID this voice state is for.
 	 */
 	user_id: Snowflake;
 
 	/**
-	 * The guild member this voice state is for
+	 * The guild member this voice state is for.
 	 */
 	member?: GuildMember;
 
 	/**
-	 * The session ID for this voice state
+	 * The session ID for this voice state.
 	 */
 	session_id: string;
 
 	/**
-	 * Whether this user is deafened by the server
+	 * Whether this user is deafened by the server.
 	 */
 	deaf: boolean;
 
 	/**
-	 * Whether this user is muted by the server
+	 * Whether this user is muted by the server.
 	 */
 	mute: boolean;
 
 	/**
-	 * Whether this user is locally deafened
+	 * Whether this user is locally deafened.
 	 */
 	self_deaf: boolean;
 
 	/**
-	 * Whether this user is locally muted
+	 * Whether this user is locally muted.
 	 */
 	self_mute: boolean;
 
 	/**
-	 * Whether this user is streaming using "Go Live"
+	 * Whether this user is streaming using "Go Live".
 	 */
 	self_stream?: boolean;
 
 	/**
-	 * Whether this user's camera is enabled
+	 * Whether this user's camera is enabled.
 	 */
 	self_video: boolean;
 
 	/**
-	 * Whether this user is muted by the current user
+	 * Whether this user is muted by the current user.
 	 */
 	suppress: boolean;
 }
@@ -73,32 +73,32 @@ export interface VoiceState {
  */
 export interface VoiceRegion {
 	/**
-	 * Unique ID for the region
+	 * Unique ID for the region.
 	 */
 	id: Snowflake;
 
 	/**
-	 * Name of the region
+	 * Name of the region.
 	 */
 	name: string;
 
 	/**
-	 * True if this is a VIP-only server
+	 * True if this is a VIP-only server.
 	 */
 	vip: boolean;
 
 	/**
-	 * True for a single server that is closest to the current user's client
+	 * True for a single server that is closest to the current user's client.
 	 */
 	optimal: boolean;
 
 	/**
-	 * Whether this is a deprecated voice region (avoid switching to these)
+	 * Whether this is a deprecated voice region (avoid switching to these).
 	 */
 	deprecated: boolean;
 
 	/**
-	 * Whether this is a custom voice region (used for events/etc)
+	 * Whether this is a custom voice region (used for events/etc.).
 	 */
 	custom: boolean;
 }

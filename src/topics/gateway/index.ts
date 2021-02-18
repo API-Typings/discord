@@ -12,28 +12,30 @@ export * from './Events';
  */
 export interface GatewayPayload {
 	/**
-	 * {@link https://discord.com/developers/docs/topics/opcodes-and-status-codes#gateway-gateway-opcodes|OPCode} for the payload
+	 * [OPCode][1] for the payload.
+	 *
+	 * [1]: https://discord.com/developers/docs/topics/opcodes-and-status-codes#gateway-gateway-opcodes
 	 */
 	op: GatewayOPCode;
 
 	/**
-	 * Event data
+	 * Event data.
 	 */
 	d: Nullable<unknown>;
 
 	/**
-	 * Sequence number, used for resuming sessions and heartbeats
+	 * Sequence number, used for resuming sessions and heartbeats.
 	 *
 	 * @remarks
-	 * `s` and `t` are `null` when `op` is not `0` (Gateway Dispatch Opcode)
+	 * `s` and `t` are `null` when `op` is not `0` (Gateway Dispatch Opcode).
 	 */
 	s: Nullable<number>;
 
 	/**
-	 * The event name for this payload
+	 * The event name for this payload.
 	 *
 	 * @remarks
-	 * `s` and `t` are `null` when `op` is not `0` (Gateway Dispatch Opcode)
+	 * `s` and `t` are `null` when `op` is not `0` (Gateway Dispatch Opcode).
 	 */
 	t: Nullable<GatewayEvent>;
 }
@@ -43,17 +45,17 @@ export interface GatewayPayload {
  */
 export interface GatewayURL {
 	/**
-	 * Gateway Version to use
+	 * Gateway Version to use.
 	 */
 	v: 8;
 
 	/**
-	 * The encoding of received gateway packets
+	 * The encoding of received gateway packets.
 	 */
 	encoding: EncodingType;
 
 	/**
-	 * The (optional) compression of gateway packets
+	 * The (optional) compression of gateway packets.
 	 */
 	compress?: 'zlib-stream';
 }
@@ -83,17 +85,19 @@ export type EncodingType = 'json' | 'etf';
  */
 export interface GetGatewayBot {
 	/**
-	 * The WSS URL that can be used for connecting to the gateway
+	 * The WSS URL that can be used for connecting to the gateway.
 	 */
 	url: string;
 
 	/**
-	 * The recommended number of {@link https://discord.com/developers/docs/topics/gateway#sharding|shards} to use when connecting
+	 * The recommended number of [shards][1] to use when connecting.
+	 *
+	 * [1]: https://discord.com/developers/docs/topics/gateway#sharding|
 	 */
 	shards: number;
 
 	/**
-	 * Information on the current session start limit
+	 * Information on the current session start limit.
 	 */
 	session_start_limit: SessionStartLimit;
 }
@@ -103,22 +107,22 @@ export interface GetGatewayBot {
  */
 export interface SessionStartLimit {
 	/**
-	 * The total number of session starts the current user is allowed
+	 * The total number of session starts the current user is allowed.
 	 */
 	total: number;
 
 	/**
-	 * The remaining number of session starts the current user is allowed
+	 * The remaining number of session starts the current user is allowed.
 	 */
 	remaining: number;
 
 	/**
-	 * The number of milliseconds after which the limit resets
+	 * The number of milliseconds after which the limit resets.
 	 */
 	reset_after: number;
 
 	/**
-	 * The number of identify requests allowed per 5 seconds
+	 * The number of identify requests allowed per 5 seconds.
 	 */
 	max_concurrency: number;
 }

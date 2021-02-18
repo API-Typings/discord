@@ -13,32 +13,32 @@ export enum LobbyType {
  */
 export interface Lobby {
 	/**
-	 * The unique ID of the lobby
+	 * The unique ID of the lobby.
 	 */
 	Id: bigint;
 
 	/**
-	 * If the lobby is public or private
+	 * If the lobby is public or private.
 	 */
 	Type: LobbyType;
 
 	/**
-	 * The `userId` of the lobby owner
+	 * The `userId` of the lobby owner.
 	 */
 	OwnerId: bigint;
 
 	/**
-	 * The password to the lobby
+	 * The password to the lobby.
 	 */
 	Secret: string;
 
 	/**
-	 * The max capacity of the lobby
+	 * The max capacity of the lobby.
 	 */
 	Capacity: number;
 
 	/**
-	 * Whether or not the lobby can be joined
+	 * Whether or not the lobby can be joined.
 	 */
 	Locked: boolean;
 }
@@ -68,22 +68,22 @@ export enum LobbySearchCast {
  */
 export enum LobbySearchDistance {
 	/**
-	 * Within the same region
+	 * Within the same region.
 	 */
 	Local,
 
 	/**
-	 * Within the same and adjacent regions
+	 * Within the same and adjacent regions.
 	 */
 	Default,
 
 	/**
-	 * Far distances, like US to EU
+	 * Far distances, like US to EU.
 	 */
 	Extended,
 
 	/**
-	 * All regions
+	 * All regions.
 	 */
 	Global
 }
@@ -595,12 +595,12 @@ export interface LobbyManager extends NodeJS.EventEmitter {
  */
 export interface CreateLobby extends UpdateLobby {
 	/**
-	 * Your application ID
+	 * Your application ID.
 	 */
 	application_id: string;
 
 	/**
-	 * The region in which to make the lobby
+	 * The region in which to make the lobby.
 	 *
 	 * @defaultValue The region of the requesting server's IP address
 	 */
@@ -616,17 +616,17 @@ export interface CreateLobby extends UpdateLobby {
  */
 export interface UpdateLobby {
 	/**
-	 * The type of lobby
+	 * The type of lobby.
 	 */
 	type: LobbyType;
 
 	/**
-	 * Metadata for the lobby–key/value pairs with types `string`
+	 * Metadata for the lobby–key/value pairs with types `string`.
 	 */
 	metadata: Record<string, string>;
 
 	/**
-	 * Max lobby capacity
+	 * Max lobby capacity.
 	 *
 	 * @defaultValue 16
 	 */
@@ -642,7 +642,7 @@ export interface UpdateLobby {
  */
 export interface UpdateLobbyMember {
 	/**
-	 * Metadata for the lobby member–key/value pairs with types `string`
+	 * Metadata for the lobby member–key/value pairs with types `string`.
 	 */
 	metadata: Record<string, string>;
 }
@@ -656,22 +656,22 @@ export interface UpdateLobbyMember {
  */
 export interface CreateLobbySearch {
 	/**
-	 * Your application ID
+	 * Your application ID.
 	 */
 	application_id: string;
 
 	/**
-	 * The filter to check against
+	 * The filter to check against.
 	 */
 	filter: SearchFilter;
 
 	/**
-	 * How to sort the results
+	 * How to sort the results.
 	 */
 	sort: SearchSort;
 
 	/**
-	 * Limit of lobbies returned
+	 * Limit of lobbies returned.
 	 *
 	 * @defaultValue 25
 	 */
@@ -683,22 +683,22 @@ export interface CreateLobbySearch {
  */
 export interface SearchFilter {
 	/**
-	 * The metadata key to search
+	 * The metadata key to search.
 	 */
 	key: string;
 
 	/**
-	 * The value of the metadata key to validate against
+	 * The value of the metadata key to validate against.
 	 */
 	value: string;
 
 	/**
-	 * The type to cast `value` as
+	 * The type to cast `value` as.
 	 */
 	cast: LobbySearchCast;
 
 	/**
-	 * How to compare the metadata values
+	 * How to compare the metadata values.
 	 */
 	comparison: LobbySearchComparison;
 }
@@ -708,17 +708,17 @@ export interface SearchFilter {
  */
 export interface SearchSort {
 	/**
-	 * The metadata key on which to sort lobbies that meet the search criteria
+	 * The metadata key on which to sort lobbies that meet the search criteria.
 	 */
 	key: string;
 
 	/**
-	 * The type to cast `value` as
+	 * The type to cast `value` as.
 	 */
 	cast: LobbySearchCast;
 
 	/**
-	 * The value around which to sort the key
+	 * The value around which to sort the key.
 	 */
 	near_value: string;
 }
@@ -736,7 +736,7 @@ export interface SearchSort {
  */
 export interface SendLobbyData {
 	/**
-	 * A message to be sent to other lobby members
+	 * A message to be sent to other lobby members.
 	 */
 	data: string;
 }

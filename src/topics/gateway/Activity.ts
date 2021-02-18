@@ -1,5 +1,8 @@
 import type { Nullable } from '@api-typings/core';
-import type { Snowflake, StatusType } from '../../';
+import type {
+	Snowflake,
+	StatusType
+} from '../../';
 
 // ANCHOR Client Status
 
@@ -11,17 +14,17 @@ import type { Snowflake, StatusType } from '../../';
  */
 export interface ClientStatus {
 	/**
-	 * The user's status set for an active desktop (Windows, Linux, Mac) application session
+	 * The user's status set for an active desktop (Windows, Linux, Mac) application session.
 	 */
 	desktop?: ClientStatusType;
 
 	/**
-	 * The user's status set for an active mobile (iOS, Android) application session
+	 * The user's status set for an active mobile (iOS, Android) application session.
 	 */
 	mobile?: ClientStatusType;
 
 	/**
-	 * The user's status set for an active web (browser, bot account) application session
+	 * The user's status set for an active web (browser, bot account) application session.
 	 */
 	web?: ClientStatusType;
 }
@@ -38,12 +41,12 @@ export type ClientStatusType = Omit<StatusType, 'offline' | 'invisible'>;
  */
 export interface Activity {
 	/**
-	 * The activity's ID
+	 * The activity's ID.
 	 */
 	id?: string;
 
 	/**
-	 * The activity's name
+	 * The activity's name.
 	 */
 	name: string;
 
@@ -53,82 +56,84 @@ export interface Activity {
 	type: ActivityType;
 
 	/**
-	 * Stream url, is validated when type is 1
+	 * Stream url, is validated when type is `1`.
 	 */
 	url?: Nullable<string>;
 
 	/**
-	 * Unix timestamp of when the activity was added to the user's session
+	 * Unix timestamp of when the activity was added to the user's session.
 	 */
 	created_at: number;
 
 	/**
-	 * Unix timestamps for start and/or end of the game
+	 * Unix timestamps for start and/or end of the game.
 	 */
 	timestamps?: ActivityTimestamps;
 
 	/**
-	 * The ID of the song on Spotify
+	 * The ID of the song on Spotify.
 	 */
 	sync_id?: string;
 
 	/**
-	 * The platform the game is being played on (`desktop`, `samsung`, or `xbox`)
+	 * The platform the game is being played on (`desktop`, `samsung`, or `xbox`).
 	 */
 	platform?: ActivityPlatform;
 
 	/**
-	 * Application ID for the game
+	 * Application ID for the game.
 	 */
 	application_id?: Snowflake;
 
 	/**
-	 * What the player is currently doing
+	 * What the player is currently doing.
 	 */
 	details?: Nullable<string>;
 
 	/**
-	 * The user's current party status
+	 * The user's current party status.
 	 */
 	state?: Nullable<string>;
 
 	/**
-	 * The emoji used for a custom status
+	 * The emoji used for a custom status.
 	 */
 	emoji?: Nullable<ActivityEmoji>;
 
 	/**
-	 * The ID of the game or Spotify session
+	 * The ID of the game or Spotify session.
 	 */
 	session_id?: string;
 
 	/**
-	 * Information for the current party of the player
+	 * Information for the current party of the player.
 	 */
 	party?: ActivityParty;
 
 	/**
-	 * Images for the presence and their hover texts
+	 * Images for the presence and their hover texts.
 	 */
 	assets?: ActivityAssets;
 
 	/**
-	 * Secrets for Rich Presence joining and spectating
+	 * Secrets for Rich Presence joining and spectating.
 	 */
 	secrets?: ActivitySecrets;
 
 	/**
-	 * Whether or not the activity is an instanced game session
+	 * Whether or not the activity is an instanced game session.
 	 */
 	instance?: boolean;
 
 	/**
-	 * {@link https://discord.com/developers/docs/topics/gateway#activity-object-activity-flags|Activity flags} `OR`d together, describes what the payload includes
+	 * [Activity flags][1] `OR`d together, describes what the payload includes.
+	 *
+	 * [1]: https://discord.com/developers/docs/topics/gateway#activity-object-activity-flags
 	 */
 	flags?: ActivityFlags;
 
 	/**
-	 * The custom buttons shown in the Rich Presence (max 2)
+	 * The custom buttons shown in the Rich Presence (max 2).
 	 */
 	buttons?: ActivityButton[];
 }
@@ -173,12 +178,12 @@ export enum ActivityType {
  */
 export interface ActivityTimestamps {
 	/**
-	 * Unix time (in milliseconds) of when the activity started
+	 * Unix time (in milliseconds) of when the activity started.
 	 */
 	start?: number;
 
 	/**
-	 * Unix time (in milliseconds) of when the activity ends
+	 * Unix time (in milliseconds) of when the activity ends.
 	 */
 	end?: number;
 }
@@ -188,17 +193,17 @@ export interface ActivityTimestamps {
  */
 export interface ActivityEmoji {
 	/**
-	 * The name of the emoji
+	 * The name of the emoji.
 	 */
 	name: string;
 
 	/**
-	 * The ID of the emoji
+	 * The ID of the emoji.
 	 */
 	id?: Snowflake;
 
 	/**
-	 * Whether this emojis is animated
+	 * Whether this emojis is animated.
 	 */
 	animated?: boolean;
 }
@@ -208,12 +213,12 @@ export interface ActivityEmoji {
  */
 export interface ActivityParty {
 	/**
-	 * The ID of the party
+	 * The ID of the party.
 	 */
 	id?: string;
 
 	/**
-	 * Used to show the party's current and maximum size
+	 * Used to show the party's current and maximum size.
 	 */
 	size?: [number, number];
 }
@@ -223,22 +228,22 @@ export interface ActivityParty {
  */
 export interface ActivityAssets {
 	/**
-	 * The ID for a large asset of the activity, usually a snowflake
+	 * The ID for a large asset of the activity, usually a snowflake.
 	 */
 	large_image?: string;
 
 	/**
-	 * Text displayed when hovering over the large image of the activity
+	 * Text displayed when hovering over the large image of the activity.
 	 */
 	large_text?: string;
 
 	/**
-	 * The ID for a small asset of the activity, usually a snowflake
+	 * The ID for a small asset of the activity, usually a snowflake.
 	 */
 	small_image?: string;
 
 	/**
-	 * Text displayed when hovering over the small image of the activity
+	 * Text displayed when hovering over the small image of the activity.
 	 */
 	small_text?: string;
 }
@@ -248,17 +253,17 @@ export interface ActivityAssets {
  */
 export interface ActivitySecrets {
 	/**
-	 * The secret for joining a party
+	 * The secret for joining a party.
 	 */
 	join?: string;
 
 	/**
-	 * The secret for spectating a game
+	 * The secret for spectating a game.
 	 */
 	spectate?: string;
 
 	/**
-	 * The secret for a specific instanced match
+	 * The secret for a specific instanced match.
 	 */
 	match?: string;
 }
@@ -282,12 +287,12 @@ export enum ActivityFlags {
  */
 export interface ActivityButton {
 	/**
-	 * The text shown on the button (1-32 characters)
+	 * The text shown on the button (1-32 characters).
 	 */
 	label: string;
 
 	/**
-	 * The url opened when clicking the button (1-512 characters)
+	 * The url opened when clicking the button (1-512 characters).
 	 */
 	url: string;
 }

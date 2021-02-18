@@ -1,12 +1,5 @@
 import type { Nullable } from '@api-typings/core';
-import type {
-	AllowedMentions,
-	Channel,
-	Embed,
-	Guild,
-	Snowflake,
-	User
-} from '../';
+import type { AllowedMentions, Channel, Embed, Guild, Snowflake, User } from '../';
 
 /**
  * Represents a low-effort way to post messages to channels. They do not require a bot user or
@@ -16,58 +9,60 @@ import type {
  */
 export interface Webhook {
 	/**
-	 * The ID of the webhook
+	 * The ID of the webhook.
 	 */
 	id: Snowflake;
 
 	/**
-	 * The {@link https://discord.com/developers/docs/resources/webhook#webhook-object-webhook-types|type} of the webhook
+	 * The [type][1] of the webhook.
+	 *
+	 * [1]: https://discord.com/developers/docs/resources/webhook#webhook-object-webhook-types
 	 */
 	type: WebhookType;
 
 	/**
-	 * The guild ID this webhook is for
+	 * The guild ID this webhook is for.
 	 */
 	guild_id?: Snowflake;
 
 	/**
-	 * The channel ID this webhook is for
+	 * The channel ID this webhook is for.
 	 */
 	channel_id: Snowflake;
 
 	/**
-	 * The user this webhook was created by (not returned when getting a webhook with its token)
+	 * The user this webhook was created by (not returned when getting a webhook with its token).
 	 */
 	user?: User;
 
 	/**
-	 * The default name of the webhook
+	 * The default name of the webhook.
 	 */
 	name: Nullable<string>;
 
 	/**
-	 * The default avatar of the webhook
+	 * The default avatar of the webhook.
 	 */
 	avatar: Nullable<string>;
 
 	/**
-	 * The secure token of the webhook (returned for Incoming Webhooks)
+	 * The secure token of the webhook (returned for Incoming Webhooks).
 	 */
 	token?: string;
 
 	/**
-	 * The bot/OAuth2 application that created this webhook
+	 * The bot/OAuth2 application that created this webhook.
 	 */
 	application_id: Nullable<Snowflake>;
 
 	/**
 	 * The guild of the channel that this webhook is following (returned for Channel Follower
-	 * Webhooks)
+	 * Webhooks).
 	 */
 	source_guild?: Pick<Guild, 'id' | 'name' | 'icon'>;
 
 	/**
-	 * The channel that this webhook is following (returned for Channel Follower Webhooks)
+	 * The channel that this webhook is following (returned for Channel Follower Webhooks).
 	 */
 	source_channel?: Pick<Channel, 'id' | 'name'>;
 }
@@ -77,13 +72,13 @@ export interface Webhook {
  */
 export enum WebhookType {
 	/**
-	 * Incoming Webhooks can post messages to channels with a generated token
+	 * Incoming Webhooks can post messages to channels with a generated token.
 	 */
 	Incoming = 1,
 
 	/**
 	 * Channel Follower Webhooks are internal webhooks used with Channel Following to post new
-	 * messages into channels
+	 * messages into channels.
 	 */
 	ChannelFollower
 }
@@ -96,7 +91,7 @@ export enum WebhookType {
  * @remarks
  * Webhook names follow the naming restrictions that can be found in the [Usernames and
  * Nicknames][1]documentation, with the following additional stipulations:
- * - Webhook names cannot be: `clyde`
+ * - Webhook names cannot be: `clyde`.
  *
  * @endpoint [POST] `/channels/{channel.id}/webhooks`
  *
@@ -108,12 +103,12 @@ export enum WebhookType {
  */
 export interface CreateWebhook {
 	/**
-	 * Name of the webhook (1-80 characters)
+	 * Name of the webhook (1-80 characters).
 	 */
 	name: string;
 
 	/**
-	 * Image for the default webhook avatar
+	 * Image for the default webhook avatar.
 	 */
 	avatar: Nullable<string>;
 }
@@ -130,17 +125,17 @@ export interface CreateWebhook {
  */
 export interface ModifyWebhook {
 	/**
-	 * The default name of the webhook
+	 * The default name of the webhook.
 	 */
 	name?: string;
 
 	/**
-	 * Image for the default webhook avatar
+	 * Image for the default webhook avatar.
 	 */
 	avatar?: Nullable<string>;
 
 	/**
-	 * The new channel id this webhook should be moved to
+	 * The new channel id this webhook should be moved to.
 	 */
 	channel_id?: Nullable<Snowflake>;
 }
@@ -166,43 +161,43 @@ export interface ExecuteWebhook {
 	/**
 	 * Waits for server confirmation of message send before response, and returns the created
 	 * message body (defaults to `false`; when `false` a message that is not saved does not return
-	 * an error)
+	 * an error).
 	 */
 	wait?: boolean;
 
 	/**
-	 * The message contents (up to 2000 characters)
+	 * The message contents (up to 2000 characters).
 	 */
 	content?: string;
 
 	/**
-	 * Override the default username of the webhook
+	 * Override the default username of the webhook.
 	 */
 	username?: string;
 
 	/**
-	 * Override the default avatar of the webhook
+	 * Override the default avatar of the webhook.
 	 */
 	avatar_url?: string;
 
 	/**
-	 * True if this is a TTS message
+	 * True if this is a TTS message.
 	 */
 	tts?: boolean;
 
 	/**
-	 * The contents of the file being sent
+	 * The contents of the file being sent.
 	 */
 	file?: unknown;
 
 	/**
-	 * Embedded `rich` content
+	 * Embedded `rich` content.
 	 */
 	embeds?: Embed[];
 	payload_json?: string;
 
 	/**
-	 * Allowed mentions for the message
+	 * Allowed mentions for the message.
 	 */
 	allowed_mentions?: AllowedMentions;
 	flags?: number;
@@ -220,17 +215,17 @@ export interface ExecuteWebhook {
  */
 export interface EditWebhookMessage {
 	/**
-	 * The message contents (up to 2000 characters)
+	 * The message contents (up to 2000 characters).
 	 */
 	content?: Nullable<string>;
 
 	/**
-	 * Embedded rich content
+	 * Embedded `rich` content.
 	 */
 	embeds?: Nullable<Embed[]>;
 
 	/**
-	 * Allowed mentions for the message
+	 * Allowed mentions for the message.
 	 */
 	allowed_mentions?: Nullable<AllowedMentions>;
 }

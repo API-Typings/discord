@@ -1,6 +1,6 @@
 import type { Nullable, RangeOf } from '@api-typings/core';
 import type { PartialIntegration, PartialRole, Snowflake, User, Webhook } from '../';
-import { ChannelType, Overwrite } from './Channel';
+import type { ChannelType, Overwrite } from './Channel';
 
 /**
  * Whenever an admin action is performed on the API, an entry is added to the respective guild's
@@ -10,22 +10,22 @@ import { ChannelType, Overwrite } from './Channel';
  */
 export interface AuditLog {
 	/**
-	 * List of webhooks found in the audit log
+	 * List of webhooks found in the audit log.
 	 */
 	webhooks: Webhook[];
 
 	/**
-	 * List of users found in the audit log
+	 * List of users found in the audit log.
 	 */
 	users: User[];
 
 	/**
-	 * List of audit log entries, sorted by id in descending order
+	 * List of audit log entries, sorted by ID in descending order.
 	 */
 	audit_log_entries: AuditLogEntry[];
 
 	/**
-	 * List of partial integration objects
+	 * List of partial integration objects.
 	 */
 	integrations: PartialIntegration[];
 }
@@ -35,37 +35,37 @@ export interface AuditLog {
  */
 export interface AuditLogEntry {
 	/**
-	 * ID of the affected entity (webhook, user, role, etc.)
+	 * ID of the affected entity (webhook, user, role, etc.).
 	 */
 	target_id: Nullable<string>;
 
 	/**
-	 * Changes made to the `target_id`
+	 * Changes made to the `target_id`.
 	 */
 	changes?: AuditLogChangeType[];
 
 	/**
-	 * The user who made the changes
+	 * The user who made the changes.
 	 */
 	user_id: Snowflake;
 
 	/**
-	 * ID of the entry
+	 * ID of the entry.
 	 */
 	id: Snowflake;
 
 	/**
-	 * Type of action that occurred
+	 * Type of action that occurred.
 	 */
 	action_type: AuditLogEvent;
 
 	/**
-	 * Additional info for certain action types
+	 * Additional info for certain action types.
 	 */
 	options?: AuditLogEntryInfo;
 
 	/**
-	 * The reason for the change (0-512 characters)
+	 * The reason for the change (0-512 characters).
 	 */
 	reason?: string;
 }
@@ -116,23 +116,21 @@ export enum AuditLogEvent {
  */
 export interface AuditLogEntryInfo {
 	/**
-	 * Number of days after which inactive members were kicked
+	 * Number of days after which inactive members were kicked.
 	 *
-	 * @action
-	 * `MEMBER_PRUNE`
+	 * @action `MEMBER_PRUNE`
 	 */
 	delete_member_days: string;
 
 	/**
-	 * Number of members removed by the prune
+	 * Number of members removed by the prune.
 	 *
-	 * @action
-	 * `MEMBER_PRUNE`
+	 * @action `MEMBER_PRUNE`
 	 */
 	members_removed: string;
 
 	/**
-	 * Channel in which the entities were targeted
+	 * Channel in which the entities were targeted.
 	 *
 	 * @action
 	 * - `MEMBER_MOVE`
@@ -143,7 +141,7 @@ export interface AuditLogEntryInfo {
 	channel_id: Snowflake;
 
 	/**
-	 * ID of the message that was targeted
+	 * ID of the message that was targeted.
 	 *
 	 * @action
 	 * - `MESSAGE_PIN`
@@ -152,7 +150,7 @@ export interface AuditLogEntryInfo {
 	message_id: Snowflake;
 
 	/**
-	 * Number of entities that were targeted
+	 * Number of entities that were targeted.
 	 *
 	 * @action
 	 * - `MESSAGE_DELETE`
@@ -163,7 +161,7 @@ export interface AuditLogEntryInfo {
 	count: string;
 
 	/**
-	 * ID of the overwritten entity
+	 * ID of the overwritten entity.
 	 *
 	 * @action
 	 * - `CHANNEL_OVERWRITE_CREATE`
@@ -173,7 +171,7 @@ export interface AuditLogEntryInfo {
 	id: Snowflake;
 
 	/**
-	 * Type of overwritten entity - `0` for `role` or `1` for `member`
+	 * Type of overwritten entity–`0` for `role` or `1` for `member`.
 	 *
 	 * @action
 	 * - `CHANNEL_OVERWRITE_CREATE`
@@ -183,7 +181,7 @@ export interface AuditLogEntryInfo {
 	type: '0' | '1';
 
 	/**
-	 * Name of the role if type is `0` (not present if type is `1`)
+	 * Name of the role if type is `0` (not present if type is `1`).
 	 *
 	 * @action
 	 * - `CHANNEL_OVERWRITE_CREATE`
@@ -202,17 +200,17 @@ export interface AuditLogEntryInfo {
  */
 export interface AuditLogChange<K extends string, T = string> {
 	/**
-	 * New value of the key
+	 * New value of the key.
 	 */
 	new_value?: T;
 
 	/**
-	 * Old value of the key
+	 * Old value of the key.
 	 */
 	old_value?: T;
 
 	/**
-	 * Name of audit log change key
+	 * Name of audit log change key.
 	 */
 	key: K;
 }
@@ -289,22 +287,24 @@ export type AuditLogChangeType =
  */
 export interface GetGuildAuditLog {
 	/**
-	 * Filter the log for actions made by a user
+	 * Filter the log for actions made by a user.
 	 */
 	user_id?: Snowflake;
 
 	/**
-	 * The type of {@link https://discord.com/developers/docs/resources/audit-log#audit-log-entry-object-audit-log-events|audit log event}
+	 * The type of [audit log event][1].
+	 *
+	 * [1]: https://discord.com/developers/docs/resources/audit-log#audit-log-entry-object-audit-log-events|
 	 */
 	action_type?: AuditLogEvent;
 
 	/**
-	 * Filter the log before a certain entry ID
+	 * Filter the log before a certain entry ID.
 	 */
 	before?: Snowflake;
 
 	/**
-	 * How many entries are returned
+	 * How many entries are returned.
 	 *
 	 * @defaultValue 50
 	 */

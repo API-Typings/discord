@@ -22,17 +22,17 @@ interface GatewayCommandPayload<O extends GatewayOPCode> extends GatewayPayload 
  */
 export interface ConnectionProperties {
 	/**
-	 * Your operating system
+	 * Your operating system.
 	 */
 	$os: string;
 
 	/**
-	 * Your library name
+	 * Your library name.
 	 */
 	$browser: string;
 
 	/**
-	 * Your library name
+	 * Your library name.
 	 */
 	$device: string;
 }
@@ -65,17 +65,19 @@ export interface ConnectionProperties {
 export interface Identify extends GatewayCommandPayload<GatewayOPCode.Identify> {
 	d: {
 		/**
-		 * Authentication token
+		 * Authentication token.
 		 */
 		token: string;
 
 		/**
-		 * {@link https://discord.com/developers/docs/topics/gateway#identify-identify-connection-properties|Connection properties}
+		 * [Connection properties][1].
+		 *
+		 * [1]: https://discord.com/developers/docs/topics/gateway#identify-identify-connection-properties
 		 */
 		properties: ConnectionProperties;
 
 		/**
-		 * Whether this connection supports compression of packets
+		 * Whether this connection supports compression of packets.
 		 *
 		 * @defaultValue false
 		 */
@@ -83,24 +85,26 @@ export interface Identify extends GatewayCommandPayload<GatewayOPCode.Identify> 
 
 		/**
 		 * Value between 50 and 250, total number of members where the gateway will stop sending
-		 * offline members in the guild member list
+		 * offline members in the guild member list.
 		 *
 		 * @defaultValue 50
 		 */
 		large_threshold?: RangeOf<50, 250>;
 
 		/**
-		 * Used for {@link https://discord.com/developers/docs/topics/gateway#sharding|Guild Sharding}
+		 * Used for [Guild Sharding][1].
+		 *
+		 * [1]: https://discord.com/developers/docs/topics/gateway#sharding
 		 */
 		shard?: [shard_id: number, num_shards: number];
 
 		/**
-		 * Presence structure for initial presence information
+		 * Presence structure for initial presence information.
 		 */
 		presence?: UpdateStatus['d'];
 
 		/**
-		 * The {@link https://discord.com/developers/docs/topics/gateway#gateway-intents|Gateway Intents} you wish to receive
+		 * The {@link https://discord.com/developers/docs/topics/gateway#gateway-intents|Gateway Intents} you wish to receive.
 		 */
 		intents: number;
 	};
@@ -116,16 +120,16 @@ export interface Identify extends GatewayCommandPayload<GatewayOPCode.Identify> 
 export interface Resume extends GatewayCommandPayload<GatewayOPCode.Resume> {
 	d: {
 		/**
-		 * Session token
+		 * Session token.
 		 */
 		token: string;
 
 		/**
-		 * Session ID
+		 * Session ID.
 		 */
 		session_id: string;
 		/**
-		 * Last sequence number received
+		 * Last sequence number received.
 		 */
 		seq: number;
 	};
@@ -179,33 +183,35 @@ export interface Heartbeat extends GatewayCommandPayload<GatewayOPCode.Heartbeat
 export interface RequestGuildMembers extends GatewayCommandPayload<GatewayOPCode.RequestGuildMembers> {
 	d: {
 		/**
-		 * ID of the guild to get members for
+		 * ID of the guild to get members for.
 		 */
 		guild_id: Snowflake;
 
 		/**
-		 * String that username starts with, or an empty string to return all members
+		 * String that username starts with, or an empty string to return all members.
 		 */
 		query?: string;
 
 		/**
 		 * Maximum number of members to send matching the `query`; a limit of `0` can be used with
-		 * an empty string `query` to return all members
+		 * an empty string `query` to return all members.
 		 */
 		limit: number;
 
 		/**
-		 * Used to specify if we want the presences of the matched members
+		 * Used to specify if we want the presences of the matched members.
 		 */
 		presences?: boolean;
 
 		/**
-		 * Used to specify which users you wish to fetch
+		 * Used to specify which users you wish to fetch.
 		 */
 		user_ids?: Snowflake | Snowflake[];
 
 		/**
-		 * Nonce to identify the {@link https://discord.com/developers/docs/topics/gateway#guild-members-chunk|Guild Members Chunk} response
+		 * Nonce to identify the [Guild Members Chunk][1] response.
+		 * 
+		 * [1]: https://discord.com/developers/docs/topics/gateway#guild-members-chunk
 		 */
 		nonce?: string;
 	};
@@ -220,22 +226,22 @@ export interface RequestGuildMembers extends GatewayCommandPayload<GatewayOPCode
  */
 export interface UpdateVoiceState {
 	/**
-	 * ID of the guild
+	 * ID of the guild.
 	 */
 	guild_id: Snowflake;
 
 	/**
-	 * ID of the voice channel client wants to join (`null` if disconnecting)
+	 * ID of the voice channel client wants to join (`null` if disconnecting).
 	 */
 	channel_id: Nullable<Snowflake>;
 
 	/**
-	 * Is the client muted
+	 * Is the client muted.
 	 */
 	self_mute: boolean;
 
 	/**
-	 * Is the client deafened
+	 * Is the client deafened.
 	 */
 	self_deaf: boolean;
 }
@@ -251,22 +257,24 @@ export interface UpdateStatus extends GatewayCommandPayload<GatewayOPCode.Presen
 	d: {
 		/**
 		 * Unix time (in milliseconds) of when the client went idle, or null if the client is not
-		 * idle
+		 * idle.
 		 */
 		since: Nullable<number>;
 
 		/**
-		 * `null`, or the user's activities
+		 * `null`, or the user's activities.
 		 */
 		activities: Nullable<Activity[]>;
 
 		/**
-		 * The user's new {@link https://discord.com/developers/docs/topics/gateway#update-status-status-types|status}
+		 * The user's new [status][1].
+		 *
+		 * [1]; https://discord.com/developers/docs/topics/gateway#update-status-status-types
 		 */
 		status: StatusType;
 
 		/**
-		 * Whether or not the client is AFK
+		 * Whether or not the client is AFK.
 		 */
 		afk: boolean;
 	};

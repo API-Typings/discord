@@ -7,7 +7,7 @@ import type { User } from './Users';
  */
 export interface OAuth2Token {
 	/**
-	 * A bearer token for the current user
+	 * A bearer token for the current user.
 	 */
 	AccessToken: string;
 
@@ -18,7 +18,7 @@ export interface OAuth2Token {
 	Scopes: string;
 
 	/**
-	 * The timestamp at which the token expires
+	 * The timestamp at which the token expires.
 	 */
 	Expires: bigint;
 }
@@ -28,22 +28,22 @@ export interface OAuth2Token {
  */
 export interface SignedAppTicket {
 	/**
-	 * The application id for the ticket
+	 * The application id for the ticket.
 	 */
 	application_id: bigint;
 
 	/**
-	 * The user for the ticket
+	 * The user for the ticket.
 	 */
 	user: User;
 
 	/**
-	 * The list of the user's entitlements for this application
+	 * The list of the user's entitlements for this application.
 	 */
 	entitlements: Pick<Entitlement, 'SkuId'>[];
 
 	/**
-	 * The ISO 8601 timestamp for the ticket
+	 * The ISO 8601 timestamp for the ticket.
 	 */
 	timestamp: string;
 }
@@ -56,7 +56,7 @@ export interface ApplicationManager {
 	 * Get's the locale the current user has Discord set to.
 	 *
 	 * @info
-	 * Value from the environment variable `DISCORD_CURRENT_LOCALE`
+	 * Value from the environment variable `DISCORD_CURRENT_LOCALE`.
 	 */
 	GetCurrentLocale(): string;
 
@@ -65,7 +65,7 @@ export interface ApplicationManager {
 	 * created and pushed using Dispatch.
 	 *
 	 * @info
-	 * Value from environment variable `DISCORD_CURRENT_BRANCH`
+	 * Value from environment variable `DISCORD_CURRENT_BRANCH`.
 	 */
 	GetCurrentBranch(): string;
 
@@ -78,7 +78,7 @@ export interface ApplicationManager {
 	 * Discord will focus itself and prompt the user for authorization.
 	 *
 	 * @info
-	 * Value from the environment variable `DISCORD_ACCESS_TOKEN`
+	 * Value from the environment variable `DISCORD_ACCESS_TOKEN`.
 	 *
 	 * @warning
 	 * Ensure that you have `http://127.0.0.1` set as a valid redirect URI for your application in
@@ -100,10 +100,10 @@ export interface ApplicationManager {
 	 * The `signature` is used to verify the ticket using the libsodium library of your choice, and
 	 * the `base64encodedjson` is what you can transform after verification. It contains:
 	 *
-	 * - The application ID tied to the ticket
-	 * - The user's user ID
-	 * - A timestamp for the ticket
-	 * - The list of the user's [entitlements][1] for the application ID
+	 * - The application ID tied to the ticket.
+	 * - The user's user ID.
+	 * - A timestamp for the ticket.
+	 * - The list of the user's [entitlements][1] for the application ID.
 	 *
 	 * These values can be accessed by transforming the string into a [SignedAppTicket][2] with your
 	 * application's private key.

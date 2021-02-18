@@ -6,41 +6,41 @@ import type { Discord } from '../';
  */
 export interface Achievement {
 	/**
-	 * The unique ID of the application
+	 * The unique ID of the application.
 	 */
 	application_id: bigint;
 
 	/**
-	 * The name of the achievement as an [achievement locale][1] object
+	 * The name of the achievement as an [achievement locale][1] object.
 	 *
 	 * [1]: https://discord.com/developers/docs/game-sdk/achievements#data-models-achievement-locale-object
 	 */
 	name: AchievementLocale;
 
 	/**
-	 * The user-facing achievement description as an [achievement locale][1] object
+	 * The user-facing achievement description as an [achievement locale][1] object.
 	 *
 	 * [1]: https://discord.com/developers/docs/game-sdk/achievements#data-models-achievement-locale-object
 	 */
 	description: AchievementLocale;
 
 	/**
-	 * If the achievement is secret
+	 * If the achievement is secret.
 	 */
 	secret: boolean;
 
 	/**
-	 * If the achievement is secure
+	 * If the achievement is secure.
 	 */
 	secure: boolean;
 
 	/**
-	 * The unique ID of the achievement
+	 * The unique ID of the achievement.
 	 */
 	id: bigint;
 
 	/**
-	 * [The hash of the icon][1]
+	 * [The hash of the icon][1].
 	 *
 	 * [1]: https://discord.com/developers/docs/reference#image-formatting
 	 */
@@ -52,12 +52,12 @@ export interface Achievement {
  */
 export interface AchievementLocale {
 	/**
-	 * The default locale for the achievement
+	 * The default locale for the achievement.
 	 */
 	default: string;
 
 	/**
-	 * Object of [accepted locales][1] as the key and achievement translations as the value
+	 * Object of [accepted locales][1] as the key and achievement translations as the value.
 	 *
 	 * [1]: https://discord.com/developers/docs/dispatch/field-values#predefined-field-values-accepted-locales
 	 */
@@ -69,22 +69,22 @@ export interface AchievementLocale {
  */
 export interface UserAchievement {
 	/**
-	 * The unique ID of the user working on the achievement
+	 * The unique ID of the user working on the achievement.
 	 */
 	UserId: bigint;
 
 	/**
-	 * The unique id of the achievement
+	 * The unique id of the achievement.
 	 */
 	AchievementId: bigint;
 
 	/**
-	 * How far along the user is to completing the achievement (0-100)
+	 * How far along the user is to completing the achievement (0-100).
 	 */
 	PercentComplete: RangeOf<0, 100>;
 
 	/**
-	 * The timestamp at which the user completed the achievement (`PercentComplete` was set to 100)
+	 * The timestamp at which the user completed the achievement (`PercentComplete` was set to 100).
 	 */
 	UnlockedAt: string;
 }
@@ -148,11 +148,8 @@ export interface AchievementManager extends NodeJS.EventEmitter {
 // SECTION Endpoints
 
 /**
- * Creates a new achievement for your application
- *
- * @remarks
- * Applications can have a maximum of 1000 achievements. This endpoint has a rate limit of 5
- * requests per 5 seconds per application.
+ * Creates a new achievement for your application. Applications can have a maximum of 1000
+ * achievements. This endpoint has a rate limit of 5 requests per 5 seconds per application.
  *
  * @endpoint [POST] `/applications/{application.id}/achievements`
  *
@@ -160,17 +157,15 @@ export interface AchievementManager extends NodeJS.EventEmitter {
  */
 export interface CreateAchievement extends Omit<Achievement, 'id' | 'icon_hash' | 'application_id'> {
 	/**
-	 * The icon for the achievement
+	 * The icon for the achievement.
 	 */
 	icon: string;
 }
 
 /**
- * Updates the `UserAchievement` record for a given user.
- *
- * @remarks
- * Use this endpoint to update secure achievement progress for users. This endpoint has a rate limit
- * of 5 requests per 5 seconds per application.
+ * Updates the `UserAchievement` record for a given user. Use this endpoint to update secure
+ * achievement progress for users. This endpoint has a rate limit of 5 requests per 5 seconds per
+ * application.
  *
  * @endpoint [PUT] `/applications/{application.id}/achievements/{achievement.id}`
  *
@@ -178,7 +173,7 @@ export interface CreateAchievement extends Omit<Achievement, 'id' | 'icon_hash' 
  */
 export interface UpdateUserAchievement {
 	/**
-	 * The user's progress towards completing the achievement
+	 * The user's progress towards completing the achievement.
 	 */
 	percent_complete: number;
 }

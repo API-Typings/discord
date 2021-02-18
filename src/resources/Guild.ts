@@ -21,47 +21,53 @@ import type {
  */
 export interface PartialGuild {
 	/**
-	 * Guild ID
+	 * Guild ID.
 	 */
 	id: Snowflake;
 
 	/**
-	 * Guild name (2-100 characters, excluding trailing and leading whitespace)
+	 * Guild name (2-100 characters, excluding trailing and leading whitespace).
 	 */
 	name: Nullable<string>;
 
 	/**
-	 * {@link https://discord.com/developers/docs/reference#image-formatting|Splash hash}
+	 * [Splash hash][1].
+	 *
+	 * [1]: https://discord.com/developers/docs/reference#image-formatting
 	 */
 	splash: Nullable<string>;
 
 	/**
-	 * {@link https://discord.com/developers/docs/reference#image-formatting|Banner hash}
+	 * [Banner hash][1].
+	 *
+	 * [1]: https://discord.com/developers/docs/reference#image-formatting
 	 */
 	banner?: Nullable<string>;
 
 	/**
-	 * The description for the guild
+	 * The description for the guild.
 	 */
 	description?: Nullable<string>;
 
 	/**
-	 * Enabled guild features
+	 * Enabled guild features.
 	 */
 	features?: GuildFeatures[];
 
 	/**
-	 * {@link https://discord.com/developers/docs/resources/guild#guild-object-verification-level|Verification level} required for the guild
+	 * [Verification level][1] required for the guild.
+	 *
+	 * [1]: https://discord.com/developers/docs/resources/guild#guild-object-verification-level
 	 */
 	verification_level?: VerificationLevel;
 
 	/**
-	 * The vanity url code for the guild
+	 * The vanity URL code for the guild.
 	 */
 	vanity_url_code?: Nullable<string>;
 
 	/**
-	 * True if this guild is unavailable due to an outage
+	 * True if this guild is unavailable due to an outage.
 	 */
 	unavailable?: boolean;
 }
@@ -76,26 +82,34 @@ export interface PartialGuild {
  */
 export interface Guild extends PartialGuild {
 	/**
-	 * {@link https://discord.com/developers/docs/reference#image-formatting|Icon hash}
+	 * [Icon hash][1].
+	 *
+	 * [1]: https://discord.com/developers/docs/reference#image-formatting
 	 */
 	icon: string;
 
 	/**
-	 * {@link https://discord.com/developers/docs/reference#image-formatting|Icon hash}, returned when in the template object
+	 * [Icon hash][1], returned when in the template object.
+	 *
+	 * [1]: https://discord.com/developers/docs/reference#image-formatting
 	 */
 	icon_hash?: Nullable<string>;
 
 	/**
-	 * {@link https://discord.com/developers/docs/reference#image-formatting|Discovery splash hash}; only present for guilds with the "DISCOVERABLE" feature
+	 * [Discovery splash hash][1]; only present for guilds with the `DISCOVERABLE` feature.
+	 *
+	 * [1]: https://discord.com/developers/docs/reference#image-formatting
 	 */
 	discovery_splash: Nullable<string>;
 
 	/**
-	 * True if {@link https://discord.com/developers/docs/resources/user#get-current-user-guilds|the user} is the owner of the guild
+	 * True if [the user][1] is the owner of the guild.
 	 *
 	 * @remarks
-	 * This field is only sent when using the {@link https://discord.com/developers/docs/resources/user#get-current-user-guilds|GET Current User Guilds}
-	 * endpoint and is relative to the request user
+	 * This field is only sent when using the [`GET Current User Guilds`][1] endpoint and is
+	 * relative to the request user.
+	 *
+	 * [1]: https://discord.com/developers/docs/resources/user#get-current-user-guilds
 	 */
 	owner?: boolean;
 
@@ -105,228 +119,263 @@ export interface Guild extends PartialGuild {
 	owner_id: Snowflake;
 
 	/**
-	 * Total permissions for {@link https://discord.com/developers/docs/resources/user#get-current-user-guilds|the user} in the guild (excludes overrides)
+	 * Total permissions for [the user][1] in the guild (excludes overrides).
 	 *
 	 * @remarks
-	 * This field is only sent when using the {@link https://discord.com/developers/docs/resources/user#get-current-user-guilds|GET Current User Guilds}
-	 * endpoint and is relative to the request user
+	 * This field is only sent when using the [`GET Current User Guilds`][1] endpoint and is
+	 * relative to the request user.
+	 *
+	 * [1]: https://discord.com/developers/docs/resources/user#get-current-user-guilds
 	 */
 	permissions?: string;
 
 	/**
-	 * {@link https://discord.com/developers/docs/resources/voice#voice-region-object|Voice region} ID for the guild
+	 * [Voice region][1] ID for the guild.
+	 *
+	 * [1]: https://discord.com/developers/docs/resources/voice#voice-region-object
 	 */
 	region: VoiceRegion;
 
 	/**
-	 * ID of AFK channel
+	 * ID of AFK channel.
 	 */
 	afk_channel_id: Nullable<Snowflake>;
 
 	/**
-	 * AFK timeout in seconds
+	 * AFK timeout in seconds.
 	 */
 	afk_timeout: number;
 
 	/**
-	 * True if the server widget is enabled
+	 * True if the server widget is enabled.
 	 */
 	wdiget_enabled?: boolean;
 
 	/**
-	 * The channel id that the widget will generate an invite to, or `null` if set to no invite
+	 * The channel ID that the widget will generate an invite to, or `null` if set to no invite.
 	 */
 	widget_channel_id?: Nullable<Snowflake>;
 
 	/**
-	 * {@link https://discord.com/developers/docs/resources/guild#guild-object-verification-level|Verification level} required for the guild
+	 * [Verification level][1] required for the guild.
+	 *
+	 * [1]: https://discord.com/developers/docs/resources/guild#guild-object-verification-level
 	 */
 	verification_level: VerificationLevel;
 
 	/**
-	 * Default {@link https://discord.com/developers/docs/resources/guild#guild-object-default-message-notification-level|message notifications level}
+	 * Default [message notifications level][1].
+	 *
+	 * [1]: https://discord.com/developers/docs/resources/guild#guild-object-default-message-notification-level
 	 */
 	default_message_notifications: NotificationLevel;
 
 	/**
-	 * {@link https://discord.com/developers/docs/resources/guild#guild-object-explicit-content-filter-level|Explicit content filter level}
+	 * [Explicit content filter level][1].
+	 *
+	 * [1]: https://discord.com/developers/docs/resources/guild#guild-object-explicit-content-filter-level
 	 */
 	explicit_content_filter: ExplicitFilterLevel;
 
 	/**
-	 * Roles in the guild
+	 * Roles in the guild.
 	 */
 	roles: Role[];
 
 	/**
-	 * Custom guild emojis
+	 * Custom guild emojis.
 	 */
 	emojis: Emoji[];
 
 	/**
-	 * Enabled guild features
+	 * Enabled guild features.
 	 */
 	features: GuildFeatures[];
 
 	/**
-	 * Required {@link https://discord.com/developers/docs/resources/guild#guild-object-mfa-level|MFA level} for the guild
+	 * Required [MFA level][1] for the guild.
+	 *
+	 * [1]: https://discord.com/developers/docs/resources/guild#guild-object-mfa-level
 	 */
 	mfa_level: MFALevel;
 
 	/**
-	 * Application ID of the guild creator if it is bot-created
+	 * Application ID of the guild creator if it is bot-created.
 	 */
 	application_id: Nullable<Snowflake>;
 
 	/**
 	 * The ID of the channel where guild notices such as welcome messages and boost events are
-	 * posted
+	 * posted.
 	 */
 	system_channel_id: Nullable<Snowflake>;
 
 	/**
-	 * {@link https://discord.com/developers/docs/resources/guild#guild-object-system-channel-flags|System channel flags}
+	 * [System channel flags][1].
+	 *
+	 * [1]: https://discord.com/developers/docs/resources/guild#guild-object-system-channel-flags
 	 */
 	system_channel_flags: SystemChannelFlags;
 
 	/**
-	 * The ID of the channel where Community guilds can display rules and/or guidelines
+	 * The ID of the channel where Community guilds can display rules and/or guidelines.
 	 */
 	rules_channel_id: Nullable<Snowflake>;
 
 	/**
-	 * When this guild was joined at
+	 * When this guild was joined at.
 	 *
 	 * @remarks
-	 * This field is only sent within the {@link https://discord.com/developers/docs/topics/gateway#guild-create|`GUILD_CREATE`} event
+	 * This field is only sent within the [`GUILD_CREATE`][1] event.
+	 *
+	 * [1]: https://discord.com/developers/docs/topics/gateway#guild-create
 	 */
 	joined_at?: Nullable<string>;
 
 	/**
-	 * True if this is considered a large guild
+	 * True if this is considered a large guild.
 	 *
 	 * @remarks
-	 * This field is only sent within the {@link https://discord.com/developers/docs/topics/gateway#guild-create|`GUILD_CREATE`} event
+	 * This field is only sent within the [`GUILD_CREATE`][1] event.
+	 *
+	 * [1]: https://discord.com/developers/docs/topics/gateway#guild-create
 	 */
 	large?: boolean;
 
 	/**
-	 * True if this guild is unavailable due to an outage
+	 * True if this guild is unavailable due to an outage.
 	 *
 	 * @remarks
-	 * This field is only sent within the {@link https://discord.com/developers/docs/topics/gateway#guild-create|`GUILD_CREATE`} event
+	 * This field is only sent within the [`GUILD_CREATE`][1] event.
+	 *
+	 * [1]: https://discord.com/developers/docs/topics/gateway#guild-create
 	 */
 	unavailable?: boolean;
 
 	/**
-	 * Total number of members in this guild
+	 * Total number of members in this guild.
 	 *
 	 * @remarks
-	 * This field is only sent within the {@link https://discord.com/developers/docs/topics/gateway#guild-create|`GUILD_CREATE`} event
+	 * This field is only sent within the [`GUILD_CREATE`][1] event.
+	 *
+	 * [1]: https://discord.com/developers/docs/topics/gateway#guild-create
 	 */
 	member_count?: number;
 
 	/**
-	 * States of members currently in voice channels; lacks the `guild_id` key
+	 * States of members currently in voice channels; lacks the `guild_id` key.
 	 *
 	 * @remarks
-	 * This field is only sent within the {@link https://discord.com/developers/docs/topics/gateway#guild-create|`GUILD_CREATE`} event
+	 * This field is only sent within the [`GUILD_CREATE`][1] event.
+	 *
+	 * [1]: https://discord.com/developers/docs/topics/gateway#guild-create
 	 */
 	voice_states?: Omit<VoiceState, 'guild_id'>[];
 
 	/**
-	 * Users in the guild
+	 * Users in the guild.
 	 *
 	 * @remarks
-	 * This field is only sent within the {@link https://discord.com/developers/docs/topics/gateway#guild-create|`GUILD_CREATE`} event
+	 * This field is only sent within the [`GUILD_CREATE`][1] event.
+	 *
+	 * [1]: https://discord.com/developers/docs/topics/gateway#guild-create
 	 */
 	members?: GuildMember[];
 
 	/**
-	 * Channels in the guild
+	 * Channels in the guild.
 	 *
 	 * @remarks
-	 * This field is only sent within the {@link https://discord.com/developers/docs/topics/gateway#guild-create|`GUILD_CREATE`} event
+	 * This field is only sent within the [`GUILD_CREATE`][1] event.
+	 *
+	 * [1]: https://discord.com/developers/docs/topics/gateway#guild-create
 	 */
 	channels?: Channel[];
 
 	/**
 	 * Presences of the members in the guild, will only include non-offline members if the size is
-	 * greater than `large threshold`
+	 * greater than `large threshold`.
 	 *
 	 * @remarks
-	 * This field is only sent within the {@link https://discord.com/developers/docs/topics/gateway#guild-create|`GUILD_CREATE`} event
+	 * This field is only sent within the [`GUILD_CREATE`][1] event.
+	 *
+	 * [1]: https://discord.com/developers/docs/topics/gateway#guild-create
 	 */
 	presences?: Partial<PresenceUpdate['d']>[];
 
 	/**
 	 * The maximum number of presences for the guild (the default value, currently 25000, is in
-	 * effect when `null` is returned)
+	 * effect when `null` is returned).
 	 */
 	max_presences?: Nullable<number>;
 
 	/**
-	 * The maximum number of members for the guild
+	 * The maximum number of members for the guild.
 	 */
 	max_members?: number;
 
 	/**
-	 * The vanity url code for the guild
+	 * The vanity url code for the guild.
 	 */
 	vanity_url_code: Nullable<string>;
 
 	/**
-	 * The description for the guild, if the guild is discoverable
+	 * The description for the guild, if the guild is discoverable.
 	 */
 	description: Nullable<string>;
 
 	/**
-	 * {@link https://discord.com/developers/docs/reference#image-formatting|Banner hash}
+	 * [Banner hash][1].
+	 *
+	 * [1]: https://discord.com/developers/docs/reference#image-formatting
 	 */
 	banner?: Nullable<string>;
 
 	/**
-	 * {@link https://discord.com/developers/docs/resources/guild#guild-object-premium-tier|Premium tier (server Boost level)}
+	 * [Premium tier (server Boost level)][1].
+	 *
+	 * [1]: https://discord.com/developers/docs/resources/guild#guild-object-premium-tier
 	 */
 	premium_tier: PremiumTier;
 
 	/**
-	 * The number of boosts this guild currently has
+	 * The number of boosts this guild currently has.
 	 */
 	premium_subscription_count?: number;
 
 	/**
 	 * The preferred locale of a Community guild; used in server discovery and notices from Discord;
-	 * defaults to "en-US"
+	 *
+	 * @defaultValue en-US
 	 */
 	preferred_locale: string;
 
 	/**
 	 * The ID of the channel where admins and moderators of Community guilds receive notices from
-	 * Discord
+	 * Discord.
 	 */
 	public_updates_channel_id: Nullable<Snowflake>;
 
 	/**
-	 * The maximum amount of users in a video channel
+	 * The maximum amount of users in a video channel.
 	 */
 	max_video_channel_users?: number;
 
 	/**
 	 * Approximate number of members in this guild, returned from the `GET /guilds/{guild.id}`
-	 * endpoint when `with_counts` is `true`
+	 * endpoint when `with_counts` is `true`.
 	 */
 	approximate_member_count?: number;
 
 	/**
 	 * Approximate number of non-offline members in this guild, returned from the
-	 * `GET /guilds/{guild.id}` endpoint when `with_counts` is `true`
+	 * `GET /guilds/{guild.id}` endpoint when `with_counts` is `true`.
 	 */
 	approximate_presence_count?: number;
 
 	/**
 	 * The welcome screen of a Community guild, shown to new members, returned when in the invite
-	 * object
+	 * object.
 	 */
 	welcome_screen?: WelcomeScreen;
 }
@@ -361,27 +410,27 @@ export enum MFALevel {
  */
 export enum VerificationLevel {
 	/**
-	 * Unrestricted
+	 * Unrestricted.
 	 */
 	None,
 
 	/**
-	 * Must have verified email on account
+	 * Must have verified email on account.
 	 */
 	Low,
 
 	/**
-	 * Must be registered on Discord for longer than 5 minutes
+	 * Must be registered on Discord for longer than 5 minutes.
 	 */
 	Medium,
 
 	/**
-	 * Must be a member of the server for longer than 10 minutes
+	 * Must be a member of the server for longer than 10 minutes.
 	 */
 	High,
 
 	/**
-	 * Must have a verified phone number
+	 * Must have a verified phone number.
 	 */
 	VeryHigh
 }
@@ -401,12 +450,12 @@ export enum PremiumTier {
  */
 export enum SystemChannelFlags {
 	/**
-	 * Suppress member join notifications
+	 * Suppress member join notifications.
 	 */
 	SuppressJoinNotifications = 1 << 0,
 
 	/**
-	 * Suppress server boost notifications
+	 * Suppress server boost notifications.
 	 */
 	SuppressPremiumSubscriptions = 1 << 1
 }
@@ -447,52 +496,58 @@ export interface UnavailableGuild extends Pick<PartialGuild, 'id'> {
  */
 export interface GuildPreview {
 	/**
-	 * Guild ID
+	 * Guild ID.
 	 */
 	id: Snowflake;
 
 	/**
-	 * Guild name
+	 * Guild name.
 	 */
 	name: string;
 
 	/**
-	 * {@link https://discord.com/developers/docs/reference#image-formatting|Icon hash}
+	 * [Icon hash][1].
+	 *
+	 * [1]: https://discord.com/developers/docs/reference#image-formatting
 	 */
 	icon: Nullable<string>;
 
 	/**
-	 * {@link https://discord.com/developers/docs/reference#image-formatting|Splash hash}
+	 * [Splash hash][1].
+	 *
+	 * [1]: https://discord.com/developers/docs/reference#image-formatting
 	 */
 	splash: Nullable<string>;
 
 	/**
-	 * {@link https://discord.com/developers/docs/reference#image-formatting|Discovery splash hash}
+	 * [Discovery splash hash][1].
+	 *
+	 * [1]: https://discord.com/developers/docs/reference#image-formatting
 	 */
 	discovery_splash: Nullable<string>;
 
 	/**
-	 * Custom guild emojis
+	 * Custom guild emojis.
 	 */
 	emojis: Emoji[];
 
 	/**
-	 * Enabled guild features
+	 * Enabled guild features.
 	 */
 	features: GuildFeatures[];
 
 	/**
-	 * Approximate number of members in this guild
+	 * Approximate number of members in this guild.
 	 */
 	approximate_member_count: number;
 
 	/**
-	 * Approximate number of online members in this guild
+	 * Approximate number of online members in this guild.
 	 */
 	approximate_presence_count: number;
 
 	/**
-	 * The description for the guild, if the guild is discoverable
+	 * The description for the guild, if the guild is discoverable.
 	 */
 	description: Nullable<string>;
 }
@@ -502,12 +557,12 @@ export interface GuildPreview {
  */
 export interface GuildWidgetSettings {
 	/**
-	 * Whether the widget is enabled
+	 * Whether the widget is enabled.
 	 */
 	enabled: boolean;
 
 	/**
-	 * The widget channel ID
+	 * The widget channel ID.
 	 */
 	channel_id?: Snowflake;
 }
@@ -555,56 +610,60 @@ export interface GuildWidgetMember {
 /**
  * @info
  * - The field `user` won't be included in the member object attached to `MESSAGE_CREATE` and
- *   `MESSAGE_UPDATE` gateway events
+ *   `MESSAGE_UPDATE` gateway events.
  * - In `GUILD_` events, `pending` will always be included as `true` or `false`. In non `GUILD_`
- *   events which can only be triggered by non-`pending` users, `pending` will not be included
+ *   events which can only be triggered by non-`pending` users, `pending` will not be included.
  *
  * @source {@link https://discord.com/developers/docs/resources/guild#guild-member-object-guild-member-structure|Guild}
  */
 export interface GuildMember {
 	/**
-	 * The user this guild member represents
+	 * The user this guild member represents.
 	 */
 	user?: User;
 
 	/**
-	 * This users guild nickname
+	 * This users guild nickname.
 	 */
 	nick?: Nullable<string>;
 
 	/**
-	 * Array of {@link https://discord.com/developers/docs/topics/permissions#role-object|role} object IDs
+	 * Array of [role][1] object IDs.
+	 *
+	 * [1]: https://discord.com/developers/docs/topics/permissions#role-object
 	 */
 	roles: Snowflake[];
 
 	/**
-	 * When the user joined the guild
+	 * When the user joined the guild.
 	 */
 	joined_at: string;
 
 	/**
-	 * When the user started {@link https://support.discord.com/hc/en-us/articles/360028038352-Server-Boosting-|boosting} the guild
+	 * When the user started [boosting][1] the guild.
+	 *
+	 * [1]: https://support.discord.com/hc/en-us/articles/360028038352-Server-Boosting-
 	 */
 	premium_since?: Nullable<string>;
 
 	/**
-	 * Whether the user is deafened in voice channels
+	 * Whether the user is deafened in voice channels.
 	 */
 	deaf: boolean;
 
 	/**
-	 * Whether the user is muted in voice channels
+	 * Whether the user is muted in voice channels.
 	 */
 	mute: boolean;
 
 	/**
-	 * Whether the user has not yet passed the guild's Membership Screening requirements
+	 * Whether the user has not yet passed the guild's Membership Screening requirements.
 	 */
 	pending?: boolean;
 
 	/**
 	 * Total permissions of the member in the channel, including overrides, returned when in the
-	 * interaction object
+	 * interaction object.
 	 */
 	permissions?: string;
 }
@@ -618,22 +677,22 @@ export interface GuildMember {
  */
 export interface PartialIntegration {
 	/**
-	 * Integration ID
+	 * Integration ID.
 	 */
 	id: Snowflake;
 
 	/**
-	 * Integration name
+	 * Integration name.
 	 */
 	name: string;
 
 	/**
-	 * Integration type (Twitch, YouTube, or Discord)
+	 * Integration type (Twitch, YouTube, or Discord).
 	 */
 	type: IntegrationType;
 
 	/**
-	 * Integration account information
+	 * Integration account information.
 	 */
 	account: IntegrationAccount;
 }
@@ -645,12 +704,12 @@ export interface PartialIntegration {
  */
 export interface Integration extends PartialIntegration {
 	/**
-	 * Integration ID
+	 * Integration ID.
 	 */
 	id: Snowflake;
 
 	/**
-	 * Integration name
+	 * Integration name.
 	 */
 	name: string;
 
@@ -660,81 +719,81 @@ export interface Integration extends PartialIntegration {
 	type: IntegrationType;
 
 	/**
-	 * Is this integration enabled
+	 * Is this integration enabled.
 	 */
 	enabled: boolean;
 
 	/**
-	 * Is this integration syncing
+	 * Is this integration syncing.
 	 *
 	 * @remarks
-	 * This field is not provided for discord bot integrations
+	 * This field is not provided for discord bot integrations.
 	 */
 	syncing?: boolean;
 
 	/**
-	 * ID that this integration uses for "subscribers"
+	 * ID that this integration uses for "subscribers".
 	 *
 	 * @remarks
-	 * This field is not provided for discord bot integrations
+	 * This field is not provided for discord bot integrations.
 	 */
 	role_id?: Snowflake;
 
 	/**
-	 * Whether emoticons should be synced for this integration (Twitch only currently)
+	 * Whether emoticons should be synced for this integration (Twitch only currently).
 	 *
 	 * @remarks
-	 * This field is not provided for discord bot integrations
+	 * This field is not provided for discord bot integrations.
 	 */
 	enable_emoticons?: boolean;
 
 	/**
-	 * The behavior of expiring subscribers
+	 * The behavior of expiring subscribers.
 	 *
 	 * @remarks
-	 * This field is not provided for discord bot integrations
+	 * This field is not provided for discord bot integrations.
 	 */
 	expire_behavior?: IntegrationExpireBehavior;
 
 	/**
-	 * The grace period (in days) before expiring subscribers
+	 * The grace period (in days) before expiring subscribers.
 	 *
 	 * @remarks
-	 * This field is not provided for discord bot integrations
+	 * This field is not provided for discord bot integrations.
 	 */
 	expire_grace_period?: number;
 
 	/**
-	 * User for this integration
+	 * User for this integration.
 	 *
 	 * @remarks
-	 * This field is not provided for discord bot integrations
+	 * This field is not provided for discord bot integrations.
 	 */
 	user?: User;
 
 	/**
-	 * When this integration was last synced
+	 * When this integration was last synced.
 	 *
 	 * @remarks
-	 * This field is not provided for discord bot integrations
+	 * This field is not provided for discord bot integrations.
 	 */
 	synced_at?: string;
 
 	/**
-	 * How many subscribers this integration has
+	 * How many subscribers this integration has.
 	 *
 	 * @remarks
-	 * This field is not provided for discord bot integrations
+	 * This field is not provided for discord bot integrations.
 	 */
 	subscriber_count?: number;
 
 	/**
-	 * Has this integration been revoked
+	 * Has this integration been revoked.
 	 */
 	revoked?: boolean;
 
 	/**
-	 * The bot/OAuth2 application for discord integrations
+	 * The bot/OAuth2 application for discord integrations.
 	 */
 	application?: IntegrationApplication;
 }
@@ -754,12 +813,12 @@ export enum IntegrationExpireBehavior {
  */
 export interface IntegrationAccount {
 	/**
-	 * ID of the account
+	 * ID of the account.
 	 */
 	id: Snowflake;
 
 	/**
-	 * Name of the account
+	 * Name of the account.
 	 */
 	name: string;
 }
@@ -769,38 +828,40 @@ export interface IntegrationAccount {
  */
 export interface IntegrationApplication {
 	/**
-	 * The ID of the app
+	 * The ID of the app.
 	 */
 	id: Snowflake;
 
 	/**
-	 * The name of the app
+	 * The name of the app.
 	 */
 	name: string;
 
 	/**
-	 * The {@link https://discord.com/developers/docs/reference#image-formatting|Icon hash} of the app
+	 * The [Icon hash][1] of the app.
+	 *
+	 * [1]: https://discord.com/developers/docs/reference#image-formatting
 	 */
 	icon: Nullable<string>;
 
 	/**
-	 * The description of the app
+	 * The description of the app.
 	 */
 	description: string;
 
 	/**
-	 * The description of the app
+	 * The description of the app.
 	 */
 	summary: string;
 
 	/**
 	 * If this application is a game sold on Discord, this field will be the hash of the image on
-	 * store embeds
+	 * store embeds.
 	 */
 	cover_image?: string;
 
 	/**
-	 * The bot associated with this application
+	 * The bot associated with this application.
 	 */
 	bot?: User;
 }
@@ -812,12 +873,12 @@ export interface IntegrationApplication {
  */
 export interface GuildBan {
 	/**
-	 * The reason for the ban
+	 * The reason for the ban.
 	 */
 	reason: Nullable<string>;
 
 	/**
-	 * The banned user
+	 * The banned user.
 	 */
 	user: User;
 }
@@ -833,12 +894,12 @@ export interface Prune {
  */
 export interface WelcomeScreen {
 	/**
-	 * The server description shown in the welcome screen
+	 * The server description shown in the welcome screen.
 	 */
 	description: Nullable<string>;
 
 	/**
-	 * The channels shown in the welcome screen, up to 5
+	 * The channels shown in the welcome screen, up to 5.
 	 */
 	welcome_channels: WelcomeScreenChannel[];
 }
@@ -848,22 +909,24 @@ export interface WelcomeScreen {
  */
 export interface WelcomeScreenChannel {
 	/**
-	 * The channel's ID
+	 * The channel's ID.
 	 */
 	channel_id: Snowflake;
 
 	/**
-	 * The description shown for the channel
+	 * The description shown for the channel.
 	 */
 	description: string;
 
 	/**
-	 * The {@link https://discord.com/developers/docs/reference#image-formatting|emoji ID}, if the emoji is custom
+	 * The [emoji ID][1], if the emoji is custom.
+	 *
+	 * [1]: https://discord.com/developers/docs/reference#image-formatting
 	 */
 	emoji_id: Nullable<Snowflake>;
 
 	/**
-	 * The emoji name if custom, the unicode character if standard, or `null` if no emoji is set
+	 * The emoji name if custom, the unicode character if standard, or `null` if no emoji is set.
 	 */
 	emoji_name: Nullable<string>;
 }
@@ -890,17 +953,17 @@ export interface WelcomeScreenChannel {
  */
 export interface MembershipScreening {
 	/**
-	 * When the fields were last updated
+	 * When the fields were last updated.
 	 */
 	version: string;
 
 	/**
-	 * The steps in the screening form
+	 * The steps in the screening form.
 	 */
 	form_fields: ScreeningField[];
 
 	/**
-	 * The server description shown in the screening form
+	 * The server description shown in the screening form.
 	 */
 	description: Nullable<string>;
 }
@@ -910,22 +973,22 @@ export interface MembershipScreening {
  */
 export interface ScreeningField {
 	/**
-	 * The type of field (currently `TERMS` is the only type)
+	 * The type of field (currently `TERMS` is the only type).
 	 */
 	field_type: ScreeningFieldType;
 
 	/**
-	 * The title of the field
+	 * The title of the field.
 	 */
 	label: string;
 
 	/**
-	 * The list of rules
+	 * The list of rules.
 	 */
 	values?: string[];
 
 	/**
-	 * Whether the user has to fill out the field
+	 * Whether the user has to fill out the field.
 	 */
 	required: boolean;
 }
@@ -958,37 +1021,45 @@ export enum ScreeningFieldType {
  */
 export interface CreateGuild {
 	/**
-	 * Name of the guild (2-100 characters)
+	 * Name of the guild (2-100 characters).
 	 */
 	name: string;
 
 	/**
-	 * {@link https://discord.com/developers/docs/resources/voice#voice-region-object|Voice region} ID
+	 * [Voice region][1] ID.
+	 *
+	 * [1]: https://discord.com/developers/docs/resources/voice#voice-region-object
 	 */
 	region?: string;
 
 	/**
-	 * Base64 128x128 image for the guild icon
+	 * Base64 128x128 image for the guild icon.
 	 */
 	icon?: string;
 
 	/**
-	 * {@link https://discord.com/developers/docs/resources/guild#guild-object-verification-level|Verification level}
+	 * [Verification level][1].
+	 *
+	 * [1]: https://discord.com/developers/docs/resources/guild#guild-object-verification-level
 	 */
 	verification_level?: number;
 
 	/**
-	 * Default {@link https://discord.com/developers/docs/resources/guild#guild-object-default-message-notification-level|message notifications level}
+	 * Default [message notifications level][1].
+	 *
+	 * [1]: https://discord.com/developers/docs/resources/guild#guild-object-default-message-notification-level
 	 */
 	default_message_notifications?: number;
 
 	/**
-	 * {@link https://discord.com/developers/docs/resources/guild#guild-object-explicit-content-filter-level|Explicit content filter level}
+	 * [Explicit content filter level][1].
+	 *
+	 * [1]: https://discord.com/developers/docs/resources/guild#guild-object-explicit-content-filter-level
 	 */
 	explicit_content_filter?: number;
 
 	/**
-	 * New guild roles
+	 * New guild roles.
 	 *
 	 * @remarks
 	 * When using the `roles` parameter:
@@ -1001,7 +1072,7 @@ export interface CreateGuild {
 	roles?: Role[];
 
 	/**
-	 * New guild's channels
+	 * New guild's channels.
 	 *
 	 * @remarks
 	 * When using the `channels` parameter:
@@ -1014,23 +1085,25 @@ export interface CreateGuild {
 	channels?: PartialChannel;
 
 	/**
-	 * ID for AFK channel
+	 * ID for AFK channel.
 	 */
 	afk_channel_id?: Snowflake;
 
 	/**
-	 * AFK timeout in seconds
+	 * AFK timeout in seconds.
 	 */
 	afk_timeout?: number;
 
 	/**
 	 * The ID of the channel where guild notices such as welcome messages and boost events are
-	 * posted
+	 * posted.
 	 */
 	system_channel_id?: Snowflake;
 
 	/**
-	 * {@link https://discord.com/developers/docs/resources/guild#guild-object-system-channel-flags|System channel flags}
+	 * [System channel flags][1].
+	 *
+	 * [1]: https://discord.com/developers/docs/resources/guild#guild-object-system-channel-flags
 	 */
 	system_channel_flags?: SystemChannelFlags;
 }
@@ -1049,7 +1122,7 @@ export interface CreateGuild {
  */
 export interface GetGuild {
 	/**
-	 * When `true`, will return approximate member and presence counts for the guild
+	 * When `true`, will return approximate member and presence counts for the guild.
 	 *
 	 * @defaultValue false
 	 */
@@ -1070,106 +1143,116 @@ export interface GetGuild {
  */
 export interface ModifyGuild {
 	/**
-	 * Guild name
+	 * Guild name.
 	 */
 	name?: string;
 
 	/**
-	 * Guild {@link https://discord.com/developers/docs/resources/voice#voice-region-object|voice region} id
+	 * Guild [voice region][1] ID.
+	 *
+	 * [1]: https://discord.com/developers/docs/resources/voice#voice-region-object
 	 */
 	region?: Nullable<string>;
 
 	/**
-	 * {@link https://discord.com/developers/docs/resources/guild#guild-object-verification-level|Verification level}
+	 * [Verification level][1].
+	 *
+	 * [1]: https://discord.com/developers/docs/resources/guild#guild-object-verification-level
 	 */
 	verification_level?: Nullable<number>;
 
 	/**
-	 * Default {@link https://discord.com/developers/docs/resources/guild#guild-object-default-message-notification-level|message notifications level}
+	 * Default [message notifications level][1].
+	 *
+	 * [1]: https://discord.com/developers/docs/resources/guild#guild-object-default-message-notification-level
 	 */
 	default_message_notifications?: Nullable<number>;
 
 	/**
-	 * {@link https://discord.com/developers/docs/resources/guild#guild-object-explicit-content-filter-level|Explicit content filter level}
+	 * [Explicit content filter level][1].
+	 *
+	 * [1]: https://discord.com/developers/docs/resources/guild#guild-object-explicit-content-filter-level
 	 */
 	explicit_content_filter?: Nullable<number>;
 
 	/**
-	 * ID for AFK channel
+	 * ID for AFK channel.
 	 */
 	afk_channel_id?: Nullable<Snowflake>;
 
 	/**
-	 * AFK timeout in seconds
+	 * AFK timeout in seconds.
 	 */
 	afk_timeout?: Nullable<number>;
 
 	/**
 	 * Base64 1024x1024 png/jpeg/gif image for the guild icon (can be animated gif when the server
-	 * has `ANIMATED_ICON` feature)
+	 * has `ANIMATED_ICON` feature).
 	 */
 	icon?: Nullable<string>;
 
 	/**
-	 * User ID to transfer guild ownership to (must be owner)
+	 * User ID to transfer guild ownership to (must be owner).
 	 */
 	owner_id?: Snowflake;
 
 	/**
-	 * Base64 16:9 png/jpeg image for the guild splash (when the server has `INVITE_SPLASH` feature)
+	 * Base64 16:9 png/jpeg image for the guild splash (when the server has `INVITE_SPLASH`
+	 * feature).
 	 */
 	splash?: Nullable<string>;
 
 	/**
-	 * Base64 16:9 png/jpeg image for the guild banner (when the server has `BANNER` feature)
+	 * Base64 16:9 png/jpeg image for the guild banner (when the server has `BANNER` feature).
 	 */
 	banner?: Nullable<string>;
 
 	/**
 	 * The ID of the channel where guild notices such as welcome messages and boost events are
-	 * posted
+	 * posted.
 	 */
 	system_channel_id?: Nullable<Snowflake>;
 
 	/**
-	 * {@link https://discord.com/developers/docs/resources/guild#guild-object-system-channel-flags|System channel flags}
+	 * [System channel flags][1].
+	 *
+	 * [1]: https://discord.com/developers/docs/resources/guild#guild-object-system-channel-flags
 	 */
 	system_channel_flags?: SystemChannelFlags;
 
 	/**
-	 * The ID of the channel where Community guilds display rules and/or guidelines
+	 * The ID of the channel where Community guilds display rules and/or guidelines.
 	 */
 	rules_channel_id?: Nullable<Snowflake>;
 
 	/**
 	 * The ID of the channel where admins and moderators of Community guilds receive notices from
-	 * Discord
+	 * Discord.
 	 */
 	public_updates_channel_id?: Nullable<Snowflake>;
 
 	/**
-	 * The preferred locale of a Community guild used in server discovery and notices from Discord;
-	 * defaults to "en-US"
+	 * The preferred locale of a Community guild used in server discovery and notices from Discord
+	 *
+	 * @defaultValue en-US
 	 */
 	preferred_locale?: Nullable<string>;
 
 	/**
-	 * Enabled guild features
+	 * Enabled guild features.
 	 */
 	features?: GuildFeatures[];
 
 	/**
-	 * The description for the guild, if the guild is discoverable
+	 * The description for the guild, if the guild is discoverable.
 	 */
 	description: string;
 }
 
 /**
- * Create a new [channel][1] object for the guild. Requires the `MANAGE_CHANNELS` permission.
- *
- * @remarks
- * If setting permission overwrites, only permissions your bot has in the guild can be allowed/
- * denied. Setting `MANAGE_ROLES` permission in channels is only possible for guild administrators.
+ * Create a new [channel][1] object for the guild. Requires the `MANAGE_CHANNELS` permission. If
+ * setting permission overwrites, only permissions your bot has in the guild can be allowed/denied.
+ * Setting `MANAGE_ROLES` permission in channels is only possible for guild administrators.
  *
  * @endpoint [POST] `/guilds/{guild.id}/channels`
  *
@@ -1182,53 +1265,55 @@ export interface ModifyGuild {
  */
 export interface CreateGuildChannel {
 	/**
-	 * Channel name (2-100 characters)
+	 * Channel name (2-100 characters).
 	 */
 	name: string;
 
 	/**
-	 * The {@link https://discord.com/developers/docs/resources/channel#channel-object-channel-types|type of channel}
+	 * The [type of channel][1].
+	 *
+	 * [1]: https://discord.com/developers/docs/resources/channel#channel-object-channel-types
 	 */
 	type?: number;
 
 	/**
-	 * Channel topic (0-1024 characters)
+	 * Channel topic (0-1024 characters).
 	 */
 	topic?: string;
 
 	/**
-	 * The bitrate (in bits) of the voice channel (voice only)
+	 * The bitrate (in bits) of the voice channel (voice only).
 	 */
 	bitrate?: number;
 
 	/**
-	 * The user limit of the voice channel (voice only)
+	 * The user limit of the voice channel (voice only).
 	 */
 	user_limit?: number;
 
 	/**
 	 * Amount of seconds a user has to wait before sending another message (0-21600); bots, as
-	 * well as users with the permission `manage_messages` or `manage_channel`, are unaffected
+	 * well as users with the permission `manage_messages` or `manage_channel`, are unaffected.
 	 */
 	rate_limit_per_user?: number;
 
 	/**
-	 * Sorting position of the channel
+	 * Sorting position of the channel.
 	 */
 	position?: number;
 
 	/**
-	 * The channel's permission overwrites
+	 * The channel's permission overwrites.
 	 */
 	permission_overwrites?: Overwrite[];
 
 	/**
-	 * ID of the parent category for a channel
+	 * ID of the parent category for a channel.
 	 */
 	parent_id?: Snowflake;
 
 	/**
-	 * Whether the channel is nsfw
+	 * Whether the channel is NSFW.
 	 */
 	nsfw?: boolean;
 }
@@ -1248,22 +1333,22 @@ export interface CreateGuildChannel {
  */
 export interface ModifyGuildChannelPositions {
 	/**
-	 * Channel ID
+	 * Channel ID.
 	 */
 	id: Snowflake;
 
 	/**
-	 * Sorting position of the channel
+	 * Sorting position of the channel.
 	 */
 	position: Nullable<number>;
 
 	/**
-	 * Syncs the permission overwrites with the new parent, if moving to a new category
+	 * Syncs the permission overwrites with the new parent, if moving to a new category.
 	 */
 	lock_permissions: Nullable<boolean>;
 
 	/**
-	 * The new parent ID for the channel that is moved
+	 * The new parent ID for the channel that is moved.
 	 */
 	parent_id: Snowflake;
 }
@@ -1279,14 +1364,14 @@ export interface ModifyGuildChannelPositions {
  */
 export interface ListGuildMembers {
 	/**
-	 * Max number of members to return (1-1000)
+	 * Max number of members to return (1-1000).
 	 *
 	 * @defaultValue 1
 	 */
 	limit?: RangeOf<1, 1000>;
 
 	/**
-	 * The highest user ID in the previous page
+	 * The highest user ID in the previous page.
 	 *
 	 * @defaultValue 0
 	 */
@@ -1303,12 +1388,12 @@ export interface ListGuildMembers {
  */
 export interface SearchGuildMembers {
 	/**
-	 * Query string to match username(s) and nickname(s) against
+	 * Query string to match username(s) and nickname(s) against.
 	 */
 	query: string;
 
 	/**
-	 * Max numbers of members to return (1-1000)
+	 * Max numbers of members to return (1-1000).
 	 *
 	 * @defaultValue 1
 	 */
@@ -1338,33 +1423,33 @@ export interface SearchGuildMembers {
 export interface AddGuildMember {
 	/**
 	 * An OAuth2 access token granted with the `guilds.join` to the bot's application for the user
-	 * you want to add to the guild
+	 * you want to add to the guild.
 	 */
 	access_token: string;
 
 	/**
-	 * Value to set users nickname to
+	 * Value to set users nickname to.
 	 *
 	 * @permission `MANAGE_NICKNAMES`
 	 */
 	nick?: string;
 
 	/**
-	 * Array of role ids the member is assigned
+	 * Array of role ids the member is assigned.
 	 *
 	 * @permission `MANAGE_ROLES`
 	 */
 	roles?: Snowflake[];
 
 	/**
-	 * Whether the user is muted in voice channels
+	 * Whether the user is muted in voice channels.
 	 *
 	 * @permission `MUTE_MEMBERS`
 	 */
 	mute?: boolean;
 
 	/**
-	 * Whether the user is deafened in voice channels
+	 * Whether the user is deafened in voice channels.
 	 *
 	 * @permission `DEAFEN_MEMBERS`
 	 */
@@ -1393,35 +1478,35 @@ export interface AddGuildMember {
  */
 export interface ModifyGuildMember {
 	/**
-	 * Value to set users nickname to
+	 * Value to set users nickname to.
 	 *
 	 * @permission `MANAGE_NICKNAMES`
 	 */
 	nick?: Nullable<string>;
 
 	/**
-	 * Array of role IDs the member is assigned
+	 * Array of role IDs the member is assigned.
 	 *
 	 * @permission `MANAGE_ROLES`
 	 */
 	roles?: Nullable<Snowflake[]>;
 
 	/**
-	 * Whether the user is muted in voice channels
+	 * Whether the user is muted in voice channels.
 	 *
 	 * @permission `MUTE_MEMBERS`
 	 */
 	mute?: Nullable<boolean>;
 
 	/**
-	 * Whether the user is deafened in voice channels
+	 * Whether the user is deafened in voice channels.
 	 *
 	 * @permission `DEAFEN_MEMBERS`
 	 */
 	deaf?: Nullable<boolean>;
 
 	/**
-	 * ID of channel to move user to (if they are connected to voice)
+	 * ID of channel to move user to (if they are connected to voice).
 	 *
 	 * @permission `MOVE_MEMBERS`
 	 */
@@ -1441,7 +1526,7 @@ export interface ModifyGuildMember {
  */
 export interface ModifyCurrentUserNick {
 	/**
-	 * Value to set users nickname to
+	 * Value to set users nickname to.
 	 *
 	 * @permission `CHANGE_NICKNAME`
 	 */
@@ -1462,12 +1547,12 @@ export interface ModifyCurrentUserNick {
  */
 export interface CreateGuildBan {
 	/**
-	 * Number of days to delete messages for (0-7)
+	 * Number of days to delete messages for (0-7).
 	 */
 	delete_messages_days?: RangeOf<0, 7>;
 
 	/**
-	 * Reason for the ban
+	 * Reason for the ban.
 	 */
 	reason?: string;
 }
@@ -1486,35 +1571,35 @@ export interface CreateGuildBan {
  */
 export interface CreateGuildRole {
 	/**
-	 * Name of the role
+	 * Name of the role.
 	 *
-	 * @defaultValue 'new role'
+	 * @defaultValue new role
 	 */
 	name?: string;
 
 	/**
-	 * Bitwise value of the enabled/disabled permissions
+	 * Bitwise value of the enabled/disabled permissions.
 	 *
 	 * @defaultValue `@everyone` permissions in guild
 	 */
 	permissions?: string;
 
 	/**
-	 * RGB color value
+	 * RGB color value.
 	 *
 	 * @defaultValue 0
 	 */
 	color?: number;
 
 	/**
-	 * Whether the role should be displayed separately in the sidebar
+	 * Whether the role should be displayed separately in the sidebar.
 	 *
 	 * @defaultValue false
 	 */
 	hoist?: boolean;
 
 	/**
-	 * Whether the role should be mentionable
+	 * Whether the role should be mentionable.
 	 *
 	 * @defaultValue false
 	 */
@@ -1537,12 +1622,12 @@ export interface CreateGuildRole {
  */
 export interface ModifyGuildRolePositions {
 	/**
-	 * Role
+	 * Role.
 	 */
 	id: Snowflake;
 
 	/**
-	 * Sorting position of the role
+	 * Sorting position of the role.
 	 */
 	position?: Nullable<number>;
 }
@@ -1561,27 +1646,27 @@ export interface ModifyGuildRolePositions {
  */
 export interface ModifyGuildRole {
 	/**
-	 * Name of the role
+	 * Name of the role.
 	 */
 	name?: Nullable<string>;
 
 	/**
-	 * Bitwise value of the enabled/disabled permissions
+	 * Bitwise value of the enabled/disabled permissions.
 	 */
 	permissions?: Nullable<string>;
 
 	/**
-	 * RGB color value
+	 * RGB color value.
 	 */
 	color?: Nullable<number>;
 
 	/**
-	 * Whether the role should be displayed separately in the sidebar
+	 * Whether the role should be displayed separately in the sidebar.
 	 */
 	hoist?: Nullable<boolean>;
 
 	/**
-	 * Whether the role should be mentionable
+	 * Whether the role should be mentionable.
 	 */
 	mentionable?: Nullable<boolean>;
 }
@@ -1603,14 +1688,14 @@ export interface ModifyGuildRole {
  */
 export interface GetGuildPruneCount {
 	/**
-	 * Number of days to count prune for (1-30)
+	 * Number of days to count prune for (1-30).
 	 *
 	 * @defaultValue 7
 	 */
 	days?: RangeOf<1, 30>;
 
 	/**
-	 * Role(s) to include
+	 * Role(s) to include.
 	 */
 	include_roles?: Snowflake[];
 }
@@ -1637,21 +1722,21 @@ export interface GetGuildPruneCount {
  */
 export interface BeginGuildPrune {
 	/**
-	 * Number of days to prune (1-30)
+	 * Number of days to prune (1-30).
 	 *
 	 * @defaultValue 7
 	 */
 	days?: RangeOf<1, 30>;
 
 	/**
-	 * Whether 'pruned' is returned, discouraged for large guilds
+	 * Whether `pruned` is returned, discouraged for large guilds.
 	 *
 	 * @defaultValue true
 	 */
 	compute_prune_count?: boolean;
 
 	/**
-	 * Role(s) to include
+	 * Role(s) to include.
 	 */
 	include_roles?: Snowflake[];
 }
@@ -1671,12 +1756,12 @@ export interface BeginGuildPrune {
  */
 export interface CreateGuildIntegration {
 	/**
-	 * 	The integration type
+	 * 	The integration type.
 	 */
 	type: IntegrationType;
 
 	/**
-	 * The integration ID
+	 * The integration ID.
 	 */
 	id: Snowflake;
 }
@@ -1696,18 +1781,17 @@ export interface CreateGuildIntegration {
  */
 export interface EditIntegration {
 	/**
-	 * The behavior when an integration subscription lapses (see the
-	 * {@link https://discord.com/developers/docs/resources/guild#integration-object-integration-expire-behaviors|integration expire behaviors} documentation)
+	 * The behavior when an integration subscription lapses.
 	 */
 	expire_behavior?: Nullable<number>;
 
 	/**
-	 * Period (in days) where the integration will ignore lapsed subscriptions
+	 * Period (in days) where the integration will ignore lapsed subscriptions.
 	 */
 	expire_grace_period?: Nullable<number>;
 
 	/**
-	 * Whether emoticons should be synced for this integration (Twitch only currently)
+	 * Whether emoticons should be synced for this integration (Twitch only currently).
 	 */
 	enable_emoticons?: Nullable<boolean>;
 }
@@ -1721,7 +1805,7 @@ export interface EditIntegration {
  */
 export interface GetWidgetImage {
 	/**
-	 * Style of the widget image returned
+	 * Style of the widget image returned.
 	 *
 	 * @defaultValue `shield`
 	 */
@@ -1742,17 +1826,17 @@ export type WidgetStyle = 'shield' | 'banner1' | 'banner2' | 'banner3' | 'banner
  */
 export interface ModifyDiscoveryMetadata {
 	/**
-	 * The ID of the primary discovery category
+	 * The ID of the primary discovery category.
 	 */
 	primary_category_id?: Nullable<number>;
 
 	/**
-	 * Up to 10 discovery search keywords
+	 * Up to 10 discovery search keywords.
 	 */
 	keywords?: Nullable<string[]>;
 
 	/**
-	 * Whether guild info is shown when custom emojis are clicked
+	 * Whether guild info is shown when custom emojis are clicked.
 	 */
 	emoji_discoverability_enabled?: Nullable<boolean>;
 }
@@ -1768,17 +1852,17 @@ export interface ModifyDiscoveryMetadata {
  */
 export interface ModifyWelcomeScreen {
 	/**
-	 * Whether the welcome screen is enabled
+	 * Whether the welcome screen is enabled.
 	 */
 	enabled: boolean;
 
 	/**
-	 * Channels linked in the welcome screen and their display options
+	 * Channels linked in the welcome screen and their display options.
 	 */
 	welcome_channels: WelcomeScreenChannel[];
 
 	/**
-	 * The server description to show in the welcome screen
+	 * The server description to show in the welcome screen.
 	 */
 	description: string;
 }
@@ -1794,17 +1878,19 @@ export interface ModifyWelcomeScreen {
  */
 export interface ModifyMembershipScreening {
 	/**
-	 * Whether Membership Screening is enabled
+	 * Whether Membership Screening is enabled.
 	 */
 	enabled?: boolean;
 
 	/**
-	 * Array of {@link https://discord.com/developers/docs/resources/guild#membership-screening-object-membership-screening-field-structure|field} objects serialized in a string
+	 * Array of [field][1] objects serialized in a string.
+	 *
+	 * [1]: https://discord.com/developers/docs/resources/guild#membership-screening-object-membership-screening-field-structure
 	 */
 	form_fields?: string;
 
 	/**
-	 * The server description to show in the screening form
+	 * The server description to show in the screening form.
 	 */
 	description?: string;
 }

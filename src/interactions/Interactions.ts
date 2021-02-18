@@ -1,11 +1,5 @@
 import type { Nullable } from '@api-typings/core';
-import type {
-	AllowedMentions,
-	Embed,
-	GuildMember,
-	Snowflake,
-	User
-} from '../';
+import type { AllowedMentions, Embed, GuildMember, Snowflake, User } from '../';
 
 // SECTION Application Command
 
@@ -19,27 +13,27 @@ import type {
  */
 export interface ApplicationCommand {
 	/**
-	 * Unique ID of the command
+	 * Unique ID of the command.
 	 */
 	id: Snowflake;
 
 	/**
-	 * Unique ID of the parent application
+	 * Unique ID of the parent application.
 	 */
 	application_id: Snowflake;
 
 	/**
-	 * 1-32 character name matching `^[\w-]{1,32}$`
+	 * 1-32 character name matching `^[\w-]{1,32}$`.
 	 */
 	name: string;
 
 	/**
-	 * 1-100 character description
+	 * 1-100 character description.
 	 */
 	description: string;
 
 	/**
-	 * The parameters for the command
+	 * The parameters for the command.
 	 */
 	options?: ApplicationCommandOption[];
 }
@@ -62,23 +56,23 @@ export interface ApplicationCommandOption {
 	name: string;
 
 	/**
-	 * 1-100 character description
+	 * 1-100 character description.
 	 */
 	description: string;
 
 	/**
-	 * If the parameter is required or optional--default `false`
+	 * If the parameter is required or optional--default `false`.
 	 */
 	required?: boolean;
 
 	/**
-	 * Choices for `string` and `int` types for the user to pick from
+	 * Choices for `string` and `int` types for the user to pick from.
 	 */
 	choices?: ApplicationCommandOptionChoice[];
 
 	/**
 	 * If the option is a subcommand or subcommand group type, this nested options will be the
-	 * parameters
+	 * parameters.
 	 */
 	options?: ApplicationCommandOption[];
 }
@@ -88,13 +82,13 @@ export interface ApplicationCommandOption {
  */
 export enum ApplicationCommandOptionType {
 	/**
-	 * Organized commands grouped by specifying actions within a command or group
+	 * Organized commands grouped by specifying actions within a command or group.
 	 */
 	SubCommand = 1,
 
 	/**
 	 * Organized subcommands grouped by subcommands with similar actions or resources within a
-	 * command
+	 * command.
 	 */
 	SubCommandGroup,
 	String,
@@ -106,18 +100,18 @@ export enum ApplicationCommandOptionType {
 }
 
 /**
- * If you specify `choices` for an option, they are the only valid values for a user to pick
+ * If you specify `choices` for an option, they are the only valid values for a user to pick.
  *
  * @source {@link https://discord.com/developers/docs/interactions/slash-commands#applicationcommandoptionchoice|Slash Commands}
  */
 export interface ApplicationCommandOptionChoice {
 	/**
-	 * 1-100 character choice name
+	 * 1-100 character choice name.
 	 */
 	name: string;
 
 	/**
-	 * Value of the choice
+	 * Value of the choice.
 	 */
 	value: string | number;
 }
@@ -134,51 +128,48 @@ export interface ApplicationCommandOptionChoice {
  */
 export interface Interaction {
 	/**
-	 * ID of the interaction
+	 * ID of the interaction.
 	 */
 	id: Snowflake;
 
 	/**
-	 * The type of interaction
+	 * The type of interaction.
 	 */
 	type: InteractionType;
 
 	/**
-	 * The command data payload
-	 *
-	 * @remarks
-	 * This is always present on `ApplicationCommand` interaction types. It is optional for
-	 * future-proofing against new interaction types.
+	 * The command data payload. This is always present on `ApplicationCommand` interaction types.
+	 * It is optional for future-proofing against new interaction types.
 	 */
 	data?: ApplicationCommandInteractionData;
 
 	/**
-	 * The guild it was sent from
+	 * The guild it was sent from.
 	 */
 	guild_id?: Snowflake;
 
 	/**
-	 * The channel it was sent from
+	 * The channel it was sent from.
 	 */
 	channel_id?: Snowflake;
 
 	/**
-	 * Guild member data for the invoking user, including permissions
+	 * Guild member data for the invoking user, including permissions.
 	 */
 	member?: GuildMember;
 
 	/**
-	 * User object for the invoking user, if invoked in a DM
+	 * User object for the invoking user, if invoked in a DM.
 	 */
 	user?: User;
 
 	/**
-	 * A continuation token for responding to the interaction
+	 * A continuation token for responding to the interaction.
 	 */
 	token: string;
 
 	/**
-	 * Read-only property, always `1`
+	 * Read-only property, always `1`.
 	 */
 	version: number;
 }
@@ -196,17 +187,17 @@ export enum InteractionType {
  */
 export interface ApplicationCommandInteractionData {
 	/**
-	 * The ID of the invoked command
+	 * The ID of the invoked command.
 	 */
 	id: Snowflake;
 
 	/**
-	 * The name of the invoked command
+	 * The name of the invoked command.
 	 */
 	name: string;
 
 	/**
-	 * The params + values from the user
+	 * The params + values from the user.
 	 */
 	options?: ApplicationCommandInteractionOptionData[];
 }
@@ -222,17 +213,17 @@ export interface ApplicationCommandInteractionData {
  */
 export interface ApplicationCommandInteractionOptionData {
 	/**
-	 * The name of the parameter
+	 * The name of the parameter.
 	 */
 	name: string;
 
 	/**
-	 * The value of the pair
+	 * The value of the pair.
 	 */
 	value?: unknown;
 
 	/**
-	 * Present if this option is a group or subcommand
+	 * Present if this option is a group or subcommand.
 	 */
 	options?: ApplicationCommandInteractionOptionData[];
 }
@@ -255,12 +246,12 @@ export interface ApplicationCommandInteractionOptionData {
  */
 export interface InteractionResponse {
 	/**
-	 * The type of response
+	 * The type of response.
 	 */
 	type: InteractionResponseType;
 
 	/**
-	 * An optional response message
+	 * An optional response message.
 	 */
 	data?: InteractionApplicationCommandCallbackData;
 }
@@ -270,17 +261,17 @@ export interface InteractionResponse {
  */
 export enum InteractionResponseType {
 	/**
-	 * ACK a `Ping`
+	 * ACK a `Ping`.
 	 */
 	Pong = 1,
 
 	/**
-	 * Respond to an interaction with a message
+	 * Respond to an interaction with a message.
 	 */
 	ChannelMessageSource = 4,
 
 	/**
-	 * ACK an interaction and send a response later, the user sees a loading stat
+	 * ACK an interaction and send a response later, the user sees a loading statud.
 	 */
 	DeferredChannelMessageSource
 }
@@ -290,27 +281,29 @@ export enum InteractionResponseType {
  */
 export interface InteractionApplicationCommandCallbackData {
 	/**
-	 * Is the response TTS
+	 * Is the response TTS.
 	 */
 	tts?: boolean;
 
 	/**
-	 * Message content
+	 * Message content.
 	 */
 	content: string;
 
 	/**
-	 * Supports up to 10 embeds
+	 * Supports up to 10 embeds.
 	 */
 	embeds?: Embed[];
 
 	/**
-	 * {@link https://discord.com/developers/docs/resources/channel#allowed-mentions-object|Allowed mentions} object
+	 * [Allowed mentions][1] object.
+	 *
+	 * [1]: https://discord.com/developers/docs/resources/channel#allowed-mentions-object
 	 */
 	allowed_mentions?: AllowedMentions;
 
 	/**
-	 * Set to `64` to make your response ephemeral
+	 * Set to `64` to make your response ephemeral.
 	 */
 	flags?: number;
 }
@@ -321,8 +314,8 @@ export interface InteractionApplicationCommandCallbackData {
 
 /**
  * Create a new guild/global command.
- * - **Guild:** new guild commands will be available in the guild immediately
- * - **Global:** new global commands will be available in all guilds after 1 hour
+ * - **Guild:** new guild commands will be available in the guild immediately.
+ * - **Global:** new global commands will be available in all guilds after 1 hour.
  *
  * @warning
  * Creating a command with the same name as an existing command for your application will
@@ -332,7 +325,7 @@ export interface InteractionApplicationCommandCallbackData {
  * - **Guild:** `/applications/{application.id}/guilds/{guild.id}/commands`
  * - **Global:** `/applications/{application.id}/commands`
  *
- * @returns `201` and an [Application Command][1] object
+ * @returns `201` and an [Application Command][1] object.
  *
  * [P1]: https://discord.com/developers/docs/interactions/slash-commands#create-guild-application-command
  * [P2]: https://discord.com/developers/docs/interactions/slash-commands#create-global-application-command
@@ -340,17 +333,17 @@ export interface InteractionApplicationCommandCallbackData {
  */
 export interface CreateApplicationCommand {
 	/**
-	 * 1-32 character name matching `^[\w-]{1,32}$`
+	 * 1-32 character name matching `^[\w-]{1,32}$`.
 	 */
 	name: string;
 
 	/**
-	 * 1-100 character description
+	 * 1-100 character description.
 	 */
 	description: string;
 
 	/**
-	 * The parameters for the command
+	 * The parameters for the command.
 	 */
 	options?: ApplicationCommandOption[];
 }
@@ -359,14 +352,14 @@ export interface CreateApplicationCommand {
 
 /**
  * Edit a guild/global command.
- * - **Guild:** updates for guild commands will be available immediately
- * - **Global:** updates will be available in all guilds after 1 hour
+ * - **Guild:** updates for guild commands will be available immediately.
+ * - **Global:** updates will be available in all guilds after 1 hour.
  *
  * @endpoint PATCH [[1][P1]] [[2][P2]]
  * - **Guild:** `/applications/{application.id}/guilds/{guild.id}/commands/{command.id}`
  * - **Global:** `/applications/{application.id}/commands/{command.id}`
  *
- * @returns `200` and an [Application Command][1] object
+ * @returns `200` and an [Application Command][1] object.
  *
  * [P1]: https://discord.com/developers/docs/interactions/slash-commands#edit-guild-application-command
  * [P2]: https://discord.com/developers/docs/interactions/slash-commands#edit-global-application-command
@@ -374,17 +367,17 @@ export interface CreateApplicationCommand {
  */
 export interface EditApplicationCommand {
 	/**
-	 * 1-32 character name matching `^[\w-]{1,32}$`
+	 * 1-32 character name matching `^[\w-]{1,32}$`.
 	 */
 	name?: string;
 
 	/**
-	 * 1-100 character description
+	 * 1-100 character description.
 	 */
 	description?: string;
 
 	/**
-	 * The parameters for the command
+	 * The parameters for the command.
 	 */
 	options?: Nullable<ApplicationCommandOption[]>;
 }

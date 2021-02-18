@@ -7,12 +7,12 @@ import type { PartialChannel, PartialGuild, PartialUser, User } from './';
  */
 export interface PartialInvite {
 	/**
-	 * The invite code (unique ID)
+	 * The invite code (unique ID).
 	 */
 	code: string;
 
 	/**
-	 * Number of times this invite has been used
+	 * Number of times this invite has been used.
 	 */
 	uses: number;
 }
@@ -26,37 +26,39 @@ export interface PartialInvite {
  */
 export interface Invite extends Pick<PartialInvite, 'code'> {
 	/**
-	 * The guild this invite is for
+	 * The guild this invite is for.
 	 */
 	guild?: PartialGuild;
 
 	/**
-	 * The channel this invite is for
+	 * The channel this invite is for.
 	 */
 	channel: PartialChannel;
 
 	/**
-	 * The user who created the invite
+	 * The user who created the invite.
 	 */
 	inviter?: User;
 
 	/**
-	 * The target user for this invite
+	 * The target user for this invite.
 	 */
 	target_user?: PartialUser;
 
 	/**
-	 * The {@link https://discord.com/developers/docs/resources/invite#invite-object-target-user-types|type of user target} for this invite
+	 * The [type of user target][1] for this invite.
+	 *
+	 * [1]: https://discord.com/developers/docs/resources/invite#invite-object-target-user-types
 	 */
 	target_user_type?: TargetUser;
 
 	/**
-	 * Approximate count of online members (only present when `target_user` is set)
+	 * Approximate count of online members (only present when `target_user` is set).
 	 */
 	approximate_presence_count?: number;
 
 	/**
-	 * Approximate count of total members
+	 * Approximate count of total members.
 	 */
 	approximate_member_count?: number;
 }
@@ -75,22 +77,22 @@ export enum TargetUser {
  */
 export interface InviteMetadata extends Invite, Pick<PartialInvite, 'uses'> {
 	/**
-	 * Max number of times this invite can be used
+	 * Max number of times this invite can be used.
 	 */
 	max_uses: number;
 
 	/**
-	 * Duration (in seconds) after which the invite expires
+	 * Duration (in seconds) after which the invite expires.
 	 */
 	max_age: number;
 
 	/**
-	 * Whether this invite only grants temporary membership
+	 * Whether this invite only grants temporary membership.
 	 */
 	temporary: boolean;
 
 	/**
-	 * When this invite was created
+	 * When this invite was created.
 	 */
 	created_at: string;
 }
@@ -107,7 +109,7 @@ export interface InviteMetadata extends Invite, Pick<PartialInvite, 'uses'> {
  */
 export interface GetInvite {
 	/**
-	 * Whether the invite should contain approximate member counts
+	 * Whether the invite should contain approximate member counts.
 	 */
 	with_counts?: boolean;
 }

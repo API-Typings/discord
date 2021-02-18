@@ -5,12 +5,12 @@ import type { Discord } from '../';
  */
 export interface ImageDimensions {
 	/**
-	 * The width of the image
+	 * The width of the image.
 	 */
 	Width: number;
 
 	/**
-	 * The height of the image
+	 * The height of the image.
 	 */
 	Height: number;
 }
@@ -20,24 +20,24 @@ export interface ImageDimensions {
  */
 export enum ImageType {
 	/**
-	 * Image is a user's avatar
+	 * Image is a user's avatar.
 	 */
 	User
 }
 
 export interface ImageHandle {
 	/**
-	 * The source of the image
+	 * The source of the image.
 	 */
 	Type: ImageType;
 
 	/**
-	 * The ID of the user whose avatar you want to get
+	 * The ID of the user whose avatar you want to get.
 	 */
 	Id: bigint;
 
 	/**
-	 * The resolution at which you want the image
+	 * The resolution at which you want the image.
 	 */
 	Size: number;
 }

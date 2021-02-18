@@ -14,12 +14,12 @@ export enum InputModeType {
  */
 export interface InputMode {
 	/**
-	 * Set either VAD or PTT as the voice input mode
+	 * Set either VAD or PTT as the voice input mode.
 	 */
 	Type: InputModeType;
 
 	/**
-	 * The PTT hotkey for the user
+	 * The PTT hotkey for the user.
 	 */
 	Shortcut: string;
 }

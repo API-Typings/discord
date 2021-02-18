@@ -5,17 +5,17 @@ import type { Discord } from '../';
  */
 export interface FileStat {
 	/**
-	 * The name of the file
+	 * The name of the file.
 	 */
 	Filename: string;
 
 	/**
-	 * The size of the file
+	 * The size of the file.
 	 */
 	Size: bigint;
 
 	/**
-	 * Timestamp of when the file was last modified
+	 * Timestamp of when the file was last modified.
 	 */
 	LastModified: bigint;
 }
@@ -34,7 +34,7 @@ export interface StorageManager {
 	 * user-specific path and help users protect their save files.
 	 *
 	 * @info
-	 * Value from environment variable `DISCORD_STORAGE_PATH`
+	 * Value from environment variable `DISCORD_STORAGE_PATH`.
 	 */
 	GetPath(): string;
 

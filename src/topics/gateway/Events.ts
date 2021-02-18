@@ -49,217 +49,229 @@ export interface HeartbeatAck {
  */
 export enum GatewayEvent {
 	/**
-	 * Contains the initial state information
+	 * Contains the initial state information.
 	 */
 	Ready = 'READY',
 
 	/**
-	 * Respone to {@link https://discord.com/developers/docs/topics/gateway#resume|resume}
+	 * Respone to [resume][1].
+	 *
+	 * [1]: https://discord.com/developers/docs/topics/gateway#resume
 	 */
 	Resumed = 'RESUMED',
 
 	/**
-	 * New guild channel created
+	 * New guild channel created.
 	 */
 	ChannelCreate = 'CHANNEL_CREATE',
 
 	/**
-	 * Channel was updated
+	 * Channel was updated.
 	 */
 	ChannelUpdate = 'CHANNEL_UPDATE',
 
 	/**
-	 * Channel was deleted
+	 * Channel was deleted.
 	 */
 	ChannelDelete = 'CHANNEL_DELETE',
 
 	/**
-	 * Message was pinned or unpinned
+	 * Message was pinned or unpinned.
 	 */
 	ChannelPinsUpdate = 'CHANNEL_PINS_UPDATE',
 
 	/**
-	 * Lazy-load for unavailable guild, guild became available, or user joined a new guild
+	 * Lazy-load for unavailable guild, guild became available, or user joined a new guild.
 	 */
 	GuildCreate = 'GUILD_CREATE',
 
 	/**
-	 * Guild was updated
+	 * Guild was updated.
 	 */
 	GuildUpdate = 'GUILD_UPDATE',
 
 	/**
-	 * Guild became unavailable, or user left/was removed from a guild
+	 * Guild became unavailable, or user left/was removed from a guild.
 	 */
 	GuildDelete = 'GUILD_DELETE',
 
 	/**
-	 * User was banned from a guild
+	 * User was banned from a guild.
 	 */
 	GuildBanAdd = 'GUILD_BAN_ADD',
 
 	/**
-	 * User was unbanned from a guild
+	 * User was unbanned from a guild.
 	 */
 	GuildBanRemove = 'GUILD_BAN_REMOVE',
 
 	/**
-	 * Guild emojis were updated
+	 * Guild emojis were updated.
 	 */
 	GuildEmojisUpdate = 'GUILD_EMOJIS_UPDATE',
 
 	/**
-	 * Guild integration was updated
+	 * Guild integration was updated.
 	 */
 	GuildIntegrationsUpdate = 'GUILD_INTEGRATIONS_UPDATE',
 
 	/**
-	 * New user joined a guild
+	 * New user joined a guild.
 	 */
 	GuildMemberAdd = 'GUILD_MEMBER_ADD',
 
 	/**
-	 * User was removed from a guild
+	 * User was removed from a guild.
 	 */
 	GuildMemberRemove = 'GUILD_MEMBER_REMOVE',
 
 	/**
-	 * Guild member was updated
+	 * Guild member was updated.
 	 */
 	GuildMemberUpdate = 'GUILD_MEMBER_UPDATE',
 
 	/**
-	 * Response to {@link https://discord.com/developers/docs/topics/gateway#request-guild-members|Request Guild Members}
+	 * Response to [Request Guild Members][1].
+	 *
+	 * [1]: https://discord.com/developers/docs/topics/gateway#request-guild-members
 	 */
 	GuildMemberChunk = 'GUILD_MEMBERS_CHUNK',
 
 	/**
-	 * Guild role was created
+	 * Guild role was created.
 	 */
 	GuildRoleCreate = 'GUILD_ROLE_CREATE',
 
 	/**
-	 * Guild role was updated
+	 * Guild role was updated.
 	 */
 	GuildRoleUpdate = 'GUILD_ROLE_UPDATE',
 
 	/**
-	 * Guild role was deleted
+	 * Guild role was deleted.
 	 */
 	GuildRoleDelete = 'GUILD_ROLE_DELETE',
 
 	/**
-	 * Guild integration was created
+	 * Guild integration was created.
 	 */
 	IntegrationCreate = 'INTEGRATION_CREATE',
 
 	/**
-	 * Guild integration was updated
+	 * Guild integration was updated.
 	 */
 	IntegrationUpdate = 'INTEGRATION_UPDATE',
 
 	/**
-	 * Guild integration was deleted
+	 * Guild integration was deleted.
 	 */
 	IntegrationDelete = 'INTEGRATION_DELETE',
 
 	/**
-	 * Invite to a channel was created
+	 * Invite to a channel was created.
 	 */
 	InviteCreate = 'INVITE_CREATE',
 
 	/**
-	 * Invite to a channel was deleted
+	 * Invite to a channel was deleted.
 	 */
 	InviteDelete = 'INVITE_DELETE',
 
 	/**
-	 * Message was created
+	 * Message was created.
 	 */
 	MessageCreate = 'MESSAGE_CREATE',
 
 	/**
-	 * Message was edited
+	 * Message was edited.
 	 */
 	MessageUpdate = 'MESSAGE_UPDATE',
 
 	/**
-	 * Message was deleted
+	 * Message was deleted.
 	 */
 	MessageDelete = 'MESSAGE_DELETE',
 
 	/**
-	 * Multiple messages were deleted at once
+	 * Multiple messages were deleted at once.
 	 */
 	MessageDeleteBulk = 'MESSAGE_DELETE_BULK',
 
 	/**
-	 * User reacted to a message
+	 * User reacted to a message.
 	 */
 	MessageReactionAdd = 'MESSAGE_REACTION_ADD',
 
 	/**
-	 * User removed a reaction from a message
+	 * User removed a reaction from a message.
 	 */
 	MessageReactionRemove = 'MESSAGE_REACTION_REMOVE',
 
 	/**
-	 * All reactions were explicitly removed from a message
+	 * All reactions were explicitly removed from a message.
 	 */
 	MessageReactionRemoveAll = 'MESSAGE_REACTION_REMOVE_ALL',
 
 	/**
-	 * All reactions for a given emoji were explicitly removed from a message
+	 * All reactions for a given emoji were explicitly removed from a message.
 	 */
 	MessageReactionRemoveEmoji = 'MESSAGE_REACTION_REMOVE_EMOJI',
 
 	/**
-	 * User was updated
+	 * User was updated.
 	 */
 	PresenceUpdate = 'PRESENCE_UPDATE',
 
 	/**
-	 * User started typing in a channel
+	 * User started typing in a channel.
 	 */
 	TypingStart = 'TYPING_START',
 
 	/**
-	 * Properties about the user changed
+	 * Properties about the user changed.
 	 */
 	UserUpdate = 'USER_UPDATE',
 
 	/**
-	 * Someone joined, left, or moved a voice channel
+	 * Someone joined, left, or moved a voice channel.
 	 */
 	VoiceStateUpdate = 'VOICE_STATE_UPDATE',
 
 	/**
-	 * Guild's voice server was updated
+	 * Guild's voice server was updated.
 	 */
 	VoiceServerUpdate = 'VOICE_SERVER_UPDATE',
 
 	/**
-	 * Guild channel webhook was created, update, or deleted
+	 * Guild channel webhook was created, update, or deleted.
 	 */
 	WebhooksUpdate = 'WEBHOOKS_UPDATE',
 
 	/**
-	 * New {@link https://discord.com/developers/docs/interactions/slash-commands|Slash Command} was created
+	 * New [Slash Command][1] was created.
+	 *
+	 * [1]: https://discord.com/developers/docs/interactions/slash-commands
 	 */
 	ApplicationCommandCreate = 'APPLICATION_COMMAND_CREATE',
 
 	/**
-	 * {@link https://discord.com/developers/docs/interactions/slash-commands|Slash Command} was updated
+	 * [Slash Command][1] was updated.
+	 *
+	 * [1]: https://discord.com/developers/docs/interactions/slash-commands
 	 */
 	ApplicationCommandUpdate = 'APPLICATION_COMMAND_UPDATE',
 
 	/**
-	 * {@link https://discord.com/developers/docs/interactions/slash-commands|Slash Command} was deleted
+	 * [Slash Command][1] was deleted.
+	 *
+	 * [1]: https://discord.com/developers/docs/interactions/slash-commands
 	 */
 	ApplicationCommandDelete = 'APPLICATION_COMMAND_DELETE',
 
 	/**
-	 * User used a {@link https://discord.com/developers/docs/interactions/slash-commands|Slash Command}
+	 * User used a [Slash Command][1].
+	 *
+	 * [1]: https://discord.com/developers/docs/interactions/slash-commands
 	 */
 	InteractionCreate = 'INTERACTION_CREATE'
 }
@@ -278,7 +290,7 @@ export interface Hello {
 	op: GatewayOPCode.Hello;
 	d: {
 		/**
-		 * The interval (in milliseconds) the client should heartbeat with
+		 * The interval (in milliseconds) the client should heartbeat with.
 		 */
 		heartbeat_interval: number;
 	};
@@ -304,46 +316,48 @@ export interface Hello {
 export interface Ready extends GatewayEventPayload<GatewayEvent.Ready> {
 	d: {
 		/**
-		 * {@link https://discord.com/developers/docs/topics/gateway#gateways-gateway-versions|Gateway version}
+		 * [Gateway version][1].
+		 *
+		 * [1]: https://discord.com/developers/docs/topics/gateway#gateways-gateway-versions
 		 */
 		v: number;
 
 		/**
-		 * Information about the user including email
+		 * Information about the user including email.
 		 */
 		user: PartialUser;
 
 		/**
-		 * Empty array
+		 * Empty array.
 		 */
 		private_channels: [];
 
 		/**
-		 * The guilds the user is in
+		 * The guilds the user is in.
 		 */
 		guilds: UnavailableGuild[];
 
 		/**
-		 * Used for resuming connections
+		 * Used for resuming connections.
 		 */
 		session_id: string;
 
 		/**
-		 * The shard information associated with this session, if sent when identifying
+		 * The shard information associated with this session, if sent when identifying.
 		 */
 		shard?: [number, number];
 
 		/**
-		 * Contains `id` and `flags`
+		 * Contains `id` and `flags`.
 		 */
 		application: {
 			/**
-			 * The ID of the app
+			 * The ID of the app.
 			 */
 			id: Snowflake;
 
 			/**
-			 * The application's public flags
+			 * The application's public flags.
 			 */
 			flags: number;
 		};
@@ -353,9 +367,9 @@ export interface Ready extends GatewayEventPayload<GatewayEvent.Ready> {
 /**
  * Sent to indicate one of at least three different situations:
  *
- * - The gateway could not initialize a session after receiving an [Opcode 2 Identify][1]
- * - The gateway could not resume a previous session after receiving an [Opcode 6 Resume][2]
- * - The gateway has invalidated an active session and is requesting client action
+ * - The gateway could not initialize a session after receiving an [Opcode 2 Identify][1].
+ * - The gateway could not resume a previous session after receiving an [Opcode 6 Resume][2].
+ * - The gateway has invalidated an active session and is requesting client action.
  *
  * The inner `d` key is a boolean that indicates whether the session may be resumable. See
  * [Connecting][3] and [Resuming][4] for more information.
@@ -371,7 +385,7 @@ export interface InvalidSession {
 	op: GatewayOPCode.InvalidSession;
 
 	/**
-	 * A boolean that indicates whether the session may be resumable
+	 * A boolean that indicates whether the session may be resumable.
 	 */
 	d: boolean;
 }
@@ -429,17 +443,17 @@ export interface ChannelDelete extends GatewayEventPayload<GatewayEvent.ChannelD
 export interface ChannelPinsUpdate extends GatewayEventPayload<GatewayEvent.ChannelPinsUpdate> {
 	d: {
 		/**
-		 * The ID of the guild
+		 * The ID of the guild.
 		 */
 		guild_id?: Snowflake;
 
 		/**
-		 * The ID of the channel
+		 * The ID of the channel.
 		 */
 		channel_id: Snowflake;
 
 		/**
-		 * The time at which the most recent pinned message was pinned
+		 * The time at which the most recent pinned message was pinned.
 		 */
 		last_pin_timestamp?: Nullable<string>;
 	};
@@ -454,9 +468,9 @@ export interface ChannelPinsUpdate extends GatewayEventPayload<GatewayEvent.Chan
  *
  * 1. When a user is initially connecting, to lazily load and backfill information for all
  *    unavailable guilds sent in the [Ready][1] event. Guilds that are unavailable due to an outage
- *    will send a [Guild Delete][2] event
- * 2. When a Guild becomes available again to the client
- * 3. When the current user joins a new Guild
+ *    will send a [Guild Delete][2] event.
+ * 2. When a Guild becomes available again to the client.
+ * 3. When the current user joins a new Guild.
  *
  * The inner payload is a [guild][3] object, with all the extra fields specified.
  *
@@ -508,12 +522,12 @@ export interface GuildDelete extends GatewayEventPayload<GatewayEvent.GuildDelet
 export interface GuildBanAdd extends GatewayEventPayload<GatewayEvent.GuildBanAdd> {
 	d: {
 		/**
-		 * ID of the guild
+		 * ID of the guild.
 		 */
 		guild_id: Snowflake;
 
 		/**
-		 * The banned user
+		 * The banned user.
 		 */
 		user: User;
 	};
@@ -527,12 +541,12 @@ export interface GuildBanAdd extends GatewayEventPayload<GatewayEvent.GuildBanAd
 export interface GuildBanRemove extends GatewayEventPayload<GatewayEvent.GuildBanRemove> {
 	d: {
 		/**
-		 * ID of the guild
+		 * ID of the guild.
 		 */
 		guild_id: Snowflake;
 
 		/**
-		 * The unbanned user
+		 * The unbanned user.
 		 */
 		user: User;
 	};
@@ -546,12 +560,14 @@ export interface GuildBanRemove extends GatewayEventPayload<GatewayEvent.GuildBa
 export interface GuildEmojisUpdate extends GatewayEventPayload<GatewayEvent.GuildEmojisUpdate> {
 	d: {
 		/**
-		 * ID of the guild
+		 * ID of the guild.
 		 */
 		guild_id: Snowflake;
 
 		/**
-		 * Array of {@link https://discord.com/developers/docs/resources/emoji#emoji-object|emojis}
+		 * Array of [emojis][1].
+		 *
+		 * [1]: https://discord.com/developers/docs/resources/emoji#emoji-object
 		 */
 		emojis: Emoji[];
 	};
@@ -565,7 +581,7 @@ export interface GuildEmojisUpdate extends GatewayEventPayload<GatewayEvent.Guil
 export interface GuildIntegrationsUpdate extends GatewayEventPayload<GatewayEvent.GuildIntegrationsUpdate> {
 	d: {
 		/**
-		 * ID of the guild whose integrations were updated
+		 * ID of the guild whose integrations were updated.
 		 */
 		guild_id: Snowflake;
 	};
@@ -587,7 +603,7 @@ export interface GuildIntegrationsUpdate extends GatewayEventPayload<GatewayEven
 export interface GuildMemberAdd extends GatewayEventPayload<GatewayEvent.GuildMemberAdd> {
 	d: GuildMember & {
 		/**
-		 * ID of the guild
+		 * ID of the guild.
 		 */
 		guild_id: Snowflake;
 	};
@@ -604,12 +620,12 @@ export interface GuildMemberAdd extends GatewayEventPayload<GatewayEvent.GuildMe
 export interface GuildMemberRemove extends GatewayEventPayload<GatewayEvent.GuildMemberRemove> {
 	d: {
 		/**
-		 * The ID of the guild
+		 * The ID of the guild.
 		 */
 		guild_id: Snowflake;
 
 		/**
-		 * The user who was removed
+		 * The user who was removed.
 		 */
 		user: User;
 	};
@@ -627,48 +643,49 @@ export interface GuildMemberRemove extends GatewayEventPayload<GatewayEvent.Guil
 export interface GuildMemberUpdate extends GatewayEventPayload<GatewayEvent.GuildMemberUpdate> {
 	d: {
 		/**
-		 * The ID of the guild
+		 * The ID of the guild.
 		 */
 		guild_id: Snowflake;
 
 		/**
-		 * User role IDs
+		 * User role IDs.
 		 */
 		roles: Snowflake[];
 
 		/**
-		 * The user
+		 * The user.
 		 */
 		user: User;
 
 		/**
-		 * Nickname of the user in the guild
+		 * Nickname of the user in the guild.
 		 */
 		nick?: Nullable<string>;
 
 		/**
-		 * When the user joined the guild
+		 * When the user joined the guild.
 		 */
 		joined_at: string;
 
 		/**
-		 * When the user starting {@link https://support.discord.com/hc/en-us/articles/360028038352-Server-Boosting-|boosting} the guild
+		 * When the user starting [boosting][1] the guild.
+		 *
+		 * [1]: https://support.discord.com/hc/en-us/articles/360028038352-Server-Boosting-
 		 */
 		premium_since?: Nullable<string>;
 
 		/**
-		 * Whether the user has not yet passed the guild's {@link https://discord.com/developers/docs/resources/guild#membership-screening-object|Membership Screening} requirements
+		 * Whether the user has not yet passed the guild's [Membership Screening][1] requirements.
+		 *
+		 * [1]: https://discord.com/developers/docs/resources/guild#membership-screening-object
 		 */
 		pending?: boolean;
 	};
 }
 
 /**
- * Sent in response to [Guild Request Members][1].
- *
- * @remarks
- * You can use the `chunk_index` and `chunk_count` to calculate how many chunks are left for your
- * request.
+ * Sent in response to [Guild Request Members][1]. You can use the `chunk_index` and `chunk_count`
+ * to calculate how many chunks are left for your request.
  *​
  * @source {@link https://discord.com/developers/docs/topics/gateway#guild-members-chunk|Gateway}
  *
@@ -677,39 +694,41 @@ export interface GuildMemberUpdate extends GatewayEventPayload<GatewayEvent.Guil
 export interface GuildMemberChunk extends GatewayEventPayload<GatewayEvent.GuildMemberChunk> {
 	d: {
 		/**
-		 * The ID of the guild
+		 * The ID of the guild.
 		 */
 		guild_id: Snowflake;
 
 		/**
-		 * Set of guild members
+		 * Set of guild members.
 		 */
 		members: GuildMember[];
 
 		/**
-		 * The chunk index in the expected chunks for this response (`0` \<= `chunk_index` \<
+		 * The chunk index in the expected chunks for this response (`0` ≤ `chunk_index` \<
 		 * `chunk_count`)
 		 */
 		chunk_index: number;
 
 		/**
-		 * The total number of expected chunks for this response
+		 * The total number of expected chunks for this response.
 		 */
 		chunk_count: number;
 
 		/**
-		 * If passing an invalid ID to `REQUEST_GUILD_MEMBERS`, it will be returned here
+		 * If passing an invalid ID to `REQUEST_GUILD_MEMBERS`, it will be returned here.
 		 */
 		not_found?: Snowflake[];
 
 		/**
 		 * If passing true to `REQUEST_GUILD_MEMBERS`, presences of the returned members will be
-		 * here
+		 * here.
 		 */
 		presences?: PresenceUpdate['d'][];
 
 		/**
-		 * The nonce used in the {@link https://discord.com/developers/docs/topics/gateway#request-guild-members|Guild Members Request}
+		 * The nonce used in the [Guild Members Request][1].
+		 *
+		 * [1]: https://discord.com/developers/docs/topics/gateway#request-guild-members
 		 */
 		nonce?: string;
 	};
@@ -727,12 +746,12 @@ export interface GuildMemberChunk extends GatewayEventPayload<GatewayEvent.Guild
 export interface GuildRoleCreate extends GatewayEventPayload<GatewayEvent.GuildRoleCreate> {
 	d: {
 		/**
-		 * The ID of the guild
+		 * The ID of the guild.
 		 */
 		guild_id: Snowflake;
 
 		/**
-		 * The role updated
+		 * The role updated.
 		 */
 		role: Role;
 	};
@@ -746,12 +765,12 @@ export interface GuildRoleCreate extends GatewayEventPayload<GatewayEvent.GuildR
 export interface GuildRoleUpdate extends GatewayEventPayload<GatewayEvent.GuildRoleUpdate> {
 	d: {
 		/**
-		 * The ID of the guild
+		 * The ID of the guild.
 		 */
 		guild_id: Snowflake;
 
 		/**
-		 * The role updated
+		 * The role updated.
 		 */
 		role: Role;
 	};
@@ -765,12 +784,12 @@ export interface GuildRoleUpdate extends GatewayEventPayload<GatewayEvent.GuildR
 export interface GuildRoleDelete extends GatewayEventPayload<GatewayEvent.GuildRoleDelete> {
 	d: {
 		/**
-		 * ID of the guild
+		 * ID of the guild.
 		 */
 		guild_id: Snowflake;
 
 		/**
-		 * ID of the role
+		 * ID of the role.
 		 */
 		role_id: Snowflake;
 	};
@@ -791,7 +810,7 @@ export interface GuildRoleDelete extends GatewayEventPayload<GatewayEvent.GuildR
 export interface IntegrationCreate extends GatewayEventPayload<GatewayEvent.IntegrationCreate> {
 	d: Integration & {
 		/**
-		 * ID of the guild
+		 * ID of the guild.
 		 */
 		guild_id: Snowflake;
 	};
@@ -806,7 +825,7 @@ export interface IntegrationCreate extends GatewayEventPayload<GatewayEvent.Inte
 export interface IntegrationUpdate extends GatewayEventPayload<GatewayEvent.IntegrationUpdate> {
 	d: Integration & {
 		/**
-		 * ID of the guild
+		 * ID of the guild.
 		 */
 		guild_id: Snowflake;
 	};
@@ -818,16 +837,16 @@ export interface IntegrationUpdate extends GatewayEventPayload<GatewayEvent.Inte
 export interface IntegrationDelete extends GatewayEventPayload<GatewayEvent.IntegrationDelete> {
 	d: {
 		/**
-		 * ID of the guild
+		 * ID of the guild.
 		 */
 		guild_id: Snowflake;
 		/**
-		 * Integration ID
+		 * Integration ID.
 		 */
 		id: Snowflake;
 
 		/**
-		 * ID of the bot/OAuth2 application for this discord integration
+		 * ID of the bot/OAuth2 application for this discord integration.
 		 */
 		application_id?: Snowflake;
 	};
@@ -845,58 +864,62 @@ export interface IntegrationDelete extends GatewayEventPayload<GatewayEvent.Inte
 export interface InviteCreate extends GatewayEventPayload<GatewayEvent.InviteCreate> {
 	d: {
 		/**
-		 * The channel the invite is for
+		 * The channel the invite is for.
 		 */
 		channel_id: Snowflake;
 
 		/**
-		 * The unique invite {@link https://discord.com/developers/docs/resources/invite#invite-object|code}
+		 * The unique invite [code][1].
+		 *
+		 * [1]: https://discord.com/developers/docs/resources/invite#invite-object
 		 */
 		code: string;
 
 		/**
-		 * The time at which the invite was created
+		 * The time at which the invite was created.
 		 */
 		created_at: string;
 
 		/**
-		 * The guild of the invite
+		 * The guild of the invite.
 		 */
 		guild_id?: Snowflake;
 
 		/**
-		 * The user that created the invite
+		 * The user that created the invite.
 		 */
 		inviter?: User;
 
 		/**
-		 * How long the invite is valid for (in seconds)
+		 * How long the invite is valid for (in seconds).
 		 */
 		max_age: number;
 
 		/**
-		 * The maximum number of times the invite can be used
+		 * The maximum number of times the invite can be used.
 		 */
 		max_uses: number;
 
 		/**
-		 * The target user for this invite
+		 * The target user for this invite.
 		 */
 		target_user?: PartialUser;
 
 		/**
-		 * The {@link https://discord.com/developers/docs/resources/invite#invite-object-target-user-types|type of user target} for this invite
+		 * The [type of user target][1] for this invite.
+		 *
+		 * [1]: https://discord.com/developers/docs/resources/invite#invite-object-target-user-types
 		 */
 		target_user_type?: TargetUser;
 
 		/**
 		 * Whether or not the invite is temporary (invited users will be kicked on disconnect unless
-		 * they're assigned a role)
+		 * they're assigned a role).
 		 */
 		temporary: boolean;
 
 		/**
-		 * How many times the invite has been used (always will be 0)
+		 * How many times the invite has been used (always will be 0).
 		 */
 		uses: number;
 	};
@@ -910,7 +933,7 @@ export interface InviteCreate extends GatewayEventPayload<GatewayEvent.InviteCre
 export interface InviteDelete extends GatewayEventPayload<GatewayEvent.InviteDelete> {
 	d: Pick<InviteCreate['d'], 'guild_id' | 'code'> & {
 		/**
-		 * The channel of the invite
+		 * The channel of the invite.
 		 */
 		channel_id: Snowflake;
 	};
@@ -954,17 +977,17 @@ export interface MessageUpdate extends GatewayEventPayload<GatewayEvent.MessageU
 export interface MessageDelete extends GatewayEventPayload<GatewayEvent.MessageDelete> {
 	d: {
 		/**
-		 * The ID of the message
+		 * The ID of the message.
 		 */
 		id: Snowflake;
 
 		/**
-		 * The ID of the channel
+		 * The ID of the channel.
 		 */
 		channel_id: Snowflake;
 
 		/**
-		 * The ID of the guild
+		 * The ID of the guild.
 		 */
 		guild_id?: Snowflake;
 	};
@@ -978,7 +1001,7 @@ export interface MessageDelete extends GatewayEventPayload<GatewayEvent.MessageD
 export interface MessageDeleteBulk extends GatewayEventPayload<GatewayEvent.MessageDeleteBulk> {
 	d: Pick<MessageDelete['d'], 'channel_id' | 'guild_id'> & {
 		/**
-		 * The IDs of the messages
+		 * The IDs of the messages.
 		 */
 		ids: Snowflake[];
 	};
@@ -992,32 +1015,32 @@ export interface MessageDeleteBulk extends GatewayEventPayload<GatewayEvent.Mess
 export interface MessageReactionAdd extends GatewayEventPayload<GatewayEvent.MessageReactionAdd> {
 	d: {
 		/**
-		 * The ID of the user
+		 * The ID of the user.
 		 */
 		user_id: Snowflake;
 
 		/**
-		 * The ID of the channel
+		 * The ID of the channel.
 		 */
 		channel_id: Snowflake;
 
 		/**
-		 * The ID of the message
+		 * The ID of the message.
 		 */
 		message_id: Snowflake;
 
 		/**
-		 * The ID of the guild
+		 * The ID of the guild.
 		 */
 		guild_id?: Snowflake;
 
 		/**
-		 * The member who reacted if this happened in a guild
+		 * The member who reacted if this happened in a guild.
 		 */
 		member?: GuildMember;
 
 		/**
-		 * The emoji used to react
+		 * The emoji used to react.
 		 */
 		emoji: PartialEmoji;
 	};
@@ -1049,7 +1072,7 @@ export interface MessageReactionRemoveAll extends GatewayEventPayload<GatewayEve
 export interface MessageReactionRemoveEmoji extends GatewayEventPayload<GatewayEvent.MessageReactionRemoveEmoji> {
 	d: MessageReactionRemoveAll & {
 		/**
-		 * The emoji that was removed
+		 * The emoji that was removed.
 		 */
 		emoji: PartialEmoji;
 	};
@@ -1064,7 +1087,7 @@ export interface MessageReactionRemoveEmoji extends GatewayEventPayload<GatewayE
  *
  * @warning
  * - If you are using Gateway Intents, you *must* specify the `GUILD_PRESENCES` intent in order to
- *   receive Presence Update events
+ *   receive Presence Update events.
  * - The user object within this event can be partial, the only field which must be sent is the `id`
  *   field, everything else is optional. Along with this limitation, no fields are required, and the
  *   types of the fields are **not** validated. Your client should expect any combination of fields
@@ -1075,27 +1098,27 @@ export interface MessageReactionRemoveEmoji extends GatewayEventPayload<GatewayE
 export interface PresenceUpdate extends GatewayEventPayload<GatewayEvent.PresenceUpdate> {
 	d: {
 		/**
-		 * The user presence is being updated for
+		 * The user presence is being updated for.
 		 */
 		user?: Required<Pick<User, 'id'>> & Partial<Omit<User, 'id'>>;
 
 		/**
-		 * ID of the guild
+		 * ID of the guild.
 		 */
 		guild_id?: Snowflake;
 
 		/**
-		 * Either `idle`, `dnd`, `online`, or `offline`
+		 * Either `idle`, `dnd`, `online`, or `offline`.
 		 */
 		status?: string;
 
 		/**
-		 * User's current activities
+		 * User's current activities.
 		 */
 		activities?: Activity[];
 
 		/**
-		 * User's platform-dependent status
+		 * User's platform-dependent status.
 		 */
 		client_status?: ClientStatus;
 	};
@@ -1111,27 +1134,27 @@ export interface PresenceUpdate extends GatewayEventPayload<GatewayEvent.Presenc
 export interface TypingStart extends GatewayEventPayload<GatewayEvent.TypingStart> {
 	d: {
 		/**
-		 * ID of the channel
+		 * ID of the channel.
 		 */
 		channel_id: Snowflake;
 
 		/**
-		 * ID of the guild
+		 * ID of the guild.
 		 */
 		guild_id?: Snowflake;
 
 		/**
-		 * ID of the user
+		 * ID of the user.
 		 */
 		user_id: Snowflake;
 
 		/**
-		 * Unix time (in seconds) of when the user started typing
+		 * Unix time (in seconds) of when the user started typing.
 		 */
 		timestamp: number;
 
 		/**
-		 * The member who started typing if this happened in a guild
+		 * The member who started typing if this happened in a guild.
 		 */
 		member?: GuildMember;
 	};
@@ -1170,17 +1193,17 @@ export interface VoiceStateUpdate extends GatewayEventPayload<GatewayEvent.Voice
 export interface VoiceServerUpdate extends GatewayEventPayload<GatewayEvent.VoiceServerUpdate> {
 	d: {
 		/**
-		 * Voice connection token
+		 * Voice connection token.
 		 */
 		token: string;
 
 		/**
-		 * The guild this voice server update is for
+		 * The guild this voice server update is for.
 		 */
 		guild_id: Snowflake;
 
 		/**
-		 * The voice server host
+		 * The voice server host.
 		 */
 		endpoint: Nullable<string>;
 	};
@@ -1198,12 +1221,12 @@ export interface VoiceServerUpdate extends GatewayEventPayload<GatewayEvent.Voic
 export interface WebhooksUpdate extends GatewayEventPayload<GatewayEvent.WebhooksUpdate> {
 	d: {
 		/**
-		 * ID of the guild
+		 * ID of the guild.
 		 */
 		guild_id: Snowflake;
 
 		/**
-		 * ID of the channel
+		 * ID of the channel.
 		 */
 		channel_id: Snowflake;
 	};
@@ -1223,7 +1246,7 @@ export interface WebhooksUpdate extends GatewayEventPayload<GatewayEvent.Webhook
 export interface ApplicationCommandCreate extends GatewayEventPayload<GatewayEvent.ApplicationCommandCreate> {
 	d: ApplicationCommand & {
 		/**
-		 * ID of the guild the command is in
+		 * ID of the guild the command is in.
 		 */
 		guild_id?: Snowflake;
 	};
@@ -1241,7 +1264,7 @@ export interface ApplicationCommandCreate extends GatewayEventPayload<GatewayEve
 export interface ApplicationCommandDelete extends GatewayEventPayload<GatewayEvent.ApplicationCommandDelete> {
 	d: ApplicationCommand & {
 		/**
-		 * ID of the guild the command is in
+		 * ID of the guild the command is in.
 		 */
 		guild_id?: Snowflake;
 	};
@@ -1259,7 +1282,7 @@ export interface ApplicationCommandDelete extends GatewayEventPayload<GatewayEve
 export interface ApplicationCommandUpdate extends GatewayEventPayload<GatewayEvent.ApplicationCommandUpdate> {
 	d: ApplicationCommand & {
 		/**
-		 * ID of the guild the command is in
+		 * ID of the guild the command is in.
 		 */
 		guild_id?: Snowflake;
 	};

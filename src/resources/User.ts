@@ -5,30 +5,32 @@ import type { PartialIntegration, Snowflake } from '../';
 
 export interface PartialUser {
 	/**
-	 * The user's ID
+	 * The user's ID.
 	 *
 	 * @scope `identify`
 	 */
 	id: Snowflake;
 
 	/**
-	 * The user's username, not unique across the platform
+	 * The user's username, not unique across the platform.
 	 *
 	 * @scope `identify`
 	 */
 	username: string;
 
 	/**
-	 * The user's 4-digit discord-tag
+	 * The user's 4-digit discord-tag.
 	 *
 	 * @scope `identify`
 	 */
 	discriminator: string;
 
 	/**
-	 * The user's {@link https://discord.com/developers/docs/reference#image-formatting|avatar hash}
+	 * The user's [avatar hash][1].
 	 *
 	 * @scope `identify`
+	 *
+	 * [1]: https://discord.com/developers/docs/reference#image-formatting
 	 */
 	avatar: Nullable<string>;
 }
@@ -46,65 +48,71 @@ export interface PartialUser {
  */
 export interface User extends PartialUser {
 	/**
-	 * Whether the user belongs to an OAuth2 application
+	 * Whether the user belongs to an OAuth2 application.
 	 *
 	 * @scope `identify`
 	 */
 	bot?: boolean;
 
 	/**
-	 * Whether the user is an Official Discord System user (part of the urgent message system)
+	 * Whether the user is an Official Discord System user (part of the urgent message system).
 	 *
 	 * @scope `identify`
 	 */
 	system?: boolean;
 
 	/**
-	 * Whether the user has two factor enabled on their account
+	 * Whether the user has two factor enabled on their account.
 	 *
 	 * @scope `identify`
 	 */
 	mfa_enabled?: boolean;
 
 	/**
-	 * The user's chosen language option
+	 * The user's chosen language option.
 	 *
 	 * @scope `identify`
 	 */
 	locale?: string;
 
 	/**
-	 * Whether the email on this account has been verified
+	 * Whether the email on this account has been verified.
 	 *
 	 * @scope `email`
 	 */
 	verified?: boolean;
 
 	/**
-	 * The user's email
+	 * The user's email.
 	 *
 	 * @scope `email`
 	 */
 	email?: Nullable<string>;
 
 	/**
-	 * The {@link https://discord.com/developers/docs/resources/user#user-object-user-flags|flags} on a user's account
+	 * The [flags][1] on a user's account.
 	 *
 	 * @scope `identify`
+	 *
+	 * [1]: https://discord.com/developers/docs/resources/user#user-object-user-flags
 	 */
 	flags?: UserFlags;
 
 	/**
-	 * The {@link https://discord.com/developers/docs/resources/user#user-object-premium-types|type of Nitro subscription} on a user's account
+	 * The [type of Nitro subscription][1] on a user's account.
 	 *
 	 * @scope `identify`
+	 *
+	 * [1]: https://discord.com/developers/docs/resources/user#user-object-premium-types
 	 */
 	premium_type?: PremiumType;
 
 	/**
-	 * The public {@link https://discord.com/developers/docs/resources/user#user-object-user-flags|flags} on a user's account
+	 * The public [flags][1] on a user's account.
 	 *
 	 * @scope `identify`
+	 *
+	 * [1]: https://discord.com/developers/docs/resources/user#user-object-user-flags
 	 */
 	public_flags?: UserFlags;
 }
@@ -149,47 +157,51 @@ export enum PremiumType {
  */
 export interface Connection {
 	/**
-	 * ID of the connection account
+	 * ID of the connection account.
 	 */
 	id: Snowflake;
 
 	/**
-	 * The username of the connection account
+	 * The username of the connection account.
 	 */
 	name: string;
 
 	/**
-	 * The service of the connection (twitch, youtube)
+	 * The service of the connection (twitch, youtube).
 	 */
 	type: string;
 
 	/**
-	 * Whether the connection is revoked
+	 * Whether the connection is revoked.
 	 */
 	revoked?: boolean;
 
 	/**
-	 * An array of partial {@link https://discord.com/developers/docs/resources/guild#integration-object|server integrations}
+	 * An array of partial [server integrations][1].
+	 *
+	 * [1]: https://discord.com/developers/docs/resources/guild#integration-object
 	 */
 	integrations?: PartialIntegration[];
 
 	/**
-	 * Whether the connection is verified
+	 * Whether the connection is verified.
 	 */
 	verified: boolean;
 
 	/**
-	 * Whether friend sync is enabled for this connection
+	 * Whether friend sync is enabled for this connection.
 	 */
 	friend_sync: boolean;
 
 	/**
-	 * Whether activities related to this connection will be shown in presence updates
+	 * Whether activities related to this connection will be shown in presence updates.
 	 */
 	show_activity: boolean;
 
 	/**
-	 * {@link https://discord.com/developers/docs/resources/user#user-object-visibility-types|Visibility} of this connection
+	 * [Visibility][1] of this connection.
+	 *
+	 * [1]: https://discord.com/developers/docs/resources/user#user-object-visibility-types
 	 */
 	visibility: VisibilityType;
 }
@@ -199,12 +211,12 @@ export interface Connection {
  */
 export enum VisibilityType {
 	/**
-	 * Invisible to everyone except the user themselves
+	 * Invisible to everyone except the user themselves.
 	 */
 	None,
 
 	/**
-	 * Visible to everyone
+	 * Visible to everyone.
 	 */
 	Everyone
 }
@@ -223,12 +235,12 @@ export enum VisibilityType {
  */
 export interface ModifyCurrentUser {
 	/**
-	 * User's username, if changed may cause the user's discriminator to be randomized
+	 * User's username, if changed may cause the user's discriminator to be randomized.
 	 */
 	username?: string;
 
 	/**
-	 * If passed, modifies the user's avatar
+	 * If passed, modifies the user's avatar.
 	 */
 	avatar?: Nullable<string>;
 }
@@ -250,17 +262,17 @@ export interface ModifyCurrentUser {
  */
 export interface GetCurrentUserGuilds {
 	/**
-	 * Get guilds before this guild ID
+	 * Get guilds before this guild ID.
 	 */
 	before?: Snowflake;
 
 	/**
-	 * Get guilds after this guild ID
+	 * Get guilds after this guild ID.
 	 */
 	after?: Snowflake;
 
 	/**
-	 * Max number of guilds to return (1-100)
+	 * Max number of guilds to return (1-100).
 	 *
 	 * @defaultValue 100
 	 */
@@ -284,7 +296,7 @@ export interface GetCurrentUserGuilds {
  */
 export interface CreateDM {
 	/**
-	 * The recipient to open a DM channel with
+	 * The recipient to open a DM channel with.
 	 */
 	recipient_id: Snowflake;
 }
@@ -304,12 +316,12 @@ export interface CreateDM {
  */
 export interface CreateGroupDM {
 	/**
-	 * Access tokens of users that have granted your app the `gdm.join` scope
+	 * Access tokens of users that have granted your app the `gdm.join` scope.
 	 */
 	access_tokens: string[];
 
 	/**
-	 * A dictionary of user IDs to their respective nicknames
+	 * A dictionary of user IDs to their respective nicknames.
 	 */
 	nicks: Record<Snowflake, string>;
 }

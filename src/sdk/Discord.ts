@@ -68,22 +68,22 @@ export enum Result {
  */
 export enum LogLevel {
 	/**
-	 * Log only errors
+	 * Log only errors.
 	 */
 	Error,
 
 	/**
-	 * Log warnings and errors
+	 * Log warnings and errors.
 	 */
 	Warning,
 
 	/**
-	 * Log info, warnings, and errors
+	 * Log info, warnings, and errors.
 	 */
 	Info,
 
 	/**
-	 * Log everything
+	 * Log everything.
 	 */
 	Debug
 }
@@ -93,12 +93,12 @@ export enum LogLevel {
  */
 export enum CreateFlags {
 	/**
-	 * Requires Discord to be running to play the game
+	 * Requires Discord to be running to play the game.
 	 */
 	Default,
 
 	/**
-	 * Does not require Discord to be running, use this on other platforms
+	 * Does not require Discord to be running, use this on other platforms.
 	 */
 	NoRequireDiscord
 }

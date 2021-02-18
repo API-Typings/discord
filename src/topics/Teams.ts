@@ -7,22 +7,22 @@ import type { PartialUser } from '../resources';
  */
 export interface Team {
 	/**
-	 * A hash of the image of the team's icon
+	 * A hash of the image of the team's icon.
 	 */
 	icon: Nullable<string>;
 
 	/**
-	 * The unique ID of the team
+	 * The unique ID of the team.
 	 */
 	id: Snowflake;
 
 	/**
-	 * The unique id of the team
+	 * The unique id of the team.
 	 */
 	member: TeamMember[];
 
 	/**
-	 * The user ID of the current team owner
+	 * The user ID of the current team owner.
 	 */
 	owner_user_id: Snowflake;
 }
@@ -32,24 +32,24 @@ export interface Team {
  */
 export interface TeamMember {
 	/**
-	 * The user's [membership state][1] on the team
+	 * The user's [membership state][1] on the team.
 	 *
 	 * [1]: https://discord.com/developers/docs/topics/teams#data-models-membership-state-enum
 	 */
 	membership_state: MembershipState;
 
 	/**
-	 * Will always be `["*"]`
+	 * Will always be `["*"]`.
 	 */
 	permissions: ['*'];
 
 	/**
-	 * The ID of the parent team of which they are a member
+	 * The ID of the parent team of which they are a member.
 	 */
 	team_id: Snowflake;
 
 	/**
-	 * The avatar, discriminator, ID, and username of the user
+	 * The avatar, discriminator, ID, and username of the user.
 	 */
 	user: PartialUser;
 }

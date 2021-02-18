@@ -5,27 +5,27 @@ import type { Discord } from '../';
  */
 export interface User {
 	/**
-	 * The user's ID
+	 * The user's ID.
 	 */
 	Id: bigint;
 
 	/**
-	 * Their name
+	 * Their name.
 	 */
 	Username: string;
 
 	/**
-	 * The user's unique discrim
+	 * The user's unique discrim.
 	 */
 	Discriminator: string;
 
 	/**
-	 * The hash of the user's avatar
+	 * The hash of the user's avatar.
 	 */
 	Avatar: string;
 
 	/**
-	 * If the user is a bot user
+	 * If the user is a bot user.
 	 */
 	Bot: boolean;
 }
@@ -35,27 +35,27 @@ export interface User {
  */
 export enum UserFlag {
 	/**
-	 * Discord Partner
+	 * Discord Partner.
 	 */
 	Partner = 2,
 
 	/**
-	 * HypeSquad Events participant
+	 * HypeSquad Events participant.
 	 */
 	HypeSquadEvents = 4,
 
 	/**
-	 * House Bravey
+	 * House Bravey.
 	 */
 	HypeSquadHouse1 = 64,
 
 	/**
-	 * House Brilliance
+	 * House Brilliance.
 	 */
 	HypeSquadHouse2 = 128,
 
 	/**
-	 * House Balance
+	 * House Balance.
 	 */
 	HypeSquadHouse3 = 256
 }
@@ -65,17 +65,17 @@ export enum UserFlag {
  */
 export enum PremiumType {
 	/**
-	 * Not a Nitro subscriber
+	 * Not a Nitro subscriber.
 	 */
 	None,
 
 	/**
-	 * Nitro Classic subscriber
+	 * Nitro Classic subscriber.
 	 */
 	Tier1,
 
 	/**
-	 * Nitro subscriber
+	 * Nitro subscriber.
 	 */
 	Tier2
 }

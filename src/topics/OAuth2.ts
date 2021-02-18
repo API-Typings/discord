@@ -1,5 +1,12 @@
 import type { Nullable } from '@api-typings/core';
-import type { Guild, PartialUser, Snowflake, Team, User, Webhook } from '../';
+import type {
+	Guild,
+	PartialUser,
+	Snowflake,
+	Team,
+	User,
+	Webhook
+} from '../';
 
 /**
  * @warning
@@ -10,17 +17,17 @@ import type { Guild, PartialUser, Snowflake, Team, User, Webhook } from '../';
  */
 export enum OAuth2URL {
 	/**
-	 * Base authorization URL
+	 * Base authorization URL.
 	 */
 	Base = 'https://discord.com/api/oauth2/authorize',
 
 	/**
-	 * Token URL
+	 * Token URL.
 	 */
 	Token = 'https://discord.com/api/oauth2/token',
 
 	/**
-	 * {@link https://tools.ietf.org/html/rfc7009|Token Revocation} URL
+	 * {@link https://tools.ietf.org/html/rfc7009|Token Revocation} URL.
 	 */
 	TokenRevocation = 'https://discord.com/api/oauth2/token/revoke'
 }
@@ -34,7 +41,7 @@ export enum OAuth2URL {
  */
 export enum OAuth2Scope {
 	/**
-	 * For OAuth2 bots, this puts the bot in the user's selected guild by default
+	 * For OAuth2 bots, this puts the bot in the user's selected guild by default.
 	 *
 	 * @remarks
 	 * This scope requires you to have a bot account linked to your application.
@@ -42,35 +49,35 @@ export enum OAuth2Scope {
 	Bot = 'bot',
 
 	/**
-	 * Allows [/users/\@me/connections][1] to return linked third-party accounts
+	 * Allows [/users/\@me/connections][1] to return linked third-party accounts.
 	 *
 	 * [1]: https://discord.com/developers/docs/resources/user#get-user-connections
 	 */
 	Connections = 'connections',
 
 	/**
-	 * Enables [/users/\@me][1] to return an `email`
+	 * Enables [/users/\@me][1] to return an `email`.
 	 *
 	 * [1]: https://discord.com/developers/docs/resources/user#get-current-user
 	 */
 	Email = 'email',
 
 	/**
-	 * Allows [/users/\@me][1] without `email`
+	 * Allows [/users/\@me][1] without `email`.
 	 *
 	 * [1]: https://discord.com/developers/docs/resources/user#get-current-user
 	 */
 	Identify = 'identify',
 
 	/**
-	 * Allows [/users/\@me/guilds][1] to return basic information about all of a user's guilds
+	 * Allows [/users/\@me/guilds][1] to return basic information about all of a user's guilds.
 	 *
 	 * [1]: https://discord.com/developers/docs/resources/user#get-current-user-guilds
 	 */
 	Guilds = 'guilds',
 
 	/**
-	 * Allows [/guilds/\{guild.id\}/members/\{user.id\}][1] to be used for joining users to a guild
+	 * Allows [/guilds/\{guild.id\}/members/\{user.id\}][1] to be used for joining users to a guild.
 	 *
 	 * @remarks
 	 * This scope requires you to have a bot account linked to your application. Also, in order to
@@ -81,7 +88,7 @@ export enum OAuth2Scope {
 	GuildsJoin = 'guilds.join',
 
 	/**
-	 * Allows your app to [join users to a group dm][1]
+	 * Allows your app to [join users to a group dm][1].
 	 *
 	 * [1]: https://discord.com/developers/docs/resources/channel#group-dm-add-recipient
 	 */
@@ -89,19 +96,19 @@ export enum OAuth2Scope {
 
 	/**
 	 * For local RPC server API access, this allows you to read messages from all client channels
-	 * (otherwise restricted to channels/guilds your app creates)
+	 * (otherwise restricted to channels/guilds your app creates).
 	 */
 	MessagesRead = 'messages.read',
 
 	/**
-	 * For local RPC server access, this allows you to control a user's local Discord client
+	 * For local RPC server access, this allows you to control a user's local Discord client.
 	 *
 	 * @whitelist
 	 */
 	RPC = 'rpc',
 
 	/**
-	 * For local RPC server API access, this allows you to access the API as the local user
+	 * For local RPC server API access, this allows you to access the API as the local user.
 	 *
 	 * @whitelist
 	 */
@@ -109,7 +116,7 @@ export enum OAuth2Scope {
 
 	/**
 	 * For local RPC server API access, this allows you to receive notifications pushed out to the
-	 * user
+	 * user.
 	 *
 	 * @whitelist
 	 */
@@ -117,49 +124,49 @@ export enum OAuth2Scope {
 
 	/**
 	 * This generates a webhook that is returned in the oauth token response for authorization code
-	 * grants
+	 * grants.
 	 */
 	WebhookIncoming = 'webhook.incoming',
 
 	/**
-	 * Allows your app to upload/update builds for a user's applications
+	 * Allows your app to upload/update builds for a user's applications.
 	 *
 	 * @whitelist
 	 */
 	ApplicationsBuildsUpload = 'applications.builds.upload',
 
 	/**
-	 * Allows your app to read build data for a user's applications
+	 * Allows your app to read build data for a user's applications.
 	 */
 	ApplicationsBuildsRead = 'applications.builds.read',
 
 	/**
 	 * Allows your app to read and update store data (SKUs, store listings, achievements, etc.) for
-	 * a user's applications
+	 * a user's applications.
 	 */
 	ApplicationsStoreUpdate = 'applications.store.update',
 
 	/**
-	 * Allows your app to read entitlements for a user's applications
+	 * Allows your app to read entitlements for a user's applications.
 	 */
 	ApplicationsEntitlements = 'applications.entitlements',
 
 	/**
-	 * Allows your app to know a user's friends and implicit relationships
+	 * Allows your app to know a user's friends and implicit relationships.
 	 *
 	 * @whitelist
 	 */
 	RelationshipsRead = 'relationships.read',
 
 	/**
-	 * Allows your app to fetch data from a user's "Now Playing/Recently Played" list
+	 * Allows your app to fetch data from a user's "Now Playing/Recently Played" list.
 	 *
 	 * @whitelist
 	 */
 	ActivitiesRead = 'activities.read',
 
 	/**
-	 * Allows your app to update a user's activity
+	 * Allows your app to update a user's activity.
 	 *
 	 * @remarks
 	 * Whitelist is NOT required for {@link https://discord.com/developers/docs/game-sdk/activities|GameSDK Activity Manager}
@@ -169,14 +176,14 @@ export enum OAuth2Scope {
 	ActivitiesWrite = 'activities.write',
 
 	/**
-	 * Allows your app to use [Slash Commands][1] in a guild
+	 * Allows your app to use [Slash Commands][1] in a guild.
 	 *
 	 * [1]: https://discord.com/developers/docs/interactions/slash-commands
 	 */
 	ApplicationsCommands = 'applications.commands',
 
 	/**
-	 * Allows your app to update [Slash Commands][1] via bearer token
+	 * Allows your app to update [Slash Commands][1] via bearer token.
 	 *
 	 * [1]: https://discord.com/developers/docs/interactions/slash-commands
 	 */
@@ -199,26 +206,27 @@ export interface AuthorizationCodeGrant extends Omit<ImplicitGrant, 'response_ty
 	response_type: 'code';
 
 	/**
-	 * A list of [OAuth2 scopes][1] separated by URL encoded spaces (`%20`)
+	 * A list of [OAuth2 scopes][1] separated by URL encoded spaces (`%20`).
 	 *
 	 * [1]: https://discord.com/developers/docs/topics/oauth2#shared-resources-oauth2-scopes
 	 */
 	scope: string;
 
 	/**
-	 * The URL you registered when creating your application, url-encoded
+	 * The URL you registered when creating your application, url-encoded.
 	 */
 	redirect_uri: string;
 
 	/**
-	 * Controls how the authorization flow handles existing authorizations
+	 * Controls how the authorization flow handles existing authorizations.
 	 *
 	 * @remarks
-	 * If a user has previously authorized your application with the requested scopes and prompt is
-	 * set to `consent`, it will request them to reapprove their authorization. If set to `none`, it
-	 * will skip the authorization screen and redirect them back to your redirect URI without
-	 * requesting their authorization. For passthrough scopes, like `bot` and `webhook.incoming`,
-	 * authorization is always required.
+	 * - `consent` - Request to reapprove a user's authorization if they previously authorized your
+	 * application with the requested scopes,
+	 * - `none` - Skip the authorization screen and redirect them back to your redirect URI without
+	 * requesting their authorization.
+	 *
+	 * For passthrough scopes, like `bot` and `webhook.incoming`, authorization is always required.
 	 */
 	prompt: 'consent' | 'none';
 }
@@ -234,12 +242,12 @@ export interface AuthorizationCodeGrant extends Omit<ImplicitGrant, 'response_ty
 export interface AuthorizationCodeAccessTokenURL
 	extends Omit<AuthorizationCodeAccessTokenRefreshURL, 'grant_type' | 'refresh_token'> {
 	/**
-	 * Must be set to `authorization_code`
+	 * Must be set to `authorization_code`.
 	 */
 	grant_type: 'authorization_code';
 
 	/**
-	 * The code from the querystring
+	 * The code from the querystring.
 	 */
 	code: string;
 }
@@ -249,39 +257,39 @@ export interface AuthorizationCodeAccessTokenURL
  */
 export interface AuthorizationCodeAccessToken extends ClientCredentialsAccessToken {
 	/**
-	 * The user's refresh token
+	 * The user's refresh token.
 	 */
 	refresh_token: string;
 }
 
 export interface AuthorizationCodeAccessTokenRefreshURL {
 	/**
-	 * Your application's client ID
+	 * Your application's client ID.
 	 */
 	client_id: Snowflake;
 
 	/**
-	 * Your application's client secret
+	 * Your application's client secret.
 	 */
 	client_secret: string;
 
 	/**
-	 * Must be set to `refresh_token`
+	 * Must be set to `refresh_token`.
 	 */
 	grant_type: 'refresh_token';
 
 	/**
-	 * The user's refresh token
+	 * The user's refresh token.
 	 */
 	refresh_token: string;
 
 	/**
-	 * Your `redirect_uri`
+	 * Your `redirect_uri`.
 	 */
 	redirect_uri: string;
 
 	/**
-	 * The scopes requested in your authorization URL, space-delimited
+	 * The scopes requested in your authorization URL, space-delimited.
 	 */
 	scope: string;
 }
@@ -295,7 +303,7 @@ export interface ImplicitGrant {
 	response_type: 'token';
 
 	/**
-	 * Your application's `client_id`
+	 * Your application's `client_id`.
 	 */
 	client_id: Snowflake;
 
@@ -306,7 +314,7 @@ export interface ImplicitGrant {
 	state?: string;
 
 	/**
-	 * A list of [OAuth2 scopes][1] separated by URL encoded spaces (`%20`)
+	 * A list of [OAuth2 scopes][1] separated by URL encoded spaces (`%20`).
 	 *
 	 * [1]: https://discord.com/developers/docs/topics/oauth2#shared-resources-oauth2-scopes
 	 */
@@ -322,7 +330,7 @@ export interface ClientCredentialsGrant {
 	grant_type: 'client_credentials';
 
 	/**
-	 * A list of [OAuth2 scopes][1] separated by URL encoded spaces (`%20`)
+	 * A list of [OAuth2 scopes][1] separated by URL encoded spaces (`%20`).
 	 *
 	 * [1]: https://discord.com/developers/docs/topics/oauth2#shared-resources-oauth2-scopes
 	 */
@@ -335,18 +343,18 @@ export interface ClientCredentialsGrant {
 export interface ClientCredentialsAccessToken {
 	/**
 	 * Allows your application to make certain requests to the API on their behalf, restricted to
-	 * whatever scopes were requested
+	 * whatever scopes were requested.
 	 */
 	access_token: string;
 	token_type: string;
 
 	/**
-	 * How long, in seconds, until the returned access token expires
+	 * How long, in seconds, until the returned access token expires.
 	 */
 	expires_in: number;
 
 	/**
-	 * The scopes requested in your authorization URL, space-delimited
+	 * The scopes requested in your authorization URL, space-delimited.
 	 */
 	scope: string;
 }
@@ -361,29 +369,29 @@ export interface ClientCredentialsAccessToken {
  */
 export interface BotAuthorization {
 	/**
-	 * Your app's client ID
+	 * Your app's client ID.
 	 */
 	client_id: Snowflake;
 
 	/**
-	 * Needs to include `bot` for the bot flow
+	 * Needs to include `bot` for the bot flow.
 	 */
 	scope: string;
 
 	/**
-	 * The [permisssions][1] you're requesting
+	 * The [permisssions][1] you're requesting.
 	 *
 	 * [1]: https://discord.com/developers/docs/topics/permissions
 	 */
 	permissions: number;
 
 	/**
-	 * Pre-fills the dropdown picker with a guild for the user
+	 * Pre-fills the dropdown picker with a guild for the user.
 	 */
 	guild_id?: Snowflake;
 
 	/**
-	 * `true` or `false`–disallows the user from changing the guild dropdown
+	 * `true` or `false`–disallows the user from changing the guild dropdown.
 	 */
 	disable_guild_select?: boolean;
 }
@@ -418,44 +426,44 @@ export interface WebhookAccessToken extends AuthorizationCodeAccessToken {
  */
 export interface PartialApplication {
 	/**
-	 * The ID of the app
+	 * The ID of the app.
 	 */
 	id: Snowflake;
 
 	/**
-	 * The name of the app
+	 * The name of the app.
 	 */
 	name: string;
 
 	/**
-	 * The icon hash of the app
+	 * The icon hash of the app.
 	 */
 	icon: Nullable<string>;
 
 	/**
-	 * The description of the app
+	 * The description of the app.
 	 */
 	description: string;
 
 	/**
 	 * If this application is a game sold on Discord, this field will be the summary field for the
-	 * store page of its primary SKU
+	 * store page of its primary SKU.
 	 */
 	summary: string;
 	hook: boolean;
 
 	/**
-	 * When `false`, only the app owner can join the app's bot to guilds
+	 * When `false`, only the app owner can join the app's bot to guilds.
 	 */
 	bot_public: boolean;
 
 	/**
-	 * When `true`, the app's bot will only join upon completion of the full OAuth2 code grant flow
+	 * When `true`, the app's bot will only join upon completion of the full OAuth2 code grant flow.
 	 */
 	bot_require_code_grant: boolean;
 
 	/**
-	 * The base64 encoded key for the GameSDK's [GetTicket][1]
+	 * The base64 encoded key for the GameSDK's [GetTicket][1].
 	 *
 	 * [1]: https://discord.com/developers/docs/game-sdk/applications#get-ticket
 	 */
@@ -469,46 +477,46 @@ export interface PartialApplication {
  */
 export interface Application extends Omit<PartialApplication, 'hook'> {
 	/**
-	 * An array of RPC origin URLs, if RPC is enabled
+	 * An array of RPC origin URLs, if RPC is enabled.
 	 */
 	rpc_origins?: string[];
 
 	/**
-	 * Partial user object containing info on the owner of the application
+	 * Partial user object containing info on the owner of the application.
 	 */
 	owner: PartialUser & Pick<User, 'flags'>;
 
 	/**
-	 * If the application belongs to a team, this will be a list of the members of that team
+	 * If the application belongs to a team, this will be a list of the members of that team.
 	 */
 	team: Nullable<Team>;
 
 	/**
 	 * If this application is a game sold on Discord, this field will be the guild to which it has
-	 * been linked
+	 * been linked.
 	 */
 	guild_id?: Snowflake;
 
 	/**
 	 * If this application is a game sold on Discord, this field will be the id of the "Game SKU"
-	 * that is created, if exists
+	 * that is created, if exists.
 	 */
 	primary_sku_id?: Snowflake;
 
 	/**
 	 * If this application is a game sold on Discord, this field will be the URL slug that links to
-	 * the store page
+	 * the store page.
 	 */
 	slug?: string;
 
 	/**
 	 * If this application is a game sold on Discord, this field will be the hash of the image on
-	 * store embeds
+	 * store embeds.
 	 */
 	cover_image?: string;
 
 	/**
-	 * The application's public flags
+	 * The application's public flags.
 	 */
 	flags: number;
 }
@@ -518,22 +526,22 @@ export interface Application extends Omit<PartialApplication, 'hook'> {
  */
 export interface AuthorizationInformation {
 	/**
-	 * The current application
+	 * The current application.
 	 */
 	application: PartialApplication;
 
 	/**
-	 * The scopes the user has authorized the application for
+	 * The scopes the user has authorized the application for.
 	 */
 	scopes: `${OAuth2Scope}`[];
 
 	/**
-	 * When the access token expires
+	 * When the access token expires.
 	 */
 	expires: string;
 
 	/**
-	 * The user who has authorized, if the user has authorized with the `identify` scope
+	 * The user who has authorized, if the user has authorized with the `identify` scope.
 	 */
 	user?: User;
 }

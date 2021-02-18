@@ -6,22 +6,22 @@ import type { Discord, Snowflake } from '../';
  */
 export interface Sku {
 	/**
-	 * The unique ID of the SKU
+	 * The unique ID of the SKU.
 	 */
 	Id: bigint;
 
 	/**
-	 * What sort of SKU it is
+	 * What sort of SKU it is.
 	 */
 	Type: SkuType;
 
 	/**
-	 * The name of the SKU
+	 * The name of the SKU.
 	 */
 	Name: string;
 
 	/**
-	 * The price of the SKU
+	 * The price of the SKU.
 	 */
 	Price: SkuPrice;
 }
@@ -31,22 +31,22 @@ export interface Sku {
  */
 export enum SkuType {
 	/**
-	 * SKU is a game
+	 * SKU is a game.
 	 */
 	Application = 1,
 
 	/**
-	 * SKU is a DLC
+	 * SKU is a DLC.
 	 */
 	DLC,
 
 	/**
-	 * SKU is a consumable (in-app purchase)
+	 * SKU is a consumable (in-app purchase).
 	 */
 	Consumable,
 
 	/**
-	 * SKU is a bundle (comprising the other 3 types)
+	 * SKU is a bundle (comprising the other 3 types).
 	 */
 	Bundle
 }
@@ -56,12 +56,12 @@ export enum SkuType {
  */
 export interface SkuPrice {
 	/**
-	 * The amount of money the SKU costs
+	 * The amount of money the SKU costs.
 	 */
 	Amount: number;
 
 	/**
-	 * The currency the amount is in
+	 * The currency the amount is in.
 	 */
 	Currency: string;
 }
@@ -71,54 +71,54 @@ export interface SkuPrice {
  */
 export interface Entitlement {
 	/**
-	 * The unique ID of the entitlement
+	 * The unique ID of the entitlement.
 	 */
 	Id: bigint;
 
 	/**
-	 * The kind of entitlement it is
+	 * The kind of entitlement it is.
 	 */
 	Type: EntitlementType;
 
 	/**
-	 * The ID of the SKU to which the user is entitled
+	 * The ID of the SKU to which the user is entitled.
 	 */
 	SkuId: bigint;
 }
 
 export enum EntitlementType {
 	/**
-	 * Entitlement was purchased
+	 * Entitlement was purchased.
 	 */
 	Purchase = 1,
 
 	/**
-	 * Entitlement for a Discord Nitro subscription
+	 * Entitlement for a Discord Nitro subscription.
 	 */
 	PremiumSubscription,
 
 	/**
-	 * Entitlement was gifted by a developer
+	 * Entitlement was gifted by a developer.
 	 */
 	DeveloperGift,
 
 	/**
-	 * Entitlement was purchased by a dev in application test mode
+	 * Entitlement was purchased by a dev in application test mode.
 	 */
 	TestModePurchase,
 
 	/**
-	 * Entitlement was granted when the SKU was free
+	 * Entitlement was granted when the SKU was free.
 	 */
 	FreePurchase,
 
 	/**
-	 * Entitlement was gifted by another user
+	 * Entitlement was gifted by another user.
 	 */
 	UserGift,
 
 	/**
-	 * Entitlement was claimed by user for free as a Nitro Subscriber
+	 * Entitlement was claimed by user for free as a Nitro Subscriber.
 	 */
 	PremiumPurchase
 }
@@ -230,27 +230,27 @@ export interface StoreManager extends NodeJS.EventEmitter {
  */
 export interface LimitedPaymentData {
 	/**
-	 * Unique ID of the payment
+	 * Unique ID of the payment.
 	 */
 	id: string;
 
 	/**
-	 * The currency the payment was made in
+	 * The currency the payment was made in.
 	 */
 	currency: string;
 
 	/**
-	 * The amount paid
+	 * The amount paid.
 	 */
 	amount: number;
 
 	/**
-	 * The amount of tax
+	 * The amount of tax.
 	 */
 	tax: number;
 
 	/**
-	 * Whether the amount is tax-inclusive
+	 * Whether the amount is tax-inclusive.
 	 */
 	tax_inclusive: boolean;
 }
@@ -267,34 +267,34 @@ export interface LimitedPaymentData {
  */
 export interface GetEntitlements {
 	/**
-	 * The user ID to look up entitlements for
+	 * The user ID to look up entitlements for.
 	 */
 	user_id?: Snowflake;
 
 	/**
-	 * The list SKU IDs to check entitlements for
+	 * The list SKU IDs to check entitlements for.
 	 */
 	sku_ids?: string;
 
 	/**
-	 * Returns [limited payment data][1] for each entitlement
+	 * Returns [limited payment data][1] for each entitlement.
 	 *
 	 * [1]: https://discord.com/developers/docs/game-sdk/store#httpspecific-data-models-limited-payment-data-object
 	 */
 	with_payments?: boolean;
 
 	/**
-	 * Retrieve entitlements before this time
+	 * Retrieve entitlements before this time.
 	 */
 	before?: Snowflake;
 
 	/**
-	 * Retrieve entitlements after this time
+	 * Retrieve entitlements after this time.
 	 */
 	after?: Snowflake;
 
 	/**
-	 * Number of entitlements to return, 1-100
+	 * Number of entitlements to return, 1-100.
 	 *
 	 * @defaultValue 100
 	 */
@@ -311,7 +311,7 @@ export interface GetEntitlements {
  */
 export interface GetEntitlement {
 	/**
-	 * Returns [limited payment data][1] for the entitlement
+	 * Returns [limited payment data][1] for the entitlement.
 	 *
 	 * [1]: https://discord.com/developers/docs/game-sdk/store#httpspecific-data-models-limited-payment-data-object
 	 */
@@ -330,12 +330,12 @@ export interface GetEntitlement {
  */
 export interface CreatePurchaseDiscount {
 	/**
-	 * The percentage to discount
+	 * The percentage to discount.
 	 */
 	percent_off: RangeOf<1, 100>;
 
 	/**
-	 * The time to live for the discount, in seconds
+	 * The time to live for the discount, in seconds.
 	 *
 	 * @defaultValue 600
 	 */
