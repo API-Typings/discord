@@ -1,4 +1,4 @@
-import type { Nullable } from '@api-typings/core';
+import type { Nullable, TupleOf } from '@api-typings/core';
 import type { Snowflake } from '../';
 
 /**
@@ -39,7 +39,7 @@ export interface DiscoveryMetadata {
 	/**
 	 * IDs of up to 5 discovery subcategories set for this guild.
 	 */
-	category_ids: number[];
+	category_ids: Partial<TupleOf<number, 5>>;
 }
 
 export interface DiscoveryCategory {

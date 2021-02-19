@@ -1,4 +1,4 @@
-import type { Nullable, RangeOf } from '@api-typings/core';
+import type { Nullable, RangeOf, TupleOf } from '@api-typings/core';
 import type {
 	Activity,
 	Channel,
@@ -13,6 +13,7 @@ import type {
 	VoiceRegion,
 	VoiceState
 } from '../';
+import { ChannelType } from './Channel';
 
 // ANCHOR Partial Guild
 
@@ -1082,21 +1083,21 @@ export interface CreateGuild {
 	 *
 	 * [1]: https://discord.com/developers/docs/resources/guild#guild-object-verification-level
 	 */
-	verification_level?: number;
+	verification_level?: number | VerificationLevel;
 
 	/**
 	 * Default [message notifications level][1].
 	 *
 	 * [1]: https://discord.com/developers/docs/resources/guild#guild-object-default-message-notification-level
 	 */
-	default_message_notifications?: number;
+	default_message_notifications?: number | NotificationLevel;
 
 	/**
 	 * [Explicit content filter level][1].
 	 *
 	 * [1]: https://discord.com/developers/docs/resources/guild#guild-object-explicit-content-filter-level
 	 */
-	explicit_content_filter?: number;
+	explicit_content_filter?: number | ExplicitFilterLevel;
 
 	/**
 	 * New guild roles.
@@ -1199,21 +1200,21 @@ export interface ModifyGuild {
 	 *
 	 * [1]: https://discord.com/developers/docs/resources/guild#guild-object-verification-level
 	 */
-	verification_level?: Nullable<number>;
+	verification_level?: Nullable<number | VerificationLevel>;
 
 	/**
 	 * Default [message notifications level][1].
 	 *
 	 * [1]: https://discord.com/developers/docs/resources/guild#guild-object-default-message-notification-level
 	 */
-	default_message_notifications?: Nullable<number>;
+	default_message_notifications?: Nullable<number | NotificationLevel>;
 
 	/**
 	 * [Explicit content filter level][1].
 	 *
 	 * [1]: https://discord.com/developers/docs/resources/guild#guild-object-explicit-content-filter-level
 	 */
-	explicit_content_filter?: Nullable<number>;
+	explicit_content_filter?: Nullable<number | ExplicitFilterLevel>;
 
 	/**
 	 * ID for AFK channel.
@@ -1314,7 +1315,7 @@ export interface CreateGuildChannel {
 	 *
 	 * [1]: https://discord.com/developers/docs/resources/channel#channel-object-channel-types
 	 */
-	type?: number;
+	type?: number | ChannelType;
 
 	/**
 	 * Channel topic (0-1024 characters).
@@ -1873,7 +1874,7 @@ export interface ModifyDiscoveryMetadata {
 	/**
 	 * Up to 10 discovery search keywords.
 	 */
-	keywords?: Nullable<string[]>;
+	keywords?: Nullable<Partial<TupleOf<string, 10>>>;
 
 	/**
 	 * Whether guild info is shown when custom emojis are clicked.

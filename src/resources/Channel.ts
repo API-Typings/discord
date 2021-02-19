@@ -1,5 +1,6 @@
 import type { Nullable, RangeOf } from '@api-typings/core';
 import type { GuildMember, PartialEmoji, Snowflake, User } from '../';
+import { TargetUser } from './Invite';
 
 // SECTION Channel Types
 
@@ -1090,7 +1091,7 @@ export interface ModifyChannel {
 	 *
 	 * [1]: https://discord.com/developers/docs/resources/channel#channel-object-channel-types
 	 */
-	type?: number;
+	type?: number | ChannelType;
 
 	/**
 	 * The position of the channel in the left-hand listing.
@@ -1133,7 +1134,7 @@ export interface ModifyChannel {
 	 *
 	 * @channel Voice
 	 */
-	user_limit?: Nullable<number>;
+	user_limit?: Nullable<RangeOf<0, 99>>;
 
 	/**
 	 * Channel or category-specific permissions.
@@ -1453,7 +1454,7 @@ export interface EditChannelPermissions {
 	/**
 	 * 0 for a role or 1 for a member.
 	 */
-	type?: number;
+	type?: 0 | 1;
 }
 
 /**
@@ -1486,7 +1487,7 @@ export interface CreateChannelInvite {
 	 *
 	 * @defaultValue 0
 	 */
-	max_uses?: number;
+	max_uses?: RangeOf<0, 100>;
 
 	/**
 	 * Whether this invite only grants temporary membership.
@@ -1511,7 +1512,7 @@ export interface CreateChannelInvite {
 	/**
 	 * The type of user target for this invite.
 	 */
-	target_user_type?: number;
+	target_user_type?: number | TargetUser;
 }
 
 /**

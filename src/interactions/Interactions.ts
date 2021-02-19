@@ -170,8 +170,10 @@ export interface Interaction {
 
 	/**
 	 * Read-only property, always `1`.
+	 *
+	 * @readonly
 	 */
-	version: number;
+	readonly version: 1;
 }
 
 /**
