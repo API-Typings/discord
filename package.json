@@ -21,8 +21,10 @@
 		"url": "https://github.com/API-Typings/discord"
 	},
 	"license": "BSD-3-Clause",
+	"dependencies": {
+		"@api-typings/core": "^1.0.3"
+	},
 	"devDependencies": {
-		"@api-typings/core": "^1.0.3",
 		"@microsoft/tsdoc-config": "^0.14.0",
 		"@types/node": "^14.14.28",
 		"@typescript-eslint/eslint-plugin": "^4.15.0",
