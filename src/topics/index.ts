@@ -11,17 +11,17 @@ export * from './Teams';
  */
 export interface RateLimit {
 	/**
-	 * A message saying you are being rate limited
+	 * A message saying you are being rate limited.
 	 */
 	message: string;
 
 	/**
-	 * The number of seconds to wait before submitting another request
+	 * The number of seconds to wait before submitting another request.
 	 */
 	retry_after: number;
 
 	/**
-	 * A value indicating if you are being globally rate limited or not
+	 * A value indicating if you are being globally rate limited or not.
 	 */
 	global: boolean;
 }
