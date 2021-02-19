@@ -1,12 +1,5 @@
 import type { Nullable } from '@api-typings/core';
-import type {
-	Guild,
-	PartialUser,
-	Snowflake,
-	Team,
-	User,
-	Webhook
-} from '../';
+import type { Guild, PartialUser, Snowflake, Team, User, Webhook } from '../';
 
 /**
  * @warning
@@ -518,7 +511,19 @@ export interface Application extends Omit<PartialApplication, 'hook'> {
 	/**
 	 * The application's public flags.
 	 */
-	flags: number;
+	flags: ApplicationFlags;
+}
+
+export enum ApplicationFlags {
+	ManagedEmoji = 1 << 2,
+	GroupDMCreate = 1 << 4,
+	RPCConnected = 1 << 11,
+	GatewayPresence = 1 << 12,
+	GatewayPresenceLimited = 1 << 13,
+	GatewayGuildMembers = 1 << 14,
+	GatewayGuildMembersLimited = 1 << 15,
+	VerificationPendingGuildLimit = 1 << 16,
+	Enabled = 1 << 17
 }
 
 /**
