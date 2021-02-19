@@ -1,8 +1,5 @@
 import type { Nullable } from '@api-typings/core';
-import type {
-	Snowflake,
-	StatusType
-} from '../../';
+import type { Snowflake, StatusType } from '../../';
 
 // ANCHOR Client Status
 
@@ -220,7 +217,7 @@ export interface ActivityParty {
 	/**
 	 * Used to show the party's current and maximum size.
 	 */
-	size?: [number, number];
+	size?: [current_size: number, max_size: number];
 }
 
 /**

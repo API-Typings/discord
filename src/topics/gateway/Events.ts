@@ -345,7 +345,7 @@ export interface Ready extends GatewayEventPayload<GatewayEvent.Ready> {
 		/**
 		 * The shard information associated with this session, if sent when identifying.
 		 */
-		shard?: [number, number];
+		shard?: [shard_id: number, num_shards: number];
 
 		/**
 		 * Contains `id` and `flags`.
