@@ -21,6 +21,7 @@ import type {
 	User,
 	VoiceState
 } from '../../';
+import { Application } from '../OAuth2';
 
 // ANCHOR Event Payload
 
@@ -350,17 +351,7 @@ export interface Ready extends GatewayEventPayload<GatewayEvent.Ready> {
 		/**
 		 * Contains `id` and `flags`.
 		 */
-		application: {
-			/**
-			 * The ID of the app.
-			 */
-			id: Snowflake;
-
-			/**
-			 * The application's public flags.
-			 */
-			flags: number;
-		};
+		application: Pick<Application, 'id' | 'flags'>;
 	};
 }
 
