@@ -264,7 +264,14 @@ export enum PermissionFlags {
 	 *
 	 * [1]: https://discord.com/developers/docs/topics/oauth2#twofactor-authentication-requirement
 	 */
-	MANAGE_EMOJIS = 0x40000000
+	MANAGE_EMOJIS = 0x40000000,
+
+	/**
+	 * Allows members to use slash commands in text channels.
+	 *
+	 * @channel Text
+	 */
+	USE_SLASH_COMMANDS = 0x80000000
 }
 
 export type Permission = keyof typeof PermissionFlags;
