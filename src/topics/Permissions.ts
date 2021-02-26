@@ -251,7 +251,7 @@ export enum PermissionFlags {
 	 *
 	 * [1]: https://discord.com/developers/docs/topics/oauth2#twofactor-authentication-requirement
 	 *
-	 * @channel Text, Voice
+	 * @channel Text
 	 */
 	MANAGE_WEBHOOKS = 0x20000000,
 
