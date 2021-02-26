@@ -1,6 +1,5 @@
 import type { Nullable, RangeOf } from '@api-typings/core';
-import type { GuildMember, PartialEmoji, Snowflake, User } from '../';
-import { TargetUser } from './Invite';
+import type { GuildMember, PartialEmoji, Snowflake, TargetUser, User } from '../';
 
 // SECTION Channel Types
 
@@ -23,6 +22,11 @@ export interface PartialChannel {
 	 * The name of the channel (2-100 characters).
 	 */
 	name: string;
+
+	/**
+	 * The computed permissions for the invoking user in that channel, including overwrites
+	 */
+	permissions: string;
 }
 
 /**

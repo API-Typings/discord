@@ -646,23 +646,8 @@ export interface GuildWidgetMember {
 
 // !SECTION
 
-// ANCHOR Guild Member
-
-/**
- * @info
- * - The field `user` won't be included in the member object attached to `MESSAGE_CREATE` and
- *   `MESSAGE_UPDATE` gateway events.
- * - In `GUILD_` events, `pending` will always be included as `true` or `false`. In non `GUILD_`
- *   events which can only be triggered by non-`pending` users, `pending` will not be included.
- *
- * @source {@link https://discord.com/developers/docs/resources/guild#guild-member-object-guild-member-structure|Guild}
- */
-export interface GuildMember {
-	/**
-	 * The user this guild member represents.
-	 */
-	user?: User;
-
+// ANCHOR Partial Guild Member
+export interface PartialGuildMember {
 	/**
 	 * This users guild nickname.
 	 */
@@ -688,16 +673,6 @@ export interface GuildMember {
 	premium_since?: Nullable<string>;
 
 	/**
-	 * Whether the user is deafened in voice channels.
-	 */
-	deaf: boolean;
-
-	/**
-	 * Whether the user is muted in voice channels.
-	 */
-	mute: boolean;
-
-	/**
 	 * Whether the user has not yet passed the guild's Membership Screening requirements.
 	 */
 	pending?: boolean;
@@ -707,6 +682,34 @@ export interface GuildMember {
 	 * interaction object.
 	 */
 	permissions?: string;
+}
+
+// ANCHOR Guild Member
+
+/**
+ * @info
+ * - The field `user` won't be included in the member object attached to `MESSAGE_CREATE` and
+ *   `MESSAGE_UPDATE` gateway events.
+ * - In `GUILD_` events, `pending` will always be included as `true` or `false`. In non `GUILD_`
+ *   events which can only be triggered by non-`pending` users, `pending` will not be included.
+ *
+ * @source {@link https://discord.com/developers/docs/resources/guild#guild-member-object-guild-member-structure|Guild}
+ */
+export interface GuildMember extends PartialGuildMember {
+	/**
+	 * The user this guild member represents.
+	 */
+	user?: User;
+
+	/**
+	 * Whether the user is deafened in voice channels.
+	 */
+	deaf: boolean;
+
+	/**
+	 * Whether the user is muted in voice channels.
+	 */
+	mute: boolean;
 }
 
 // SECTION Integration

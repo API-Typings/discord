@@ -1,5 +1,14 @@
 import type { Nullable } from '@api-typings/core';
-import type { AllowedMentions, Embed, GuildMember, Snowflake, User } from '../';
+import type {
+	AllowedMentions,
+	Embed,
+	GuildMember,
+	PartialChannel,
+	PartialGuildMember,
+	Role,
+	Snowflake,
+	User
+} from '../';
 
 // SECTION Application Command
 
@@ -199,9 +208,36 @@ export interface ApplicationCommandInteractionData {
 	name: string;
 
 	/**
+	 * Converted users + roles + channels.
+	 */
+	resolved?: ApplicationCommandInteractionDataResolved;
+
+	/**
 	 * The params + values from the user.
 	 */
 	options?: ApplicationCommandInteractionOptionData[];
+}
+
+export interface ApplicationCommandInteractionDataResolved {
+	/**
+	 * The IDs and User objects.
+	 */
+	users?: Record<Snowflake, User>;
+
+	/**
+	 * The IDs and partial Member objects.
+	 */
+	members?: Record<Snowflake, PartialGuildMember>;
+
+	/**
+	 * The IDs and Role objects.
+	 */
+	roles?: Record<Snowflake, Role>;
+
+	/**
+	 * The IDs and partial Channel objects.
+	 */
+	channels?: Record<Snowflake, PartialChannel>;
 }
 
 /**
