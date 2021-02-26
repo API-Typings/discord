@@ -1,6 +1,5 @@
 import type { Nullable, RangeOf } from '@api-typings/core';
-import type { PartialIntegration, PartialRole, Snowflake, User, Webhook } from '../';
-import type { ChannelType, Overwrite } from './Channel';
+import type { ChannelType, Overwrite, PartialIntegration, PartialRole, Snowflake, User, Webhook } from '../';
 
 /**
  * Whenever an admin action is performed on the API, an entry is added to the respective guild's
@@ -37,7 +36,7 @@ export interface AuditLogEntry {
 	/**
 	 * ID of the affected entity (webhook, user, role, etc.).
 	 */
-	target_id: Nullable<string>;
+	target_id: Nullable<Snowflake>;
 
 	/**
 	 * Changes made to the `target_id`.
@@ -81,14 +80,14 @@ export enum AuditLogEvent {
 	ChannelOverwriteCreate,
 	ChannelOverwriteUpdate,
 	ChannelOverwriteDelete,
-	GuildMemberKick = 20,
-	GuildMemberPrune,
-	GuildMemberBanAdd,
-	GuildMemberBanRemove,
-	GuildMemberUpdate,
-	GuildMemberRoleUpdate,
-	GuildMemberMove,
-	GuildMemberDisconnect,
+	MemberKick = 20,
+	MemberPrune,
+	MemberBanAdd,
+	MemberBanRemove,
+	MemberUpdate,
+	MemberRoleUpdate,
+	MemberMove,
+	MemberDisconnect,
 	BotAdd,
 	RoleCreate = 30,
 	RoleUpdate,
@@ -294,7 +293,7 @@ export interface GetGuildAuditLog {
 	/**
 	 * The type of [audit log event][1].
 	 *
-	 * [1]: https://discord.com/developers/docs/resources/audit-log#audit-log-entry-object-audit-log-events|
+	 * [1]: https://discord.com/developers/docs/resources/audit-log#audit-log-entry-object-audit-log-events
 	 */
 	action_type?: AuditLogEvent;
 
