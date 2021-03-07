@@ -1,5 +1,18 @@
 import type { Nullable, RangeOf } from '@api-typings/core';
-import type { ChannelType, Overwrite, PartialIntegration, PartialRole, Snowflake, User, Webhook } from '../';
+import type {
+	ChannelType,
+	ExplicitFilterLevel,
+	IntegrationExpireBehavior,
+	MFALevel,
+	NotificationLevel,
+	Overwrite,
+	PartialIntegration,
+	PartialRole,
+	Snowflake,
+	User,
+	VerificationLevel,
+	Webhook
+} from '../';
 
 /**
  * Whenever an admin action is performed on the API, an entry is added to the respective guild's
@@ -41,7 +54,9 @@ export interface AuditLogEntry {
 	/**
 	 * Changes made to the `target_id`.
 	 */
-	changes?: AuditLogChangeType[];
+	changes?: {
+		[K in keyof AuditLogChangeKey]: AuditLogChange<K>;
+	}[keyof AuditLogChangeKey][];
 
 	/**
 	 * The user who made the changes.
@@ -197,16 +212,16 @@ export interface AuditLogEntryInfo {
  *
  * @source {@link https://discord.com/developers/docs/resources/audit-log#audit-log-change-object-audit-log-change-structure|Audit Log}
  */
-export interface AuditLogChange<K extends string, T = string> {
+export interface AuditLogChange<K extends keyof AuditLogChangeKey> {
 	/**
 	 * New value of the key.
 	 */
-	new_value?: T;
+	new_value?: AuditLogChangeKey[K];
 
 	/**
 	 * Old value of the key.
 	 */
-	old_value?: T;
+	old_value?: AuditLogChangeKey[K];
 
 	/**
 	 * Name of audit log change key.
@@ -217,60 +232,61 @@ export interface AuditLogChange<K extends string, T = string> {
 /**
  * @source {@link https://discord.com/developers/docs/resources/audit-log#audit-log-change-object-audit-log-change-key|Audit Log}
  */
-export type AuditLogChangeType =
-	| AuditLogChange<'name'>
-	| AuditLogChange<'guild'>
-	| AuditLogChange<'icon_hash'>
-	| AuditLogChange<'splash_hash'>
-	| AuditLogChange<'discovery_splash_hash'>
-	| AuditLogChange<'banner_hash'>
-	| AuditLogChange<'owner_id', Snowflake>
-	| AuditLogChange<'region'>
-	| AuditLogChange<'preferred_locale'>
-	| AuditLogChange<'afk_channel_id', Snowflake>
-	| AuditLogChange<'afk_timeout', number>
-	| AuditLogChange<'rules_channel_id', Snowflake>
-	| AuditLogChange<'public_updates_channel_id', Snowflake>
-	| AuditLogChange<'mfa_level', number>
-	| AuditLogChange<'verification_level', number>
-	| AuditLogChange<'explicit_content_filter', number>
-	| AuditLogChange<'default_message_notifications', number>
-	| AuditLogChange<'vanity_url_code'>
-	| AuditLogChange<'$add', PartialRole[]>
-	| AuditLogChange<'$remove', PartialRole[]>
-	| AuditLogChange<'prune_delete_days', number>
-	| AuditLogChange<'widget_enabled', boolean>
-	| AuditLogChange<'widget_channel_id', Snowflake>
-	| AuditLogChange<'system_channel_id', Snowflake>
-	| AuditLogChange<'position', number>
-	| AuditLogChange<'topic'>
-	| AuditLogChange<'bitrate', number>
-	| AuditLogChange<'permission_overwrites', Overwrite[]>
-	| AuditLogChange<'nsfw', boolean>
-	| AuditLogChange<'application_id', Snowflake>
-	| AuditLogChange<'rate_limit_per_user', number>
-	| AuditLogChange<'permissions'>
-	| AuditLogChange<'color', number>
-	| AuditLogChange<'hoist', boolean>
-	| AuditLogChange<'mentionalble', boolean>
-	| AuditLogChange<'allow'>
-	| AuditLogChange<'deny'>
-	| AuditLogChange<'code'>
-	| AuditLogChange<'channel_id', Snowflake>
-	| AuditLogChange<'inviter_id', Snowflake>
-	| AuditLogChange<'max_uses', number>
-	| AuditLogChange<'uses', number>
-	| AuditLogChange<'temporary', boolean>
-	| AuditLogChange<'deaf', boolean>
-	| AuditLogChange<'mute', boolean>
-	| AuditLogChange<'nick', Snowflake>
-	| AuditLogChange<'avatar_hash', Snowflake>
-	| AuditLogChange<'id', string>
-	| AuditLogChange<'type', ChannelType | string>
-	| AuditLogChange<'enable_emoticons', boolean>
-	| AuditLogChange<'expire_behavior', number>
-	| AuditLogChange<'expire_grace_period', number>
-	| AuditLogChange<'user_limit', number>;
+export interface AuditLogChangeKey {
+	name: string;
+	guild: string;
+	icon_hash: string;
+	splash_hash: string;
+	discovery_splash_hash: string;
+	banner_hash: string;
+	owner_id: Snowflake;
+	region: string;
+	preferred_locale: string;
+	afk_channel_id: Snowflake;
+	afk_timeout: number;
+	rules_channel_id: Snowflake;
+	public_updates_channel_id: Snowflake;
+	mfa_level: MFALevel;
+	verification_level: VerificationLevel;
+	explicit_content_filter: ExplicitFilterLevel;
+	default_message_notifications: NotificationLevel;
+	vanity_url_code: string;
+	$add: PartialRole[];
+	$remove: PartialRole[];
+	prune_delete_days: number;
+	widget_enabled: boolean;
+	widget_channel_id: Snowflake;
+	system_channel_id: Snowflake;
+	position: number;
+	topic: string;
+	bitrate: number;
+	permission_overwrites: Overwrite[];
+	nsfw: boolean;
+	application_id: Snowflake;
+	rate_limit_per_user: number;
+	permissions: string;
+	color: number;
+	hoist: boolean;
+	mentionalble: boolean;
+	allow: string;
+	deny: string;
+	code: string;
+	channel_id: Snowflake;
+	inviter_id: Snowflake;
+	max_uses: number;
+	uses: number;
+	temporary: boolean;
+	deaf: boolean;
+	mute: boolean;
+	nick: string;
+	avatar_hash: string;
+	id: Snowflake;
+	type: ChannelType | string;
+	enable_emoticons: boolean;
+	expire_behavior: IntegrationExpireBehavior;
+	expire_grace_period: number;
+	user_limit: number;
+}
 
 // SECTION Endpoints
 
