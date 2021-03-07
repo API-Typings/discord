@@ -582,7 +582,7 @@ export enum MessageFlags {
 	Urgent = 1 << 4,
 
 	/**
-	 * This message is only visible to the user did the Interaction.
+	 * This message is only visible to the user who did the Interaction.
 	 */
 	Ephemeral = 1 << 6
 }
