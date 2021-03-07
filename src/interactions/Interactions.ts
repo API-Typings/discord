@@ -1,4 +1,4 @@
-import type { Nullable } from '@api-typings/core';
+import type { Nullable, TupleOf } from '@api-typings/core';
 import type {
 	AllowedMentions,
 	Embed,
@@ -49,7 +49,7 @@ export interface ApplicationCommand {
 
 /**
  * @info
- * You can specify a maximum of 10 `choices` per option.
+ * You can specify a maximum of 25 `choices` per option.
  *
  * @source {@link https://discord.com/developers/docs/interactions/slash-commands#applicationcommandoption|Slash Commands}
  */
@@ -70,17 +70,19 @@ export interface ApplicationCommandOption {
 	description: string;
 
 	/**
-	 * If the parameter is required or optional--default `false`.
+	 * If the parameter is required or optional.
+	 *
+	 * @defaultValue false
 	 */
 	required?: boolean;
 
 	/**
-	 * Choices for `string` and `int` types for the user to pick from.
+	 * Choices for `string` and `number` types for the user to pick from.
 	 */
-	choices?: ApplicationCommandOptionChoice[];
+	choices?: TupleOf<ApplicationCommandOptionChoice, 50>;
 
 	/**
-	 * If the option is a subcommand or subcommand group type, this nested options will be the
+	 * If the option is a subcommand or subcommand group type, the nested options will be the
 	 * parameters.
 	 */
 	options?: ApplicationCommandOption[];
@@ -109,7 +111,7 @@ export enum ApplicationCommandOptionType {
 }
 
 /**
- * If you specify `choices` for an option, they are the only valid values for a user to pick.
+ * If you specify `choices` for an option, they are the **only** valid values for a user to pick.
  *
  * @source {@link https://discord.com/developers/docs/interactions/slash-commands#applicationcommandoptionchoice|Slash Commands}
  */
@@ -120,7 +122,7 @@ export interface ApplicationCommandOptionChoice {
 	name: string;
 
 	/**
-	 * Value of the choice.
+	 * Value of the choice, up to 100 characters if string.
 	 */
 	value: string | number;
 }
@@ -148,7 +150,6 @@ export interface Interaction {
 
 	/**
 	 * The command data payload. This is always present on `ApplicationCommand` interaction types.
-	 * It is optional for future-proofing against new interaction types.
 	 */
 	data?: ApplicationCommandInteractionData;
 
@@ -256,6 +257,11 @@ export interface ApplicationCommandInteractionOptionData {
 	name: string;
 
 	/**
+	 * Value of `ApplicationCommandOptionType`.
+	 */
+	type: number;
+
+	/**
 	 * The value of the pair.
 	 */
 	value?: unknown;
@@ -267,20 +273,7 @@ export interface ApplicationCommandInteractionOptionData {
 }
 
 /**
- * After receiving an interaction, you must respond to acknowledge it. You can choose to respond
- * with a message immediately using type `4`, or you can choose to send a deferred response with
- * type `5`. If choosing a deferred response, the user will see a loading state for the interaction,
- * and you'll have up to 15 minutes to edit the original deferred response using [Edit Original
- * Interaction Response][1].
- *
- * Interaction responses can also be public—everyone can see it—or "ephemeral"—only the invoking
- * user can see it. That is determined by setting `flags` to `64` on the
- * [InteractionApplicationCommandCallbackData][2].
- *
  * @source {@link https://discord.com/developers/docs/interactions/slash-commands#interaction-response|Slash Commands}
- *
- * [1]: https://discord.com/developers/docs/interactions/slash-commands#edit-original-interaction-response
- * [2]: https://discord.com/developers/docs/interactions/slash-commands#interaction-response-interactionapplicationcommandcallbackdata
  */
 export interface InteractionResponse {
 	/**
@@ -309,7 +302,7 @@ export enum InteractionResponseType {
 	ChannelMessageSource = 4,
 
 	/**
-	 * ACK an interaction and send a response later, the user sees a loading statud.
+	 * ACK an interaction and send a response later, the user sees a loading state.
 	 */
 	DeferredChannelMessageSource
 }
@@ -326,12 +319,12 @@ export interface InteractionApplicationCommandCallbackData {
 	/**
 	 * Message content.
 	 */
-	content: string;
+	content?: string;
 
 	/**
 	 * Supports up to 10 embeds.
 	 */
-	embeds?: Embed[];
+	embeds?: TupleOf<Embed, 10>;
 
 	/**
 	 * [Allowed mentions][1] object.
@@ -381,6 +374,10 @@ export interface MessageInteraction {
  * Create a new guild/global command.
  * - **Guild:** new guild commands will be available in the guild immediately.
  * - **Global:** new global commands will be available in all guilds after 1 hour.
+ *
+ * @info
+ * Apps can have a maximum of 100 global commands, and an additional 100 guild-specific commands per
+ * guild.
  *
  * @warning
  * Creating a command with the same name as an existing command for your application will
