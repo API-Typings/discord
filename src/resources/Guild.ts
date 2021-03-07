@@ -2,6 +2,7 @@ import type { Nullable, RangeOf, TupleOf } from '@api-typings/core';
 import type {
 	Activity,
 	Channel,
+	ChannelType,
 	Emoji,
 	Overwrite,
 	PartialChannel,
@@ -13,7 +14,6 @@ import type {
 	VoiceRegion,
 	VoiceState
 } from '../';
-import { ChannelType } from './Channel';
 
 // ANCHOR Partial Guild
 
