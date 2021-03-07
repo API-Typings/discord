@@ -1,5 +1,5 @@
 import type { Nullable, RangeOf } from '@api-typings/core';
-import type { GuildMember, PartialEmoji, Snowflake, TargetUser, User } from '../';
+import type { GuildMember, MessageInteraction, PartialEmoji, Snowflake, TargetUser, User } from '../';
 
 // SECTION Channel Types
 
@@ -405,6 +405,11 @@ export interface Message {
 	 * but is null, the referenced message was deleted.
 	 */
 	referenced_message?: Nullable<Message>;
+
+	/**
+	 * Sent if the message is a response to an Interaction.
+	 */
+	interaction?: MessageInteraction;
 }
 
 export interface UserMention extends User {

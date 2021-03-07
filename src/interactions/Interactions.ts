@@ -346,6 +346,33 @@ export interface InteractionApplicationCommandCallbackData {
 	flags?: number;
 }
 
+// ANCHOR Message Interaction
+
+/**
+ * @source {@link https://discord.com/developers/docs/interactions/slash-commands#messageinteraction|Slash Commands}
+ */
+export interface MessageInteraction {
+	/**
+	 * ID of the interaction.
+	 */
+	id: Snowflake;
+
+	/**
+	 * The type of interaction.
+	 */
+	type: InteractionType;
+
+	/**
+	 * The name of the `ApplicationCommand`.
+	 */
+	name: string;
+
+	/**
+	 * The user who invoked the interaction.
+	 */
+	user: User;
+}
+
 // SECTION Endpoints
 
 // ANCHOR Create
