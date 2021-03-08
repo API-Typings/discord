@@ -66,7 +66,7 @@ export interface Channel extends PartialChannel {
 	parent_id: Nullable<string>;
 }
 
-// ANCHOR Channel Type Enum
+// ANCHOR Channel Type
 
 /**
  * @source {@link https://discord.com/developers/docs/resources/channel#channel-object-channel-types|Channel}
@@ -112,6 +112,12 @@ export enum ChannelType {
 	 * [1]: https://discord.com/developers/docs/game-and-server-management/special-channels|
 	 */
 	GuildStore
+
+	/**
+	 * Undocumented & unusable channel types; here for when they're released.
+	 * Thread = 11
+	 * Stage = 13
+	 */
 }
 
 // ANCHOR Text Channel
