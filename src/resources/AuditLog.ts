@@ -295,35 +295,36 @@ export interface AuditLogChangeKey {
  *
  * @endpoint [GET] `/guilds/{guild.id}/audit-logs`
  *
- * @returns An [audit log][1] object for the guild.
- *
  * [GET]: https://discord.com/developers/docs/resources/audit-log#get-guild-audit-log
- * [1]: https://discord.com/developers/docs/resources/audit-log#audit-log-object
  */
 export interface GetGuildAuditLog {
-	/**
-	 * Filter the log for actions made by a user.
-	 */
-	user_id?: Snowflake;
+	query: {
+		/**
+		 * Filter the log for actions made by a user.
+		 */
+		user_id?: Snowflake;
 
-	/**
-	 * The type of [audit log event][1].
-	 *
-	 * [1]: https://discord.com/developers/docs/resources/audit-log#audit-log-entry-object-audit-log-events
-	 */
-	action_type?: AuditLogEvent;
+		/**
+		 * The type of [audit log event][1].
+		 *
+		 * [1]: https://discord.com/developers/docs/resources/audit-log#audit-log-entry-object-audit-log-events
+		 */
+		action_type?: AuditLogEvent;
 
-	/**
-	 * Filter the log before a certain entry ID.
-	 */
-	before?: Snowflake;
+		/**
+		 * Filter the log before a certain entry ID.
+		 */
+		before?: Snowflake;
 
-	/**
-	 * How many entries are returned.
-	 *
-	 * @defaultValue 50
-	 */
-	limit?: RangeOf<1, 100>;
+		/**
+		 * How many entries are returned.
+		 *
+		 * @defaultValue 50
+		 */
+		limit?: RangeOf<1, 100>;
+	};
+
+	response: AuditLog;
 }
 
 // !SECTION
