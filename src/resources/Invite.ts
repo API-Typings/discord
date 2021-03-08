@@ -1,3 +1,4 @@
+import { PartialApplication } from '../topics';
 import type { PartialChannel, PartialGuild, PartialUser, User } from './';
 
 // ANCHOR Partial Invite
@@ -41,33 +42,39 @@ export interface Invite extends Pick<PartialInvite, 'code'> {
 	inviter?: User;
 
 	/**
-	 * The target user for this invite.
+	 * The type of target for this voice channel invite.
 	 */
-	target_user?: PartialUser;
+	target_type?: InviteTargetType;
 
 	/**
-	 * The [type of user target][1] for this invite.
-	 *
-	 * [1]: https://discord.com/developers/docs/resources/invite#invite-object-target-user-types
+	 * The user whose stream to display for this voice channel stream invite.
 	 */
-	target_user_type?: TargetUser;
+	target_user?: User;
 
 	/**
-	 * Approximate count of online members (only present when `target_user` is set).
+	 * The embedded application to open for this voice channel embedded application invite.
+	 */
+	target_application?: PartialApplication;
+
+	/**
+	 * Approximate count of online members, returned from the `GET /invites/<code>` endpoint when
+	 * `with_counts` is `true`
 	 */
 	approximate_presence_count?: number;
 
 	/**
-	 * Approximate count of total members.
+	 * Approximate count of total members, returned from the `GET /invites/<code>` endpoint when
+	 * `with_counts` is `true`.
 	 */
 	approximate_member_count?: number;
 }
 
 /**
- * @source {@link https://discord.com/developers/docs/resources/invite#invite-object-target-user-types|Invite}
+ * @source {@link https://discord.com/developers/docs/resources/invite#invite-object-invite-target-typs|Invite}
  */
-export enum TargetUser {
-	Stream = 1
+export enum InviteTargetType {
+	Stream = 1,
+	EmbeddedApplication
 }
 
 /**

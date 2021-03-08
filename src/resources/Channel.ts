@@ -1,5 +1,5 @@
 import type { Nullable, RangeOf } from '@api-typings/core';
-import type { GuildMember, MessageInteraction, PartialEmoji, Snowflake, TargetUser, User } from '../';
+import type { GuildMember, InviteTargetType, MessageInteraction, PartialEmoji, Snowflake, User } from '../';
 
 // SECTION Channel Types
 
@@ -1524,14 +1524,21 @@ export interface CreateChannelInvite {
 	unique?: boolean;
 
 	/**
-	 * The target user ID for this invite.
+	 * The type of target for this voice channel invite.
 	 */
-	target_user_id?: string;
+	target_type?: InviteTargetType;
 
 	/**
-	 * The type of user target for this invite.
+	 * The ID of the user whose stream to display for this invite, required if `target_type` is 1,
+	 * the user must be streaming in the channel.
 	 */
-	target_user_type?: number | TargetUser;
+	target_user_id?: Snowflake;
+
+	/**
+	 * The ID of the embedded application to open for this invite, required if `target_type` is 2,
+	 * the application must have the `EMBEDDED` flag.
+	 */
+	target_application_id?: Snowflake;
 }
 
 /**

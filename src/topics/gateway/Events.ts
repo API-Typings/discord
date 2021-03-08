@@ -11,17 +11,17 @@ import type {
 	GuildMember,
 	Integration,
 	Interaction,
+	InviteTargetType,
 	Message,
 	PartialEmoji,
 	PartialUser,
 	Role,
 	Snowflake,
-	TargetUser,
 	UnavailableGuild,
 	User,
 	VoiceState
 } from '../../';
-import { Application } from '../OAuth2';
+import { Application, PartialApplication } from '../OAuth2';
 
 // ANCHOR Event Payload
 
@@ -892,16 +892,19 @@ export interface InviteCreate extends GatewayEventPayload<GatewayEvent.InviteCre
 		max_uses: number;
 
 		/**
-		 * The target user for this invite.
+		 * The type of target for this voice channel invite.
 		 */
-		target_user?: PartialUser;
+		target_type?: InviteTargetType;
 
 		/**
-		 * The [type of user target][1] for this invite.
-		 *
-		 * [1]: https://discord.com/developers/docs/resources/invite#invite-object-target-user-types
+		 * The user whose stream to display for this voice channel stream invite.
 		 */
-		target_user_type?: TargetUser;
+		target_user?: User;
+
+		/**
+		 * The embedded application to open for this voice channel embedded application invite
+		 */
+		target_application?: PartialApplication;
 
 		/**
 		 * Whether or not the invite is temporary (invited users will be kicked on disconnect unless
@@ -912,7 +915,7 @@ export interface InviteCreate extends GatewayEventPayload<GatewayEvent.InviteCre
 		/**
 		 * How many times the invite has been used (always will be 0).
 		 */
-		uses: number;
+		uses: 0;
 	};
 }
 
