@@ -293,9 +293,7 @@ export interface AuditLogChangeKey {
 /**
  * Requires the `VIEW_AUDIT_LOG` permission.
  *
- * @endpoint [GET] `/guilds/{guild.id}/audit-logs`
- *
- * [GET]: https://discord.com/developers/docs/resources/audit-log#get-guild-audit-log
+ * @endpoint [GET](https://discord.com/developers/docs/resources/audit-log#get-guild-audit-log) `/guilds/{guild.id}/audit-logs`
  */
 export interface GetGuildAuditLog {
 	query: {
