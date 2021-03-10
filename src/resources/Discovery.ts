@@ -83,23 +83,27 @@ export interface DiscoverySubcategory {
 	category_id: number;
 }
 
-export interface ValidDiscoverySearchTerm {
-	/**
-	 * Whether the provided term is valid.
-	 */
-	valid: boolean;
-}
-
 // SECTION Endpoints
 
 /**
  * @endpoint GET `/discovery/valid-term`
  */
 export interface ValidateDiscoverySearchTerm {
+	body: {
+		/**
+		 * The search term to check.
+		 */
+		term: string;
+	};
+
+	response: ValidDiscoverySearchTerm;
+}
+
+export interface ValidDiscoverySearchTerm {
 	/**
-	 * The search term to check.
+	 * Whether the provided term is valid.
 	 */
-	term: string;
+	valid: boolean;
 }
 
 // !SECTION

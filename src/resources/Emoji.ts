@@ -65,6 +65,20 @@ export interface Emoji extends PartialEmoji {
 // SECTION Endpoints
 
 /**
+ * Returns a list of emoji objects for the given guild.
+ *
+ * @endpoint [GET](https://discord.com/developers/docs/resources/emoji#list-guild-emojis) `/guilds/{guild.id}/emojis`
+ */
+export type ListGuildEmojis = { response: Emoji[] };
+
+/**
+ * Returns an emoji object for the given guild and emoji IDs.
+ *
+ * @endpoint [GET](https://discord.com/developers/docs/resources/emoji#get-guild-emojis) `/guilds/{guild.id}/emojis/{emoji.id}`
+ */
+export type GetGuildEmoji = { response: Emoji };
+
+/**
  * Create a new emoji for the guild. Requires the `MANAGE_EMOJIS` permission.
  *
  * @warning
@@ -72,54 +86,61 @@ export interface Emoji extends PartialEmoji {
  * larger than this limit will fail and return `400 BAD REQUEST` and an error message, but not a
  * JSON status code.
  *
- * @endpoint [POST] `/guilds/{guild.id}/emojis`
- *
- * @returns The new [emoji][1] object on success.
- * @fires A [Guild Emojis Update][2] Gateway event.
- *
- * [POST]: https://discord.com/developers/docs/resources/emoji#create-guild-emoji
- * [1]: https://discord.com/developers/docs/resources/emoji#emoji-object
- * [2]: https://discord.com/developers/docs/topics/gateway#guild-emojis-update
+ * @endpoint [POST](https://discord.com/developers/docs/resources/emoji#create-guild-emoji) `/guilds/{guild.id}/emojis`
  */
-export interface CreateEmoji {
-	/**
-	 * Name of the emoji.
-	 */
-	name: string;
+export interface CreateGuildEmoji {
+	body: {
+		/**
+		 * Name of the emoji.
+		 */
+		name: string;
+
+		/**
+		 * The 128x128 emoji image.
+		 */
+		image: string;
+
+		/**
+		 * Roles for which this emoji will be whitelisted.
+		 */
+		roles: Snowflake[];
+	};
 
 	/**
-	 * The 128x128 emoji image.
+	 * The new emoji object.
 	 */
-	image: string;
-
-	/**
-	 * Roles for which this emoji will be whitelisted.
-	 */
-	roles: Snowflake[];
+	response: Emoji;
 }
 
 /**
  * Modify the given emoji. Requires the `MANAGE_EMOJIS` permission.
  *
- * @endpoint [PATCH] `/guilds/{guild.id}/emojis/{emoji.id}`
- *
- * @returns The updated [emoji][1] object on success.
- * @fires A [Guild Emojis Update][2] Gateway event.
- *
- * [PATCH]: https://discord.com/developers/docs/resources/emoji#modify-guild-emoji
- * [1]: https://discord.com/developers/docs/resources/emoji#emoji-object
- * [2]: https://discord.com/developers/docs/topics/gateway#guild-emojis-update
+ * @endpoint [PATCH](https://discord.com/developers/docs/resources/emoji#modify-guild-emoji) `/guilds/{guild.id}/emojis/{emoji.id}`
  */
-export interface ModifyEmoji {
-	/**
-	 * Name of the emoji.
-	 */
-	name?: string;
+export interface ModifyGuildEmoji {
+	body: {
+		/**
+		 * Name of the emoji.
+		 */
+		name?: string;
+
+		/**
+		 * Roles for which this emoji will be whitelisted.
+		 */
+		roles?: Nullable<Snowflake[]>;
+	};
 
 	/**
-	 * Roles for which this emoji will be whitelisted.
+	 * The updated emoji object.
 	 */
-	roles?: Nullable<Snowflake[]>;
+	response: Emoji;
 }
+
+/**
+ * Delete the given emoji. Requires the `MANAGE_EMOJIS` permission.
+ *
+ * @endpoint [DELETE](https://discord.com/developers/docs/resources/emoji#delete-guild-emoji) `/guilds/{guild.id}/emojis/{emoji.id}`
+ */
+export type DeleteGuildEmoji = { response: never };
 
 // !SECTION
