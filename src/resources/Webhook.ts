@@ -249,7 +249,7 @@ export interface ExecuteWebhook {
 		/**
 		 * Embedded `rich` content.
 		 */
-		embeds?: TupleOf<Embed, 10>;
+		embeds?: Partial<TupleOf<Embed, 10>>;
 		payload_json?: string;
 
 		/**
