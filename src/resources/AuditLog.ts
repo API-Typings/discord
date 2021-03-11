@@ -303,9 +303,7 @@ export interface GetGuildAuditLog {
 		user_id?: Snowflake;
 
 		/**
-		 * The type of [audit log event][1].
-		 *
-		 * [1]: https://discord.com/developers/docs/resources/audit-log#audit-log-entry-object-audit-log-events
+		 * The type of audit log event.
 		 */
 		action_type?: AuditLogEvent;
 
