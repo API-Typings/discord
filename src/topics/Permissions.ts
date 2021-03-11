@@ -1,3 +1,4 @@
+import type { CamelCase, Delimited } from 'extended-utility-types';
 import type { Snowflake } from '../';
 
 // ANCHOR Permission Flags
@@ -17,145 +18,133 @@ export enum PermissionFlags {
 	 *
 	 * @channel Text, Voice
 	 */
-	CREATE_INSTANT_INVITE = 0x00000001,
+	CreateInstantInvite = 0x00000001,
 
 	/**
 	 * Allows kicking members.
 	 *
 	 * @remarks
-	 * This permissions requires the owner account to use [two-factor authentication][1] when used
-	 * on a guild that has server-wide 2FA enabled.
-	 *
-	 * [1]: https://discord.com/developers/docs/topics/oauth2#twofactor-authentication-requirement
+	 * This permissions requires the owner account to use two-factor authentication when used on a
+	 * guild that has server-wide 2FA enabled.
 	 */
-	KICK_MEMBERS = 0x00000002,
+	KickMembers = 0x00000002,
 
 	/**
 	 * Allows banning members.
 	 *
 	 * @remarks
-	 * This permissions requires the owner account to use [two-factor authentication][1] when used
-	 * on a guild that has server-wide 2FA enabled.
-	 *
-	 * [1]: https://discord.com/developers/docs/topics/oauth2#twofactor-authentication-requirement
+	 * This permissions requires the owner account to use two-factor authentication when used on a
+	 * guild that has server-wide 2FA enabled.
 	 */
-	BAN_MEMBERS = 0x00000004,
+	BanMembers = 0x00000004,
 
 	/**
 	 * Allows all permissions and bypasses channel permission overwrites.
 	 *
 	 * @remarks
-	 * This permissions requires the owner account to use [two-factor authentication][1] when used
-	 * on a guild that has server-wide 2FA enabled.
-	 *
-	 * [1]: https://discord.com/developers/docs/topics/oauth2#twofactor-authentication-requirement
+	 * This permissions requires the owner account to use two-factor authentication when used on a
+	 * guild that has server-wide 2FA enabled.
 	 */
-	ADMINISTRATOR = 0x00000008,
+	Administrator = 0x00000008,
 
 	/**
 	 * Allows management and editing of channels.
 	 *
 	 * @remarks
-	 * This permissions requires the owner account to use [two-factor authentication][1] when used
-	 * on a guild that has server-wide 2FA enabled.
-	 *
-	 * [1]: https://discord.com/developers/docs/topics/oauth2#twofactor-authentication-requirement
+	 * This permissions requires the owner account to use two-factor authentication when used on a
+	 * guild that has server-wide 2FA enabled.
 	 *
 	 * @channel Text, Voice
 	 */
-	MANAGE_CHANNELS = 0x00000010,
+	ManageChannels = 0x00000010,
 
 	/**
 	 * Allows management and editing of the guild.
 	 *
 	 * @remarks
-	 * This permissions requires the owner account to use [two-factor authentication][1] when used
-	 * on a guild that has server-wide 2FA enabled.
-	 *
-	 * [1]: https://discord.com/developers/docs/topics/oauth2#twofactor-authentication-requirement
+	 * This permissions requires the owner account to use two-factor authentication when used on a
+	 * guild that has server-wide 2FA enabled.
 	 */
-	MANAGE_GUILD = 0x00000020,
+	ManageGuild = 0x00000020,
 
 	/**
 	 * Allows for the addition of reactions to messages.
 	 *
 	 * @channel Text
 	 */
-	ADD_REACTIONS = 0x00000040,
+	AddReactions = 0x00000040,
 
 	/**
 	 * Allows for viewing of audit logs.
 	 */
-	VIEW_AUDIT_LOG = 0x00000080,
+	ViewAuditLog = 0x00000080,
 
 	/**
 	 * Allows for using priority speaker in a voice channel.
 	 *
 	 * @channel Voice
 	 */
-	PRIORITY_SPEAKER = 0x00000100,
+	PrioritySpeaker = 0x00000100,
 
 	/**
 	 * Allows the user to go live.
 	 *
 	 * @channel Voice
 	 */
-	STREAM = 0x00000200,
+	Stream = 0x00000200,
 
 	/**
 	 * Allows guild members to view a channel, which includes reading messages in text channels.
 	 *
 	 * @channel Text, Voice
 	 */
-	VIEW_CHANNEL = 0x00000400,
+	ViewChannel = 0x00000400,
 
 	/**
 	 * Allows for sending messages in a channel.
 	 *
 	 * @channel Text
 	 */
-	SEND_MESSAGES = 0x00000800,
+	SendMessages = 0x00000800,
 
 	/**
 	 * Allows for sending of `/tts` messages.
 	 *
 	 * @channel Text
 	 */
-	SEND_TTS_MESSAGES = 0x00001000,
+	SendTTSMessages = 0x00001000,
 
 	/**
 	 * Allows for deletion of other users messages.
 	 *
 	 * @remarks
-	 * This permissions requires the owner account to use [two-factor authentication][1] when used
-	 * on a guild that has server-wide 2FA enabled.
-	 *
-	 * [1]: https://discord.com/developers/docs/topics/oauth2#twofactor-authentication-requirement
+	 * This permissions requires the owner account to use two-factor authentication when used on a
+	 * guild that has server-wide 2FA enabled.
 	 *
 	 * @channel Text
 	 */
-	MANAGE_MESSAGES = 0x00002000,
+	ManageMessages = 0x00002000,
 
 	/**
 	 * Links sent by users with this permission will be auto-embedded.
 	 *
 	 * @channel Text
 	 */
-	EMBED_LINKS = 0x00004000,
+	EmbedLinks = 0x00004000,
 
 	/**
 	 * Allows for uploading images and files.
 	 *
 	 * @channel Text
 	 */
-	ATTACH_FILES = 0x00008000,
+	AttachFiles = 0x00008000,
 
 	/**
 	 * Allows for reading of message history.
 	 *
 	 * @channel Text
 	 */
-	READ_MESSAGE_HISTORY = 0x00010000,
+	ReadMessageHistory = 0x00010000,
 
 	/**
 	 * Allows for using the `@everyone` tag to notify all users in a channel, and the `@here` tag
@@ -163,118 +152,112 @@ export enum PermissionFlags {
 	 *
 	 * @channel Text
 	 */
-	MENTION_EVERYONE = 0x00020000,
+	MentionEveryone = 0x00020000,
 
 	/**
 	 * Allows the usage of custom emojis from other servers.
 	 *
 	 * @channel Text
 	 */
-	USE_EXTERNAL_EMOJIS = 0x00040000,
+	UseExternalEmojis = 0x00040000,
 
 	/**
 	 * Allows for viewing guild insights.
 	 */
-	VIEW_GUILD_INSIGHTS = 0x00080000,
+	ViewGuildInsights = 0x00080000,
 
 	/**
 	 * Allows for joining of a voice channel.
 	 *
 	 * @channel Voice
 	 */
-	CONNECT = 0x00100000,
+	Connect = 0x00100000,
 
 	/**
 	 * Allows for speaking in a voice channel.
 	 *
 	 * @channel Voice
 	 */
-	SPEAK = 0x00200000,
+	Speak = 0x00200000,
 
 	/**
 	 * Allows for muting members in a voice channel.
 	 *
 	 * @channel Voice
 	 */
-	MUTE_MEMBERS = 0x00400000,
+	MuteMembers = 0x00400000,
 
 	/**
 	 * Allows for deafening of members in a voice channel.
 	 *
 	 * @channel Voice
 	 */
-	DEAFEN_MEMBERS = 0x00800000,
+	DeafenMembers = 0x00800000,
 
 	/**
 	 * Allows for moving of members between voice channels.
 	 *
 	 * @channel Voice
 	 */
-	MOVE_MEMBERS = 0x01000000,
+	MoveMembers = 0x01000000,
 
 	/**
 	 * Allows for using voice-activity-detection in a voice channel.
 	 *
 	 * @channel Voice
 	 */
-	USE_VAD = 0x02000000,
+	UseVAD = 0x02000000,
 
 	/**
 	 * Allows for modification of own nickname.
 	 */
-	CHANGE_NICKNAME = 0x04000000,
+	ChangeNickname = 0x04000000,
 
 	/**
 	 * Allows for modification of other users nicknames.
 	 */
-	MANAGE_NICKNAMES = 0x08000000,
+	ManageNicknames = 0x08000000,
 
 	/**
 	 * Allows management and editing of roles.
 	 *
 	 * @remarks
-	 * This permissions requires the owner account to use [two-factor authentication][1] when used
-	 * on a guild that has server-wide 2FA enabled.
-	 *
-	 * [1]: https://discord.com/developers/docs/topics/oauth2#twofactor-authentication-requirement
+	 * This permissions requires the owner account to use two-factor authentication when used on a
+	 * guild that has server-wide 2FA enabled.
 	 *
 	 * @channel Text, Voice
 	 */
-	MANAGE_ROLES = 0x10000000,
+	ManageRoles = 0x10000000,
 
 	/**
 	 * Allows management and editing of webhooks.
 	 *
 	 * @remarks
-	 * This permissions requires the owner account to use [two-factor authentication][1] when used
-	 * on a guild that has server-wide 2FA enabled.
-	 *
-	 * [1]: https://discord.com/developers/docs/topics/oauth2#twofactor-authentication-requirement
+	 * This permissions requires the owner account to use two-factor authentication when used on a
+	 * guild that has server-wide 2FA enabled.
 	 *
 	 * @channel Text
 	 */
-	MANAGE_WEBHOOKS = 0x20000000,
+	ManageWebhooks = 0x20000000,
 
 	/**
 	 * Allows management and editing of emojis.
 	 *
 	 * @remarks
-	 * This permissions requires the owner account to use [two-factor authentication][1] when used
-	 * on a guild that has server-wide 2FA enabled.
-	 *
-	 * [1]: https://discord.com/developers/docs/topics/oauth2#twofactor-authentication-requirement
+	 * This permissions requires the owner account to use two-factor authentication when used on a
+	 * guild that has server-wide 2FA enabled.
 	 */
-	MANAGE_EMOJIS = 0x40000000,
+	ManageEmojis = 0x40000000,
 
 	/**
 	 * Allows members to use slash commands in text channels.
 	 *
 	 * @channel Text
 	 */
-	USE_SLASH_COMMANDS = 0x80000000
+	UseSlashCommands = 0x80000000
 }
 
-export type Permission = keyof typeof PermissionFlags;
+export type Permission = Uppercase<Delimited<CamelCase<keyof typeof PermissionFlags>, '_'>>;
 
 // SECTION Roles
 
