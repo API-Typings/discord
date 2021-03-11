@@ -1,6 +1,14 @@
-import type { Nullable, RangeOf } from '@api-typings/core';
-import type { GuildMember, InviteTargetType, MessageInteraction, PartialEmoji, Snowflake, User } from '../';
-import { Invite, InviteMetadata } from './Invite';
+import type { Nullable, Range } from 'extended-utility-types';
+import type {
+	GuildMember,
+	Invite,
+	InviteMetadata,
+	InviteTargetType,
+	MessageInteraction,
+	PartialEmoji,
+	Snowflake,
+	User
+} from '../';
 
 // SECTION Channel Types
 
@@ -1154,7 +1162,7 @@ export interface ModifyChannel {
 		 *
 		 * @channel Voice
 		 */
-		user_limit?: Nullable<RangeOf<0, 99>>;
+		user_limit?: Nullable<Range<0, 99>>;
 
 		/**
 		 * Channel or category-specific permissions.
@@ -1244,7 +1252,7 @@ export interface GetChannelMessages {
 		 *
 		 * @defaultValue 50
 		 */
-		limit?: RangeOf<1, 100>;
+		limit?: Range<1, 100>;
 	};
 
 	/**
@@ -1442,7 +1450,7 @@ export interface GetReactions {
 		 *
 		 * @defaultValue 25
 		 */
-		limit?: RangeOf<1, 100>;
+		limit?: Range<1, 100>;
 	};
 
 	/**
@@ -1601,7 +1609,7 @@ export interface CreateChannelInvite {
 		 *
 		 * @defaultValue 0
 		 */
-		max_uses?: RangeOf<0, 100>;
+		max_uses?: Range<0, 100>;
 
 		/**
 		 * Whether this invite only grants temporary membership.

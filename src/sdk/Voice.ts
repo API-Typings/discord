@@ -1,4 +1,4 @@
-import type { RangeOf } from '@api-typings/core';
+import type { Range } from 'extended-utility-types';
 import type { Discord } from '../';
 
 /**
@@ -138,5 +138,5 @@ export interface VoiceManager {
 	 * @param userId - The ID of the user to change
 	 * @param volume - The volume at which to set the user, `0` to `200`
 	 */
-	SetLocalVolume(userId: bigint, volume: RangeOf<0, 200>): void;
+	SetLocalVolume(userId: bigint, volume: Range<0, 200>): void;
 }

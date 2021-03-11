@@ -1,4 +1,4 @@
-import type { RangeOf } from '@api-typings/core';
+import type { Range } from 'extended-utility-types';
 import type { Discord, Snowflake } from '../';
 
 /**
@@ -295,7 +295,7 @@ export interface GetEntitlements {
 		 *
 		 * @defaultValue 100
 		 */
-		limit?: RangeOf<1, 100>;
+		limit?: Range<1, 100>;
 	};
 
 	response: Entitlement[];
@@ -361,14 +361,14 @@ export interface CreatePurchaseDiscount {
 		/**
 		 * The percentage to discount.
 		 */
-		percent_off: RangeOf<1, 100>;
+		percent_off: Range<1, 100>;
 
 		/**
 		 * The time to live for the discount, in seconds.
 		 *
 		 * @defaultValue 600
 		 */
-		ttl?: RangeOf<60, 3600>;
+		ttl?: Range<60, 3600>;
 	};
 
 	response: never;

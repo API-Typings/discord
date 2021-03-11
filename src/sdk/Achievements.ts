@@ -1,4 +1,4 @@
-import type { RangeOf } from '@api-typings/core';
+import type { Range } from 'extended-utility-types';
 import type { Discord } from '../';
 
 /**
@@ -81,7 +81,7 @@ export interface UserAchievement {
 	/**
 	 * How far along the user is to completing the achievement (0-100).
 	 */
-	PercentComplete: RangeOf<0, 100>;
+	PercentComplete: Range<0, 100>;
 
 	/**
 	 * The timestamp at which the user completed the achievement (`PercentComplete` was set to 100).
@@ -102,7 +102,7 @@ export interface AchievementManager extends NodeJS.EventEmitter {
 	 */
 	/* prettier-ignore */
 	/* eslint-disable-next-line */
-	SetUserAchievement(achievementId: bigint, percentComplete: RangeOf<0, 100>, callback: (result: Discord.Result) => void): void
+	SetUserAchievement(achievementId: bigint, percentComplete: Range<0, 100>, callback: (result: Discord.Result) => void): void
 
 	/**
 	 * Loads a stable list of the current user's achievements to iterate over. If the user has any

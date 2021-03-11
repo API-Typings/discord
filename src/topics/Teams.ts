@@ -1,4 +1,4 @@
-import type { Nullable } from '@api-typings/core';
+import type { Nullable } from 'extended-utility-types';
 import type { Snowflake } from '../';
 import type { PartialUser } from '../resources';
 

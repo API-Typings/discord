@@ -1,7 +1,5 @@
-import type { Nullable, RangeOf } from '@api-typings/core';
-import type { PartialIntegration, Snowflake } from '../';
-import { DMChannel } from './Channel';
-import { PartialGuild } from './Guild';
+import type { Nullable, Range } from 'extended-utility-types';
+import type { DMChannel, PartialGuild, PartialIntegration, Snowflake } from '../';
 
 // ANCHOR Partial User
 
@@ -292,7 +290,7 @@ export interface GetCurrentUserGuilds {
 		 *
 		 * @defaultValue 100
 		 */
-		limit?: RangeOf<1, 100>;
+		limit?: Range<1, 100>;
 	};
 
 	response: PartialGuild[];

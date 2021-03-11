@@ -1,4 +1,4 @@
-import type { Nullable, TupleOf } from '@api-typings/core';
+import type { Nullable, TupleOf } from 'extended-utility-types';
 import type {
 	AllowedMentions,
 	EditWebhookMessage,

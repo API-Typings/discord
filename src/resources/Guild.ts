@@ -1,11 +1,14 @@
-import type { Nullable, RangeOf, TupleOf } from '@api-typings/core';
+import type { Nullable, Range, TupleOf } from 'extended-utility-types';
 import type {
 	Activity,
 	Channel,
 	ChannelType,
+	DiscoveryMetadata,
 	Emoji,
+	InviteMetadata,
 	Overwrite,
 	PartialChannel,
+	PartialInvite,
 	PresenceUpdate,
 	Role,
 	Snowflake,
@@ -14,8 +17,6 @@ import type {
 	VoiceRegion,
 	VoiceState
 } from '../';
-import { DiscoveryMetadata } from './Discovery';
-import { InviteMetadata, PartialInvite } from './Invite';
 
 // ANCHOR Partial Guild
 
@@ -1415,7 +1416,7 @@ export interface ListGuildMembers {
 		 *
 		 * @defaultValue 1
 		 */
-		limit?: RangeOf<1, 1000>;
+		limit?: Range<1, 1000>;
 
 		/**
 		 * The highest user ID in the previous page.
@@ -1446,7 +1447,7 @@ export interface SearchGuildMembers {
 		 *
 		 * @defaultValue 1
 		 */
-		limit?: RangeOf<1, 1000>;
+		limit?: Range<1, 1000>;
 	};
 
 	/**
@@ -1633,7 +1634,7 @@ export interface CreateGuildBan {
 		/**
 		 * Number of days to delete messages for (0-7).
 		 */
-		delete_messages_days?: RangeOf<0, 7>;
+		delete_messages_days?: Range<0, 7>;
 
 		/**
 		 * Reason for the ban.
@@ -1795,7 +1796,7 @@ export interface GetGuildPruneCount {
 		 *
 		 * @defaultValue 7
 		 */
-		days?: RangeOf<1, 30>;
+		days?: Range<1, 30>;
 
 		/**
 		 * Role(s) to include.
@@ -1831,7 +1832,7 @@ export interface BeginGuildPrune {
 		 *
 		 * @defaultValue 7
 		 */
-		days?: RangeOf<1, 30>;
+		days?: Range<1, 30>;
 
 		/**
 		 * Whether `pruned` is returned, discouraged for large guilds.

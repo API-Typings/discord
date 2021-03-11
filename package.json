@@ -22,7 +22,7 @@
 	},
 	"license": "BSD-3-Clause",
 	"dependencies": {
-		"@api-typings/core": "^1.0.3"
+		"extended-utility-types": "^1.0.0"
 	},
 	"devDependencies": {
 		"@microsoft/tsdoc-config": "^0.14.0",

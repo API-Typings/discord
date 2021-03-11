@@ -1,4 +1,4 @@
-import type { Nullable, RangeOf } from '@api-typings/core';
+import type { Nullable, Range } from 'extended-utility-types';
 import type {
 	ChannelType,
 	ExplicitFilterLevel,
@@ -317,7 +317,7 @@ export interface GetGuildAuditLog {
 		 *
 		 * @defaultValue 50
 		 */
-		limit?: RangeOf<1, 100>;
+		limit?: Range<1, 100>;
 	};
 
 	response: AuditLog;

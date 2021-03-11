@@ -1,4 +1,4 @@
-import type { Nullable, RangeOf } from '@api-typings/core';
+import type { Nullable, Range } from 'extended-utility-types';
 import type { Activity, GatewayOPCode, GatewayPayload, Snowflake } from '../../';
 
 // ANCHOR Command Payload
@@ -81,7 +81,7 @@ export interface Identify extends GatewayCommandPayload<GatewayOPCode.Identify> 
 		 *
 		 * @defaultValue 50
 		 */
-		large_threshold?: RangeOf<50, 250>;
+		large_threshold?: Range<50, 250>;
 
 		/**
 		 * Used for [Guild Sharding][1].

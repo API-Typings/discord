@@ -1,4 +1,4 @@
-import type { Nullable } from '@api-typings/core';
+import type { Nullable } from 'extended-utility-types';
 import type { GuildMember, Snowflake } from '../';
 
 /**
