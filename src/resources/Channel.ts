@@ -124,8 +124,10 @@ export enum ChannelType {
 
 	/**
 	 * Undocumented & unusable channel types; here for when they're released.
-	 * Thread = 11
-	 * Stage = 13
+	 *
+	 * PUBLIC_THREAD = 11
+	 * PRIVATE_THREAD = 12
+	 * GUILD_STAGE_VOICE = 13
 	 */
 }
 
