@@ -1,7 +1,9 @@
 import type { Nullable, TupleOf } from '@api-typings/core';
 import type {
 	AllowedMentions,
+	EditWebhookMessage,
 	Embed,
+	ExecuteWebhook,
 	GuildMember,
 	PartialChannel,
 	PartialGuildMember,
@@ -368,80 +370,171 @@ export interface MessageInteraction {
 
 // SECTION Endpoints
 
-// ANCHOR Create
+/**
+ * Fetch all of the global commands for your application.
+ *
+ * @endpoint [GET](https://discord.com/developers/docs/interactions/slash-commands#get-global-application-commands) `/applications/{application.id}/commands`
+ */
+export type GetGlobalApplicationCommands = { response: ApplicationCommand[] };
 
 /**
- * Create a new guild/global command.
- * - **Guild:** new guild commands will be available in the guild immediately.
- * - **Global:** new global commands will be available in all guilds after 1 hour.
- *
- * @info
- * Apps can have a maximum of 100 global commands, and an additional 100 guild-specific commands per
- * guild.
+ * Creates a new global command. New global commands will be available in all guilds after 1 hour.
  *
  * @warning
- * Creating a command with the same name as an existing command for your application will
- * overwrite the old command.
+ * Creating a command with the same name as an existing command for your application will overwrite
+ * the old command.
  *
- * @endpoint POST [[1][P1]] [[2][P2]]
- * - **Guild:** `/applications/{application.id}/guilds/{guild.id}/commands`
- * - **Global:** `/applications/{application.id}/commands`
- *
- * @returns `201` and an [Application Command][1] object.
- *
- * [P1]: https://discord.com/developers/docs/interactions/slash-commands#create-guild-application-command
- * [P2]: https://discord.com/developers/docs/interactions/slash-commands#create-global-application-command
- * [1]: https://discord.com/developers/docs/interactions/slash-commands#applicationcommand
+ * @endpoint [POST](https://discord.com/developers/docs/interactions/slash-commands#create-global-application-command) `/applications/{application.id}/commands`
  */
-export interface CreateApplicationCommand {
-	/**
-	 * 1-32 character name matching `^[\w-]{1,32}$`.
-	 */
-	name: string;
+export interface CreateGlobalApplicationCommand {
+	body: {
+		/**
+		 * 1-32 character name matching `^[\w-]{1,32}$`.
+		 */
+		name: string;
 
-	/**
-	 * 1-100 character description.
-	 */
-	description: string;
+		/**
+		 * 1-100 character description.
+		 */
+		description: string;
 
-	/**
-	 * The parameters for the command.
-	 */
-	options?: ApplicationCommandOption[];
+		/**
+		 * The parameters for the command.
+		 */
+		options?: ApplicationCommandOption[];
+	};
+
+	response: ApplicationCommand;
 }
-
-// ANCHOR Edit
 
 /**
- * Edit a guild/global command.
- * - **Guild:** updates for guild commands will be available immediately.
- * - **Global:** updates will be available in all guilds after 1 hour.
+ * Fetch a global command for your application.
  *
- * @endpoint PATCH [[1][P1]] [[2][P2]]
- * - **Guild:** `/applications/{application.id}/guilds/{guild.id}/commands/{command.id}`
- * - **Global:** `/applications/{application.id}/commands/{command.id}`
- *
- * @returns `200` and an [Application Command][1] object.
- *
- * [P1]: https://discord.com/developers/docs/interactions/slash-commands#edit-guild-application-command
- * [P2]: https://discord.com/developers/docs/interactions/slash-commands#edit-global-application-command
- * [1]: https://discord.com/developers/docs/interactions/slash-commands#applicationcommand
+ * @endpoint [GET](https://discord.com/developers/docs/interactions/slash-commands#get-global-application-command) `/applications/{application.id}/commands/{command.id}`
  */
-export interface EditApplicationCommand {
-	/**
-	 * 1-32 character name matching `^[\w-]{1,32}$`.
-	 */
-	name?: string;
+export type GetGlobalApplicationCommand = { response: ApplicationCommand };
 
-	/**
-	 * 1-100 character description.
-	 */
-	description?: string;
+/**
+ * Edit a global command. Updates will be available in all guilds after 1 hour.
+ *
+ * @endpoint [PATCH](https://discord.com/developers/docs/interactions/slash-commands#edit-guild-application-command) `/applications/{application.id}/commands/{command.id}`
+ */
+export interface EditGlobalApplicationCommand {
+	body: {
+		/**
+		 * 1-32 character name matching `^[\w-]{1,32}$`.
+		 */
+		name?: string;
 
-	/**
-	 * The parameters for the command.
-	 */
-	options?: Nullable<ApplicationCommandOption[]>;
+		/**
+		 * 1-100 character description.
+		 */
+		description?: string;
+
+		/**
+		 * The parameters for the command.
+		 */
+		options?: Nullable<ApplicationCommandOption>[];
+	};
+
+	response: ApplicationCommand;
 }
+
+/**
+ * Deletes a global command.
+ *
+ * @endpoint [DELETE](https://discord.com/developers/docs/interactions/slash-commands#delete-global-application-command) `/applications/{application.id}/commands/{command.id}`
+ */
+export type DeleteGlobalApplicationCommand = { response: never };
+
+/**
+ * Fetch all of the guild commands for your application for a specific guild.
+ *
+ * @endpoint [GET](https://discord.com/developers/docs/interactions/slash-commands#get-guild-application-commands) `/applications/{application.id}/guilds/{guild.id}/commands`
+ */
+export type GetGuildApplicationCommands = { response: ApplicationCommand[] };
+
+/**
+ * Create a new guild command. New guild commands will be available in the guild immediately.
+ *
+ * @warning
+ * Creating a command with the same name as an existing command for your application will overwrite
+ * the old command.
+ *
+ * @endpoint [POST](https://discord.com/developers/docs/interactions/slash-commands#create-guild-application-command) `/applications/{application.id}/guilds/{guild.id}/commands`
+ */
+export interface CreateGuildApplicationCommand {
+	body: CreateGlobalApplicationCommand['body'];
+	response: ApplicationCommand;
+}
+
+/**
+ * Fetch a guild command for your application.
+ *
+ * @endpoint [GET](https://discord.com/developers/docs/interactions/slash-commands#get-guild-application-command) `/applications/{application.id}/guilds/{guild.id}/commands/{command.id}`
+ */
+export type GetGuildApplicationCommand = { response: ApplicationCommand };
+
+/**
+ * Edit a guild command. Updates for guild commands will be available immediately.
+ *
+ * @endpoint [PATCH](https://discord.com/developers/docs/interactions/slash-commands#edit-global-application-command) `/applications/{application.id}/guilds/{guild.id}/commands/{command.id}`
+ */
+export interface EditGuildApplicationCommand {
+	body: EditGlobalApplicationCommand['body'];
+	response: ApplicationCommand;
+}
+
+/**
+ * Delete a guild command.
+ *
+ * @endpoint [DELETE](https://discord.com/developers/docs/interactions/slash-commands#delete-guild-application-command) `/applications/{application.id}/guilds/{guild.id}/commands/{command.id}`
+ */
+export type DeleteGuildApplicationCommand = { response: never };
+
+/**
+ * Create a response to an Interaction from the gateway.
+ *
+ * @endpoint [POST](https://discord.com/developers/docs/interactions/slash-commands#create-interaction-response) `/interactions/{interaction.id}/{interaction.token}/callback`
+ */
+export interface CreateInteractionResponse {
+	body: InteractionResponse;
+	response: never;
+}
+
+/**
+ * Edits the initial Interaction response.
+ *
+ * @endpoint [PATCH](https://discord.com/developers/docs/interactions/slash-commands#edit-original-interaction-response) `/webhooks/{application.id}/{interaction.token}/messages/@original`
+ */
+export type EditOriginalInteractionResponse = EditWebhookMessage;
+
+/**
+ * Deletes the initial Interaction response.
+ *
+ * @endpoint [DELETE](https://discord.com/developers/docs/interactions/slash-commands#delete-original-interaction-response) `/webhooks/{application.id}/{interaction.token}/messages/@original`
+ */
+export type DeleteOriginalInteractionResponse = { response: never };
+
+/**
+ * Create a followup message for an Interaction.
+ *
+ * @endpoint [POST](https://discord.com/developers/docs/interactions/slash-commands#create-followup-message) `/webhooks/{application.id}/{interaction.token}`
+ */
+export type CreateFollowupMessage = ExecuteWebhook['body'];
+
+/**
+ * Edits a followup message for an Interaction.
+ *
+ * @endpoint [PATCH](https://discord.com/developers/docs/interactions/slash-commands#edit-followup-message) `/webhooks/{application.id}/{interaction.token}/messages/{message.id}`
+ */
+export type EditFollowupMessage = EditWebhookMessage;
+
+/**
+ * Deletes a followup message for an Interaction.
+ *
+ * @endpoint [DELETE](https://discord.com/developers/docs/interactions/slash-commands#delete-followup-message) `/webhooks/{application.id}/{interaction.token}/messages/{message.id}`
+ */
+export type DeleteFollowupMessage = { response: never };
 
 // !SECTION

@@ -1,5 +1,7 @@
 import type { Nullable, RangeOf } from '@api-typings/core';
 import type { PartialIntegration, Snowflake } from '../';
+import { DMChannel } from './Channel';
+import { PartialGuild } from './Guild';
 
 // ANCHOR Partial User
 
@@ -224,60 +226,92 @@ export enum VisibilityType {
 // SECTION Endpoints
 
 /**
+ * Returns the user object of the requester's account.
+ *
+ * @remarks
+ * For OAuth2, this requires the `identify` scope, which will return the object *without* an email,
+ * and optionally the `email` scope, which returns the object *with* an email.
+ *
+ * @endpoint [GET](https://discord.com/developers/docs/resources/user#get-current-user) `/users/@me`
+ */
+export type GetCurrentUser = { response: User };
+
+/**
+ * Returns a user object for a given user ID.
+ *
+ * @endpoint [GET](https://discord.com/developers/docs/resources/user#get-user) `/users/{user.id}`
+ */
+export type GetUser = { response: User };
+
+/**
  * Modify the requester's user account settings.
  *
- * @endpoint [PATCH] `/users/@me`
- *
- * @returns A [user][1] object on success.
- *
- * [PATCH]: https://discord.com/developers/docs/resources/user#modify-current-user
- * [1]: https://discord.com/developers/docs/resources/user#user-object
+ * @endpoint [PATCH](https://discord.com/developers/docs/resources/user#modify-current-user) `/users/@me`
  */
 export interface ModifyCurrentUser {
-	/**
-	 * User's username, if changed may cause the user's discriminator to be randomized.
-	 */
-	username?: string;
+	body: {
+		/**
+		 * User's username, if changed may cause the user's discriminator to be randomized.
+		 */
+		username?: string;
 
-	/**
-	 * If passed, modifies the user's avatar.
-	 */
-	avatar?: Nullable<string>;
+		/**
+		 * If passed, modifies the user's avatar.
+		 */
+		avatar?: Nullable<string>;
+	};
+
+	response: User;
 }
 
 /**
- * Requires the `guilds` OAuth2 scope.
+ * Returns a list of partial guild objects the current user is a member of. Requires the `guilds`
+ * OAuth2 scope.
  *
  * @info
  * This endpoint returns 100 guilds by default, which is the maximum number of guilds a non-bot user
  * can join. Therefore, pagination is **not needed** for integrations that need to get a list of the
  * users' guilds.
  *
- * @endpoint [GET] `/users/@me/guilds`
- *
- * @returns A list of partial [guild][1] objects the current user is a member of.
- *
- * [GET]: https://discord.com/developers/docs/resources/user#get-current-user-guilds
- * [1]: https://discord.com/developers/docs/resources/guild#guild-object
+ * @endpoint [GET](https://discord.com/developers/docs/resources/user#get-current-user-guilds) `/users/@me/guilds`
  */
 export interface GetCurrentUserGuilds {
-	/**
-	 * Get guilds before this guild ID.
-	 */
-	before?: Snowflake;
+	query: {
+		/**
+		 * Get guilds before this guild ID.
+		 */
+		before?: Snowflake;
 
-	/**
-	 * Get guilds after this guild ID.
-	 */
-	after?: Snowflake;
+		/**
+		 * Get guilds after this guild ID.
+		 */
+		after?: Snowflake;
 
-	/**
-	 * Max number of guilds to return (1-100).
-	 *
-	 * @defaultValue 100
-	 */
-	limit?: RangeOf<1, 100>;
+		/**
+		 * Max number of guilds to return (1-100).
+		 *
+		 * @defaultValue 100
+		 */
+		limit?: RangeOf<1, 100>;
+	};
+
+	response: PartialGuild[];
 }
+
+/**
+ * Leave a guild.
+ *
+ * @endpoint [DELETE](https://discord.com/developers/docs/resources/user#leave-guild) `/users/@me/guilds/{guild.id}`
+ */
+export type LeaveGuild = { response: never };
+
+/**
+ * Returns a list of DM channel objects. For bots, this is no longer a supported method of getting
+ * recent DMs, and will return an empty array.
+ *
+ * @endpoint [GET](https://discord.com/developers/docs/resources/user#get-user-dms) `/users/@me/users`
+ */
+export type GetUserDMs = { response: DMChannel[] | [] };
 
 /**
  * Create a new DM channel with a user.
@@ -287,18 +321,17 @@ export interface GetCurrentUserGuilds {
  * be initiated by a user action. If you open a significant amount of DMs too quickly, your bot may
  * be rate limited or blocked from opening new ones.
  *
- * @endpoint [POST] `/users/@me/channels`
- *
- * @returns A [DM channel][1] object.
- *
- * [POST]: https://discord.com/developers/docs/resources/user#create-dm
- * [1]: https://discord.com/developers/docs/resources/channel#channel-object
+ * @endpoint [POST](https://discord.com/developers/docs/resources/user#create-dm) `/users/@me/channels`
  */
 export interface CreateDM {
-	/**
-	 * The recipient to open a DM channel with.
-	 */
-	recipient_id: Snowflake;
+	body: {
+		/**
+		 * The recipient to open a DM channel with.
+		 */
+		recipient_id: Snowflake;
+	};
+
+	response: DMChannel;
 }
 
 /**
@@ -307,23 +340,29 @@ export interface CreateDM {
  * @warning
  * This endpoint is limited to 10 active group DMs.
  *
- * @endpoint [POST] `/users/@me/channels`
- *
- * @returns A [DM channel][1] object.
- *
- * [POST]: https://discord.com/developers/docs/resources/user#create-dm
- * [1]: https://discord.com/developers/docs/resources/channel#channel-object
+ * @endpoint [POST](https://discord.com/developers/docs/resources/user#create-dm) `/users/@me/channels`
  */
 export interface CreateGroupDM {
-	/**
-	 * Access tokens of users that have granted your app the `gdm.join` scope.
-	 */
-	access_tokens: string[];
+	body: {
+		/**
+		 * Access tokens of users that have granted your app the `gdm.join` scope.
+		 */
+		access_tokens: string[];
 
-	/**
-	 * A dictionary of user IDs to their respective nicknames.
-	 */
-	nicks: Record<Snowflake, string>;
+		/**
+		 * A dictionary of user IDs to their respective nicknames.
+		 */
+		nicks: Record<Snowflake, string>;
+	};
+
+	response: DMChannel;
 }
+
+/**
+ * Returns a list of connection objects. Requires the `connections` OAuth2 scope.
+ *
+ * @endpoint [GET](https://discord.com/developers/docs/resources/user#get-user-connections) `/users/@me/connections`
+ */
+export type GetUserConnections = { response: Connection[] };
 
 // !SECTION

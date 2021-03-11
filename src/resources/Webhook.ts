@@ -1,5 +1,6 @@
-import type { Nullable } from '@api-typings/core';
+import type { Nullable, TupleOf } from '@api-typings/core';
 import type { AllowedMentions, Channel, Embed, Guild, Snowflake, User } from '../';
+import { Message } from './Channel';
 
 /**
  * Represents a low-effort way to post messages to channels. They do not require a bot user or
@@ -89,56 +90,110 @@ export enum WebhookType {
  * Create a new webhook. Requires the `MANAGE_WEBHOOKS` permission.
  *
  * @remarks
- * Webhook names follow the naming restrictions that can be found in the [Usernames and
- * Nicknames][1]documentation, with the following additional stipulations:
+ * Webhook names follow the naming restrictions that can be found in the Usernames and Nicknames
+ * documentation, with the following additional stipulations:
  * - Webhook names cannot be: `clyde`.
  *
- * @endpoint [POST] `/channels/{channel.id}/webhooks`
- *
- * @returns A [webhook][2] object on success.
- *
- * [POST]: https://discord.com/developers/docs/resources/webhook#create-webhook
- * [1]: https://discord.com/developers/docs/resources/user#usernames-and-nicknames
- * [2]: https://discord.com/developers/docs/resources/webhook#webhook-object
+ * @endpoint [POST](https://discord.com/developers/docs/resources/webhook#create-webhook) `/channels/{channel.id}/webhooks`
  */
 export interface CreateWebhook {
-	/**
-	 * Name of the webhook (1-80 characters).
-	 */
-	name: string;
+	body: {
+		/**
+		 * Name of the webhook (1-80 characters).
+		 */
+		name: string;
 
-	/**
-	 * Image for the default webhook avatar.
-	 */
-	avatar: Nullable<string>;
+		/**
+		 * Image for the default webhook avatar.
+		 */
+		avatar: Nullable<string>;
+	};
+
+	response: Webhook;
 }
+
+/**
+ * Returns a list of channel webhook objects. Requires the `MANAGE_WEBHOOKS` permission.
+ *
+ * @endpoint [GET](https://discord.com/developers/docs/resources/webhook#get-channel-webhooks) `/channels/{channel.id}/webhooks`
+ */
+export type GetChannelWebhooks = { response: Webhook[] };
+
+/**
+ * Returns a list of guild webhook objects. Requires the `MANAGE_WEBHOOKS` permission.
+ *
+ * @endpoint [GET](https://discord.com/developers/docs/resources/webhook#get-guild-webhooks) `/guilds/{guild.id}/webhooks`
+ */
+export type GetGuildWebhooks = { response: Webhook[] };
+
+/**
+ * Returns the new webhook object for the given ID.
+ *
+ * @endpoint [GET](https://discord.com/developers/docs/resources/webhook#get-webhook) `/webhooks/{webhook.id}`
+ */
+export type GetWebhook = { response: Webhook };
+
+/**
+ * Returns the new webhook object for the given ID, except this call does not require authentication
+ * and returns no user in the webhook object.
+ *
+ * @endpoint [GET](https://discord.com/developers/docs/resources/webhook#get-webhook-with-token) `/webhooks/{webhook.id}/{webhook.token}`
+ */
+export type GetWebookWithToken = { response: Omit<Webhook, 'user'> };
 
 /**
  * Modify a webhook. Requires the `MANAGE_WEBHOOKS` permission.
  *
- * @endpoint [PATCH] `/webhooks/{webhook.id}`
- *
- * @returns The [webhook][1] object on success.
- *
- * [PATCH]: https://discord.com/developers/docs/resources/webhook#modify-webhook
- * [1]: https://discord.com/developers/docs/resources/webhook#webhook-object
+ * @endpoint [PATCH](https://discord.com/developers/docs/resources/webhook#modify-webhook) `/webhooks/{webhook.id}`
  */
 export interface ModifyWebhook {
-	/**
-	 * The default name of the webhook.
-	 */
-	name?: string;
+	body: {
+		/**
+		 * The default name of the webhook.
+		 */
+		name?: string;
+
+		/**
+		 * Image for the default webhook avatar.
+		 */
+		avatar?: Nullable<string>;
+
+		/**
+		 * The new channel ID this webhook should be moved to.
+		 */
+		channel_id?: Nullable<Snowflake>;
+	};
 
 	/**
-	 * Image for the default webhook avatar.
+	 * The updated webhook object.
 	 */
-	avatar?: Nullable<string>;
-
-	/**
-	 * The new channel id this webhook should be moved to.
-	 */
-	channel_id?: Nullable<Snowflake>;
+	response: Webhook;
 }
+
+/**
+ * Modifies a webhook, except this call does not require authentication, does not accept a
+ * `channel_id` parameter in the body, and does not return a user in the webhook object.
+ *
+ * @endpoint [PATCH](https://discord.com/developers/docs/resources/webhook#modify-webhook-with-token) `/webhooks/{webhook.id}/{webhook.token}`
+ */
+export interface ModifyWebhookWithToken {
+	body: Omit<ModifyWebhook['body'], 'channel_id'>;
+	response: GetWebookWithToken['response'];
+}
+
+/**
+ * Delete a webhook permanently. Requires the `MANAGE_WEBHOOKS` permission.
+ *
+ * @endpoint [DELETE](https://discord.com/developers/docs/resources/webhook#delete-webhook) `/webhooks/{webhook.id}`
+ */
+export type DeleteWebhook = { response: never };
+
+/**
+ * Delete a webhook permanently, except this call does not require authentication.
+ *
+ * @endpoint [DELETE](https://discord.com/developers/docs/resources/webhook#delete-webhook-with-token) `/webhooks/{webhook.id}/{webhook.token}`
+ */
+export type DeleteWebhookWithToken = { response: never };
 
 /**
  * @info
@@ -153,81 +208,89 @@ export interface ModifyWebhook {
  * `embeds` field cannot be used, but you can pass an url-encoded JSON body as a form value for
  * `payload_json`.
  *
- * @endpoint [POST] `/webhooks/{webhook.id}/{webhook.token}`
- *
- * [POST]: https://discord.com/developers/docs/resources/webhook#execute-webhook
+ * @endpoint [POST](https://discord.com/developers/docs/resources/webhook#execute-webhook) `/webhooks/{webhook.id}/{webhook.token}`
  */
 export interface ExecuteWebhook {
-	/**
-	 * Waits for server confirmation of message send before response, and returns the created
-	 * message body (defaults to `false`; when `false` a message that is not saved does not return
-	 * an error).
-	 */
-	wait?: boolean;
+	query: {
+		/**
+		 * Waits for server confirmation of message send before response, and returns the created
+		 * message body (when `false`, a message that is not saved does not return an error).
+		 *
+		 * @defaultValue false
+		 */
+		wait?: boolean;
+	};
 
-	/**
-	 * The message contents (up to 2000 characters).
-	 */
-	content?: string;
+	body: {
+		/**
+		 * The message contents (up to 2000 characters).
+		 */
+		content?: string;
 
-	/**
-	 * Override the default username of the webhook.
-	 */
-	username?: string;
+		/**
+		 * Override the default username of the webhook.
+		 */
+		username?: string;
 
-	/**
-	 * Override the default avatar of the webhook.
-	 */
-	avatar_url?: string;
+		/**
+		 * Override the default avatar of the webhook.
+		 */
+		avatar_url?: string;
 
-	/**
-	 * True if this is a TTS message.
-	 */
-	tts?: boolean;
+		/**
+		 * True if this is a TTS message.
+		 */
+		tts?: boolean;
 
-	/**
-	 * The contents of the file being sent.
-	 */
-	file?: unknown;
+		/**
+		 * The contents of the file being sent.
+		 */
+		file?: unknown;
 
-	/**
-	 * Embedded `rich` content.
-	 */
-	embeds?: Embed[];
-	payload_json?: string;
+		/**
+		 * Embedded `rich` content.
+		 */
+		embeds?: TupleOf<Embed, 10>;
+		payload_json?: string;
 
-	/**
-	 * Allowed mentions for the message.
-	 */
-	allowed_mentions?: AllowedMentions;
-	flags?: number;
+		/**
+		 * Allowed mentions for the message.
+		 */
+		allowed_mentions?: AllowedMentions;
+	};
 }
 
 /**
  * Edits a previously-sent webhook message from the same token.
  *
- * @endpoint [PATCH] `/webhooks/{webhook.id}/{webhook.token}/messages/{message.id}`
- *
- * @returns A [message] object on success.
- *
- * [PATCH]: https://discord.com/developers/docs/resources/webhook#edit-webhook-message
- * [1]: https://discord.com/developers/docs/resources/channel#message-object
+ * @endpoint [PATCH](https://discord.com/developers/docs/resources/webhook#edit-webhook-message) `/webhooks/{webhook.id}/{webhook.token}/messages/{message.id}`
  */
 export interface EditWebhookMessage {
-	/**
-	 * The message contents (up to 2000 characters).
-	 */
-	content?: Nullable<string>;
+	body: {
+		/**
+		 * The message contents (up to 2000 characters).
+		 */
+		content?: Nullable<string>;
 
-	/**
-	 * Embedded `rich` content.
-	 */
-	embeds?: Nullable<Embed[]>;
+		/**
+		 * Embedded `rich` content.
+		 */
+		embeds?: Nullable<Embed[]>;
 
-	/**
-	 * Allowed mentions for the message.
-	 */
-	allowed_mentions?: Nullable<AllowedMentions>;
+		/**
+		 * Allowed mentions for the message.
+		 */
+		allowed_mentions?: Nullable<AllowedMentions>;
+	};
+
+	response: Message;
 }
+
+/**
+ * Deletes a message that was created by the webhook.
+ *
+ * @endpoint [DELETE](https://discord.com/developers/docs/resources/webhook#delete-webhook-message) `/webhooks/{webhook.id}/{webhook.token}/messages/{message.id}`
+ */
+export type DeleteWebhookMessage = { response: never };
 
 // !SECTION

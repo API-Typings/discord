@@ -1,5 +1,6 @@
 import type { Nullable } from '@api-typings/core';
 import type { PartialGuild, Snowflake, User } from '../';
+import { Guild } from './Guild';
 
 /**
  * Represents a code that when used, creates a guild based on a snapshot of an existing one.
@@ -66,74 +67,105 @@ export interface Template {
 // SECTION Endpoints
 
 /**
+ * Returns a template object for the given code.
+ *
+ * @endpoint [GET](https://discord.com/developers/docs/resources/template#get-template) `/guilds/template/{template.code}`
+ */
+export type GetTemplate = { response: Template };
+
+/**
  * Create a new guild based on a template.
  *
  * @warning
  * This endpoint can be used only by bots in less than 10 guilds.
  *
- * @endpoint [POST] `/guilds/templates/{template.code}`
- *
- * @returns A [guild][1] object on success.
- * @fires A [Guild Create][2] Gateway event.
- *
- * [POST]: https://discord.com/developers/docs/resources/template#create-guild-from-template
- * [1]: https://discord.com/developers/docs/resources/guild#guild-object
- * [2]: https://discord.com/developers/docs/topics/gateway#guild-create
+ * @endpoint [POST](https://discord.com/developers/docs/resources/template#create-guild-from-template) `/guilds/templates/{template.code}`
  */
 export interface CreateGuildFromTemplate {
-	/**
-	 * Name of the guild (2-100 characters).
-	 */
-	name: string;
+	body: {
+		/**
+		 * Name of the guild (2-100 characters).
+		 */
+		name: string;
 
-	/**
-	 * Base64 128x128 image for the guild icon.
-	 */
-	icon?: string;
+		/**
+		 * Base64 128x128 image for the guild icon.
+		 */
+		icon?: string;
+	};
+
+	response: Guild;
 }
+
+/**
+ * Returns an array of template objects. Requires the MANAGE_GUILD permission.
+ *
+ * @endpoint [GET](https://discord.com/developers/docs/resources/template#get-guild-templates) `/guilds/{guild.id}/templates`
+ */
+export type GetGuildTemplates = { response: Template[] };
 
 /**
  * Creates a template for the guild. Requires the `MANAGE_GUILD` permission.
  *
- * @endpoint [POST] `/guilds/{guild.id}/templates`
- *
- * @returns The created [template][1] object on success.
- *
- * [POST]: https://discord.com/developers/docs/resources/template#create-guild-template
- * [1]: https://discord.com/developers/docs/resources/template#template-object
+ * @endpoint [POST](https://discord.com/developers/docs/resources/template#create-guild-template) `/guilds/{guild.id}/templates`
  */
 export interface CreateGuildTemplate {
-	/**
-	 * Name of the template (1-100 characters).
-	 */
-	name: string;
+	body: {
+		/**
+		 * Name of the template (1-100 characters).
+		 */
+		name: string;
+
+		/**
+		 * Description for the template (0-120 characters).
+		 */
+		description?: Nullable<string>;
+	};
 
 	/**
-	 * Description for the template (0-120 characters).
+	 * The created template object.
 	 */
-	description?: Nullable<string>;
+	response: Template;
 }
+
+/**
+ * Syncs the template to the guild's current state. Requires the `MANAGE_GUILD` permission.
+ *
+ * @endpoint [PUT](https://discord.com/developers/docs/resources/template#get-guild-templates) `/guilds/{guild.id}/templates/{template.code}`
+ */
+export type SyncGuildTemplate = { response: Template };
 
 /**
  * Modifies the template's metadata. Requires the `MANAGE_GUILD` permission.
  *
- * @endpoint [PATCH] `/guilds/{guild.id}/templates/{template.code}`
- *
- * @returns The [template][1] object on success.
- *
- * [PATCH]: https://discord.com/developers/docs/resources/template#modify-guild-template
- * [1]: https://discord.com/developers/docs/resources/template#template-object
+ * @endpoint [PATCH](https://discord.com/developers/docs/resources/template#modify-guild-template) `/guilds/{guild.id}/templates/{template.code}`
  */
 export interface ModifyGuildTemplate {
-	/**
-	 * Name of the template (1-100 characters).
-	 */
-	name?: string;
+	body: {
+		/**
+		 * Name of the template (1-100 characters).
+		 */
+		name?: string;
 
-	/**
-	 * Description for the template (0-120 characters).
-	 */
-	description?: Nullable<string>;
+		/**
+		 * Description for the template (0-120 characters).
+		 */
+		description?: Nullable<string>;
+	};
+
+	response: Template;
 }
+
+/**
+ * Deletes the template. Requires the MANAGE_GUILD permission.
+ *
+ * @endpoint [DELETE](https://discord.com/developers/docs/resources/template#delete-guild-template) `/guilds/{guild.id}/templates/{template.code}`
+ */
+export type DeleteGuildTemplate = {
+	/**
+	 * The deleted template object.
+	 */
+	response: Template;
+};
 
 // !SECTION

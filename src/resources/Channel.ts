@@ -1,5 +1,6 @@
 import type { Nullable, RangeOf } from '@api-typings/core';
 import type { GuildMember, InviteTargetType, MessageInteraction, PartialEmoji, Snowflake, User } from '../';
+import { Invite, InviteMetadata } from './Invite';
 
 // SECTION Channel Types
 
@@ -1079,149 +1080,196 @@ export enum OverwriteType {
 // SECTION Endpoints
 
 /**
- * Update a channel's settings. Requires the `MANAGE_CHANNELS` permission for the guild. Only
- * permissions your bot has in the guild or channel can be allowed/denied (unless your bot has a
- * `MANAGE_ROLES` overwrite in the channel).
+ * Get a channel by ID.
  *
- * @endpoint [PATCH] `/channels/{channel.id}`
+ * @endpoint [GET](https://discord.com/developers/docs/resources/channel#get-channel) `/channels/{channel.id}`
+ */
+export type GetChannel = { response: Channel };
+
+/**
+ * Update a channel's settings. Requires the `MANAGE_CHANNELS` permission.
  *
- * @returns A [channel][1] on success, and a `400 BAD REQUEST` on invalid parameters.
- * @fires A [Channel Update][2] Gateway event.  If modifying a category, individual [Channel
- * Update][2] events will fire for each child channel that also changes. If modifying permission
- * overwrites, the `MANAGE_ROLES` permission is required.
+ * If modifying permission overwrites, the MANAGE_ROLES permission is required. Only permissions
+ * your bot has in the guild or channel can be allowed/denied (unless your bot has a `MANAGE_ROLES`
+ * overwrite in the channel).
  *
- * [PATCH]: https://discord.com/developers/docs/resources/channel#modify-channel
- * [1]: https://discord.com/developers/docs/resources/channel#channel-object
- * [2]: https://discord.com/developers/docs/topics/gateway#channel-update
+ * @endpoint [PATCH](https://discord.com/developers/docs/resources/channel#modify-channel) `/channels/{channel.id}`
  */
 export interface ModifyChannel {
-	/**
-	 * 2-100 character channel name.
-	 *
-	 * @channel All
-	 */
-	name?: string;
+	body: {
+		/**
+		 * 2-100 character channel name.
+		 *
+		 * @channel All
+		 */
+		name?: string;
 
-	/**
-	 * The [type of Channel][1]; only conversion between text and news is supported and only in
-	 * guilds with the `NEWS` feature.
-	 *
-	 * @channel Text, News
-	 *
-	 * [1]: https://discord.com/developers/docs/resources/channel#channel-object-channel-types
-	 */
-	type?: number | ChannelType;
+		/**
+		 * The type of Channel; only conversion between text and news is supported and only in
+		 * guilds with the `NEWS` feature.
+		 *
+		 * @channel Text, News
+		 */
+		type?: number | ChannelType;
 
-	/**
-	 * The position of the channel in the left-hand listing.
-	 *
-	 * @channel All
-	 */
-	position?: Nullable<number>;
+		/**
+		 * The position of the channel in the left-hand listing.
+		 *
+		 * @channel All
+		 */
+		position?: Nullable<number>;
 
-	/**
-	 * 0-1024 character channel topic.
-	 *
-	 * @channel Text, News
-	 */
-	topic?: Nullable<string>;
+		/**
+		 * 0-1024 character channel topic.
+		 *
+		 * @channel Text, News
+		 */
+		topic?: Nullable<string>;
 
-	/**
-	 * Whether the channel is NSFW.
-	 *
-	 * @channel Text, News, Store
-	 */
-	nsfw?: Nullable<boolean>;
+		/**
+		 * Whether the channel is NSFW.
+		 *
+		 * @channel Text, News, Store
+		 */
+		nsfw?: Nullable<boolean>;
 
-	/**
-	 * Amount of seconds a user has to wait before sending another message (0-21600); bots, as
-	 * well as users with the permission `manage_messages` or `manage_channel`, are unaffected.
-	 *
-	 * @channel Text
-	 */
-	rate_limit_per_user?: Nullable<number>;
+		/**
+		 * Amount of seconds a user has to wait before sending another message (0-21600); bots, as
+		 * well as users with the permission `manage_messages` or `manage_channel`, are unaffected.
+		 *
+		 * @channel Text
+		 */
+		rate_limit_per_user?: Nullable<number>;
 
-	/**
-	 * The bitrate (in bits) of the voice channel; 8000 to 96000 (128000 for VIP servers).
-	 *
-	 * @channel Voice
-	 */
-	bitrate?: Nullable<number>;
+		/**
+		 * The bitrate (in bits) of the voice channel; 8000 to 96000 (128000 for VIP servers).
+		 *
+		 * @channel Voice
+		 */
+		bitrate?: Nullable<number>;
 
-	/**
-	 * The user limit of the voice channel; 0 refers to no limit, 1 to 99 refers to a user limit.
-	 *
-	 * @channel Voice
-	 */
-	user_limit?: Nullable<RangeOf<0, 99>>;
+		/**
+		 * The user limit of the voice channel; 0 refers to no limit, 1 to 99 refers to a user
+		 * limit.
+		 *
+		 * @channel Voice
+		 */
+		user_limit?: Nullable<RangeOf<0, 99>>;
 
-	/**
-	 * Channel or category-specific permissions.
-	 *
-	 * @channel All
-	 */
-	permission_overwrites?: Nullable<Overwrite[]>;
+		/**
+		 * Channel or category-specific permissions.
+		 *
+		 * @channel All
+		 */
+		permission_overwrites?: Nullable<Overwrite[]>;
 
-	/**
-	 * ID of the new parent category for a channel.
-	 *
-	 * @channel Text, News, Store, Voice
-	 */
-	parent_id?: Nullable<Snowflake>;
+		/**
+		 * ID of the new parent category for a channel.
+		 *
+		 * @channel Text, News, Store, Voice
+		 */
+		parent_id?: Nullable<Snowflake>;
 
-	/**
-	 * Image for the channel icon.
-	 *
-	 * @channel Group DM
-	 */
-	icon?: string;
+		/**
+		 * Image for the channel icon.
+		 *
+		 * @channel Group DM
+		 */
+		icon?: string;
+	};
+
+	response: Channel;
 }
 
 /**
- * Returns the messages for a channel. If operating on a guild channel, this endpoint requires the
- * `VIEW_CHANNEL` permission to be present on the current user. If the current user is missing the
- * `READ_MESSAGE_HISTORY` permission in the channel then this will return no messages (since they
- * cannot read the message history).
+ * Delete a channel. Requires the `MANAGE_CHANNELS` permission.
  *
- * @endpoint [GET] `/channels/{channel.id}/messages`
+ * Deleting a category does not delete its child channels; they will have their `parent_id` removed.
  *
- * @returns An array of [message][1] objects on success, sorted by their ID in descending order.
+ * @info
+ * For Community guilds, the Rules or Guidelines channel and the Community Updates channel cannot
+ * be deleted.
  *
- * [GET]: https://discord.com/developers/docs/resources/channel#get-channel-messages
- * [1]: https://discord.com/developers/docs/resources/channel#message-object
+ * @warning
+ * Deleting a guild channel cannot be undone. Use this with caution, as it is impossible to undo
+ * this action.
+ *
+ * @endpoint [DELETE](https://discord.com/developers/docs/resources/channel#deleteclose-channel) `/channels/{channel.id}`
+ */
+export type DeleteChannel = { response: Channel };
+
+/**
+ * Close a private message.
+ *
+ * @info
+ * It is possible to undo this action by opening a private message with the recipient again.
+ *
+ * @endpoint [DELETE](https://discord.com/developers/docs/resources/channel#deleteclose-channel) `/channels/{channel.id}`
+ */
+export type CloseChannel = { response: Channel };
+
+/**
+ * Returns the messages for a channel.
+ *
+ * - If operating on a guild channel, this endpoint requires the `VIEW_CHANNEL` permission to be
+ * present on the current user.
+ * - If the current user is missing the `READ_MESSAGE_HISTORY` permission in the channel then this
+ * will return no messages (since they cannot read the message history).
+ *
+ * @endpoint [GET](https://discord.com/developers/docs/resources/channel#get-channel-messages) `/channels/{channel.id}/messages`
  */
 export interface GetChannelMessages {
 	/**
-	 * Get messages around this message ID.
+	 * @info
+	 * The before, after, and around keys are mutually exclusive, only one may be passed at a time.
 	 */
-	around?: Snowflake;
+	query: {
+		/**
+		 * Get messages around this message ID.
+		 */
+		around?: Snowflake;
+
+		/**
+		 * Get messages before this message ID.
+		 */
+		before?: Snowflake;
+
+		/**
+		 * Get messages after this message ID.
+		 */
+		after?: Snowflake;
+
+		/**
+		 * Max number of messages to return (1-100).
+		 *
+		 * @defaultValue 50
+		 */
+		limit?: RangeOf<1, 100>;
+	};
 
 	/**
-	 * Get messages before this message ID.
+	 * An array of message objects, sorted by their ID in descending order.
 	 */
-	before?: Snowflake;
-
-	/**
-	 * Get messages after this message ID.
-	 */
-	after?: Snowflake;
-
-	/**
-	 * Max number of messages to return (1-100).
-	 *
-	 * @defaultValue 50
-	 */
-	limit?: RangeOf<1, 100>;
+	response: Message[] | [];
 }
+
+/**
+ * Returns a specific message in the channel.
+ *
+ * If operating on a guild channel, this endpoint requires the `READ_MESSAGE_HISTORY` permission to
+ * be present on the current user.
+ */
+export type GetChannelMessage = { response: Message };
 
 // SECTION Create Message
 
 // ANCHOR JSON
 
 /**
- * Post a message to a guild text or DM channel. You may create a message as a reply to another
- * message. To do so, include a [`message_reference`][1] with a `message_id`. The `channel_id` and
- * `guild_id` in the `message_reference` are optional, but will be validated if provided.
+ * Post a message to a guild text or DM channel.
+ *
+ * @info
+ * Note that when sending `application/json` you must send at **least one of** `content` or `embed`.
  *
  * @limitations
  * - When operating on a guild channel, the current user must have the `SEND_MESSAGES` permission
@@ -1236,46 +1284,40 @@ export interface GetChannelMessages {
  *   for images,
  * - **Files can only be uploaded when using the `multipart/form-data` content type**,
  *
- * @endpoint [POST] `/channels/{channel.id}/messages`
- *
- * @returns A [message][2] object.
- * @fires A [Message Create][3] Gateway event.
- *
- * [POST]: https://discord.com/developers/docs/resources/channel#create-message
- * [1]: https://discord.com/developers/docs/resources/channel#message-object-message-reference-structure
- * [2]: https://discord.com/developers/docs/resources/channel#message-object
- * [3]: https://discord.com/developers/docs/topics/gateway#message-create
+ * @endpoint [POST](https://discord.com/developers/docs/resources/channel#create-message) `/channels/{channel.id}/messages`
  */
 export interface CreateMessageJSON {
-	/**
-	 * The message contents (up to 2000 characters).
-	 */
-	content?: string;
+	body: {
+		/**
+		 * The message contents (up to 2000 characters).
+		 */
+		content?: string;
 
-	/**
-	 * A nonce that can be used for optimistic message sending.
-	 */
-	nonce?: number | string;
+		/**
+		 * A nonce that can be used for optimistic message sending.
+		 */
+		nonce?: number | string;
 
-	/**
-	 * True if this is a TTS message.
-	 */
-	tts?: boolean;
+		/**
+		 * True if this is a TTS message.
+		 */
+		tts?: boolean;
 
-	/**
-	 * Embedded rich content.
-	 */
-	embed?: Embed;
+		/**
+		 * Embedded rich content.
+		 */
+		embed?: Embed;
 
-	/**
-	 * Allowed mentions for a message.
-	 */
-	allowed_mentions?: AllowedMentions;
+		/**
+		 * Allowed mentions for a message.
+		 */
+		allowed_mentions?: AllowedMentions;
 
-	/**
-	 * Include to make your message a reply.
-	 */
-	message_reference?: MessageReference;
+		/**
+		 * Include to make your message a reply.
+		 */
+		message_reference?: MessageReference;
+	};
 }
 
 // ANCHOR Form-Data
@@ -1284,21 +1326,15 @@ export interface CreateMessageJSON {
  * Post a message to a guild text or DM channel.
  *
  * @remarks
- * - Some fields can be provided as `form-data` fields, but **if you supply a `payload_json`, all
- *   fields except for `file` fields will be ignored**.
- * - You may create a message as a reply to another message. To do so, include a
- *   [`message_reference`][1] with a `message_id`.
- *   The `channel_id` and `guild_id` in the `message_reference` are optional, but will be validated
- *   if provided.
+ * This endpoint supports all the same fields as its `application/json` counterpart, however they
+ * must be set in `payload_json` rather than provided as form fields. Some fields can be provided
+ * as `form-data` fields, but if you supply a `payload_json`, **all fields except for `file` fields
+ * will be ignored**.
  *
  * @info
  * Note that when sending `multipart/form-data`, you must provide a value for at **least one of**
  * `content`, `embed` or `file`. For a `file` attachment, the `Content-Disposition` subpart header
  * MUST contain a `filename` parameter.
- *
- * @warning
- * This endpoint supports **all** the same fields as its `application/json` counterpart, however
- * they must be set in `payload_json` rather than provided as form fields.
  *
  * @limitations
  * - When operating on a guild channel, the current user must have the `SEND_MESSAGES` permission
@@ -1311,72 +1347,127 @@ export interface CreateMessageJSON {
  * - For the embed object, you can set every field except `type` (it will be `rich` regardless of
  *   if you try to set it), `provider`, `video`, and any `height`, `width`, or `proxy_url` values
  *   for images
- * - **Files can only be uploaded when using the `multipart/form-data` content type**
  *
- * @endpoint [POST] `/channels/{channel.id}/messages`
- *
- * @returns A [message][2] object.
- * @fires A [Message Create][3] Gateway event.
- *
- * [POST]: https://discord.com/developers/docs/resources/channel#create-message
- * [1]: https://discord.com/developers/docs/resources/channel#message-object-message-reference-structure
- * [2]: https://discord.com/developers/docs/resources/channel#message-object
- * [3]: https://discord.com/developers/docs/topics/gateway#message-create
+ * @endpoint [POST](https://discord.com/developers/docs/resources/channel#create-message) `/channels/{channel.id}/messages`
  */
 export interface CreateMessageFormData {
-	/**
-	 * The message contents (up to 2000 characters).
-	 */
-	content?: string;
+	body: {
+		/**
+		 * The message contents (up to 2000 characters).
+		 */
+		content?: string;
 
-	/**
-	 * A nonce that can be used for optimistic message sending.
-	 */
-	nonce?: number | string;
+		/**
+		 * A nonce that can be used for optimistic message sending.
+		 */
+		nonce?: number | string;
 
-	/**
-	 * True if this is a TTS message.
-	 */
-	tts?: boolean;
+		/**
+		 * True if this is a TTS message.
+		 */
+		tts?: boolean;
 
-	/**
-	 * The contents of the file being sent.
-	 */
-	file?: unknown;
+		/**
+		 * The contents of the file being sent.
+		 */
+		file?: unknown;
 
-	/**
-	 * JSON encoded body of any additional request fields.
-	 */
-	payload_json?: string;
+		/**
+		 * JSON encoded body of any additional request fields.
+		 */
+		payload_json?: string;
+	};
+
+	response: Message;
 }
 
 // !SECTION
 
 /**
- * Get a list of users that reacted with this emoji. The `emoji` must be [URL Encoded][1] or the
- * request will fail with `10014: Unknown Emoji`.
+ * Crosspost a message in a News Channel to following channels. This endpoint requires the
+ * `SEND_MESSAGES` permission, if the current user sent the message, or additionally the
+ * `MANAGE_MESSAGES` permission, for all other messages, to be present for the current user.
  *
- * @endpoint [GET] `/channels/{channel.id}/messages/{message.id}/reactions/{emoji.id}`
+ * @endpoint [POST](https://discord.com/developers/docs/resources/channel#crosspost-message) `/channels/{channel.id}/messages/{message.id}/crosspost`
+ */
+export type CrosspostMessage = { response: Message };
+
+/**
+ * Create a reaction for the message. This endpoint requires the `READ_MESSAGE_HISTORY` permission
+ * to be present on the current user. Additionally, if nobody else has reacted to the message using
+ * this emoji, this endpoint requires the `ADD_REACTIONS` permission to be present on the current
+ * user.
  *
- * @returns An array of [user][2] objects on success, sorted by their ID in ascending order.
+ * The `emoji` must be URL Encoded or the request will fail with `10014: Unknown Emoji`.
  *
- * [GET]: https://discord.com/developers/docs/resources/channel#get-reactions
- * [1]: https://en.wikipedia.org/wiki/Percent-encoding
- * [2]: https://discord.com/developers/docs/resources/user#user-object
+ * @endpoint [PUT](https://discord.com/developers/docs/resources/channel#create-reaction) `/channels/{channel.id}/messages/{message.id}/reactions/{emoji}/@me`
+ */
+export type CreateReaction = { response: never };
+
+/**
+ * Delete a reaction the current user has made for the message.
+ *
+ * The `emoji` must be URL Encoded or the request will fail with `10014: Unknown Emoji`.
+ *
+ * @endpoint [DELETE](https://discord.com/developers/docs/resources/channel#delete-own-reaction) `/channels/{channel.id}/messages/{message.id}/reactions/{emoji}/@me`
+ */
+export type DeleteOwnReaction = { response: never };
+
+/**
+ * Deletes another user's reaction. This endpoint requires the `MANAGE_MESSAGES` permission to be
+ * present on the current user.
+ *
+ * The `emoji` must be URL Encoded or the request will fail with `10014: Unknown Emoji`.
+ *
+ * @endpoint [DELETE](https://discord.com/developers/docs/resources/channel#delete-user-reaction) `/channels/{channel.id}/messages/{message.id}/reactions/{emoji}/{user.id}`
+ */
+export type DeleteUserReaction = { response: never };
+
+/**
+ * Get a list of users that reacted with this emoji.
+ *
+ * The `emoji` must be URL Encoded or the request will fail with `10014: Unknown Emoji`.
+ *
+ * @endpoint [GET](https://discord.com/developers/docs/resources/channel#get-reactions) `/channels/{channel.id}/messages/{message.id}/reactions/{emoji.id}`
  */
 export interface GetReactions {
-	/**
-	 * Get users after this user ID.
-	 */
-	after?: Snowflake;
+	query: {
+		/**
+		 * Get users after this user ID.
+		 */
+		after?: Snowflake;
+
+		/**
+		 * Max number of users to return (1-100).
+		 *
+		 * @defaultValue 25
+		 */
+		limit?: RangeOf<1, 100>;
+	};
 
 	/**
-	 * Max number of users to return (1-100).
-	 *
-	 * @defaultValue 25
+	 * An array of user objects, sorted by their ID in ascending order.
 	 */
-	limit?: RangeOf<1, 100>;
+	response: User[];
 }
+
+/**
+ * Deletes all reactions on a message. This endpoint requires the `MANAGE_MESSAGES` permission to
+ * be present on the current user.
+ *
+ * @endpoint [DELETE](https://discord.com/developers/docs/resources/channel#delete-all-reactions) `/channels/{channel.id}/messages/{message.id}/reactions`
+ */
+export type DeleteAllReactions = { response: never };
+
+/**
+ * Deletes all the reactions for a given emoji on a message. This endpoint requires the
+ * `MANAGE_MESSAGES` permission to be present on the current user.
+ *
+ * The `emoji` must be URL Encoded or the request will fail with `10014: Unknown Emoji`.
+ *
+ * @endpoint [DELETE](https://discord.com/developers/docs/resources/channel#delete-all-reactions-for-emoji) `/channels/{channel.id}/messages/{message.id}/reactions/{emoji}`
+ */
+export type DeleteAllEmojiReactions = { response: never };
 
 /**
  * Edit a previously sent message.
@@ -1389,38 +1480,39 @@ export interface GetReactions {
  * the table below may be modified by users (unsupported flag changes are currently ignored without
  * error).
  *
- * @endpoint [PATCH] `/channels/{channel.id}/messages/{message.id}`
- *
- * @returns A [message][1] object.
- * @fires A [Message Update][2] gateway event.
- *
- * [PATCH]: https://discord.com/developers/docs/resources/channel#edit-message
- * [1]: https://discord.com/developers/docs/resources/channel#message-object
- * [2]: https://discord.com/developers/docs/topics/gateway#message-update
+ * @endpoint [PATCH](https://discord.com/developers/docs/resources/channel#edit-message) `/channels/{channel.id}/messages/{message.id}`
  */
 export interface EditMessage {
-	/**
-	 * The new message contents (up to 2000 characters),
-	 */
-	content?: Nullable<string>;
+	body: {
+		/**
+		 * The new message contents (up to 2000 characters),
+		 */
+		content?: Nullable<string>;
 
-	/**
-	 * Embedded `rich` content,
-	 */
-	embed?: Nullable<Embed>;
+		/**
+		 * Embedded `rich` content,
+		 */
+		embed?: Nullable<Embed>;
 
-	/**
-	 * Edit the [flags][1] of a message (only `SUPPRESS_EMBEDS` can currently be set/unset).
-	 *
-	 * [1]: https://discord.com/developers/docs/resources/channel#message-object-message-flags
-	 */
-	flags?: Nullable<number>;
+		/**
+		 * Edit the flags of a message (only `SUPPRESS_EMBEDS` can currently be set/unset).
+		 */
+		flags?: Nullable<number>;
 
-	/**
-	 * Allowed mentions for the message.
-	 */
-	allowed_mentions?: Nullable<AllowedMentions>;
+		/**
+		 * Allowed mentions for the message.
+		 */
+		allowed_mentions?: Nullable<AllowedMentions>;
+	};
 }
+
+/**
+ * Delete a message.
+ *
+ * If operating on a guild channel and trying to delete a message that was not sent by the current
+ * user, this endpoint requires the `MANAGE_MESSAGES` permission.
+ */
+export type DeleteMessage = { response: never };
 
 /**
  * Delete multiple messages in a single request. This endpoint can only be used on guild channels
@@ -1433,149 +1525,207 @@ export interface EditMessage {
  * This endpoint will not delete messages older than 2 weeks, and will fail with a `400 BAD REQUEST`
  * if any message provided is older than that or if any duplicate message IDs are provided.
  *
- * @endpoint [POST] `/channels/{channel.id}/messages/bulk-delete`
- *
- * @returns A `204` empty response on success.
- * @fires A [Message Delete][1] Gateway event.
- *
- * [POST]: https://discord.com/developers/docs/resources/channel#bulk-delete-messages
- * [1]: https://discord.com/developers/docs/topics/gateway#message-delete-bulk
+ * @endpoint [POST](https://discord.com/developers/docs/resources/channel#bulk-delete-messages) `/channels/{channel.id}/messages/bulk-delete`
  */
 export interface BulkDeleteMessages {
-	/**
-	 * An array of message IDs to delete (2-100).
-	 */
-	messages: Snowflake[];
+	body: {
+		/**
+		 * An array of message IDs to delete (2-100).
+		 */
+		messages: Snowflake[];
+	};
+
+	response: never;
 }
 
 /**
- * Edit the channel permission overwrites for a user or role in a channel. Only usable for guild
- * channels. Requires the `MANAGE_ROLES` permission. Only permissions your bot has in the guild or
- * channel can be allowed/denied (unless your bot has a `MANAGE_ROLES` overwrite in the channel).
+ * Edit the channel permission overwrites for a user or role in a channel. Requires the
+ * `MANAGE_ROLES` permission. Only usable for guild channels.
  *
- * @endpoint [PUT] `/channels/{channel.id}/permissions/{overwrite.id}`
+ * Only permissions your bot has in the guild or channel can be
+ * allowed/denied (unless your bot has a `MANAGE_ROLES` overwrite in the channel).
  *
- * @returns A `204` empty response on success.
- *
- * [PUT]: https://discord.com/developers/docs/resources/channel#edit-channel-permissions
+ * @endpoint [PUT](https://discord.com/developers/docs/resources/channel#edit-channel-permissions) `/channels/{channel.id}/permissions/{overwrite.id}`
  */
 export interface EditChannelPermissions {
-	/**
-	 * The bitwise value of all allowed permissions.
-	 */
-	allow?: string;
+	body: {
+		/**
+		 * The bitwise value of all allowed permissions.
+		 */
+		allow?: string;
 
-	/**
-	 * The bitwise value of all disallowed permissions.
-	 */
-	deny?: string;
+		/**
+		 * The bitwise value of all disallowed permissions.
+		 */
+		deny?: string;
 
-	/**
-	 * 0 for a role or 1 for a member.
-	 */
-	type?: 0 | 1;
+		/**
+		 * 0 for a role or 1 for a member.
+		 */
+		type?: 0 | 1;
+	};
+
+	response: never;
 }
 
 /**
- * Create a new [invite][1] object for the channel. Only usable for guild channels. Requires the
- * `CREATE_INSTANT_INVITE` permission.
+ * Returns a list of invite objects (with invite metadata) for the channel. Requires the
+ * `MANAGE_CHANNELS` permission. Only usable for guild channels.
+ *
+ * @endpoint [GET](https://discord.com/developers/docs/resources/channel#get-channel-invites) `/channels/{channel.id}/invites`
+ */
+export type GetChannelInvites = { response: InviteMetadata[] };
+
+/**
+ * Create a new invite object for the channel. Requires the `CREATE_INSTANT_INVITE` permission. Only
+ * usable for guild channels.
  *
  * @remarks
  * All JSON parameters for this route are optional, however the request body is not. If you are not
  * sending any fields, you still have to send an empty JSON object (`{}`).
  *
- * @endpoint [POST] `/channels/{channel.id}/invites`
- *
- * @returns An [invite][1] object.
- * @fires An [Invite Create][2] Gateway event.
- *
- * [POST]: https://discord.com/developers/docs/resources/channel#create-channel-invite
- * [1]: https://discord.com/developers/docs/resources/invite#invite-object
- * [2]: https://discord.com/developers/docs/topics/gateway#invite-create
+ * @endpoint [POST](https://discord.com/developers/docs/resources/channel#create-channel-invite) `/channels/{channel.id}/invites`
  */
 export interface CreateChannelInvite {
-	/**
-	 * Duration of invite in seconds before expiry, or 0 for never. Between 0 and 604800 (7 days).
-	 *
-	 * @defaultValue 86400 (24 hours)
-	 */
-	max_age?: number;
+	body: {
+		/**
+		 * Duration of invite in seconds before expiry, or 0 for never. Between 0 and 604800 (7
+		 * days).
+		 *
+		 * @defaultValue 86400 (24 hours)
+		 */
+		max_age?: number;
 
-	/**
-	 * Max number of uses or 0 for unlimited. Between 0 and 100.
-	 *
-	 * @defaultValue 0
-	 */
-	max_uses?: RangeOf<0, 100>;
+		/**
+		 * Max number of uses or 0 for unlimited. Between 0 and 100.
+		 *
+		 * @defaultValue 0
+		 */
+		max_uses?: RangeOf<0, 100>;
 
-	/**
-	 * Whether this invite only grants temporary membership.
-	 *
-	 * @defaultValue false
-	 */
-	temporary?: boolean;
+		/**
+		 * Whether this invite only grants temporary membership.
+		 *
+		 * @defaultValue false
+		 */
+		temporary?: boolean;
 
-	/**
-	 * If true, don't try to reuse a similar invite (useful for creating many unique one time use
-	 * invites).
-	 *
-	 * @defaultValue false
-	 */
-	unique?: boolean;
+		/**
+		 * If true, don't try to reuse a similar invite (useful for creating many unique one time
+		 * use invites).
+		 *
+		 * @defaultValue false
+		 */
+		unique?: boolean;
 
-	/**
-	 * The type of target for this voice channel invite.
-	 */
-	target_type?: InviteTargetType;
+		/**
+		 * The type of target for this voice channel invite.
+		 */
+		target_type?: InviteTargetType;
 
-	/**
-	 * The ID of the user whose stream to display for this invite, required if `target_type` is 1,
-	 * the user must be streaming in the channel.
-	 */
-	target_user_id?: Snowflake;
+		/**
+		 * The ID of the user whose stream to display for this invite, required if `target_type`
+		 * is 1, the user must be streaming in the channel.
+		 */
+		target_user_id?: Snowflake;
 
-	/**
-	 * The ID of the embedded application to open for this invite, required if `target_type` is 2,
-	 * the application must have the `EMBEDDED` flag.
-	 */
-	target_application_id?: Snowflake;
+		/**
+		 * The ID of the embedded application to open for this invite, required if `target_type`
+		 * is 2, the application must have the `EMBEDDED` flag.
+		 */
+		target_application_id?: Snowflake;
+	};
+
+	response: Invite;
 }
+
+/**
+ * Delete a channel permission overwrite for a user or role in a channel. Requires the
+ * `MANAGE_ROLES` permission. Only usable for guild channels.
+ *
+ * @endpoint [DELETE](https://discord.com/developers/docs/resources/channel#delete-channel-permission) `/channels/{channel.id}/permissions/{overwrite.id}`
+ */
+export type DeleteChannelPermission = { response: never };
 
 /**
  * Follow a News Channel to send messages to a target channel. Requires the `MANAGE_WEBHOOKS`
  * permission in the target channel.
  *
- * @endpoint [POST] `/channels/{channel.id}/followers`
- *
- * @returns A [followed channel][1] object.
- *
- * [POST]: https://discord.com/developers/docs/resources/channel#follow-news-channel
- * [1]: https://discord.com/developers/docs/resources/channel#followed-channel-object
+ * @endpoint [POST](https://discord.com/developers/docs/resources/channel#follow-news-channel) `/channels/{channel.id}/followers`
  */
 export interface FollowNewsChannel {
-	/**
-	 * ID of target channel.
-	 */
-	webhook_channel_id: Snowflake;
+	body: {
+		/**
+		 * ID of target channel.
+		 */
+		webhook_channel_id: Snowflake;
+	};
+
+	response: FollowedChannel;
 }
+
+/**
+ * Post a typing indicator for the specified channel.
+ *
+ * @remarks
+ * Generally bots should **not** implement this route. However, if a bot is responding to a command
+ * and expects the computation to take a few seconds, this endpoint may be called to let the user
+ * know that the bot is processing their message.
+ *
+ * @endpoint [POST](https://discord.com/developers/docs/resources/channel#trigger-typing-indicator) `/channels/{channel.id}/typing`
+ */
+export type TriggerTypingIndicator = { response: never };
+
+/**
+ * Returns all pinned messages in the channel.
+ *
+ * @endpoint [GET](https://discord.com/developers/docs/resources/channel#get-pinned-messages) `/channels/{channel.id}/pins`
+ */
+export type GetPinnedMessages = { response: Message[] };
+
+/**
+ * Pin a message in a channel. Requires the `MANAGE_MESSAGES` permission.
+ *
+ * @warning
+ * The max pinned messages is 50.
+ *
+ * @endpoint [PUT](https://discord.com/developers/docs/resources/channel#add-pinned-channel-message) `/channels/{channel.id}/pins/{message.id}`
+ */
+export type AddPinnedChannelMessage = { response: never };
+
+/**
+ * Delete a pinned message in a channel. Requires the `MANAGE_MESSAGES` permission.
+ *
+ * @endpoint [DELETE](https://discord.com/developers/docs/resources/channel#delete-pinned-channel-message) `/channels/{channel.id}/pins/{message.id}`
+ */
+export type DeletePinnedChannelMessage = { response: never };
 
 /**
  * Adds a recipient to a Group DM using their access token.
  *
- * @endpoint [PUT] `/channels/{channel.id}/recipients/{user.id}`
- *
- * [PUT]: https://discord.com/developers/docs/resources/channel#group-dm-add-recipient
+ * @endpoint [PUT](https://discord.com/developers/docs/resources/channel#group-dm-add-recipient) `/channels/{channel.id}/recipients/{user.id}`
  */
 export interface GroupDMAddRecipient {
-	/**
-	 * Access token of a user that has granted your app the `gdm.join` scope.
-	 */
-	access_token: string;
+	body: {
+		/**
+		 * Access token of a user that has granted your app the `gdm.join` scope.
+		 */
+		access_token: string;
 
-	/**
-	 * Nickname of the user being added.
-	 */
-	nick: string;
+		/**
+		 * Nickname of the user being added.
+		 */
+		nick: string;
+	};
+
+	response: never;
 }
+
+/**
+ * Removes a recipient from a Group DM.
+ *
+ * @endpoint [DELETE](https://discord.com/developers/docs/resources/channel#group-dm-delete-recipient) `/channels/{channel.id}/recipients/{user.id}`
+ */
+export type GroupDMRemoveRecipient = { response: never };
 
 // !SECTION

@@ -107,18 +107,27 @@ export interface InviteMetadata extends Invite, Pick<PartialInvite, 'uses'> {
 // SECTION Endpoints
 
 /**
- * @endpoint [GET] `/invites/{invite.code}`
+ * Returns an invite object for the given code.
  *
- * @returns An [invite][1] object for the given code.
- *
- * [GET]: https://discord.com/developers/docs/resources/invite#invite-object
- * [1]: https://discord.com/developers/docs/resources/invite#invite-object
+ * @endpoint [GET](https://discord.com/developers/docs/resources/invite#invite-object) `/invites/{invite.code}`
  */
 export interface GetInvite {
-	/**
-	 * Whether the invite should contain approximate member counts.
-	 */
-	with_counts?: boolean;
+	query: {
+		/**
+		 * Whether the invite should contain approximate member counts.
+		 */
+		with_counts?: boolean;
+	};
+
+	response: Invite;
 }
+
+/**
+ * Delete an invite. Requires the `MANAGE_CHANNELS` permission on the channel this invite belongs
+ * to, or `MANAGE_GUILD` to remove any invite across the guild.
+ *
+ * @endpoint [DELETE](https://discord.com/developers/docs/resources/invite#delete-invite) `/invites/{invite.code}`
+ */
+export type DeleteInvite = { response: Invite };
 
 // !SECTION
