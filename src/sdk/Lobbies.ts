@@ -1,4 +1,4 @@
-import type { Discord } from '../';
+import type { Discord, Snowflake } from '../';
 
 /**
  * @source {@link https://discord.com/developers/docs/game-sdk/lobbies#data-models-lobbytype-enum|Lobbies}
@@ -589,93 +589,106 @@ export interface LobbyManager extends NodeJS.EventEmitter {
 /**
  * Creates a new lobby.
  *
- * @endpoint [POST] `/lobbies`
- *
- * [POST]: https://discord.com/developers/docs/game-sdk/lobbies#create-lobby
+ * @endpoint [POST](https://discord.com/developers/docs/game-sdk/lobbies#create-lobby) `/lobbies`
  */
-export interface CreateLobby extends UpdateLobby {
-	/**
-	 * Your application ID.
-	 */
-	application_id: string;
+export interface CreateLobby {
+	body: UpdateLobby & {
+		/**
+		 * Your application ID.
+		 */
+		application_id: Snowflake;
 
-	/**
-	 * The region in which to make the lobby.
-	 *
-	 * @defaultValue The region of the requesting server's IP address
-	 */
-	region?: string;
+		/**
+		 * The region in which to make the lobby.
+		 *
+		 * @defaultValue The region of the requesting server's IP address
+		 */
+		region?: string;
+	};
+
+	response: CreateLobby['body'] & {
+		secret: string;
+		id: Snowflake;
+		owner_id: Snowflake;
+	};
 }
 
 /**
  * Updates a lobby.
  *
- * @endpoint [PATCH] `/lobbies/{lobby.id}`
- *
- * [PATCH]: https://discord.com/developers/docs/game-sdk/lobbies#update-lobby
+ * @endpoint [PATCH](https://discord.com/developers/docs/game-sdk/lobbies#update-lobby) `/lobbies/{lobby.id}`
  */
 export interface UpdateLobby {
-	/**
-	 * The type of lobby.
-	 */
-	type: LobbyType;
+	body: {
+		/**
+		 * The type of lobby.
+		 */
+		type: LobbyType;
 
-	/**
-	 * Metadata for the lobby–key/value pairs with types `string`.
-	 */
-	metadata: Record<string, string>;
+		/**
+		 * Metadata for the lobby–key/value pairs with types `string`.
+		 */
+		metadata: Record<string, string>;
 
-	/**
-	 * Max lobby capacity.
-	 *
-	 * @defaultValue 16
-	 */
-	capacity?: number;
+		/**
+		 * Max lobby capacity.
+		 *
+		 * @defaultValue 16
+		 */
+		capacity?: number;
+	};
 }
+
+/**
+ * Deletes a lobby.
+ *
+ * @endpoint [DELETE](https://discord.com/developers/docs/game-sdk/lobbies#delete-lobby) `/lobbies/{lobby.id}`
+ */
+export type DeleteLobby = { response: never };
 
 /**
  * Updates the metadata for a lobby member.
  *
- * @endpoint [PATCH] `/lobbies/{lobby.id}/members/{user.id}`
- *
- * [PATCH]: https://discord.com/developers/docs/game-sdk/lobbies#update-lobby-member
+ * @endpoint [PATCH](https://discord.com/developers/docs/game-sdk/lobbies#update-lobby-member) `/lobbies/{lobby.id}/members/{user.id}`
  */
 export interface UpdateLobbyMember {
-	/**
-	 * Metadata for the lobby member–key/value pairs with types `string`.
-	 */
-	metadata: Record<string, string>;
+	body: {
+		/**
+		 * Metadata for the lobby member–key/value pairs with types `string`.
+		 */
+		metadata: Record<string, string>;
+	};
 }
 
 /**
  * Creates a lobby search for matchmaking around given criteria.
  *
- * @endpoint [POST] `/lobbies/search`
- *
- * [POST]: https://discord.com/developers/docs/game-sdk/lobbies#create-lobby-search
+ * @endpoint [POST](https://discord.com/developers/docs/game-sdk/lobbies#create-lobby-search) `/lobbies/search`
  */
 export interface CreateLobbySearch {
-	/**
-	 * Your application ID.
-	 */
-	application_id: string;
+	body: {
+		/**
+		 * Your application ID.
+		 */
+		application_id: string;
 
-	/**
-	 * The filter to check against.
-	 */
-	filter: SearchFilter;
+		/**
+		 * The filter to check against.
+		 */
+		filter: SearchFilter;
 
-	/**
-	 * How to sort the results.
-	 */
-	sort: SearchSort;
+		/**
+		 * How to sort the results.
+		 */
+		sort: SearchSort;
 
-	/**
-	 * Limit of lobbies returned.
-	 *
-	 * @defaultValue 25
-	 */
-	limit?: number;
+		/**
+		 * Limit of lobbies returned.
+		 *
+		 * @defaultValue 25
+		 */
+		limit?: number;
+	};
 }
 
 /**
@@ -730,15 +743,15 @@ export interface SearchSort {
  * This endpoints accepts a UTF8 string. If you want to send binary, you can send it to this
  * endpoint as a base64 encoded data uri.
  *
- * @endpoint [POST] `/lobbies/{lobby.id}/send`
- *
- * [POST]: https://discord.com/developers/docs/game-sdk/lobbies#send-lobby-data|Lobbies
+ * @endpoint [POST](https://discord.com/developers/docs/game-sdk/lobbies#send-lobby-data|Lobbies) `/lobbies/{lobby.id}/send`
  */
 export interface SendLobbyData {
-	/**
-	 * A message to be sent to other lobby members.
-	 */
-	data: string;
+	body: {
+		/**
+		 * A message to be sent to other lobby members.
+		 */
+		data: string;
+	};
 }
 
 // !SECTION

@@ -261,85 +261,128 @@ export interface LimitedPaymentData {
  * Gets entitlements for a given user. You can use this on your game backend to check entitlements
  * of an arbitrary user, or perhaps in an administrative panel for your support team.
  *
- * @endpoint [GET] `/applications/{application.id}/entitlements`
- *
- * [GET]: https://discord.com/developers/docs/game-sdk/store#get-entitlements
+ * @endpoint [GET](https://discord.com/developers/docs/game-sdk/store#get-entitlements) `/applications/{application.id}/entitlements`
  */
 export interface GetEntitlements {
-	/**
-	 * The user ID to look up entitlements for.
-	 */
-	user_id?: Snowflake;
+	query: {
+		/**
+		 * The user ID to look up entitlements for.
+		 */
+		user_id?: Snowflake;
 
-	/**
-	 * The list SKU IDs to check entitlements for.
-	 */
-	sku_ids?: string;
+		/**
+		 * The list SKU IDs to check entitlements for.
+		 */
+		sku_ids?: string;
 
-	/**
-	 * Returns [limited payment data][1] for each entitlement.
-	 *
-	 * [1]: https://discord.com/developers/docs/game-sdk/store#httpspecific-data-models-limited-payment-data-object
-	 */
-	with_payments?: boolean;
+		/**
+		 * Returns limited payment data for each entitlement.
+		 */
+		with_payments?: boolean;
 
-	/**
-	 * Retrieve entitlements before this time.
-	 */
-	before?: Snowflake;
+		/**
+		 * Retrieve entitlements before this time.
+		 */
+		before?: Snowflake;
 
-	/**
-	 * Retrieve entitlements after this time.
-	 */
-	after?: Snowflake;
+		/**
+		 * Retrieve entitlements after this time.
+		 */
+		after?: Snowflake;
 
-	/**
-	 * Number of entitlements to return, 1-100.
-	 *
-	 * @defaultValue 100
-	 */
-	limit?: RangeOf<1, 100>;
+		/**
+		 * Number of entitlements to return, 1-100.
+		 *
+		 * @defaultValue 100
+		 */
+		limit?: RangeOf<1, 100>;
+	};
+
+	response: Entitlement[];
 }
 
 /**
  * Fetch an entitlement by its ID. This may be useful in confirming that a user has a given
  * entitlement that another call or the SDK says they do.
  *
- * @endpoint [GET] `/applications/{application.id}/entitlements/{entitlement.id}`
- *
- * [GET]: https://discord.com/developers/docs/game-sdk/store#get-entitlement
+ * @endpoint [GET](https://discord.com/developers/docs/game-sdk/store#get-entitlement) `/applications/{application.id}/entitlements/{entitlement.id}`
  */
 export interface GetEntitlement {
-	/**
-	 * Returns [limited payment data][1] for the entitlement.
-	 *
-	 * [1]: https://discord.com/developers/docs/game-sdk/store#httpspecific-data-models-limited-payment-data-object
-	 */
-	with_payment?: boolean;
+	query: {
+		/**
+		 * Returns limited payment data for the entitlement.
+		 */
+		with_payment?: boolean;
+	};
+
+	response: Entitlement;
 }
+
+/**
+ * Get all SKUs for an application.
+ *
+ * @endpoint [GET](https://discord.com/developers/docs/game-sdk/store#get-skus) `/applications/{application.id}/skus`
+ */
+export type GetSKUs = { response: Sku[] };
+
+/**
+ * Marks a given entitlement for the user as consumed, meaning it will no longer be returned in an
+ * entitlements check.
+ *
+ * **Ensure the user was granted whatever items the entitlement was for before consuming it.**
+ *
+ * @endpoint [POST](https://discord.com/developers/docs/game-sdk/store#consume-sku) `/applications/{application.id}/entitlements/{entitlement.id}/consume`
+ */
+export type ConsumeSKU = { response: never };
+
+/**
+ * Deletes a test entitlement for an application.
+ *
+ * You can only delete entitlements that were "purchased" in developer test mode; these are
+ * entitlements of `type == TestModePurchase`. You cannot use this route to delete arbitrary
+ * entitlements that users actually purchased.
+ *
+ * @endpoint [DELETE](https://discord.com/developers/docs/game-sdk/store#delete-test-entitlement) `/applications/{application.id}/entitlements/{entitlement.id}`
+ */
+export type DeleteTestEntitlement = { response: never };
 
 /**
  * Creates a discount for the given user on their next purchase of the given SKU.
  *
  * @remarks
- * You should call this endpoint from your backend server just before calling [StartPurchase][1] for
- * the SKU you wish to discount. The user will then see a discounted price for that SKU at time of
+ * You should call this endpoint from your backend server just before calling StartPurchase for the
+ * SKU you wish to discount. The user will then see a discounted price for that SKU at time of
  * payment. The discount is automatically consumed after successful purchase or if the TTL expires.
  *
- * [1]: https://discord.com/developers/docs/game-sdk/store#start-purchase
+ * @endpoint [PUT](https://discord.com/developers/docs/game-sdk/store#create-purchase-discount) `/store/skus/{sku.id}/discounts/{user.id}`
  */
 export interface CreatePurchaseDiscount {
-	/**
-	 * The percentage to discount.
-	 */
-	percent_off: RangeOf<1, 100>;
+	body: {
+		/**
+		 * The percentage to discount.
+		 */
+		percent_off: RangeOf<1, 100>;
 
-	/**
-	 * The time to live for the discount, in seconds.
-	 *
-	 * @defaultValue 600
-	 */
-	ttl?: RangeOf<60, 3600>;
+		/**
+		 * The time to live for the discount, in seconds.
+		 *
+		 * @defaultValue 600
+		 */
+		ttl?: RangeOf<60, 3600>;
+	};
+
+	response: never;
 }
+
+/**
+ * Deletes the currently active discount on the given SKU for the given user.
+ *
+ * You **do not need** to call this after a user has made a discounted purchase; successful
+ * discounted purchases will automatically remove the discount for that user for subsequent
+ * purchases.
+ *
+ * @endpoint [DELETE](https://discord.com/developers/docs/game-sdk/store#delete-purchase-discount) `/store/skus/{sku.id}/discounts/{user.id}`
+ */
+export type DeletePurchaseDiscount = { response: never };
 
 // !SECTION
