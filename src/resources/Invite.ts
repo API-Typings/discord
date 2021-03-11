@@ -1,5 +1,4 @@
-import { PartialApplication } from '../topics';
-import type { PartialChannel, PartialGuild, User } from './';
+import type { PartialApplication, PartialChannel, PartialGuild, User } from '../';
 
 // ANCHOR Partial Invite
 
