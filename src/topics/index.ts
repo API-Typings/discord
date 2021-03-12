@@ -1,5 +1,4 @@
 export * from './gateway';
-export * from './rpc';
 export * from './Codes';
 export * from './Devices';
 export * from './OAuth2';
