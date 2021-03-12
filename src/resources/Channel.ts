@@ -1,4 +1,4 @@
-import type { Nullable, Range } from 'extended-utility-types';
+import type { Nullable, Range, TupleOf } from 'extended-utility-types';
 import type {
 	GuildMember,
 	Invite,
@@ -755,9 +755,7 @@ export interface Embed {
 	title?: string;
 
 	/**
-	 * [Type of embed][1] (always `rich` for webhook embeds).
-	 *
-	 * [1]: https://discord.com/developers/docs/resources/channel#embed-object-embed-types
+	 * Type of embed (always `rich` for webhook embeds).
 	 */
 	type?: EmbedType;
 
@@ -789,17 +787,17 @@ export interface Embed {
 	/**
 	 * Image information.
 	 */
-	image?: EmbedMedia;
+	image?: EmbedImage;
 
 	/**
 	 * Thumbnail information.
 	 */
-	thumbnail?: EmbedMedia;
+	thumbnail?: EmbedThumbnail;
 
 	/**
 	 * Video information.
 	 */
-	video?: EmbedMedia;
+	video?: EmbedVideo;
 
 	/**
 	 * Prodvider information.
@@ -814,7 +812,7 @@ export interface Embed {
 	/**
 	 * Fields information.
 	 */
-	fields?: EmbedField[];
+	fields?: Partial<TupleOf<EmbedField, 25>>;
 }
 
 /**
@@ -824,16 +822,42 @@ export interface Embed {
  *
  * @source {@link https://discord.com/developers/docs/resources/channel#embed-object-embed-types|Channel}
  */
-export type EmbedType = 'rich' | 'image' | 'video' | 'gifv' | 'article' | 'link';
+export enum EmbedType {
+	/**
+	 * Generic embed rendered from embed attributes.
+	 */
+	Rich = 'rich',
+
+	/**
+	 * Image embed.
+	 */
+	Image = 'image',
+
+	/**
+	 * Video embed.
+	 */
+	Video = 'video',
+
+	/**
+	 * Animated gif image embed rendered as a video embed.
+	 */
+	GIFV = 'gifv',
+
+	/**
+	 * Article embed.
+	 */
+	Article = 'article',
+
+	/**
+	 * Link embed.
+	 */
+	Link = 'link'
+}
 
 /**
- * @source Channel [[1][C1]] [[2][C2]] [[3][C3]]
- *
- * [C1]: https://discord.com/developers/docs/resources/channel#embed-object-embed-thumbnail-structure
- * [C2]: https://discord.com/developers/docs/resources/channel#embed-object-embed-video-structure
- * [C3]: https://discord.com/developers/docs/resources/channel#embed-object-embed-image-structure
+ * @source {@link https://discord.com/developers/docs/resources/channel#embed-object-embed-thumbnail-structure|Channel}
  */
-export interface EmbedMedia {
+export interface EmbedThumbnail {
 	/**
 	 * Source URL of thumbnail or image (only supports http[s] and attachments), or video.
 	 */
@@ -854,6 +878,16 @@ export interface EmbedMedia {
 	 */
 	width?: number;
 }
+
+/**
+ * @source {@link https://discord.com/developers/docs/resources/channel#embed-object-embed-video-structure|Channel}
+ */
+export type EmbedVideo = EmbedThumbnail;
+
+/**
+ * @source {@link https://discord.com/developers/docs/resources/channel#embed-object-embed-image-structure|Channel}
+ */
+export type EmbedImage = EmbedThumbnail;
 
 /**
  * @source {@link https://discord.com/developers/docs/resources/channel#embed-object-embed-provider-structure|Channel}
@@ -1043,9 +1077,7 @@ export enum EmbedLimit {
 	Description = 2048,
 
 	/**
-	 * Up to 25 [field][1] objects.
-	 *
-	 * [1]: https://discord.com/developers/docs/resources/channel#embed-object-embed-field-structure
+	 * Up to 25 field objects.
 	 */
 	Fields = 25,
 
