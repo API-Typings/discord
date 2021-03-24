@@ -50,14 +50,29 @@ export interface HeartbeatAck {
  */
 export enum GatewayEvent {
 	/**
+	 * Defines the heartbeat interval.
+	 */
+	Hello = 'HELLO',
+
+	/**
 	 * Contains the initial state information.
 	 */
 	Ready = 'READY',
 
 	/**
-	 * Respone to resume.
+	 * Response to resume.
 	 */
 	Resumed = 'RESUMED',
+
+	/**
+	 * Server is going away, client should reconnect to gateway and resume.
+	 */
+	Reconnect = 'RECONNECT',
+
+	/**
+	 * Failure response to `Identify` or `Resume` or invalid active session.
+	 */
+	InvalidSession = 'INVALID_SESSION',
 
 	/**
 	 * New Slash Command was created.
