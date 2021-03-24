@@ -24,109 +24,107 @@ export interface EventPayload<E extends Event> extends Omit<RPC.Payload, 'nonce'
  */
 export enum Event {
 	/**
-	 * Non-subscription event sent immediately after connecting, contains server information
+	 * Non-subscription event sent immediately after connecting, contains server information.
 	 */
 	Ready = 'READY',
 
 	/**
-	 * Non-subscription event sent when there is an error, including command responses
+	 * Non-subscription event sent when there is an error, including command responses.
 	 */
 	Error = 'ERROR',
 
 	/**
-	 * Sent when a subscribed server's state changes
+	 * Sent when a subscribed server's state changes.
 	 */
 	GuildStatus = 'GUILD_STATUS',
 
 	/**
-	 * Sent when a guild is created/joined on the client
+	 * Sent when a guild is created/joined on the client.
 	 */
 	GuildCreate = 'GUILD_CREATE',
 
 	/**
-	 * Sent when a channel is created/joined on the client
+	 * Sent when a channel is created/joined on the client.
 	 */
 	ChannelCreate = 'CHANNEL_CREATE',
 
 	/**
-	 * Sent when the client joins a voice channel
+	 * Sent when the client joins a voice channel.
 	 */
 	VoiceChannelSelect = 'VOICE_CHANNEL_SELECT',
 
 	/**
-	 * Sent when a user joins a subscribed voice channel
+	 * Sent when a user joins a subscribed voice channel.
 	 */
 	VoiceStateCreate = 'VOICE_STATE_CREATE',
 
 	/**
-	 * Sent when a user's voice state changes in a subscribed voice channel (mute, volume, etc.)
+	 * Sent when a user's voice state changes in a subscribed voice channel (mute, volume, etc.).
 	 */
 	VoiceStateUpdate = 'VOICE_STATE_UPDATE',
 
 	/**
-	 * Sent when a user parts a subscribed voice channel
+	 * Sent when a user parts a subscribed voice channel.
 	 */
 	VoiceStateDelete = 'VOICE_STATE_DELETE',
 
 	/**
-	 * Sent when the client's voice settings update
+	 * Sent when the client's voice settings update.
 	 */
 	VoiceSettingsUpdate = 'VOICE_SETTINGS_UPDATE',
 
 	/**
-	 * Sent when the client's voice connection status changes
+	 * Sent when the client's voice connection status changes.
 	 */
 	VoiceConnectionStatus = 'VOICE_CONNECTION_STATUS',
 
 	/**
-	 * Sent when a user in a subscribed voice channel speaks
+	 * Sent when a user in a subscribed voice channel speaks.
 	 */
 	SpeakingStart = 'SPEAKING_START',
 
 	/**
-	 * Sent when a user in a subscribed voice channel stops speaking
+	 * Sent when a user in a subscribed voice channel stops speaking.
 	 */
 	SpeakingStop = 'SPEAKING_STOP',
 
 	/**
-	 * Sent when a message is created in a subscribed text channel
+	 * Sent when a message is created in a subscribed text channel.
 	 */
 	MessageCreate = 'MESSAGE_CREATE',
 
 	/**
-	 * Sent when a message is updated in a subscribed text channel
+	 * Sent when a message is updated in a subscribed text channel.
 	 */
 	MessageUpdate = 'MESSAGE_UPDATE',
 
 	/**
-	 * Sent when a message is deleted in a subscribed text channel
+	 * Sent when a message is deleted in a subscribed text channel.
 	 */
 	MessageDelete = 'MESSAGE_DELETE',
 
 	/**
-	 * Sent when the client receives a notification (mention or new message in eligible channels)
+	 * Sent when the client receives a notification (mention or new message in eligible channels).
 	 */
 	NotificationCreate = 'NOTIFICATION_CREATE',
 
 	/**
-	 * Sent when the user presses a key during [shortcut capturing][1]
-	 *
-	 * [1]: https://discord.com/developers/docs/topics/rpc#captureshortcut
+	 * Sent when the user presses a key during shortcut capturing.
 	 */
 	CaptureShortcutChange = 'CAPTURE_SHORTCUT_CHANGE',
 
 	/**
-	 * Sent when the user clicks a Rich Presence join invite in chat to join a game
+	 * Sent when the user clicks a Rich Presence join invite in chat to join a game.
 	 */
 	ActivityJoin = 'ACTIVITY_JOIN',
 
 	/**
-	 * Sent when the user clicks a Rich Presence spectate invite in chat to spectate a game
+	 * Sent when the user clicks a Rich Presence spectate invite in chat to spectate a game.
 	 */
 	ActivitySpectate = 'ACTIVITY_SPECTATE',
 
 	/**
-	 * Sent when the user receives a Rich Presence Ask to Join request
+	 * Sent when the user receives a Rich Presence Ask to Join request.
 	 */
 	ActivityJoinRequest = 'ACTIVITY_JOIN_REQUEST'
 }
