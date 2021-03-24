@@ -160,7 +160,7 @@ export interface Heartbeat extends GatewayCommandPayload<GatewayOPCode.Heartbeat
  * are online, have a role, have a nickname, or are in a voice channel, and if it has under
  * `large_threshold` members, it will send all members.
  *
- * @limitations
+ * **Limitations**
  * - `GUILD_PRESENCES` intent is required to set `presences = true`. Otherwise, it will always be
  *   false
  * - `GUILD_MEMBERS` intent is required to request the entire member list—`(query=‘’, limit=0<=n)`

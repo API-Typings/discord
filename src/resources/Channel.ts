@@ -1145,89 +1145,68 @@ export type GetChannel = { response: Channel };
 export interface ModifyChannel {
 	body: {
 		/**
-		 * 2-100 character channel name.
-		 *
-		 * @channel All
+		 * 2-100 character channel name. Applies to all channel types.
 		 */
 		name?: string;
 
 		/**
 		 * The type of Channel; only conversion between text and news is supported and only in
-		 * guilds with the `NEWS` feature.
-		 *
-		 * @channel Text, News
+		 * guilds with the `NEWS` feature. Applies to text and news channels.
 		 */
 		type?: number | ChannelType;
 
 		/**
-		 * The position of the channel in the left-hand listing.
-		 *
-		 * @channel All
+		 * The position of the channel in the left-hand listing. Applies to all channel types.
 		 */
 		position?: Nullable<number>;
 
 		/**
-		 * 0-1024 character channel topic.
-		 *
-		 * @channel Text, News
+		 * 0-1024 character channel topic. Applies to text or news channels.
 		 */
 		topic?: Nullable<string>;
 
 		/**
-		 * Whether the channel is NSFW.
-		 *
-		 * @channel Text, News, Store
+		 * Whether the channel is NSFW. Applies to text, news, or store channels.
 		 */
 		nsfw?: Nullable<boolean>;
 
 		/**
 		 * Amount of seconds a user has to wait before sending another message (0-21600); bots, as
 		 * well as users with the permission `manage_messages` or `manage_channel`, are unaffected.
-		 *
-		 * @channel Text
+		 * Applies to text channels.
 		 */
 		rate_limit_per_user?: Nullable<number>;
 
 		/**
 		 * The bitrate (in bits) of the voice channel; 8000 to 96000 (128000 for VIP servers).
-		 *
-		 * @channel Voice
+		 * Applies to voice channels.
 		 */
 		bitrate?: Nullable<number>;
 
 		/**
 		 * The user limit of the voice channel; 0 refers to no limit, 1 to 99 refers to a user
-		 * limit.
-		 *
-		 * @channel Voice
+		 * limit. Applies to voice channels.
 		 */
 		user_limit?: Nullable<Range<0, 99>>;
 
 		/**
-		 * Channel or category-specific permissions.
-		 *
-		 * @channel All
+		 * Channel or category-specific permissions. Applies to all channel types.
 		 */
 		permission_overwrites?: Nullable<Overwrite[]>;
 
 		/**
-		 * ID of the new parent category for a channel.
-		 *
-		 * @channel Text, News, Store, Voice
+		 * ID of the new parent category for a channel. Applies to all channel types except
+		 * categories.
 		 */
 		parent_id?: Nullable<Snowflake>;
 
 		/**
-		 * Image for the channel icon.
-		 *
-		 * @channel Group DM
+		 * Image for the channel icon. Applies to group DMs.
 		 */
 		icon?: string;
 
 		/**
-		 * Channel voice region ID, automatic when set to `null`.
-		 *
-		 * @channel Voice
+		 * Channel voice region ID, automatic when set to `null`. Applies to voice channels.
 		 */
 		rtc_region?: Nullable<string>;
 	};
@@ -1325,7 +1304,7 @@ export type GetChannelMessage = { response: Message };
  * @info
  * Note that when sending `application/json` you must send at **least one of** `content` or `embed`.
  *
- * @limitations
+ * **Limitations**
  * - When operating on a guild channel, the current user must have the `SEND_MESSAGES` permission
  * - When sending a message with `tts` (text-to-speech) set to `true`, the current user must have
  *   the `SEND_TTS_MESSAGES` permission,
@@ -1390,7 +1369,7 @@ export interface CreateMessageJSON {
  * `content`, `embed` or `file`. For a `file` attachment, the `Content-Disposition` subpart header
  * MUST contain a `filename` parameter.
  *
- * @limitations
+ * **Limitations**
  * - When operating on a guild channel, the current user must have the `SEND_MESSAGES` permission
  * - When sending a message with `tts` (text-to-speech) set to `true`, the current user must have
  *   the `SEND_TTS_MESSAGES` permission

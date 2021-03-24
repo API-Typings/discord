@@ -14,44 +14,8 @@
 			"syntaxKind": "block"
 		},
 		{
-			"tagName": "@channel",
-			"syntaxKind": "block"
-		},
-		{
-			"tagName": "@action",
-			"syntaxKind": "block"
-		},
-		{
 			"tagName": "@endpoint",
 			"syntaxKind": "block"
-		},
-		{
-			"tagName": "@limitations",
-			"syntaxKind": "block"
-		},
-		{
-			"tagName": "@permission",
-			"syntaxKind": "block"
-		},
-		{
-			"tagName": "@scope",
-			"syntaxKind": "block"
-		},
-		{
-			"tagName": "@format",
-			"syntaxKind": "block"
-		},
-		{
-			"tagName": "@sender",
-			"syntaxKind": "block"
-		},
-		{
-			"tagName": "@fires",
-			"syntaxKind": "block"
-		},
-		{
-			"tagName": "@whitelist",
-			"syntaxKind": "modifier"
 		}
 	]
 }

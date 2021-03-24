@@ -112,80 +112,63 @@ export enum GatewayCloseCode {
  */
 export enum GatewayOPCode {
 	/**
-	 * An event was dispatched.
-	 *
-	 * @action Receive
+	 * An event was dispatched. The client can receive this action.
 	 */
 	Dispatch,
 
 	/**
-	 * Fired periodically by the client to keep the connection alive.
-	 *
-	 * @action Send, Receive
+	 * Fired periodically by the client to keep the connection alive. The client can send and
+	 * receive this action.
 	 */
 	Heartbeat,
 
 	/**
-	 * Starts a new session during the initial handshake.
-	 *
-	 * @action Send
+	 * Starts a new session during the initial handshake. The client can send this action.
 	 */
 	Identify,
 
 	/**
-	 * Update the client's presence.
-	 *
-	 * @action Send
+	 * Update the client's presence. The client can send this action.
 	 */
 	PresenceUpdate,
 
 	/**
-	 * Used to join/leave or move between voice channels.
-	 *
-	 * @action Send
+	 * Used to join/leave or move between voice channels. The client can send this action.
 	 */
 	VoiceStateUpdate,
 	VoiceGuildPing,
 
 	/**
-	 * Resume a previous session that was disconnected.
-	 *
-	 * @action Send
+	 * Resume a previous session that was disconnected. The client can send this action.
 	 */
 	Resume,
 
 	/**
-	 * You should attempt to reconnect and resume immediately.
-	 *
-	 * @action Receive
+	 * You should attempt to reconnect and resume immediately. The client can receive this action.
 	 */
 	Reconnect,
 
 	/**
-	 * Request information about offline guild members in a large guild.
-	 *
-	 * @action Send
+	 * Request information about offline guild members in a large guild. The client can send this
+	 * action.
 	 */
 	RequestGuildMembers,
 
 	/**
-	 * The session has been invalidated. You should reconnect and identify/resume accordingly.
-	 *
-	 * @action Receive
+	 * The session has been invalidated. You should reconnect and identify/resume accordingly. The
+	 * client can receive this action.
 	 */
 	InvalidSession,
 
 	/**
-	 * Sent immediately after connecting, contains the `heartbeat_interval` to use.
-	 *
-	 * @action Receive
+	 * Sent immediately after connecting, contains the `heartbeat_interval` to use. The client can
+	 * receive this action.
 	 */
 	Hello,
 
 	/**
-	 * Sent in response to receiving a heartbeat to acknowledge that it has been received.
-	 *
-	 * @action Receive
+	 * Sent in response to receiving a heartbeat to acknowledge that it has been received. The
+	 * client can receive this action.
 	 */
 	HeartbeatAck
 }
@@ -824,79 +807,57 @@ export enum VoiceCloseCode {
  */
 export enum VoiceOPCode {
 	/**
-	 * Begin a voice websocket connection.
-	 *
-	 * @sender Client
+	 * Begin a voice websocket connection. This is sent by the client.
 	 */
 	Identify,
 
 	/**
-	 * Select the voice protocol.
-	 *
-	 * @sender Client
+	 * Select the voice protocol. This is sent by the client.
 	 */
 	SelectProtocol,
 
 	/**
-	 * Complete the websocket handshake.
-	 *
-	 * @sender Server
+	 * Complete the websocket handshake. This is sent by the server.
 	 */
 	Ready,
 
 	/**
-	 * Keep the websocket connection alive.
-	 *
-	 * @sender Client
+	 * Keep the websocket connection alive. This is sent by the client.
 	 */
 	Heartbeat,
 
 	/**
-	 * Describe the session.
-	 *
-	 * @sender Server
+	 * Describe the session. This is sent by the server.
 	 */
 	SessionDescription,
 
 	/**
-	 * Indicate which users are speaking.
-	 *
-	 * @sender Client, Server
+	 * Indicate which users are speaking. This is sent by the client and server.
 	 */
 	Speaking,
 
 	/**
-	 * Sent to acknowledge a received client heartbeat.
-	 *
-	 * @sender Server
+	 * Sent to acknowledge a received client heartbeat. This is sent by the server.
 	 */
 	HeartbeatAck,
 
 	/**
-	 * Resume a connection.
-	 *
-	 * @sender Client
+	 * Resume a connection. This is sent by the client.
 	 */
 	Resume,
 
 	/**
-	 * Time to wait between sending heartbeats in milliseconds.
-	 *
-	 * @sender Server
+	 * Time to wait between sending heartbeats in milliseconds. This is sent by the server.
 	 */
 	Hello,
 
 	/**
-	 * Acknowledge a successful session resume.
-	 *
-	 * @sender Server
+	 * Acknowledge a successful session resume. This is sent by the server.
 	 */
 	Resumed,
 
 	/**
-	 * A client has disconnected from the voice channel.
-	 *
-	 * @sender Server
+	 * A client has disconnected from the voice channel. This is sent by the server.
 	 */
 	ClientDisconnect = 13
 }

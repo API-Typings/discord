@@ -5,30 +5,22 @@ import type { DMChannel, PartialGuild, PartialIntegration, Snowflake } from '../
 
 export interface PartialUser {
 	/**
-	 * The user's ID.
-	 *
-	 * @scope `identify`
+	 * The user's ID. Requires the `identify` OAuth2 scope.
 	 */
 	id: Snowflake;
 
 	/**
-	 * The user's username, not unique across the platform.
-	 *
-	 * @scope `identify`
+	 * The user's username, not unique across the platform. Requires the `identify` OAuth2 scope.
 	 */
 	username: string;
 
 	/**
-	 * The user's 4-digit discord-tag.
-	 *
-	 * @scope `identify`
+	 * The user's 4-digit discord-tag. Requires the `identify` OAuth2 scope.
 	 */
 	discriminator: string;
 
 	/**
-	 * The user's [avatar hash][1].
-	 *
-	 * @scope `identify`
+	 * The user's [avatar hash][1]. Requires the `identify` OAuth2 scope.
 	 *
 	 * [1]: https://discord.com/developers/docs/reference#image-formatting
 	 */
@@ -48,69 +40,54 @@ export interface PartialUser {
  */
 export interface User extends PartialUser {
 	/**
-	 * Whether the user belongs to an OAuth2 application.
-	 *
-	 * @scope `identify`
+	 * Whether the user belongs to an OAuth2 application. Requires the `identify` OAuth2 scope.
 	 */
 	bot?: boolean;
 
 	/**
 	 * Whether the user is an Official Discord System user (part of the urgent message system).
-	 *
-	 * @scope `identify`
+	 * Requires the `identify` OAuth2 scope.
 	 */
 	system?: boolean;
 
 	/**
-	 * Whether the user has two factor enabled on their account.
-	 *
-	 * @scope `identify`
+	 * Whether the user has two factor enabled on their account. Requires the `identify` OAuth2
+	 * scope.
 	 */
 	mfa_enabled?: boolean;
 
 	/**
-	 * The user's chosen language option.
-	 *
-	 * @scope `identify`
+	 * The user's chosen language option. Requires the `identify` OAuth2 scope.
 	 */
 	locale?: string;
 
 	/**
-	 * Whether the email on this account has been verified.
-	 *
-	 * @scope `email`
+	 * Whether the email on this account has been verified. Requires the `email` OAuth2 scope.
 	 */
 	verified?: boolean;
 
 	/**
-	 * The user's email.
-	 *
-	 * @scope `email`
+	 * The user's email. Requires the `email` OAuth2 scope.
 	 */
 	email?: Nullable<string>;
 
 	/**
-	 * The [flags][1] on a user's account.
-	 *
-	 * @scope `identify`
+	 * The [flags][1] on a user's account. Requires the `identify` OAuth2 scope.
 	 *
 	 * [1]: https://discord.com/developers/docs/resources/user#user-object-user-flags
 	 */
 	flags?: UserFlags;
 
 	/**
-	 * The [type of Nitro subscription][1] on a user's account.
-	 *
-	 * @scope `identify`
+	 * The [type of Nitro subscription][1] on a user's account. Requires the `identify` OAuth2
+	 * scope.
 	 *
 	 * [1]: https://discord.com/developers/docs/resources/user#user-object-premium-types
 	 */
 	premium_type?: PremiumType;
 
 	/**
-	 * The public [flags][1] on a user's account.
-	 *
-	 * @scope `identify`
+	 * The public [flags][1] on a user's account. Requires the `identify` OAuth2 scope.
 	 *
 	 * [1]: https://discord.com/developers/docs/resources/user#user-object-user-flags
 	 */

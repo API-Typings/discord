@@ -95,23 +95,19 @@ export enum OAuth2Scope {
 
 	/**
 	 * For local RPC server access, this allows you to control a user's local Discord client.
-	 *
-	 * @whitelist
+	 * Whitelist only.
 	 */
 	RPC = 'rpc',
 
 	/**
 	 * For local RPC server API access, this allows you to access the API as the local user.
-	 *
-	 * @whitelist
+	 * Whitelist only.
 	 */
 	RPCAPI = 'rpc.api',
 
 	/**
 	 * For local RPC server API access, this allows you to receive notifications pushed out to the
-	 * user.
-	 *
-	 * @whitelist
+	 * user. Whitelist only.
 	 */
 	RPCNotificationsRead = 'rpc.notifications.read',
 
@@ -122,9 +118,7 @@ export enum OAuth2Scope {
 	WebhookIncoming = 'webhook.incoming',
 
 	/**
-	 * Allows your app to upload/update builds for a user's applications.
-	 *
-	 * @whitelist
+	 * Allows your app to upload/update builds for a user's applications. Whitelist only.
 	 */
 	ApplicationsBuildsUpload = 'applications.builds.upload',
 
@@ -145,26 +139,21 @@ export enum OAuth2Scope {
 	ApplicationsEntitlements = 'applications.entitlements',
 
 	/**
-	 * Allows your app to know a user's friends and implicit relationships.
-	 *
-	 * @whitelist
+	 * Allows your app to know a user's friends and implicit relationships. Whitelist only.
 	 */
 	RelationshipsRead = 'relationships.read',
 
 	/**
-	 * Allows your app to fetch data from a user's "Now Playing/Recently Played" list.
-	 *
-	 * @whitelist
+	 * Allows your app to fetch data from a user's "Now Playing/Recently Played" list. Whitelist
+	 * only.
 	 */
 	ActivitiesRead = 'activities.read',
 
 	/**
-	 * Allows your app to update a user's activity.
+	 * Allows your app to update a user's activity. Whitelist only.
 	 *
 	 * @remarks
 	 * Whitelist is NOT required for {@link https://discord.com/developers/docs/game-sdk/activities|GameSDK Activity Manager}
-	 *
-	 * @whitelist
 	 */
 	ActivitiesWrite = 'activities.write',
 

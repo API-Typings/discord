@@ -145,32 +145,32 @@ export type ActivityPlatform = 'desktop' | 'samsung' | 'xbox';
  */
 export enum ActivityType {
 	/**
-	 * @format Playing \{name\}
+	 * Playing \{name\}
 	 */
 	Game,
 
 	/**
-	 * @format Streaming \{details\}
+	 * Streaming \{details\}
 	 */
 	Streaming,
 
 	/**
-	 * @format Listening to \{name\}
+	 * Listening to \{name\}
 	 */
 	Listening,
 
 	/**
-	 * @format Watching \{name\}
+	 * Watching \{name\}
 	 */
 	Watching,
 
 	/**
-	 * @format \{emoji\} \{name\}
+	 * \{emoji\} \{name\}
 	 */
 	Custom,
 
 	/**
-	 * @format Competing in \{name\}
+	 * Competing in \{name\}
 	 */
 	Competing
 }

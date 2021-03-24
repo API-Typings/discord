@@ -130,23 +130,18 @@ export enum AuditLogEvent {
  */
 export interface AuditLogEntryInfo {
 	/**
-	 * Number of days after which inactive members were kicked.
-	 *
-	 * @action `MEMBER_PRUNE`
+	 * Number of days after which inactive members were kicked. Only present on `MEMBER_PRUNE`
+	 * actions.
 	 */
 	delete_member_days: string;
 
 	/**
-	 * Number of members removed by the prune.
-	 *
-	 * @action `MEMBER_PRUNE`
+	 * Number of members removed by the prune. Only present on `MEMBER_PRUNE` actions.
 	 */
 	members_removed: string;
 
 	/**
-	 * Channel in which the entities were targeted.
-	 *
-	 * @action
+	 * Channel in which the entities were targeted. Present on the following actions:
 	 * - `MEMBER_MOVE`
 	 * - `MESSAGE_PIN`
 	 * - `MESSAGE_UNPIN`
@@ -155,18 +150,14 @@ export interface AuditLogEntryInfo {
 	channel_id: Snowflake;
 
 	/**
-	 * ID of the message that was targeted.
-	 *
-	 * @action
+	 * ID of the message that was targeted. Present on the following actions:
 	 * - `MESSAGE_PIN`
 	 * - `MESSAGE_UNPIN`
 	 */
 	message_id: Snowflake;
 
 	/**
-	 * Number of entities that were targeted.
-	 *
-	 * @action
+	 * Number of entities that were targeted. Present on the following actions:
 	 * - `MESSAGE_DELETE`
 	 * - `MESSAGE_BULK_DELETE`
 	 * - `MEMBER_DISCONNECT`
@@ -175,9 +166,7 @@ export interface AuditLogEntryInfo {
 	count: string;
 
 	/**
-	 * ID of the overwritten entity.
-	 *
-	 * @action
+	 * ID of the overwritten entity. Present on the following actions:
 	 * - `CHANNEL_OVERWRITE_CREATE`
 	 * - `CHANNEL_OVERWRITE_UPDATE`
 	 * - `CHANNEL_OVERWRITE_DELETE`
@@ -185,9 +174,8 @@ export interface AuditLogEntryInfo {
 	id: Snowflake;
 
 	/**
-	 * Type of overwritten entity–`0` for `role` or `1` for `member`.
-	 *
-	 * @action
+	 * Type of overwritten entity–`0` for `role` or `1` for `member`. Present on the following
+	 * actions:
 	 * - `CHANNEL_OVERWRITE_CREATE`
 	 * - `CHANNEL_OVERWRITE_UPDATE`
 	 * - `CHANNEL_OVERWRITE_DELETE`
@@ -195,9 +183,8 @@ export interface AuditLogEntryInfo {
 	type: '0' | '1';
 
 	/**
-	 * Name of the role if type is `0` (not present if type is `1`).
-	 *
-	 * @action
+	 * Name of the role if type is `0` (not present if type is `1`). Present on the following
+	 * actions:
 	 * - `CHANNEL_OVERWRITE_CREATE`
 	 * - `CHANNEL_OVERWRITE_UPDATE`
 	 * - `CHANNEL_OVERWRITE_DELETE`

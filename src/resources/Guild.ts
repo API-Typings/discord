@@ -1481,30 +1481,22 @@ export interface AddGuildMember {
 		access_token: string;
 
 		/**
-		 * Value to set users nickname to.
-		 *
-		 * @permission `MANAGE_NICKNAMES`
+		 * Value to set users nickname to. Requires the `MANAGE_NICKNAMES` permission.
 		 */
 		nick?: string;
 
 		/**
-		 * Array of role ids the member is assigned.
-		 *
-		 * @permission `MANAGE_ROLES`
+		 * Array of role ids the member is assigned. Requires the `MANAGE_ROLES` permission.
 		 */
 		roles?: Snowflake[];
 
 		/**
-		 * Whether the user is muted in voice channels.
-		 *
-		 * @permission `MUTE_MEMBERS`
+		 * Whether the user is muted in voice channels. Requires the `MUTE_MEMBERS` permission.
 		 */
 		mute?: boolean;
 
 		/**
-		 * Whether the user is deafened in voice channels.
-		 *
-		 * @permission `DEAFEN_MEMBERS`
+		 * Whether the user is deafened in voice channels. Requires the `DEAFEN_MEMBERS` permission.
 		 */
 		deaf?: boolean;
 	};
@@ -1527,37 +1519,28 @@ export interface AddGuildMember {
 export interface ModifyGuildMember {
 	body: {
 		/**
-		 * Value to set users nickname to.
-		 *
-		 * @permission `MANAGE_NICKNAMES`
+		 * Value to set users nickname to. Requires the `MANAGE_NICKNAMES` permission.
 		 */
 		nick?: Nullable<string>;
 
 		/**
-		 * Array of role IDs the member is assigned.
-		 *
-		 * @permission `MANAGE_ROLES`
+		 * Array of role IDs the member is assigned. Requires the `MANAGE_ROLES` permission.
 		 */
 		roles?: Nullable<Snowflake[]>;
 
 		/**
-		 * Whether the user is muted in voice channels.
-		 *
-		 * @permission `MUTE_MEMBERS`
+		 * Whether the user is muted in voice channels. Requires the `MUTE_MEMBERS` permission.
 		 */
 		mute?: Nullable<boolean>;
 
 		/**
-		 * Whether the user is deafened in voice channels.
-		 *
-		 * @permission `DEAFEN_MEMBERS`
+		 * Whether the user is deafened in voice channels. Requires the `DEAFEN_MEMBERS` permission.
 		 */
 		deaf?: Nullable<boolean>;
 
 		/**
-		 * ID of channel to move user to (if they are connected to voice).
-		 *
-		 * @permission `MOVE_MEMBERS`
+		 * ID of channel to move user to (if they are connected to voice). Requires the
+		 * `MOVE_MEMBERS` permission.
 		 */
 		channel_id?: Nullable<Snowflake>;
 	};
@@ -1573,9 +1556,7 @@ export interface ModifyGuildMember {
 export interface ModifyCurrentUserNick {
 	body: {
 		/**
-		 * Value to set users nickname to.
-		 *
-		 * @permission `CHANGE_NICKNAME`
+		 * Value to set users nickname to. Requires the `CHANGE_NICKNAME` permission.
 		 */
 		nick?: Nullable<string>;
 	};

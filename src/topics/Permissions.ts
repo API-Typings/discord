@@ -14,9 +14,7 @@ import type { Snowflake } from '../';
  */
 export enum PermissionFlags {
 	/**
-	 * Allows creation of instant invites.
-	 *
-	 * @channel Text, Voice
+	 * Allows creation of instant invites. Applies to text and voice channels.
 	 */
 	CreateInstantInvite = 0x00000001,
 
@@ -48,13 +46,11 @@ export enum PermissionFlags {
 	Administrator = 0x00000008,
 
 	/**
-	 * Allows management and editing of channels.
+	 * Allows management and editing of channels. Applies to text and voice channels.
 	 *
 	 * @remarks
 	 * This permissions requires the owner account to use two-factor authentication when used on a
 	 * guild that has server-wide 2FA enabled.
-	 *
-	 * @channel Text, Voice
 	 */
 	ManageChannels = 0x00000010,
 
@@ -68,9 +64,7 @@ export enum PermissionFlags {
 	ManageGuild = 0x00000020,
 
 	/**
-	 * Allows for the addition of reactions to messages.
-	 *
-	 * @channel Text
+	 * Allows for the addition of reactions to messages. Applies to text channels.
 	 */
 	AddReactions = 0x00000040,
 
@@ -80,84 +74,63 @@ export enum PermissionFlags {
 	ViewAuditLog = 0x00000080,
 
 	/**
-	 * Allows for using priority speaker in a voice channel.
-	 *
-	 * @channel Voice
+	 * Allows for using priority speaker in a voice channel. Applies to voice channels.
 	 */
 	PrioritySpeaker = 0x00000100,
 
 	/**
-	 * Allows the user to go live.
-	 *
-	 * @channel Voice
+	 * Allows the user to go live. Applies to voice channels.
 	 */
 	Stream = 0x00000200,
 
 	/**
 	 * Allows guild members to view a channel, which includes reading messages in text channels.
-	 *
-	 * @channel Text, Voice
+	 * Applies to text and voice channels.
 	 */
 	ViewChannel = 0x00000400,
 
 	/**
-	 * Allows for sending messages in a channel.
-	 *
-	 * @channel Text
+	 * Allows for sending messages in a channel. Applies to text channels.
 	 */
 	SendMessages = 0x00000800,
 
 	/**
-	 * Allows for sending of `/tts` messages.
-	 *
-	 * @channel Text
+	 * Allows for sending of `/tts` messages. Applies to text channels.
 	 */
 	SendTTSMessages = 0x00001000,
 
 	/**
-	 * Allows for deletion of other users messages.
+	 * Allows for deletion of other users messages. Applies to text channels.
 	 *
 	 * @remarks
 	 * This permissions requires the owner account to use two-factor authentication when used on a
 	 * guild that has server-wide 2FA enabled.
-	 *
-	 * @channel Text
 	 */
 	ManageMessages = 0x00002000,
 
 	/**
-	 * Links sent by users with this permission will be auto-embedded.
-	 *
-	 * @channel Text
+	 * Links sent by users with this permission will be auto-embedded. Applies to text channels.
 	 */
 	EmbedLinks = 0x00004000,
 
 	/**
-	 * Allows for uploading images and files.
-	 *
-	 * @channel Text
+	 * Allows for uploading images and files. Applies to text channels.
 	 */
 	AttachFiles = 0x00008000,
 
 	/**
-	 * Allows for reading of message history.
-	 *
-	 * @channel Text
+	 * Allows for reading of message history. Applies to text channels.
 	 */
 	ReadMessageHistory = 0x00010000,
 
 	/**
 	 * Allows for using the `@everyone` tag to notify all users in a channel, and the `@here` tag
-	 * to notify all online users in a channel.
-	 *
-	 * @channel Text
+	 * to notify all online users in a channel. Applies to text channels.
 	 */
 	MentionEveryone = 0x00020000,
 
 	/**
-	 * Allows the usage of custom emojis from other servers.
-	 *
-	 * @channel Text
+	 * Allows the usage of custom emojis from other servers. Applies to text channels.
 	 */
 	UseExternalEmojis = 0x00040000,
 
@@ -167,44 +140,32 @@ export enum PermissionFlags {
 	ViewGuildInsights = 0x00080000,
 
 	/**
-	 * Allows for joining of a voice channel.
-	 *
-	 * @channel Voice
+	 * Allows for joining of a voice channel. Applies to voice channels.
 	 */
 	Connect = 0x00100000,
 
 	/**
-	 * Allows for speaking in a voice channel.
-	 *
-	 * @channel Voice
+	 * Allows for speaking in a voice channel. Applies to voice channels.
 	 */
 	Speak = 0x00200000,
 
 	/**
-	 * Allows for muting members in a voice channel.
-	 *
-	 * @channel Voice
+	 * Allows for muting members in a voice channel. Applies to voice channels.
 	 */
 	MuteMembers = 0x00400000,
 
 	/**
-	 * Allows for deafening of members in a voice channel.
-	 *
-	 * @channel Voice
+	 * Allows for deafening of members in a voice channel. Applies to voice channels.
 	 */
 	DeafenMembers = 0x00800000,
 
 	/**
-	 * Allows for moving of members between voice channels.
-	 *
-	 * @channel Voice
+	 * Allows for moving of members between voice channels. Applies to voice channels.
 	 */
 	MoveMembers = 0x01000000,
 
 	/**
-	 * Allows for using voice-activity-detection in a voice channel.
-	 *
-	 * @channel Voice
+	 * Allows for using voice-activity-detection in a voice channel. Applies to voice channels.
 	 */
 	UseVAD = 0x02000000,
 
@@ -219,24 +180,20 @@ export enum PermissionFlags {
 	ManageNicknames = 0x08000000,
 
 	/**
-	 * Allows management and editing of roles.
+	 * Allows management and editing of roles. Applies to text and voice channels.
 	 *
 	 * @remarks
 	 * This permissions requires the owner account to use two-factor authentication when used on a
 	 * guild that has server-wide 2FA enabled.
-	 *
-	 * @channel Text, Voice
 	 */
 	ManageRoles = 0x10000000,
 
 	/**
-	 * Allows management and editing of webhooks.
+	 * Allows management and editing of webhooks. Applies to text channels.
 	 *
 	 * @remarks
 	 * This permissions requires the owner account to use two-factor authentication when used on a
 	 * guild that has server-wide 2FA enabled.
-	 *
-	 * @channel Text
 	 */
 	ManageWebhooks = 0x20000000,
 
@@ -250,9 +207,7 @@ export enum PermissionFlags {
 	ManageEmojis = 0x40000000,
 
 	/**
-	 * Allows members to use slash commands in text channels.
-	 *
-	 * @channel Text
+	 * Allows members to use slash commands in text channels. Applies to text channels.
 	 */
 	UseSlashCommands = 0x80000000
 }
