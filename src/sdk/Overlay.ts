@@ -1,5 +1,4 @@
 import type { Discord } from '../';
-import type { ActivityActionType } from './Activities';
 
 /**
  * @source {@link https://discord.com/developers/docs/game-sdk/overlay|Overlay}
@@ -39,7 +38,7 @@ export interface OverlayManager extends NodeJS.EventEmitter {
 	 *
 	 * [1]: https://discord.com/developers/docs/game-sdk/activities#activity-action-field-requirements
 	 */
-	OpenActivityInvite(type: ActivityActionType, callback: (result: Discord.Result) => void): void;
+	OpenActivityInvite(type: Discord.ActivityActionType, callback: (result: Discord.Result) => void): void;
 
 	/**
 	 * Opens the overlay modal for joining a Discord guild, given its invite code.

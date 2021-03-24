@@ -1,6 +1,4 @@
 import type { Discord } from '../';
-import { Entitlement } from './Store';
-import type { User } from './Users';
 
 /**
  * @source {@link https://discord.com/developers/docs/game-sdk/applications#data-models-oauth2token-struct|Applications}
@@ -35,12 +33,12 @@ export interface SignedAppTicket {
 	/**
 	 * The user for the ticket.
 	 */
-	user: User;
+	user: Discord.User;
 
 	/**
 	 * The list of the user's entitlements for this application.
 	 */
-	entitlements: Pick<Entitlement, 'SkuId'>[];
+	entitlements: Pick<Discord.Entitlement, 'SkuId'>[];
 
 	/**
 	 * The ISO 8601 timestamp for the ticket.

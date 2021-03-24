@@ -1,6 +1,7 @@
 import type { Nullable } from 'extended-utility-types';
 import type {
 	Activity,
+	Application,
 	ApplicationCommand,
 	Channel,
 	ClientStatus,
@@ -13,6 +14,7 @@ import type {
 	Interaction,
 	InviteTargetType,
 	Message,
+	PartialApplication,
 	PartialEmoji,
 	PartialUser,
 	Role,
@@ -21,7 +23,6 @@ import type {
 	User,
 	VoiceState
 } from '../../';
-import { Application, PartialApplication } from '../OAuth2';
 
 // ANCHOR Event Payload
 

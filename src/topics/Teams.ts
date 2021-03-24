@@ -1,6 +1,5 @@
 import type { Nullable } from 'extended-utility-types';
-import type { Snowflake } from '../';
-import type { PartialUser } from '../resources';
+import type { PartialUser, Snowflake } from '../';
 
 /**
  * @source {@link https://discord.com/developers/docs/topics/teams#data-models-team-object|Teams}

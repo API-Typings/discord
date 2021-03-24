@@ -1,5 +1,4 @@
 import type { Discord } from '../';
-import type { Activity, User } from './';
 
 /**
  * @source {@link https://discord.com/developers/docs/game-sdk/relationships#data-models-relationship-struct|Relationships}
@@ -13,7 +12,7 @@ export interface Relationship {
 	/**
 	 * The user the relationship is for.
 	 */
-	User: User;
+	User: Discord.User;
 
 	/**
 	 * That user's current presence.
@@ -68,7 +67,7 @@ export interface Presence {
 	/**
 	 * The user's current activity.
 	 */
-	Activity: Activity;
+	Activity: Discord.Activity;
 }
 
 /**
