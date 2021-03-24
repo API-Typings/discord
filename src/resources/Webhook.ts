@@ -277,6 +277,12 @@ export interface EditWebhookMessage {
 		embeds?: Nullable<Embed[]>;
 
 		/**
+		 * The contents of the file being sent/edited.
+		 */
+		file?: Nullable<string>;
+		payload_json?: Nullable<string>;
+
+		/**
 		 * Allowed mentions for the message.
 		 */
 		allowed_mentions?: Nullable<AllowedMentions>;
