@@ -455,7 +455,23 @@ export type DeleteGlobalApplicationCommand = { response: never };
 export type GetGuildApplicationCommands = { response: ApplicationCommand[] };
 
 /**
+ * Takes a list of application commands, overwriting existing commands that are registered globally
+ * for this application. Updates will be available in all guilds after 1 hour.
+ *
+ * Commands that do not already exist will count toward your daily application command create limit.
+ *
+ * @endpoint PUT `/applications/{application.id}/commands`
+ */
+export interface BulkOverwriteGlobalApplicationCommands {
+	body: ApplicationCommand[];
+	response: ApplicationCommand[];
+}
+
+/**
  * Create a new guild command. New guild commands will be available in the guild immediately.
+ *
+ * If the command did not already exist, it will count toward your daily application command create
+ * limit.
  *
  * @warning
  * Creating a command with the same name as an existing command for your application will overwrite
@@ -491,6 +507,13 @@ export interface EditGuildApplicationCommand {
  * @endpoint [DELETE](https://discord.com/developers/docs/interactions/slash-commands#delete-guild-application-command) `/applications/{application.id}/guilds/{guild.id}/commands/{command.id}`
  */
 export type DeleteGuildApplicationCommand = { response: never };
+
+/**
+ * Takes a list of application commands, overwriting existing commands for the guild.
+ *
+ * @endpoint PUT `/applications/{application.id}/guilds/{guild.id}/commands`
+ */
+export type BulkOverwriteGuildApplicationCommands = BulkOverwriteGlobalApplicationCommands;
 
 /**
  * Create a response to an Interaction from the gateway.
