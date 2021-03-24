@@ -55,11 +55,24 @@ export enum GatewayEvent {
 	Ready = 'READY',
 
 	/**
-	 * Respone to [resume][1].
-	 *
-	 * [1]: https://discord.com/developers/docs/topics/gateway#resume
+	 * Respone to resume.
 	 */
 	Resumed = 'RESUMED',
+
+	/**
+	 * New Slash Command was created.
+	 */
+	ApplicationCommandCreate = 'APPLICATION_COMMAND_CREATE',
+
+	/**
+	 * Slash Command was updated.
+	 */
+	ApplicationCommandUpdate = 'APPLICATION_COMMAND_UPDATE',
+
+	/**
+	 * Slash Command was deleted.
+	 */
+	ApplicationCommandDelete = 'APPLICATION_COMMAND_DELETE',
 
 	/**
 	 * New guild channel created.
@@ -132,9 +145,7 @@ export enum GatewayEvent {
 	GuildMemberUpdate = 'GUILD_MEMBER_UPDATE',
 
 	/**
-	 * Response to [Request Guild Members][1].
-	 *
-	 * [1]: https://discord.com/developers/docs/topics/gateway#request-guild-members
+	 * Response to Request Guild Members.
 	 */
 	GuildMemberChunk = 'GUILD_MEMBERS_CHUNK',
 
@@ -167,6 +178,11 @@ export enum GatewayEvent {
 	 * Guild integration was deleted.
 	 */
 	IntegrationDelete = 'INTEGRATION_DELETE',
+
+	/**
+	 * User used a Slash Command.
+	 */
+	InteractionCreate = 'INTERACTION_CREATE',
 
 	/**
 	 * Invite to a channel was created.
@@ -246,35 +262,7 @@ export enum GatewayEvent {
 	/**
 	 * Guild channel webhook was created, update, or deleted.
 	 */
-	WebhooksUpdate = 'WEBHOOKS_UPDATE',
-
-	/**
-	 * New [Slash Command][1] was created.
-	 *
-	 * [1]: https://discord.com/developers/docs/interactions/slash-commands
-	 */
-	ApplicationCommandCreate = 'APPLICATION_COMMAND_CREATE',
-
-	/**
-	 * [Slash Command][1] was updated.
-	 *
-	 * [1]: https://discord.com/developers/docs/interactions/slash-commands
-	 */
-	ApplicationCommandUpdate = 'APPLICATION_COMMAND_UPDATE',
-
-	/**
-	 * [Slash Command][1] was deleted.
-	 *
-	 * [1]: https://discord.com/developers/docs/interactions/slash-commands
-	 */
-	ApplicationCommandDelete = 'APPLICATION_COMMAND_DELETE',
-
-	/**
-	 * User used a [Slash Command][1].
-	 *
-	 * [1]: https://discord.com/developers/docs/interactions/slash-commands
-	 */
-	InteractionCreate = 'INTERACTION_CREATE'
+	WebhooksUpdate = 'WEBHOOKS_UPDATE'
 }
 
 // SECTION Gateway Events
