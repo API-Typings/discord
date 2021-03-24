@@ -359,7 +359,7 @@ export interface Message {
 	/**
 	 * Any embedded content.
 	 */
-	embeds: Embed;
+	embeds: Embed[];
 
 	/**
 	 * Reactions to the message.
