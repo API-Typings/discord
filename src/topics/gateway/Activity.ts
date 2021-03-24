@@ -160,6 +160,11 @@ export enum ActivityType {
 	Listening,
 
 	/**
+	 * @format Watching \{name\}
+	 */
+	Watching,
+
+	/**
 	 * @format \{emoji\} \{name\}
 	 */
 	Custom,
