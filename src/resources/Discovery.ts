@@ -96,14 +96,12 @@ export interface ValidateDiscoverySearchTerm {
 		term: string;
 	};
 
-	response: ValidDiscoverySearchTerm;
-}
-
-export interface ValidDiscoverySearchTerm {
-	/**
-	 * Whether the provided term is valid.
-	 */
-	valid: boolean;
+	response: {
+		/**
+		 * Whether the provided term is valid.
+		 */
+		valid: boolean;
+	};
 }
 
 // !SECTION
