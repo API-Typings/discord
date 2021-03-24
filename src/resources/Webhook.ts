@@ -14,9 +14,7 @@ export interface Webhook {
 	id: Snowflake;
 
 	/**
-	 * The [type][1] of the webhook.
-	 *
-	 * [1]: https://discord.com/developers/docs/resources/webhook#webhook-object-webhook-types
+	 * The type of the webhook.
 	 */
 	type: WebhookType;
 

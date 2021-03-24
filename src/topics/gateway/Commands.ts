@@ -37,9 +37,9 @@ export interface ConnectionProperties {
  * Used to trigger the initial handshake with the gateway.
  *
  * @remarks
- * If the payload is valid, the gateway will respond with a [Ready][1] event. Clients are limited
- * by [maximum concurrency][2] when [Identify][3]ing; if they exceed this limit, the gateway will
- * respond with an [Opcode 9 Invalid Session][4].
+ * If the payload is valid, the gateway will respond with a Ready event. Clients are limited
+ * by maximum concurrency when Identifying; if they exceed this limit, the gateway will
+ * respond with an Opcode 9 Invalid Session.
  *
  * @warning
  * Clients are limited to 1000 `IDENTIFY` calls to the websocket in a 24-hour period. This limit is
@@ -48,11 +48,6 @@ export interface ConnectionProperties {
  * receive an email notification.
  *
  * @source {@link https://discord.com/developers/docs/topics/gateway#identify|Gateway}
- *
- * [1]: https://discord.com/developers/docs/topics/gateway#ready
- * [2]: https://discord.com/developers/docs/topics/gateway#session-start-limit-object
- * [3]: https://discord.com/developers/docs/topics/gateway#identify
- * [4]: https://discord.com/developers/docs/topics/gateway#invalid-session
  */
 export interface Identify extends GatewayCommandPayload<GatewayOPCode.Identify> {
 	d: {
@@ -62,9 +57,7 @@ export interface Identify extends GatewayCommandPayload<GatewayOPCode.Identify> 
 		token: string;
 
 		/**
-		 * [Connection properties][1].
-		 *
-		 * [1]: https://discord.com/developers/docs/topics/gateway#identify-identify-connection-properties
+		 * Connection properties
 		 */
 		properties: ConnectionProperties;
 
@@ -84,9 +77,7 @@ export interface Identify extends GatewayCommandPayload<GatewayOPCode.Identify> 
 		large_threshold?: Range<50, 250>;
 
 		/**
-		 * Used for [Guild Sharding][1].
-		 *
-		 * [1]: https://discord.com/developers/docs/topics/gateway#sharding
+		 * Used for Guild Sharding
 		 */
 		shard?: [shard_id: number, num_shards: number];
 
@@ -96,9 +87,7 @@ export interface Identify extends GatewayCommandPayload<GatewayOPCode.Identify> 
 		presence?: UpdateStatus['d'];
 
 		/**
-		 * The [Gateway Intents][1] you wish to receive.
-		 *
-		 * [1]: https://discord.com/developers/docs/topics/gateway#gateway-intents
+		 * The Gateway Intents you wish to receive
 		 */
 		intents: number;
 	};
@@ -135,13 +124,11 @@ export interface Resume extends GatewayCommandPayload<GatewayOPCode.Resume> {
  * Used to maintain an active gateway connection.
  *
  * @remarks
- * Must be sent every `heartbeat_interval` milliseconds after the [Opcode 10 Hello][1] payload is
+ * Must be sent every `heartbeat_interval` milliseconds after the Opcode 10 Hello payload is
  * received. The inner `d` key is the last sequence number—`s`—received by the client. If you have
  * not yet received one, send `null`.
  *
  * @source {@link https://discord.com/developers/docs/topics/gateway#heartbeat|Gateway}
- *
- * [1]: https://discord.com/developers/docs/topics/gateway#hello
  */
 export interface Heartbeat extends GatewayCommandPayload<GatewayOPCode.Heartbeat> {
 	d: Nullable<number>;
@@ -153,10 +140,10 @@ export interface Heartbeat extends GatewayCommandPayload<GatewayOPCode.Heartbeat
  * Used to request all members for a guild or a list of guilds.
  *
  * @remarks
- * When initially connecting, if you are using [Gateway Intents][1] and don't have the
+ * When initially connecting, if you are using Gateway Intents and don't have the
  * `GUILD_PRESENCES` intent, or if the guild is over 75k members, it will only send members who are
  * in voice, plus the member for you (the connecting user). Otherwise, if a guild has over
- * `large_threshold` members (value in the [Gateway Identify][2]), it will only send members who
+ * `large_threshold` members (value in the Gateway Identify), it will only send members who
  * are online, have a role, have a nickname, or are in a voice channel, and if it has under
  * `large_threshold` members, it will send all members.
  *
@@ -169,9 +156,6 @@ export interface Heartbeat extends GatewayCommandPayload<GatewayOPCode.Heartbeat
  * - Requesting `user_ids` will continue to be limited to returning 100 members
  *
  * @source {@link https://discord.com/developers/docs/topics/gateway#request-guild-members|Gateway}
- *
- * [1]: https://discord.com/developers/docs/topics/gateway#gateway-intents
- * [2]: https://discord.com/developers/docs/topics/gateway#identify
  */
 // prettier-ignore
 export interface RequestGuildMembers extends GatewayCommandPayload<GatewayOPCode.RequestGuildMembers> {
@@ -203,9 +187,7 @@ export interface RequestGuildMembers extends GatewayCommandPayload<GatewayOPCode
 		user_ids?: Snowflake | Snowflake[];
 
 		/**
-		 * Nonce to identify the [Guild Members Chunk][1] response.
-		 * 
-		 * [1]: https://discord.com/developers/docs/topics/gateway#guild-members-chunk
+		 * Nonce to identify the Guild Members Chunk response
 		 */
 		nonce?: string;
 	};
@@ -261,9 +243,7 @@ export interface UpdateStatus extends GatewayCommandPayload<GatewayOPCode.Presen
 		activities: Nullable<Activity[]>;
 
 		/**
-		 * The user's new [status][1].
-		 *
-		 * [1]; https://discord.com/developers/docs/topics/gateway#update-status-status-types
+		 * The user's new status
 		 */
 		status: StatusType;
 

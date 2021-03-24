@@ -35,16 +35,12 @@ export interface PartialGuild {
 	name: Nullable<string>;
 
 	/**
-	 * [Splash hash][1].
-	 *
-	 * [1]: https://discord.com/developers/docs/reference#image-formatting
+	 * Splash hash.
 	 */
 	splash: Nullable<string>;
 
 	/**
-	 * [Banner hash][1].
-	 *
-	 * [1]: https://discord.com/developers/docs/reference#image-formatting
+	 * Banner hash.
 	 */
 	banner?: Nullable<string>;
 
@@ -59,9 +55,7 @@ export interface PartialGuild {
 	features?: GuildFeatures[];
 
 	/**
-	 * [Verification level][1] required for the guild.
-	 *
-	 * [1]: https://discord.com/developers/docs/resources/guild#guild-object-verification-level
+	 * Verification level required for the guild.
 	 */
 	verification_level?: VerificationLevel;
 
@@ -86,34 +80,26 @@ export interface PartialGuild {
  */
 export interface Guild extends PartialGuild {
 	/**
-	 * [Icon hash][1].
-	 *
-	 * [1]: https://discord.com/developers/docs/reference#image-formatting
+	 * Icon hash.
 	 */
 	icon: string;
 
 	/**
-	 * [Icon hash][1], returned when in the template object.
-	 *
-	 * [1]: https://discord.com/developers/docs/reference#image-formatting
+	 * Icon hash, returned when in the template object.
 	 */
 	icon_hash?: Nullable<string>;
 
 	/**
-	 * [Discovery splash hash][1]; only present for guilds with the `DISCOVERABLE` feature.
-	 *
-	 * [1]: https://discord.com/developers/docs/reference#image-formatting
+	 * Discovery splash hash; only present for guilds with the `DISCOVERABLE` feature.
 	 */
 	discovery_splash: Nullable<string>;
 
 	/**
-	 * True if [the user][1] is the owner of the guild.
+	 * True if the user is the owner of the guild.
 	 *
 	 * @remarks
-	 * This field is only sent when using the [`GET Current User Guilds`][1] endpoint and is
+	 * This field is only sent when using the `GET Current User Guilds` endpoint and is
 	 * relative to the request user.
-	 *
-	 * [1]: https://discord.com/developers/docs/resources/user#get-current-user-guilds
 	 */
 	owner?: boolean;
 
@@ -123,20 +109,16 @@ export interface Guild extends PartialGuild {
 	owner_id: Snowflake;
 
 	/**
-	 * Total permissions for [the user][1] in the guild (excludes overrides).
+	 * Total permissions for the user in the guild (excludes overrides).
 	 *
 	 * @remarks
-	 * This field is only sent when using the [`GET Current User Guilds`][1] endpoint and is
+	 * This field is only sent when using the `GET Current User Guilds` endpoint and is
 	 * relative to the request user.
-	 *
-	 * [1]: https://discord.com/developers/docs/resources/user#get-current-user-guilds
 	 */
 	permissions?: string;
 
 	/**
-	 * [Voice region][1] ID for the guild.
-	 *
-	 * [1]: https://discord.com/developers/docs/resources/voice#voice-region-object
+	 * Voice region ID for the guild.
 	 */
 	region: VoiceRegion;
 
@@ -161,23 +143,17 @@ export interface Guild extends PartialGuild {
 	widget_channel_id?: Nullable<Snowflake>;
 
 	/**
-	 * [Verification level][1] required for the guild.
-	 *
-	 * [1]: https://discord.com/developers/docs/resources/guild#guild-object-verification-level
+	 * Verification level required for the guild.
 	 */
 	verification_level: VerificationLevel;
 
 	/**
-	 * Default [message notifications level][1].
-	 *
-	 * [1]: https://discord.com/developers/docs/resources/guild#guild-object-default-message-notification-level
+	 * Default message notifications level.
 	 */
 	default_message_notifications: NotificationLevel;
 
 	/**
-	 * [Explicit content filter level][1].
-	 *
-	 * [1]: https://discord.com/developers/docs/resources/guild#guild-object-explicit-content-filter-level
+	 * Explicit content filter level.
 	 */
 	explicit_content_filter: ExplicitFilterLevel;
 
@@ -197,9 +173,7 @@ export interface Guild extends PartialGuild {
 	features: GuildFeatures[];
 
 	/**
-	 * Required [MFA level][1] for the guild.
-	 *
-	 * [1]: https://discord.com/developers/docs/resources/guild#guild-object-mfa-level
+	 * Required MFA level for the guild.
 	 */
 	mfa_level: MFALevel;
 
@@ -215,9 +189,7 @@ export interface Guild extends PartialGuild {
 	system_channel_id: Nullable<Snowflake>;
 
 	/**
-	 * [System channel flags][1].
-	 *
-	 * [1]: https://discord.com/developers/docs/resources/guild#guild-object-system-channel-flags
+	 * System channel flags.
 	 */
 	system_channel_flags: SystemChannelFlags;
 
@@ -230,9 +202,7 @@ export interface Guild extends PartialGuild {
 	 * When this guild was joined at.
 	 *
 	 * @remarks
-	 * This field is only sent within the [`GUILD_CREATE`][1] event.
-	 *
-	 * [1]: https://discord.com/developers/docs/topics/gateway#guild-create
+	 * This field is only sent within the `GUILD_CREATE` event.
 	 */
 	joined_at?: Nullable<string>;
 
@@ -240,9 +210,7 @@ export interface Guild extends PartialGuild {
 	 * True if this is considered a large guild.
 	 *
 	 * @remarks
-	 * This field is only sent within the [`GUILD_CREATE`][1] event.
-	 *
-	 * [1]: https://discord.com/developers/docs/topics/gateway#guild-create
+	 * This field is only sent within the `GUILD_CREATE` event.
 	 */
 	large?: boolean;
 
@@ -250,9 +218,7 @@ export interface Guild extends PartialGuild {
 	 * True if this guild is unavailable due to an outage.
 	 *
 	 * @remarks
-	 * This field is only sent within the [`GUILD_CREATE`][1] event.
-	 *
-	 * [1]: https://discord.com/developers/docs/topics/gateway#guild-create
+	 * This field is only sent within the `GUILD_CREATE` event.
 	 */
 	unavailable?: boolean;
 
@@ -260,9 +226,7 @@ export interface Guild extends PartialGuild {
 	 * Total number of members in this guild.
 	 *
 	 * @remarks
-	 * This field is only sent within the [`GUILD_CREATE`][1] event.
-	 *
-	 * [1]: https://discord.com/developers/docs/topics/gateway#guild-create
+	 * This field is only sent within the `GUILD_CREATE` event.
 	 */
 	member_count?: number;
 
@@ -270,9 +234,7 @@ export interface Guild extends PartialGuild {
 	 * States of members currently in voice channels; lacks the `guild_id` key.
 	 *
 	 * @remarks
-	 * This field is only sent within the [`GUILD_CREATE`][1] event.
-	 *
-	 * [1]: https://discord.com/developers/docs/topics/gateway#guild-create
+	 * This field is only sent within the `GUILD_CREATE` event.
 	 */
 	voice_states?: Omit<VoiceState, 'guild_id'>[];
 
@@ -280,9 +242,7 @@ export interface Guild extends PartialGuild {
 	 * Users in the guild.
 	 *
 	 * @remarks
-	 * This field is only sent within the [`GUILD_CREATE`][1] event.
-	 *
-	 * [1]: https://discord.com/developers/docs/topics/gateway#guild-create
+	 * This field is only sent within the `GUILD_CREATE` event.
 	 */
 	members?: GuildMember[];
 
@@ -290,9 +250,7 @@ export interface Guild extends PartialGuild {
 	 * Channels in the guild.
 	 *
 	 * @remarks
-	 * This field is only sent within the [`GUILD_CREATE`][1] event.
-	 *
-	 * [1]: https://discord.com/developers/docs/topics/gateway#guild-create
+	 * This field is only sent within the `GUILD_CREATE` event.
 	 */
 	channels?: Channel[];
 
@@ -301,9 +259,7 @@ export interface Guild extends PartialGuild {
 	 * greater than `large threshold`.
 	 *
 	 * @remarks
-	 * This field is only sent within the [`GUILD_CREATE`][1] event.
-	 *
-	 * [1]: https://discord.com/developers/docs/topics/gateway#guild-create
+	 * This field is only sent within the `GUILD_CREATE` event.
 	 */
 	presences?: Partial<PresenceUpdate['d']>[];
 
@@ -329,16 +285,12 @@ export interface Guild extends PartialGuild {
 	description: Nullable<string>;
 
 	/**
-	 * [Banner hash][1].
-	 *
-	 * [1]: https://discord.com/developers/docs/reference#image-formatting
+	 * Banner hash.
 	 */
 	banner?: Nullable<string>;
 
 	/**
-	 * [Premium tier (server Boost level)][1].
-	 *
-	 * [1]: https://discord.com/developers/docs/resources/guild#guild-object-premium-tier
+	 * Premium tier (server Boost level).
 	 */
 	premium_tier: PremiumTier;
 
@@ -550,23 +502,17 @@ export interface GuildPreview {
 	name: string;
 
 	/**
-	 * [Icon hash][1].
-	 *
-	 * [1]: https://discord.com/developers/docs/reference#image-formatting
+	 * Icon hash.
 	 */
 	icon: Nullable<string>;
 
 	/**
-	 * [Splash hash][1].
-	 *
-	 * [1]: https://discord.com/developers/docs/reference#image-formatting
+	 * Splash hash.
 	 */
 	splash: Nullable<string>;
 
 	/**
-	 * [Discovery splash hash][1].
-	 *
-	 * [1]: https://discord.com/developers/docs/reference#image-formatting
+	 * Discovery splash hash.
 	 */
 	discovery_splash: Nullable<string>;
 
@@ -657,9 +603,7 @@ export interface PartialGuildMember {
 	nick?: Nullable<string>;
 
 	/**
-	 * Array of [role][1] object IDs.
-	 *
-	 * [1]: https://discord.com/developers/docs/topics/permissions#role-object
+	 * Array of role object IDs.
 	 */
 	roles: Snowflake[];
 
@@ -669,9 +613,7 @@ export interface PartialGuildMember {
 	joined_at: string;
 
 	/**
-	 * When the user started [boosting][1] the guild.
-	 *
-	 * [1]: https://support.discord.com/hc/en-us/articles/360028038352-Server-Boosting-
+	 * When the user started boosting the guild.
 	 */
 	premium_since?: Nullable<string>;
 
@@ -885,9 +827,7 @@ export interface IntegrationApplication {
 	name: string;
 
 	/**
-	 * The [Icon hash][1] of the app.
-	 *
-	 * [1]: https://discord.com/developers/docs/reference#image-formatting
+	 * The Icon hash of the app.
 	 */
 	icon: Nullable<string>;
 
@@ -966,9 +906,7 @@ export interface WelcomeScreenChannel {
 	description: string;
 
 	/**
-	 * The [emoji ID][1], if the emoji is custom.
-	 *
-	 * [1]: https://discord.com/developers/docs/reference#image-formatting
+	 * The emoji ID, if the emoji is custom.
 	 */
 	emoji_id: Nullable<Snowflake>;
 
@@ -983,9 +921,9 @@ export interface WelcomeScreenChannel {
 // SECTION Membership Screening
 
 /**
- * In guilds with [Membership Screening][1] enabled, when a member joins, [Guild Member Add][2] will
+ * In guilds with Membership Screening][1] enabled, when a member joins, [Guild Member Add will
  * be emitted but they will initially be restricted from doing any actions in the guild, and
- * `pending`will be true in the [member object][3]. When the member completes the screening, [Guild
+ * `pending`will be true in the member object. When the member completes the screening, [Guild
  * Member Update][4] will be emitted and `pending` will be false.
  *
  * Giving the member a role will bypass Membership Screening as well as the guild's verification
@@ -1505,7 +1443,7 @@ export interface AddGuildMember {
 }
 
 /**
- * Modify attributes of a [guild member][1].
+ * Modify attributes of a guild member.
  *
  * If the `channel_id` is set to `null`, this will force the target user to be disconnected from
  * voice.

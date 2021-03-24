@@ -101,13 +101,10 @@ export interface ApplicationManager {
 	 * - The application ID tied to the ticket.
 	 * - The user's user ID.
 	 * - A timestamp for the ticket.
-	 * - The list of the user's [entitlements][1] for the application ID.
+	 * - The list of the user's entitlements for the application ID.
 	 *
-	 * These values can be accessed by transforming the string into a [SignedAppTicket][2] with your
+	 * These values can be accessed by transforming the string into a SignedAppTicket with your
 	 * application's private key.
-	 *
-	 * [1]: https://discord.com/developers/docs/game-sdk/store#data-models-entitlement-struct
-	 * [2]: https://discord.com/developers/docs/game-sdk/applications#data-models-signedappticket-struct
 	 */
 	GetTicket(callback: (result: Discord.Result, ticket: string) => void): void;
 }

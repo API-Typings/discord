@@ -8,9 +8,7 @@ import type { Snowflake, User } from '../';
  */
 export interface PartialEmoji {
 	/**
-	 * [Emoji ID][1].
-	 *
-	 * [1]: https://discord.com/developers/docs/reference#image-formatting
+	 * Emoji ID.
 	 */
 	id: Nullable<Snowflake>;
 

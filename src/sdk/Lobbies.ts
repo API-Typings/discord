@@ -297,12 +297,10 @@ export interface LobbyManager extends NodeJS.EventEmitter {
 	 * Gets the lobby object for a given lobby ID.
 	 *
 	 * @remarks
-	 * You must first call [`Search()`][1] to build a stable list of lobbies. This function will
+	 * You must first call `Search()` to build a stable list of lobbies. This function will
 	 * then query those lobbies for ones with a matching ID.
 	 *
 	 * @param lobbyId - The lobby you want to get
-	 *
-	 * [1]: https://discord.com/developers/docs/game-sdk/lobbies#search
 	 */
 	GetLobby(lobbyId: bigint): Discord.Lobby;
 
@@ -404,12 +402,10 @@ export interface LobbyManager extends NodeJS.EventEmitter {
 	 *
 	 * @remarks
 	 * You should use this function for message sending if you are *not* using the built in
-	 * networking layer for the lobby. If you are, you should use [SendNetworkMessage][1] instead
+	 * networking layer for the lobby. If you are, you should use SendNetworkMessage instead
 	 *
 	 * @param lobbyId - The lobby the member belongs to
 	 * @param data - The data to send
-	 *
-	 * [1]: https://discord.com/developers/docs/game-sdk/lobbies#sendnetworkmessage
 	 */
 	SendLobbyMessage(lobbyId: bigint, data: number, callback: (result: Discord.Result) => void): void;
 

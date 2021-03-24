@@ -31,12 +31,10 @@ export interface OverlayManager extends NodeJS.EventEmitter {
 	 *
 	 * @remarks
 	 * If you do not have a valid activity with all the required fields, this call will error. See
-	 * [Activity Action Field Requirements][1] for the fields required to have join and spectate
+	 * Activity Action Field Requirements for the fields required to have join and spectate
 	 * invites function properly.
 	 *
 	 * @param type - What type of invite to send
-	 *
-	 * [1]: https://discord.com/developers/docs/game-sdk/activities#activity-action-field-requirements
 	 */
 	OpenActivityInvite(type: Discord.ActivityActionType, callback: (result: Discord.Result) => void): void;
 

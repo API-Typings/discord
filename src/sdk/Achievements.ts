@@ -11,16 +11,12 @@ export interface Achievement {
 	application_id: bigint;
 
 	/**
-	 * The name of the achievement as an [achievement locale][1] object.
-	 *
-	 * [1]: https://discord.com/developers/docs/game-sdk/achievements#data-models-achievement-locale-object
+	 * The name of the achievement as an achievement locale object.
 	 */
 	name: AchievementLocale;
 
 	/**
-	 * The user-facing achievement description as an [achievement locale][1] object.
-	 *
-	 * [1]: https://discord.com/developers/docs/game-sdk/achievements#data-models-achievement-locale-object
+	 * The user-facing achievement description as an achievement locale object.
 	 */
 	description: AchievementLocale;
 
@@ -40,9 +36,7 @@ export interface Achievement {
 	id: bigint;
 
 	/**
-	 * [The hash of the icon][1].
-	 *
-	 * [1]: https://discord.com/developers/docs/reference#image-formatting
+	 * The hash of the icon.
 	 */
 	icon_hash: string;
 }
@@ -57,9 +51,7 @@ export interface AchievementLocale {
 	default: string;
 
 	/**
-	 * Object of [accepted locales][1] as the key and achievement translations as the value.
-	 *
-	 * [1]: https://discord.com/developers/docs/dispatch/field-values#predefined-field-values-accepted-locales
+	 * Object of accepted locales as the key and achievement translations as the value.
 	 */
 	localizations?: Record<string, string>;
 }

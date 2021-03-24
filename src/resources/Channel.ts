@@ -21,9 +21,7 @@ export interface PartialChannel {
 	id: Snowflake;
 
 	/**
-	 * The [type of Channel][1].
-	 *
-	 * [1]: https://discord.com/developers/docs/resources/channel#channel-object-channel-types
+	 * The type of Channel.
 	 */
 	type: ChannelType;
 
@@ -102,23 +100,17 @@ export enum ChannelType {
 	GroupDM,
 
 	/**
-	 * An [organizational category][1] that contains up to 50 channels.
-	 *
-	 * [1]: https://support.discord.com/hc/en-us/articles/115001580171-Channel-Categories-101
+	 * An organizational category that contains up to 50 channels.
 	 */
 	GuildCategory,
 
 	/**
-	 * A channel that [users can follow and crosspost into their own server][1].
-	 *
-	 * [1]: https://support.discord.com/hc/en-us/articles/360032008192
+	 * A channel that users can follow and crosspost into their own server.
 	 */
 	GuildNews,
 
 	/**
-	 * A channel in which game developers can [sell their game on Discord][1].
-	 *
-	 * [1]: https://discord.com/developers/docs/game-and-server-management/special-channels|
+	 * A channel in which game developers can sell their game on Discord.
 	 */
 	GuildStore
 
@@ -161,7 +153,7 @@ export interface TextChannel extends Channel {
 // ANCHOR News Channel
 
 /**
- * A channel that [users can follow and crosspost into their own server][1]. Bots can post or
+ * A channel that users can follow and crosspost into their own server. Bots can post or
  * publish messages in this type of channel if they have the proper permissions.
  *
  * @source {@link https://discord.com/developers/docs/resources/channel#channel-object-example-guild-news-channel|Channel}
@@ -242,7 +234,7 @@ export interface GroupDMChannel extends DMChannel, Nullable<Pick<Channel, 'name'
 // ANCHOR Channel Category
 
 /**
- * An [organizational category][1] that contains up to 50 channels.
+ * An organizational category that contains up to 50 channels.
  *
  * @source {@link https://discord.com/developers/docs/resources/channel#channel-object-example-channel-category|Channel}
  *
@@ -253,7 +245,7 @@ export type ChannelCategory = Omit<Channel, 'topic'>;
 // ANCHOR Store Channel
 
 /**
- * A channel in which game developers can [sell their game on Discord][1].
+ * A channel in which game developers can sell their game on Discord.
  *
  * @remarks
  * Bots can neither send or read messages from this channel type (as it is a store page).
@@ -305,11 +297,9 @@ export interface Message {
 	 * Member properties for this message's author.
 	 *
 	 * @remarks
-	 * The member object exists in [`MESSAGE_CREATE`][1] and [`MESSAGE_UPDATE`][2] events from
+	 * The member object exists in `MESSAGE_CREATE`][1] and [`MESSAGE_UPDATE` events from
 	 * text-based guild channels. This allows bots to obtain real-time member data without
 	 * requiring bots to store member state in memory.
-	 *
-	 * [1]: https://discord.com/developers/docs/topics/gateway#message-create
 	 * [2]: https://discord.com/developers/docs/topics/gateway#message-update
 	 */
 	member?: GuildMember;
@@ -344,9 +334,7 @@ export interface Message {
 	 *
 	 * @remarks
 	 * The user objects in the mentions array will only have the partial `member` field present in
-	 * [`MESSAGE_CREATE`][1] and [`MESSAGE_UPDATE`][2] events from text-based guild channels.
-	 *
-	 * [1]: https://discord.com/developers/docs/topics/gateway#message-create
+	 * `MESSAGE_CREATE`][1] and [`MESSAGE_UPDATE` events from text-based guild channels.
 	 * [2]: https://discord.com/developers/docs/topics/gateway#message-update
 	 */
 	mentions: UserMention[];
@@ -387,9 +375,7 @@ export interface Message {
 	webhook_id?: Snowflake;
 
 	/**
-	 * [Type of message][1]
-	 *
-	 * [1]: https://discord.com/developers/docs/resources/channel#message-object-message-types
+	 * Type of message
 	 */
 	type: MessageType;
 
@@ -404,9 +390,7 @@ export interface Message {
 	application?: MessageApplication;
 
 	/**
-	 * [Message flags][1] combined as a [bitfield][2].
-	 *
-	 * [1]: https://discord.com/developers/docs/resources/channel#message-object-message-flags
+	 * Message flags][1] combined as a [bitfield.
 	 * [2]: https://en.wikipedia.org/wiki/Bit_field
 	 */
 	flags?: MessageFlags;
@@ -468,16 +452,12 @@ export enum MessageType {
  */
 export interface MessageActivity {
 	/**
-	 * [Type of message activity][1].
-	 *
-	 * [1]: https://discord.com/developers/docs/resources/channel#message-object-message-activity-types
+	 * Type of message activity.
 	 */
 	type: MessageActivityType;
 
 	/**
-	 * `party_id` from a [Rich Presence event][1].
-	 *
-	 * [1]: https://discord.com/developers/docs/rich-presence/how-to#updating-presence-update-presence-payload-fields
+	 * `party_id` from a Rich Presence event.
 	 */
 	party_id?: string;
 }
@@ -651,9 +631,7 @@ export interface Sticker {
 	preview_asset: string;
 
 	/**
-	 * [Type of sticker format][1].
-	 *
-	 * [1]: https://discord.com/developers/docs/resources/channel#message-object-message-sticker-format-types
+	 * Type of sticker format.
 	 */
 	format_type: StickerFormat;
 }
@@ -1011,9 +989,7 @@ export interface ChannelMention {
 	guild_id: Snowflake;
 
 	/**
-	 * The [type of Channel][1].
-	 *
-	 * [1]: https://discord.com/developers/docs/resources/channel#channel-object-channel-types
+	 * The type of Channel.
 	 */
 	type: ChannelType;
 
@@ -1038,9 +1014,7 @@ export type AllowedMentionsType = 'roles' | 'users' | 'everyone';
  */
 export interface AllowedMentions {
 	/**
-	 * An array of [allowed mention types][1] to parse from the content.
-	 *
-	 * [1]: https://discord.com/developers/docs/resources/channel#allowed-mentions-object-allowed-mention-types
+	 * An array of allowed mention types to parse from the content.
 	 */
 	parse: AllowedMentionsType[];
 

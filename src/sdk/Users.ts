@@ -101,18 +101,14 @@ export interface UserManager extends NodeJS.EventEmitter {
 	GetUser(userId: bigint, callback: (result: Discord.Result, user: Discord.User) => void): void;
 
 	/**
-	 * Get the [PremiumType][1] for the currently connected user.
-	 *
-	 * [1]: https://discord.com/developers/docs/game-sdk/users#data-models-premiumtype-enum
+	 * Get the PremiumType for the currently connected user.
 	 */
 	GetCurrentUserPremiumType(): Discord.PremiumType;
 
 	/**
-	 * See whether or not the current user has a certain [UserFlag][1] on their account.
+	 * See whether or not the current user has a certain UserFlag on their account.
 	 *
 	 * @param flag - The flag to check on the user's account
-	 *
-	 * [1]: https://discord.com/developers/docs/game-sdk/users#data-models-userflag-enum
 	 */
 	CurrentUserHasFlag(flag: UserFlag): boolean;
 

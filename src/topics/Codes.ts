@@ -15,30 +15,22 @@ export enum GatewayCloseCode {
 	UnknownError = 4000,
 
 	/**
-	 * You sent an invalid [Gateway opcode][1] or an invalid payload for an opcode.
-	 *
-	 * [1]: https://discord.com/developers/docs/topics/gateway#payloads-and-opcodes
+	 * You sent an invalid Gateway opcode or an invalid payload for an opcode.
 	 */
 	UnknownOPCode,
 
 	/**
-	 * You sent an invalid [payload][1].
-	 *
-	 * [1]: https://discord.com/developers/docs/topics/gateway#sending-payloads
+	 * You sent an invalid payload.
 	 */
 	DecodeError,
 
 	/**
-	 * You sent a payload prior to [identifying][1].
-	 *
-	 * [1]: https://discord.com/developers/docs/topics/gateway#identify
+	 * You sent a payload prior to identifying.
 	 */
 	NotAuthenticated,
 
 	/**
-	 * The account token sent with your [identify payload][1] is incorrect.
-	 *
-	 * [1]: https://discord.com/developers/docs/topics/gateway#identify
+	 * The account token sent with your identify payload is incorrect.
 	 */
 	AuthenticationFailed,
 
@@ -48,10 +40,8 @@ export enum GatewayCloseCode {
 	AlreadyAuthenticated,
 
 	/**
-	 * The sequence sent when [resuming][1] the session was invalid. Reconnect and start a new
+	 * The sequence sent when resuming the session was invalid. Reconnect and start a new
 	 * session.
-	 *
-	 * [1]: https://discord.com/developers/docs/topics/gateway#resume
 	 */
 	InvalidSequence = 4007,
 
@@ -66,17 +56,13 @@ export enum GatewayCloseCode {
 	SessionTimedOut,
 
 	/**
-	 * You sent an invalid [shard when identifying][1].
-	 *
-	 * [1]: https://discord.com/developers/docs/topics/gateway#sharding
+	 * You sent an invalid shard when identifying.
 	 */
 	InvalidShard,
 
 	/**
-	 * The session would have handled too many guilds–you are required to [shard][1] your connection
+	 * The session would have handled too many guilds–you are required to shard your connection
 	 * in order to connect.
-	 *
-	 * [1]: https://discord.com/developers/docs/topics/gateway#sharding
 	 */
 	ShardingRequired,
 
@@ -86,18 +72,14 @@ export enum GatewayCloseCode {
 	InvalidAPIVersion,
 
 	/**
-	 * You sent an invalid intent for a [Gateway Intent][1]. You may have incorrectly calculated
+	 * You sent an invalid intent for a Gateway Intent. You may have incorrectly calculated
 	 * the bitwise value.
-	 *
-	 * [1]: https://discord.com/developers/docs/topics/gateway#gateway-intents
 	 */
 	InvalidIntents,
 
 	/**
-	 * You sent a disallowed intent for a [Gateway Intent][1]. You may have tried to specify an
-	 * intent that you [have not enabled or are not whitelisted for][2].
-	 *
-	 * [1]: https://discord.com/developers/docs/topics/gateway#gateway-intents
+	 * You sent a disallowed intent for a Gateway Intent. You may have tried to specify an
+	 * intent that you have not enabled or are not whitelisted for.
 	 * [2]: https://discord.com/developers/docs/topics/gateway#privileged-intents
 	 */
 	DisallowedIntents
@@ -724,37 +706,27 @@ export enum RPCErrorCode {
  */
 export enum VoiceCloseCode {
 	/**
-	 * You sent an invalid [opcode][1].
-	 *
-	 * [1]: https://discord.com/developers/docs/topics/opcodes-and-status-codes#voice-voice-opcodes
+	 * You sent an invalid opcode.
 	 */
 	UnknownOPCode = 4001,
 
 	/**
-	 * You sent an invalid payload in your [identifying][1] to the Gateway
-	 *
-	 * [1]: https://discord.com/developers/docs/topics/gateway#gateway-identify
+	 * You sent an invalid payload in your identifying to the Gateway
 	 */
 	DecodeFailure,
 
 	/**
-	 * You sent a payload before [identifying][1] with the gateway.
-	 *
-	 * [1]: https://discord.com/developers/docs/topics/gateway#gateway-identify
+	 * You sent a payload before identifying with the gateway.
 	 */
 	NotAuthenticated,
 
 	/**
-	 * The token you sent in your [identify][1] payload is incorrect.
-	 *
-	 * [1]: https://discord.com/developers/docs/topics/gateway#gateway-identify
+	 * The token you sent in your identify payload is incorrect.
 	 */
 	AuthenticationFailed,
 
 	/**
-	 * You sent more than one [identify][1] payload.
-	 *
-	 * [1]: https://discord.com/developers/docs/topics/gateway#gateway-identify
+	 * You sent more than one identify payload.
 	 */
 	AlreadyAuthenticated,
 
@@ -774,9 +746,7 @@ export enum VoiceCloseCode {
 	ServerNotFound = 4011,
 
 	/**
-	 * The [protocol][1] you sent wasn't recognized,
-	 *
-	 * [1]: https://discord.com/developers/docs/topics/voice-connections#establishing-a-voice-udp-connection-example-select-protocol-payload
+	 * The protocol you sent wasn't recognized,
 	 */
 	UnknownProtocol,
 
@@ -786,16 +756,12 @@ export enum VoiceCloseCode {
 	Disconnected = 4014,
 
 	/**
-	 * The server crashed. Try [resuming][1].
-	 *
-	 * [1]: https://discord.com/developers/docs/topics/voice-connections#resuming-voice-connection
+	 * The server crashed. Try resuming.
 	 */
 	VoiceServerCrashed,
 
 	/**
-	 * Your [encryption][1] wasn't recognized.
-	 *
-	 * [1]: https://discord.com/developers/docs/topics/voice-connections#encrypting-and-sending-voice
+	 * Your encryption wasn't recognized.
 	 */
 	UnknownEncryptionMode
 }

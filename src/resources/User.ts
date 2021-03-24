@@ -20,9 +20,7 @@ export interface PartialUser {
 	discriminator: string;
 
 	/**
-	 * The user's [avatar hash][1]. Requires the `identify` OAuth2 scope.
-	 *
-	 * [1]: https://discord.com/developers/docs/reference#image-formatting
+	 * The user's avatar hash. Requires the `identify` OAuth2 scope.
 	 */
 	avatar: Nullable<string>;
 }
@@ -72,24 +70,18 @@ export interface User extends PartialUser {
 	email?: Nullable<string>;
 
 	/**
-	 * The [flags][1] on a user's account. Requires the `identify` OAuth2 scope.
-	 *
-	 * [1]: https://discord.com/developers/docs/resources/user#user-object-user-flags
+	 * The flags on a user's account. Requires the `identify` OAuth2 scope.
 	 */
 	flags?: UserFlags;
 
 	/**
-	 * The [type of Nitro subscription][1] on a user's account. Requires the `identify` OAuth2
+	 * The type of Nitro subscription on a user's account. Requires the `identify` OAuth2
 	 * scope.
-	 *
-	 * [1]: https://discord.com/developers/docs/resources/user#user-object-premium-types
 	 */
 	premium_type?: PremiumType;
 
 	/**
-	 * The public [flags][1] on a user's account. Requires the `identify` OAuth2 scope.
-	 *
-	 * [1]: https://discord.com/developers/docs/resources/user#user-object-user-flags
+	 * The public flags on a user's account. Requires the `identify` OAuth2 scope.
 	 */
 	public_flags?: UserFlags;
 }
@@ -154,9 +146,7 @@ export interface Connection {
 	revoked?: boolean;
 
 	/**
-	 * An array of partial [server integrations][1].
-	 *
-	 * [1]: https://discord.com/developers/docs/resources/guild#integration-object
+	 * An array of partial server integrations.
 	 */
 	integrations?: PartialIntegration[];
 
@@ -176,9 +166,7 @@ export interface Connection {
 	show_activity: boolean;
 
 	/**
-	 * [Visibility][1] of this connection.
-	 *
-	 * [1]: https://discord.com/developers/docs/resources/user#user-object-visibility-types
+	 * Visibility of this connection.
 	 */
 	visibility: VisibilityType;
 }

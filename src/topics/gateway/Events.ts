@@ -309,21 +309,16 @@ export interface Hello {
  * all the state required for a client to begin interacting with the rest of the platform.
  *
  * `guilds` are the guilds of which your bot is a member. They start out as unavailable when you
- * connect to the gateway. As they become available, your bot will be notified via [Guild Create][1]
+ * connect to the gateway. As they become available, your bot will be notified via Guild Create
  * events. `private_channels` will be an empty array. As bots receive private messages, they will be
- * notified via [Channel Create][2] events.
+ * notified via Channel Create events.
  *
  * @source {@link https://discord.com/developers/docs/topics/gateway#ready|Gateway}
- *
- * [1]: https://discord.com/developers/docs/topics/gateway#guild-create
- * [2]: https://discord.com/developers/docs/topics/gateway#channel-create
  */
 export interface Ready extends GatewayEventPayload<GatewayEvent.Ready> {
 	d: {
 		/**
-		 * [Gateway version][1].
-		 *
-		 * [1]: https://discord.com/developers/docs/topics/gateway#gateways-gateway-versions
+		 * Gateway version.
 		 */
 		v: number;
 
@@ -362,19 +357,14 @@ export interface Ready extends GatewayEventPayload<GatewayEvent.Ready> {
 /**
  * Sent to indicate one of at least three different situations:
  *
- * - The gateway could not initialize a session after receiving an [Opcode 2 Identify][1].
- * - The gateway could not resume a previous session after receiving an [Opcode 6 Resume][2].
+ * - The gateway could not initialize a session after receiving an Opcode 2 Identify.
+ * - The gateway could not resume a previous session after receiving an Opcode 6 Resume.
  * - The gateway has invalidated an active session and is requesting client action.
  *
  * The inner `d` key is a boolean that indicates whether the session may be resumable. See
- * [Connecting][3] and [Resuming][4] for more information.
+ * Connecting][3] and [Resuming for more information.
  *
  * @source {@link https://discord.com/developers/docs/topics/gateway#invalid-session|Gateway}
- *
- * [1]: https://discord.com/developers/docs/topics/gateway#identify
- * [2]: https://discord.com/developers/docs/topics/gateway#resume
- * [3]: https://discord.com/developers/docs/topics/gateway#connecting
- * [4]: https://discord.com/developers/docs/topics/gateway#resuming
  */
 export interface InvalidSession {
 	op: GatewayOPCode.InvalidSession;
@@ -391,25 +381,20 @@ export interface InvalidSession {
 
 /**
  * Sent when a new guild channel is created, relevant to the current user. The inner payload is a
- * [channel][1] object.
+ * channel object.
  *
  * @source {@link https://discord.com/developers/docs/topics/gateway#channel-create|Gateway}
- *
- * [1]: https://discord.com/developers/docs/resources/channel#channel-object
  */
 export interface ChannelCreate extends GatewayEventPayload<GatewayEvent.ChannelCreate> {
 	d: Channel;
 }
 
 /**
- * Sent when a channel is updated. The inner payload is a [channel][1] object.
+ * Sent when a channel is updated. The inner payload is a channel object.
  *
  * @remarks
  * This is not sent when the field `last_message_id` is altered. To keep track of the
- * `last_message_id` changes, you must listen for [Message Create][2] events.
- *
- * [1]: https://discord.com/developers/docs/resources/channel#channel-object
- * [2]: https://discord.com/developers/docs/topics/gateway#message-create
+ * `last_message_id` changes, you must listen for Message Create events.
  *
  * @source {@link https://discord.com/developers/docs/topics/gateway#channel-update|Gateway}
  */
@@ -418,10 +403,8 @@ export interface ChannelUpdate extends GatewayEventPayload<GatewayEvent.ChannelU
 }
 
 /**
- * Sent when a channel relevant to the current user is deleted. The inner payload is a [channel][1]
+ * Sent when a channel relevant to the current user is deleted. The inner payload is a channel
  * object.
- *
- * [1]: https://discord.com/developers/docs/resources/channel#channel-object
  *
  * @source {@link https://discord.com/developers/docs/topics/gateway#channel-delete|Gateway}
  */
@@ -462,33 +445,27 @@ export interface ChannelPinsUpdate extends GatewayEventPayload<GatewayEvent.Chan
  * This event can be sent in three different scenarios:
  *
  * 1. When a user is initially connecting, to lazily load and backfill information for all
- *    unavailable guilds sent in the [Ready][1] event. Guilds that are unavailable due to an outage
- *    will send a [Guild Delete][2] event.
+ *    unavailable guilds sent in the Ready event. Guilds that are unavailable due to an outage
+ *    will send a Guild Delete event.
  * 2. When a Guild becomes available again to the client.
  * 3. When the current user joins a new Guild.
  *
- * The inner payload is a [guild][3] object, with all the extra fields specified.
+ * The inner payload is a guild object, with all the extra fields specified.
  *
  * @warning
  * If you are using Gateway Intents, members and presences returned in this event will only contain
  * your bot and users in voice channels unless you specify the `GUILD_PRESENCES` intent.
  *
  * @source {@link https://discord.com/developers/docs/topics/gateway#guild-create|Gateway}​
- *
- * [1]: https://discord.com/developers/docs/topics/gateway#ready
- * [2]: https://discord.com/developers/docs/topics/gateway#guild-delete
- * [3]: https://discord.com/developers/docs/resources/guild#guild-object
  */
 export interface GuildCreate extends GatewayEventPayload<GatewayEvent.GuildCreate> {
 	d: Guild;
 }
 
 /**
- * Sent when a guild is updated. The inner payload is a [guild][1] object.
+ * Sent when a guild is updated. The inner payload is a guild object.
  *
  * @source {@link https://discord.com/developers/docs/topics/gateway#guild-update|Gateway}
- *
- * [1]: https://discord.com/developers/docs/resources/guild#guild-object
  */
 export interface GuildUpdate extends GatewayEventPayload<GatewayEvent.GuildUpdate> {
 	d: Guild;
@@ -496,14 +473,12 @@ export interface GuildUpdate extends GatewayEventPayload<GatewayEvent.GuildUpdat
 
 /**
  * Sent when a guild becomes or was already unavailable due to an outage, or when the user leaves or
- * is removed from a guild. The inner payload is an [unavailable guild][1] object.
+ * is removed from a guild. The inner payload is an unavailable guild object.
  *
  * @remarks
  * If the unavailable `field` is not set, the user was removed from the guild.
  *
  * @source {@link https://discord.com/developers/docs/topics/gateway#guild-delete|Gateway}
- *
- * [1]: https://discord.com/developers/docs/resources/guild#unavailable-guild-object
  */
 export interface GuildDelete extends GatewayEventPayload<GatewayEvent.GuildDelete> {
 	d: UnavailableGuild;
@@ -560,9 +535,7 @@ export interface GuildEmojisUpdate extends GatewayEventPayload<GatewayEvent.Guil
 		guild_id: Snowflake;
 
 		/**
-		 * Array of [emojis][1].
-		 *
-		 * [1]: https://discord.com/developers/docs/resources/emoji#emoji-object
+		 * Array of emojis.
 		 */
 		emojis: Emoji[];
 	};
@@ -585,15 +558,13 @@ export interface GuildIntegrationsUpdate extends GatewayEventPayload<GatewayEven
 // SECTION Guild Members
 
 /**
- * Sent when a new user joins a guild. The inner payload is a [guild member][1] object with an extra
+ * Sent when a new user joins a guild. The inner payload is a guild member object with an extra
  * `guild_id` key.
  *
  * @warning
  * If using Gateway Intents, the `GUILD_MEMBERS` intent will be required to receive this event.
  *
  * @source {@link https://discord.com/developers/docs/topics/gateway#guild-member-add|Gateway}
- *
- * [1]: https://discord.com/developers/docs/resources/guild#guild-member-object
  */
 export interface GuildMemberAdd extends GatewayEventPayload<GatewayEvent.GuildMemberAdd> {
 	d: GuildMember & {
@@ -663,28 +634,22 @@ export interface GuildMemberUpdate extends GatewayEventPayload<GatewayEvent.Guil
 		joined_at: string;
 
 		/**
-		 * When the user starting [boosting][1] the guild.
-		 *
-		 * [1]: https://support.discord.com/hc/en-us/articles/360028038352-Server-Boosting-
+		 * When the user starting boosting the guild.
 		 */
 		premium_since?: Nullable<string>;
 
 		/**
-		 * Whether the user has not yet passed the guild's [Membership Screening][1] requirements.
-		 *
-		 * [1]: https://discord.com/developers/docs/resources/guild#membership-screening-object
+		 * Whether the user has not yet passed the guild's Membership Screening requirements.
 		 */
 		pending?: boolean;
 	};
 }
 
 /**
- * Sent in response to [Guild Request Members][1]. You can use the `chunk_index` and `chunk_count`
+ * Sent in response to Guild Request Members. You can use the `chunk_index` and `chunk_count`
  * to calculate how many chunks are left for your request.
  *​
  * @source {@link https://discord.com/developers/docs/topics/gateway#guild-members-chunk|Gateway}
- *
- * [1]: https://discord.com/developers/docs/topics/gateway#request-guild-members
  */
 export interface GuildMemberChunk extends GatewayEventPayload<GatewayEvent.GuildMemberChunk> {
 	d: {
@@ -721,9 +686,7 @@ export interface GuildMemberChunk extends GatewayEventPayload<GatewayEvent.Guild
 		presences?: PresenceUpdate['d'][];
 
 		/**
-		 * The nonce used in the [Guild Members Request][1].
-		 *
-		 * [1]: https://discord.com/developers/docs/topics/gateway#request-guild-members
+		 * The nonce used in the Guild Members Request.
 		 */
 		nonce?: string;
 	};
@@ -797,10 +760,8 @@ export interface GuildRoleDelete extends GatewayEventPayload<GatewayEvent.GuildR
 // SECTION Integrations
 
 /**
- * Sent when an integration is created. The inner payload is an [integration][1] object with an
+ * Sent when an integration is created. The inner payload is an integration object with an
  * `guild_id` key.
- *
- * [1]: https://discord.com/developers/docs/resources/guild#integration-object
  */
 export interface IntegrationCreate extends GatewayEventPayload<GatewayEvent.IntegrationCreate> {
 	d: Integration & {
@@ -812,10 +773,8 @@ export interface IntegrationCreate extends GatewayEventPayload<GatewayEvent.Inte
 }
 
 /**
- * Sent when an integration is updated. The inner payload is an [integration][1] object with an
+ * Sent when an integration is updated. The inner payload is an integration object with an
  * `guild_id` key.
- *
- * [1]: https://discord.com/developers/docs/resources/guild#integration-object
  */
 export interface IntegrationUpdate extends GatewayEventPayload<GatewayEvent.IntegrationUpdate> {
 	d: Integration & {
@@ -864,9 +823,7 @@ export interface InviteCreate extends GatewayEventPayload<GatewayEvent.InviteCre
 		channel_id: Snowflake;
 
 		/**
-		 * The unique invite [code][1].
-		 *
-		 * [1]: https://discord.com/developers/docs/resources/invite#invite-object
+		 * The unique invite code.
 		 */
 		code: string;
 
@@ -942,26 +899,22 @@ export interface InviteDelete extends GatewayEventPayload<GatewayEvent.InviteDel
 // SECTION Messages
 
 /**
- * Sent when a message is created. The inner payload is a [message][1] object.
+ * Sent when a message is created. The inner payload is a message object.
  *
  * @source {@link https://discord.com/developers/docs/topics/gateway#message-create|Gateway}
- *
- * [1]: https://discord.com/developers/docs/resources/channel#message-object
  */
 export interface MessageCreate extends GatewayEventPayload<GatewayEvent.MessageCreate> {
 	d: Message;
 }
 
 /**
- * Sent when a message is updated. The inner payload is a [message][1] object.
+ * Sent when a message is updated. The inner payload is a message object.
  *
  * @warning
  * Unlike creates, message updates may contain only a subset of the full message object payload (but
  * will always contain an `id` and `channel_id`).
  *
  * @source {@link https://discord.com/developers/docs/topics/gateway#message-update|Gateway}
- *
- * [1]: https://discord.com/developers/docs/resources/channel#message-object
  */
 export interface MessageUpdate extends GatewayEventPayload<GatewayEvent.MessageUpdate> {
 	d: Message;
@@ -1161,11 +1114,9 @@ export interface TypingStart extends GatewayEventPayload<GatewayEvent.TypingStar
 // ANCHOR User Update
 
 /**
- * Sent when properties about the user change. Inner payload is a [user][1] object.
+ * Sent when properties about the user change. Inner payload is a user object.
  *
  * @source {@link https://discord.com/developers/docs/topics/gateway#user-update|Gateway}
- *
- * [1]: https://discord.com/developers/docs/resources/user#user-object
  */
 export interface UserUpdate extends GatewayEventPayload<GatewayEvent.UserUpdate> {
 	d: User;
@@ -1174,11 +1125,9 @@ export interface UserUpdate extends GatewayEventPayload<GatewayEvent.UserUpdate>
 // SECTION Voice
 
 /**
- * Sent when someone joins/leaves/moves voice channels. Inner payload is a [voice state][1] object.
+ * Sent when someone joins/leaves/moves voice channels. Inner payload is a voice state object.
  *
  * @source {@link https://discord.com/developers/docs/topics/gateway#voice-state-update|Gateway}
- *
- * [1]: https://discord.com/developers/docs/resources/voice#voice-state-object
  */
 export interface VoiceStateUpdate extends GatewayEventPayload<GatewayEvent.VoiceStateUpdate> {
 	d: VoiceState;
@@ -1233,13 +1182,10 @@ export interface WebhooksUpdate extends GatewayEventPayload<GatewayEvent.Webhook
 // SECTION Commands
 
 /**
- * Sent when a new [Slash Command][1] is created, relevant to the current user. The inner payload
- * is an [ApplicationCommand][2] object, with an optional extra `guild_id` key.
+ * Sent when a new Slash Command is created, relevant to the current user. The inner payload
+ * is an ApplicationCommand object, with an optional extra `guild_id` key.
  *
  * @source {@link https://discord.com/developers/docs/topics/gateway#application-command-create|Gateway}
- *
- * [1]: https://discord.com/developers/docs/interactions/slash-commands
- * [2]: https://discord.com/developers/docs/interactions/slash-commands#applicationcommand
  */
 export interface ApplicationCommandCreate extends GatewayEventPayload<GatewayEvent.ApplicationCommandCreate> {
 	d: ApplicationCommand & {
@@ -1251,13 +1197,10 @@ export interface ApplicationCommandCreate extends GatewayEventPayload<GatewayEve
 }
 
 /**
- * Sent when a new [Slash Command][1] relevant to the current user is updated. The inner payload
- * is an [ApplicationCommand][2] object, with an optional extra `guild_id` key.
+ * Sent when a new Slash Command relevant to the current user is updated. The inner payload
+ * is an ApplicationCommand object, with an optional extra `guild_id` key.
  *
  * @source {@link https://discord.com/developers/docs/topics/gateway#application-command-update|Gateway}
- *
- * [1]: https://discord.com/developers/docs/interactions/slash-commands
- * [2]: https://discord.com/developers/docs/interactions/slash-commands#applicationcommand
  */
 export interface ApplicationCommandDelete extends GatewayEventPayload<GatewayEvent.ApplicationCommandDelete> {
 	d: ApplicationCommand & {
@@ -1269,13 +1212,10 @@ export interface ApplicationCommandDelete extends GatewayEventPayload<GatewayEve
 }
 
 /**
- * Sent when a new [Slash Command][1] relevant to the current user is deleted. The inner payload
- * is an [ApplicationCommand][2] object, with an optional extra `guild_id` key.
+ * Sent when a new Slash Command relevant to the current user is deleted. The inner payload
+ * is an ApplicationCommand object, with an optional extra `guild_id` key.
  *
  * @source {@link https://discord.com/developers/docs/topics/gateway#application-command-delete|Gateway}
- *
- * [1]: https://discord.com/developers/docs/interactions/slash-commands
- * [2]: https://discord.com/developers/docs/interactions/slash-commands#applicationcommand
  */
 export interface ApplicationCommandUpdate extends GatewayEventPayload<GatewayEvent.ApplicationCommandUpdate> {
 	d: ApplicationCommand & {
@@ -1291,12 +1231,9 @@ export interface ApplicationCommandUpdate extends GatewayEventPayload<GatewayEve
 // ANCHOR Interaction
 
 /**
- * Sent when a user in a guild uses a [Slash Command][1]. Inner payload is an [Interaction][2].
+ * Sent when a user in a guild uses a Slash Command][1]. Inner payload is an [Interaction.
  *
  * @source {@link https://discord.com/developers/docs/topics/gateway#interaction-create|Gateway}
- *
- * [1]: https://discord.com/developers/docs/interactions/slash-commands
- * [2]: https://discord.com/developers/docs/interactions/slash-commands#interaction
  */
 export interface InteractionCreate extends GatewayEventPayload<GatewayEvent.InteractionCreate> {
 	d: Interaction;

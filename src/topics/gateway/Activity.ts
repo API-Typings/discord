@@ -123,9 +123,7 @@ export interface Activity {
 	instance?: boolean;
 
 	/**
-	 * [Activity flags][1] `OR`d together, describes what the payload includes.
-	 *
-	 * [1]: https://discord.com/developers/docs/topics/gateway#activity-object-activity-flags
+	 * Activity flags `OR`d together, describes what the payload includes.
 	 */
 	flags?: ActivityFlags;
 

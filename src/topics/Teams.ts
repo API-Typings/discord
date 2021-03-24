@@ -31,9 +31,7 @@ export interface Team {
  */
 export interface TeamMember {
 	/**
-	 * The user's [membership state][1] on the team.
-	 *
-	 * [1]: https://discord.com/developers/docs/topics/teams#data-models-membership-state-enum
+	 * The user's membership state on the team.
 	 */
 	membership_state: MembershipState;
 

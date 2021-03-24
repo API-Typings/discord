@@ -233,14 +233,12 @@ export interface ActivityManager extends NodeJS.EventEmitter {
 	 *
 	 * @remarks
 	 * If you do not have a valid activity with all the required fields, this call will error. See
-	 * [Activity Action Field Requirements][1] for the fields required to have join and spectate
+	 * Activity Action Field Requirements for the fields required to have join and spectate
 	 * invites function properly.
 	 *
 	 * @param userId - The ID of the user to invite
 	 * @param type - Marks the invite as an invitation to join or spectate
 	 * @param content - A message to send along with the invite
-	 *
-	 * [1]: https://discord.com/developers/docs/game-sdk/activities#activity-action-field-requirements
 	 */
 	/* prettier-ignore */
 	/* eslint-disable-next-line */

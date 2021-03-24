@@ -329,9 +329,7 @@ export interface InteractionApplicationCommandCallbackData {
 	embeds?: TupleOf<Embed, 10>;
 
 	/**
-	 * [Allowed mentions][1] object.
-	 *
-	 * [1]: https://discord.com/developers/docs/resources/channel#allowed-mentions-object
+	 * Allowed mentions object.
 	 */
 	allowed_mentions?: AllowedMentions;
 

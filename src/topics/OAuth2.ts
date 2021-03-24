@@ -42,48 +42,36 @@ export enum OAuth2Scope {
 	Bot = 'bot',
 
 	/**
-	 * Allows [/users/\@me/connections][1] to return linked third-party accounts.
-	 *
-	 * [1]: https://discord.com/developers/docs/resources/user#get-user-connections
+	 * Allows /users/\@me/connections to return linked third-party accounts.
 	 */
 	Connections = 'connections',
 
 	/**
-	 * Enables [/users/\@me][1] to return an `email`.
-	 *
-	 * [1]: https://discord.com/developers/docs/resources/user#get-current-user
+	 * Enables /users/\@me to return an `email`.
 	 */
 	Email = 'email',
 
 	/**
-	 * Allows [/users/\@me][1] without `email`.
-	 *
-	 * [1]: https://discord.com/developers/docs/resources/user#get-current-user
+	 * Allows /users/\@me without `email`.
 	 */
 	Identify = 'identify',
 
 	/**
-	 * Allows [/users/\@me/guilds][1] to return basic information about all of a user's guilds.
-	 *
-	 * [1]: https://discord.com/developers/docs/resources/user#get-current-user-guilds
+	 * Allows /users/\@me/guilds to return basic information about all of a user's guilds.
 	 */
 	Guilds = 'guilds',
 
 	/**
-	 * Allows [/guilds/\{guild.id\}/members/\{user.id\}][1] to be used for joining users to a guild.
+	 * Allows /guilds/\{guild.id\}/members/\{user.id\} to be used for joining users to a guild.
 	 *
 	 * @remarks
 	 * This scope requires you to have a bot account linked to your application. Also, in order to
 	 * add a user to a guild, your bot has to already belong to that guild.
-	 *
-	 * [1]: https://discord.com/developers/docs/resources/guild#add-guild-member
 	 */
 	GuildsJoin = 'guilds.join',
 
 	/**
-	 * Allows your app to [join users to a group dm][1].
-	 *
-	 * [1]: https://discord.com/developers/docs/resources/channel#group-dm-add-recipient
+	 * Allows your app to join users to a group dm.
 	 */
 	GroupDMJoin = 'gdm.join',
 
@@ -158,16 +146,12 @@ export enum OAuth2Scope {
 	ActivitiesWrite = 'activities.write',
 
 	/**
-	 * Allows your app to use [Slash Commands][1] in a guild.
-	 *
-	 * [1]: https://discord.com/developers/docs/interactions/slash-commands
+	 * Allows your app to use Slash Commands in a guild.
 	 */
 	ApplicationsCommands = 'applications.commands',
 
 	/**
-	 * Allows your app to update [Slash Commands][1] via bearer token.
-	 *
-	 * [1]: https://discord.com/developers/docs/interactions/slash-commands
+	 * Allows your app to update Slash Commands via bearer token.
 	 */
 	ApplicationsCommandsUpdate = 'applications.commands.update'
 }
@@ -188,9 +172,7 @@ export interface AuthorizationCodeGrant extends Omit<ImplicitGrant, 'response_ty
 	response_type: 'code';
 
 	/**
-	 * A list of [OAuth2 scopes][1] separated by URL encoded spaces (`%20`).
-	 *
-	 * [1]: https://discord.com/developers/docs/topics/oauth2#shared-resources-oauth2-scopes
+	 * A list of OAuth2 scopes separated by URL encoded spaces (`%20`).
 	 */
 	scope: string;
 
@@ -296,9 +278,7 @@ export interface ImplicitGrant {
 	state?: string;
 
 	/**
-	 * A list of [OAuth2 scopes][1] separated by URL encoded spaces (`%20`).
-	 *
-	 * [1]: https://discord.com/developers/docs/topics/oauth2#shared-resources-oauth2-scopes
+	 * A list of OAuth2 scopes separated by URL encoded spaces (`%20`).
 	 */
 	scope: string;
 }
@@ -312,9 +292,7 @@ export interface ClientCredentialsGrant {
 	grant_type: 'client_credentials';
 
 	/**
-	 * A list of [OAuth2 scopes][1] separated by URL encoded spaces (`%20`).
-	 *
-	 * [1]: https://discord.com/developers/docs/topics/oauth2#shared-resources-oauth2-scopes
+	 * A list of OAuth2 scopes separated by URL encoded spaces (`%20`).
 	 */
 	scope: string;
 }
@@ -361,9 +339,7 @@ export interface BotAuthorization {
 	scope: string;
 
 	/**
-	 * The [permisssions][1] you're requesting.
-	 *
-	 * [1]: https://discord.com/developers/docs/topics/permissions
+	 * The permisssions you're requesting.
 	 */
 	permissions: number;
 
@@ -388,7 +364,7 @@ export interface BotAuthorizationAccessToken extends AuthorizationCodeAccessToke
 // ANCHOR Webhook
 
 /**
- * Discord's webhook flow is a specialized version of an [authorization code][1] implementation.
+ * Discord's webhook flow is a specialized version of an authorization code implementation.
  * In this case, the `scope` querystring parameter needs to be set to `webhook.incoming`.
  *
  * @source {@link https://discord.com/developers/docs/topics/oauth2#webhooks|OAuth2}
@@ -445,9 +421,7 @@ export interface PartialApplication {
 	bot_require_code_grant: boolean;
 
 	/**
-	 * The base64 encoded key for the GameSDK's [GetTicket][1].
-	 *
-	 * [1]: https://discord.com/developers/docs/game-sdk/applications#get-ticket
+	 * The base64 encoded key for the GameSDK's GetTicket.
 	 */
 	verify_key: string;
 }

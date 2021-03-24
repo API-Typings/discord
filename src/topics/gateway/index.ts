@@ -12,9 +12,7 @@ export * from './Events';
  */
 export interface GatewayPayload {
 	/**
-	 * [OPCode][1] for the payload.
-	 *
-	 * [1]: https://discord.com/developers/docs/topics/opcodes-and-status-codes#gateway-gateway-opcodes
+	 * OPCode for the payload.
 	 */
 	op: GatewayOPCode;
 
@@ -66,40 +64,36 @@ export interface GatewayURL {
 export type EncodingType = 'json' | 'etf';
 
 /**
- * @endpoint [GET] `/gateway/bot`
+ * @endpoint [GET](https://discord.com/developers/docs/topics/gateway#get-gateway-bot) `/gateway/bot`
  *
  * @remarks
- * Unlike the [Get Gateway][1], this route should not be cached for extended periods of time as the
+ * Unlike the Get Gateway, this route should not be cached for extended periods of time as the
  * value is not guaranteed to be the same per-call, and changes as the bot joins/leaves guilds.
  *
  * @warning
  * This endpoint requires authentication using a valid bot token.
  *
  * @returns
- * An object based on the information in [Get Gateway][1], plus additional metadata that can help
- * during the operation of large or [sharded][2] bots.
- *
- * [GET]: https://discord.com/developers/docs/topics/gateway#get-gateway-bot
- * [1]: https://discord.com/developers/docs/topics/gateway#get-gateway
- * [2]: https://discord.com/developers/docs/topics/gateway#sharding
+ * An object based on the information in Get Gateway, plus additional metadata that can help
+ * during the operation of large or sharded bots.
  */
 export interface GetGatewayBot {
-	/**
-	 * The WSS URL that can be used for connecting to the gateway.
-	 */
-	url: string;
+	response: {
+		/**
+		 * The WSS URL that can be used for connecting to the gateway.
+		 */
+		url: string;
 
-	/**
-	 * The recommended number of [shards][1] to use when connecting.
-	 *
-	 * [1]: https://discord.com/developers/docs/topics/gateway#sharding|
-	 */
-	shards: number;
+		/**
+		 * The recommended number of shards to use when connecting.
+		 */
+		shards: number;
 
-	/**
-	 * Information on the current session start limit.
-	 */
-	session_start_limit: SessionStartLimit;
+		/**
+		 * Information on the current session start limit.
+		 */
+		session_start_limit: SessionStartLimit;
+	};
 }
 
 /**
@@ -130,14 +124,12 @@ export interface SessionStartLimit {
 // ANCHOR Gateway Intents
 
 /**
- * When [identifying][1] to the gateway, you can specify an `intents` parameter which allows you to
+ * When identifying to the gateway, you can specify an `intents` parameter which allows you to
  * conditionally subscribe to pre-defined "intents", groups of events defined by Discord. If you do
  * not specify a certain intent, you will not receive any of the gateway events that are batched
  * into that group.
  *
  * @source {@link https://discord.com/developers/docs/topics/gateway#list-of-intents|Gateway}
- *
- * [1]: https://discord.com/developers/docs/topics/gateway#identifying
  */
 export enum Intents {
 	/**
