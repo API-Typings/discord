@@ -187,6 +187,11 @@ export interface VoiceChannel extends Channel {
 	 * The user limit of the voice channel.
 	 */
 	user_limit: number;
+
+	/**
+	 * Voice region ID for the voice channel.
+	 */
+	rtc_region: Nullable<string>;
 }
 
 // ANCHOR DM Channel
@@ -1218,6 +1223,13 @@ export interface ModifyChannel {
 		 * @channel Group DM
 		 */
 		icon?: string;
+
+		/**
+		 * Channel voice region ID, automatic when set to `null`.
+		 *
+		 * @channel Voice
+		 */
+		rtc_region?: Nullable<string>;
 	};
 
 	response: Channel;
