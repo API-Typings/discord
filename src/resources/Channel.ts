@@ -1248,7 +1248,7 @@ export interface GetChannelMessages {
 	/**
 	 * An array of message objects, sorted by their ID in descending order.
 	 */
-	response: Message[] | [];
+	response: Message[];
 }
 
 /**
@@ -1316,6 +1316,8 @@ export interface CreateMessageJSON {
 		 */
 		message_reference?: MessageReference;
 	};
+
+	response: Message;
 }
 
 // ANCHOR Form-Data
