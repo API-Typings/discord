@@ -202,7 +202,6 @@ export interface Authenticate extends CommandPayload<Command.Authenticate> {
  */
 export interface GetGuilds extends CommandPayload<Command.GetGuilds> {
 	args: Record<string, never>;
-
 	data: {
 		/**
 		 * The guilds the user is in
@@ -406,7 +405,6 @@ export interface SelectTextChannel extends CommandPayload<Command.SelectTextChan
  */
 export interface GetVoiceSettings extends CommandPayload<Command.GetVoiceSettings> {
 	args: Record<string, never>;
-
 	data: {
 		/**
 		 * Input settings.
