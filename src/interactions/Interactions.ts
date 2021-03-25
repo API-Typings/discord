@@ -88,7 +88,7 @@ export interface ApplicationCommandOption {
 	/**
 	 * Choices for `string` and `number` types for the user to pick from.
 	 */
-	choices?: TupleOf<ApplicationCommandOptionChoice, 50>;
+	choices?: Partial<TupleOf<ApplicationCommandOptionChoice, 50>>;
 
 	/**
 	 * If the option is a subcommand or subcommand group type, the nested options will be the
@@ -359,7 +359,7 @@ export interface InteractionApplicationCommandCallbackData {
 	/**
 	 * Supports up to 10 embeds.
 	 */
-	embeds?: TupleOf<Embed, 10>;
+	embeds?: Partial<TupleOf<Embed, 10>>;
 
 	/**
 	 * Allowed mentions object.
