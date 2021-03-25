@@ -47,6 +47,13 @@ export interface ApplicationCommand {
 	 * The parameters for the command.
 	 */
 	options?: ApplicationCommandOption[];
+
+	/**
+	 * Whether the command is enabled by default when the app is added to a guild.
+	 *
+	 * @defaultValue true
+	 */
+	default_permission?: boolean;
 }
 
 /**
@@ -127,6 +134,32 @@ export interface ApplicationCommandOptionChoice {
 	 * Value of the choice, up to 100 characters if string.
 	 */
 	value: string | number;
+}
+
+/**
+ * Application command permissions allow you to enable or disable commands for specific users or
+ * roles within a guild.
+ */
+export interface ApplicationCommandPermissions {
+	/**
+	 * The ID of the role or user.
+	 */
+	id: Snowflake;
+
+	/**
+	 * Role or user.
+	 */
+	type: ApplicationCommandPermissionType;
+
+	/**
+	 * `true` to allow, `false` to disallow.
+	 */
+	permission: boolean;
+}
+
+export enum ApplicationCommandPermissionType {
+	Role = 1,
+	User
 }
 
 // !SECTION
@@ -557,5 +590,43 @@ export type EditFollowupMessage = EditWebhookMessage;
  * @endpoint [DELETE](https://discord.com/developers/docs/interactions/slash-commands#delete-followup-message) `/webhooks/{application.id}/{interaction.token}/messages/{message.id}`
  */
 export type DeleteFollowupMessage = { response: never };
+
+/**
+ * Fetches command permissions for all commands for your application in a guild.
+ *
+ * @endpoint GET `/applications/{application.id}/guilds/{guild.id}/commands/permissions`
+ */
+export type GetGuildApplicationCommandPermissions = { response: ApplicationCommandPermissions[] };
+
+/* eslint-disable max-len */
+/**
+ * Fetches command permissions for a specific command for your application in a guild.
+ *
+ * @endpoint GET `/applications/{application.id}/guilds/{guild.id}/commands/{command.id}/permissions`
+ */
+export type GetApplicationCommandPermissions = { response: ApplicationCommandPermissions[] };
+
+/**
+ * Edits command permissions for a specific command for your application in a guild.
+ *
+ * @remarks
+ * - This endpoint will overwrite existing permissions for the command in that guild.
+ * - Deleting or renaming a command will permanently delete all permissions for that command.
+ *
+ * @endpoint PUT `/applications/{application.id}/guilds/{guild.id}/commands/{command.id}/permissions`
+ */
+/* eslint-enable max-len */
+export interface EditApplicationCommandPermissions {
+	body: {
+		permissions: ApplicationCommandPermissions[];
+	};
+
+	response: {
+		id: Snowflake;
+		application_id: Snowflake;
+		guild_id: Snowflake;
+		permissions: ApplicationCommandPermissions[];
+	};
+}
 
 // !SECTION
