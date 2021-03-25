@@ -368,8 +368,6 @@ export interface BotAuthorizationAccessToken extends AuthorizationCodeAccessToke
  * In this case, the `scope` querystring parameter needs to be set to `webhook.incoming`.
  *
  * @source {@link https://discord.com/developers/docs/topics/oauth2#webhooks|OAuth2}
- *
- * [1]: https://discord.com/developers/docs/topics/oauth2#authorization-code-grant
  */
 export interface WebhookAccessToken extends AuthorizationCodeAccessToken {
 	webhook: Webhook;

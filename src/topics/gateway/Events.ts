@@ -361,8 +361,7 @@ export interface Ready extends GatewayEventPayload<GatewayEvent.Ready> {
  * - The gateway could not resume a previous session after receiving an Opcode 6 Resume.
  * - The gateway has invalidated an active session and is requesting client action.
  *
- * The inner `d` key is a boolean that indicates whether the session may be resumable. See
- * Connecting][3] and [Resuming for more information.
+ * The inner `d` key is a boolean that indicates whether the session may be resumable.
  *
  * @source {@link https://discord.com/developers/docs/topics/gateway#invalid-session|Gateway}
  */
@@ -1231,7 +1230,7 @@ export interface ApplicationCommandUpdate extends GatewayEventPayload<GatewayEve
 // ANCHOR Interaction
 
 /**
- * Sent when a user in a guild uses a Slash Command][1]. Inner payload is an [Interaction.
+ * Sent when a user in a guild uses a Slash Command. Inner payload is an Interaction.
  *
  * @source {@link https://discord.com/developers/docs/topics/gateway#interaction-create|Gateway}
  */

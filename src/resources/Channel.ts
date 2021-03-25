@@ -157,8 +157,6 @@ export interface TextChannel extends Channel {
  * publish messages in this type of channel if they have the proper permissions.
  *
  * @source {@link https://discord.com/developers/docs/resources/channel#channel-object-example-guild-news-channel|Channel}
- *
- * [1]: https://support.discord.com/hc/en-us/articles/360032008192
  */
 export type NewsChannel = Omit<TextChannel, 'rate_limit_per_user'>;
 
@@ -237,8 +235,6 @@ export interface GroupDMChannel extends DMChannel, Nullable<Pick<Channel, 'name'
  * An organizational category that contains up to 50 channels.
  *
  * @source {@link https://discord.com/developers/docs/resources/channel#channel-object-example-channel-category|Channel}
- *
- * [1]: https://support.discord.com/hc/en-us/articles/115001580171-Channel-Categories-101
  */
 export type ChannelCategory = Omit<Channel, 'topic'>;
 
@@ -251,8 +247,6 @@ export type ChannelCategory = Omit<Channel, 'topic'>;
  * Bots can neither send or read messages from this channel type (as it is a store page).
  *
  * @source {@link https://discord.com/developers/docs/resources/channel#channel-object-example-store-channel|Channel}
- *
- * [1]: https://discord.com/developers/docs/game-and-server-management/special-channels
  */
 export type StoreChannel = Omit<Channel, 'topic'>;
 
@@ -297,10 +291,9 @@ export interface Message {
 	 * Member properties for this message's author.
 	 *
 	 * @remarks
-	 * The member object exists in `MESSAGE_CREATE`][1] and [`MESSAGE_UPDATE` events from
+	 * The member object exists in `MESSAGE_CREATE` and `MESSAGE_UPDATE` events from
 	 * text-based guild channels. This allows bots to obtain real-time member data without
 	 * requiring bots to store member state in memory.
-	 * [2]: https://discord.com/developers/docs/topics/gateway#message-update
 	 */
 	member?: GuildMember;
 
@@ -334,8 +327,7 @@ export interface Message {
 	 *
 	 * @remarks
 	 * The user objects in the mentions array will only have the partial `member` field present in
-	 * `MESSAGE_CREATE`][1] and [`MESSAGE_UPDATE` events from text-based guild channels.
-	 * [2]: https://discord.com/developers/docs/topics/gateway#message-update
+	 * `MESSAGE_CREATE` and `MESSAGE_UPDATE` events from text-based guild channels.
 	 */
 	mentions: UserMention[];
 
@@ -390,8 +382,7 @@ export interface Message {
 	application?: MessageApplication;
 
 	/**
-	 * Message flags][1] combined as a [bitfield.
-	 * [2]: https://en.wikipedia.org/wiki/Bit_field
+	 * Message flags combined as a bitfield.
 	 */
 	flags?: MessageFlags;
 

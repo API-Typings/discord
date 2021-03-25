@@ -478,10 +478,8 @@ export type GuildFeatures =
 	| 'PREVIEW_ENABLED';
 
 /**
- * Represents an Offline Guild, or a Guild whose information has not been provided through [Guild
- * Create][1] events during the Gateway connect.
- *
- * [1]: https://discord.com/developers/docs/topics/gateway#guild-create
+ * Represents an Offline Guild, or a Guild whose information has not been provided through Guild
+ * Create events during the Gateway connect.
  */
 export interface UnavailableGuild extends Pick<PartialGuild, 'id'> {
 	unavailable: true;
@@ -921,20 +919,15 @@ export interface WelcomeScreenChannel {
 // SECTION Membership Screening
 
 /**
- * In guilds with Membership Screening][1] enabled, when a member joins, [Guild Member Add will
+ * In guilds with Membership Screening enabled, when a member joins, Guild Member Add will
  * be emitted but they will initially be restricted from doing any actions in the guild, and
- * `pending`will be true in the member object. When the member completes the screening, [Guild
- * Member Update][4] will be emitted and `pending` will be false.
+ * `pending`will be true in the member object. When the member completes the screening, Guild
+ * Member Update will be emitted and `pending` will be false.
  *
  * Giving the member a role will bypass Membership Screening as well as the guild's verification
  * level, giving the member immediate access to chat.
  *
  * @source {@link https://discord.com/developers/docs/resources/guild#membership-screening-object|Guild}
- *
- * [1]: https://support.discord.com/hc/en-us/articles/1500000466882
- * [2]: https://discord.com/developers/docs/topics/gateway#guild-member-add
- * [3]: https://discord.com/developers/docs/resources/guild#guild-member-object
- * [4]: https://discord.com/developers/docs/topics/gateway#guild-member-update
  */
 export interface MembershipScreening {
 	/**

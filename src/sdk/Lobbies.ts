@@ -450,12 +450,10 @@ export interface LobbyManager extends NodeJS.EventEmitter {
 	 * users with whom they are in voice, allowing them to mute/deafen themselves as well as mute/
 	 * adjust the volume of other lobby members.
 	 *
-	 * You can also allow users to adjust voice settings for your game with [Overlay
-	 * OpenVoiceSettings][1].
+	 * You can also allow users to adjust voice settings for your game with Overlay
+	 * OpenVoiceSettings.
 	 *
 	 * @param lobbyId - Lobby to voice connect to
-	 *
-	 * [1]: https://discord.com/developers/docs/game-sdk/overlay#openvoicesettings
 	 */
 	ConnectVoice(lobbyId: bigint, callback: (result: Discord.Result) => void): void;
 

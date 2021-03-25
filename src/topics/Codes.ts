@@ -80,7 +80,6 @@ export enum GatewayCloseCode {
 	/**
 	 * You sent a disallowed intent for a Gateway Intent. You may have tried to specify an
 	 * intent that you have not enabled or are not whitelisted for.
-	 * [2]: https://discord.com/developers/docs/topics/gateway#privileged-intents
 	 */
 	DisallowedIntents
 }
