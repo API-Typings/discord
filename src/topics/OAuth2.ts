@@ -20,7 +20,7 @@ export enum OAuth2URL {
 	Token = 'https://discord.com/api/oauth2/token',
 
 	/**
-	 * {@link https://tools.ietf.org/html/rfc7009|Token Revocation} URL.
+	 * Token Revocation URL.
 	 */
 	TokenRevocation = 'https://discord.com/api/oauth2/token/revoke'
 }
@@ -141,7 +141,7 @@ export enum OAuth2Scope {
 	 * Allows your app to update a user's activity. Whitelist only.
 	 *
 	 * @remarks
-	 * Whitelist is NOT required for {@link https://discord.com/developers/docs/game-sdk/activities|GameSDK Activity Manager}
+	 * Whitelist is NOT required for the GameSDK Activity Manager.
 	 */
 	ActivitiesWrite = 'activities.write',
 

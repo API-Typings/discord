@@ -48,7 +48,7 @@ export interface Activity {
 	name: string;
 
 	/**
-	 * {@link https://discord.com/developers/docs/topics/gateway#activity-object-activity-types|Activity type}
+	 * Activity type.
 	 */
 	type: ActivityType;
 

@@ -57,7 +57,7 @@ export interface ApplicationCommand {
  */
 export interface ApplicationCommandOption {
 	/**
-	 * Value of {@link https://discord.com/developers/docs/interactions/slash-commands#applicationcommandoptiontype|Slash Commands}
+	 * Value of `ApplicationCommandOptionType`.
 	 */
 	type: ApplicationCommandOptionType;
 
