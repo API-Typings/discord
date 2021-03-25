@@ -1,6 +1,6 @@
 {
 	"name": "@api-typings/discord",
-	"version": "4.6.0",
+	"version": "4.6.1",
 	"description": "API Typings for the Discord API",
 	"main": "dist/index.js",
 	"typings": "dist/typings/index.d.ts",
