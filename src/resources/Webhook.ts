@@ -193,13 +193,11 @@ export type DeleteWebhook = { response: never };
 export type DeleteWebhookWithToken = { response: never };
 
 /**
- * @info
- * For the webhook embed objects, you can set every field except `type` (it will be `rich`
+ * @remarks
+ * - For the webhook embed objects, you can set every field except `type` (it will be `rich`
  * regardless of if you try to set it), `provider`, `video`, and any `height`, `width`, or
  * `proxy_url` values for images.
- *
- * @warning
- * This endpoint supports both JSON and form data bodies. It does require `multipart/form-data`
+ * - This endpoint supports both JSON and form data bodies. It does require `multipart/form-data`
  * requests instead of the normal JSON request type when uploading files. Make sure you set your
  * `Content-Type` to `multipart/form-data` if you're doing that. Note that in that case, the
  * `embeds` field cannot be used, but you can pass an url-encoded JSON body as a form value for

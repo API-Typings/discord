@@ -73,10 +73,8 @@ export interface Template {
 export type GetTemplate = { response: Template };
 
 /**
- * Create a new guild based on a template.
- *
- * @warning
- * This endpoint can be used only by bots in less than 10 guilds.
+ * Create a new guild based on a template. This endpoint can be used only by bots in less than 10
+ * guilds.
  *
  * @endpoint [POST](https://discord.com/developers/docs/resources/template#create-guild-from-template) `/guilds/templates/{template.code}`
  */

@@ -51,35 +51,26 @@ export interface SignedAppTicket {
  */
 export interface ApplicationManager {
 	/**
-	 * Get's the locale the current user has Discord set to.
-	 *
-	 * @info
-	 * Value from the environment variable `DISCORD_CURRENT_LOCALE`.
+	 * Get's the locale the current user has Discord set to (value from the environment variable
+	 * `DISCORD_CURRENT_LOCALE`).
 	 */
 	GetCurrentLocale(): string;
 
 	/**
 	 * Get the name of pushed branch on which the game is running. These are branches that you
-	 * created and pushed using Dispatch.
-	 *
-	 * @info
-	 * Value from environment variable `DISCORD_CURRENT_BRANCH`.
+	 * created and pushed using Dispatch (value from environment variable `DISCORD_CURRENT_BRANCH`).
 	 */
 	GetCurrentBranch(): string;
 
 	/**
-	 * Retrieve an oauth2 bearer token for the current user.
+	 * Retrieve an oauth2 bearer token for the current user (value from the environment variable
+	 * `DISCORD_ACCESS_TOKEN`).
 	 *
 	 * @remarks
-	 * If your game was launched from Discord and you call this function, you will automatically
+	 * - If your game was launched from Discord and you call this function, you will automatically
 	 * receive the token. If the game was *not* launched from Discord and this method is called,
 	 * Discord will focus itself and prompt the user for authorization.
-	 *
-	 * @info
-	 * Value from the environment variable `DISCORD_ACCESS_TOKEN`.
-	 *
-	 * @warning
-	 * Ensure that you have `http://127.0.0.1` set as a valid redirect URI for your application in
+	 * - Ensure that you have `http://127.0.0.1` set as a valid redirect URI for your application in
 	 * the Developer Portal, or this method will always return an error.
 	 */
 	GetOAuth2Token(callback: (result: Discord.Result, token: Discord.OAuth2Token) => void): void;

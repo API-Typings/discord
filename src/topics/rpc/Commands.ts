@@ -347,7 +347,7 @@ export interface Pan {
 /**
  * Used to join and leave voice channels, group DMs, or DMs.
  *
- * @warning
+ * @remarks
  * When trying to join the user to a voice channel, you will receive a `5003` error coded response
  * if the user is already in a voice channel. The `force` parameter should only be specified in
  * response to the case where a user is already in a voice channel and they have **approved** to be

@@ -87,7 +87,7 @@ export interface UserManager extends NodeJS.EventEmitter {
 	/**
 	 * Fetch information about the currently connected user account.
 	 *
-	 * @info
+	 * @remarks
 	 * Before calling this function, you'll need to wait for the `CurrentUserUpdate` callback to
 	 * fire after instantiating the User manager.
 	 */

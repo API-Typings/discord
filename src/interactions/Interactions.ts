@@ -17,7 +17,7 @@ import type {
 /**
  * An application command is the base "command" model that belongs to an application.
  *
- * @info
+ * @remarks
  * A command, or each individual subcommand, can have a maximum of 10 `options`.
  *
  * @source {@link https://discord.com/developers/docs/interactions/slash-commands#applicationcommand|Slash Commands}
@@ -57,7 +57,7 @@ export interface ApplicationCommand {
 }
 
 /**
- * @info
+ * @remarks
  * You can specify a maximum of 25 `choices` per option.
  *
  * @source {@link https://discord.com/developers/docs/interactions/slash-commands#applicationcommandoption|Slash Commands}
@@ -416,7 +416,7 @@ export type GetGlobalApplicationCommands = { response: ApplicationCommand[] };
 /**
  * Creates a new global command. New global commands will be available in all guilds after 1 hour.
  *
- * @warning
+ * @remarks
  * Creating a command with the same name as an existing command for your application will overwrite
  * the old command.
  *
@@ -506,12 +506,11 @@ export interface BulkOverwriteGlobalApplicationCommands {
 /**
  * Create a new guild command. New guild commands will be available in the guild immediately.
  *
- * If the command did not already exist, it will count toward your daily application command create
- * limit.
- *
- * @warning
- * Creating a command with the same name as an existing command for your application will overwrite
- * the old command.
+ * @remarks
+ * - If the command did not already exist, it will count toward your daily application command
+ * create limit.
+ * - Creating a command with the same name as an existing command for your application will
+ * overwrite the old command.
  *
  * @endpoint [POST](https://discord.com/developers/docs/interactions/slash-commands#create-guild-application-command) `/applications/{application.id}/guilds/{guild.id}/commands`
  */

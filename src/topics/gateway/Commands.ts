@@ -37,15 +37,13 @@ export interface ConnectionProperties {
  * Used to trigger the initial handshake with the gateway.
  *
  * @remarks
- * If the payload is valid, the gateway will respond with a Ready event. Clients are limited
+ * - If the payload is valid, the gateway will respond with a Ready event. Clients are limited
  * by maximum concurrency when Identifying; if they exceed this limit, the gateway will
  * respond with an Opcode 9 Invalid Session.
- *
- * @warning
- * Clients are limited to 1000 `IDENTIFY` calls to the websocket in a 24-hour period. This limit is
- * global and across all shards, but does not include `RESUME` calls. Upon hitting this limit, all
- * active sessions for the bot will be terminated, the bot's token will be reset, and the owner will
- * receive an email notification.
+ * - Clients are limited to 1000 `IDENTIFY` calls to the websocket in a 24-hour period. This limit
+ * is global and across all shards, but does not include `RESUME` calls. Upon hitting this limit,
+ * all active sessions for the bot will be terminated, the bot's token will be reset, and the owner
+ * will receive an email notification.
  *
  * @source {@link https://discord.com/developers/docs/topics/gateway#identify|Gateway}
  */
@@ -149,7 +147,7 @@ export interface Heartbeat extends GatewayCommandPayload<GatewayOPCode.Heartbeat
  *
  * **Limitations**
  * - `GUILD_PRESENCES` intent is required to set `presences = true`. Otherwise, it will always be
- *   false
+ * false
  * - `GUILD_MEMBERS` intent is required to request the entire member list—`(query=‘’, limit=0<=n)`
  * - You will be limited to requesting 1 `guild_id` per request
  * - Requesting a prefix (`query` parameter) will return a maximum of 100 members

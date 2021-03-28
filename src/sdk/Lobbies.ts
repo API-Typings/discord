@@ -102,7 +102,7 @@ export interface LobbyTransaction {
 	/**
 	 * Sets a new owner for the lobby.
 	 *
-	 * @warning
+	 * @remarks
 	 * This method is only valid for `LobbyUpdateTransactions` and may cause issues if you set it on
 	 * a `LobbyCreateTransaction`.
 	 *
@@ -227,7 +227,7 @@ export interface LobbyManager extends NodeJS.EventEmitter {
 	/**
 	 * Creates a lobby. Creating a lobby auto-joins the connected user to it.
 	 *
-	 * @warning
+	 * @remarks
 	 * **Do not call `SetOwner()` in the transaction for this method.**
 	 *
 	 * @param transaction - A lobby transaction with set properties like capacity
@@ -238,7 +238,7 @@ export interface LobbyManager extends NodeJS.EventEmitter {
 	 * Updates a lobby with data from the given transaction. You *can* call `SetOwner()` in this
 	 * transaction.
 	 *
-	 * @warning
+	 * @remarks
 	 * This call has a rate limit of 10 updates per 5 seconds. If you fear you might hit that, it
 	 * may be a good idea to batch your lobby updates into transactions.
 	 *

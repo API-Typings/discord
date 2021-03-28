@@ -31,7 +31,7 @@ export type ClientStatusType = Omit<StatusType, 'offline' | 'invisible'>;
 // SECTION Activity
 
 /**
- * @info
+ * @remarks
  * Bots are only able to send `name`, `type`, and optionally `url`.
  *
  * @source {@link https://discord.com/developers/docs/topics/gateway#activity-object-activity-structure|Gateway}
@@ -136,8 +136,9 @@ export interface Activity {
 export type ActivityPlatform = 'desktop' | 'samsung' | 'xbox';
 
 /**
- * @info
- * The streaming type currently only supports Twitch and YouTube. Only `https://twitch.tv/` and `https://youtube.com/` urls will work.
+ * @remarks
+ * The streaming type currently only supports Twitch and YouTube. Only `https://twitch.tv/` and
+ * `https://youtube.com/` urls will work.
  *
  * @source {@link https://discord.com/developers/docs/topics/gateway#activity-object-activity-types|Gateway}
  */

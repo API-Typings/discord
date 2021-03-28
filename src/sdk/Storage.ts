@@ -26,15 +26,12 @@ export interface FileStat {
 export interface StorageManager {
 	/**
 	 * Returns the filepath to which Discord saves files if you were to use the SDK's storage
-	 * manager.
+	 * manager (value from environment variable `DISCORD_STORAGE_PATH`).
 	 *
 	 * @remarks
 	 * Discord has branch-specific, user-specific saves, so you will never overwrite others' save
 	 * files. If your game already has save file writing logic, you can use this method to get that
 	 * user-specific path and help users protect their save files.
-	 *
-	 * @info
-	 * Value from environment variable `DISCORD_STORAGE_PATH`.
 	 */
 	GetPath(): string;
 

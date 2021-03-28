@@ -193,7 +193,7 @@ export interface AuditLogEntryInfo {
 }
 
 /**
- * @info
+ * @remarks
  * If `new_value` is not present in the change object, while `old_value` is, that means the
  * property that was changed has been reset, or set to `null`.
  *

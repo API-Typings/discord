@@ -444,14 +444,14 @@ export interface ChannelPinsUpdate extends GatewayEventPayload<GatewayEvent.Chan
  * This event can be sent in three different scenarios:
  *
  * 1. When a user is initially connecting, to lazily load and backfill information for all
- *    unavailable guilds sent in the Ready event. Guilds that are unavailable due to an outage
- *    will send a Guild Delete event.
+ * unavailable guilds sent in the Ready event. Guilds that are unavailable due to an outage
+ * will send a Guild Delete event.
  * 2. When a Guild becomes available again to the client.
  * 3. When the current user joins a new Guild.
  *
  * The inner payload is a guild object, with all the extra fields specified.
  *
- * @warning
+ * @remarks
  * If you are using Gateway Intents, members and presences returned in this event will only contain
  * your bot and users in voice channels unless you specify the `GUILD_PRESENCES` intent.
  *
@@ -560,7 +560,7 @@ export interface GuildIntegrationsUpdate extends GatewayEventPayload<GatewayEven
  * Sent when a new user joins a guild. The inner payload is a guild member object with an extra
  * `guild_id` key.
  *
- * @warning
+ * @remarks
  * If using Gateway Intents, the `GUILD_MEMBERS` intent will be required to receive this event.
  *
  * @source {@link https://discord.com/developers/docs/topics/gateway#guild-member-add|Gateway}
@@ -577,7 +577,7 @@ export interface GuildMemberAdd extends GatewayEventPayload<GatewayEvent.GuildMe
 /**
  * Sent when a user is removed from a guild (leave/kick/ban).
  *
- * @warning
+ * @remarks
  * If using Gateway Intents, the `GUILD_MEMBERS` intent will be required to receive this event.
  *
  * @source {@link https://discord.com/developers/docs/topics/gateway#guild-member-remove|Gateway}
@@ -600,7 +600,7 @@ export interface GuildMemberRemove extends GatewayEventPayload<GatewayEvent.Guil
  * Sent when a guild member is updated. This will also fire when the user object of a guild member
  * changes.
  *
- * @warning
+ * @remarks
  * If using Gateway Intents, the `GUILD_MEMBERS` intent will be required to receive this event.
  *
  * @source {@link https://discord.com/developers/docs/topics/gateway#guild-member-update|Gateway}
@@ -909,7 +909,7 @@ export interface MessageCreate extends GatewayEventPayload<GatewayEvent.MessageC
 /**
  * Sent when a message is updated. The inner payload is a message object.
  *
- * @warning
+ * @remarks
  * Unlike creates, message updates may contain only a subset of the full message object payload (but
  * will always contain an `id` and `channel_id`).
  *
@@ -1035,13 +1035,13 @@ export interface MessageReactionRemoveEmoji extends GatewayEventPayload<GatewayE
 /**
  * Sent when a user's presence or info, such as name or avatar, is updated.
  *
- * @warning
+ * @remarks
  * - If you are using Gateway Intents, you *must* specify the `GUILD_PRESENCES` intent in order to
- *   receive Presence Update events.
+ * receive Presence Update events.
  * - The user object within this event can be partial, the only field which must be sent is the `id`
- *   field, everything else is optional. Along with this limitation, no fields are required, and the
- *   types of the fields are **not** validated. Your client should expect any combination of fields
- *   and types within this event.
+ * field, everything else is optional. Along with this limitation, no fields are required, and the
+ * types of the fields are **not** validated. Your client should expect any combination of fields
+ * and types within this event.
  *
  * @source {@link https://discord.com/developers/docs/topics/gateway#presence-update|Gateway}
  */

@@ -2,7 +2,7 @@ import type { Nullable } from 'extended-utility-types';
 import type { Guild, PartialUser, Snowflake, Team, User, Webhook } from '../';
 
 /**
- * @warning
+ * @remarks
  * In accordance with the relevant RFCs, the token and token revocation URLs will only accept a
  * content type of `x-www-form-urlencoded`. JSON content is not permitted and will return an error.
  *

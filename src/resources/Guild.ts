@@ -630,11 +630,11 @@ export interface PartialGuildMember {
 // ANCHOR Guild Member
 
 /**
- * @info
+ * @remarks
  * - The field `user` won't be included in the member object attached to `MESSAGE_CREATE` and
- *   `MESSAGE_UPDATE` gateway events.
+ * `MESSAGE_UPDATE` gateway events.
  * - In `GUILD_` events, `pending` will always be included as `true` or `false`. In non `GUILD_`
- *   events which can only be triggered by non-`pending` users, `pending` will not be included.
+ * events which can only be triggered by non-`pending` users, `pending` will not be included.
  *
  * @source {@link https://discord.com/developers/docs/resources/guild#guild-member-object-guild-member-structure|Guild}
  */
@@ -983,10 +983,7 @@ export enum ScreeningFieldType {
 // SECTION Endpoints
 
 /**
- * Create a new guild.
- *
- * @warning
- * This endpoint can be used only by bots in less than 10 guilds.
+ * Create a new guild. This endpoint can be used only by bots in less than 10 guilds.
  *
  * @endpoint [POST](https://discord.com/developers/docs/resources/guild#create-guild) `/guilds`
  */
@@ -1028,10 +1025,10 @@ export interface CreateGuild {
 		 * @remarks
 		 * When using the `roles` parameter:
 		 * - The first member of the array is used to change properties of the guild's `@everyone`
-		 * 	 role. If you are trying to bootstrap a guild with additional roles, keep this in mind.
+		 * role. If you are trying to bootstrap a guild with additional roles, keep this in mind.
 		 * - The required `id` field within each role object is an integer placeholder, and will be
-		 *   replaced by the API upon consumption. Its purpose is to allow you to overwrite a role's
-		 *   permissions in a channel when also passing in channels with the channels array.
+		 * replaced by the API upon consumption. Its purpose is to allow you to overwrite a role's
+		 * permissions in a channel when also passing in channels with the channels array.
 		 */
 		roles?: Role[];
 
@@ -1042,9 +1039,9 @@ export interface CreateGuild {
 		 * When using the `channels` parameter:
 		 * - The `position` field is ignored, and none of the default channels are created.
 		 * - The `id` field within each channel object may be set to an integer placeholder, and
-		 * 	 will be replaced by the API upon consumption. Its purpose is to allow you to create
-		 *   `GUILD_CATEGORY` channels by setting the `parent_id` field on any children to the
-		 *   category's `id` field. Category channels must be listed before any children.
+		 * will be replaced by the API upon consumption. Its purpose is to allow you to create
+		 * `GUILD_CATEGORY` channels by setting the `parent_id` field on any children to the
+		 * category's `id` field. Category channels must be listed before any children.
 		 */
 		channels?: PartialChannel;
 
@@ -1392,12 +1389,10 @@ export interface SearchGuildMembers {
  * `guilds.join` scope.
  *
  * @remarks
- * For guilds with Membership Screening enabled, this endpoint will default to adding new members
+ * - For guilds with Membership Screening enabled, this endpoint will default to adding new members
  * as `pending` in the guild member object. Members that are `pending` will have to complete
  * membership screening before they become full members that can talk.
- *
- * @info
- * The Authorization header must be a Bot token (belonging to the same application used for
+ * - The Authorization header must be a Bot token (belonging to the same application used for
  * authorization), and the bot must be a member of the guild with `CREATE_INSTANT_INVITE`
  * permission.
  *
@@ -1438,11 +1433,10 @@ export interface AddGuildMember {
 /**
  * Modify attributes of a guild member.
  *
- * If the `channel_id` is set to `null`, this will force the target user to be disconnected from
+ * @remarks
+ * - If the `channel_id` is set to `null`, this will force the target user to be disconnected from
  * voice.
- *
- * @info
- * When moving members to channels, the API user *must* have permissions to both connect to the
+ * - When moving members to channels, the API user *must* have permissions to both connect to the
  * channel and have the `MOVE_MEMBERS` permission.
  *
  * @endpoint [PATCH](https://discord.com/developers/docs/resources/guild#modify-guild-member) `/guilds/{guild.id}/members/{user.id}`
@@ -1795,7 +1789,7 @@ export type GetGuildIntegrations = { response: Integration[] };
 export interface CreateGuildIntegration {
 	body: {
 		/**
-		 * 	The integration type.
+		 * The integration type.
 		 */
 		type: IntegrationType;
 

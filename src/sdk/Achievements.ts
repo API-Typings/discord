@@ -100,7 +100,7 @@ export interface AchievementManager extends NodeJS.EventEmitter {
 	 * Loads a stable list of the current user's achievements to iterate over. If the user has any
 	 * achievements, do your iteration within the callback of this function.
 	 *
-	 * @info
+	 * @remarks
 	 * Remember to only iterate when there are results.
 	 */
 	FetchUserAchievements(callback: (result: Discord.Result) => void): void;

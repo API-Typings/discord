@@ -130,7 +130,7 @@ export interface StoreManager extends NodeJS.EventEmitter {
 	/**
 	 * Fetches the list of SKUs for the connected application, readying them for iteration.
 	 *
-	 * @warning
+	 * @remarks
 	 * Only SKUs that have a price set will be fetched. If you aren't seeing any SKUs being
 	 * returned, make sure they have a price set.
 	 */

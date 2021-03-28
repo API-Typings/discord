@@ -67,17 +67,15 @@ export type EncodingType = 'json' | 'etf';
  * @endpoint [GET](https://discord.com/developers/docs/topics/gateway#get-gateway-bot) `/gateway/bot`
  *
  * @remarks
- * Unlike the Get Gateway, this route should not be cached for extended periods of time as the
+ * - Unlike the Get Gateway, this route should not be cached for extended periods of time as the
  * value is not guaranteed to be the same per-call, and changes as the bot joins/leaves guilds.
- *
- * @warning
- * This endpoint requires authentication using a valid bot token.
- *
- * @returns
- * An object based on the information in Get Gateway, plus additional metadata that can help
- * during the operation of large or sharded bots.
+ * - This endpoint requires authentication using a valid bot token.
  */
 export interface GetGatewayBot {
+	/**
+	 * An object based on the information in Get Gateway, plus additional metadata that can help
+	 * during the operation of large or sharded bots.
+	 */
 	response: {
 		/**
 		 * The WSS URL that can be used for connecting to the gateway.

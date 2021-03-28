@@ -492,17 +492,17 @@ export interface MessageApplication {
  * **Channel Follow Add Messages** – automatic messages sent when a channel is followed into the
  * current channel (type `12`).
  * - These messages have the `channel_id` and `guild_id` fields, with data of the followed
- *   announcement channel.
+ * announcement channel.
  *
  * **Pin Messages** – automatic messages sent when a message is pinned (type `6`).
  * - These messages have `message_id` and `channel_id`, and `guild_id` if it is in a guild, with
- *   data of the message that was pinned.
+ * data of the message that was pinned.
  *
  * **Replies** – messages replying to a previous message (type `19`).
  * - These messages have `message_id` and `channel_id`, and `guild_id` if it is in a guild, with
- *   data of the message that was replied to. The `channel_id` and `guild_id` will be the same as
- *   the reply. Replies are created by including a `message_reference` when sending a message.
- *   When sending, only `message_id` is required.
+ * data of the message that was replied to. The `channel_id` and `guild_id` will be the same as
+ * the reply. Replies are created by including a `message_reference` when sending a message.
+ * When sending, only `message_id` is required.
  *
  * @source {@link https://discord.com/developers/docs/resources/channel#message-object-message-reference-structure|Channel}
  */
@@ -1189,14 +1189,12 @@ export interface ModifyChannel {
 /**
  * Delete a channel. Requires the `MANAGE_CHANNELS` permission.
  *
- * Deleting a category does not delete its child channels; they will have their `parent_id` removed.
- *
- * @info
- * For Community guilds, the Rules or Guidelines channel and the Community Updates channel cannot
+ * @remarks
+ * - Deleting a category does not delete its child channels; they will have their `parent_id`
+ * removed.
+ * - For Community guilds, the Rules or Guidelines channel and the Community Updates channel cannot
  * be deleted.
- *
- * @warning
- * Deleting a guild channel cannot be undone. Use this with caution, as it is impossible to undo
+ * - Deleting a guild channel cannot be undone. Use this with caution, as it is impossible to undo
  * this action.
  *
  * @endpoint [DELETE](https://discord.com/developers/docs/resources/channel#deleteclose-channel) `/channels/{channel.id}`
@@ -1206,7 +1204,7 @@ export type DeleteChannel = { response: Channel };
 /**
  * Close a private message.
  *
- * @info
+ * @remarks
  * It is possible to undo this action by opening a private message with the recipient again.
  *
  * @endpoint [DELETE](https://discord.com/developers/docs/resources/channel#deleteclose-channel) `/channels/{channel.id}`
@@ -1216,6 +1214,7 @@ export type CloseChannel = { response: Channel };
 /**
  * Returns the messages for a channel.
  *
+ * @remarks
  * - If operating on a guild channel, this endpoint requires the `VIEW_CHANNEL` permission to be
  * present on the current user.
  * - If the current user is missing the `READ_MESSAGE_HISTORY` permission in the channel then this
@@ -1225,7 +1224,7 @@ export type CloseChannel = { response: Channel };
  */
 export interface GetChannelMessages {
 	/**
-	 * @info
+	 * @remarks
 	 * The before, after, and around keys are mutually exclusive, only one may be passed at a time.
 	 */
 	query: {
@@ -1273,20 +1272,20 @@ export type GetChannelMessage = { response: Message };
 /**
  * Post a message to a guild text or DM channel.
  *
- * @info
+ * @remarks
  * Note that when sending `application/json` you must send at **least one of** `content` or `embed`.
  *
  * **Limitations**
  * - When operating on a guild channel, the current user must have the `SEND_MESSAGES` permission
  * - When sending a message with `tts` (text-to-speech) set to `true`, the current user must have
- *   the `SEND_TTS_MESSAGES` permission,
+ * the `SEND_TTS_MESSAGES` permission,
  * - When creating a message as a reply to another message, the current user must have the
- *   `READ_MESSAGE_HISTORY` permission,
+ * `READ_MESSAGE_HISTORY` permission,
  * - The referenced message must exist and cannot be a system message,
  * - The maximum request size when sending a message is **8MB**,
  * - For the embed object, you can set every field except `type` (it will be `rich` regardless of
- *   if you try to set it), `provider`, `video`, and any `height`, `width`, or `proxy_url` values
- *   for images,
+ * if you try to set it), `provider`, `video`, and any `height`, `width`, or `proxy_url` values
+ * for images,
  * - **Files can only be uploaded when using the `multipart/form-data` content type**,
  *
  * @endpoint [POST](https://discord.com/developers/docs/resources/channel#create-message) `/channels/{channel.id}/messages`
@@ -1333,27 +1332,25 @@ export interface CreateMessageJSON {
  * Post a message to a guild text or DM channel.
  *
  * @remarks
- * This endpoint supports all the same fields as its `application/json` counterpart, however they
+ * - This endpoint supports all the same fields as its `application/json` counterpart, however they
  * must be set in `payload_json` rather than provided as form fields. Some fields can be provided
  * as `form-data` fields, but if you supply a `payload_json`, **all fields except for `file` fields
  * will be ignored**.
- *
- * @info
- * Note that when sending `multipart/form-data`, you must provide a value for at **least one of**
+ * - Note that when sending `multipart/form-data`, you must provide a value for at **least one of**
  * `content`, `embed` or `file`. For a `file` attachment, the `Content-Disposition` subpart header
  * MUST contain a `filename` parameter.
  *
  * **Limitations**
  * - When operating on a guild channel, the current user must have the `SEND_MESSAGES` permission
  * - When sending a message with `tts` (text-to-speech) set to `true`, the current user must have
- *   the `SEND_TTS_MESSAGES` permission
+ * the `SEND_TTS_MESSAGES` permission
  * - When creating a message as a reply to another message, the current user must have the
- *   `READ_MESSAGE_HISTORY` permission
+ * `READ_MESSAGE_HISTORY` permission
  * - The referenced message must exist and cannot be a system message
  * - The maximum request size when sending a message is **8MB**
  * - For the embed object, you can set every field except `type` (it will be `rich` regardless of
- *   if you try to set it), `provider`, `video`, and any `height`, `width`, or `proxy_url` values
- *   for images
+ * if you try to set it), `provider`, `video`, and any `height`, `width`, or `proxy_url` values
+ * for images
  *
  * @endpoint [POST](https://discord.com/developers/docs/resources/channel#create-message) `/channels/{channel.id}/messages`
  */
@@ -1528,7 +1525,7 @@ export type DeleteMessage = { response: never };
  * Any message IDs given that do not exist or are invalid will count towards the minimum and
  * maximum message count (currently 2 and 100 respectively).
  *
- * @warning
+ * @remarks
  * This endpoint will not delete messages older than 2 weeks, and will fail with a `400 BAD REQUEST`
  * if any message provided is older than that or if any duplicate message IDs are provided.
  *
@@ -1693,7 +1690,7 @@ export type GetPinnedMessages = { response: Message[] };
 /**
  * Pin a message in a channel. Requires the `MANAGE_MESSAGES` permission.
  *
- * @warning
+ * @remarks
  * The max pinned messages is 50.
  *
  * @endpoint [PUT](https://discord.com/developers/docs/resources/channel#add-pinned-channel-message) `/channels/{channel.id}/pins/{message.id}`

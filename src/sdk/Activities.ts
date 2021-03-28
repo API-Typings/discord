@@ -199,7 +199,7 @@ export interface ActivityManager extends NodeJS.EventEmitter {
 	 * Used if you are distributing this SDK on Steam. Registers your game's Steam app id for the
 	 * protocol `steam://run-game-id/<id>`.
 	 *
-	 * @param steamId - Your game's Steam app id
+	 * @param steamId - Your game's Steam app ID
 	 */
 	RegisterSteam(steamId: number): void;
 
@@ -207,7 +207,7 @@ export interface ActivityManager extends NodeJS.EventEmitter {
 	 * Sets a user's presence in Discord to a new activity. This has a rate limit of 5 updates per
 	 * 20 seconds.
 	 *
-	 * @info
+	 * @remarks
 	 * It is possible for users to hide their presence on Discord (User Settings -\> Game Activity).
 	 * Presence set through this SDK may not be visible when this setting is toggled off.
 	 *

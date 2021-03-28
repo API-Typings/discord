@@ -231,7 +231,7 @@ export interface ModifyCurrentUser {
  * Returns a list of partial guild objects the current user is a member of. Requires the `guilds`
  * OAuth2 scope.
  *
- * @info
+ * @remarks
  * This endpoint returns 100 guilds by default, which is the maximum number of guilds a non-bot user
  * can join. Therefore, pagination is **not needed** for integrations that need to get a list of the
  * users' guilds.
@@ -279,7 +279,7 @@ export type GetUserDMs = { response: DMChannel[] | [] };
 /**
  * Create a new DM channel with a user.
  *
- * @warning
+ * @remarks
  * You should not use this endpoint to DM everyone in a server about something. DMs should generally
  * be initiated by a user action. If you open a significant amount of DMs too quickly, your bot may
  * be rate limited or blocked from opening new ones.
@@ -298,10 +298,8 @@ export interface CreateDM {
 }
 
 /**
- * Create a new group DM channel with multiple users.
- *
- * @warning
- * This endpoint is limited to 10 active group DMs.
+ * Create a new group DM channel with multiple users. This endpoint is limited to 10 active group
+ * DMs.
  *
  * @endpoint [POST](https://discord.com/developers/docs/resources/user#create-dm) `/users/@me/channels`
  */
