@@ -15,10 +15,11 @@ import type {
 // SECTION Application Command
 
 /**
- * An application command is the base "command" model that belongs to an application.
+ * An application command is the base "command" model that belongs to an application. This is what
+ * you are creating when you `POST` a new command.
  *
  * @remarks
- * A command, or each individual subcommand, can have a maximum of 10 `options`.
+ * A command, or each individual subcommand, can have a maximum of 25 `options`.
  *
  * @source {@link https://discord.com/developers/docs/interactions/slash-commands#applicationcommand|Slash Commands}
  */
@@ -46,7 +47,7 @@ export interface ApplicationCommand {
 	/**
 	 * The parameters for the command.
 	 */
-	options?: ApplicationCommandOption[];
+	options?: Partial<TupleOf<ApplicationCommandOption, 25>>;
 
 	/**
 	 * Whether the command is enabled by default when the app is added to a guild.
@@ -88,13 +89,13 @@ export interface ApplicationCommandOption {
 	/**
 	 * Choices for `string` and `number` types for the user to pick from.
 	 */
-	choices?: Partial<TupleOf<ApplicationCommandOptionChoice, 50>>;
+	choices?: Partial<TupleOf<ApplicationCommandOptionChoice, 25>>;
 
 	/**
 	 * If the option is a subcommand or subcommand group type, the nested options will be the
 	 * parameters.
 	 */
-	options?: ApplicationCommandOption[];
+	options?: Partial<TupleOf<ApplicationCommandOption, 25>>;
 }
 
 /**
@@ -380,6 +381,8 @@ export interface InteractionApplicationCommandCallbackData {
 // ANCHOR Message Interaction
 
 /**
+ * This is sent on the message object when the message is a response to an Interaction.
+ *
  * @source {@link https://discord.com/developers/docs/interactions/slash-commands#messageinteraction|Slash Commands}
  */
 export interface MessageInteraction {
