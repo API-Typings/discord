@@ -12,6 +12,54 @@ import type {
 	User
 } from '../';
 
+// ANCHOR Slash Command Limits
+
+/**
+ * @source {@link https://discord.com/developers/docs/interactions/slash-commands#a-quick-note-on-limits|Slash Commands}
+ */
+export enum SlashCommandLimit {
+	/**
+	 * An app can have up to 100 top-level global commands with unique names.
+	 */
+	GlobalCommands = 100,
+
+	/**
+	 * An app can have up to an additional 100 guild commands per guild.
+	 */
+	GuildCommands = 100,
+
+	/**
+	 * An app can have up to 25 subcommand groups on a top-level command.
+	 */
+	SubcommandGroups = 25,
+
+	/**
+	 * An app can have up to 25 subcommands within a subcommand group.
+	 */
+	Subcommands = 25,
+
+	/**
+	 * Commands can have up to 25 `options`.
+	 */
+	CommandOptions = 25,
+
+	/**
+	 * Options can have up to 25 `choices`.
+	 */
+	CommandOptionChoices = 25,
+
+	/**
+	 * Maximum of 4000 characters for combined name, description, and value properties for each
+	 * command and its subcommands and groups.
+	 */
+	Characters = 4000,
+
+	/**
+	 * Global rate limit of 200 application command creates per day per guild.
+	 */
+	GlobalRateLimit = 200
+}
+
 // SECTION Application Command
 
 /**
