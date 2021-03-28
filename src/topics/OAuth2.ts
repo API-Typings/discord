@@ -419,7 +419,7 @@ export interface PartialApplication {
 	bot_require_code_grant: boolean;
 
 	/**
-	 * The base64 encoded key for the GameSDK's GetTicket.
+	 * The hex encoded key for verification in interactions the GameSDK's `GetTicket`.
 	 */
 	verify_key: string;
 }
