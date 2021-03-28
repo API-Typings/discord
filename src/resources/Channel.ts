@@ -1125,7 +1125,7 @@ export interface ModifyChannel {
 		 * The type of Channel; only conversion between text and news is supported and only in
 		 * guilds with the `NEWS` feature. Applies to text and news channels.
 		 */
-		type?: number | ChannelType;
+		type?: ChannelType;
 
 		/**
 		 * The position of the channel in the left-hand listing. Applies to all channel types.

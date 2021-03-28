@@ -299,7 +299,7 @@ export interface ApplicationCommandInteractionOptionData {
 	/**
 	 * Value of `ApplicationCommandOptionType`.
 	 */
-	type: number;
+	type: ApplicationCommandOptionType;
 
 	/**
 	 * The value of the pair.
