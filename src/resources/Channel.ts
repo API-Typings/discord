@@ -545,6 +545,8 @@ export enum MessageActivityType {
 	JoinRequest = 5
 }
 
+// ANCHOR Message Flags
+
 /**
  * @source {@link https://discord.com/developers/docs/resources/channel#message-object-message-flags|Channel}
  */
@@ -577,7 +579,12 @@ export enum MessageFlags {
 	/**
 	 * This message is only visible to the user who did the Interaction.
 	 */
-	Ephemeral = 1 << 6
+	Ephemeral = 1 << 6,
+
+	/**
+	 * This message is an `InteractionResponse` and the bot is "thinking".
+	 */
+	Loading = 1 << 7
 }
 
 // ANCHOR Sticker
