@@ -220,58 +220,274 @@ export interface AuditLogChange<K extends keyof AuditLogChangeKey> {
  * @source {@link https://discord.com/developers/docs/resources/audit-log#audit-log-change-object-audit-log-change-key|Audit Log}
  */
 export interface AuditLogChangeKey {
+	/**
+	 * Guild name changed.
+	 */
 	name: string;
-	guild: string;
+
+	/**
+	 * Guild description changed.
+	 */
+	description: string;
+
+	/**
+	 * Guild icon changed.
+	 */
 	icon_hash: string;
+
+	/**
+	 * Guild invite splash page artwork changed.
+	 */
 	splash_hash: string;
+
+	/**
+	 * Guild discovery splash changed.
+	 */
 	discovery_splash_hash: string;
+
+	/**
+	 * Guild banner changed.
+	 */
 	banner_hash: string;
+
+	/**
+	 * Guild owner changed.
+	 */
 	owner_id: Snowflake;
+
+	/**
+	 * Guild region changed.
+	 */
 	region: string;
+
+	/**
+	 * Guild's preferred locale changed.
+	 */
 	preferred_locale: string;
+
+	/**
+	 * Guild AFK channel changed.
+	 */
 	afk_channel_id: Snowflake;
+
+	/**
+	 * Guild AFK timeout duration changed.
+	 */
 	afk_timeout: number;
+
+	/**
+	 * Guild's rules channel changed.
+	 */
 	rules_channel_id: Snowflake;
+
+	/**
+	 * Guild's public updates channel changed.
+	 */
 	public_updates_channel_id: Snowflake;
+
+	/**
+	 * Guild's two-factor auth requirement changed.
+	 */
 	mfa_level: MFALevel;
+
+	/**
+	 * Guild's required verification level changed.
+	 */
 	verification_level: VerificationLevel;
+
+	/**
+	 * Change in whose messages are scanned and deleted for explicit content in the server.
+	 */
 	explicit_content_filter: ExplicitFilterLevel;
+
+	/**
+	 * Guild's default message notification level changed.
+	 */
 	default_message_notifications: NotificationLevel;
+
+	/**
+	 * Guild invite vanity URL changed.
+	 */
 	vanity_url_code: string;
+
+	/**
+	 * New role added.
+	 */
 	$add: PartialRole[];
+
+	/**
+	 * Role removed.
+	 */
 	$remove: PartialRole[];
+
+	/**
+	 * Change in number of days after which inactive and role-unassigned members are kicked.
+	 */
 	prune_delete_days: number;
+
+	/**
+	 * Server widget enabled/disabled.
+	 */
 	widget_enabled: boolean;
+
+	/**
+	 * Channel ID of the server widget changed.
+	 */
 	widget_channel_id: Snowflake;
+
+	/**
+	 * ID of the system channel of the server changed.
+	 */
 	system_channel_id: Snowflake;
+
+	/**
+	 * Text or voice channel position changed.
+	 */
 	position: number;
+
+	/**
+	 * Text channel topic changed.
+	 */
 	topic: string;
+
+	/**
+	 * Coice channel bitrate changed.
+	 */
 	bitrate: number;
+
+	/**
+	 * Permissions on a channel changed.
+	 */
 	permission_overwrites: Overwrite[];
+
+	/**
+	 * Channel NSFW restriction changed.
+	 */
 	nsfw: boolean;
+
+	/**
+	 * Application ID of the added or removed webhook or bot.
+	 */
 	application_id: Snowflake;
+
+	/**
+	 * Amount of seconds a user has to wait before sending another message changed.
+	 */
 	rate_limit_per_user: number;
+
+	/**
+	 * Permissions for a role changed.
+	 */
 	permissions: string;
+
+	/**
+	 * Role color changed.
+	 */
 	color: number;
+
+	/**
+	 * Role is now displayed/no longer displayed separate from online users.
+	 */
 	hoist: boolean;
+
+	/**
+	 * Role is now mentionable/unmentionable.
+	 */
 	mentionalble: boolean;
+
+	/**
+	 * A permission on a text or voice channel was allowed for a role.
+	 */
 	allow: string;
+
+	/**
+	 * A permission on a text or voice channel was denied for a role.
+	 */
 	deny: string;
+
+	/**
+	 * Invite code changed.
+	 */
 	code: string;
+
+	/**
+	 * Channel for invite code changed.
+	 */
 	channel_id: Snowflake;
+
+	/**
+	 * Person who created invite code changed.
+	 */
 	inviter_id: Snowflake;
+
+	/**
+	 * Change to max number of times invite code can be used.
+	 */
 	max_uses: number;
+
+	/**
+	 * Number of times an invite code can be used changed.
+	 */
 	uses: number;
+
+	/**
+	 * How long the invite code lasts changed.
+	 */
+	max_age: number;
+
+	/**
+	 * Invite code is temporary/never expires.
+	 */
 	temporary: boolean;
+
+	/**
+	 * User server deafened/undeafened.
+	 */
 	deaf: boolean;
+
+	/**
+	 * User server muted/unmuted.
+	 */
 	mute: boolean;
+
+	/**
+	 * User nickname changed.
+	 */
 	nick: string;
+
+	/**
+	 * User avatar changed.
+	 */
 	avatar_hash: string;
+
+	/**
+	 * The ID of the changed entity–sometimes used in conjunction with other keys.
+	 */
 	id: Snowflake;
+
+	/**
+	 * Type of entity created.
+	 */
 	type: ChannelType | string;
+
+	/**
+	 * Integration emoticons enabled/disabled.
+	 */
 	enable_emoticons: boolean;
+
+	/**
+	 * Integration expiring subscriber behavior changed.
+	 */
 	expire_behavior: IntegrationExpireBehavior;
+
+	/**
+	 * Integration expire grace period changed.
+	 */
 	expire_grace_period: number;
+
+	/**
+	 * New user limit in a voice channel.
+	 */
 	user_limit: number;
 }
 
