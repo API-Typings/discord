@@ -438,12 +438,12 @@ export interface Application extends Omit<PartialApplication, 'hook'> {
 	/**
 	 * The URL of the app's Terms of Service.
 	 */
-	terms_of_service_url: string;
+	terms_of_service_url?: string;
 
 	/**
 	 * The URL of the app's Privacy Policy.
 	 */
-	privacy_policy_url: string;
+	privacy_policy_url?: string;
 
 	/**
 	 * Partial user object containing info on the owner of the application.
