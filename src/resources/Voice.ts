@@ -66,6 +66,11 @@ export interface VoiceState {
 	 * Whether this user is muted by the current user.
 	 */
 	suppress: boolean;
+
+	/**
+	 * The time at which the user requested to speak.
+	 */
+	request_to_speak_timestamp: Nullable<string>;
 }
 
 /**
