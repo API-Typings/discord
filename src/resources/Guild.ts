@@ -1861,6 +1861,37 @@ export interface GetWidgetImage {
 export type WidgetStyle = 'shield' | 'banner1' | 'banner2' | 'banner3' | 'banner4';
 
 /**
+ * Updates the current user's voice state.
+ *
+ * @endpoint PATCH `/guilds/{guild.id}/voice-states/@me`
+ */
+export interface UpdateSelfVoiceState {
+	body: {
+		/**
+		 * The ID of the channel the user is currently in.
+		 */
+		channel_id: Snowflake;
+
+		/**
+		 * Toggles the user's suppress state.
+		 */
+		suppress?: boolean;
+
+		/**
+		 * Sets the user's request to speak.
+		 */
+		request_to_speak_timestamp?: Nullable<string>;
+	};
+}
+
+/**
+ * Updates another user's voice state.
+ *
+ * @endpoint PATCH `/guilds/{guild.id}/voice-states/{user.id}`
+ */
+export type UpdateOthersVoiceState = { body: Omit<UpdateSelfVoiceState['body'], 'request_to_speak_timestamp'> };
+
+/**
  * Returns the Welcome Screen object for the guild.
  *
  * @endpoint [GET](https://discord.com/developers/docs/resources/guild#get-guild-welcome-screen) `/guilds/{guild.id}/welcome-screen`

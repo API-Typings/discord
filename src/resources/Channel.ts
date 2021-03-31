@@ -113,15 +113,19 @@ export enum ChannelType {
 	/**
 	 * A channel in which game developers can sell their game on Discord.
 	 */
-	GuildStore
+	GuildStore,
 
 	/**
 	 * Undocumented & unusable channel types; here for when they're released.
 	 *
 	 * PUBLIC_THREAD = 11
 	 * PRIVATE_THREAD = 12
-	 * GUILD_STAGE_VOICE = 13
 	 */
+
+	/**
+	 * A voice channel for hosting events with an audience.
+	 */
+	GUILD_STAGE_VOICE = 13
 }
 
 export enum VideoQualityMode {
