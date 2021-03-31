@@ -26,3 +26,15 @@ export enum BaseURL {
  * @source {@link https://discord.com/developers/docs/reference#snowflakes|Reference}
  */
 export type Snowflake = `${bigint}`;
+
+export type UserFormat = `<@${bigint}>`;
+
+export type UserNicknameFormat = `<@!${bigint}>`;
+
+export type ChannelFormat = `<#${bigint}>`;
+
+export type RoleFormat = `<@&${bigint}>`;
+
+export type CustomEmojiFormat = `<:${string}:${bigint}>`;
+
+export type CustomEmojiAnimatedFormat = `<a:${string}:${bigint}>`;
