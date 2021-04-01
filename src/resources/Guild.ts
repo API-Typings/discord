@@ -52,7 +52,7 @@ export interface PartialGuild {
 	/**
 	 * Enabled guild features.
 	 */
-	features?: GuildFeatures[];
+	features?: `${GuildFeature}`[];
 
 	/**
 	 * Verification level required for the guild.
@@ -170,7 +170,7 @@ export interface Guild extends PartialGuild {
 	/**
 	 * Enabled guild features.
 	 */
-	features: GuildFeatures[];
+	features: `${GuildFeature}`[];
 
 	/**
 	 * Required MFA level for the guild.
@@ -464,23 +464,24 @@ export enum SystemChannelFlags {
 /**
  * @source {@link https://discord.com/developers/docs/resources/guild#guild-object-guild-features|Guild}
  */
-export type GuildFeatures =
-	| 'INVITE_SPLASH'
-	| 'VIP_REGIONS'
-	| 'VANITY_URL'
-	| 'VERIFIED'
-	| 'PARTNERED'
-	| 'COMMUNITY'
-	| 'COMMERCE'
-	| 'NEWS'
-	| 'DISCOVERABLE'
-	| 'DISCOVERABLE_DISABLED'
-	| 'FEATURABLE'
-	| 'ANIMATED_ICON'
-	| 'BANNER'
-	| 'WELCOME_SCREEN_ENABLED'
-	| 'MEMBER_VERIFICATION_GATE_ENABLED'
-	| 'PREVIEW_ENABLED';
+export enum GuildFeature {
+	InviteSplash = 'INVITE_SPLASH',
+	VIPRegions = 'VIP_REGIONS',
+	VanityURL = 'VANITY_URL',
+	Verified = 'VERIFIED',
+	Partnered = 'PARTNERED',
+	Community = 'COMMUNITY',
+	Commerce = 'COMMERCE',
+	News = 'NEWS',
+	Discoverable = 'DISCOVERABLE',
+	DiscoverableDisabled = 'DISCOVERABLE_DISABLED',
+	Featurable = 'FEATURABLE',
+	AnimatedIcon = 'ANIMATED_ICON',
+	Banner = 'BANNER',
+	WelcomeScreenEnabled = 'WELCOME_SCREEN_ENABLED',
+	MemberVerificationGateEnabled = 'MEMBER_VERIFICATION_GATE_ENABLED',
+	PreviewEnabled = 'PREVIEW_ENABLED'
+}
 
 /**
  * Represents an Offline Guild, or a Guild whose information has not been provided through Guild
@@ -527,7 +528,7 @@ export interface GuildPreview {
 	/**
 	 * Enabled guild features.
 	 */
-	features: GuildFeatures[];
+	features: `${GuildFeature}`[];
 
 	/**
 	 * Approximate number of members in this guild.
@@ -1202,7 +1203,7 @@ export interface ModifyGuild {
 		/**
 		 * Enabled guild features.
 		 */
-		features?: GuildFeatures[];
+		features?: `${GuildFeature}`[];
 
 		/**
 		 * The description for the guild, if the guild is discoverable.
