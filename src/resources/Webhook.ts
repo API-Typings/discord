@@ -1,4 +1,4 @@
-import type { Nullable, TupleOf } from 'extended-utility-types';
+import type { FixedTuple, Nullable } from 'extended-utility-types';
 import type { AllowedMentions, Channel, Embed, Guild, Message, Snowflake, User } from '../';
 
 /**
@@ -245,7 +245,7 @@ export interface ExecuteWebhook {
 		/**
 		 * Embedded `rich` content.
 		 */
-		embeds?: Partial<TupleOf<Embed, 10>>;
+		embeds?: Partial<FixedTuple<Embed, 10>>;
 		payload_json?: string;
 
 		/**

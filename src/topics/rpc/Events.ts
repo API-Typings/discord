@@ -1,4 +1,4 @@
-import { Nullable, TupleOf } from 'extended-utility-types';
+import { FixedTuple, Nullable } from 'extended-utility-types';
 import type {
 	Message,
 	PartialChannel,
@@ -320,7 +320,7 @@ export interface VoiceConnectionStatus extends EventPayload<Event.VoiceConnectio
 		/**
 		 * Last 20 pings (in ms).
 		 */
-		pings: Partial<TupleOf<number, 20>>;
+		pings: Partial<FixedTuple<number, 20>>;
 
 		/**
 		 * Average ping (in ms).

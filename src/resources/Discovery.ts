@@ -1,4 +1,4 @@
-import type { Nullable, TupleOf } from 'extended-utility-types';
+import type { FixedTuple, Nullable } from 'extended-utility-types';
 import type { Snowflake } from '../';
 
 /**
@@ -39,7 +39,7 @@ export interface DiscoveryMetadata {
 	/**
 	 * IDs of up to 5 discovery subcategories set for this guild.
 	 */
-	category_ids: Partial<TupleOf<number, 5>>;
+	category_ids: Partial<FixedTuple<number, 5>>;
 }
 
 export interface DiscoveryCategory {

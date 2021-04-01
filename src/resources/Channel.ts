@@ -1,4 +1,4 @@
-import type { Nullable, Range, TupleOf } from 'extended-utility-types';
+import type { FixedTuple, Nullable, Range } from 'extended-utility-types';
 import type {
 	GuildMember,
 	Invite,
@@ -794,7 +794,7 @@ export interface Embed {
 	/**
 	 * Fields information.
 	 */
-	fields?: Partial<TupleOf<EmbedField, 25>>;
+	fields?: Partial<FixedTuple<EmbedField, 25>>;
 }
 
 /**

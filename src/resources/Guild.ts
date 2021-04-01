@@ -1,4 +1,4 @@
-import type { Nullable, Range, TupleOf } from 'extended-utility-types';
+import type { FixedTuple, Nullable, Range } from 'extended-utility-types';
 import type {
 	Activity,
 	Channel,
@@ -1927,7 +1927,7 @@ export interface ModifyDiscoveryMetadata {
 		/**
 		 * Up to 10 discovery search keywords.
 		 */
-		keywords?: Nullable<Partial<TupleOf<string, 10>>>;
+		keywords?: Nullable<Partial<FixedTuple<string, 10>>>;
 
 		/**
 		 * Whether guild info is shown when custom emojis are clicked.

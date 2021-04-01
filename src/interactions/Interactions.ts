@@ -1,4 +1,4 @@
-import type { Nullable, TupleOf } from 'extended-utility-types';
+import type { FixedTuple, Nullable } from 'extended-utility-types';
 import type {
 	AllowedMentions,
 	EditWebhookMessage,
@@ -95,7 +95,7 @@ export interface ApplicationCommand {
 	/**
 	 * The parameters for the command.
 	 */
-	options?: Partial<TupleOf<ApplicationCommandOption, 25>>;
+	options?: Partial<FixedTuple<ApplicationCommandOption, 25>>;
 
 	/**
 	 * Whether the command is enabled by default when the app is added to a guild.
@@ -137,13 +137,13 @@ export interface ApplicationCommandOption {
 	/**
 	 * Choices for `string` and `number` types for the user to pick from.
 	 */
-	choices?: Partial<TupleOf<ApplicationCommandOptionChoice, 25>>;
+	choices?: Partial<FixedTuple<ApplicationCommandOptionChoice, 25>>;
 
 	/**
 	 * If the option is a subcommand or subcommand group type, the nested options will be the
 	 * parameters.
 	 */
-	options?: Partial<TupleOf<ApplicationCommandOption, 25>>;
+	options?: Partial<FixedTuple<ApplicationCommandOption, 25>>;
 }
 
 /**
@@ -413,7 +413,7 @@ export interface InteractionApplicationCommandCallbackData {
 	/**
 	 * Supports up to 10 embeds.
 	 */
-	embeds?: Partial<TupleOf<Embed, 10>>;
+	embeds?: Partial<FixedTuple<Embed, 10>>;
 
 	/**
 	 * Allowed mentions object.
