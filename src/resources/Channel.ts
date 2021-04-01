@@ -435,7 +435,8 @@ export enum MessageType {
 	GuildDiscoveryGracePeriodInitialWarning,
 	GuildDiscoveryGracePeriodFinalWarning,
 	Reply = 19,
-	ApplicationCommand
+	ApplicationCommand,
+	GuildInviteReminder
 }
 
 /**

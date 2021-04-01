@@ -453,7 +453,12 @@ export enum SystemChannelFlags {
 	/**
 	 * Suppress server boost notifications.
 	 */
-	SuppressPremiumSubscriptions = 1 << 1
+	SuppressPremiumSubscriptions = 1 << 1,
+
+	/**
+	 * Suppress server setup tips.
+	 */
+	SuppressGuildReminderNotifications = 1 << 2
 }
 
 /**
