@@ -71,18 +71,6 @@ export interface DiscoveryCategoryName {
 	localizations?: Record<string, string>;
 }
 
-export interface DiscoverySubcategory {
-	/**
-	 * The guild ID the subcategory was added to.
-	 */
-	guild_id: Snowflake;
-
-	/**
-	 * The ID of the subcategory added.
-	 */
-	category_id: number;
-}
-
 // SECTION Endpoints
 
 /**

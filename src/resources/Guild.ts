@@ -1859,11 +1859,18 @@ export interface GetWidgetImage {
 export type WidgetStyle = 'shield' | 'banner1' | 'banner2' | 'banner3' | 'banner4';
 
 /**
+ * Returns the discovery metadata object for the guild. Requires the `MANAGE_GUILD` permission.
+ *
+ * @endpoint GET `/guilds/{guild.id}/discovery-metadata`
+ */
+export type GetGuildDiscoveryMetadata = { response: DiscoveryMetadata };
+
+/**
  * Modify the discovery metadata for the guild. Requires the `MANAGE_GUILD` permission.
  *
  * @endpoint PATCH `/guilds/{guild.id}/discovery-metadata`
  */
-export interface ModifyDiscoveryMetadata {
+export interface ModifyGuildDiscoveryMetadata {
 	body: {
 		/**
 		 * The ID of the primary discovery category.
@@ -1886,6 +1893,32 @@ export interface ModifyDiscoveryMetadata {
 	 */
 	response: DiscoveryMetadata;
 }
+
+/**
+ * Add a discovery subcategory to the guild. Requires the `MANAGE_GUILD` permission.
+ *
+ * @endpoint POST `/guilds/{guild.id}/discovery-categories/{category.id}`
+ */
+export interface AddGuildDiscoverySubcategory {
+	response: {
+		/**
+		 * The guild ID the subcategory was added to.
+		 */
+		guild_id: Snowflake;
+
+		/**
+		 * The ID of the subcategory added.
+		 */
+		category_id: number;
+	};
+}
+
+/**
+ * Removes a discovery subcategory from the guild. Requires the `MANAGE_GUILD` permission.
+ *
+ * @endpoint DELETE `/guilds/{guild.id}/discovery-categories/{category.id}`
+ */
+export type RemoveGuildDiscoverySubcategory = { response: never };
 
 /**
  * Modify the guild's Welcome Screen. Requires the `MANAGE_GUILD` permission.
