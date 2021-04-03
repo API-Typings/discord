@@ -1341,6 +1341,10 @@ export type GetGuildMember = { response: GuildMember };
 /**
  * Returns a list of guild member objects that are members of the guild.
  *
+ * @remarks
+ * This endpoint is restricted according to whether the `GUILD_MEMBERS` Privileged Intent is
+ * enabled for your appliation.
+ *
  * @endpoint [GET](https://discord.com/developers/docs/resources/guild#list-guild-members) `/guilds/{guild.id}/members`
  */
 export interface ListGuildMembers {
