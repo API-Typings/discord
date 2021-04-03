@@ -948,6 +948,11 @@ export interface Attachment {
 	filename: string;
 
 	/**
+	 * The attachment's media type.
+	 */
+	content_type?: string;
+
+	/**
 	 * Size of file in bytes.
 	 */
 	size: number;
