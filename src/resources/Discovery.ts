@@ -18,7 +18,7 @@ export interface DiscoveryMetadata {
 	/**
 	 * Up to 10 discovery search keywords set for this guild.
 	 */
-	keywords: Nullable<string[]>;
+	keywords: Nullable<Partial<FixedTuple<string, 10>>>;
 
 	/**
 	 * Whether guild info is shown when custom emojis from this guild are clicked.
