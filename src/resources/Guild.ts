@@ -1787,64 +1787,6 @@ export type GetGuildInvites = { response: InviteMetadata[] };
 export type GetGuildIntegrations = { response: Integration[] };
 
 /**
- * Attach an integration object from the current user to the guild. Requires the `MANAGE_GUILD`
- * permission.
- *
- * @endpoint [POST](https://discord.com/developers/docs/resources/guild#create-guild-integration) `/guilds/{guild.id}/integrations`
- */
-export interface CreateGuildIntegration {
-	body: {
-		/**
-		 * The integration type.
-		 */
-		type: IntegrationType;
-
-		/**
-		 * The integration ID.
-		 */
-		id: Snowflake;
-	};
-
-	response: never;
-}
-
-/**
- * Modify the behavior and settings of an integration object for the guild. Requires the
- * `MANAGE_GUILD` permission.
- *
- * @endpoint [PATCH](https://discord.com/developers/docs/resources/guild#modify-guild-integration) `/guilds/{guild.id}/integrations/{integration.id}`
- */
-export interface ModifyGuildIntegration {
-	body: {
-		/**
-		 * The behavior when an integration subscription lapses.
-		 */
-		expire_behavior?: Nullable<number>;
-
-		/**
-		 * Period (in days) where the integration will ignore lapsed subscriptions.
-		 */
-		expire_grace_period?: Nullable<number>;
-
-		/**
-		 * Whether emoticons should be synced for this integration (Twitch only currently).
-		 */
-		enable_emoticons?: Nullable<boolean>;
-	};
-
-	response: never;
-}
-
-/**
- * Delete the attached integration object for the guild. Requires the `MANAGE_GUILD` permission.
- *
- * Deletes any associated webhooks and kicks the associated bot if there is one.
- *
- * @endpoint [DELETE](https://discord.com/developers/docs/resources/guild#delete-guild-integration) `/guilds/{guild.id}/integrations/{integration.id}`
- */
-export type DeleteGuildIntegration = { response: never };
-
-/**
  * Sync an integration. Requires the `MANAGE_GUILD` permission.
  *
  * @endpoint [POST](https://discord.com/developers/docs/resources/guild#sync-guild-integration) `/guilds/{guild.id}/integrations/{integration.id}/sync`
