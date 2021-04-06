@@ -1923,6 +1923,13 @@ export interface AddGuildDiscoverySubcategory {
 export type RemoveGuildDiscoverySubcategory = { response: never };
 
 /**
+ * Returns the Welcome Screen object for the guild.
+ *
+ * @endpoint [GET](https://discord.com/developers/docs/resources/guild#get-guild-welcome-screen) `/guilds/{guild.id}/welcome-screen`
+ */
+export type GetGuildWelcomeScreen = { response: WelcomeScreen };
+
+/**
  * Modify the guild's Welcome Screen. Requires the `MANAGE_GUILD` permission.
  *
  * @endpoint PATCH `/guilds/{guild.id}/welcome-screen`
