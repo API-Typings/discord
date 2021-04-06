@@ -52,9 +52,7 @@ export interface ImageManager {
 	 * @param handle - Contains the desired `userId` and `size` for the returned image
 	 * @param refresh - Whether to use cached data for fetch anew
 	 */
-	/* prettier-ignore */
-	/* eslint-disable-next-line */
-	Fetch(handle: ImageHandle, refresh: boolean, callback: (result: Discord.Result, imageHandle: Discord.ImageHandle) => void): void
+	Fetch(handle: ImageHandle, refresh: boolean): Discord.ImageHandle;
 
 	/**
 	 * Get's the dimensions for the given user's avatar's source image.
