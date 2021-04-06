@@ -1861,6 +1861,42 @@ export interface GetWidgetImage {
 export type WidgetStyle = 'shield' | 'banner1' | 'banner2' | 'banner3' | 'banner4';
 
 /**
+ * Returns the Welcome Screen object for the guild.
+ *
+ * @endpoint [GET](https://discord.com/developers/docs/resources/guild#get-guild-welcome-screen) `/guilds/{guild.id}/welcome-screen`
+ */
+export type GetGuildWelcomeScreen = { response: WelcomeScreen };
+
+/**
+ * Modify the guild's Welcome Screen. Requires the `MANAGE_GUILD` permission.
+ *
+ * @endpoint PATCH `/guilds/{guild.id}/welcome-screen`
+ */
+export interface ModifyWelcomeScreen {
+	body: {
+		/**
+		 * Whether the welcome screen is enabled.
+		 */
+		enabled: boolean;
+
+		/**
+		 * Channels linked in the welcome screen and their display options.
+		 */
+		welcome_channels: WelcomeScreenChannel[];
+
+		/**
+		 * The server description to show in the welcome screen.
+		 */
+		description: string;
+	};
+
+	/**
+	 * The updated Welcome Screen object.
+	 */
+	response: WelcomeScreen;
+}
+
+/**
  * Returns the discovery metadata object for the guild. Requires the `MANAGE_GUILD` permission.
  *
  * @endpoint GET `/guilds/{guild.id}/discovery-metadata`
@@ -1921,42 +1957,6 @@ export interface AddGuildDiscoverySubcategory {
  * @endpoint DELETE `/guilds/{guild.id}/discovery-categories/{category.id}`
  */
 export type RemoveGuildDiscoverySubcategory = { response: never };
-
-/**
- * Returns the Welcome Screen object for the guild.
- *
- * @endpoint [GET](https://discord.com/developers/docs/resources/guild#get-guild-welcome-screen) `/guilds/{guild.id}/welcome-screen`
- */
-export type GetGuildWelcomeScreen = { response: WelcomeScreen };
-
-/**
- * Modify the guild's Welcome Screen. Requires the `MANAGE_GUILD` permission.
- *
- * @endpoint PATCH `/guilds/{guild.id}/welcome-screen`
- */
-export interface ModifyWelcomeScreen {
-	body: {
-		/**
-		 * Whether the welcome screen is enabled.
-		 */
-		enabled: boolean;
-
-		/**
-		 * Channels linked in the welcome screen and their display options.
-		 */
-		welcome_channels: WelcomeScreenChannel[];
-
-		/**
-		 * The server description to show in the welcome screen.
-		 */
-		description: string;
-	};
-
-	/**
-	 * The updated Welcome Screen object.
-	 */
-	response: WelcomeScreen;
-}
 
 /**
  * Modify the guild's Membership Screening form. Requires the `MANAGE_GUILD` permission.
