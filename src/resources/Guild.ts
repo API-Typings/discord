@@ -988,6 +988,8 @@ export enum ScreeningFieldType {
 
 // SECTION Endpoints
 
+// ANCHOR Create Guild
+
 /**
  * Create a new guild. This endpoint can be used only by bots in less than 10 guilds.
  *
@@ -1208,7 +1210,7 @@ export interface ModifyGuild {
 		/**
 		 * The description for the guild, if the guild is discoverable.
 		 */
-		description?: string;
+		description: Nullable<string>;
 	};
 
 	/**
