@@ -754,7 +754,8 @@ export enum VoiceCloseCode {
 	UnknownProtocol,
 
 	/**
-	 * Either the channel was deleted or you were kicked. Should not reconnect.
+	 * Either the channel was deleted, you were kicked, or the main gateway session was dropped.
+	 * Should not reconnect.
 	 */
 	Disconnected = 4014,
 
