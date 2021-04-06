@@ -88,12 +88,6 @@ export enum OAuth2Scope {
 	RPC = 'rpc',
 
 	/**
-	 * For local RPC server API access, this allows you to access the API as the local user.
-	 * Whitelist only.
-	 */
-	RPCAPI = 'rpc.api',
-
-	/**
 	 * For local RPC server API access, this allows you to receive notifications pushed out to the
 	 * user. Whitelist only.
 	 */
