@@ -61,7 +61,7 @@ export interface AuditLogEntry {
 	/**
 	 * The user who made the changes.
 	 */
-	user_id: Snowflake;
+	user_id: Nullable<Snowflake>;
 
 	/**
 	 * ID of the entry.
