@@ -59,6 +59,12 @@ export interface GatewayURL {
 }
 
 /**
+ * @remarks
+ * While using ETF there are some additional constraints to note:
+ * - Snowflake IDs are transmitted as 64-bit integers over ETF.
+ * - The client must not send compressed messages to the server.
+ * - Payloads must use string keys, atom keys will lead to a 4002 decode error.
+ *
  * @source {@link https://discord.com/developers/docs/topics/gateway#etfjson|Gateway}
  */
 export type EncodingType = 'json' | 'etf';
