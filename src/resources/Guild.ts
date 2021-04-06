@@ -1870,9 +1870,9 @@ export type GetGuildWelcomeScreen = { response: WelcomeScreen };
 /**
  * Modify the guild's Welcome Screen. Requires the `MANAGE_GUILD` permission.
  *
- * @endpoint PATCH `/guilds/{guild.id}/welcome-screen`
+ * @endpoint [PATCH](https://discord.com/developers/docs/resources/guild#modify-guild-welcome-screen) `/guilds/{guild.id}/welcome-screen`
  */
-export interface ModifyWelcomeScreen {
+export interface ModifyGuildWelcomeScreen {
 	body: {
 		/**
 		 * Whether the welcome screen is enabled.
