@@ -394,7 +394,7 @@ export interface Message {
 	stickers?: Sticker[];
 
 	/**
-	 * The message associated with the `message_reference`
+	 * The message associated with the `message_reference`.
 	 *
 	 * @remarks
 	 * This field is only returned for messages with a `type` of `19` (`REPLY`). If the message is
