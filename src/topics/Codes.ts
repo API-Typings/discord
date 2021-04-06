@@ -555,7 +555,11 @@ export enum JSONErrorCode {
 	 * Invalid sticker sent.
 	 */
 	InvalidStickerSent = 50081,
-	TwoFactorAuthRequired = 60003,
+
+	/**
+	 * Two factor is required for this operation.
+	 */
+	TwoFactorRequired = 60003,
 
 	/**
 	 * Reaction was blocked.
