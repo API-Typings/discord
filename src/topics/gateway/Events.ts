@@ -793,6 +793,7 @@ export interface IntegrationDelete extends GatewayEventPayload<GatewayEvent.Inte
 		 * ID of the guild.
 		 */
 		guild_id: Snowflake;
+
 		/**
 		 * Integration ID.
 		 */

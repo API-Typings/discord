@@ -180,6 +180,9 @@ export enum Intents {
 	 * GUILD_INTEGRATIONS (1 \<\< 4)
 	 *
 	 * - `GUILD_INTEGRATIONS_UPDATE`
+	 * - `INTEGRATION_CREATE`
+	 * - `INTEGRATION_UPDATE`
+	 * - `INTEGRATION_DELETE`
 	 */
 	GuildIntegrations = 1 << 4,
 
