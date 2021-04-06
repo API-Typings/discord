@@ -1327,7 +1327,7 @@ export interface ModifyGuildChannelPositions {
 		/**
 		 * The new parent ID for the channel that is moved.
 		 */
-		parent_id: Snowflake;
+		parent_id: Nullable<Snowflake>;
 	};
 
 	response: never;
