@@ -1371,7 +1371,7 @@ export interface ListGuildMembers {
 }
 
 /**
- * @endpoint GET `/guilds/{guild.id}/members/search`
+ * @endpoint [GET](https://discord.com/developers/docs/resources/guild#search-guild-members) `/guilds/{guild.id}/members/search`
  */
 export interface SearchGuildMembers {
 	query: {
