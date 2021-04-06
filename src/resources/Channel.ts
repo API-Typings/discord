@@ -1279,7 +1279,7 @@ export interface CreateMessageJSON {
 		content?: string;
 
 		/**
-		 * A nonce that can be used for optimistic message sending.
+		 * A nonce that can be used for optimistic message sending (up to 25 characters).
 		 */
 		nonce?: number | string;
 

@@ -138,20 +138,20 @@ export interface Heartbeat extends GatewayCommandPayload<GatewayOPCode.Heartbeat
  * Used to request all members for a guild or a list of guilds.
  *
  * @remarks
- * When initially connecting, if you are using Gateway Intents and don't have the
+ * - When initially connecting, if you are using Gateway Intents and don't have the
  * `GUILD_PRESENCES` intent, or if the guild is over 75k members, it will only send members who are
  * in voice, plus the member for you (the connecting user). Otherwise, if a guild has over
  * `large_threshold` members (value in the Gateway Identify), it will only send members who
  * are online, have a role, have a nickname, or are in a voice channel, and if it has under
  * `large_threshold` members, it will send all members.
- *
- * **Limitations**
  * - `GUILD_PRESENCES` intent is required to set `presences = true`. Otherwise, it will always be
  * false
  * - `GUILD_MEMBERS` intent is required to request the entire member list—`(query=‘’, limit=0<=n)`
  * - You will be limited to requesting 1 `guild_id` per request
  * - Requesting a prefix (`query` parameter) will return a maximum of 100 members
  * - Requesting `user_ids` will continue to be limited to returning 100 members
+ * - `nonce` can only be up to 32 bytes. If you send an invalid `nonce` it will be ignored and the
+ * reply `member_chunk`(s) will not have a `nonce` set.
  *
  * @source {@link https://discord.com/developers/docs/topics/gateway#request-guild-members|Gateway}
  */
