@@ -1135,6 +1135,11 @@ export interface VoiceStateUpdate extends GatewayEventPayload<GatewayEvent.Voice
 /**
  * Sent when a guild's voice server is updated. This is sent when initially connecting to voice, and
  * when the current voice instance fails over to a new server.
+ *
+ * @remarks
+ * A `null` endpoint means that the voice server allocated has gone away and is trying to be
+ * reallocated. You should attempt to disconnect from the currently connected voice server, and not
+ * attempt to reconnect until a new voice server is allocated.
  */
 export interface VoiceServerUpdate extends GatewayEventPayload<GatewayEvent.VoiceServerUpdate> {
 	d: {
