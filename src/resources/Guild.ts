@@ -1877,17 +1877,17 @@ export interface ModifyGuildWelcomeScreen {
 		/**
 		 * Whether the welcome screen is enabled.
 		 */
-		enabled: boolean;
+		enabled?: Nullable<boolean>;
 
 		/**
 		 * Channels linked in the welcome screen and their display options.
 		 */
-		welcome_channels: WelcomeScreenChannel[];
+		welcome_channels?: Nullable<WelcomeScreenChannel[]>;
 
 		/**
 		 * The server description to show in the welcome screen.
 		 */
-		description: string;
+		description?: Nullable<string>;
 	};
 
 	/**
