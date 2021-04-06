@@ -5,6 +5,7 @@ import type {
 	InviteMetadata,
 	InviteTargetType,
 	MessageInteraction,
+	PartialApplication,
 	PartialEmoji,
 	Snowflake,
 	User
@@ -379,7 +380,7 @@ export interface Message {
 	/**
 	 * Sent with Rich Presence-related chat embeds.
 	 */
-	application?: MessageApplication;
+	application?: PartialApplication;
 
 	/**
 	 * Message flags combined as a bitfield.
@@ -412,6 +413,8 @@ export interface Message {
 export interface UserMention extends User {
 	member?: Partial<Omit<GuildMember, 'user'>>;
 }
+
+// ANCHOR Message Type Enum
 
 /**
  * @source {@link https://discord.com/developers/docs/resources/channel#message-object-message-types|Channel}
@@ -454,35 +457,7 @@ export interface MessageActivity {
 	party_id?: string;
 }
 
-/**
- * @source {@link https://discord.com/developers/docs/resources/channel#message-object-message-application-structure|Channel}
- */
-export interface MessageApplication {
-	/**
-	 * ID of the application.
-	 */
-	id: Snowflake;
-
-	/**
-	 * ID of the embed's image asset.
-	 */
-	cover_image?: string;
-
-	/**
-	 * Application's description.
-	 */
-	description: string;
-
-	/**
-	 * ID of the application's icon.
-	 */
-	icon: Nullable<string>;
-
-	/**
-	 * Name of the application.
-	 */
-	name: string;
-}
+// ANCHOR Message Reference
 
 /**
  * There are four situations in which a message has a `message_reference` object:
