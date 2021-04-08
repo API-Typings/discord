@@ -1405,7 +1405,8 @@ export type CrosspostMessage = { response: Message };
  * this emoji, this endpoint requires the `ADD_REACTIONS` permission to be present on the current
  * user.
  *
- * The `emoji` must be URL Encoded or the request will fail with `10014: Unknown Emoji`.
+ * The `emoji` must be URL Encoded or the request will fail with `10014: Unknown Emoji`. To use a
+ * custom emoji, you must encode it in the format `name:id` with the emoji name and emoji ID.
  *
  * @endpoint [PUT](https://discord.com/developers/docs/resources/channel#create-reaction) `/channels/{channel.id}/messages/{message.id}/reactions/{emoji}/@me`
  */
@@ -1414,7 +1415,8 @@ export type CreateReaction = { response: never };
 /**
  * Delete a reaction the current user has made for the message.
  *
- * The `emoji` must be URL Encoded or the request will fail with `10014: Unknown Emoji`.
+ * The `emoji` must be URL Encoded or the request will fail with `10014: Unknown Emoji`. To use a
+ * custom emoji, you must encode it in the format `name:id` with the emoji name and emoji ID.
  *
  * @endpoint [DELETE](https://discord.com/developers/docs/resources/channel#delete-own-reaction) `/channels/{channel.id}/messages/{message.id}/reactions/{emoji}/@me`
  */
@@ -1424,7 +1426,8 @@ export type DeleteOwnReaction = { response: never };
  * Deletes another user's reaction. This endpoint requires the `MANAGE_MESSAGES` permission to be
  * present on the current user.
  *
- * The `emoji` must be URL Encoded or the request will fail with `10014: Unknown Emoji`.
+ * The `emoji` must be URL Encoded or the request will fail with `10014: Unknown Emoji`. To use a
+ * custom emoji, you must encode it in the format `name:id` with the emoji name and emoji ID.
  *
  * @endpoint [DELETE](https://discord.com/developers/docs/resources/channel#delete-user-reaction) `/channels/{channel.id}/messages/{message.id}/reactions/{emoji}/{user.id}`
  */
@@ -1433,7 +1436,8 @@ export type DeleteUserReaction = { response: never };
 /**
  * Get a list of users that reacted with this emoji.
  *
- * The `emoji` must be URL Encoded or the request will fail with `10014: Unknown Emoji`.
+ * The `emoji` must be URL Encoded or the request will fail with `10014: Unknown Emoji`. To use a
+ * custom emoji, you must encode it in the format `name:id` with the emoji name and emoji ID.
  *
  * @endpoint [GET](https://discord.com/developers/docs/resources/channel#get-reactions) `/channels/{channel.id}/messages/{message.id}/reactions/{emoji.id}`
  */
@@ -1470,7 +1474,8 @@ export type DeleteAllReactions = { response: never };
  * Deletes all the reactions for a given emoji on a message. This endpoint requires the
  * `MANAGE_MESSAGES` permission to be present on the current user.
  *
- * The `emoji` must be URL Encoded or the request will fail with `10014: Unknown Emoji`.
+ * The `emoji` must be URL Encoded or the request will fail with `10014: Unknown Emoji`. To use a
+ * custom emoji, you must encode it in the format `name:id` with the emoji name and emoji ID.
  *
  * @endpoint [DELETE](https://discord.com/developers/docs/resources/channel#delete-all-reactions-for-emoji) `/channels/{channel.id}/messages/{message.id}/reactions/{emoji}`
  */
