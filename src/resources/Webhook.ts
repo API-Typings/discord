@@ -63,6 +63,11 @@ export interface Webhook {
 	 * The channel that this webhook is following (returned for Channel Follower Webhooks).
 	 */
 	source_channel?: Pick<Channel, 'id' | 'name'>;
+
+	/**
+	 * The URL used for executing the webhook (returned by the Webhooks OAuth2 flow).
+	 */
+	url?: `https://discord.com/api/webhooks/${Snowflake}/${string}`;
 }
 
 /**
