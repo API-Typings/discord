@@ -439,7 +439,7 @@ export enum MessageType {
 	GuildDiscoveryGracePeriodFinalWarning,
 	Reply = 19,
 	ApplicationCommand,
-	GuildInviteReminder
+	GuildInviteReminder = 22
 }
 
 /**
