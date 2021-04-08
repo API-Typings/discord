@@ -25,7 +25,7 @@
 	},
 	"license": "BSD-3-Clause",
 	"dependencies": {
-		"extended-utility-types": "^1.12.0"
+		"extended-utility-types": "^1.13.0"
 	},
 	"devDependencies": {
 		"@microsoft/tsdoc-config": "^0.14.0",
@@ -35,6 +35,6 @@
 		"eslint": "^7.23.0",
 		"eslint-plugin-tsdoc": "^0.2.11",
 		"prettier": "^2.2.1",
-		"typescript": "^4.2.3"
+		"typescript": "^4.2.4"
 	}
 }
