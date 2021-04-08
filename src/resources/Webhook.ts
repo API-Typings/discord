@@ -39,7 +39,7 @@ export interface Webhook {
 	name: Nullable<string>;
 
 	/**
-	 * The default avatar of the webhook.
+	 * The default user avatar hash of the webhook.
 	 */
 	avatar: Nullable<string>;
 
