@@ -310,8 +310,7 @@ export interface Hello {
  *
  * `guilds` are the guilds of which your bot is a member. They start out as unavailable when you
  * connect to the gateway. As they become available, your bot will be notified via Guild Create
- * events. `private_channels` will be an empty array. As bots receive private messages, they will be
- * notified via Channel Create events.
+ * events.
  *
  * @source {@link https://discord.com/developers/docs/topics/gateway#ready|Gateway}
  */
@@ -326,11 +325,6 @@ export interface Ready extends GatewayEventPayload<GatewayEvent.Ready> {
 		 * Information about the user including email.
 		 */
 		user: PartialUser;
-
-		/**
-		 * Empty array.
-		 */
-		private_channels: [];
 
 		/**
 		 * The guilds the user is in.
