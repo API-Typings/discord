@@ -124,6 +124,18 @@ export enum ChannelType {
 	 */
 }
 
+export enum VideoQualityMode {
+	/**
+	 * Discord chooses the quality for optimal performance.
+	 */
+	Auto = 1,
+
+	/**
+	 * 720p.
+	 */
+	Full
+}
+
 // ANCHOR Text Channel
 
 /**
@@ -183,6 +195,11 @@ export interface VoiceChannel extends Channel {
 	 * Voice region ID for the voice channel, automatic when set to `null`.
 	 */
 	rtc_region: Nullable<string>;
+
+	/**
+	 * The camera video quality mode of the voice channel, `1` when not present.
+	 */
+	video_quality_mode: VideoQualityMode;
 }
 
 // ANCHOR DM Channel
@@ -1162,6 +1179,11 @@ export interface ModifyChannel {
 		 * Channel voice region ID, automatic when set to `null`. Applies to voice channels.
 		 */
 		rtc_region?: Nullable<string>;
+
+		/**
+		 * The camera video quality mode of the voice channel. Applies to voice channels.
+		 */
+		video_quality_mode?: Nullable<VideoQualityMode>;
 	};
 
 	response: Channel;
