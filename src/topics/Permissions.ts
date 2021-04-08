@@ -208,7 +208,7 @@ export enum PermissionFlags {
 	/**
 	 * Allows members to use slash commands in text channels. Applies to text channels.
 	 */
-	UseApplicationCommands = 0x80000000
+	UseSlashCommands = 0x80000000
 }
 
 export type Permission =
@@ -243,7 +243,7 @@ export type Permission =
 	| 'MANAGE_ROLES'
 	| 'MANAGE_WEBHOOKS'
 	| 'MANAGE_EMOJIS'
-	| 'USE_APPLICATION_COMMANDS';
+	| 'USE_SLASH_COMMANDS';
 
 // SECTION Roles
 
