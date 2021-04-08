@@ -185,6 +185,35 @@ export interface ApplicationCommandOptionChoice {
 	value: string | number;
 }
 
+// ANCHOR Partial Guild Application Command Permissions
+
+export interface PartialGuildApplicationCommandPermissions {
+	/**
+	 * The ID of the command.
+	 */
+	id: Snowflake;
+
+	/**
+	 * The permissions for the command in the guild.
+	 */
+	permissions: ApplicationCommandPermissions[];
+}
+
+/**
+ * Returns when fetching the permissions for a command in a guild.
+ */
+export interface GuildApplicationCommandPermissions extends PartialGuildApplicationCommandPermissions {
+	/**
+	 * The ID of the application the command belongs to.
+	 */
+	application_id: Snowflake;
+
+	/**
+	 * The ID of the guild.
+	 */
+	guild_id: Snowflake;
+}
+
 /**
  * Application command permissions allow you to enable or disable commands for specific users or
  * roles within a guild.
@@ -489,6 +518,13 @@ export interface CreateGlobalApplicationCommand {
 		 * The parameters for the command.
 		 */
 		options?: ApplicationCommandOption[];
+
+		/**
+		 * Whether the command is enabled by default when the app is added to a guild.
+		 *
+		 * @defaultValue true
+		 */
+		default_permission?: boolean;
 	};
 
 	response: ApplicationCommand;
@@ -522,6 +558,13 @@ export interface EditGlobalApplicationCommand {
 		 * The parameters for the command.
 		 */
 		options?: Nullable<ApplicationCommandOption>[];
+
+		/**
+		 * Whether the command is enabled by default when the app is added to a guild.
+		 *
+		 * @defaultValue true
+		 */
+		default_permission?: boolean;
 	};
 
 	response: ApplicationCommand;
@@ -651,7 +694,7 @@ export type DeleteFollowupMessage = { response: never };
  *
  * @endpoint GET `/applications/{application.id}/guilds/{guild.id}/commands/permissions`
  */
-export type GetGuildApplicationCommandPermissions = { response: ApplicationCommandPermissions[] };
+export type GetGuildApplicationCommandPermissions = { response: GuildApplicationCommandPermissions[] };
 
 /* eslint-disable max-len */
 /**
@@ -676,12 +719,19 @@ export interface EditApplicationCommandPermissions {
 		permissions: ApplicationCommandPermissions[];
 	};
 
-	response: {
-		id: Snowflake;
-		application_id: Snowflake;
-		guild_id: Snowflake;
-		permissions: ApplicationCommandPermissions[];
-	};
+	response: GuildApplicationCommandPermissions;
+}
+
+/**
+ * Batch edits permissions for all commands in a guild.
+ *
+ * @remarks
+ * This endpoint will overwrite existing permissions for the command in that guild.
+ *
+ * @endpoint PUT `/applications/{application.id}/guilds/{guild.id}/permissions`
+ */
+export interface BatchEditApplicationCommandPermissions {
+	body: PartialGuildApplicationCommandPermissions[];
 }
 
 // !SECTION
