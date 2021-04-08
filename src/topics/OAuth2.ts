@@ -369,6 +369,13 @@ export interface WebhookAccessToken extends AuthorizationCodeAccessToken {
 
 // !SECTION
 
+// ANCHOR Get Current Bot Application Information
+
+/**
+ * @endpoint [GET](https://discord.com/developers/docs/topics/oauth2#get-current-application-information) `/oauth2/applications/@me`
+ */
+export type GetCurrentBotApplicationInformation = { response: Omit<Application, 'flags'> };
+
 // ANCHOR Partial Application
 
 /**
@@ -480,16 +487,22 @@ export interface Application extends Omit<PartialApplication, 'hook'> {
 }
 
 export enum ApplicationFlags {
-	ManagedEmoji = 1 << 2,
-	GroupDMCreate = 1 << 4,
-	RPCConnected = 1 << 11,
 	GatewayPresence = 1 << 12,
 	GatewayPresenceLimited = 1 << 13,
 	GatewayGuildMembers = 1 << 14,
 	GatewayGuildMembersLimited = 1 << 15,
 	VerificationPendingGuildLimit = 1 << 16,
-	Enabled = 1 << 17
+	Embedded = 1 << 17
 }
+
+// ANCHOR Get Current Authorization Information
+
+/**
+ * Returns info about the current authorization. Requires authentication with a bearer token.
+ *
+ * @endpoint [GET](https://discord.com/developers/docs/topics/oauth2#get-current-authorization-information) `/oauth2/@me`
+ */
+export type GetCurrentAuthorizationInformation = { response: AuthorizationInformation };
 
 /**
  * @source {@link https://discord.com/developers/docs/topics/oauth2#get-current-authorization-information-response-structure|OAuth2}
