@@ -1,4 +1,4 @@
-import type { Nullable, TupleOf } from 'extended-utility-types';
+import type { FixedTuple, Nullable } from 'extended-utility-types';
 import type { AllowedMentions, Channel, Embed, Guild, Message, Snowflake, User } from '../';
 
 /**
@@ -39,7 +39,7 @@ export interface Webhook {
 	name: Nullable<string>;
 
 	/**
-	 * The default avatar of the webhook.
+	 * The default user avatar hash of the webhook.
 	 */
 	avatar: Nullable<string>;
 
@@ -63,6 +63,11 @@ export interface Webhook {
 	 * The channel that this webhook is following (returned for Channel Follower Webhooks).
 	 */
 	source_channel?: Pick<Channel, 'id' | 'name'>;
+
+	/**
+	 * The URL used for executing the webhook (returned by the Webhooks OAuth2 flow).
+	 */
+	url?: `https://discord.com/api/webhooks/${Snowflake}/${string}`;
 }
 
 /**
@@ -245,7 +250,7 @@ export interface ExecuteWebhook {
 		/**
 		 * Embedded `rich` content.
 		 */
-		embeds?: Partial<TupleOf<Embed, 10>>;
+		embeds?: Partial<FixedTuple<Embed, 10>>;
 		payload_json?: string;
 
 		/**

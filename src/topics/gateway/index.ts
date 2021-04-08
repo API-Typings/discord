@@ -59,6 +59,12 @@ export interface GatewayURL {
 }
 
 /**
+ * @remarks
+ * While using ETF there are some additional constraints to note:
+ * - Snowflake IDs are transmitted as 64-bit integers over ETF.
+ * - The client must not send compressed messages to the server.
+ * - Payloads must use string keys, atom keys will lead to a 4002 decode error.
+ *
  * @source {@link https://discord.com/developers/docs/topics/gateway#etfjson|Gateway}
  */
 export type EncodingType = 'json' | 'etf';
@@ -132,7 +138,6 @@ export interface SessionStartLimit {
 export enum Intents {
 	/**
 	 * GUILDS (1 \<\< 0)
-	 *
 	 * - `GUILD_CREATE`
 	 * - `GUILD_UPDATE`
 	 * - `GUILD_DELETE`
@@ -148,7 +153,6 @@ export enum Intents {
 
 	/**
 	 * GUILD_MEMBERS (1 \<\< 1)
-	 *
 	 * - `GUILD_MEMBER_ADD`
 	 * - `GUILD_MEMBER_UPDATE`
 	 * - `GUILD_MEMBER_REMOVE`
@@ -157,7 +161,6 @@ export enum Intents {
 
 	/**
 	 * GUILD_BANS (1 \<\< 2)
-	 *
 	 * - `GUILD_BAN_ADD`
 	 * - `GUILD_BAN_REMOVE`
 	 */
@@ -165,28 +168,27 @@ export enum Intents {
 
 	/**
 	 * GUILD_EMOJIS (1 \<\< 3)
-	 *
 	 * - `GUILD_EMOJIS_UPDATE`
 	 */
 	GuildEmojis = 1 << 3,
 
 	/**
 	 * GUILD_INTEGRATIONS (1 \<\< 4)
-	 *
 	 * - `GUILD_INTEGRATIONS_UPDATE`
+	 * - `INTEGRATION_CREATE`
+	 * - `INTEGRATION_UPDATE`
+	 * - `INTEGRATION_DELETE`
 	 */
 	GuildIntegrations = 1 << 4,
 
 	/**
 	 * GUILD_WEBHOOKS (1 \<\< 5)
-	 *
 	 * - `WEBHOOKS_UPDATE`
 	 */
 	GuildWebhooks = 1 << 5,
 
 	/**
 	 * GUILD_INVITES (1 \<\< 6)
-	 *
 	 * - `INVITE_CREATE`
 	 * - `INVITE_DELETE`
 	 */
@@ -194,21 +196,18 @@ export enum Intents {
 
 	/**
 	 * GUILD_VOICE_STATES (1 \<\< 7)
-	 *
 	 * - `VOICE_STATE_UPDATE`
 	 */
 	GuildVoiceStates = 1 << 7,
 
 	/**
 	 * GUILD_PRESENCES (1 \<\< 8)
-	 *
 	 * - `PRESENCE_UPDATE`
 	 */
 	GuildPresences = 1 << 8,
 
 	/**
 	 * GUILD_MESSAGES (1 \<\< 9)
-	 *
 	 * - `MESSAGE_CREATE`
 	 * - `MESSAGE_UPDATE`
 	 * - `MESSAGE_DELETE`
@@ -218,7 +217,6 @@ export enum Intents {
 
 	/**
 	 * GUILD_MESSAGE_REACTIONS (1 \<\< 10)
-	 *
 	 * - `MESSAGE_REACTION_REMOVE`
 	 * - `MESSAGE_REACTION_ADD`
 	 * - `MESSAGE_REACTION_REMOVE_ALL`
@@ -228,14 +226,12 @@ export enum Intents {
 
 	/**
 	 * GUILD_MESSAGE_TYPING (1 \<\< 11)
-	 *
 	 * - `TYPING_START`
 	 */
 	GuildMessageTyping = 1 << 11,
 
 	/**
 	 * DIRECT_MESSAGES (1 \<\< 12)
-	 *
 	 * - `MESSAGE_CREATE`
 	 * - `MESSAGE_UPDATE`
 	 * - `MESSAGE_DELETE`
@@ -245,7 +241,6 @@ export enum Intents {
 
 	/**
 	 * DIRECT_MESSAGE_REACTIONS (1 \<\< 13)
-	 *
 	 * - `MESSAGE_REACTION_ADD`
 	 * - `MESSAGE_REACTION_REMOVE`
 	 * - `MESSAGE_REACTION_REMOVE_ALL`
@@ -255,7 +250,6 @@ export enum Intents {
 
 	/**
 	 * DIRECT_MESSAGE_TYPING (1 \<\< 14)
-	 *
 	 * - `TYPING_START`
 	 */
 	DirectMessageTyping = 1 << 14,

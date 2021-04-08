@@ -1,10 +1,11 @@
-import type { Nullable, Range, TupleOf } from 'extended-utility-types';
+import type { FixedTuple, Nullable, Range } from 'extended-utility-types';
 import type {
 	GuildMember,
 	Invite,
 	InviteMetadata,
 	InviteTargetType,
 	MessageInteraction,
+	PartialApplication,
 	PartialEmoji,
 	Snowflake,
 	User
@@ -127,6 +128,18 @@ export enum ChannelType {
 	GUILD_STAGE_VOICE = 13
 }
 
+export enum VideoQualityMode {
+	/**
+	 * Discord chooses the quality for optimal performance.
+	 */
+	Auto = 1,
+
+	/**
+	 * 720p.
+	 */
+	Full
+}
+
 // ANCHOR Text Channel
 
 /**
@@ -183,9 +196,14 @@ export interface VoiceChannel extends Channel {
 	user_limit: number;
 
 	/**
-	 * Voice region ID for the voice channel.
+	 * Voice region ID for the voice channel, automatic when set to `null`.
 	 */
 	rtc_region: Nullable<string>;
+
+	/**
+	 * The camera video quality mode of the voice channel, `1` when not present.
+	 */
+	video_quality_mode: VideoQualityMode;
 }
 
 // ANCHOR DM Channel
@@ -383,7 +401,7 @@ export interface Message {
 	/**
 	 * Sent with Rich Presence-related chat embeds.
 	 */
-	application?: MessageApplication;
+	application?: PartialApplication;
 
 	/**
 	 * Message flags combined as a bitfield.
@@ -397,7 +415,7 @@ export interface Message {
 	stickers?: Sticker[];
 
 	/**
-	 * The message associated with the `message_reference`
+	 * The message associated with the `message_reference`.
 	 *
 	 * @remarks
 	 * This field is only returned for messages with a `type` of `19` (`REPLY`). If the message is
@@ -416,6 +434,8 @@ export interface Message {
 export interface UserMention extends User {
 	member?: Partial<Omit<GuildMember, 'user'>>;
 }
+
+// ANCHOR Message Type Enum
 
 /**
  * @source {@link https://discord.com/developers/docs/resources/channel#message-object-message-types|Channel}
@@ -439,7 +459,8 @@ export enum MessageType {
 	GuildDiscoveryGracePeriodInitialWarning,
 	GuildDiscoveryGracePeriodFinalWarning,
 	Reply = 19,
-	ApplicationCommand
+	ApplicationCommand,
+	GuildInviteReminder = 22
 }
 
 /**
@@ -457,35 +478,7 @@ export interface MessageActivity {
 	party_id?: string;
 }
 
-/**
- * @source {@link https://discord.com/developers/docs/resources/channel#message-object-message-application-structure|Channel}
- */
-export interface MessageApplication {
-	/**
-	 * ID of the application.
-	 */
-	id: Snowflake;
-
-	/**
-	 * ID of the embed's image asset.
-	 */
-	cover_image?: string;
-
-	/**
-	 * Application's description.
-	 */
-	description: string;
-
-	/**
-	 * ID of the application's icon.
-	 */
-	icon: Nullable<string>;
-
-	/**
-	 * Name of the application.
-	 */
-	name: string;
-}
+// ANCHOR Message Reference
 
 /**
  * There are four situations in which a message has a `message_reference` object:
@@ -797,7 +790,7 @@ export interface Embed {
 	/**
 	 * Fields information.
 	 */
-	fields?: Partial<TupleOf<EmbedField, 25>>;
+	fields?: Partial<FixedTuple<EmbedField, 25>>;
 }
 
 /**
@@ -949,6 +942,11 @@ export interface Attachment {
 	 * Name of file attached.
 	 */
 	filename: string;
+
+	/**
+	 * The attachment's media type.
+	 */
+	content_type?: string;
 
 	/**
 	 * Size of file in bytes.
@@ -1185,6 +1183,11 @@ export interface ModifyChannel {
 		 * Channel voice region ID, automatic when set to `null`. Applies to voice channels.
 		 */
 		rtc_region?: Nullable<string>;
+
+		/**
+		 * The camera video quality mode of the voice channel. Applies to voice channels.
+		 */
+		video_quality_mode?: Nullable<VideoQualityMode>;
 	};
 
 	response: Channel;
@@ -1302,7 +1305,7 @@ export interface CreateMessageJSON {
 		content?: string;
 
 		/**
-		 * A nonce that can be used for optimistic message sending.
+		 * A nonce that can be used for optimistic message sending (up to 25 characters).
 		 */
 		nonce?: number | string;
 
@@ -1406,7 +1409,8 @@ export type CrosspostMessage = { response: Message };
  * this emoji, this endpoint requires the `ADD_REACTIONS` permission to be present on the current
  * user.
  *
- * The `emoji` must be URL Encoded or the request will fail with `10014: Unknown Emoji`.
+ * The `emoji` must be URL Encoded or the request will fail with `10014: Unknown Emoji`. To use a
+ * custom emoji, you must encode it in the format `name:id` with the emoji name and emoji ID.
  *
  * @endpoint [PUT](https://discord.com/developers/docs/resources/channel#create-reaction) `/channels/{channel.id}/messages/{message.id}/reactions/{emoji}/@me`
  */
@@ -1415,7 +1419,8 @@ export type CreateReaction = { response: never };
 /**
  * Delete a reaction the current user has made for the message.
  *
- * The `emoji` must be URL Encoded or the request will fail with `10014: Unknown Emoji`.
+ * The `emoji` must be URL Encoded or the request will fail with `10014: Unknown Emoji`. To use a
+ * custom emoji, you must encode it in the format `name:id` with the emoji name and emoji ID.
  *
  * @endpoint [DELETE](https://discord.com/developers/docs/resources/channel#delete-own-reaction) `/channels/{channel.id}/messages/{message.id}/reactions/{emoji}/@me`
  */
@@ -1425,7 +1430,8 @@ export type DeleteOwnReaction = { response: never };
  * Deletes another user's reaction. This endpoint requires the `MANAGE_MESSAGES` permission to be
  * present on the current user.
  *
- * The `emoji` must be URL Encoded or the request will fail with `10014: Unknown Emoji`.
+ * The `emoji` must be URL Encoded or the request will fail with `10014: Unknown Emoji`. To use a
+ * custom emoji, you must encode it in the format `name:id` with the emoji name and emoji ID.
  *
  * @endpoint [DELETE](https://discord.com/developers/docs/resources/channel#delete-user-reaction) `/channels/{channel.id}/messages/{message.id}/reactions/{emoji}/{user.id}`
  */
@@ -1434,7 +1440,8 @@ export type DeleteUserReaction = { response: never };
 /**
  * Get a list of users that reacted with this emoji.
  *
- * The `emoji` must be URL Encoded or the request will fail with `10014: Unknown Emoji`.
+ * The `emoji` must be URL Encoded or the request will fail with `10014: Unknown Emoji`. To use a
+ * custom emoji, you must encode it in the format `name:id` with the emoji name and emoji ID.
  *
  * @endpoint [GET](https://discord.com/developers/docs/resources/channel#get-reactions) `/channels/{channel.id}/messages/{message.id}/reactions/{emoji.id}`
  */
@@ -1471,7 +1478,8 @@ export type DeleteAllReactions = { response: never };
  * Deletes all the reactions for a given emoji on a message. This endpoint requires the
  * `MANAGE_MESSAGES` permission to be present on the current user.
  *
- * The `emoji` must be URL Encoded or the request will fail with `10014: Unknown Emoji`.
+ * The `emoji` must be URL Encoded or the request will fail with `10014: Unknown Emoji`. To use a
+ * custom emoji, you must encode it in the format `name:id` with the emoji name and emoji ID.
  *
  * @endpoint [DELETE](https://discord.com/developers/docs/resources/channel#delete-all-reactions-for-emoji) `/channels/{channel.id}/messages/{message.id}/reactions/{emoji}`
  */
@@ -1595,54 +1603,56 @@ export type GetChannelInvites = { response: InviteMetadata[] };
  * @endpoint [POST](https://discord.com/developers/docs/resources/channel#create-channel-invite) `/channels/{channel.id}/invites`
  */
 export interface CreateChannelInvite {
-	body: {
-		/**
-		 * Duration of invite in seconds before expiry, or 0 for never. Between 0 and 604800 (7
-		 * days).
-		 *
-		 * @defaultValue 86400 (24 hours)
-		 */
-		max_age?: number;
+	body:
+		| {
+				/**
+				 * Duration of invite in seconds before expiry, or 0 for never. Between 0 and
+				 * 604800 (7 days).
+				 *
+				 * @defaultValue 86400 (24 hours)
+				 */
+				max_age?: number;
 
-		/**
-		 * Max number of uses or 0 for unlimited. Between 0 and 100.
-		 *
-		 * @defaultValue 0
-		 */
-		max_uses?: Range<0, 100>;
+				/**
+				 * Max number of uses or 0 for unlimited. Between 0 and 100.
+				 *
+				 * @defaultValue 0
+				 */
+				max_uses?: Range<0, 100>;
 
-		/**
-		 * Whether this invite only grants temporary membership.
-		 *
-		 * @defaultValue false
-		 */
-		temporary?: boolean;
+				/**
+				 * Whether this invite only grants temporary membership.
+				 *
+				 * @defaultValue false
+				 */
+				temporary?: boolean;
 
-		/**
-		 * If true, don't try to reuse a similar invite (useful for creating many unique one time
-		 * use invites).
-		 *
-		 * @defaultValue false
-		 */
-		unique?: boolean;
+				/**
+				 * If true, don't try to reuse a similar invite (useful for creating many unique
+				 * one time use invites).
+				 *
+				 * @defaultValue false
+				 */
+				unique?: boolean;
 
-		/**
-		 * The type of target for this voice channel invite.
-		 */
-		target_type?: InviteTargetType;
+				/**
+				 * The type of target for this voice channel invite.
+				 */
+				target_type?: InviteTargetType;
 
-		/**
-		 * The ID of the user whose stream to display for this invite, required if `target_type`
-		 * is 1, the user must be streaming in the channel.
-		 */
-		target_user_id?: Snowflake;
+				/**
+				 * The ID of the user whose stream to display for this invite, required if
+				 * `target_type` is 1, the user must be streaming in the channel.
+				 */
+				target_user_id?: Snowflake;
 
-		/**
-		 * The ID of the embedded application to open for this invite, required if `target_type`
-		 * is 2, the application must have the `EMBEDDED` flag.
-		 */
-		target_application_id?: Snowflake;
-	};
+				/**
+				 * The ID of the embedded application to open for this invite, required if
+				 * `target_type` is 2, the application must have the `EMBEDDED` flag.
+				 */
+				target_application_id?: Snowflake;
+		  }
+		| Record<string, never>;
 
 	response: Invite;
 }

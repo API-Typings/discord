@@ -555,7 +555,11 @@ export enum JSONErrorCode {
 	 * Invalid sticker sent.
 	 */
 	InvalidStickerSent = 50081,
-	TwoFactorAuthRequired = 60003,
+
+	/**
+	 * Two factor is required for this operation.
+	 */
+	TwoFactorRequired = 60003,
 
 	/**
 	 * Reaction was blocked.
@@ -750,7 +754,8 @@ export enum VoiceCloseCode {
 	UnknownProtocol,
 
 	/**
-	 * Either the channel was deleted or you were kicked. Should not reconnect.
+	 * Either the channel was deleted, you were kicked, or the main gateway session was dropped.
+	 * Should not reconnect.
 	 */
 	Disconnected = 4014,
 

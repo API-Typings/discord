@@ -310,8 +310,7 @@ export interface Hello {
  *
  * `guilds` are the guilds of which your bot is a member. They start out as unavailable when you
  * connect to the gateway. As they become available, your bot will be notified via Guild Create
- * events. `private_channels` will be an empty array. As bots receive private messages, they will be
- * notified via Channel Create events.
+ * events.
  *
  * @source {@link https://discord.com/developers/docs/topics/gateway#ready|Gateway}
  */
@@ -326,11 +325,6 @@ export interface Ready extends GatewayEventPayload<GatewayEvent.Ready> {
 		 * Information about the user including email.
 		 */
 		user: PartialUser;
-
-		/**
-		 * Empty array.
-		 */
-		private_channels: [];
 
 		/**
 		 * The guilds the user is in.
@@ -638,6 +632,16 @@ export interface GuildMemberUpdate extends GatewayEventPayload<GatewayEvent.Guil
 		premium_since?: Nullable<string>;
 
 		/**
+		 * Whether the user is deafened in voice channels.
+		 */
+		deaf?: boolean;
+
+		/**
+		 * Whether the user is muted in voice channels.
+		 */
+		mute?: boolean;
+
+		/**
 		 * Whether the user has not yet passed the guild's Membership Screening requirements.
 		 */
 		pending?: boolean;
@@ -793,6 +797,7 @@ export interface IntegrationDelete extends GatewayEventPayload<GatewayEvent.Inte
 		 * ID of the guild.
 		 */
 		guild_id: Snowflake;
+
 		/**
 		 * Integration ID.
 		 */
@@ -1135,6 +1140,11 @@ export interface VoiceStateUpdate extends GatewayEventPayload<GatewayEvent.Voice
 /**
  * Sent when a guild's voice server is updated. This is sent when initially connecting to voice, and
  * when the current voice instance fails over to a new server.
+ *
+ * @remarks
+ * A `null` endpoint means that the voice server allocated has gone away and is trying to be
+ * reallocated. You should attempt to disconnect from the currently connected voice server, and not
+ * attempt to reconnect until a new voice server is allocated.
  */
 export interface VoiceServerUpdate extends GatewayEventPayload<GatewayEvent.VoiceServerUpdate> {
 	d: {

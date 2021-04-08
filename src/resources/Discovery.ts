@@ -1,4 +1,4 @@
-import type { Nullable, TupleOf } from 'extended-utility-types';
+import type { FixedTuple, Nullable } from 'extended-utility-types';
 import type { Snowflake } from '../';
 
 /**
@@ -18,7 +18,7 @@ export interface DiscoveryMetadata {
 	/**
 	 * Up to 10 discovery search keywords set for this guild.
 	 */
-	keywords: Nullable<string[]>;
+	keywords: Nullable<Partial<FixedTuple<string, 10>>>;
 
 	/**
 	 * Whether guild info is shown when custom emojis from this guild are clicked.
@@ -39,7 +39,7 @@ export interface DiscoveryMetadata {
 	/**
 	 * IDs of up to 5 discovery subcategories set for this guild.
 	 */
-	category_ids: Partial<TupleOf<number, 5>>;
+	category_ids: Partial<FixedTuple<number, 5>>;
 }
 
 export interface DiscoveryCategory {
@@ -69,18 +69,6 @@ export interface DiscoveryCategoryName {
 	 * The name in other languages.
 	 */
 	localizations?: Record<string, string>;
-}
-
-export interface DiscoverySubcategory {
-	/**
-	 * The guild ID the subcategory was added to.
-	 */
-	guild_id: Snowflake;
-
-	/**
-	 * The ID of the subcategory added.
-	 */
-	category_id: number;
 }
 
 // SECTION Endpoints

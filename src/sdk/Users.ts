@@ -115,8 +115,6 @@ export interface UserManager extends NodeJS.EventEmitter {
 	/**
 	 * Fires when the `User` struct of the currently connected user changes. They may have changed
 	 * their avatar, username, or something else.
-	 *
-	 * @param user - A new User struct for the current user
 	 */
-	on(event: 'CurrentUserUpdate', listener: (user: Discord.User) => void): this;
+	on(event: 'CurrentUserUpdate', listener: () => void): this;
 }

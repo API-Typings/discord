@@ -1,4 +1,4 @@
-import type { Nullable } from 'extended-utility-types';
+import type { FixedTuple, Nullable } from 'extended-utility-types';
 import type { Snowflake, StatusType } from '../../';
 
 // ANCHOR Client Status
@@ -128,9 +128,9 @@ export interface Activity {
 	flags?: ActivityFlags;
 
 	/**
-	 * The custom buttons shown in the Rich Presence (max 2).
+	 * The custom buttons shown in the Rich Presence.
 	 */
-	buttons?: ActivityButton[];
+	buttons?: Partial<FixedTuple<ActivityButton, 2>>;
 }
 
 export type ActivityPlatform = 'desktop' | 'samsung' | 'xbox';

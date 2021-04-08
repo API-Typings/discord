@@ -1,4 +1,4 @@
-import type { Nullable, Range, TupleOf } from 'extended-utility-types';
+import type { FixedTuple, Nullable, Range } from 'extended-utility-types';
 import type {
 	Activity,
 	Channel,
@@ -52,7 +52,7 @@ export interface PartialGuild {
 	/**
 	 * Enabled guild features.
 	 */
-	features?: GuildFeatures[];
+	features?: `${GuildFeature}`[];
 
 	/**
 	 * Verification level required for the guild.
@@ -150,12 +150,12 @@ export interface Guild extends PartialGuild {
 	/**
 	 * Default message notifications level.
 	 */
-	default_message_notifications: NotificationLevel;
+	default_message_notifications: DefaultMessageNotificationLevel;
 
 	/**
 	 * Explicit content filter level.
 	 */
-	explicit_content_filter: ExplicitFilterLevel;
+	explicit_content_filter: ExplicitContentFilterLevel;
 
 	/**
 	 * Roles in the guild.
@@ -170,7 +170,7 @@ export interface Guild extends PartialGuild {
 	/**
 	 * Enabled guild features.
 	 */
-	features: GuildFeatures[];
+	features: `${GuildFeature}`[];
 
 	/**
 	 * Required MFA level for the guild.
@@ -339,14 +339,14 @@ export interface Guild extends PartialGuild {
 /**
  * @source {@link https://discord.com/developers/docs/resources/guild#guild-object-default-message-notification-level|Guild}
  */
-export enum NotificationLevel {
+export enum DefaultMessageNotificationLevel {
 	/**
 	 * Members will receive notifications for all messages by default.
 	 */
 	AllMessages,
 
 	/**
-	 * Members will receive notifications only for messages that \@mention them by default.
+	 * Members will receive notifications only for messages that `@mention` them by default.
 	 */
 	OnlyMentions
 }
@@ -354,7 +354,7 @@ export enum NotificationLevel {
 /**
  * @source {@link https://discord.com/developers/docs/resources/guild#guild-object-explicit-content-filter-level|Guild}
  */
-export enum ExplicitFilterLevel {
+export enum ExplicitContentFilterLevel {
 	/**
 	 * No media content will be scanned.
 	 */
@@ -453,29 +453,35 @@ export enum SystemChannelFlags {
 	/**
 	 * Suppress server boost notifications.
 	 */
-	SuppressPremiumSubscriptions = 1 << 1
+	SuppressPremiumSubscriptions = 1 << 1,
+
+	/**
+	 * Suppress server setup tips.
+	 */
+	SuppressGuildReminderNotifications = 1 << 2
 }
 
 /**
  * @source {@link https://discord.com/developers/docs/resources/guild#guild-object-guild-features|Guild}
  */
-export type GuildFeatures =
-	| 'INVITE_SPLASH'
-	| 'VIP_REGIONS'
-	| 'VANITY_URL'
-	| 'VERIFIED'
-	| 'PARTNERED'
-	| 'COMMUNITY'
-	| 'COMMERCE'
-	| 'NEWS'
-	| 'DISCOVERABLE'
-	| 'DISCOVERABLE_DISABLED'
-	| 'FEATURABLE'
-	| 'ANIMATED_ICON'
-	| 'BANNER'
-	| 'WELCOME_SCREEN_ENABLED'
-	| 'MEMBER_VERIFICATION_GATE_ENABLED'
-	| 'PREVIEW_ENABLED';
+export enum GuildFeature {
+	InviteSplash = 'INVITE_SPLASH',
+	VIPRegions = 'VIP_REGIONS',
+	VanityURL = 'VANITY_URL',
+	Verified = 'VERIFIED',
+	Partnered = 'PARTNERED',
+	Community = 'COMMUNITY',
+	Commerce = 'COMMERCE',
+	News = 'NEWS',
+	Discoverable = 'DISCOVERABLE',
+	DiscoverableDisabled = 'DISCOVERABLE_DISABLED',
+	Featurable = 'FEATURABLE',
+	AnimatedIcon = 'ANIMATED_ICON',
+	Banner = 'BANNER',
+	WelcomeScreenEnabled = 'WELCOME_SCREEN_ENABLED',
+	MemberVerificationGateEnabled = 'MEMBER_VERIFICATION_GATE_ENABLED',
+	PreviewEnabled = 'PREVIEW_ENABLED'
+}
 
 /**
  * Represents an Offline Guild, or a Guild whose information has not been provided through Guild
@@ -522,7 +528,7 @@ export interface GuildPreview {
 	/**
 	 * Enabled guild features.
 	 */
-	features: GuildFeatures[];
+	features: `${GuildFeature}`[];
 
 	/**
 	 * Approximate number of members in this guild.
@@ -982,6 +988,8 @@ export enum ScreeningFieldType {
 
 // SECTION Endpoints
 
+// ANCHOR Create Guild
+
 /**
  * Create a new guild. This endpoint can be used only by bots in less than 10 guilds.
  *
@@ -1012,12 +1020,12 @@ export interface CreateGuild {
 		/**
 		 * Default message notifications level.
 		 */
-		default_message_notifications?: NotificationLevel;
+		default_message_notifications?: DefaultMessageNotificationLevel;
 
 		/**
 		 * Explicit content filter level.
 		 */
-		explicit_content_filter?: ExplicitFilterLevel;
+		explicit_content_filter?: ExplicitContentFilterLevel;
 
 		/**
 		 * New guild roles.
@@ -1125,12 +1133,12 @@ export interface ModifyGuild {
 		/**
 		 * Default message notifications level.
 		 */
-		default_message_notifications?: Nullable<NotificationLevel>;
+		default_message_notifications?: Nullable<DefaultMessageNotificationLevel>;
 
 		/**
 		 * Explicit content filter level.
 		 */
-		explicit_content_filter?: Nullable<ExplicitFilterLevel>;
+		explicit_content_filter?: Nullable<ExplicitContentFilterLevel>;
 
 		/**
 		 * ID for AFK channel.
@@ -1197,12 +1205,12 @@ export interface ModifyGuild {
 		/**
 		 * Enabled guild features.
 		 */
-		features?: GuildFeatures[];
+		features?: `${GuildFeature}`[];
 
 		/**
 		 * The description for the guild, if the guild is discoverable.
 		 */
-		description?: string;
+		description: Nullable<string>;
 	};
 
 	/**
@@ -1319,7 +1327,7 @@ export interface ModifyGuildChannelPositions {
 		/**
 		 * The new parent ID for the channel that is moved.
 		 */
-		parent_id: Snowflake;
+		parent_id: Nullable<Snowflake>;
 	};
 
 	response: never;
@@ -1334,6 +1342,10 @@ export type GetGuildMember = { response: GuildMember };
 
 /**
  * Returns a list of guild member objects that are members of the guild.
+ *
+ * @remarks
+ * This endpoint is restricted according to whether the `GUILD_MEMBERS` Privileged Intent is
+ * enabled for your appliation.
  *
  * @endpoint [GET](https://discord.com/developers/docs/resources/guild#list-guild-members) `/guilds/{guild.id}/members`
  */
@@ -1361,7 +1373,7 @@ export interface ListGuildMembers {
 }
 
 /**
- * @endpoint GET `/guilds/{guild.id}/members/search`
+ * @endpoint [GET](https://discord.com/developers/docs/resources/guild#search-guild-members) `/guilds/{guild.id}/members/search`
  */
 export interface SearchGuildMembers {
 	query: {
@@ -1781,64 +1793,6 @@ export type GetGuildInvites = { response: InviteMetadata[] };
 export type GetGuildIntegrations = { response: Integration[] };
 
 /**
- * Attach an integration object from the current user to the guild. Requires the `MANAGE_GUILD`
- * permission.
- *
- * @endpoint [POST](https://discord.com/developers/docs/resources/guild#create-guild-integration) `/guilds/{guild.id}/integrations`
- */
-export interface CreateGuildIntegration {
-	body: {
-		/**
-		 * The integration type.
-		 */
-		type: IntegrationType;
-
-		/**
-		 * The integration ID.
-		 */
-		id: Snowflake;
-	};
-
-	response: never;
-}
-
-/**
- * Modify the behavior and settings of an integration object for the guild. Requires the
- * `MANAGE_GUILD` permission.
- *
- * @endpoint [PATCH](https://discord.com/developers/docs/resources/guild#modify-guild-integration) `/guilds/{guild.id}/integrations/{integration.id}`
- */
-export interface ModifyGuildIntegration {
-	body: {
-		/**
-		 * The behavior when an integration subscription lapses.
-		 */
-		expire_behavior?: Nullable<number>;
-
-		/**
-		 * Period (in days) where the integration will ignore lapsed subscriptions.
-		 */
-		expire_grace_period?: Nullable<number>;
-
-		/**
-		 * Whether emoticons should be synced for this integration (Twitch only currently).
-		 */
-		enable_emoticons?: Nullable<boolean>;
-	};
-
-	response: never;
-}
-
-/**
- * Delete the attached integration object for the guild. Requires the `MANAGE_GUILD` permission.
- *
- * Deletes any associated webhooks and kicks the associated bot if there is one.
- *
- * @endpoint [DELETE](https://discord.com/developers/docs/resources/guild#delete-guild-integration) `/guilds/{guild.id}/integrations/{integration.id}`
- */
-export type DeleteGuildIntegration = { response: never };
-
-/**
  * Sync an integration. Requires the `MANAGE_GUILD` permission.
  *
  * @endpoint [POST](https://discord.com/developers/docs/resources/guild#sync-guild-integration) `/guilds/{guild.id}/integrations/{integration.id}/sync`
@@ -1907,11 +1861,85 @@ export interface GetWidgetImage {
 export type WidgetStyle = 'shield' | 'banner1' | 'banner2' | 'banner3' | 'banner4';
 
 /**
+ * Updates the current user's voice state.
+ *
+ * @endpoint PATCH `/guilds/{guild.id}/voice-states/@me`
+ */
+export interface UpdateSelfVoiceState {
+	body: {
+		/**
+		 * The ID of the channel the user is currently in.
+		 */
+		channel_id: Snowflake;
+
+		/**
+		 * Toggles the user's suppress state.
+		 */
+		suppress?: boolean;
+
+		/**
+		 * Sets the user's request to speak.
+		 */
+		request_to_speak_timestamp?: Nullable<string>;
+	};
+}
+
+/**
+ * Updates another user's voice state.
+ *
+ * @endpoint PATCH `/guilds/{guild.id}/voice-states/{user.id}`
+ */
+export type UpdateOthersVoiceState = { body: Omit<UpdateSelfVoiceState['body'], 'request_to_speak_timestamp'> };
+
+/**
+ * Returns the Welcome Screen object for the guild.
+ *
+ * @endpoint [GET](https://discord.com/developers/docs/resources/guild#get-guild-welcome-screen) `/guilds/{guild.id}/welcome-screen`
+ */
+export type GetGuildWelcomeScreen = { response: WelcomeScreen };
+
+/**
+ * Modify the guild's Welcome Screen. Requires the `MANAGE_GUILD` permission.
+ *
+ * @endpoint [PATCH](https://discord.com/developers/docs/resources/guild#modify-guild-welcome-screen) `/guilds/{guild.id}/welcome-screen`
+ */
+export interface ModifyGuildWelcomeScreen {
+	body: {
+		/**
+		 * Whether the welcome screen is enabled.
+		 */
+		enabled?: Nullable<boolean>;
+
+		/**
+		 * Channels linked in the welcome screen and their display options.
+		 */
+		welcome_channels?: Nullable<WelcomeScreenChannel[]>;
+
+		/**
+		 * The server description to show in the welcome screen.
+		 */
+		description?: Nullable<string>;
+	};
+
+	/**
+	 * The updated Welcome Screen object.
+	 */
+	response: WelcomeScreen;
+}
+
+/**
+ * Returns the discovery metadata object for the guild. Requires the `MANAGE_GUILD` permission.
+ *
+ * @endpoint GET `/guilds/{guild.id}/discovery-metadata`
+ */
+export type GetGuildDiscoveryMetadata = { response: DiscoveryMetadata };
+
+/**
  * Modify the discovery metadata for the guild. Requires the `MANAGE_GUILD` permission.
  *
  * @endpoint PATCH `/guilds/{guild.id}/discovery-metadata`
  */
-export interface ModifyDiscoveryMetadata {
+export interface ModifyGuildDiscoveryMetadata {
 	body: {
 		/**
 		 * The ID of the primary discovery category.
@@ -1921,7 +1949,7 @@ export interface ModifyDiscoveryMetadata {
 		/**
 		 * Up to 10 discovery search keywords.
 		 */
-		keywords?: Nullable<Partial<TupleOf<string, 10>>>;
+		keywords?: Nullable<Partial<FixedTuple<string, 10>>>;
 
 		/**
 		 * Whether guild info is shown when custom emojis are clicked.
@@ -1936,32 +1964,55 @@ export interface ModifyDiscoveryMetadata {
 }
 
 /**
- * Modify the guild's Welcome Screen. Requires the `MANAGE_GUILD` permission.
+ * Add a discovery subcategory to the guild. Requires the `MANAGE_GUILD` permission.
  *
- * @endpoint PATCH `/guilds/{guild.id}/welcome-screen`
+ * @endpoint POST `/guilds/{guild.id}/discovery-categories/{category.id}`
  */
-export interface ModifyWelcomeScreen {
+export interface AddGuildDiscoverySubcategory {
+	response: {
+		/**
+		 * The guild ID the subcategory was added to.
+		 */
+		guild_id: Snowflake;
+
+		/**
+		 * The ID of the subcategory added.
+		 */
+		category_id: number;
+	};
+}
+
+/**
+ * Updates the current user's voice state.
+ *
+ * @remarks
+ * - `channel_id` must currently point to a stage channel.
+ * - The current user must already have joined `channel_id`.
+ * - You must have the `MUTE_MEMBERS` permission to unsuppress yourself. You can always suppress
+ * yourself.
+ * - You must have the `REQUEST_TO_SPEAK` permission to request to speak. You can always clear your
+ * own request to speak.
+ * - You are able to set `request_to_speak_timestamp` to any present or future time.
+ *
+ * @endpoint PATCH `/guilds/{guild.id}/voice-states/@me`
+ */
+export interface UpdateCurrentUserVoiceState {
 	body: {
 		/**
-		 * Whether the welcome screen is enabled.
+		 * The ID of the channel the user is currently in.
 		 */
-		enabled: boolean;
+		channel_id: Snowflake;
 
 		/**
-		 * Channels linked in the welcome screen and their display options.
+		 * Toggles the user's suppress state.
 		 */
-		welcome_channels: WelcomeScreenChannel[];
+		suppress?: boolean;
 
 		/**
-		 * The server description to show in the welcome screen.
+		 * Sets the user's request to speak.
 		 */
-		description: string;
+		request_to_speak_timestamp?: Nullable<string>;
 	};
-
-	/**
-	 * The updated Welcome Screen object.
-	 */
-	response: WelcomeScreen;
 }
 
 /**
@@ -2012,6 +2063,13 @@ export interface UpdateCurrentUserVoiceState {
  * @endpoint PATCH `/guilds/{guild.id}/voice-states/{user.id}`
  */
 export type UpdateUserVoiceState = { body: Omit<UpdateCurrentUserVoiceState['body'], 'request_to_speak_timestamp'> };
+
+/**
+ * Removes a discovery subcategory from the guild. Requires the `MANAGE_GUILD` permission.
+ *
+ * @endpoint DELETE `/guilds/{guild.id}/discovery-categories/{category.id}`
+ */
+export type RemoveGuildDiscoverySubcategory = { response: never };
 
 /**
  * Modify the guild's Membership Screening form. Requires the `MANAGE_GUILD` permission.

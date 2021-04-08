@@ -1,4 +1,4 @@
-import type { Nullable, TupleOf } from 'extended-utility-types';
+import type { FixedTuple, Nullable } from 'extended-utility-types';
 import type {
 	AllowedMentions,
 	EditWebhookMessage,
@@ -95,7 +95,7 @@ export interface ApplicationCommand {
 	/**
 	 * The parameters for the command.
 	 */
-	options?: Partial<TupleOf<ApplicationCommandOption, 25>>;
+	options?: Partial<FixedTuple<ApplicationCommandOption, 25>>;
 
 	/**
 	 * Whether the command is enabled by default when the app is added to a guild.
@@ -137,13 +137,13 @@ export interface ApplicationCommandOption {
 	/**
 	 * Choices for `string` and `number` types for the user to pick from.
 	 */
-	choices?: Partial<TupleOf<ApplicationCommandOptionChoice, 25>>;
+	choices?: Partial<FixedTuple<ApplicationCommandOptionChoice, 25>>;
 
 	/**
 	 * If the option is a subcommand or subcommand group type, the nested options will be the
 	 * parameters.
 	 */
-	options?: Partial<TupleOf<ApplicationCommandOption, 25>>;
+	options?: Partial<FixedTuple<ApplicationCommandOption, 25>>;
 }
 
 /**
@@ -183,6 +183,35 @@ export interface ApplicationCommandOptionChoice {
 	 * Value of the choice, up to 100 characters if string.
 	 */
 	value: string | number;
+}
+
+// ANCHOR Partial Guild Application Command Permissions
+
+export interface PartialGuildApplicationCommandPermissions {
+	/**
+	 * The ID of the command.
+	 */
+	id: Snowflake;
+
+	/**
+	 * The permissions for the command in the guild.
+	 */
+	permissions: ApplicationCommandPermissions[];
+}
+
+/**
+ * Returns when fetching the permissions for a command in a guild.
+ */
+export interface GuildApplicationCommandPermissions extends PartialGuildApplicationCommandPermissions {
+	/**
+	 * The ID of the application the command belongs to.
+	 */
+	application_id: Snowflake;
+
+	/**
+	 * The ID of the guild.
+	 */
+	guild_id: Snowflake;
 }
 
 /**
@@ -413,7 +442,7 @@ export interface InteractionApplicationCommandCallbackData {
 	/**
 	 * Supports up to 10 embeds.
 	 */
-	embeds?: Partial<TupleOf<Embed, 10>>;
+	embeds?: Partial<FixedTuple<Embed, 10>>;
 
 	/**
 	 * Allowed mentions object.
@@ -489,6 +518,13 @@ export interface CreateGlobalApplicationCommand {
 		 * The parameters for the command.
 		 */
 		options?: ApplicationCommandOption[];
+
+		/**
+		 * Whether the command is enabled by default when the app is added to a guild.
+		 *
+		 * @defaultValue true
+		 */
+		default_permission?: boolean;
 	};
 
 	response: ApplicationCommand;
@@ -522,6 +558,13 @@ export interface EditGlobalApplicationCommand {
 		 * The parameters for the command.
 		 */
 		options?: Nullable<ApplicationCommandOption>[];
+
+		/**
+		 * Whether the command is enabled by default when the app is added to a guild.
+		 *
+		 * @defaultValue true
+		 */
+		default_permission?: boolean;
 	};
 
 	response: ApplicationCommand;
@@ -651,7 +694,7 @@ export type DeleteFollowupMessage = { response: never };
  *
  * @endpoint GET `/applications/{application.id}/guilds/{guild.id}/commands/permissions`
  */
-export type GetGuildApplicationCommandPermissions = { response: ApplicationCommandPermissions[] };
+export type GetGuildApplicationCommandPermissions = { response: GuildApplicationCommandPermissions[] };
 
 /* eslint-disable max-len */
 /**
@@ -676,12 +719,19 @@ export interface EditApplicationCommandPermissions {
 		permissions: ApplicationCommandPermissions[];
 	};
 
-	response: {
-		id: Snowflake;
-		application_id: Snowflake;
-		guild_id: Snowflake;
-		permissions: ApplicationCommandPermissions[];
-	};
+	response: GuildApplicationCommandPermissions;
+}
+
+/**
+ * Batch edits permissions for all commands in a guild.
+ *
+ * @remarks
+ * This endpoint will overwrite existing permissions for the command in that guild.
+ *
+ * @endpoint PUT `/applications/{application.id}/guilds/{guild.id}/permissions`
+ */
+export interface BatchEditApplicationCommandPermissions {
+	body: PartialGuildApplicationCommandPermissions[];
 }
 
 // !SECTION
