@@ -150,12 +150,12 @@ export interface Guild extends PartialGuild {
 	/**
 	 * Default message notifications level.
 	 */
-	default_message_notifications: NotificationLevel;
+	default_message_notifications: DefaultMessageNotificationLevel;
 
 	/**
 	 * Explicit content filter level.
 	 */
-	explicit_content_filter: ExplicitFilterLevel;
+	explicit_content_filter: ExplicitContentFilterLevel;
 
 	/**
 	 * Roles in the guild.
@@ -339,14 +339,14 @@ export interface Guild extends PartialGuild {
 /**
  * @source {@link https://discord.com/developers/docs/resources/guild#guild-object-default-message-notification-level|Guild}
  */
-export enum NotificationLevel {
+export enum DefaultMessageNotificationLevel {
 	/**
 	 * Members will receive notifications for all messages by default.
 	 */
 	AllMessages,
 
 	/**
-	 * Members will receive notifications only for messages that \@mention them by default.
+	 * Members will receive notifications only for messages that `@mention` them by default.
 	 */
 	OnlyMentions
 }
@@ -354,7 +354,7 @@ export enum NotificationLevel {
 /**
  * @source {@link https://discord.com/developers/docs/resources/guild#guild-object-explicit-content-filter-level|Guild}
  */
-export enum ExplicitFilterLevel {
+export enum ExplicitContentFilterLevel {
 	/**
 	 * No media content will be scanned.
 	 */
@@ -1020,12 +1020,12 @@ export interface CreateGuild {
 		/**
 		 * Default message notifications level.
 		 */
-		default_message_notifications?: NotificationLevel;
+		default_message_notifications?: DefaultMessageNotificationLevel;
 
 		/**
 		 * Explicit content filter level.
 		 */
-		explicit_content_filter?: ExplicitFilterLevel;
+		explicit_content_filter?: ExplicitContentFilterLevel;
 
 		/**
 		 * New guild roles.
@@ -1133,12 +1133,12 @@ export interface ModifyGuild {
 		/**
 		 * Default message notifications level.
 		 */
-		default_message_notifications?: Nullable<NotificationLevel>;
+		default_message_notifications?: Nullable<DefaultMessageNotificationLevel>;
 
 		/**
 		 * Explicit content filter level.
 		 */
-		explicit_content_filter?: Nullable<ExplicitFilterLevel>;
+		explicit_content_filter?: Nullable<ExplicitContentFilterLevel>;
 
 		/**
 		 * ID for AFK channel.

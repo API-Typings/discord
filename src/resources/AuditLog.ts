@@ -1,10 +1,10 @@
 import type { Nullable, Range } from 'extended-utility-types';
 import type {
 	ChannelType,
-	ExplicitFilterLevel,
+	DefaultMessageNotificationLevel,
+	ExplicitContentFilterLevel,
 	IntegrationExpireBehavior,
 	MFALevel,
-	NotificationLevel,
 	Overwrite,
 	PartialIntegration,
 	PartialRole,
@@ -298,12 +298,12 @@ export interface AuditLogChangeKey {
 	/**
 	 * Change in whose messages are scanned and deleted for explicit content in the server.
 	 */
-	explicit_content_filter: ExplicitFilterLevel;
+	explicit_content_filter: ExplicitContentFilterLevel;
 
 	/**
 	 * Guild's default message notification level changed.
 	 */
-	default_message_notifications: NotificationLevel;
+	default_message_notifications: DefaultMessageNotificationLevel;
 
 	/**
 	 * Guild invite vanity URL changed.
