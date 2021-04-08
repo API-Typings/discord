@@ -206,14 +206,14 @@ export enum PermissionFlags {
 	ManageEmojis = 0x40000000,
 
 	/**
-	 * Allows for requesting to speak in stage channels.
-	 */
-	RequestToSpeak = 0x100000000,
-
-	/**
 	 * Allows members to use slash commands in text channels. Applies to text channels.
 	 */
-	UseSlashCommands = 0x80000000
+	UseSlashCommands = 0x80000000,
+
+	/**
+	 * Allows for requesting to speak in stage channels.
+	 */
+	RequestToSpeak = 0x100000000
 }
 
 export type Permission =
