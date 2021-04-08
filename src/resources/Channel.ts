@@ -1572,54 +1572,56 @@ export type GetChannelInvites = { response: InviteMetadata[] };
  * @endpoint [POST](https://discord.com/developers/docs/resources/channel#create-channel-invite) `/channels/{channel.id}/invites`
  */
 export interface CreateChannelInvite {
-	body: {
-		/**
-		 * Duration of invite in seconds before expiry, or 0 for never. Between 0 and 604800 (7
-		 * days).
-		 *
-		 * @defaultValue 86400 (24 hours)
-		 */
-		max_age?: number;
+	body:
+		| {
+				/**
+				 * Duration of invite in seconds before expiry, or 0 for never. Between 0 and
+				 * 604800 (7 days).
+				 *
+				 * @defaultValue 86400 (24 hours)
+				 */
+				max_age?: number;
 
-		/**
-		 * Max number of uses or 0 for unlimited. Between 0 and 100.
-		 *
-		 * @defaultValue 0
-		 */
-		max_uses?: Range<0, 100>;
+				/**
+				 * Max number of uses or 0 for unlimited. Between 0 and 100.
+				 *
+				 * @defaultValue 0
+				 */
+				max_uses?: Range<0, 100>;
 
-		/**
-		 * Whether this invite only grants temporary membership.
-		 *
-		 * @defaultValue false
-		 */
-		temporary?: boolean;
+				/**
+				 * Whether this invite only grants temporary membership.
+				 *
+				 * @defaultValue false
+				 */
+				temporary?: boolean;
 
-		/**
-		 * If true, don't try to reuse a similar invite (useful for creating many unique one time
-		 * use invites).
-		 *
-		 * @defaultValue false
-		 */
-		unique?: boolean;
+				/**
+				 * If true, don't try to reuse a similar invite (useful for creating many unique
+				 * one time use invites).
+				 *
+				 * @defaultValue false
+				 */
+				unique?: boolean;
 
-		/**
-		 * The type of target for this voice channel invite.
-		 */
-		target_type?: InviteTargetType;
+				/**
+				 * The type of target for this voice channel invite.
+				 */
+				target_type?: InviteTargetType;
 
-		/**
-		 * The ID of the user whose stream to display for this invite, required if `target_type`
-		 * is 1, the user must be streaming in the channel.
-		 */
-		target_user_id?: Snowflake;
+				/**
+				 * The ID of the user whose stream to display for this invite, required if
+				 * `target_type` is 1, the user must be streaming in the channel.
+				 */
+				target_user_id?: Snowflake;
 
-		/**
-		 * The ID of the embedded application to open for this invite, required if `target_type`
-		 * is 2, the application must have the `EMBEDDED` flag.
-		 */
-		target_application_id?: Snowflake;
-	};
+				/**
+				 * The ID of the embedded application to open for this invite, required if
+				 * `target_type` is 2, the application must have the `EMBEDDED` flag.
+				 */
+				target_application_id?: Snowflake;
+		  }
+		| Record<string, never>;
 
 	response: Invite;
 }
