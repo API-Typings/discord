@@ -1861,37 +1861,6 @@ export interface GetWidgetImage {
 export type WidgetStyle = 'shield' | 'banner1' | 'banner2' | 'banner3' | 'banner4';
 
 /**
- * Updates the current user's voice state.
- *
- * @endpoint PATCH `/guilds/{guild.id}/voice-states/@me`
- */
-export interface UpdateSelfVoiceState {
-	body: {
-		/**
-		 * The ID of the channel the user is currently in.
-		 */
-		channel_id: Snowflake;
-
-		/**
-		 * Toggles the user's suppress state.
-		 */
-		suppress?: boolean;
-
-		/**
-		 * Sets the user's request to speak.
-		 */
-		request_to_speak_timestamp?: Nullable<string>;
-	};
-}
-
-/**
- * Updates another user's voice state.
- *
- * @endpoint PATCH `/guilds/{guild.id}/voice-states/{user.id}`
- */
-export type UpdateOthersVoiceState = { body: Omit<UpdateSelfVoiceState['body'], 'request_to_speak_timestamp'> };
-
-/**
  * Returns the Welcome Screen object for the guild.
  *
  * @endpoint [GET](https://discord.com/developers/docs/resources/guild#get-guild-welcome-screen) `/guilds/{guild.id}/welcome-screen`
@@ -1926,6 +1895,55 @@ export interface ModifyGuildWelcomeScreen {
 	 */
 	response: WelcomeScreen;
 }
+
+/**
+ * Updates the current user's voice state.
+ *
+ * @remarks
+ * - `channel_id` must currently point to a stage channel.
+ * - The current user must already have joined `channel_id`.
+ * - You must have the `MUTE_MEMBERS` permission to unsuppress yourself. You can always suppress
+ * yourself.
+ * - You must have the `REQUEST_TO_SPEAK` permission to request to speak. You can always clear your
+ * own request to speak.
+ * - You are able to set `request_to_speak_timestamp` to any present or future time.
+ *
+ * @endpoint PATCH `/guilds/{guild.id}/voice-states/@me`
+ */
+export interface UpdateCurrentUserVoiceState {
+	body: {
+		/**
+		 * The ID of the channel the user is currently in.
+		 */
+		channel_id: Snowflake;
+
+		/**
+		 * Toggles the user's suppress state.
+		 */
+		suppress?: boolean;
+
+		/**
+		 * Sets the user's request to speak.
+		 */
+		request_to_speak_timestamp?: Nullable<string>;
+	};
+}
+
+/**
+ * Updates another user's voice state.
+ *
+ * @remarks
+ * - `channel_id` must currently point to a stage channel.
+ * - User must already have joined `channel_id`.
+ * - You must have the `MUTE_MEMBERS` permission (since suppression is the only thing that is
+ * available currently).
+ * - When unsuppressed, non-bot users will have their `request_to_speak_timestamp` set to the
+ * current time. Bot users will not.
+ * - When suppressed, the user will have their `request_to_speak_timestamp` removed.
+ *
+ * @endpoint PATCH `/guilds/{guild.id}/voice-states/{user.id}`
+ */
+export type UpdateUserVoiceState = { body: Omit<UpdateCurrentUserVoiceState['body'], 'request_to_speak_timestamp'> };
 
 /**
  * Returns the discovery metadata object for the guild. Requires the `MANAGE_GUILD` permission.
@@ -1981,88 +1999,6 @@ export interface AddGuildDiscoverySubcategory {
 		category_id: number;
 	};
 }
-
-/**
- * Updates the current user's voice state.
- *
- * @remarks
- * - `channel_id` must currently point to a stage channel.
- * - The current user must already have joined `channel_id`.
- * - You must have the `MUTE_MEMBERS` permission to unsuppress yourself. You can always suppress
- * yourself.
- * - You must have the `REQUEST_TO_SPEAK` permission to request to speak. You can always clear your
- * own request to speak.
- * - You are able to set `request_to_speak_timestamp` to any present or future time.
- *
- * @endpoint PATCH `/guilds/{guild.id}/voice-states/@me`
- */
-export interface UpdateCurrentUserVoiceState {
-	body: {
-		/**
-		 * The ID of the channel the user is currently in.
-		 */
-		channel_id: Snowflake;
-
-		/**
-		 * Toggles the user's suppress state.
-		 */
-		suppress?: boolean;
-
-		/**
-		 * Sets the user's request to speak.
-		 */
-		request_to_speak_timestamp?: Nullable<string>;
-	};
-}
-
-/**
- * Updates the current user's voice state.
- *
- * @remarks
- * - `channel_id` must currently point to a stage channel.
- * - The current user must already have joined `channel_id`.
- * - You must have the `MUTE_MEMBERS` permission to unsuppress yourself. You can always suppress
- * yourself.
- * - You must have the `REQUEST_TO_SPEAK` permission to request to speak. You can always clear your
- * own request to speak.
- * - You are able to set `request_to_speak_timestamp` to any present or future time.
- *
- * @endpoint PATCH `/guilds/{guild.id}/voice-states/@me`
- */
-export interface UpdateCurrentUserVoiceState {
-	body: {
-		/**
-		 * The ID of the channel the user is currently in.
-		 */
-		channel_id: Snowflake;
-
-		/**
-		 * Toggles the user's suppress state.
-		 */
-		suppress?: boolean;
-
-		/**
-		 * Sets the user's request to speak.
-		 */
-		request_to_speak_timestamp?: Nullable<string>;
-	};
-}
-
-/**
- * Updates another user's voice state.
- *
- * @remarks
- * - `channel_id` must currently point to a stage channel.
- * - User must already have joined `channel_id`.
- * - You must have the `MUTE_MEMBERS` permission (since suppression is the only thing that is
- * available currently).
- * - When unsuppressed, non-bot users will have their `request_to_speak_timestamp` set to the
- * current time. Bot users will not.
- * - When suppressed, the user will have their `request_to_speak_timestamp` removed.
- *
- * @endpoint PATCH `/guilds/{guild.id}/voice-states/{user.id}`
- */
-export type UpdateUserVoiceState = { body: Omit<UpdateCurrentUserVoiceState['body'], 'request_to_speak_timestamp'> };
 
 /**
  * Removes a discovery subcategory from the guild. Requires the `MANAGE_GUILD` permission.
