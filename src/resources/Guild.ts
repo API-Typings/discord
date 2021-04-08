@@ -2016,6 +2016,39 @@ export interface UpdateCurrentUserVoiceState {
 }
 
 /**
+ * Updates the current user's voice state.
+ *
+ * @remarks
+ * - `channel_id` must currently point to a stage channel.
+ * - The current user must already have joined `channel_id`.
+ * - You must have the `MUTE_MEMBERS` permission to unsuppress yourself. You can always suppress
+ * yourself.
+ * - You must have the `REQUEST_TO_SPEAK` permission to request to speak. You can always clear your
+ * own request to speak.
+ * - You are able to set `request_to_speak_timestamp` to any present or future time.
+ *
+ * @endpoint PATCH `/guilds/{guild.id}/voice-states/@me`
+ */
+export interface UpdateCurrentUserVoiceState {
+	body: {
+		/**
+		 * The ID of the channel the user is currently in.
+		 */
+		channel_id: Snowflake;
+
+		/**
+		 * Toggles the user's suppress state.
+		 */
+		suppress?: boolean;
+
+		/**
+		 * Sets the user's request to speak.
+		 */
+		request_to_speak_timestamp?: Nullable<string>;
+	};
+}
+
+/**
  * Updates another user's voice state.
  *
  * @remarks
