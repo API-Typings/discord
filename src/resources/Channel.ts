@@ -180,7 +180,7 @@ export interface VoiceChannel extends Channel {
 	user_limit: number;
 
 	/**
-	 * Voice region ID for the voice channel.
+	 * Voice region ID for the voice channel, automatic when set to `null`.
 	 */
 	rtc_region: Nullable<string>;
 }
