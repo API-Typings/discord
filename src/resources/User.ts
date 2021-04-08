@@ -269,14 +269,6 @@ export interface GetCurrentUserGuilds {
 export type LeaveGuild = { response: never };
 
 /**
- * Returns a list of DM channel objects. For bots, this is no longer a supported method of getting
- * recent DMs, and will return an empty array.
- *
- * @endpoint [GET](https://discord.com/developers/docs/resources/user#get-user-dms) `/users/@me/users`
- */
-export type GetUserDMs = { response: DMChannel[] | [] };
-
-/**
  * Create a new DM channel with a user.
  *
  * @remarks
