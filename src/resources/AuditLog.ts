@@ -518,7 +518,7 @@ export interface GetGuildAuditLog {
 		/**
 		 * How many entries are returned.
 		 *
-		 * @defaultValue 50
+		 * @defaultValue `50`
 		 */
 		limit?: Range<1, 100>;
 	};

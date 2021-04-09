@@ -254,7 +254,7 @@ export interface GetCurrentUserGuilds {
 		/**
 		 * Max number of guilds to return (1-100).
 		 *
-		 * @defaultValue 100
+		 * @defaultValue `100`
 		 */
 		limit?: Range<1, 100>;
 	};

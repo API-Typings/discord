@@ -1,6 +1,5 @@
 import type { FixedTuple, Nullable, Range } from 'extended-utility-types';
 import type {
-	Activity,
 	Channel,
 	ChannelType,
 	DiscoveryMetadata,
@@ -9,10 +8,11 @@ import type {
 	Overwrite,
 	PartialChannel,
 	PartialInvite,
+	PartialUser,
 	PresenceUpdate,
 	Role,
 	Snowflake,
-	UpdateStatus,
+	StatusType,
 	User,
 	VoiceRegion,
 	VoiceState
@@ -302,7 +302,7 @@ export interface Guild extends PartialGuild {
 	/**
 	 * The preferred locale of a Community guild; used in server discovery and notices from Discord;
 	 *
-	 * @defaultValue en-US
+	 * @defaultValue `en-US`
 	 */
 	preferred_locale: string;
 
@@ -465,21 +465,85 @@ export enum SystemChannelFlags {
  * @source {@link https://discord.com/developers/docs/resources/guild#guild-object-guild-features|Guild}
  */
 export enum GuildFeature {
+	/**
+	 * Guild has access to set an invite splash background.
+	 */
 	InviteSplash = 'INVITE_SPLASH',
+
+	/**
+	 * Guild has access to set 384kbps bitrate in voice (previously VIP voice servers).
+	 */
 	VIPRegions = 'VIP_REGIONS',
+
+	/**
+	 * Guild has access to set a vanity URL.
+	 */
 	VanityURL = 'VANITY_URL',
+
+	/**
+	 * Guild is verified.
+	 */
 	Verified = 'VERIFIED',
+
+	/**
+	 * Guild is partnered.
+	 */
 	Partnered = 'PARTNERED',
+
+	/**
+	 * Guild can enable welcome screen, Membership Screening, and discovery, and receives community
+	 * updates.
+	 */
 	Community = 'COMMUNITY',
+
+	/**
+	 * Guild has access to use commerce features.
+	 */
 	Commerce = 'COMMERCE',
+
+	/**
+	 * Guild has access to create news channels.
+	 */
 	News = 'NEWS',
+
+	/**
+	 * Guild is able to be discovered in the directory.
+	 */
 	Discoverable = 'DISCOVERABLE',
+
+	/**
+	 * Guild cannot be discoverable.
+	 */
 	DiscoverableDisabled = 'DISCOVERABLE_DISABLED',
+
+	/**
+	 * Guild is able to be featured in the directory.
+	 */
 	Featurable = 'FEATURABLE',
+
+	/**
+	 * Guild has access to set an animated guild icon.
+	 */
 	AnimatedIcon = 'ANIMATED_ICON',
+
+	/**
+	 * Guild has access to set a guild banner image.
+	 */
 	Banner = 'BANNER',
+
+	/**
+	 * Guild has enabled the welcome screen.
+	 */
 	WelcomeScreenEnabled = 'WELCOME_SCREEN_ENABLED',
+
+	/**
+	 * Guild has enabled Membership Screening.
+	 */
 	MemberVerificationGateEnabled = 'MEMBER_VERIFICATION_GATE_ENABLED',
+
+	/**
+	 * Guild can be previewed before joining via Membership Screening or the directory.
+	 */
 	PreviewEnabled = 'PREVIEW_ENABLED'
 }
 
@@ -546,6 +610,8 @@ export interface GuildPreview {
 	description: Nullable<string>;
 }
 
+// SECTION Guild Widget
+
 /**
  * @source {@link https://discord.com/developers/docs/resources/guild#guild-widget-object-guild-widget-structure|Guild}
  */
@@ -558,10 +624,8 @@ export interface GuildWidgetSettings {
 	/**
 	 * The widget channel ID.
 	 */
-	channel_id?: Snowflake;
+	channel_id: Nullable<Snowflake>;
 }
-
-// SECTION Guild Widget
 
 /**
  * @source {@link https://discord.com/developers/docs/resources/guild#get-guild-widget-example-get-guild-widget|Guild}
@@ -570,31 +634,12 @@ export interface GuildWidget {
 	id: Snowflake;
 	name: string;
 	instant_invite: string;
-	channels: GuildWidgetChannel[];
-	members: GuildWidgetMember[];
+	channels: Omit<PartialChannel, 'type'>[];
+	members: (PartialUser & {
+		status: StatusType;
+		avatar_url: string;
+	})[];
 	presence_count: number;
-}
-
-/**
- * @source {@link https://discord.com/developers/docs/resources/guild#get-guild-widget-example-get-guild-widget|Guild}
- */
-export interface GuildWidgetChannel {
-	id: Snowflake;
-	name: string;
-	position: number;
-}
-
-/**
- * @source {@link https://discord.com/developers/docs/resources/guild#get-guild-widget-example-get-guild-widget|Guild}
- */
-export interface GuildWidgetMember {
-	id: Snowflake;
-	username: string;
-	discriminator: string;
-	avatar: Nullable<string>;
-	status: UpdateStatus;
-	activity?: Pick<Activity, 'name'>;
-	avatar_url: string;
 }
 
 // !SECTION
@@ -1091,7 +1136,7 @@ export interface GetGuild {
 		/**
 		 * When `true`, will return approximate member and presence counts for the guild.
 		 *
-		 * @defaultValue false
+		 * @defaultValue `false`
 		 */
 		with_counts?: boolean;
 	};
@@ -1198,7 +1243,7 @@ export interface ModifyGuild {
 		 * The preferred locale of a Community guild used in server discovery and notices from
 		 * Discord
 		 *
-		 * @defaultValue en-US
+		 * @defaultValue `en-US`
 		 */
 		preferred_locale?: Nullable<string>;
 
@@ -1354,14 +1399,14 @@ export interface ListGuildMembers {
 		/**
 		 * Max number of members to return (1-1000).
 		 *
-		 * @defaultValue 1
+		 * @defaultValue `1`
 		 */
 		limit?: Range<1, 1000>;
 
 		/**
 		 * The highest user ID in the previous page.
 		 *
-		 * @defaultValue 0
+		 * @defaultValue `0`
 		 */
 		after?: Snowflake;
 	};
@@ -1385,7 +1430,7 @@ export interface SearchGuildMembers {
 		/**
 		 * Max numbers of members to return (1-1000).
 		 *
-		 * @defaultValue 1
+		 * @defaultValue `1`
 		 */
 		limit?: Range<1, 1000>;
 	};
@@ -1587,7 +1632,7 @@ export interface CreateGuildRole {
 		/**
 		 * Name of the role.
 		 *
-		 * @defaultValue new role
+		 * @defaultValue `new role`
 		 */
 		name?: string;
 
@@ -1601,21 +1646,21 @@ export interface CreateGuildRole {
 		/**
 		 * RGB color value.
 		 *
-		 * @defaultValue 0
+		 * @defaultValue `0`
 		 */
 		color?: number;
 
 		/**
 		 * Whether the role should be displayed separately in the sidebar.
 		 *
-		 * @defaultValue false
+		 * @defaultValue `false`
 		 */
 		hoist?: boolean;
 
 		/**
 		 * Whether the role should be mentionable.
 		 *
-		 * @defaultValue false
+		 * @defaultValue `false`
 		 */
 		mentionable?: boolean;
 	};
@@ -1712,7 +1757,7 @@ export interface GetGuildPruneCount {
 		/**
 		 * Number of days to count prune for (1-30).
 		 *
-		 * @defaultValue 7
+		 * @defaultValue `7`
 		 */
 		days?: Range<1, 30>;
 
@@ -1748,14 +1793,14 @@ export interface BeginGuildPrune {
 		/**
 		 * Number of days to prune (1-30).
 		 *
-		 * @defaultValue 7
+		 * @defaultValue `7`
 		 */
 		days?: Range<1, 30>;
 
 		/**
 		 * Whether `pruned` is returned, discouraged for large guilds.
 		 *
-		 * @defaultValue true
+		 * @defaultValue `true`
 		 */
 		compute_prune_count?: boolean;
 
@@ -1961,16 +2006,22 @@ export interface ModifyGuildDiscoveryMetadata {
 	body: {
 		/**
 		 * The ID of the primary discovery category.
+		 *
+		 * @defaultValue `0`
 		 */
 		primary_category_id?: Nullable<number>;
 
 		/**
 		 * Up to 10 discovery search keywords.
+		 *
+		 * @defaultValue `null`
 		 */
 		keywords?: Nullable<Partial<FixedTuple<string, 10>>>;
 
 		/**
 		 * Whether guild info is shown when custom emojis are clicked.
+		 *
+		 * @defaultValue `true`
 		 */
 		emoji_discoverability_enabled?: Nullable<boolean>;
 	};

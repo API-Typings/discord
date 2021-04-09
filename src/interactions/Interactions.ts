@@ -100,7 +100,7 @@ export interface ApplicationCommand {
 	/**
 	 * Whether the command is enabled by default when the app is added to a guild.
 	 *
-	 * @defaultValue true
+	 * @defaultValue `true`
 	 */
 	default_permission?: boolean;
 }
@@ -130,7 +130,7 @@ export interface ApplicationCommandOption {
 	/**
 	 * If the parameter is required or optional.
 	 *
-	 * @defaultValue false
+	 * @defaultValue `false`
 	 */
 	required?: boolean;
 
@@ -522,7 +522,7 @@ export interface CreateGlobalApplicationCommand {
 		/**
 		 * Whether the command is enabled by default when the app is added to a guild.
 		 *
-		 * @defaultValue true
+		 * @defaultValue `true`
 		 */
 		default_permission?: boolean;
 	};
@@ -562,7 +562,7 @@ export interface EditGlobalApplicationCommand {
 		/**
 		 * Whether the command is enabled by default when the app is added to a guild.
 		 *
-		 * @defaultValue true
+		 * @defaultValue `true`
 		 */
 		default_permission?: boolean;
 	};

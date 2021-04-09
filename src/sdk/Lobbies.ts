@@ -627,7 +627,7 @@ export interface UpdateLobby {
 		/**
 		 * Max lobby capacity.
 		 *
-		 * @defaultValue 16
+		 * @defaultValue `16`
 		 */
 		capacity?: number;
 	};
@@ -679,7 +679,7 @@ export interface CreateLobbySearch {
 		/**
 		 * Limit of lobbies returned.
 		 *
-		 * @defaultValue 25
+		 * @defaultValue `25`
 		 */
 		limit?: number;
 	};

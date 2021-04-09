@@ -216,7 +216,7 @@ export interface ExecuteWebhook {
 		 * Waits for server confirmation of message send before response, and returns the created
 		 * message body (when `false`, a message that is not saved does not return an error).
 		 *
-		 * @defaultValue false
+		 * @defaultValue `false`
 		 */
 		wait?: boolean;
 	};

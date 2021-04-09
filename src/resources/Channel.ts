@@ -7,6 +7,7 @@ import type {
 	MessageInteraction,
 	PartialApplication,
 	PartialEmoji,
+	PartialUser,
 	Snowflake,
 	User
 } from '../';
@@ -44,9 +45,10 @@ export interface PartialChannel {
  */
 export interface Channel extends PartialChannel {
 	/**
-	 * The ID of the guild.
+	 * The ID of the guild (may be missing for some channel objects received over gateway guild
+	 * dispatches).
 	 */
-	guild_id: Snowflake;
+	guild_id?: Snowflake;
 
 	/**
 	 * Sorting position of the channel.
@@ -213,13 +215,11 @@ export interface VoiceChannel extends Channel {
  *
  * @source {@link https://discord.com/developers/docs/resources/channel#channel-object-example-dm-channel|Channel}
  */
-/* prettier-ignore */
-/* eslint-disable-next-line */
-export interface DMChannel extends Pick<Channel, 'id'|'type'>, Pick<TextChannel, 'last_message_id'|'last_pin_timestamp'> {
+export interface DMChannel extends Pick<TextChannel, 'id' | 'type' | 'last_message_id' | 'last_pin_timestamp'> {
 	/**
 	 * The recipients of the DM.
 	 */
-	recipients: User[];
+	recipients: PartialUser[];
 
 	/**
 	 * Application ID of the group DM creator if it is bot-created.
@@ -235,11 +235,6 @@ export interface DMChannel extends Pick<Channel, 'id'|'type'>, Pick<TextChannel,
  * @source {@link https://discord.com/developers/docs/resources/channel#channel-object-example-group-dm-channel|Channel}
  */
 export interface GroupDMChannel extends DMChannel, Nullable<Pick<Channel, 'name'>> {
-	/**
-	 * The nicknames that are set for a group DM channel's recipients.
-	 */
-	nicks: ChannelNickname[];
-
 	/**
 	 * Icon hash.
 	 */
@@ -527,7 +522,7 @@ export interface MessageReference {
 	 * When sending, whether to error if the referenced message doesn't exist instead of sending as
 	 * a normal (non-reply) message.
 	 *
-	 * @defaultValue true
+	 * @defaultValue `true`
 	 */
 	fail_if_not_exists?: boolean;
 }
@@ -1031,7 +1026,7 @@ export interface AllowedMentions {
 	/**
 	 * For replies, whether to mention the author of the message being replied to.
 	 *
-	 * @defaultValue false
+	 * @defaultValue `false`
 	 */
 	replied_user?: boolean;
 }
@@ -1079,18 +1074,6 @@ export enum EmbedLimit {
 	 * 256 characters.
 	 */
 	Author = 256
-}
-
-export interface ChannelNickname {
-	/**
-	 * The ID of the user this nickname is applied to.
-	 */
-	id: Snowflake;
-
-	/**
-	 * The user's nickname.
-	 */
-	nick: string;
 }
 
 export enum OverwriteType {
@@ -1175,11 +1158,6 @@ export interface ModifyChannel {
 		parent_id?: Nullable<Snowflake>;
 
 		/**
-		 * Image for the channel icon. Applies to group DMs.
-		 */
-		icon?: string;
-
-		/**
 		 * Channel voice region ID, automatic when set to `null`. Applies to voice channels.
 		 */
 		rtc_region?: Nullable<string>;
@@ -1253,7 +1231,7 @@ export interface GetChannelMessages {
 		/**
 		 * Max number of messages to return (1-100).
 		 *
-		 * @defaultValue 50
+		 * @defaultValue `50`
 		 */
 		limit?: Range<1, 100>;
 	};
@@ -1455,7 +1433,7 @@ export interface GetReactions {
 		/**
 		 * Max number of users to return (1-100).
 		 *
-		 * @defaultValue 25
+		 * @defaultValue `25`
 		 */
 		limit?: Range<1, 100>;
 	};
@@ -1612,21 +1590,21 @@ export interface CreateChannelInvite {
 				 * Duration of invite in seconds before expiry, or 0 for never. Between 0 and
 				 * 604800 (7 days).
 				 *
-				 * @defaultValue 86400 (24 hours)
+				 * @defaultValue `86400` (24 hours)
 				 */
 				max_age?: number;
 
 				/**
 				 * Max number of uses or 0 for unlimited. Between 0 and 100.
 				 *
-				 * @defaultValue 0
+				 * @defaultValue `0`
 				 */
 				max_uses?: Range<0, 100>;
 
 				/**
 				 * Whether this invite only grants temporary membership.
 				 *
-				 * @defaultValue false
+				 * @defaultValue `false`
 				 */
 				temporary?: boolean;
 
@@ -1634,7 +1612,7 @@ export interface CreateChannelInvite {
 				 * If true, don't try to reuse a similar invite (useful for creating many unique
 				 * one time use invites).
 				 *
-				 * @defaultValue false
+				 * @defaultValue `false`
 				 */
 				unique?: boolean;
 

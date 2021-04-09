@@ -1068,9 +1068,9 @@ export interface PresenceUpdate extends GatewayEventPayload<GatewayEvent.Presenc
 		status?: string;
 
 		/**
-		 * User's current activities.
+		 * The user's current activities.
 		 */
-		activities?: Activity[];
+		activities: Activity[];
 
 		/**
 		 * User's platform-dependent status.

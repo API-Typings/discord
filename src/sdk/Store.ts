@@ -293,7 +293,7 @@ export interface GetEntitlements {
 		/**
 		 * Number of entitlements to return, 1-100.
 		 *
-		 * @defaultValue 100
+		 * @defaultValue `100`
 		 */
 		limit?: Range<1, 100>;
 	};
@@ -366,7 +366,7 @@ export interface CreatePurchaseDiscount {
 		/**
 		 * The time to live for the discount, in seconds.
 		 *
-		 * @defaultValue 600
+		 * @defaultValue `600`
 		 */
 		ttl?: Range<60, 3600>;
 	};
