@@ -1,4 +1,4 @@
-import { FixedTuple, Nullable } from 'extended-utility-types';
+import type { FixedTuple, Nullable } from 'extended-utility-types';
 import type {
 	Message,
 	PartialChannel,
@@ -107,11 +107,6 @@ export enum Event {
 	 * Sent when the client receives a notification (mention or new message in eligible channels).
 	 */
 	NotificationCreate = 'NOTIFICATION_CREATE',
-
-	/**
-	 * Sent when the user presses a key during shortcut capturing.
-	 */
-	CaptureShortcutChange = 'CAPTURE_SHORTCUT_CHANGE',
 
 	/**
 	 * Sent when the user clicks a Rich Presence join invite in chat to join a game.
@@ -474,19 +469,6 @@ export interface NotificationCreate extends EventPayload<Event.NotificationCreat
 		 * Body of the notification.
 		 */
 		body: string;
-	};
-}
-
-/**
- * @source {@link https://discord.com/developers/docs/topics/rpc#captureshortcutchange|RPC}
- */
-export interface CaptureShortcutChange extends EventPayload<Event.CaptureShortcutChange> {
-	args: never;
-	data: {
-		/**
-		 * Captured shortcut key combos.
-		 */
-		shortcut: RPC.ShortcutKeyCombo;
 	};
 }
 

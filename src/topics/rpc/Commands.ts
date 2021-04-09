@@ -101,11 +101,6 @@ export enum Command {
 	SetVoiceSettings = 'SET_VOICE_SETTINGS',
 
 	/**
-	 * Used to capture a keyboard shortcut entered by the user
-	 */
-	CaptureShortcut = 'CAPTURE_SHORTCUT',
-
-	/**
 	 * Used to send info about certified hardware devices
 	 */
 	SetCertifiedDevices = 'SET_CERTIFIED_DEVICES',
@@ -610,31 +605,6 @@ export interface Unsubscribe<T extends RPC.Event> extends CommandPayload<Command
 // !SECTION
 
 /**
- * Used to capture a keyboard shortcut entered by the user.
- *
- * @source {@link https://discord.com/developers/docs/topics/rpc#captureshortcut|RPC}
- */
-export interface CaptureShortcut extends CommandPayload<Command.CaptureShortcut> {
-	args: {
-		/**
-		 * Capture action.
-		 */
-		action: CaptureShortcutAction;
-	};
-
-	data: {
-		/**
-		 * The captured shortcut key combo array, or `null` for the `STOP` action.
-		 */
-		shortcut: ShortcutKeyCombo[];
-	};
-}
-
-export type CaptureShortcutAction = 'START' | 'STOP';
-
-// SECTION Set Certified Devices
-
-/**
  * Used by hardware manufacturers to send information about the current state of their certified
  * devices that are connected to Discord.
  *
@@ -648,8 +618,6 @@ export interface SetCertifiedDevices extends CommandPayload<Command.SetCertified
 		devices: Device[];
 	};
 }
-
-// !SECTION
 
 /**
  * @source {@link https://discord.com/developers/docs/topics/rpc#setactivity|RPC}
