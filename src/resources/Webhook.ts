@@ -263,6 +263,13 @@ export interface ExecuteWebhook {
 /**
  * Edits a previously-sent webhook message from the same token.
  *
+ * @remarks
+ * When the `content` field is edited, the `mentions` array in the message object will be
+ * reconstructed from scratch based on the new content. The `allowed_mentions` field of the edit
+ * request controls how this happens. If there is no explicit `allowed_mentions` in the edit
+ * request, the content will be parsed with *default* allowances, that is, without regard to whether
+ * or not an `allowed_mentions` was present in the request that originally created the message.
+ *
  * @endpoint [PATCH](https://discord.com/developers/docs/resources/webhook#edit-webhook-message) `/webhooks/{webhook.id}/{webhook.token}/messages/{message.id}`
  */
 export interface EditWebhookMessage {

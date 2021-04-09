@@ -1489,12 +1489,15 @@ export type DeleteAllEmojiReactions = { response: never };
  * Edit a previously sent message.
  *
  * @remarks
- * The fields `content`, `embed`, `allowed_mentions` and `flags` can be edited by the original
+ * - The fields `content`, `embed`, `allowed_mentions` and `flags` can be edited by the original
  * message author. Other users can only edit `flags` and only if they have the `MANAGE_MESSAGES`
  * permission in the corresponding channel. When specifying `flags`, ensure to include all
- * previously set flags/bits in addition to ones that you are modifying. Only `flags` documented in
- * the table below may be modified by users (unsupported flag changes are currently ignored without
- * error).
+ * previously set flags/bits in addition to ones that you are modifying.
+ * - When the `content` field is edited, the `mentions` array in the message object will be
+ * reconstructed from scratch based on the new content. The `allowed_mentions` field of the edit
+ * request controls how this happens. If there is no explicit `allowed_mentions` in the edit
+ * request, the content will be parsed with *default* allowances, that is, without regard to whether
+ * or not an `allowed_mentions` was present in the request that originally created the message.
  *
  * @endpoint [PATCH](https://discord.com/developers/docs/resources/channel#edit-message) `/channels/{channel.id}/messages/{message.id}`
  */
