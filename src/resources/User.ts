@@ -86,6 +86,8 @@ export interface User extends PartialUser {
 	public_flags?: UserFlags;
 }
 
+// ANCHOR User Flags
+
 /**
  * @source {@link https://discord.com/developers/docs/resources/user#user-object-user-flags|User}
  */
@@ -100,7 +102,6 @@ export enum UserFlags {
 	HouseBalance = 1 << 8,
 	EarlySupporter = 1 << 9,
 	TeamUser = 1 << 10,
-	System = 1 << 12,
 	BugHunterLevel2 = 1 << 14,
 	VerifiedBot = 1 << 16,
 	EarlyVerifiedBotDeveloper = 1 << 17
