@@ -1,5 +1,5 @@
 import type { Nullable } from 'extended-utility-types';
-import type { Guild, PartialUser, Snowflake, Team, User, Webhook } from '../';
+import type { PartialUser, Snowflake, Team, User } from '../';
 
 /**
  * @remarks
@@ -42,27 +42,27 @@ export enum OAuth2Scope {
 	Bot = 'bot',
 
 	/**
-	 * Allows /users/\@me/connections to return linked third-party accounts.
+	 * Allows `/users/@me/connections` to return linked third-party accounts.
 	 */
 	Connections = 'connections',
 
 	/**
-	 * Enables /users/\@me to return an `email`.
+	 * Enables `/users/@me` to return an `email`.
 	 */
 	Email = 'email',
 
 	/**
-	 * Allows /users/\@me without `email`.
+	 * Allows `/users/@me` without `email`.
 	 */
 	Identify = 'identify',
 
 	/**
-	 * Allows /users/\@me/guilds to return basic information about all of a user's guilds.
+	 * Allows `/users/@me/guilds` to return basic information about all of a user's guilds.
 	 */
 	Guilds = 'guilds',
 
 	/**
-	 * Allows /guilds/\{guild.id\}/members/\{user.id\} to be used for joining users to a guild.
+	 * Allows `/guilds/{guild.id}/members/{user.id}` to be used for joining users to a guild.
 	 *
 	 * @remarks
 	 * This scope requires you to have a bot account linked to your application. Also, in order to
@@ -149,225 +149,6 @@ export enum OAuth2Scope {
 	 */
 	ApplicationsCommandsUpdate = 'applications.commands.update'
 }
-
-// SECTION Authorization Flows
-
-// ANCHOR Authorization Code
-
-/**
- * The authorization code grant is what most developers will recognize as "standard OAuth2" and
- * involves retrieving an access code and exchanging it for a user's access token. It allows the
- * authorization server to act as an intermediary between the client and the resource owner, so the
- * resource owner's credentials are never shared directly with the client.
- *
- * @source {@link https://discord.com/developers/docs/topics/oauth2#authorization-code-grant|OAuth2}
- */
-export interface AuthorizationCodeGrant extends Omit<ImplicitGrant, 'response_type'> {
-	response_type: 'code';
-
-	/**
-	 * A list of OAuth2 scopes separated by URL encoded spaces (`%20`).
-	 */
-	scope: string;
-
-	/**
-	 * The URL you registered when creating your application, url-encoded.
-	 */
-	redirect_uri: string;
-
-	/**
-	 * Controls how the authorization flow handles existing authorizations.
-	 *
-	 * @remarks
-	 * - `consent` - Request to reapprove a user's authorization if they previously authorized your
-	 * application with the requested scopes,
-	 * - `none` - Skip the authorization screen and redirect them back to your redirect URI without
-	 * requesting their authorization.
-	 *
-	 * For passthrough scopes, like `bot` and `webhook.incoming`, authorization is always required.
-	 */
-	prompt: 'consent' | 'none';
-}
-
-/**
- * @remarks
- * You can also pass your `client_id` and `client_secret` as basic authentication with `client_id`
- * as the username and `client_secret` as the password.
- *
- * @source {@link https://discord.com/developers/docs/topics/oauth2#authorization-code-grant|OAuth2}
- */
-// eslint-disable-next-line
-export interface AuthorizationCodeAccessTokenURL
-	extends Omit<AuthorizationCodeAccessTokenRefreshURL, 'grant_type' | 'refresh_token'> {
-	/**
-	 * Must be set to `authorization_code`.
-	 */
-	grant_type: 'authorization_code';
-
-	/**
-	 * The code from the querystring.
-	 */
-	code: string;
-}
-
-/**
- * @source {@link https://discord.com/developers/docs/topics/oauth2#authorization-code-grant|OAuth2}
- */
-export interface AuthorizationCodeAccessToken extends ClientCredentialsAccessToken {
-	/**
-	 * The user's refresh token.
-	 */
-	refresh_token: string;
-}
-
-export interface AuthorizationCodeAccessTokenRefreshURL {
-	/**
-	 * Your application's client ID.
-	 */
-	client_id: Snowflake;
-
-	/**
-	 * Your application's client secret.
-	 */
-	client_secret: string;
-
-	/**
-	 * Must be set to `refresh_token`.
-	 */
-	grant_type: 'refresh_token';
-
-	/**
-	 * The user's refresh token.
-	 */
-	refresh_token: string;
-
-	/**
-	 * Your `redirect_uri`.
-	 */
-	redirect_uri: string;
-
-	/**
-	 * The scopes requested in your authorization URL, space-delimited.
-	 */
-	scope: string;
-}
-
-// ANCHOR Implicit
-
-/**
- * @source {@link https://discord.com/developers/docs/topics/oauth2#implicit-grant|OAuth2}
- */
-export interface ImplicitGrant {
-	response_type: 'token';
-
-	/**
-	 * Your application's `client_id`.
-	 */
-	client_id: Snowflake;
-
-	/**
-	 * Sent in the authorization request and returned back in the response and should be a value
-	 * that binds the user's request to their authenticated state.
-	 */
-	state?: string;
-
-	/**
-	 * A list of OAuth2 scopes separated by URL encoded spaces (`%20`).
-	 */
-	scope: string;
-}
-
-// ANCHOR Client Credentials
-
-/**
- * @source {@link https://discord.com/developers/docs/topics/oauth2#client-credentials-grant|OAuth}
- */
-export interface ClientCredentialsGrant {
-	grant_type: 'client_credentials';
-
-	/**
-	 * A list of OAuth2 scopes separated by URL encoded spaces (`%20`).
-	 */
-	scope: string;
-}
-
-/**
- * @source {@link https://discord.com/developers/docs/topics/oauth2#client-credentials-grant|OAuth}
- */
-export interface ClientCredentialsAccessToken {
-	/**
-	 * Allows your application to make certain requests to the API on their behalf, restricted to
-	 * whatever scopes were requested.
-	 */
-	access_token: string;
-	token_type: string;
-
-	/**
-	 * How long, in seconds, until the returned access token expires.
-	 */
-	expires_in: number;
-
-	/**
-	 * The scopes requested in your authorization URL, space-delimited.
-	 */
-	scope: string;
-}
-
-// ANCHOR Bot Authorization
-
-/**
- * Bot authorization is a special server-less and callback-less OAuth2 flow that makes it easy for
- * users to add bots to guilds.
- *
- * @source {@link https://discord.com/developers/docs/topics/oauth2#bot-authorization-flow-bot-auth-parameters}
- */
-export interface BotAuthorization {
-	/**
-	 * Your app's client ID.
-	 */
-	client_id: Snowflake;
-
-	/**
-	 * Needs to include `bot` for the bot flow.
-	 */
-	scope: string;
-
-	/**
-	 * The permisssions you're requesting.
-	 */
-	permissions: number;
-
-	/**
-	 * Pre-fills the dropdown picker with a guild for the user.
-	 */
-	guild_id?: Snowflake;
-
-	/**
-	 * `true` or `false`–disallows the user from changing the guild dropdown.
-	 */
-	disable_guild_select?: boolean;
-}
-
-/**
- * @source {@link https://discord.com/developers/docs/topics/oauth2#advanced-bot-authorization|OAuth2}
- */
-export interface BotAuthorizationAccessToken extends AuthorizationCodeAccessToken {
-	guild: Guild;
-}
-
-// ANCHOR Webhook
-
-/**
- * Discord's webhook flow is a specialized version of an authorization code implementation.
- * In this case, the `scope` querystring parameter needs to be set to `webhook.incoming`.
- *
- * @source {@link https://discord.com/developers/docs/topics/oauth2#webhooks|OAuth2}
- */
-export interface WebhookAccessToken extends AuthorizationCodeAccessToken {
-	webhook: Webhook;
-}
-
-// !SECTION
 
 // ANCHOR Get Current Bot Application Information
 
