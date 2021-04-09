@@ -82,7 +82,7 @@ export interface Identify extends GatewayCommandPayload<GatewayOPCode.Identify> 
 		/**
 		 * Presence structure for initial presence information.
 		 */
-		presence?: UpdateStatus['d'];
+		presence?: UpdatePresence['d'];
 
 		/**
 		 * The Gateway Intents you wish to receive
@@ -225,9 +225,9 @@ export interface UpdateVoiceState {
 /**
  * Sent by the client to indicate a presence or status update.
  *
- * @source {@link https://discord.com/developers/docs/topics/gateway#update-status|Gateway}
+ * @source {@link https://discord.com/developers/docs/topics/gateway#update-presence|Gateway}
  */
-export interface UpdateStatus extends GatewayCommandPayload<GatewayOPCode.PresenceUpdate> {
+export interface UpdatePresence extends GatewayCommandPayload<GatewayOPCode.PresenceUpdate> {
 	d: {
 		/**
 		 * Unix time (in milliseconds) of when the client went idle, or null if the client is not
