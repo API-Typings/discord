@@ -11,7 +11,7 @@ export interface DiscoveryMetadata {
 	guild_id: Snowflake;
 
 	/**
-	 * The ID of the primary discovery category.
+	 * The ID of the primary discovery category set for this guild..
 	 */
 	primary_category_id: number;
 
@@ -74,6 +74,15 @@ export interface DiscoveryCategoryName {
 // SECTION Endpoints
 
 /**
+ * Returns an array of discovery category objects that can be used when editing guilds.
+ *
+ * @endpoint GET `/discovery/categories`
+ */
+export type ListDiscoveryCategories = { response: DiscoveryCategory[] };
+
+/**
+ * Checks if a discovery search term is valid.
+ *
  * @endpoint GET `/discovery/valid-term`
  */
 export interface ValidateDiscoverySearchTerm {
