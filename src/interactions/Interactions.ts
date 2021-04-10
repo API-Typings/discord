@@ -334,7 +334,7 @@ export interface ApplicationCommandInteractionData {
 	/**
 	 * The params + values from the user.
 	 */
-	options?: ApplicationCommandInteractionOptionData[];
+	options?: ApplicationCommandInteractionDataOption[];
 }
 
 export interface ApplicationCommandInteractionDataResolved {
@@ -368,7 +368,7 @@ export interface ApplicationCommandInteractionDataResolved {
  *
  * @source {@link https://discord.com/developers/docs/interactions/slash-commands#interaction-applicationcommandinteractiondataoption|Slash Commands}
  */
-export interface ApplicationCommandInteractionOptionData {
+export interface ApplicationCommandInteractionDataOption {
 	/**
 	 * The name of the parameter.
 	 */
@@ -387,7 +387,7 @@ export interface ApplicationCommandInteractionOptionData {
 	/**
 	 * Present if this option is a group or subcommand.
 	 */
-	options?: ApplicationCommandInteractionOptionData[];
+	options?: ApplicationCommandInteractionDataOption[];
 }
 
 /**
