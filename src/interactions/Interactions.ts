@@ -341,22 +341,22 @@ export interface ApplicationCommandInteractionDataResolved {
 	/**
 	 * The IDs and User objects.
 	 */
-	users?: Record<Snowflake, User>;
+	users?: Record<string, User>;
 
 	/**
 	 * The IDs and partial Member objects.
 	 */
-	members?: Record<Snowflake, PartialGuildMember>;
+	members?: Record<string, PartialGuildMember>;
 
 	/**
 	 * The IDs and Role objects.
 	 */
-	roles?: Record<Snowflake, Role>;
+	roles?: Record<string, Role>;
 
 	/**
 	 * The IDs and partial Channel objects.
 	 */
-	channels?: Record<Snowflake, PartialChannel>;
+	channels?: Record<string, PartialChannel>;
 }
 
 /**
