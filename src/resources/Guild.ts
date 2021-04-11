@@ -466,35 +466,14 @@ export enum SystemChannelFlags {
  */
 export enum GuildFeature {
 	/**
-	 * Guild has access to set an invite splash background.
+	 * Guild has access to set an animated guild icon.
 	 */
-	InviteSplash = 'INVITE_SPLASH',
+	AnimatedIcon = 'ANIMATED_ICON',
 
 	/**
-	 * Guild has access to set 384kbps bitrate in voice (previously VIP voice servers).
+	 * Guild has access to set a guild banner image.
 	 */
-	VIPRegions = 'VIP_REGIONS',
-
-	/**
-	 * Guild has access to set a vanity URL.
-	 */
-	VanityURL = 'VANITY_URL',
-
-	/**
-	 * Guild is verified.
-	 */
-	Verified = 'VERIFIED',
-
-	/**
-	 * Guild is partnered.
-	 */
-	Partnered = 'PARTNERED',
-
-	/**
-	 * Guild can enable welcome screen, Membership Screening, and discovery, and receives community
-	 * updates.
-	 */
-	Community = 'COMMUNITY',
+	Banner = 'BANNER',
 
 	/**
 	 * Guild has access to use commerce features.
@@ -502,9 +481,10 @@ export enum GuildFeature {
 	Commerce = 'COMMERCE',
 
 	/**
-	 * Guild has access to create news channels.
+	 * Guild can enable welcome screen, Membership Screening, and discovery, and receives community
+	 * updates.
 	 */
-	News = 'NEWS',
+	Community = 'COMMUNITY',
 
 	/**
 	 * Guild is able to be discovered in the directory.
@@ -522,19 +502,9 @@ export enum GuildFeature {
 	Featurable = 'FEATURABLE',
 
 	/**
-	 * Guild has access to set an animated guild icon.
+	 * Guild has access to set an invite splash background.
 	 */
-	AnimatedIcon = 'ANIMATED_ICON',
-
-	/**
-	 * Guild has access to set a guild banner image.
-	 */
-	Banner = 'BANNER',
-
-	/**
-	 * Guild has enabled the welcome screen.
-	 */
-	WelcomeScreenEnabled = 'WELCOME_SCREEN_ENABLED',
+	InviteSplash = 'INVITE_SPLASH',
 
 	/**
 	 * Guild has enabled Membership Screening.
@@ -542,9 +512,39 @@ export enum GuildFeature {
 	MemberVerificationGateEnabled = 'MEMBER_VERIFICATION_GATE_ENABLED',
 
 	/**
+	 * Guild has access to create news channels.
+	 */
+	News = 'NEWS',
+
+	/**
+	 * Guild is partnered.
+	 */
+	Partnered = 'PARTNERED',
+
+	/**
 	 * Guild can be previewed before joining via Membership Screening or the directory.
 	 */
-	PreviewEnabled = 'PREVIEW_ENABLED'
+	PreviewEnabled = 'PREVIEW_ENABLED',
+
+	/**
+	 * Guild has access to set a vanity URL.
+	 */
+	VanityURL = 'VANITY_URL',
+
+	/**
+	 * Guild is verified.
+	 */
+	Verified = 'VERIFIED',
+
+	/**
+	 * Guild has access to set 384kbps bitrate in voice (previously VIP voice servers).
+	 */
+	VIPRegions = 'VIP_REGIONS',
+
+	/**
+	 * Guild has enabled the welcome screen.
+	 */
+	WelcomeScreenEnabled = 'WELCOME_SCREEN_ENABLED'
 }
 
 /**
