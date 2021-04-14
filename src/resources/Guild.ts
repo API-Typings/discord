@@ -481,8 +481,8 @@ export enum GuildFeature {
 	Commerce = 'COMMERCE',
 
 	/**
-	 * Guild can enable welcome screen, Membership Screening, and discovery, and receives community
-	 * updates.
+	 * Guild can enable welcome screen, Membership Screening, stage channels, and discovery, and
+	 * receives community updates.
 	 */
 	Community = 'COMMUNITY',
 

@@ -420,7 +420,7 @@ export enum InteractionResponseType {
 	ChannelMessageSource = 4,
 
 	/**
-	 * ACK an interaction and send a response later, the user sees a loading state.
+	 * ACK an interaction and edit a response later, the user sees a loading state.
 	 */
 	DeferredChannelMessageSource
 }
