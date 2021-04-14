@@ -334,6 +334,11 @@ export interface Guild extends PartialGuild {
 	 * object.
 	 */
 	welcome_screen?: WelcomeScreen;
+
+	/**
+	 * `true` if this guild is designated as NSFW.
+	 */
+	nsfw: boolean;
 }
 
 /**
