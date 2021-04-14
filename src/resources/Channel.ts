@@ -127,7 +127,7 @@ export enum ChannelType {
 	/**
 	 * A voice channel for hosting events with an audience.
 	 */
-	GUILD_STAGE_VOICE = 13
+	GuildStageVoice = 13
 }
 
 export enum VideoQualityMode {
