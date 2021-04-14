@@ -45,7 +45,7 @@ export interface GatewayURL {
 	/**
 	 * Gateway Version to use.
 	 */
-	v: 8;
+	v: 8 | 9;
 
 	/**
 	 * The encoding of received gateway packets.
@@ -148,6 +148,12 @@ export enum Intents {
 	 * - `CHANNEL_UPDATE`
 	 * - `CHANNEL_DELETE`
 	 * - `CHANNEL_PINS_UPDATE`
+	 * - `THREAD_CREATE`
+	 * - `THREAD_UPDATE`
+	 * - `THREAD_DELETE`
+	 * - `THREAD_LIST_SYNC`
+	 * - `THREAD_MEMBER_UPDATE`
+	 * - `THREAD_MEMBERS_UPDATE`
 	 */
 	Guilds = 1 << 0,
 
@@ -156,6 +162,7 @@ export enum Intents {
 	 * - `GUILD_MEMBER_ADD`
 	 * - `GUILD_MEMBER_UPDATE`
 	 * - `GUILD_MEMBER_REMOVE`
+	 * - `THREAD_MEMBERS_UPDATE`
 	 */
 	GuildMembers = 1 << 1,
 

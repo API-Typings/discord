@@ -1,4 +1,4 @@
-import type { Nullable } from 'extended-utility-types';
+import type { Nullable, Range } from 'extended-utility-types';
 import type {
 	Activity,
 	Application,
@@ -16,9 +16,12 @@ import type {
 	Message,
 	PartialApplication,
 	PartialEmoji,
+	PartialThreadChannel,
 	PartialUser,
 	Role,
 	Snowflake,
+	ThreadChannel,
+	ThreadMember,
 	UnavailableGuild,
 	User,
 	VoiceState
@@ -109,6 +112,36 @@ export enum GatewayEvent {
 	 * Message was pinned or unpinned.
 	 */
 	ChannelPinsUpdate = 'CHANNEL_PINS_UPDATE',
+
+	/**
+	 * Thread created, also sent when being added to a private thread.
+	 */
+	ThreadCreate = 'THREAD_CREATE',
+
+	/**
+	 * Thread was updated.
+	 */
+	ThreadUpdate = 'THREAD_UPDATE',
+
+	/**
+	 * Thread was deleted.
+	 */
+	ThreadDelete = 'THREAD_DELETE',
+
+	/**
+	 * Sent when gaining access to a channel, contains all active threads in that channel.
+	 */
+	ThreadListSync = 'THREAD_LIST_SYNC',
+
+	/**
+	 * You joined or were added to a thread.
+	 */
+	ThreadMemberUpdate = 'THREAD_MEMBER_UPDATE',
+
+	/**
+	 * Some user(s) joined or left a thread.
+	 */
+	ThreadMembersUpdate = 'THREAD_MEMBERs_UPDATE',
 
 	/**
 	 * Lazy-load for unavailable guild, guild became available, or user joined a new guild.
@@ -429,6 +462,103 @@ export interface ChannelPinsUpdate extends GatewayEventPayload<GatewayEvent.Chan
 		last_pin_timestamp?: Nullable<string>;
 	};
 }
+
+// SECTION Threads
+
+/**
+ * Sent when a thread is created, relevant to the current user, or when the current user is added
+ * to a private thread.
+ */
+export interface ThreadCreate extends GatewayEventPayload<GatewayEvent.ThreadCreate> {
+	d: ThreadChannel;
+}
+
+/**
+ * Sent when a thread is updated. This is not sent when the field `last_message_id` is altered.
+ */
+export interface ThreadUpdate extends GatewayEventPayload<GatewayEvent.ThreadUpdate> {
+	d: ThreadChannel;
+}
+
+/**
+ * Sent when a thread relevant to the current user is deleted.
+ */
+export interface ThreadDelete extends GatewayEventPayload<GatewayEvent.ThreadDelete> {
+	d: PartialThreadChannel;
+}
+
+/**
+ * Sent when the current user *gains* access to a channel.
+ */
+export interface ThreadListSync extends GatewayEventPayload<GatewayEvent.ThreadListSync> {
+	d: {
+		/**
+		 * The ID of the guild.
+		 */
+		guild_id?: Snowflake;
+
+		/**
+		 * The parent channel ids whose threads are being synced. If omitted, then threads were
+		 * synced for the entire guild.
+		 */
+		channel_ids?: Snowflake[];
+
+		/**
+		 * All active threads in the given channels that the current user can access.
+		 */
+		threads: ThreadChannel[];
+
+		/**
+		 * Any thread member objects from the synced threads for the current user, indicating which
+		 * threads are joined.
+		 */
+		members: ThreadMember[];
+	};
+}
+
+/**
+ * Sent when the current user is added to a thread.
+ */
+export interface ThreadMemberUpdate extends GatewayEventPayload<GatewayEvent.ThreadMemberUpdate> {
+	d: ThreadMember;
+}
+
+/**
+ * Sent when anyone is added to or removed from a thread.
+ *
+ * If the current user does not have the Request Guild Members intent, then this event will only be
+ * sent if the current user was added or removed from the thread.
+ */
+export interface ThreadMembersUpdate extends GatewayEventPayload<GatewayEvent.ThreadMembersUpdate> {
+	d: {
+		/**
+		 * The ID of the thread.
+		 */
+		id: Snowflake;
+
+		/**
+		 * The ID of the guild.
+		 */
+		guild_id: Snowflake;
+
+		/**
+		 * The approximate number of members in the thread, capped at 50.
+		 */
+		member_count: Range<0, 50>;
+
+		/**
+		 * The users who were added to the thread.
+		 */
+		added_members?: ThreadMember[];
+
+		/**
+		 * The ID of the users who were removed from the thread.
+		 */
+		removed_member_ids?: Snowflake[];
+	};
+}
+
+// !SECTION
 
 // !SECTION
 

@@ -557,6 +557,21 @@ export enum JSONErrorCode {
 	InvalidStickerSent = 50081,
 
 	/**
+	 * Invalid thread archive state.
+	 */
+	InvalidThreadArchiveState = 50083,
+
+	/**
+	 * Invalid thread notification settings.
+	 */
+	InvalidThreadNotificationSettings,
+
+	/**
+	 * `before` value is earlier than the thread creation date.
+	 */
+	InvalidBeforeThreadCreationDateValue,
+
+	/**
 	 * Two factor is required for this operation.
 	 */
 	TwoFactorRequired = 60003,
