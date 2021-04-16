@@ -261,6 +261,13 @@ export interface ExecuteWebhook {
 }
 
 /**
+ * Returns a previously-sent webhook message from the same token.
+ *
+ * @endpoint [GET](https://discord.com/developers/docs/resources/webhook#get-webhook-message) `/webhooks/{webhook.id}/{webhook.token}/messages/{message.id}`
+ */
+export type GetWebhookMessage = { response: Message };
+
+/**
  * Edits a previously-sent webhook message from the same token.
  *
  * @remarks

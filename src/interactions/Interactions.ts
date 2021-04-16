@@ -11,6 +11,7 @@ import type {
 	Snowflake,
 	User
 } from '../';
+import { GetWebhookMessage } from '../resources';
 
 // ANCHOR Slash Command Limits
 
@@ -653,6 +654,13 @@ export interface CreateInteractionResponse {
 	body: InteractionResponse;
 	response: never;
 }
+
+/**
+ * Returns the initial Interaction response.
+ *
+ * @endpoint [GET](https://discord.com/developers/docs/interactions/slash-commands#get-original-interaction-response) `/webhooks/{application.id}/{interaction.token}/messages/@original`
+ */
+export type GetOriginalInteractionResponse = GetWebhookMessage;
 
 /**
  * Edits the initial Interaction response.
