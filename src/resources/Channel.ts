@@ -616,11 +616,6 @@ export interface Sticker {
 	asset: string;
 
 	/**
-	 * Sticker preview asset hash.
-	 */
-	preview_asset: string;
-
-	/**
 	 * Type of sticker format.
 	 */
 	format_type: StickerFormat;
