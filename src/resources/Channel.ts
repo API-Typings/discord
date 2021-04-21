@@ -176,21 +176,25 @@ export enum ChannelType {
 	GuildStore,
 
 	/**
-	 * A temporary sub-channel within a `GUILD_TEXT` or `GUILD_NEWS` channel. Only available in API
-	 * v9.
+	 * A temporary sub-channel within a `GUILD_NEWS` channel. Only available in API v9.
 	 */
-	PublicThread = 11,
+	NewsThread = 10,
+
+	/**
+	 * A temporary sub-channel within a `GUILD_TEXT` channel. Only available in API v9.
+	 */
+	PublicThread,
 
 	/**
 	 * A temporary sub-channel within a `GUILD_TEXT` channel that is only viewable by those invited
 	 * and those with the `MANAGE_MESSAGES` permission. Only available in API v9.
 	 */
-	PrivateThread = 12,
+	PrivateThread,
 
 	/**
 	 * A voice channel for hosting events with an audience.
 	 */
-	GuildStageVoice = 13
+	GuildStageVoice
 }
 
 export enum VideoQualityMode {
@@ -297,7 +301,7 @@ export interface StoreChannel extends Omit<ChannelCategory, 'type'> {
 
 // ANCHOR Partial Thread Channel
 
-export type PartialThreadChannel = Pick<PartialChannel, 'id' | 'type'> & Pick<Channel, 'guild_id' | 'parent_id'>;
+export type PartialThreadChannel = Pick<PartialChannel, 'id' | 'type'> & Pick<Channel, 'guild_id'>;
 
 // ANCHOR Thread Channel
 
@@ -309,33 +313,43 @@ export type PartialThreadChannel = Pick<PartialChannel, 'id' | 'type'> & Pick<Ch
  * Unlike with channels, the API will only sync updates to users about threads the current user can
  * view. When receiving a guild create payload, the API will only include active threads the current
  * user can view. Threads inside of private channels are completely private to the members of that
- * private channel. As such, when *gaining* access to a channel the API sends a thread list sync,
+ * private channel. As such, when *gaining* access to a channel the API send a thread list sync,
  * which includes all active threads in that channel.
  *
- * Threads can also be joined. Users must join a thread before sending messages in them. The API
- * will helpfully automatically join users to a thread when sending a message in that thread.
+ * Threads also track membership.  Users must be added to a thread before sending messages in them.
+ * The API will helpfully automatically add users to a thread when sending a message in that thread.
  *
- * Guilds have limits on the number of active threads and members per thread. Once these are reached
- * additional threads cannot be created or joined.
+ * Guilds have limits on the number of active threads and members per thread.  Once these are
+ * reached additional threads cannot be created or unarchived, and users cannot be added.
  */
 export interface ThreadChannel
 	extends PartialThreadChannel,
 		Pick<PartialChannel, 'name'>,
 		Pick<TextChannel, 'last_message_id'> {
 	/**
+	 * ID of the creator.
+	 */
+	owner_id: Snowflake;
+
+	/**
+	 * ID of the text channel this thread was created.
+	 */
+	parent_id: Nullable<Snowflake>;
+
+	/**
 	 * An approximate count of messages in a thread, caps at 50.
 	 */
-	message_count?: Range<0, 50>;
+	message_count: Range<0, 50>;
 
 	/**
 	 * An approximate count of users in a thread, caps at 50.
 	 */
-	member_count?: Range<0, 50>;
+	member_count: Range<0, 50>;
 
 	/**
 	 * Thread-specific fields not needed by other channels.
 	 */
-	thread_metadata?: ThreadMetadata;
+	thread_metadata: ThreadMetadata;
 
 	/**
 	 * Thread member object for the current user, if they have joined the thread, only included
@@ -536,7 +550,7 @@ export enum MessageType {
 	GuildDiscoveryRequalified,
 	GuildDiscoveryGracePeriodInitialWarning,
 	GuildDiscoveryGracePeriodFinalWarning,
-	ThreadCreated = 18,
+	ThreadCreated,
 	Reply,
 	ApplicationCommand,
 
