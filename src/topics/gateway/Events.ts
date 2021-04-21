@@ -134,12 +134,12 @@ export enum GatewayEvent {
 	ThreadListSync = 'THREAD_LIST_SYNC',
 
 	/**
-	 * You joined or were added to a thread.
+	 * Thread member for the current user was updated.
 	 */
 	ThreadMemberUpdate = 'THREAD_MEMBER_UPDATE',
 
 	/**
-	 * Some user(s) joined or left a thread.
+	 * Some user(s) were added to or removed from a thread.
 	 */
 	ThreadMembersUpdate = 'THREAD_MEMBERs_UPDATE',
 
@@ -467,7 +467,8 @@ export interface ChannelPinsUpdate extends GatewayEventPayload<GatewayEvent.Chan
 
 /**
  * Sent when a thread is created, relevant to the current user, or when the current user is added
- * to a private thread.
+ * to a private thread. When being added to an existing private thread, includes a thread member
+ * object.
  */
 export interface ThreadCreate extends GatewayEventPayload<GatewayEvent.ThreadCreate> {
 	d: ThreadChannel;
@@ -517,7 +518,7 @@ export interface ThreadListSync extends GatewayEventPayload<GatewayEvent.ThreadL
 }
 
 /**
- * Sent when the current user is added to a thread.
+ * Sent when the thread member object for the current user is updated.
  */
 export interface ThreadMemberUpdate extends GatewayEventPayload<GatewayEvent.ThreadMemberUpdate> {
 	d: ThreadMember;
@@ -526,8 +527,8 @@ export interface ThreadMemberUpdate extends GatewayEventPayload<GatewayEvent.Thr
 /**
  * Sent when anyone is added to or removed from a thread.
  *
- * If the current user does not have the Request Guild Members intent, then this event will only be
- * sent if the current user was added or removed from the thread.
+ * If the current user does not have the `GUILD_MEMBERS` Gateway Intent, then this event will only
+ * be sent if the current user was added or removed from the thread.
  */
 export interface ThreadMembersUpdate extends GatewayEventPayload<GatewayEvent.ThreadMembersUpdate> {
 	d: {
