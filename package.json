@@ -28,7 +28,7 @@
 		"extended-utility-types": "^1.13.0"
 	},
 	"devDependencies": {
-		"@microsoft/tsdoc-config": "^0.14.0",
+		"@microsoft/tsdoc-config": "^0.15.2",
 		"@types/node": "^14.14.37",
 		"@typescript-eslint/eslint-plugin": "^4.21.0",
 		"@typescript-eslint/parser": "^4.21.0",
