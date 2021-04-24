@@ -724,6 +724,9 @@ export type GetApplicationCommandPermissions = { response: ApplicationCommandPer
 /* eslint-enable max-len */
 export interface EditApplicationCommandPermissions {
 	body: {
+		/**
+		 * The permissions for the command in the guild.
+		 */
 		permissions: ApplicationCommandPermissions[];
 	};
 
