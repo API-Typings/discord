@@ -652,7 +652,7 @@ export type BulkOverwriteGuildApplicationCommands = BulkOverwriteGlobalApplicati
  */
 export interface CreateInteractionResponse {
 	body: InteractionResponse;
-	response: never;
+	response: InteractionResponse;
 }
 
 /**

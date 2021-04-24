@@ -258,6 +258,8 @@ export interface ExecuteWebhook {
 		 */
 		allowed_mentions?: AllowedMentions;
 	};
+
+	response: Message;
 }
 
 /**
