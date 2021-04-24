@@ -1,5 +1,6 @@
 import type { FixedTuple, Nullable, Range } from 'extended-utility-types';
 import type {
+	Component,
 	GuildMember,
 	Invite,
 	InviteMetadata,
@@ -424,6 +425,7 @@ export interface Message {
 	 * Sent if the message is a response to an Interaction.
 	 */
 	interaction?: MessageInteraction;
+	components?: Component[];
 }
 
 export interface UserMention extends User {

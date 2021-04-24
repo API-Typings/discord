@@ -4,14 +4,15 @@ import type {
 	EditWebhookMessage,
 	Embed,
 	ExecuteWebhook,
+	GetWebhookMessage,
 	GuildMember,
+	Message,
 	PartialChannel,
 	PartialGuildMember,
 	Role,
 	Snowflake,
 	User
 } from '../';
-import { GetWebhookMessage } from '../resources';
 
 // ANCHOR Slash Command Limits
 
@@ -243,6 +244,34 @@ export enum ApplicationCommandPermissionType {
 
 // !SECTION
 
+// ANCHOR Component
+
+export interface Component {
+	type: 1;
+	components: ButtonComponent[];
+}
+
+export type ButtonComponent = {
+	label: string;
+} & (
+	| {
+			style: Exclude<ButtonComponentStyle, ButtonComponentStyle.Link>;
+			custom_id: string | number;
+	  }
+	| {
+			style: ButtonComponentStyle.Link;
+			url: string;
+	  }
+);
+
+export enum ButtonComponentStyle {
+	Primary = 1,
+	Info,
+	Success,
+	Danger,
+	Link
+}
+
 // ANCHOR Interaction
 
 /**
@@ -296,6 +325,7 @@ export interface Interaction {
 	 * A continuation token for responding to the interaction.
 	 */
 	token: string;
+	message?: Message;
 
 	/**
 	 * Read-only property, always `1`.
@@ -310,7 +340,13 @@ export interface Interaction {
  */
 export enum InteractionType {
 	Ping = 1,
-	ApplicationCommand
+	ApplicationCommand,
+	Component
+}
+
+export interface ComponentInteractionData {
+	custom_id: string;
+	component_type: 2;
 }
 
 /**
@@ -667,7 +703,11 @@ export type GetOriginalInteractionResponse = GetWebhookMessage;
  *
  * @endpoint [PATCH](https://discord.com/developers/docs/interactions/slash-commands#edit-original-interaction-response) `/webhooks/{application.id}/{interaction.token}/messages/@original`
  */
-export type EditOriginalInteractionResponse = EditWebhookMessage;
+export interface EditOriginalInteractionResponse extends EditWebhookMessage {
+	body: EditWebhookMessage['body'] & {
+		components?: Component;
+	};
+}
 
 /**
  * Deletes the initial Interaction response.
@@ -681,14 +721,18 @@ export type DeleteOriginalInteractionResponse = { response: never };
  *
  * @endpoint [POST](https://discord.com/developers/docs/interactions/slash-commands#create-followup-message) `/webhooks/{application.id}/{interaction.token}`
  */
-export type CreateFollowupMessage = ExecuteWebhook['body'];
+export interface CreateFollowupMessage extends ExecuteWebhook {
+	body: ExecuteWebhook['body'] & {
+		components?: Component;
+	};
+}
 
 /**
  * Edits a followup message for an Interaction.
  *
  * @endpoint [PATCH](https://discord.com/developers/docs/interactions/slash-commands#edit-followup-message) `/webhooks/{application.id}/{interaction.token}/messages/{message.id}`
  */
-export type EditFollowupMessage = EditWebhookMessage;
+export type EditFollowupMessage = EditOriginalInteractionResponse;
 
 /**
  * Deletes a followup message for an Interaction.
