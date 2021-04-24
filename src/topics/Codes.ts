@@ -373,12 +373,17 @@ export enum JSONErrorCode {
 	/**
 	 * Maximum number of guild discovery subcategories has been reached (5).
 	 */
-	MaximumDiscoverySubcategories = 30030,
+	MaximumDiscoverySubcategoriesReached = 30030,
 
 	/**
 	 * Guild already has a template.
 	 */
 	GuildTemplateExists,
+
+	/**
+	 * Maximum number of bans for non-guild members have been exceeded.
+	 */
+	MaximumNonGuildMemberBansReached = 30035,
 
 	/**
 	 * Unauthorized.
