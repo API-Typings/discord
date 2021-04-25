@@ -341,7 +341,7 @@ export interface Interaction {
 export enum InteractionType {
 	Ping = 1,
 	ApplicationCommand,
-	Component
+	MessageComponent
 }
 
 export interface ComponentInteractionData {
