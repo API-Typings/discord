@@ -247,8 +247,13 @@ export enum ApplicationCommandPermissionType {
 // ANCHOR Component
 
 export interface Component {
-	type: 1;
+	type: ComponentType;
 	components: ButtonComponent[];
+}
+
+export enum ComponentType {
+	ActionRow = 1,
+	Button
 }
 
 export type ButtonComponent = {
