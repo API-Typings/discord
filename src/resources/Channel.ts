@@ -120,7 +120,7 @@ export enum ChannelType {
 	/**
 	 * A temporary sub-channel within a `GUILD_NEWS` channel. Only available in API v9.
 	 */
-	NewsThread = 10,
+	AnnouncementThread = 10,
 
 	/**
 	 * A temporary sub-channel within a `GUILD_TEXT` channel. Only available in API v9.
