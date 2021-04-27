@@ -218,7 +218,7 @@ export enum JSONErrorCode {
 	/**
 	 * Unknown provider.
 	 */
-	UnknownProvider,
+	UnknownPlatform,
 
 	/**
 	 * Unknown role.
@@ -286,6 +286,11 @@ export enum JSONErrorCode {
 	UnknownRedistributable = 10036,
 
 	/**
+	 * Unknown gift code.
+	 */
+	UnknownGiftCode = 10038,
+
+	/**
 	 * Unknown guild template.
 	 */
 	UnknownGuildTemplate = 10057,
@@ -314,66 +319,79 @@ export enum JSONErrorCode {
 	 * Only bots can use this endpoint.
 	 */
 	BotRequired,
+	RPCProxyDisallowed,
+	ExplicitContent = 20009,
+	AccountScheduledForDeletion = 20011,
+	UserUnauthorizedForApplication,
+	AccountDisabled,
+	SlowmodeRateLimited = 20016,
 
 	/**
 	 * This message cannot be edited due to announcement rate limits.
 	 */
-	AnnouncementRateLimit = 20022,
+	ChannelFollowingRateLimited = 20022,
+	UnderMinimumAge = 20024,
 
 	/**
 	 * The channel you are writing has hit the write rate limit.
 	 */
-	ChannelRateLimit = 20028,
+	ChannelRateLimited = 20028,
 
 	/**
 	 * Maximum number of guilds reached (100).
 	 */
-	MaximumGuildsReached = 30001,
+	TooManyGuilds = 30001,
 
 	/**
 	 * Maximum number of friends reached (1000).
 	 */
-	MaximumFriendsReached,
+	TooManyFriends,
 
 	/**
 	 * Maximum number of pins reached for the channel (50).
 	 */
-	MaximumPinsReached,
+	TooManyPinsInChannel,
+	TooManyRecipients,
 
 	/**
 	 * Maximum number of guild roles reached (250).
 	 */
-	MaximumRolesReached = 30005,
+	TooManyGuildRoles,
+	TooManyUsingUsername,
 
 	/**
 	 * Maximum number of webhooks reached (10).
 	 */
-	MaximumWebhooksReached = 30007,
+	TooManyWebhooks,
+	TooManyEmojis,
 
 	/**
 	 * Maximum number of reactions reached (20).
 	 */
-	MaximumReactionsReached = 30010,
+	TooManyReactions = 30010,
 
 	/**
 	 * Maximum number of channels reached (500).
 	 */
-	MaximumChannelsReached = 30013,
+	TooManyChannels = 30013,
 
 	/**
 	 * Maximum number of attachments in a message reached (10).
 	 */
-	MaximumAttachmentsReached = 30015,
+	TooManyAttachments = 30015,
 
 	/**
 	 * Maximum number of invites reached (1000).
 	 */
-	MaximumInvitesReached,
+	TooManyInvites,
+	TooManyAnimatedEmojis = 30018,
+	GuildAtCapacity,
+	NotEnoughGuildMembers = 30029,
 
 	/**
 	 * Maximum number of guild discovery subcategories has been reached (5).
 	 */
-	MaximumDiscoverySubcategoriesReached = 30030,
+	TooManyDiscoverySubcategories,
 
 	/**
 	 * Guild already has a template.
@@ -383,7 +401,7 @@ export enum JSONErrorCode {
 	/**
 	 * Maximum number of bans for non-guild members have been exceeded.
 	 */
-	MaximumNonGuildMemberBansReached = 30035,
+	TooManyNonGuildMemberBans = 30035,
 
 	/**
 	 * Unauthorized.
@@ -393,12 +411,14 @@ export enum JSONErrorCode {
 	/**
 	 * You need to verify your account in order to perform this action.
 	 */
-	VerifiedAccountRequired,
+	EmailVerificationRequired,
+	DMOpenRateLimited,
+	SendMessageTemporarilyDisabled,
 
 	/**
 	 * Request entity too large.
 	 */
-	MaximumRequestSizeReached = 40005,
+	RequestEntityTooLarge,
 
 	/**
 	 * This feature has been temporarily disabled server-side.
@@ -408,7 +428,9 @@ export enum JSONErrorCode {
 	/**
 	 * The user is banned from this guild.
 	 */
-	BannedUser,
+	UserBanned,
+	ConnectionRevoked = 40012,
+	DeleteAccountTransferTeamOwnership = 40028,
 
 	/**
 	 * This message has already been crossposted.
@@ -418,7 +440,7 @@ export enum JSONErrorCode {
 	/**
 	 * Missing access.
 	 */
-	MissingAccess = 50001,
+	InvalidAccess = 50001,
 
 	/**
 	 * Invalid account type.
@@ -428,47 +450,47 @@ export enum JSONErrorCode {
 	/**
 	 * Cannot execute action on a DM channel.
 	 */
-	CannotExecuteDM,
+	InvalidDMAction,
 
 	/**
 	 * Guild widget disabled.
 	 */
-	WidgetDisabled,
+	InvalidEmbedDisabled,
 
 	/**
 	 * Cannot edit a message authored by another user.
 	 */
-	CannotEdit,
+	InvalidMessageAuthor,
 
 	/**
 	 * Cannot send an empty message.
 	 */
-	CannotSendEmpty,
+	InvalidMessageEmpty,
 
 	/**
 	 * Cannot send messages to this user.
 	 */
-	CannotDM,
+	InvalidMessageSendUser,
 
 	/**
 	 * Cannot send messages in a voice channel.
 	 */
-	CannotSendVoice,
+	InvalidMessageSendNonText,
 
 	/**
 	 * Channel verification level is too high for you to gain access.
 	 */
-	InvalidVerificationLevel,
+	InvalidMessageVerificationLevel,
 
 	/**
 	 * OAuth2 application does not have a bot.
 	 */
-	MissingOAuthApplicationBot,
+	InvalidOAuthAppBot,
 
 	/**
 	 * OAuth2 application limit reached.
 	 */
-	MaximumOAuthApplicationReached,
+	InvalidOAuthAppLimit,
 
 	/**
 	 * Invalid OAuth2 state.
@@ -483,47 +505,51 @@ export enum JSONErrorCode {
 	/**
 	 * Invalid authentication token provided.
 	 */
-	InvalidAuthenticationToken,
+	InvalidToken,
 
 	/**
 	 * Note was too long.
 	 */
-	MaximumNoteLengthReached,
+	InvalidNote,
 
 	/**
 	 * Provided too few or too many messages to delete (`2 ≤ x ≤ 100`).
 	 */
-	InvalidMessageDeleteAmount,
+	InvalidBulkDeleteCount,
+	InvalidMFALevel,
+	InvalidPassword,
 
 	/**
 	 * A message can only be pinned to the channel it was sent in.
 	 */
-	InvalidChannelPin = 50019,
+	InvalidPinMessageChannel,
 
 	/**
 	 * Invite code was either invalid or taken.
 	 */
 	InvalidInviteCode,
-
 	/**
 	 * Cannot execute action on a system message.
 	 */
-	CannotExecuteSystem,
+	InvalidMessageAction,
+	InvalidPhoneNumber,
+	InvalidClientID,
 
 	/**
 	 * Cannot execute action on this channel type.
 	 */
-	CannotExecuteChannel = 50024,
+	InvalidChannelType,
 
 	/**
 	 * Invalid OAuth2 access token provided.
 	 */
-	InvalidOAuthToken,
+	InvalidOAuth2AccessToken,
+	InvalidOAuth2MisingScope,
 
 	/**
 	 * Invalid webhook token provided.
 	 */
-	InvalidWebhookToen = 50027,
+	InvalidWebhookToken,
 
 	/**
 	 * Invalid Recipient(s).
@@ -533,7 +559,7 @@ export enum JSONErrorCode {
 	/**
 	 * A message provided was too old to bulk delete (\> 14 days).
 	 */
-	MaximumMessageAgeReached,
+	InvalidMessageAge,
 
 	/**
 	 * Invalid form body (returned for both `application/json` and `multipart/form-data` bodies),
@@ -544,12 +570,15 @@ export enum JSONErrorCode {
 	/**
 	 * An invite was accepted to a guild the application's bot is not in.
 	 */
-	MissingGuildInvite,
+	InvalidGuildInvite,
 
 	/**
 	 * Invalid API version provided.
 	 */
 	InvalidAPIVersion = 50041,
+	InvalidGiftRedemptionExhausted = 50050,
+	InvalidGiftRedemptionOwned,
+	InvalidGiftSelftRedemption = 50054,
 
 	/**
 	 * Cannot delete a channel required for Community guilds.
@@ -560,16 +589,37 @@ export enum JSONErrorCode {
 	 * Invalid sticker sent.
 	 */
 	InvalidStickerSent = 50081,
+	MFAEnabled = 60001,
+	MFADisabled,
 
 	/**
 	 * Two factor is required for this operation.
 	 */
-	TwoFactorRequired = 60003,
+	MFARequired,
+	MFAUnverified,
+	MFAInvalidSecret,
+	MFAInvalidTicket,
+	MFAInvalidCode,
+	MFAInvalidSession,
+	PhoneNumberUnableToSend = 70003,
+	PhoneVerificationRequired = 70007,
+	RelationshipIncomingDisabled = 80000,
+	RelationshipIncomingBlocked,
+	RelationshipInvalidUserBot,
+	RelationshipInvalidSelf,
+	RelationshipInvalidDiscordTag,
+	RelationshipAlreadyFriends = 80007,
 
 	/**
 	 * Reaction was blocked.
 	 */
 	ReactionBlocked = 90001,
+	InvalidGiftRedemptionSubscriptionManaged = 100021,
+	InvalidGiftRedemptionSubscriptionIncompatible = 100023,
+	InvalidGiftRedemptionInvoiceOpen,
+	ListingAlreadyJoined = 120000,
+	ListingTooManyMembers,
+	ListingJoinBlocked,
 
 	/**
 	 * API resource is currently overloaded.
