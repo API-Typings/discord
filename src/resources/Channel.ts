@@ -1,4 +1,4 @@
-import type { FixedTuple, Nullable, Range } from 'extended-utility-types';
+import type { ExclusiveOr, FixedTuple, Nullable, Range } from 'extended-utility-types';
 import type {
 	GuildMember,
 	Invite,
@@ -1233,19 +1233,9 @@ export interface GetChannelMessages {
 	 */
 	query: {
 		/**
-		 * Get messages around this message ID.
-		 */
-		around?: Snowflake;
-
-		/**
 		 * Get messages before this message ID.
 		 */
 		before?: Snowflake;
-
-		/**
-		 * Get messages after this message ID.
-		 */
-		after?: Snowflake;
 
 		/**
 		 * Max number of messages to return (1-100).
@@ -1253,7 +1243,20 @@ export interface GetChannelMessages {
 		 * @defaultValue `50`
 		 */
 		limit?: Range<1, 100>;
-	};
+	} & ExclusiveOr<
+		{
+			/**
+			 * Get messages around this message ID.
+			 */
+			around?: Snowflake;
+		},
+		{
+			/**
+			 * Get messages after this message ID.
+			 */
+			after?: Snowflake;
+		}
+	>;
 
 	/**
 	 * An array of message objects, sorted by their ID in descending order.
@@ -1277,16 +1280,13 @@ export type GetChannelMessage = { response: Message };
  * Post a message to a guild text or DM channel.
  *
  * @remarks
- * Note that when sending `application/json` you must send at **least one of** `content` or `embed`.
- *
- * **Limitations**
- * - When operating on a guild channel, the current user must have the `SEND_MESSAGES` permission
+ * - When operating on a guild channel, the current user must have the `SEND_MESSAGES` permission.
  * - When sending a message with `tts` (text-to-speech) set to `true`, the current user must have
- * the `SEND_TTS_MESSAGES` permission,
+ * the `SEND_TTS_MESSAGES` permission.
  * - When creating a message as a reply to another message, the current user must have the
- * `READ_MESSAGE_HISTORY` permission,
- * - The referenced message must exist and cannot be a system message,
- * - The maximum request size when sending a message is **8MB**,
+ * `READ_MESSAGE_HISTORY` permission.
+ * - The referenced message must exist and cannot be a system message.
+ * - The maximum request size when sending a message is **8MB**.
  * - For the embed object, you can set every field except `type` (it will be `rich` regardless of
  * if you try to set it), `provider`, `video`, and any `height`, `width`, or `proxy_url` values
  * for images,
@@ -1296,11 +1296,6 @@ export type GetChannelMessage = { response: Message };
  */
 export interface CreateMessageJSON {
 	body: {
-		/**
-		 * The message contents (up to 2000 characters).
-		 */
-		content?: string;
-
 		/**
 		 * A nonce that can be used for optimistic message sending (up to 25 characters).
 		 */
@@ -1312,11 +1307,6 @@ export interface CreateMessageJSON {
 		tts?: boolean;
 
 		/**
-		 * Embedded rich content.
-		 */
-		embed?: Embed;
-
-		/**
 		 * Allowed mentions for a message.
 		 */
 		allowed_mentions?: AllowedMentions;
@@ -1325,7 +1315,25 @@ export interface CreateMessageJSON {
 		 * Include to make your message a reply.
 		 */
 		message_reference?: MessageReference;
-	};
+	} & (
+		| {
+				/**
+				 * The message contents (up to 2000 characters).
+				 */
+				content: string;
+		  }
+		| {
+				/**
+				 * Embedded rich content.
+				 */
+				embed: Omit<Embed, 'type' | 'provider' | 'video'> &
+					{
+						[K in 'thumbnail' | 'image']: {
+							url?: string;
+						};
+					};
+		  }
+	);
 
 	response: Message;
 }
@@ -1361,11 +1369,6 @@ export interface CreateMessageJSON {
 export interface CreateMessageFormData {
 	body: {
 		/**
-		 * The message contents (up to 2000 characters).
-		 */
-		content?: string;
-
-		/**
 		 * A nonce that can be used for optimistic message sending.
 		 */
 		nonce?: number | string;
@@ -1376,15 +1379,34 @@ export interface CreateMessageFormData {
 		tts?: boolean;
 
 		/**
-		 * The contents of the file being sent.
-		 */
-		file?: unknown;
-
-		/**
 		 * JSON encoded body of any additional request fields.
 		 */
-		payload_json?: string;
-	};
+		payload_json?: CreateMessageJSON;
+	} & (
+		| {
+				/**
+				 * The message contents (up to 2000 characters).
+				 */
+				content: string;
+		  }
+		| {
+				/**
+				 * Embedded rich content.
+				 */
+				embed: Omit<Embed, 'type' | 'provider' | 'video'> &
+					{
+						[K in 'thumbnail' | 'image']: {
+							url?: string;
+						};
+					};
+		  }
+		| {
+				/**
+				 * The contents of the file being sent.
+				 */
+				file: unknown;
+		  }
+	);
 
 	response: Message;
 }
