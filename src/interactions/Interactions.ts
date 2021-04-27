@@ -4,6 +4,7 @@ import type {
 	EditWebhookMessage,
 	Embed,
 	ExecuteWebhook,
+	GetWebhookMessage,
 	GuildMember,
 	PartialChannel,
 	PartialGuildMember,
@@ -11,7 +12,6 @@ import type {
 	Snowflake,
 	User
 } from '../';
-import { GetWebhookMessage } from '../resources';
 
 // ANCHOR Slash Command Limits
 
@@ -112,12 +112,7 @@ export interface ApplicationCommand {
  *
  * @source {@link https://discord.com/developers/docs/interactions/slash-commands#applicationcommandoption|Slash Commands}
  */
-export interface ApplicationCommandOption {
-	/**
-	 * Value of `ApplicationCommandOptionType`.
-	 */
-	type: ApplicationCommandOptionType;
-
+export type ApplicationCommandOption = {
 	/**
 	 * 1-32 character name matching `^[\w-]{1,32}$`
 	 */
@@ -134,18 +129,32 @@ export interface ApplicationCommandOption {
 	 * @defaultValue `false`
 	 */
 	required?: boolean;
+} & (
+	| {
+			type:
+				| ApplicationCommandOptionType.Boolean
+				| ApplicationCommandOptionType.User
+				| ApplicationCommandOptionType.Channel
+				| ApplicationCommandOptionType.Role;
+	  }
+	| {
+			type: ApplicationCommandOptionType.String | ApplicationCommandOptionType.Integer;
 
-	/**
-	 * Choices for `string` and `number` types for the user to pick from.
-	 */
-	choices?: Partial<FixedTuple<ApplicationCommandOptionChoice, 25>>;
+			/**
+			 * Choices for `string` and `number` types for the user to pick from.
+			 */
+			choices: [ApplicationCommandOptionChoice, ...Partial<FixedTuple<ApplicationCommandOptionChoice, 24>>];
+	  }
+	| {
+			type: ApplicationCommandOptionType.SubCommand | ApplicationCommandOptionType.SubCommandGroup;
 
-	/**
-	 * If the option is a subcommand or subcommand group type, the nested options will be the
-	 * parameters.
-	 */
-	options?: Partial<FixedTuple<ApplicationCommandOption, 25>>;
-}
+			/**
+			 * If the option is a subcommand or subcommand group type, the nested options will be
+			 * the parameters.
+			 */
+			options: [ApplicationCommandOption, ...Partial<FixedTuple<ApplicationCommandOption, 24>>];
+	  }
+);
 
 /**
  * @source {@link https://discord.com/developers/docs/interactions/slash-commands#applicationcommandoptiontype|Application Command}
@@ -251,7 +260,7 @@ export enum ApplicationCommandPermissionType {
  *
  * @source {@link https://discord.com/developers/docs/interactions/slash-commands#interaction|Slash Commands}
  */
-export interface Interaction {
+export type Interaction = {
 	/**
 	 * ID of the interaction.
 	 */
@@ -263,47 +272,50 @@ export interface Interaction {
 	application_id: Snowflake;
 
 	/**
-	 * The type of interaction.
-	 */
-	type: InteractionType;
-
-	/**
-	 * The command data payload. This is always present on `ApplicationCommand` interaction types.
-	 */
-	data?: ApplicationCommandInteractionData;
-
-	/**
-	 * The guild it was sent from.
-	 */
-	guild_id?: Snowflake;
-
-	/**
-	 * The channel it was sent from.
-	 */
-	channel_id?: Snowflake;
-
-	/**
-	 * Guild member data for the invoking user, including permissions.
-	 */
-	member?: GuildMember;
-
-	/**
-	 * User object for the invoking user, if invoked in a DM.
-	 */
-	user?: User;
-
-	/**
 	 * A continuation token for responding to the interaction.
 	 */
 	token: string;
 
 	/**
 	 * Read-only property, always `1`.
-	 *
-	 * @readonly
 	 */
 	readonly version: 1;
-}
+} & (
+	| {
+			type: InteractionType.Ping;
+	  }
+	| ({
+			type: InteractionType.ApplicationCommand;
+
+			/**
+			 * The command data payload.
+			 */
+			data: ApplicationCommandInteractionData;
+
+			/**
+			 * The channel it was sent from.
+			 */
+			channel_id: Snowflake;
+	  } & (
+			| {
+					/**
+					 * The guild it was sent from.
+					 */
+					guild_id: Snowflake;
+
+					/**
+					 * Guild member data for the invoking user, including permissions.
+					 */
+					member: GuildMember;
+			  }
+			| {
+					/**
+					 * User object for the invoking user, if invoked in a DM.
+					 */
+					user: User;
+			  }
+	  ))
+);
 
 /**
  * @source {@link https://discord.com/developers/docs/interactions/slash-commands#interaction-interactiontype|Slash Commands}
@@ -369,27 +381,36 @@ export interface ApplicationCommandInteractionDataResolved {
  *
  * @source {@link https://discord.com/developers/docs/interactions/slash-commands#interaction-applicationcommandinteractiondataoption|Slash Commands}
  */
-export interface ApplicationCommandInteractionDataOption {
+export type ApplicationCommandInteractionDataOption = {
 	/**
 	 * The name of the parameter.
 	 */
 	name: string;
-
-	/**
-	 * Value of `ApplicationCommandOptionType`.
-	 */
-	type: ApplicationCommandOptionType;
-
-	/**
-	 * The value of the pair.
-	 */
-	value?: unknown;
-
-	/**
-	 * Present if this option is a group or subcommand.
-	 */
-	options?: ApplicationCommandInteractionDataOption[];
-}
+} & (
+	| {
+			type: ApplicationCommandOptionType.SubCommand | ApplicationCommandOptionType.SubCommandGroup;
+			options: ApplicationCommandInteractionDataOption[];
+	  }
+	| {
+			type: ApplicationCommandOptionType.String;
+			value: string;
+	  }
+	| {
+			type: ApplicationCommandOptionType.Integer;
+			value: number;
+	  }
+	| {
+			type: ApplicationCommandOptionType.Boolean;
+			value: boolean;
+	  }
+	| {
+			type:
+				| ApplicationCommandOptionType.User
+				| ApplicationCommandOptionType.Channel
+				| ApplicationCommandOptionType.Role;
+			value: Snowflake;
+	  }
+);
 
 /**
  * @source {@link https://discord.com/developers/docs/interactions/slash-commands#interaction-response|Slash Commands}
