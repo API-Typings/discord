@@ -255,20 +255,20 @@ export type ButtonComponent = {
 	label: string;
 } & (
 	| {
-			style: Exclude<ButtonComponentStyle, ButtonComponentStyle.Link>;
+			style: Exclude<ButtonStyle, ButtonStyle.Link>;
 			custom_id: string | number;
 	  }
 	| {
-			style: ButtonComponentStyle.Link;
+			style: ButtonStyle.Link;
 			url: string;
 	  }
 );
 
-export enum ButtonComponentStyle {
+export enum ButtonStyle {
 	Primary = 1,
-	Info,
+	Secondary,
 	Success,
-	Danger,
+	Destructive,
 	Link
 }
 
