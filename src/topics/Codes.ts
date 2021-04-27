@@ -318,12 +318,12 @@ export enum JSONErrorCode {
 	/**
 	 * This message cannot be edited due to announcement rate limits.
 	 */
-	AnnouncementRateLimit = 200022,
+	AnnouncementRateLimit = 20022,
 
 	/**
 	 * The channel you are writing has hit the write rate limit.
 	 */
-	ChannelRateLimit = 200028,
+	ChannelRateLimit = 20028,
 
 	/**
 	 * Maximum number of guilds reached (100).
