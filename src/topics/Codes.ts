@@ -308,12 +308,12 @@ export enum JSONErrorCode {
 	/**
 	 * Bots cannot use this endpoint.
 	 */
-	ExclusiveBotEndpoint = 20001,
+	BotDisallowed = 20001,
 
 	/**
 	 * Only bots can use this endpoint.
 	 */
-	InclusiveBotEndpoint,
+	BotRequired,
 
 	/**
 	 * This message cannot be edited due to announcement rate limits.
