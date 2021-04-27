@@ -23,7 +23,7 @@ export interface PartialChannel {
 	id: Snowflake;
 
 	/**
-	 * The type of Channel.
+	 * The type of channel.
 	 */
 	type: ChannelType;
 
@@ -33,9 +33,9 @@ export interface PartialChannel {
 	name: string;
 
 	/**
-	 * The computed permissions for the invoking user in that channel, including overwrites
+	 * The computed permissions for the invoking user in that channel, including overwrites.
 	 */
-	permissions: string;
+	permissions?: string;
 }
 
 /**
@@ -53,27 +53,85 @@ export interface Channel extends PartialChannel {
 	/**
 	 * Sorting position of the channel.
 	 */
-	position: number;
+	position?: number;
 
 	/**
 	 * Explicit permission overwrites for members and roles.
 	 */
-	permission_overwrites: Overwrite[];
+	permission_overwrites?: Overwrite[];
 
 	/**
 	 * The channel topic (0-1024 characters).
 	 */
-	topic: Nullable<string>;
+	topic?: Nullable<string>;
 
 	/**
 	 * Whether the channel is NSFW.
 	 */
-	nsfw: boolean;
+	nsfw?: boolean;
+
+	/**
+	 * The ID of the last message sent in this channel (may not point to an existing or valid
+	 * message).
+	 */
+	last_message_id?: Nullable<Snowflake>;
+
+	/**
+	 * The bitrate (in bits) of the voice channel.
+	 */
+	bitrate?: number;
+
+	/**
+	 * The user limit of the voice channel.
+	 */
+	user_limit?: number;
+
+	/**
+	 * Amount of seconds a user has to wait before sending another message (0-21600); bots, as
+	 * well as users with the permission `manage_messages` or `manage_channel`, are unaffected.
+	 */
+	rate_limit_per_user?: number;
+
+	/**
+	 * The recipients of the DM.
+	 */
+	recipients?: PartialUser[];
+
+	/**
+	 * Icon hash.
+	 */
+	icon?: Nullable<string>;
+
+	/**
+	 * ID of the DM creator.
+	 */
+	owner_id?: Snowflake;
+
+	/**
+	 * Application ID of the group DM creator if it is bot-created.
+	 */
+	application_id?: Snowflake;
 
 	/**
 	 * ID of the parent category for a channel (each parent category can contain up to 50 channels).
 	 */
-	parent_id: Nullable<string>;
+	parent_id?: Nullable<string>;
+
+	/**
+	 * When the last pinned message was pinned. This may be `null` in events such as `GUILD_CREATE`
+	 * when a message is not pinned.
+	 */
+	last_pin_timestamp?: Nullable<string>;
+
+	/**
+	 * Voice region ID for the voice channel, automatic when set to `null`.
+	 */
+	rtc_region?: Nullable<string>;
+
+	/**
+	 * The camera video quality mode of the voice channel, `1` when not present.
+	 */
+	video_quality_mode?: VideoQualityMode;
 }
 
 // ANCHOR Channel Type
@@ -145,127 +203,92 @@ export enum VideoQualityMode {
 // ANCHOR Text Channel
 
 /**
- * A text channel within a server.
- *
  * @source {@link https://discord.com/developers/docs/resources/channel#channel-object-example-guild-text-|Channel}
  */
-export interface TextChannel extends Channel {
-	/**
-	 * The ID of the last message sent in this channel (may not point to an existing or valid
-	 * message).
-	 */
-	last_message_id: Nullable<Snowflake>;
-
-	/**
-	 * Amount of seconds a user has to wait before sending another message (0-21600); bots, as
-	 * well as users with the permission `manage_messages` or `manage_channel`, are unaffected.
-	 */
-	rate_limit_per_user: number;
-
-	/**
-	 * When the last pinned message was pinned. This may be `null` in events such as `GUILD_CREATE`
-	 * when a message is not pinned.
-	 */
-	last_pin_timestamp: Nullable<string>;
+export interface TextChannel
+	extends Omit<PartialChannel, 'permissions'>,
+		Required<
+			Pick<
+				Channel,
+				| 'guild_id'
+				| 'position'
+				| 'permission_overwrites'
+				| 'rate_limit_per_user'
+				| 'nsfw'
+				| 'topic'
+				| 'last_message_id'
+				| 'parent_id'
+			>
+		> {
+	type: ChannelType.GuildText;
 }
 
 // ANCHOR News Channel
 
 /**
- * A channel that users can follow and crosspost into their own server. Bots can post or
- * publish messages in this type of channel if they have the proper permissions.
+ * Bots can post or publish messages in this type of channel if they have the proper permissions.
  *
  * @source {@link https://discord.com/developers/docs/resources/channel#channel-object-example-guild-news-channel|Channel}
  */
-export type NewsChannel = Omit<TextChannel, 'rate_limit_per_user'>;
+export interface NewsChannel extends Omit<TextChannel, 'rate_limit_per_user' | 'type'> {
+	type: ChannelType.GuildNews;
+}
 
 // ANCHOR Voice Channel
 
 /**
- * A voice channel within a server.
- *
  * @source {@link https://discord.com/developers/docs/resources/channel#channel-object-example-guild-voice-channel|Channel}
  */
-export interface VoiceChannel extends Channel {
-	/**
-	 * The bitrate (in bits) of the voice channel.
-	 */
-	bitrate: number;
-
-	/**
-	 * The user limit of the voice channel.
-	 */
-	user_limit: number;
-
-	/**
-	 * Voice region ID for the voice channel, automatic when set to `null`.
-	 */
-	rtc_region: Nullable<string>;
-
-	/**
-	 * The camera video quality mode of the voice channel, `1` when not present.
-	 */
-	video_quality_mode: VideoQualityMode;
+export interface VoiceChannel
+	extends Omit<NewsChannel, 'last_message_id' | 'type' | 'topic'>,
+		Required<Pick<Channel, 'bitrate' | 'user_limit' | 'rtc_region'>> {
+	type: ChannelType.GuildVoice;
 }
 
 // ANCHOR DM Channel
 
 /**
- * A direct message between users.
- *
  * @source {@link https://discord.com/developers/docs/resources/channel#channel-object-example-dm-channel|Channel}
  */
-export interface DMChannel extends Pick<TextChannel, 'id' | 'type' | 'last_message_id' | 'last_pin_timestamp'> {
-	/**
-	 * The recipients of the DM.
-	 */
-	recipients: PartialUser[];
-
-	/**
-	 * Application ID of the group DM creator if it is bot-created.
-	 */
-	application_id?: Snowflake;
+export interface DMChannel
+	extends Required<Pick<Channel, 'id' | 'last_message_id' | 'recipients'>>,
+		Pick<Channel, 'last_pin_timestamp'> {
+	type: ChannelType.DM;
+	recipients: [User];
 }
 
 // ANCHOR Group DM Channel
 
 /**
- * A direct message between multiple users.
- *
  * @source {@link https://discord.com/developers/docs/resources/channel#channel-object-example-group-dm-channel|Channel}
  */
-export interface GroupDMChannel extends DMChannel, Nullable<Pick<Channel, 'name'>> {
-	/**
-	 * Icon hash.
-	 */
-	icon: Nullable<string>;
-
-	/**
-	 * ID of the DM creator.
-	 */
-	owner_id: Snowflake;
+export interface GroupDMChannel
+	extends Omit<DMChannel, 'type' | 'recipients'>,
+		Nullable<Pick<Channel, 'name' | 'icon'>>,
+		Required<Pick<Channel, 'owner_id'>> {
+	type: ChannelType.GroupDM;
+	recipients: [User, User, ...Partial<FixedTuple<User, 6>>];
 }
 
 // ANCHOR Channel Category
 
 /**
- * An organizational category that contains up to 50 channels.
- *
  * @source {@link https://discord.com/developers/docs/resources/channel#channel-object-example-channel-category|Channel}
  */
-export type ChannelCategory = Omit<Channel, 'topic'>;
+export interface ChannelCategory extends Omit<NewsChannel, 'last_message_id' | 'type' | 'topic'> {
+	type: ChannelType.GuildCategory;
+}
 
 // ANCHOR Store Channel
 
 /**
- * A channel in which game developers can sell their game on Discord.
- *
- * @remarks
  * Bots can neither send or read messages from this channel type (as it is a store page).
  *
  * @source {@link https://discord.com/developers/docs/resources/channel#channel-object-example-store-channel|Channel}
  */
-export type StoreChannel = Omit<Channel, 'topic'>;
+export interface StoreChannel extends Omit<ChannelCategory, 'type'> {
+	type: ChannelType.GuildStore;
+}
 
 // !SECTION
 
