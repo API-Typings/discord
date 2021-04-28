@@ -45,7 +45,7 @@ export interface GatewayURL {
 	/**
 	 * Gateway Version to use.
 	 */
-	v: 8 | 9;
+	v: 9;
 
 	/**
 	 * The encoding of received gateway packets.
