@@ -135,7 +135,8 @@ export type ApplicationCommandOption = {
 				| ApplicationCommandOptionType.Boolean
 				| ApplicationCommandOptionType.User
 				| ApplicationCommandOptionType.Channel
-				| ApplicationCommandOptionType.Role;
+				| ApplicationCommandOptionType.Role
+				| ApplicationCommandOptionType.Mentionable;
 	  }
 	| {
 			type: ApplicationCommandOptionType.String | ApplicationCommandOptionType.Integer;
@@ -175,7 +176,8 @@ export enum ApplicationCommandOptionType {
 	Boolean,
 	User,
 	Channel,
-	Role
+	Role,
+	Mentionable
 }
 
 /**
