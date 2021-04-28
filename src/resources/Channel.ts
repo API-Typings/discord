@@ -197,18 +197,18 @@ export enum ChannelType {
 	GuildStore,
 
 	/**
-	 * A temporary sub-channel within a `GUILD_NEWS` channel. Only available in API v9.
+	 * A temporary sub-channel within a `GUILD_NEWS` channel.
 	 */
 	AnnouncementThread = 10,
 
 	/**
-	 * A temporary sub-channel within a `GUILD_TEXT` channel. Only available in API v9.
+	 * A temporary sub-channel within a `GUILD_TEXT` channel.
 	 */
 	PublicThread,
 
 	/**
 	 * A temporary sub-channel within a `GUILD_TEXT` channel that is only viewable by those invited
-	 * and those with the `MANAGE_MESSAGES` permission. Only available in API v9.
+	 * and those with the `MANAGE_MESSAGES` permission.
 	 */
 	PrivateThread,
 
@@ -562,10 +562,6 @@ export enum MessageType {
 	ThreadCreated,
 	Reply,
 	ApplicationCommand,
-
-	/**
-	 * Only available in API v9.
-	 */
 	ThreadStarterMessage,
 	GuildInviteReminder
 }
