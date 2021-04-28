@@ -13,6 +13,7 @@ import type {
 	Role,
 	Snowflake,
 	StatusType,
+	ThreadChannel,
 	User,
 	VoiceRegion,
 	VoiceState
@@ -253,6 +254,14 @@ export interface Guild extends PartialGuild {
 	 * This field is only sent within the `GUILD_CREATE` event.
 	 */
 	channels?: Channel[];
+
+	/**
+	 * All active threads in the guild that you have permission to view.
+	 *
+	 * @remarks
+	 * This field is only sent within the `GUILD_CREATE` event.
+	 */
+	threads?: ThreadChannel[];
 
 	/**
 	 * Presences of the members in the guild, will only include non-offline members if the size is

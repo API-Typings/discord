@@ -214,7 +214,22 @@ export enum PermissionFlags {
 	/**
 	 * Allows for requesting to speak in stage channels.
 	 */
-	RequestToSpeak = 0x100000000
+	RequestToSpeak = 0x100000000,
+
+	/**
+	 * Allows for deleting and archiving threads, and viewing all private threads.
+	 */
+	ManageThreads = 0x0400000000,
+
+	/**
+	 * Allows for creating and participating in threads.
+	 */
+	UsePublicThreads = 0x0800000000,
+
+	/**
+	 * Allows for creating and participating in private threads.
+	 */
+	UsePrivateThreads = 0x1000000000
 }
 
 export type Permission = Uppercase<Delimit<CamelCase<keyof typeof PermissionFlags>, '_'>>;
