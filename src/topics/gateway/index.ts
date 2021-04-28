@@ -111,7 +111,7 @@ export interface SessionStartLimit {
 	/**
 	 * The total number of session starts the current user is allowed.
 	 */
-	total: number;
+	total: 1000;
 
 	/**
 	 * The remaining number of session starts the current user is allowed.
