@@ -1,4 +1,4 @@
-import type { ExclusiveOr, FixedTuple, Maybe, Nullable, Range } from 'extended-utility-types';
+import type { ExclusiveOr, FixedTuple, Nullable, Range } from 'extended-utility-types';
 import type {
 	GuildMember,
 	Invite,
@@ -132,6 +132,27 @@ export interface Channel extends PartialChannel {
 	 * The camera video quality mode of the voice channel, `1` when not present.
 	 */
 	video_quality_mode?: VideoQualityMode;
+
+	/**
+	 * An approximate count of messages in a thread, caps at 50.
+	 */
+	message_count?: Range<0, 50>;
+
+	/**
+	 * An approximate count of users in a thread, caps at 50.
+	 */
+	member_count?: Range<0, 50>;
+
+	/**
+	 * Thread-specific fields not needed by other channels.
+	 */
+	thread_metadata?: ThreadMetadata;
+
+	/**
+	 * Thread member object for the current user, if they have joined the thread, only included
+	 * on certain API endpoints.
+	 */
+	member?: ThreadMember;
 }
 
 // ANCHOR Channel Type
@@ -299,10 +320,6 @@ export interface StoreChannel extends Omit<ChannelCategory, 'type'> {
 	type: ChannelType.GuildStore;
 }
 
-// ANCHOR Partial Thread Channel
-
-export type PartialThreadChannel = Pick<PartialChannel, 'id' | 'type'> & Pick<Channel, 'guild_id'>;
-
 // ANCHOR Thread Channel
 
 /**
@@ -316,46 +333,28 @@ export type PartialThreadChannel = Pick<PartialChannel, 'id' | 'type'> & Pick<Ch
  * private channel. As such, when *gaining* access to a channel the API send a thread list sync,
  * which includes all active threads in that channel.
  *
- * Threads also track membership.  Users must be added to a thread before sending messages in them.
+ * Threads also track membership. Users must be added to a thread before sending messages in them.
  * The API will helpfully automatically add users to a thread when sending a message in that thread.
  *
- * Guilds have limits on the number of active threads and members per thread.  Once these are
+ * Guilds have limits on the number of active threads and members per thread. Once these are
  * reached additional threads cannot be created or unarchived, and users cannot be added.
  */
 export interface ThreadChannel
-	extends PartialThreadChannel,
-		Pick<PartialChannel, 'name'>,
-		Pick<TextChannel, 'last_message_id'> {
-	/**
-	 * ID of the creator.
-	 */
-	owner_id: Snowflake;
-
-	/**
-	 * ID of the text channel this thread was created.
-	 */
-	parent_id: Nullable<Snowflake>;
-
-	/**
-	 * An approximate count of messages in a thread, caps at 50.
-	 */
-	message_count: Range<0, 50>;
-
-	/**
-	 * An approximate count of users in a thread, caps at 50.
-	 */
-	member_count: Range<0, 50>;
-
-	/**
-	 * Thread-specific fields not needed by other channels.
-	 */
-	thread_metadata: ThreadMetadata;
-
-	/**
-	 * Thread member object for the current user, if they have joined the thread, only included
-	 * on certain API endpoints.
-	 */
-	member?: ThreadMember;
+	extends Pick<Channel, 'last_message_id' | 'member' | 'rate_limit_per_user'>,
+		Required<
+			Pick<
+				Channel,
+				| 'id'
+				| 'guild_id'
+				| 'parent_id'
+				| 'owner_id'
+				| 'message_count'
+				| 'member_count'
+				| 'thread_metadata'
+				| 'name'
+			>
+		> {
+	type: ChannelType.AnnouncementThread | ChannelType.PublicThread | ChannelType.PrivateThread;
 }
 
 // !SECTION
@@ -579,31 +578,6 @@ export interface MessageActivity {
 // ANCHOR Message Reference
 
 /**
- * There are four situations in which a message has a `message_reference` object:
- *
- * **Crosspost Messages** – messages that originated from another channel (`IS_CROSSPOST` flag).
- * - These messages have all three fields, with data of the original message that was crossposted.
- *
- * **Channel Follow Add Messages** – automatic messages sent when a channel is followed into the
- * current channel (type `12`).
- * - These messages have the `channel_id` and `guild_id` fields, with data of the followed
- * announcement channel.
- *
- * **Pin Messages** – automatic messages sent when a message is pinned (type `6`).
- * - These messages have `message_id` and `channel_id`, and `guild_id` if it is in a guild, with
- * data of the message that was pinned.
- *
- * **Replies** – messages replying to a previous message (type `19`).
- * - These messages have `message_id` and `channel_id`, and `guild_id` if it is in a guild, with
- * data of the message that was replied to. The `channel_id` and `guild_id` will be the same as
- * the reply. Replies are created by including a `message_reference` when sending a message.
- * When sending, only `message_id` is required.
- *
- * **Thread Starter Message** – the first message in a public thread, points back to the message in
- * the parent channel from which the thread was started (type `21`).
- * - These messages have `message_id`, `channel_id`, and `guild_id`.  These message will never have
- * content, on the `message_reference` and `referenced_message` fields.
- *
  * @source {@link https://discord.com/developers/docs/resources/channel#message-object-message-reference-structure|Channel}
  */
 export interface MessageReference {
@@ -839,7 +813,7 @@ export interface ThreadMetadata {
 	/**
 	 * ID of the user that last archived or unarchived the thread.
 	 */
-	archiver_id: Nullable<Snowflake>;
+	archiver_id?: Snowflake;
 
 	/**
 	 * Duration in minutes to automatically archive the thread after recent activity.
@@ -851,6 +825,11 @@ export interface ThreadMetadata {
 	 * activity.
 	 */
 	archive_timestamp: string;
+
+	/**
+	 * When a thread is locked, only users with `MANAGE_THREADS` can unarchive it.
+	 */
+	locked?: boolean;
 }
 
 // ANCHOR Thread Member
@@ -1250,7 +1229,11 @@ export enum OverwriteType {
  *
  * @endpoint [GET](https://discord.com/developers/docs/resources/channel#get-channel) `/channels/{channel.id}`
  */
-export type GetChannel = { response: Channel & Maybe<ThreadMember> };
+export interface GetChannel {
+	response: Channel & {
+		member?: ThreadMember;
+	};
+}
 
 // ANCHOR Modify Group DM Channel
 
@@ -1368,18 +1351,20 @@ export interface ModifyGuildChannel {
  * @endpoint [PATCH](https://discord.com/developers/docs/resources/channel#modify-channel) `/channels/{channel.id}`
  */
 export interface ModifyThreadChannel {
-	body: Partial<Pick<ThreadMetadata, 'archived' | 'auto_archive_duration'>> & {
-		/**
-		 * 2-100 character channel name.
-		 */
-		name?: string;
-	};
+	body: Partial<Pick<ThreadMetadata, 'archived' | 'auto_archive_duration' | 'locked'>> &
+		Pick<ModifyGuildChannel['body'], 'rate_limit_per_user'> & {
+			/**
+			 * 2-100 character channel name.
+			 */
+			name?: string;
+		};
 
 	response: Channel;
 }
 
 /**
- * Delete a channel. Requires the `MANAGE_CHANNELS` permission.
+ * Delete a channel. Requires the `MANAGE_CHANNELS` permission, or `MANAGE_THREADS` if the channel
+ * is a thread.
  *
  * @remarks
  * - Deleting a category does not delete its child channels; they will have their `parent_id`
@@ -1962,36 +1947,34 @@ export type GroupDMRemoveRecipient = { response: never };
  * @endpoint POST `/channels/{channel.id}/messages/{message.id}/threads`
  */
 export interface StartPublicThread {
-	body: Required<Pick<ModifyThreadChannel['body'], 'name' | 'auto_archive_duration'>> & {
-		type: ChannelType;
-	};
-
+	body: Required<Pick<ModifyThreadChannel['body'], 'name' | 'auto_archive_duration'>>;
 	response: ThreadChannel;
 }
 
 /**
  * Creates a new private thread.
  *
- * @endpoint POST `/channels/{channel.id}/messages/{message.id}/threads`
+ * @endpoint POST `/channels/{channel.id}/threads`
  */
 export type StartPrivateThread = StartPublicThread;
 
 /**
- * Adds yourself to a thread.
+ * Adds the current user to a thread. Requires the thread is not archived.
  *
  * @endpoint POST `/channels/{channel.id}/thread-members/@me`
  */
 export type JoinThread = { response: never };
 
 /**
- * Adds another user to a thread.
+ * Adds another user to a thread. Requires the ability to send messages in the thread. Also requires
+ * the thread is not archived.
  *
  * @endpoint POST `/channels/{channel.id}/thread-members/{user.id}`
  */
 export type AddUserToThread = { response: never };
 
 /**
- * Removes yourself from a thread.
+ * Removes the current user from a thread.
  *
  * @endpoint DELETE `/channels/{channel.id}/thread-members/@me`
  */
@@ -1999,15 +1982,20 @@ export type LeaveThread = { response: never };
 
 /**
  * Removes another user from a thread. Requires the `MANAGE_MESSAGES` permission or that you are the
- * creator of the thread.
+ * creator of the thread. Also requires the thread is not archived.
  *
  * @endpoint DELETE `/channels/{channel.id}/thread-members/{user.id}`
  */
 export type RemoveUserFromThread = { response: never };
 
 /**
- * Returns archived threads in the channel that are `type=11`, `PUBLIC_THREAD`. Threads are ordered
- * by `archive_timestamp`, in descending order. Requires the `READ_MESSAGE_HISTORY` permission.
+ * Returns archived threads in the channel that are public. Requires the `READ_MESSAGE_HISTORY`
+ * permission.
+ *
+ * When called on a `GUILD_TEXT` channel, returns threads of type `PUBLIC_THREAD`. When called on a
+ * `GUILD_NEWS` channel, returns threads of type `NEWS_THREAD`.
+ *
+ * Threads are ordered by `archive_timestamp`, in descending order.
  *
  * @endpoint GET `/channels/{channel.id}/threads/archived/public`
  */
@@ -2037,18 +2025,20 @@ export interface GetPublicArchivedThreads {
 }
 
 /**
- * Returns archived threads in the channel that are `type=12`, `PRIVATE_THREAD`. Threads are
- * ordered by `archive_timestamp`, in descending order. Requires both the
- * `READ_MESSAGE_HISTORY` and `MANAGE_MESSAGES` permissions.
+ * Returns archived threads in the channel that are of type `PRIVATE_THREAD`. Requires both the
+ * `READ_MESSAGE_HISTORY` and `MANAGE_THREADS` permissions.
+ *
+ * Threads are ordered by `archive_timestamp`, in descending order.
  *
  * @endpoint GET `/channels/{channel.id}/threads/archived/private`
  */
 export type GetPrivateArchivedThreads = GetPublicArchivedThreads;
 
 /**
- * Returns archived threads in the channel that are `type=12`, `PRIVATE_THREAD`, and the user has
- * joined. Threads are ordered by their `id`, in descending order. Requires the
- * `READ_MESSAGE_HISTORY` permission.
+ * Returns archived threads in the channel that are of type `PRIVATE_THREAD`, and the user has
+ * joined. Requires the `READ_MESSAGE_HISTORY` permission.
+ *
+ * Threads are ordered by their `id`, in descending order.
  *
  * @endpoint GET `/channels/{channel.id}/users/@me/threads/archived/private`
  */

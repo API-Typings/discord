@@ -16,7 +16,6 @@ import type {
 	Message,
 	PartialApplication,
 	PartialEmoji,
-	PartialThreadChannel,
 	PartialUser,
 	Role,
 	Snowflake,
@@ -485,7 +484,7 @@ export interface ThreadUpdate extends GatewayEventPayload<GatewayEvent.ThreadUpd
  * Sent when a thread relevant to the current user is deleted.
  */
 export interface ThreadDelete extends GatewayEventPayload<GatewayEvent.ThreadDelete> {
-	d: PartialThreadChannel;
+	d: Pick<ThreadChannel, 'id' | 'guild_id' | 'parent_id' | 'type'>;
 }
 
 /**
@@ -496,10 +495,10 @@ export interface ThreadListSync extends GatewayEventPayload<GatewayEvent.ThreadL
 		/**
 		 * The ID of the guild.
 		 */
-		guild_id?: Snowflake;
+		guild_id: Snowflake;
 
 		/**
-		 * The parent channel ids whose threads are being synced. If omitted, then threads were
+		 * The parent channel IDs whose threads are being synced. If omitted, then threads were
 		 * synced for the entire guild.
 		 */
 		channel_ids?: Snowflake[];
