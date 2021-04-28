@@ -10,33 +10,37 @@ export * from './Events';
 /**
  * @source {@link https://discord.com/developers/docs/topics/gateway#payloads-gateway-payload-structure|Gateway}
  */
-export interface GatewayPayload {
-	/**
-	 * OPCode for the payload.
-	 */
-	op: GatewayOPCode;
-
+export type GatewayPayload = {
 	/**
 	 * Event data.
 	 */
 	d: Nullable<unknown>;
+} & (
+	| {
+			/**
+			 * OPCode for the payload.
+			 */
+			op: GatewayOPCode.Dispatch;
 
-	/**
-	 * Sequence number, used for resuming sessions and heartbeats.
-	 *
-	 * @remarks
-	 * `s` and `t` are `null` when `op` is not `0` (Gateway Dispatch Opcode).
-	 */
-	s: Nullable<number>;
+			/**
+			 * Sequence number, used for resuming sessions and heartbeats.
+			 */
+			s: number;
 
-	/**
-	 * The event name for this payload.
-	 *
-	 * @remarks
-	 * `s` and `t` are `null` when `op` is not `0` (Gateway Dispatch Opcode).
-	 */
-	t: Nullable<GatewayEvent>;
-}
+			/**
+			 * The event name for this payload.
+			 */
+			t: GatewayEvent;
+	  }
+	| {
+			/**
+			 * OPCode for the payload.
+			 */
+			op: Exclude<GatewayOPCode, GatewayOPCode.Dispatch>;
+			s: null;
+			t: null;
+	  }
+);
 
 /**
  * @source {@link https://discord.com/developers/docs/topics/gateway#connecting-gateway-url-params|Gateway}
