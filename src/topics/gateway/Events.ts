@@ -16,6 +16,7 @@ import type {
 	Message,
 	PartialApplication,
 	PartialEmoji,
+	PartialThreadChannel,
 	PartialUser,
 	Role,
 	Snowflake,
