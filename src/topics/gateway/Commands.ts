@@ -1,10 +1,10 @@
 import type { Nullable, Range } from 'extended-utility-types';
-import type { Activity, GatewayOPCode, GatewayPayload, Snowflake } from '../../';
+import type { Activity, GatewayOPCode, Snowflake } from '../../';
 
 // ANCHOR Command Payload
 
-interface GatewayCommandPayload<O extends GatewayOPCode> extends GatewayPayload {
-	op: O;
+export interface GatewayCommandPayload<T extends GatewayOPCode> {
+	op: T;
 	t: null;
 	s: null;
 }

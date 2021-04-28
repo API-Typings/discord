@@ -7,7 +7,6 @@ import type {
 	ClientStatus,
 	Emoji,
 	GatewayOPCode,
-	GatewayPayload,
 	Guild,
 	GuildMember,
 	Integration,
@@ -28,9 +27,10 @@ import type {
 
 // ANCHOR Event Payload
 
-interface GatewayEventPayload<E extends GatewayEvent> extends GatewayPayload {
+export interface GatewayEventPayload<T extends GatewayEvent> {
 	op: GatewayOPCode.Dispatch;
-	t: E;
+	s: number;
+	t: T;
 }
 
 // ANCHOR Heartbeat
