@@ -1,4 +1,4 @@
-import type { ExclusiveOr, FixedTuple, Nullable, Range } from 'extended-utility-types';
+import type { ExclusiveOr, FixedTuple, Maybe, Nullable, Range } from 'extended-utility-types';
 import type {
 	GuildMember,
 	Invite,
