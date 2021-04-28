@@ -16,7 +16,7 @@ export enum PermissionFlags {
 	/**
 	 * Allows creation of instant invites. Applies to text and voice channels.
 	 */
-	CreateInstantInvite = 0x00000001,
+	CreateInstantInvite = 1 << 0,
 
 	/**
 	 * Allows kicking members.
@@ -25,7 +25,7 @@ export enum PermissionFlags {
 	 * This permissions requires the owner account to use two-factor authentication when used on a
 	 * guild that has server-wide 2FA enabled.
 	 */
-	KickMembers = 0x00000002,
+	KickMembers = 1 << 1,
 
 	/**
 	 * Allows banning members.
@@ -34,7 +34,7 @@ export enum PermissionFlags {
 	 * This permissions requires the owner account to use two-factor authentication when used on a
 	 * guild that has server-wide 2FA enabled.
 	 */
-	BanMembers = 0x00000004,
+	BanMembers = 1 << 2,
 
 	/**
 	 * Allows all permissions and bypasses channel permission overwrites.
@@ -43,7 +43,7 @@ export enum PermissionFlags {
 	 * This permissions requires the owner account to use two-factor authentication when used on a
 	 * guild that has server-wide 2FA enabled.
 	 */
-	Administrator = 0x00000008,
+	Administrator = 1 << 3,
 
 	/**
 	 * Allows management and editing of channels. Applies to text and voice channels.
@@ -52,7 +52,7 @@ export enum PermissionFlags {
 	 * This permissions requires the owner account to use two-factor authentication when used on a
 	 * guild that has server-wide 2FA enabled.
 	 */
-	ManageChannels = 0x00000010,
+	ManageChannels = 1 << 4,
 
 	/**
 	 * Allows management and editing of the guild.
@@ -61,43 +61,43 @@ export enum PermissionFlags {
 	 * This permissions requires the owner account to use two-factor authentication when used on a
 	 * guild that has server-wide 2FA enabled.
 	 */
-	ManageGuild = 0x00000020,
+	ManageGuild = 1 << 5,
 
 	/**
 	 * Allows for the addition of reactions to messages. Applies to text channels.
 	 */
-	AddReactions = 0x00000040,
+	AddReactions = 1 << 6,
 
 	/**
 	 * Allows for viewing of audit logs.
 	 */
-	ViewAuditLog = 0x00000080,
+	ViewAuditLog = 1 << 7,
 
 	/**
 	 * Allows for using priority speaker in a voice channel. Applies to voice channels.
 	 */
-	PrioritySpeaker = 0x00000100,
+	PrioritySpeaker = 1 << 8,
 
 	/**
 	 * Allows the user to go live. Applies to voice channels.
 	 */
-	Stream = 0x00000200,
+	Stream = 1 << 9,
 
 	/**
 	 * Allows guild members to view a channel, which includes reading messages in text channels.
 	 * Applies to text and voice channels.
 	 */
-	ViewChannel = 0x00000400,
+	ViewChannel = 1 << 10,
 
 	/**
 	 * Allows for sending messages in a channel. Applies to text channels.
 	 */
-	SendMessages = 0x00000800,
+	SendMessages = 1 << 11,
 
 	/**
 	 * Allows for sending of `/tts` messages. Applies to text channels.
 	 */
-	SendTTSMessages = 0x00001000,
+	SendTTSMessages = 1 << 12,
 
 	/**
 	 * Allows for deletion of other users messages. Applies to text channels.
@@ -106,78 +106,78 @@ export enum PermissionFlags {
 	 * This permissions requires the owner account to use two-factor authentication when used on a
 	 * guild that has server-wide 2FA enabled.
 	 */
-	ManageMessages = 0x00002000,
+	ManageMessages = 1 << 13,
 
 	/**
 	 * Links sent by users with this permission will be auto-embedded. Applies to text channels.
 	 */
-	EmbedLinks = 0x00004000,
+	EmbedLinks = 1 << 14,
 
 	/**
 	 * Allows for uploading images and files. Applies to text channels.
 	 */
-	AttachFiles = 0x00008000,
+	AttachFiles = 1 << 15,
 
 	/**
 	 * Allows for reading of message history. Applies to text channels.
 	 */
-	ReadMessageHistory = 0x00010000,
+	ReadMessageHistory = 1 << 16,
 
 	/**
 	 * Allows for using the `@everyone` tag to notify all users in a channel, and the `@here` tag
 	 * to notify all online users in a channel. Applies to text channels.
 	 */
-	MentionEveryone = 0x00020000,
+	MentionEveryone = 1 << 17,
 
 	/**
 	 * Allows the usage of custom emojis from other servers. Applies to text channels.
 	 */
-	UseExternalEmojis = 0x00040000,
+	UseExternalEmojis = 1 << 18,
 
 	/**
 	 * Allows for viewing guild insights.
 	 */
-	ViewGuildInsights = 0x00080000,
+	ViewGuildInsights = 1 << 19,
 
 	/**
 	 * Allows for joining of a voice channel. Applies to voice channels.
 	 */
-	Connect = 0x00100000,
+	Connect = 1 << 20,
 
 	/**
 	 * Allows for speaking in a voice channel. Applies to voice channels.
 	 */
-	Speak = 0x00200000,
+	Speak = 1 << 21,
 
 	/**
 	 * Allows for muting members in a voice channel. Applies to voice channels.
 	 */
-	MuteMembers = 0x00400000,
+	MuteMembers = 1 << 22,
 
 	/**
 	 * Allows for deafening of members in a voice channel. Applies to voice channels.
 	 */
-	DeafenMembers = 0x00800000,
+	DeafenMembers = 1 << 23,
 
 	/**
 	 * Allows for moving of members between voice channels. Applies to voice channels.
 	 */
-	MoveMembers = 0x01000000,
+	MoveMembers = 1 << 24,
 
 	/**
 	 * Allows for using voice-activity-detection in a voice channel. Applies to voice channels.
 	 */
-	UseVAD = 0x02000000,
+	UseVAD = 1 << 25,
 
 	/**
 	 * Allows for modification of own nickname.
 	 */
-	ChangeNickname = 0x04000000,
+	ChangeNickname = 1 << 26,
 
 	/**
 	 * Allows for modification of other users nicknames.
 	 */
-	ManageNicknames = 0x08000000,
+	ManageNicknames = 1 << 27,
 
 	/**
 	 * Allows management and editing of roles. Applies to text and voice channels.
@@ -186,7 +186,7 @@ export enum PermissionFlags {
 	 * This permissions requires the owner account to use two-factor authentication when used on a
 	 * guild that has server-wide 2FA enabled.
 	 */
-	ManageRoles = 0x10000000,
+	ManageRoles = 1 << 28,
 
 	/**
 	 * Allows management and editing of webhooks. Applies to text channels.
@@ -195,7 +195,7 @@ export enum PermissionFlags {
 	 * This permissions requires the owner account to use two-factor authentication when used on a
 	 * guild that has server-wide 2FA enabled.
 	 */
-	ManageWebhooks = 0x20000000,
+	ManageWebhooks = 1 << 29,
 
 	/**
 	 * Allows management and editing of emojis.
@@ -204,32 +204,32 @@ export enum PermissionFlags {
 	 * This permissions requires the owner account to use two-factor authentication when used on a
 	 * guild that has server-wide 2FA enabled.
 	 */
-	ManageEmojis = 0x40000000,
+	ManageEmojis = 1 << 30,
 
 	/**
 	 * Allows members to use slash commands in text channels. Applies to text channels.
 	 */
-	UseSlashCommands = 0x80000000,
+	UseSlashCommands = 1 << 31,
 
 	/**
 	 * Allows for requesting to speak in stage channels.
 	 */
-	RequestToSpeak = 0x100000000,
+	RequestToSpeak = 1 << 32,
 
 	/**
 	 * Allows for deleting and archiving threads, and viewing all private threads.
 	 */
-	ManageThreads = 0x0400000000,
+	ManageThreads = 1 << 34,
 
 	/**
 	 * Allows for creating and participating in threads.
 	 */
-	UsePublicThreads = 0x0800000000,
+	UsePublicThreads = 1 << 35,
 
 	/**
 	 * Allows for creating and participating in private threads.
 	 */
-	UsePrivateThreads = 0x1000000000
+	UsePrivateThreads = 1 << 36
 }
 
 export type Permission = Uppercase<Delimit<CamelCase<keyof typeof PermissionFlags>, '_'>>;
