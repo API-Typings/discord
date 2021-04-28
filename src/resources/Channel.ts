@@ -444,6 +444,11 @@ export interface Message {
 	mention_roles: Snowflake[];
 
 	/**
+	 * Channels specifically mentioned in this message.
+	 */
+	mention_channels?: ChannelMention[];
+
+	/**
 	 * Any attached files.
 	 */
 	attachments: Attachment[];
@@ -487,6 +492,11 @@ export interface Message {
 	 * Sent with Rich Presence-related chat embeds.
 	 */
 	application?: PartialApplication;
+
+	/**
+	 * Data showing the source of a crosspost, channel follow add, pin, or reply message.
+	 */
+	message_reference?: MessageReference;
 
 	/**
 	 * Message flags combined as a bitfield.
@@ -715,21 +725,6 @@ export enum StickerFormat {
 	PNG = 1,
 	APNG,
 	LOTTIE
-}
-
-/**
- * @source {@link https://discord.com/developers/docs/resources/channel#message-object-example-crossposted-message|Channel}
- */
-export interface CrosspostedMessage extends Message {
-	/**
-	 * Channels specifically mentioned in this message.
-	 */
-	mention_channels?: ChannelMention[];
-
-	/**
-	 * Data showing the source of a crosspost, channel follow add, pin, or reply message.
-	 */
-	message_reference: MessageReference;
 }
 
 // !SECTION
