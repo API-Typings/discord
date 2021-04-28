@@ -780,7 +780,7 @@ export interface Overwrite {
 	/**
 	 * Either 0 (role) or 1 (member).
 	 */
-	type: OverwriteType;
+	type: 0 | 1;
 
 	/**
 	 * Permission bit set.
@@ -1209,11 +1209,6 @@ export enum EmbedLimit {
 	 * 256 characters.
 	 */
 	Author = 256
-}
-
-export enum OverwriteType {
-	Role,
-	GuildMember
 }
 
 // SECTION Endpoints
