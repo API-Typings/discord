@@ -1,4 +1,4 @@
-import type { FixedTuple, Nullable } from 'extended-utility-types';
+import type { FixedTuple, Nullable, Range } from 'extended-utility-types';
 import type {
 	AllowedMentions,
 	EditWebhookMessage,
@@ -131,29 +131,19 @@ export type ApplicationCommandOption = {
 	required?: boolean;
 } & (
 	| {
-			type:
-				| ApplicationCommandOptionType.Boolean
-				| ApplicationCommandOptionType.User
-				| ApplicationCommandOptionType.Channel
-				| ApplicationCommandOptionType.Role
-				| ApplicationCommandOptionType.Mentionable;
-	  }
-	| {
-			type: ApplicationCommandOptionType.String | ApplicationCommandOptionType.Integer;
-
-			/**
-			 * Choices for `string` and `number` types for the user to pick from.
-			 */
-			choices: [ApplicationCommandOptionChoice, ...Partial<FixedTuple<ApplicationCommandOptionChoice, 24>>];
-	  }
-	| {
-			type: ApplicationCommandOptionType.SubCommand | ApplicationCommandOptionType.SubCommandGroup;
-
-			/**
-			 * If the option is a subcommand or subcommand group type, the nested options will be
-			 * the parameters.
-			 */
+			type: 1 | 2;
 			options: [ApplicationCommandOption, ...Partial<FixedTuple<ApplicationCommandOption, 24>>];
+	  }
+	| {
+			type: 3;
+			choices: [{ name: string; value: string }, ...Partial<FixedTuple<{ name: string; value: string }, 24>>];
+	  }
+	| {
+			type: 4;
+			choices: [{ name: string; value: number }, ...Partial<FixedTuple<{ name: string; value: number }, 24>>];
+	  }
+	| {
+			type: Range<5, 9>;
 	  }
 );
 
