@@ -499,7 +499,8 @@ export interface ThreadListSync extends GatewayEventPayload<GatewayEvent.ThreadL
 
 		/**
 		 * The parent channel IDs whose threads are being synced. If omitted, then threads were
-		 * synced for the entire guild.
+		 * synced for the entire guild. This array may contain `channel_id`s that have no active
+		 * threads as well, so you know to clear that data.
 		 */
 		channel_ids?: Snowflake[];
 
