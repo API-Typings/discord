@@ -593,22 +593,7 @@ export enum JSONErrorCode {
 	MFADisabled,
 
 	/**
-	 * Invalid thread archive state.
-	 */
-	InvalidThreadArchiveState = 50083,
-
-	/**
-	 * Invalid thread notification settings.
-	 */
-	InvalidThreadNotificationSettings,
-
-	/**
-	 * `before` value is earlier than the thread creation date.
-	 */
-	InvalidBeforeThreadCreationDateValue,
-
-	/**
-	 * Invalid thread archive state.
+	 * Tried to perform an operation on an archived thread.
 	 */
 	InvalidThreadArchiveState = 50083,
 
