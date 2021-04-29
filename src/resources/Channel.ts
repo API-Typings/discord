@@ -330,7 +330,7 @@ export interface StoreChannel extends Omit<ChannelCategory, 'type'> {
  * Unlike with channels, the API will only sync updates to users about threads the current user can
  * view. When receiving a guild create payload, the API will only include active threads the current
  * user can view. Threads inside of private channels are completely private to the members of that
- * private channel. As such, when *gaining* access to a channel the API send a thread list sync,
+ * private channel. As such, when *gaining* access to a channel the API sends a thread list sync,
  * which includes all active threads in that channel.
  *
  * Threads also track membership. Users must be added to a thread before sending messages in them.
@@ -1975,6 +1975,42 @@ export type LeaveThread = { response: never };
 export type RemoveUserFromThread = { response: never };
 
 /**
+ * This endpoint is restricted according to whether the `GUILD_MEMBERS` Privileged Intent is enabled
+ * for your application.
+ *
+ * @endpoint GET `/channels/{channel.id}/threads-members`
+ */
+export type ListThreadMembers = { response: ThreadMember[] };
+
+/**
+ * Returns all active threads in the channel, including public and private threads. Requires the
+ * `READ_MESSAGE_HISTORY` permission.
+ *
+ * Threads are ordered by their `id`, in descending order.
+ *
+ * @endpoint GET `/channels/{channel.id}/threads/active`
+ */
+export interface ListActiveThreads {
+	response: {
+		/**
+		 * The threads.
+		 */
+		threads: ThreadChannel[];
+
+		/**
+		 * A thread member object for each returned thread the current user has joined.
+		 */
+		members: ThreadMember;
+
+		/**
+		 * Whether there are potentially additional threads that could be returned on a subsequent
+		 * call.
+		 */
+		has_more: boolean;
+	};
+}
+
+/**
  * Returns archived threads in the channel that are public. Requires the `READ_MESSAGE_HISTORY`
  * permission.
  *
@@ -1985,7 +2021,7 @@ export type RemoveUserFromThread = { response: never };
  *
  * @endpoint GET `/channels/{channel.id}/threads/archived/public`
  */
-export interface GetPublicArchivedThreads {
+export interface ListPublicArchivedThreads {
 	query: {
 		/**
 		 * Returns threads before this timestamp.
@@ -1998,16 +2034,7 @@ export interface GetPublicArchivedThreads {
 		limit?: number;
 	};
 
-	response: {
-		threads: ThreadChannel[];
-		members: ThreadMember[];
-
-		/**
-		 * Whether there are potentially additional threads that could be returned on a subsequent
-		 * call.
-		 */
-		has_more: boolean;
-	};
+	response: ListActiveThreads['response'];
 }
 
 /**
@@ -2018,7 +2045,7 @@ export interface GetPublicArchivedThreads {
  *
  * @endpoint GET `/channels/{channel.id}/threads/archived/private`
  */
-export type GetPrivateArchivedThreads = GetPublicArchivedThreads;
+export type ListPrivateArchivedThreads = ListPublicArchivedThreads;
 
 /**
  * Returns archived threads in the channel that are of type `PRIVATE_THREAD`, and the user has
@@ -2028,6 +2055,6 @@ export type GetPrivateArchivedThreads = GetPublicArchivedThreads;
  *
  * @endpoint GET `/channels/{channel.id}/users/@me/threads/archived/private`
  */
-export type GetJoinedPrivateArchivedThreads = GetPublicArchivedThreads;
+export type ListJoinedPrivateArchivedThreads = ListPublicArchivedThreads;
 
 // !SECTION
