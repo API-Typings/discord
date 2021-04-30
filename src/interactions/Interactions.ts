@@ -411,7 +411,7 @@ export interface InteractionResponse {
 	/**
 	 * The type of response.
 	 */
-	type: InteractionResponseType;
+	type: InteractionCallbackType;
 
 	/**
 	 * An optional response message.
@@ -422,7 +422,7 @@ export interface InteractionResponse {
 /**
  * @source {@link https://discord.com/developers/docs/interactions/slash-commands#interaction-response-interactionresponsetype|Slash Commands}
  */
-export enum InteractionResponseType {
+export enum InteractionCallbackType {
 	/**
 	 * ACK a `Ping`.
 	 */
