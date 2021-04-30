@@ -1700,6 +1700,11 @@ export interface EditMessage {
 		 * Allowed mentions for the message.
 		 */
 		allowed_mentions?: Nullable<AllowedMentions>;
+
+		/**
+		 * Attached files to keep.
+		 */
+		attachments?: Attachment[];
 	};
 }
 

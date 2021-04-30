@@ -1,5 +1,5 @@
 import type { FixedTuple, Nullable } from 'extended-utility-types';
-import type { AllowedMentions, Channel, Embed, Guild, Message, Snowflake, User } from '../';
+import type { AllowedMentions, Attachment, Channel, Embed, Guild, Message, Snowflake, User } from '../';
 
 /**
  * Represents a low-effort way to post messages to channels. They do not require a bot user or
@@ -303,6 +303,11 @@ export interface EditWebhookMessage {
 		 * Allowed mentions for the message.
 		 */
 		allowed_mentions?: Nullable<AllowedMentions>;
+
+		/**
+		 * Attached files to keep.
+		 */
+		attachments?: Attachment[];
 	};
 
 	response: Message;
