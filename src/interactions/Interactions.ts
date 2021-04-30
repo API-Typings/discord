@@ -253,7 +253,8 @@ export interface Component {
 
 export enum ComponentType {
 	ActionRow = 1,
-	Button
+	Button,
+	Select
 }
 
 export type ButtonComponent = {
