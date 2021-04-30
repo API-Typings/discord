@@ -199,18 +199,18 @@ export enum ChannelType {
 	/**
 	 * A temporary sub-channel within a `GUILD_NEWS` channel.
 	 */
-	AnnouncementThread = 10,
+	GuildNewsThread = 10,
 
 	/**
 	 * A temporary sub-channel within a `GUILD_TEXT` channel.
 	 */
-	PublicThread,
+	GuildPublicThread,
 
 	/**
 	 * A temporary sub-channel within a `GUILD_TEXT` channel that is only viewable by those invited
 	 * and those with the `MANAGE_MESSAGES` permission.
 	 */
-	PrivateThread,
+	GuildPrivateThread,
 
 	/**
 	 * A voice channel for hosting events with an audience.
@@ -354,7 +354,7 @@ export interface ThreadChannel
 				| 'name'
 			>
 		> {
-	type: ChannelType.AnnouncementThread | ChannelType.PublicThread | ChannelType.PrivateThread;
+	type: ChannelType.GuildNewsThread | ChannelType.GuildPublicThread | ChannelType.GuildPrivateThread;
 }
 
 // !SECTION
