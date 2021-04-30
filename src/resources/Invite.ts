@@ -1,3 +1,4 @@
+import type { Nullable } from 'extended-utility-types';
 import type { PartialApplication, PartialChannel, PartialGuild, User } from '../';
 
 // ANCHOR Partial Invite
@@ -71,7 +72,7 @@ export interface Invite extends Pick<PartialInvite, 'code'> {
 	 * The expiration date of this invite, returned from the `GET /invites/<code>` endpoint when
 	 * `with_expiration` is `true`.
 	 */
-	expires_at?: string;
+	expires_at?: Nullable<string>;
 }
 
 /**
