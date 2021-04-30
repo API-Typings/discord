@@ -1598,6 +1598,9 @@ export type GetGuildBan = GuildBan | never;
  * Create a guild ban, and optionally delete previous messages sent by the banned user. Requires
  * the `BAN_MEMBERS` permission.
  *
+ * @remarks
+ * Supplying a reason in the body will override `X-Audit-Log-Reason` header if both are provided.
+ *
  * @endpoint [PUT](https://discord.com/developers/docs/resources/guild#create-guild-ban) `/guilds/{guild.id}/bans/{user.id}`
  */
 export interface CreateGuildBan {
@@ -1794,6 +1797,8 @@ export interface GetGuildPruneCount {
  * your prune by providing the `include_roles` parameter. Any inactive user that has a subset of
  * the provided role(s) will be counted in the prune and users with additional roles will not.
  *
+ * Supplying a reason in the body will override `X-Audit-Log-Reason` header if both are provided.
+ *
  * @endpoint [POST](https://discord.com/developers/docs/resources/guild#begin-guild-prune)`/guilds/{guild.id}/prune`
  */
 export interface BeginGuildPrune {
@@ -1816,6 +1821,11 @@ export interface BeginGuildPrune {
 		 * Role(s) to include.
 		 */
 		include_roles?: Snowflake[];
+
+		/**
+		 * Reason for the prune.
+		 */
+		reason?: string;
 	};
 
 	response: GetGuildPruneCount['response'];
