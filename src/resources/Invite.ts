@@ -66,6 +66,12 @@ export interface Invite extends Pick<PartialInvite, 'code'> {
 	 * `with_counts` is `true`.
 	 */
 	approximate_member_count?: number;
+
+	/**
+	 * The expiration date of this invite, returned from the `GET /invites/<code>` endpoint when
+	 * `with_expiration` is `true`.
+	 */
+	expires_at?: string;
 }
 
 /**
@@ -116,6 +122,11 @@ export interface GetInvite {
 		 * Whether the invite should contain approximate member counts.
 		 */
 		with_counts?: boolean;
+
+		/**
+		 * Whether the invite should contain the expiration date.
+		 */
+		with_expiration?: boolean;
 	};
 
 	response: Invite;
