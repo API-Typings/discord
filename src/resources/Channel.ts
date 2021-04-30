@@ -103,7 +103,7 @@ export interface Channel extends PartialChannel {
 	icon?: Nullable<string>;
 
 	/**
-	 * ID of the DM creator.
+	 * ID of the creator of the group DM or thread.
 	 */
 	owner_id?: Snowflake;
 
@@ -1234,6 +1234,10 @@ export interface ModifyGroupDMChannel {
 		 * 2-100 character channel name.
 		 */
 		name?: string;
+
+		/**
+		 * Base64 encoded icon.
+		 */
 		icon?: string;
 	};
 
@@ -1328,8 +1332,7 @@ export interface ModifyGuildChannel {
 /**
  * Update a channel's settings.
  *
- * When setting `archived` to `false`, requires the ability to send messages in the thread. The
- * thread must already have `archived` set to `true`.
+ * When setting `archived` to `false`, only the `SEND_MESSAGES` permission is required.
  *
  * Otherwise, requires the `MANAGE_MESSAGES` permission for the guild. Requires the thread to have
  * `archived` set to `false`.
@@ -1952,7 +1955,7 @@ export type StartPrivateThread = StartPublicThread;
 /**
  * Adds the current user to a thread. Requires the thread is not archived.
  *
- * @endpoint POST `/channels/{channel.id}/thread-members/@me`
+ * @endpoint PUT `/channels/{channel.id}/thread-members/@me`
  */
 export type JoinThread = { response: never };
 
@@ -1960,7 +1963,7 @@ export type JoinThread = { response: never };
  * Adds another user to a thread. Requires the ability to send messages in the thread. Also requires
  * the thread is not archived.
  *
- * @endpoint POST `/channels/{channel.id}/thread-members/{user.id}`
+ * @endpoint PUT `/channels/{channel.id}/thread-members/{user.id}`
  */
 export type AddUserToThread = { response: never };
 
