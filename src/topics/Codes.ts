@@ -307,6 +307,7 @@ export enum JSONErrorCode {
 	 * Maximum number of bans for non-guild members have been exceeded.
 	 */
 	TooManyNonGuildMemberBans = 30035,
+	TooManyBanFetches = 30037,
 	Unauthorized = 40001,
 	EmailVerificationRequired,
 	DMOpenRateLimited,
