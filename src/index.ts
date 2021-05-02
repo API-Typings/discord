@@ -22,6 +22,14 @@ export enum BaseURL {
 	CDN = 'https://cdn.discordapp.com'
 }
 
+export enum ClientReleaseChannel {
+	Stable = 'stable',
+	Beta = 'ptb',
+	PublicTestBuild = 'ptb',
+	Alpha = 'canary',
+	Canary = 'canary'
+}
+
 /**
  * @source {@link https://discord.com/developers/docs/reference#snowflakes|Reference}
  */
