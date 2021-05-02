@@ -244,6 +244,8 @@ export enum JSONErrorCode {
 	 * Unknown webhook.
 	 */
 	UnknownWebhook,
+	UnknownWebhookService,
+	UnknownSession,
 
 	/**
 	 * Unknown ban.
@@ -279,6 +281,7 @@ export enum JSONErrorCode {
 	 * Unknown branch.
 	 */
 	UnknownBranch,
+	UnknownStoreDirectoryLayout,
 
 	/**
 	 * Unknown redistributable.
@@ -309,6 +312,7 @@ export enum JSONErrorCode {
 	 * Unknown application command.
 	 */
 	UnknownApplicationCommand,
+	UnknownApplicationCommandPermissions,
 
 	/**
 	 * Bots cannot use this endpoint.
@@ -320,11 +324,20 @@ export enum JSONErrorCode {
 	 */
 	BotRequired,
 	RPCProxyDisallowed,
+
+	/**
+	 * Explicit content cannot be sent to the desired recipient(s).
+	 */
 	ExplicitContent = 20009,
 	AccountScheduledForDeletion = 20011,
 	UserUnauthorizedForApplication,
 	AccountDisabled,
 	SlowmodeRateLimited = 20016,
+
+	/**
+	 * Only the owner of this account can perform this action.
+	 */
+	InvalidAccountOwner = 20018,
 
 	/**
 	 * This message cannot be edited due to announcement rate limits.
@@ -351,6 +364,10 @@ export enum JSONErrorCode {
 	 * Maximum number of pins reached for the channel (50).
 	 */
 	TooManyPinsInChannel,
+
+	/**
+	 * Maximum number of recipients reached (10).
+	 */
 	TooManyRecipients,
 
 	/**
@@ -431,11 +448,17 @@ export enum JSONErrorCode {
 	UserBanned,
 	ConnectionRevoked = 40012,
 	DeleteAccountTransferTeamOwnership = 40028,
+	UserNotConnectedToVoice = 400032,
 
 	/**
 	 * This message has already been crossposted.
 	 */
-	MessageAlreadyCrossposted = 40033,
+	MessageAlreadyCrossposted,
+
+	/**
+	 * An application command with that name already exists.
+	 */
+	ApplicationCommandNameExists = 40041,
 
 	/**
 	 * Missing access.
@@ -550,6 +573,7 @@ export enum JSONErrorCode {
 	 * Invalid webhook token provided.
 	 */
 	InvalidWebhookToken,
+	InvalidRole,
 
 	/**
 	 * Invalid Recipient(s).
@@ -578,7 +602,8 @@ export enum JSONErrorCode {
 	InvalidAPIVersion = 50041,
 	InvalidGiftRedemptionExhausted = 50050,
 	InvalidGiftRedemptionOwned,
-	InvalidGiftSelftRedemption = 50054,
+	InvalidGiftSelfRedemption = 50054,
+	InvalidGiftPaymentSourceRequired = 500070,
 
 	/**
 	 * Cannot delete a channel required for Community guilds.
