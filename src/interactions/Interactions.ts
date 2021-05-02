@@ -2,11 +2,11 @@ import type { FixedTuple, Nullable, Range } from 'extended-utility-types';
 import type {
 	AllowedMentions,
 	EditWebhookMessage,
-	Embed,
 	ExecuteWebhook,
 	GetWebhookMessage,
 	GuildMember,
 	PartialChannel,
+	PartialEmbed,
 	PartialGuildMember,
 	Role,
 	Snowflake,
@@ -96,7 +96,7 @@ export interface ApplicationCommand {
 	/**
 	 * The parameters for the command.
 	 */
-	options?: Partial<FixedTuple<ApplicationCommandOption, 25>>;
+	options?: [ApplicationCommandOption, ...Partial<FixedTuple<ApplicationCommandOption, 24>>];
 
 	/**
 	 * Whether the command is enabled by default when the app is added to a guild.
@@ -456,7 +456,7 @@ export interface InteractionApplicationCommandCallbackData {
 	/**
 	 * Supports up to 10 embeds.
 	 */
-	embeds?: Partial<FixedTuple<Embed, 10>>;
+	embeds?: [PartialEmbed, ...Partial<FixedTuple<PartialEmbed, 9>>];
 
 	/**
 	 * Allowed mentions object.
