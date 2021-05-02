@@ -145,7 +145,7 @@ export interface PartialConnection {
 	/**
 	 * The service of the connection.
 	 */
-	type: ConnectionService;
+	type: PlatformType;
 
 	/**
 	 * Whether the connection is verified.
@@ -187,12 +187,16 @@ export interface Connection extends PartialConnection {
 	visibility: VisibilityType;
 }
 
-export type ConnectionService =
+export type PlatformType =
 	| 'battlenet'
 	| 'facebook'
 	| 'github'
+	| 'instagram'
 	| 'leagueoflegends'
 	| 'reddit'
+	| 'samsung'
+	| 'skype'
+	| 'soundcloud'
 	| 'spotify'
 	| 'steam'
 	| 'twitch'
