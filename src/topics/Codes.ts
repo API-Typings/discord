@@ -9,14 +9,7 @@
  * @source {@link https://discord.com/developers/docs/topics/opcodes-and-status-codes#gateway-gateway-close-event-codes|Opcodes and Status Codes}
  */
 export enum GatewayCloseCode {
-	/**
-	 * An unknown error occurred.
-	 */
 	UnknownError = 4000,
-
-	/**
-	 * You sent an invalid Gateway opcode or an invalid payload for an opcode.
-	 */
 	UnknownOPCode,
 
 	/**
@@ -33,10 +26,6 @@ export enum GatewayCloseCode {
 	 * The account token sent with your identify payload is incorrect.
 	 */
 	AuthenticationFailed,
-
-	/**
-	 * You sent more than one identify payload.
-	 */
 	AlreadyAuthenticated,
 
 	/**
@@ -46,41 +35,14 @@ export enum GatewayCloseCode {
 	InvalidSequence = 4007,
 
 	/**
-	 * You're sending payloads to us too quickly. You will be disconnected on receiving this.
+	 * You're sending payloads too quickly. You will be disconnected on receiving this.
 	 */
 	RateLimited,
-
-	/**
-	 * Your session timed out. Reconnect and start a new one.
-	 */
 	SessionTimedOut,
-
-	/**
-	 * You sent an invalid shard when identifying.
-	 */
 	InvalidShard,
-
-	/**
-	 * The session would have handled too many guilds–you are required to shard your connection
-	 * in order to connect.
-	 */
 	ShardingRequired,
-
-	/**
-	 * You sent an invalid version for the gateway.
-	 */
 	InvalidAPIVersion,
-
-	/**
-	 * You sent an invalid intent for a Gateway Intent. You may have incorrectly calculated
-	 * the bitwise value.
-	 */
 	InvalidIntents,
-
-	/**
-	 * You sent a disallowed intent for a Gateway Intent. You may have tried to specify an
-	 * intent that you have not enabled or are not whitelisted for.
-	 */
 	DisallowedIntents
 }
 
@@ -510,46 +472,15 @@ export enum RPCCloseCode {
  * @source {@link https://discord.com/developers/docs/topics/opcodes-and-status-codes#rpc-rpc-error-codes|Opcodes and Status Codes}
  */
 export enum RPCErrorCode {
-	/**
-	 * An unknown error occurred.
-	 */
 	UnknownError = 1000,
 	ServiceUnavailable,
 	TransactionAborted,
-
-	/**
-	 * You sent an invalid payload.
-	 */
 	InvalidPayload = 4000,
-
-	/**
-	 * Invalid command name specified.
-	 */
 	InvalidCommand = 4002,
-
-	/**
-	 * Invalid guild ID specified.
-	 */
 	InvalidGuild,
-
-	/**
-	 * Invalid event name specified.
-	 */
 	InvalidEvent,
-
-	/**
-	 * Invalid channel ID specified.
-	 */
 	InvalidChannel,
-
-	/**
-	 * You lack permissions to access the given resource.
-	 */
 	InvalidPermissions,
-
-	/**
-	 * An invalid OAuth2 application ID was used to authorize or authenticate with.
-	 */
 	InvalidClientID,
 
 	/**
@@ -561,10 +492,6 @@ export enum RPCErrorCode {
 	 * An invalid OAuth2 token was used to authorize or authenticate with.
 	 */
 	InvalidToken,
-
-	/**
-	 * The specified user ID was invalid.
-	 */
 	InvalidUser,
 	InvalidInvite,
 	InvalidActivityJoinRequest,
@@ -573,30 +500,14 @@ export enum RPCErrorCode {
 	InvalidEntitlement,
 	InvalidGiftCode,
 	InvalidGuildTemplate,
-
-	/**
-	 * A standard OAuth2 error occurred; check the data object for the OAuth2 error details.
-	 */
 	OAuth2Error = 5000,
-
-	/**
-	 * An asynchronous `SELECT_TEXT_CHANNEL`/`SELECT_VOICE_CHANNEL` command timed out.
-	 */
 	SelectChannelTimedOut,
-
-	/**
-	 * An asynchronous `GET_GUILD` command timed out.
-	 */
 	GetGuildTimedOut,
 
 	/**
 	 * You tried to join a user to a voice channel but the user was already in one.
 	 */
 	SelectVoiceForceRequired,
-
-	/**
-	 * You tried to capture more than one shortcut key at once.
-	 */
 	CaptureShortcutAlreadyListening,
 	InvalidActivitySecret,
 	NoEligibleActivity,
@@ -641,13 +552,10 @@ export enum DispatchErrorCode {
  * @source {@link https://discord.com/developers/docs/topics/opcodes-and-status-codes#voice-voice-close-event-codes|Opcodes and Status Codes}
  */
 export enum VoiceCloseCode {
-	/**
-	 * You sent an invalid opcode.
-	 */
 	UnknownOPCode = 4001,
 
 	/**
-	 * You sent an invalid payload in your identifying to the Gateway
+	 * You sent an invalid payload in your identifying to the Gateway.
 	 */
 	DecodeFailure,
 
@@ -660,30 +568,10 @@ export enum VoiceCloseCode {
 	 * The token you sent in your identify payload is incorrect.
 	 */
 	AuthenticationFailed,
-
-	/**
-	 * You sent more than one identify payload.
-	 */
 	AlreadyAuthenticated,
-
-	/**
-	 * Your session is no longer valid.
-	 */
 	InvalidSession,
-
-	/**
-	 * Your session has timed out.
-	 */
 	SessionTimeout = 4009,
-
-	/**
-	 * The server you're trying to connect to can't be found.
-	 */
 	ServerNotFound = 4011,
-
-	/**
-	 * The protocol you sent wasn't recognized,
-	 */
 	UnknownProtocol,
 
 	/**
@@ -691,15 +579,7 @@ export enum VoiceCloseCode {
 	 * dropped. Should not reconnect.
 	 */
 	Disconnected = 4014,
-
-	/**
-	 * The server crashed. Try resuming.
-	 */
 	VoiceServerCrashed,
-
-	/**
-	 * Your encryption wasn't recognized.
-	 */
 	UnknownEncryptionMode
 }
 
