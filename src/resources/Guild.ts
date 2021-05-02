@@ -5,6 +5,7 @@ import type {
 	DiscoveryMetadata,
 	Emoji,
 	InviteMetadata,
+	Message,
 	Overwrite,
 	PartialChannel,
 	PartialInvite,
@@ -1384,6 +1385,28 @@ export interface ModifyGuildChannelPositions {
 	};
 
 	response: never;
+}
+
+/**
+ * @endpoint GET `/guilds/{guild.id}/messages`
+ */
+export interface SearchGuildMessages {
+	query: {
+		content: string;
+		author_id?: Snowflake;
+		mentions?: Snowflake;
+		has?: 'link' | 'embed' | 'video' | 'image' | 'file' | 'sound';
+		max_id?: Snowflake;
+		min_id?: Snowflake;
+		channel_id?: Snowflake;
+		sort_by?: 'timestamp' | 'relevance';
+		sort_order?: 'asc' | 'desc';
+	};
+
+	response: {
+		messages: [Message & { hit: boolean }][];
+		total_results: number;
+	};
 }
 
 /**
