@@ -1,5 +1,5 @@
 import type { FixedTuple, Nullable } from 'extended-utility-types';
-import type { AllowedMentions, Attachment, Channel, Embed, Guild, Message, Snowflake, User } from '../';
+import type { AllowedMentions, Attachment, Channel, Guild, Message, PartialEmbed, Snowflake, User } from '../';
 
 /**
  * Represents a low-effort way to post messages to channels. They do not require a bot user or
@@ -199,14 +199,12 @@ export type DeleteWebhookWithToken = { response: never };
 
 /**
  * @remarks
- * - For the webhook embed objects, you can set every field except `type` (it will be `rich`
- * regardless of if you try to set it), `provider`, `video`, and any `height`, `width`, or
- * `proxy_url` values for images.
- * - This endpoint supports both JSON and form data bodies. It does require `multipart/form-data`
- * requests instead of the normal JSON request type when uploading files. Make sure you set your
- * `Content-Type` to `multipart/form-data` if you're doing that. Note that in that case, the
- * `embeds` field cannot be used, but you can pass an url-encoded JSON body as a form value for
- * `payload_json`.
+ * - For a `file` attachment, the `Content-Disposition` subpart header MUST contain a `filename`
+ * parameter.
+ * - When uploading files, the `multipart/form-data` content type must be used. Note that in
+ * multipart form data, the `embed` and `allowed_mentions` fields cannot be used.
+ * - If `payload_json` is supplied, all fields except for `file` fields will be ignored in the form
+ * data.
  *
  * @endpoint [POST](https://discord.com/developers/docs/resources/webhook#execute-webhook) `/webhooks/{webhook.id}/{webhook.token}`
  */
@@ -223,11 +221,6 @@ export interface ExecuteWebhook {
 
 	body: {
 		/**
-		 * The message contents (up to 2000 characters).
-		 */
-		content?: string;
-
-		/**
 		 * Override the default username of the webhook.
 		 */
 		username?: string;
@@ -238,26 +231,41 @@ export interface ExecuteWebhook {
 		avatar_url?: string;
 
 		/**
-		 * True if this is a TTS message.
+		 * `true` if this is a TTS message.
+		 *
+		 * @defaultValue `false`
 		 */
 		tts?: boolean;
 
 		/**
-		 * The contents of the file being sent.
+		 * JSON encoded body of non-file params (`multipart/form-data` only).
 		 */
-		file?: unknown;
-
-		/**
-		 * Embedded `rich` content.
-		 */
-		embeds?: Partial<FixedTuple<Embed, 10>>;
-		payload_json?: string;
+		payload_json?: Nullable<string>;
 
 		/**
 		 * Allowed mentions for the message.
 		 */
 		allowed_mentions?: AllowedMentions;
-	};
+	} & (
+		| {
+				/**
+				 * The message contents (up to 2000 characters).
+				 */
+				content: string;
+		  }
+		| {
+				/**
+				 * The contents of the file being sent.
+				 */
+				file: unknown;
+		  }
+		| {
+				/**
+				 * Embedded `rich` content.
+				 */
+				embeds: [PartialEmbed, ...Partial<FixedTuple<PartialEmbed, 9>>];
+		  }
+	);
 
 	response: Message;
 }
@@ -273,11 +281,17 @@ export type GetWebhookMessage = { response: Message };
  * Edits a previously-sent webhook message from the same token.
  *
  * @remarks
- * When the `content` field is edited, the `mentions` array in the message object will be
+ * - When the `content` field is edited, the `mentions` array in the message object will be
  * reconstructed from scratch based on the new content. The `allowed_mentions` field of the edit
  * request controls how this happens. If there is no explicit `allowed_mentions` in the edit
  * request, the content will be parsed with *default* allowances, that is, without regard to whether
  * or not an `allowed_mentions` was present in the request that originally created the message.
+ * - For a `file` attachment, the `Content-Disposition` subpart header MUST contain a `filename`
+ * parameter.
+ * - When uploading files, the `multipart/form-data` content type must be used. Note that in
+ * multipart form data, the `embed` and `allowed_mentions` fields cannot be used.
+ * - If `payload_json` is supplied, all fields except for `file` fields will be ignored in the form
+ * data.
  *
  * @endpoint [PATCH](https://discord.com/developers/docs/resources/webhook#edit-webhook-message) `/webhooks/{webhook.id}/{webhook.token}/messages/{message.id}`
  */
@@ -291,12 +305,16 @@ export interface EditWebhookMessage {
 		/**
 		 * Embedded `rich` content.
 		 */
-		embeds?: Nullable<Embed[]>;
+		embeds?: Nullable<[PartialEmbed, ...Partial<FixedTuple<PartialEmbed, 9>>]>;
 
 		/**
 		 * The contents of the file being sent/edited.
 		 */
-		file?: Nullable<string>;
+		file?: Nullable<unknown>;
+
+		/**
+		 * JSON encoded body of non-file params (`multipart/form-data` only).
+		 */
 		payload_json?: Nullable<string>;
 
 		/**
@@ -307,7 +325,7 @@ export interface EditWebhookMessage {
 		/**
 		 * Attached files to keep.
 		 */
-		attachments?: Attachment[];
+		attachments?: Nullable<Attachment[]>;
 	};
 
 	response: Message;

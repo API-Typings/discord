@@ -849,19 +849,13 @@ export interface ThreadMember {
 
 // SECTION Embed
 
-/**
- * @source {@link https://discord.com/developers/docs/resources/channel#embed-object-embed-structure|Channel}
- */
-export interface Embed {
+// ANCHOR Partial Embed
+
+export interface PartialEmbed {
 	/**
 	 * Title of embed.
 	 */
 	title?: string;
-
-	/**
-	 * Type of embed (always `rich` for webhook embeds).
-	 */
-	type?: EmbedType;
 
 	/**
 	 * Description of embed.
@@ -891,6 +885,36 @@ export interface Embed {
 	/**
 	 * Image information.
 	 */
+	image?: Pick<EmbedImage, 'url'>;
+
+	/**
+	 * Thumbnail information.
+	 */
+	thumbnail?: Pick<EmbedThumbnail, 'url'>;
+
+	/**
+	 * Author information.
+	 */
+	author?: EmbedAuthor;
+
+	/**
+	 * Fields information.
+	 */
+	fields?: [EmbedField, Partial<FixedTuple<EmbedField, 24>>];
+}
+
+/**
+ * @source {@link https://discord.com/developers/docs/resources/channel#embed-object-embed-structure|Channel}
+ */
+export interface Embed extends Omit<PartialEmbed, 'image' | 'thumbnail'> {
+	/**
+	 * Type of embed (always `rich` for webhook embeds).
+	 */
+	type?: EmbedType;
+
+	/**
+	 * Image information.
+	 */
 	image?: EmbedImage;
 
 	/**
@@ -907,22 +931,11 @@ export interface Embed {
 	 * Prodvider information.
 	 */
 	provider?: EmbedProvider;
-
-	/**
-	 * Author information.
-	 */
-	author?: EmbedAuthor;
-
-	/**
-	 * Fields information.
-	 */
-	fields?: Partial<FixedTuple<EmbedField, 25>>;
 }
 
 /**
  * Embed types are "loosely defined" and, for the most part, are not used by the clients for
- * rendering. Embed attributes power what is rendered. Embed types should be considered deprecated
- * and might be removed in a future API version.
+ * rendering. Embed attributes power what is rendered.
  *
  * @source {@link https://discord.com/developers/docs/resources/channel#embed-object-embed-types|Channel}
  */
@@ -1434,39 +1447,39 @@ export interface GetChannelMessages {
  */
 export type GetChannelMessage = { response: Message };
 
-// SECTION Create Message
-
-// ANCHOR JSON
+// ANCHOR Create Message
 
 /**
  * Post a message to a guild text or DM channel.
  *
  * @remarks
  * - When operating on a guild channel, the current user must have the `SEND_MESSAGES` permission.
- * - When sending a message with `tts` (text-to-speech) set to `true`, the current user must have
- * the `SEND_TTS_MESSAGES` permission.
+ * - When sending a message with `tts` set to `true`, the current user must have the
+ * `SEND_TTS_MESSAGES` permission.
  * - When creating a message as a reply to another message, the current user must have the
  * `READ_MESSAGE_HISTORY` permission.
- * - The referenced message must exist and cannot be a system message.
- * - The maximum request size when sending a message is **8MB**.
- * - For the embed object, you can set every field except `type` (it will be `rich` regardless of
- * if you try to set it), `provider`, `video`, and any `height`, `width`, or `proxy_url` values
- * for images,
- * - **Files can only be uploaded when using the `multipart/form-data` content type**,
+ * - For a `file` attachment, the `Content-Disposition` subpart header MUST contain a `filename`
+ * parameter.
+ * - When uploading files, the `multipart/form-data` content type must be used. Note that in
+ * multipart form data, the `embed` and `allowed_mentions` fields cannot be used.
+ * - If `payload_json` is supplied, all fields except for `file` fields will be ignored in the form
+ * data.
  *
  * @endpoint [POST](https://discord.com/developers/docs/resources/channel#create-message) `/channels/{channel.id}/messages`
  */
-export interface CreateMessageJSON {
+export interface CreateMessage {
 	body: {
 		/**
-		 * A nonce that can be used for optimistic message sending (up to 25 characters).
-		 */
-		nonce?: number | string;
-
-		/**
-		 * True if this is a TTS message.
+		 * `true` if this is a TTS message.
+		 *
+		 * @defaultValue `false`
 		 */
 		tts?: boolean;
+
+		/**
+		 * JSON encoded body of non-file params (`multipart/form-data` only).
+		 */
+		payload_json?: string;
 
 		/**
 		 * Allowed mentions for a message.
@@ -1486,94 +1499,20 @@ export interface CreateMessageJSON {
 		  }
 		| {
 				/**
-				 * Embedded rich content.
-				 */
-				embed: Omit<Embed, 'type' | 'provider' | 'video'> &
-					{
-						[K in 'thumbnail' | 'image']: {
-							url?: string;
-						};
-					};
-		  }
-	);
-
-	response: Message;
-}
-
-// ANCHOR Form-Data
-
-/**
- * Post a message to a guild text or DM channel.
- *
- * @remarks
- * - This endpoint supports all the same fields as its `application/json` counterpart, however they
- * must be set in `payload_json` rather than provided as form fields. Some fields can be provided
- * as `form-data` fields, but if you supply a `payload_json`, **all fields except for `file` fields
- * will be ignored**.
- * - Note that when sending `multipart/form-data`, you must provide a value for at **least one of**
- * `content`, `embed` or `file`. For a `file` attachment, the `Content-Disposition` subpart header
- * MUST contain a `filename` parameter.
- *
- * **Limitations**
- * - When operating on a guild channel, the current user must have the `SEND_MESSAGES` permission
- * - When sending a message with `tts` (text-to-speech) set to `true`, the current user must have
- * the `SEND_TTS_MESSAGES` permission
- * - When creating a message as a reply to another message, the current user must have the
- * `READ_MESSAGE_HISTORY` permission
- * - The referenced message must exist and cannot be a system message
- * - The maximum request size when sending a message is **8MB**
- * - For the embed object, you can set every field except `type` (it will be `rich` regardless of
- * if you try to set it), `provider`, `video`, and any `height`, `width`, or `proxy_url` values
- * for images
- *
- * @endpoint [POST](https://discord.com/developers/docs/resources/channel#create-message) `/channels/{channel.id}/messages`
- */
-export interface CreateMessageFormData {
-	body: {
-		/**
-		 * A nonce that can be used for optimistic message sending.
-		 */
-		nonce?: number | string;
-
-		/**
-		 * True if this is a TTS message.
-		 */
-		tts?: boolean;
-
-		/**
-		 * JSON encoded body of any additional request fields.
-		 */
-		payload_json?: CreateMessageJSON;
-	} & (
-		| {
-				/**
-				 * The message contents (up to 2000 characters).
-				 */
-				content: string;
-		  }
-		| {
-				/**
-				 * Embedded rich content.
-				 */
-				embed: Omit<Embed, 'type' | 'provider' | 'video'> &
-					{
-						[K in 'thumbnail' | 'image']: {
-							url?: string;
-						};
-					};
-		  }
-		| {
-				/**
 				 * The contents of the file being sent.
 				 */
 				file: unknown;
 		  }
+		| {
+				/**
+				 * Embedded `rich` content.
+				 */
+				embed: PartialEmbed;
+		  }
 	);
 
 	response: Message;
 }
-
-// !SECTION
 
 /**
  * Crosspost a message in a News Channel to following channels. This endpoint requires the
@@ -1634,7 +1573,7 @@ export interface GetReactions {
 		after?: Snowflake;
 
 		/**
-		 * Max number of users to return (1-100).
+		 * Max number of users to return.
 		 *
 		 * @defaultValue `25`
 		 */
@@ -1672,13 +1611,18 @@ export type DeleteAllEmojiReactions = { response: never };
  * @remarks
  * - The fields `content`, `embed`, `allowed_mentions` and `flags` can be edited by the original
  * message author. Other users can only edit `flags` and only if they have the `MANAGE_MESSAGES`
- * permission in the corresponding channel. When specifying `flags`, ensure to include all
- * previously set flags/bits in addition to ones that you are modifying.
+ * permission in the corresponding channel.
  * - When the `content` field is edited, the `mentions` array in the message object will be
  * reconstructed from scratch based on the new content. The `allowed_mentions` field of the edit
  * request controls how this happens. If there is no explicit `allowed_mentions` in the edit
  * request, the content will be parsed with *default* allowances, that is, without regard to whether
  * or not an `allowed_mentions` was present in the request that originally created the message.
+ * - For a `file` attachment, the `Content-Disposition` subpart header MUST contain a `filename`
+ * parameter.
+ * - When uploading files, the `multipart/form-data` content type must be used. Note that in
+ * multipart form data, the `embed` and `allowed_mentions` fields cannot be used.
+ * - If `payload_json` is supplied, all fields except for `file` fields will be ignored in the form
+ * data.
  *
  * @endpoint [PATCH](https://discord.com/developers/docs/resources/channel#edit-message) `/channels/{channel.id}/messages/{message.id}`
  */
@@ -1692,12 +1636,22 @@ export interface EditMessage {
 		/**
 		 * Embedded `rich` content,
 		 */
-		embed?: Nullable<Embed>;
+		embed?: Nullable<PartialEmbed>;
 
 		/**
 		 * Edit the flags of a message (only `SUPPRESS_EMBEDS` can currently be set/unset).
 		 */
 		flags?: Nullable<number>;
+
+		/**
+		 * The contents of the file being sent/edited.
+		 */
+		file?: Nullable<unknown>;
+
+		/**
+		 * JSON encoded body of non-file params (`multipart/form-data` only).
+		 */
+		payload_json?: Nullable<string>;
 
 		/**
 		 * Allowed mentions for the message.
@@ -1707,7 +1661,7 @@ export interface EditMessage {
 		/**
 		 * Attached files to keep.
 		 */
-		attachments?: Attachment[];
+		attachments?: Nullable<Attachment[]>;
 	};
 }
 
