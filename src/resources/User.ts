@@ -137,9 +137,9 @@ export interface Connection {
 	name: string;
 
 	/**
-	 * The service of the connection (twitch, youtube).
+	 * The service of the connection.
 	 */
-	type: string;
+	type: ConnectionService;
 
 	/**
 	 * Whether the connection is revoked.
@@ -171,6 +171,19 @@ export interface Connection {
 	 */
 	visibility: VisibilityType;
 }
+
+export type ConnectionService =
+	| 'battlenet'
+	| 'facebook'
+	| 'github'
+	| 'leagueoflegends'
+	| 'reddit'
+	| 'spotify'
+	| 'steam'
+	| 'twitch'
+	| 'twitter'
+	| 'xbox'
+	| 'youtube';
 
 /**
  * @source {@link https://discord.com/developers/docs/resources/user#connection-object-visibility-types|User}
