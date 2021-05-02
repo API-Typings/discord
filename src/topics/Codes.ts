@@ -691,6 +691,8 @@ export enum RPCErrorCode {
 	 * An unknown error occurred.
 	 */
 	UnknownError = 1000,
+	ServiceUnavailable,
+	TransactionAborted,
 
 	/**
 	 * You sent an invalid payload.
@@ -741,6 +743,13 @@ export enum RPCErrorCode {
 	 * The specified user ID was invalid.
 	 */
 	InvalidUser,
+	InvalidInvite,
+	InvalidActivityJoinRequest,
+	InvalidLobby,
+	InvalidLobbySecret,
+	InvalidEntitlement,
+	InvalidGiftCode,
+	InvalidGuildTemplate,
 
 	/**
 	 * A standard OAuth2 error occurred; check the data object for the OAuth2 error details.
@@ -765,10 +774,41 @@ export enum RPCErrorCode {
 	/**
 	 * You tried to capture more than one shortcut key at once.
 	 */
-	CaptureShortcutAlreadyListening
+	CaptureShortcutAlreadyListening,
+	InvalidActivitySecret,
+	NoEligibleActivity,
+	LobbyFull,
+	PurchaseCancelled,
+	PurchaseError,
+	UnauthorizedForAchievement,
+	RateLimited
 }
 
 // !SECTION
+
+// ANCHOR Dispatch Error Codes
+
+export enum DispatchErrorCode {
+	ApplicationNotFound = 101,
+	DiskLow = 2022,
+	DiskPermissionDenied = 2025,
+	RedistributableInstallFailed,
+	ApplicationLoadFailed = 2034,
+	DeserializationFailed = 2047,
+	Interrupted = 2055,
+	MaxRequestRetriesExceeded = 2058,
+	AuthenticationFailed = 2063,
+	IOPermissionDenied,
+	NoManifests,
+	PostInstallCancelled,
+	APIError = 2069,
+	FileNameTooLong = 2072,
+	NotEntitled,
+	ApplicationLockFailed = 2076,
+	NotDirectory,
+	InvalidDrive,
+	DiskFull = 2080
+}
 
 // SECTION Voice Codes
 
