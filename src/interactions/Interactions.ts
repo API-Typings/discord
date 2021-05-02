@@ -399,7 +399,8 @@ export type ApplicationCommandInteractionDataOption = {
 			type:
 				| ApplicationCommandOptionType.User
 				| ApplicationCommandOptionType.Channel
-				| ApplicationCommandOptionType.Role;
+				| ApplicationCommandOptionType.Role
+				| ApplicationCommandOptionType.Mentionable;
 			value: Snowflake;
 	  }
 );
