@@ -73,7 +73,7 @@ export interface Activity {
 	sync_id?: string;
 
 	/**
-	 * The platform the game is being played on (`desktop`, `samsung`, or `xbox`).
+	 * The platform the game is being played on.
 	 */
 	platform?: ActivityPlatform;
 
@@ -204,7 +204,7 @@ export interface ActivityEmoji {
 	id?: Snowflake;
 
 	/**
-	 * Whether this emojis is animated.
+	 * Whether this emoji is animated.
 	 */
 	animated?: boolean;
 }
@@ -283,8 +283,7 @@ export enum ActivityFlags {
 
 /**
  * When received over the gateway, the `buttons` field is an array of strings, which are the button
- * labels. Bots cannot access a user's activity button URLs. When sending, the `buttons` field must
- * be an array.
+ * labels. Bots cannot access a user's activity button URLs.
  */
 export interface ActivityButton {
 	/**
