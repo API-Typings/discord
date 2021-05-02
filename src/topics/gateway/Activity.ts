@@ -75,7 +75,7 @@ export interface Activity {
 	/**
 	 * The platform the game is being played on.
 	 */
-	platform?: ActivityPlatform;
+	platform?: ActivityGamePlatform;
 
 	/**
 	 * Application ID for the game.
@@ -133,7 +133,7 @@ export interface Activity {
 	buttons?: [ActivityButton, ActivityButton?];
 }
 
-export type ActivityPlatform = 'desktop' | 'samsung' | 'xbox';
+export type ActivityGamePlatform = 'desktop' | 'samsung' | 'xbox' | 'ios' | 'android' | 'embedded';
 
 /**
  * @remarks
