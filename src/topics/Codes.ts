@@ -169,148 +169,36 @@ export enum JSONErrorCode {
 	 * General error (such as a malformed request body, amongst other things).
 	 */
 	General,
-
-	/**
-	 * Unknown account.
-	 */
 	UnknownAccount = 10001,
-
-	/**
-	 * Unknown application.
-	 */
 	UnknownApplication,
-
-	/**
-	 * Unknown channel.
-	 */
 	UnknownChannel,
-
-	/**
-	 * Unknown guild.
-	 */
 	UnknownGuild,
-
-	/**
-	 * Unknown integration.
-	 */
 	UnknownIntegration,
-
-	/**
-	 * Unknown invite.
-	 */
 	UnknownInvite,
-
-	/**
-	 * Unknown member.
-	 */
 	UnknownMember,
-
-	/**
-	 * Unknown message.
-	 */
 	UnknownMessage,
-
-	/**
-	 * Unknown permission overwrite.
-	 */
 	UnknownOverwrite,
-
-	/**
-	 * Unknown provider.
-	 */
 	UnknownPlatform,
-
-	/**
-	 * Unknown role.
-	 */
 	UnknownRole,
-
-	/**
-	 * Unknown token.
-	 */
 	UnknownToken,
-
-	/**
-	 * Unknown user.
-	 */
 	UnknownUser,
-
-	/**
-	 * Unknown emoji.
-	 */
 	UnknownEmoji,
-
-	/**
-	 * Unknown webhook.
-	 */
 	UnknownWebhook,
 	UnknownWebhookService,
 	UnknownSession,
-
-	/**
-	 * Unknown ban.
-	 */
 	UnknownBan = 10026,
-
-	/**
-	 * Unknown SKU.
-	 */
 	UnknownSKU,
-
-	/**
-	 * Unknown Store Listing.
-	 */
 	UnknownStoreListing,
-
-	/**
-	 * Unknown entitlement.
-	 */
 	UnknownEntitlement,
-
-	/**
-	 * Unknown build.
-	 */
 	UnknownBuild,
-
-	/**
-	 * Unknown lobby.
-	 */
 	UnknownLobby,
-
-	/**
-	 * Unknown branch.
-	 */
 	UnknownBranch,
 	UnknownStoreDirectoryLayout,
-
-	/**
-	 * Unknown redistributable.
-	 */
 	UnknownRedistributable = 10036,
-
-	/**
-	 * Unknown gift code.
-	 */
 	UnknownGiftCode = 10038,
-
-	/**
-	 * Unknown guild template.
-	 */
 	UnknownGuildTemplate = 10057,
-
-	/**
-	 * Unknown discovery category.
-	 */
 	UnknownDiscoveryCategory = 10059,
-
-	/**
-	 * Unknown interaction.
-	 */
 	UnknownInteraction = 10062,
-
-	/**
-	 * Unknown application command.
-	 */
 	UnknownApplicationCommand,
 	UnknownApplicationCommandPermissions,
 
@@ -419,55 +307,19 @@ export enum JSONErrorCode {
 	 * Maximum number of bans for non-guild members have been exceeded.
 	 */
 	TooManyNonGuildMemberBans = 30035,
-
-	/**
-	 * Unauthorized.
-	 */
 	Unauthorized = 40001,
-
-	/**
-	 * You need to verify your account in order to perform this action.
-	 */
 	EmailVerificationRequired,
 	DMOpenRateLimited,
 	SendMessageTemporarilyDisabled,
-
-	/**
-	 * Request entity too large.
-	 */
 	RequestEntityTooLarge,
-
-	/**
-	 * This feature has been temporarily disabled server-side.
-	 */
 	FeatureTemporarilyDisabled,
-
-	/**
-	 * The user is banned from this guild.
-	 */
 	UserBanned,
 	ConnectionRevoked = 40012,
 	DeleteAccountTransferTeamOwnership = 40028,
 	UserNotConnectedToVoice = 400032,
-
-	/**
-	 * This message has already been crossposted.
-	 */
 	MessageAlreadyCrossposted,
-
-	/**
-	 * An application command with that name already exists.
-	 */
 	ApplicationCommandNameExists = 40041,
-
-	/**
-	 * Missing access.
-	 */
 	InvalidAccess = 50001,
-
-	/**
-	 * Invalid account type.
-	 */
 	InvalidAccountType,
 
 	/**
@@ -484,15 +336,7 @@ export enum JSONErrorCode {
 	 * Cannot edit a message authored by another user.
 	 */
 	InvalidMessageAuthor,
-
-	/**
-	 * Cannot send an empty message.
-	 */
 	InvalidMessageEmpty,
-
-	/**
-	 * Cannot send messages to this user.
-	 */
 	InvalidMessageSendUser,
 
 	/**
@@ -501,7 +345,7 @@ export enum JSONErrorCode {
 	InvalidMessageSendNonText,
 
 	/**
-	 * Channel verification level is too high for you to gain access.
+	 * Channel verification level is too high to gain access.
 	 */
 	InvalidMessageVerificationLevel,
 
@@ -514,20 +358,8 @@ export enum JSONErrorCode {
 	 * OAuth2 application limit reached.
 	 */
 	InvalidOAuthAppLimit,
-
-	/**
-	 * Invalid OAuth2 state.
-	 */
 	InvalidOAuthState,
-
-	/**
-	 * You lack permissions to perform that action.
-	 */
 	InvalidPermissions,
-
-	/**
-	 * Invalid authentication token provided.
-	 */
 	InvalidToken,
 
 	/**
@@ -546,11 +378,8 @@ export enum JSONErrorCode {
 	 * A message can only be pinned to the channel it was sent in.
 	 */
 	InvalidPinMessageChannel,
-
-	/**
-	 * Invite code was either invalid or taken.
-	 */
 	InvalidInviteCode,
+
 	/**
 	 * Cannot execute action on a system message.
 	 */
@@ -562,21 +391,13 @@ export enum JSONErrorCode {
 	 * Cannot execute action on this channel type.
 	 */
 	InvalidChannelType,
-
-	/**
-	 * Invalid OAuth2 access token provided.
-	 */
 	InvalidOAuth2AccessToken,
 	InvalidOAuth2MisingScope,
-
-	/**
-	 * Invalid webhook token provided.
-	 */
 	InvalidWebhookToken,
 	InvalidRole,
 
 	/**
-	 * Invalid Recipient(s).
+	 * Invalid recipient(s).
 	 */
 	InvalidRecipients = 50033,
 
@@ -595,10 +416,6 @@ export enum JSONErrorCode {
 	 * An invite was accepted to a guild the application's bot is not in.
 	 */
 	InvalidGuildInvite,
-
-	/**
-	 * Invalid API version provided.
-	 */
 	InvalidAPIVersion = 50041,
 	InvalidGiftRedemptionExhausted = 50050,
 	InvalidGiftRedemptionOwned,
@@ -609,10 +426,6 @@ export enum JSONErrorCode {
 	 * Cannot delete a channel required for Community guilds.
 	 */
 	RequiredCommunityChannel = 50074,
-
-	/**
-	 * Invalid sticker sent.
-	 */
 	InvalidStickerSent = 50081,
 	MFAEnabled = 60001,
 	MFADisabled,
@@ -621,20 +434,12 @@ export enum JSONErrorCode {
 	 * Tried to perform an operation on an archived thread.
 	 */
 	InvalidThreadArchiveState = 50083,
-
-	/**
-	 * Invalid thread notification settings.
-	 */
 	InvalidThreadNotificationSettings,
 
 	/**
 	 * `before` value is earlier than the thread creation date.
 	 */
 	InvalidBeforeThreadCreationDateValue,
-
-	/**
-	 * Two factor is required for this operation.
-	 */
 	MFARequired,
 	MFAUnverified,
 	MFAInvalidSecret,
@@ -649,10 +454,6 @@ export enum JSONErrorCode {
 	RelationshipInvalidSelf,
 	RelationshipInvalidDiscordTag,
 	RelationshipAlreadyFriends = 80007,
-
-	/**
-	 * Reaction was blocked.
-	 */
 	ReactionBlocked = 90001,
 	InvalidGiftRedemptionSubscriptionManaged = 100021,
 	InvalidGiftRedemptionSubscriptionIncompatible = 100023,
@@ -660,11 +461,7 @@ export enum JSONErrorCode {
 	ListingAlreadyJoined = 120000,
 	ListingTooManyMembers,
 	ListingJoinBlocked,
-
-	/**
-	 * API resource is currently overloaded.
-	 */
-	APIOverloaded = 130000
+	APIResourceOverloaded = 130000
 }
 
 // SECTION RPC Codes
