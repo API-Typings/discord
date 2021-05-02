@@ -118,14 +118,20 @@ export enum PremiumType {
 	Nitro
 }
 
-// ANCHOR Connection
+export interface Profile {
+	user: User;
+	mutual_guilds: {
+		id: Snowflake;
+		nick: Nullable<string>;
+	}[];
+	connected_accounts: PartialConnection[];
+	premium_since: Nullable<string>;
+	premium_guild_since: Nullable<string>;
+}
 
-/**
- * The connection object that the user has attached.
- *
- * @source {@link https://discord.com/developers/docs/resources/user#connection-object-connection-structure|User}
- */
-export interface Connection {
+// ANCHOR Partial Connection
+
+export interface PartialConnection {
 	/**
 	 * ID of the connection account.
 	 */
@@ -142,6 +148,20 @@ export interface Connection {
 	type: ConnectionService;
 
 	/**
+	 * Whether the connection is verified.
+	 */
+	verified: boolean;
+}
+
+// ANCHOR Connection
+
+/**
+ * The connection object that the user has attached.
+ *
+ * @source {@link https://discord.com/developers/docs/resources/user#connection-object-connection-structure|User}
+ */
+export interface Connection extends PartialConnection {
+	/**
 	 * Whether the connection is revoked.
 	 */
 	revoked?: boolean;
@@ -150,11 +170,6 @@ export interface Connection {
 	 * An array of partial server integrations.
 	 */
 	integrations?: PartialIntegration[];
-
-	/**
-	 * Whether the connection is verified.
-	 */
-	verified: boolean;
 
 	/**
 	 * Whether friend sync is enabled for this connection.
@@ -198,6 +213,45 @@ export enum VisibilityType {
 	 * Visible to everyone.
 	 */
 	Everyone
+}
+
+export interface Relationship {
+	id: Snowflake;
+	type: RelationshipType;
+	nickname: Nullable<string>;
+	user: User;
+}
+
+export enum RelationshipType {
+	/**
+	 * User has no intrinsic relationship.
+	 */
+	None,
+
+	/**
+	 * User is a friend.
+	 */
+	Friend,
+
+	/**
+	 * User is blocked.
+	 */
+	Blocked,
+
+	/**
+	 * User has a pending incoming friend request to connected user.
+	 */
+	PendingIncoming,
+
+	/**
+	 * Current user has a pending outgoing friend request to user.
+	 */
+	PendingOutgoing,
+
+	/**
+	 * User is not friends, but interacts with current user often (frequency + recency).
+	 */
+	Implicit
 }
 
 // SECTION Endpoints
@@ -331,5 +385,15 @@ export interface CreateGroupDM {
  * @endpoint [GET](https://discord.com/developers/docs/resources/user#get-user-connections) `/users/@me/connections`
  */
 export type GetUserConnections = { response: Connection[] };
+
+/**
+ * @endpoint GET `/users/@me/relationships`
+ */
+export type GetCurrentUserRelationships = { response: Relationship[] };
+
+/**
+ * @endpoint GET `/users/{user.id}/profile`
+ */
+export type GetUserProfile = { response: Profile };
 
 // !SECTION
