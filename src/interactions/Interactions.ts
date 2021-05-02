@@ -1,4 +1,4 @@
-import type { FixedTuple, Nullable, Range } from 'extended-utility-types';
+import type { Nullable, Range, Tuple } from 'extended-utility-types';
 import type {
 	AllowedMentions,
 	EditWebhookMessage,
@@ -96,7 +96,7 @@ export interface ApplicationCommand {
 	/**
 	 * The parameters for the command.
 	 */
-	options?: [ApplicationCommandOption, ...Partial<FixedTuple<ApplicationCommandOption, 24>>];
+	options?: [ApplicationCommandOption, ...Partial<Tuple<ApplicationCommandOption, 24>>];
 
 	/**
 	 * Whether the command is enabled by default when the app is added to a guild.
@@ -132,15 +132,15 @@ export type ApplicationCommandOption = {
 } & (
 	| {
 			type: 1 | 2;
-			options: [ApplicationCommandOption, ...Partial<FixedTuple<ApplicationCommandOption, 24>>];
+			options: [ApplicationCommandOption, ...Partial<Tuple<ApplicationCommandOption, 24>>];
 	  }
 	| {
 			type: 3;
-			choices: [{ name: string; value: string }, ...Partial<FixedTuple<{ name: string; value: string }, 24>>];
+			choices: [{ name: string; value: string }, ...Partial<Tuple<{ name: string; value: string }, 24>>];
 	  }
 	| {
 			type: 4;
-			choices: [{ name: string; value: number }, ...Partial<FixedTuple<{ name: string; value: number }, 24>>];
+			choices: [{ name: string; value: number }, ...Partial<Tuple<{ name: string; value: number }, 24>>];
 	  }
 	| {
 			type: Range<5, 9>;
@@ -456,7 +456,7 @@ export interface InteractionApplicationCommandCallbackData {
 	/**
 	 * Supports up to 10 embeds.
 	 */
-	embeds?: [PartialEmbed, ...Partial<FixedTuple<PartialEmbed, 9>>];
+	embeds?: [PartialEmbed, ...Partial<Tuple<PartialEmbed, 9>>];
 
 	/**
 	 * Allowed mentions object.

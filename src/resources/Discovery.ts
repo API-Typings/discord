@@ -1,4 +1,4 @@
-import type { FixedTuple, Nullable } from 'extended-utility-types';
+import type { Nullable, Tuple } from 'extended-utility-types';
 import type { Snowflake } from '../';
 
 /**
@@ -18,7 +18,7 @@ export interface DiscoveryMetadata {
 	/**
 	 * Up to 10 discovery search keywords set for this guild.
 	 */
-	keywords: Nullable<Partial<FixedTuple<string, 10>>>;
+	keywords: Nullable<Partial<Tuple<string, 10>>>;
 
 	/**
 	 * Whether guild info is shown when custom emojis from this guild are clicked.
@@ -39,7 +39,7 @@ export interface DiscoveryMetadata {
 	/**
 	 * IDs of up to 5 discovery subcategories set for this guild.
 	 */
-	category_ids: Partial<FixedTuple<number, 5>>;
+	category_ids: Partial<Tuple<number, 5>>;
 }
 
 export interface DiscoveryCategory {

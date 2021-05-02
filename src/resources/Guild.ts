@@ -1,4 +1,4 @@
-import type { FixedTuple, Nullable, Range } from 'extended-utility-types';
+import type { Nullable, Range, Tuple } from 'extended-utility-types';
 import type {
 	Channel,
 	ChannelType,
@@ -2034,7 +2034,7 @@ export interface ModifyGuildDiscoveryMetadata {
 		 *
 		 * @defaultValue `null`
 		 */
-		keywords?: Nullable<Partial<FixedTuple<string, 10>>>;
+		keywords?: Nullable<Partial<Tuple<string, 10>>>;
 
 		/**
 		 * Whether guild info is shown when custom emojis are clicked.

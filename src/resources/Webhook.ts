@@ -1,4 +1,4 @@
-import type { FixedTuple, Nullable } from 'extended-utility-types';
+import type { Nullable, Tuple } from 'extended-utility-types';
 import type { AllowedMentions, Attachment, Channel, Guild, Message, PartialEmbed, Snowflake, User } from '../';
 
 /**
@@ -263,7 +263,7 @@ export interface ExecuteWebhook {
 				/**
 				 * Embedded `rich` content.
 				 */
-				embeds: [PartialEmbed, ...Partial<FixedTuple<PartialEmbed, 9>>];
+				embeds: [PartialEmbed, ...Partial<Tuple<PartialEmbed, 9>>];
 		  }
 	);
 
@@ -305,7 +305,7 @@ export interface EditWebhookMessage {
 		/**
 		 * Embedded `rich` content.
 		 */
-		embeds?: Nullable<[PartialEmbed, ...Partial<FixedTuple<PartialEmbed, 9>>]>;
+		embeds?: Nullable<[PartialEmbed, ...Partial<Tuple<PartialEmbed, 9>>]>;
 
 		/**
 		 * The contents of the file being sent/edited.

@@ -1,4 +1,4 @@
-import type { ExclusiveOr, FixedTuple, Nullable, Range } from 'extended-utility-types';
+import type { ExclusiveOr, Nullable, Range, Tuple } from 'extended-utility-types';
 import type {
 	GuildMember,
 	Invite,
@@ -297,7 +297,7 @@ export interface GroupDMChannel
 		Nullable<Pick<Channel, 'name' | 'icon'>>,
 		Required<Pick<Channel, 'owner_id'>> {
 	type: ChannelType.GroupDM;
-	recipients: [User, User, ...Partial<FixedTuple<User, 6>>];
+	recipients: [User, User, ...Partial<Tuple<User, 6>>];
 }
 
 // ANCHOR Channel Category
@@ -900,7 +900,7 @@ export interface PartialEmbed {
 	/**
 	 * Fields information.
 	 */
-	fields?: [EmbedField, Partial<FixedTuple<EmbedField, 24>>];
+	fields?: [EmbedField, Partial<Tuple<EmbedField, 24>>];
 }
 
 /**
