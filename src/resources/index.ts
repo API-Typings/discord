@@ -1,3 +1,4 @@
+export * from './Application';
 export * from './AuditLog';
 export * from './Channel';
 export * from './Discovery';
