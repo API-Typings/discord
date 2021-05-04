@@ -691,7 +691,8 @@ export type EditOriginalInteractionResponse = EditWebhookMessage;
 export type DeleteOriginalInteractionResponse = { response: never };
 
 /**
- * Create a followup message for an Interaction.
+ * Create a followup message for an Interaction. The `thread_id` query parameter is not required
+ * (and is furthermore ignored) when using this endpoint for interaction followups.
  *
  * @endpoint [POST](https://discord.com/developers/docs/interactions/slash-commands#create-followup-message) `/webhooks/{application.id}/{interaction.token}`
  */

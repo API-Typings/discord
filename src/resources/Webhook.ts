@@ -217,6 +217,12 @@ export interface ExecuteWebhook {
 		 * @defaultValue `false`
 		 */
 		wait?: boolean;
+
+		/**
+		 * Send a message to the specified thread within a webhook's channel. The thread will
+		 * automatically be unarchived.
+		 */
+		thread_id?: Snowflake;
 	};
 
 	body: {
