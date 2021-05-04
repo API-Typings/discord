@@ -1281,7 +1281,7 @@ export interface ModifyGuild {
 export type DeleteGuild = { response: never };
 
 /**
- * Returns a list of guild channel objects.
+ * Returns a list of guild channel objects. Does not include threads.
  *
  * @endpoint [GET](https://discord.com/developers/docs/resources/guild#get-guild-channels) `/guilds/{guild.id}/channels`
  */

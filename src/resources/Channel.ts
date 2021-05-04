@@ -1892,19 +1892,26 @@ export type GroupDMRemoveRecipient = { response: never };
 /**
  * Creates a new public thread from an existing message.
  *
+ * @remarks
+ * When called on a `GUILD_TEXT` channel, creates a `GUILD_PUBLIC_THREAD`. When called on a
+ * `GUILD_NEWS` channel, creates a `GUILD_NEWS_THREAD`. The ID of the created thread will be the
+ * same as the ID of the message, and as such a message can only have a single thread created from
+ * it.
+ *
  * @endpoint POST `/channels/{channel.id}/messages/{message.id}/threads`
  */
-export interface StartPublicThread {
+export interface StartThreadWithMessage {
 	body: Required<Pick<ModifyThreadChannel['body'], 'name' | 'auto_archive_duration'>>;
 	response: ThreadChannel;
 }
 
 /**
- * Creates a new private thread.
+ * Creates a new thread that is not connected to an existing message. The created thread is always
+ * a `GUILD_PRIVATE_THREAD`
  *
  * @endpoint POST `/channels/{channel.id}/threads`
  */
-export type StartPrivateThread = StartPublicThread;
+export type StartThreadWithoutMessage = StartThreadWithMessage;
 
 /**
  * Adds the current user to a thread. Requires the thread is not archived.
@@ -1914,12 +1921,12 @@ export type StartPrivateThread = StartPublicThread;
 export type JoinThread = { response: never };
 
 /**
- * Adds another user to a thread. Requires the ability to send messages in the thread. Also requires
- * the thread is not archived.
+ * Adds another member to a thread. Requires the ability to send messages in the thread. Also
+ * requires the thread is not archived.
  *
  * @endpoint PUT `/channels/{channel.id}/thread-members/{user.id}`
  */
-export type AddUserToThread = { response: never };
+export type AddThreadMember = { response: never };
 
 /**
  * Removes the current user from a thread.
@@ -1929,18 +1936,18 @@ export type AddUserToThread = { response: never };
 export type LeaveThread = { response: never };
 
 /**
- * Removes another user from a thread. Requires the `MANAGE_MESSAGES` permission or that you are the
- * creator of the thread. Also requires the thread is not archived.
+ * Removes another member from a thread. Requires the `MANAGE_MESSAGES` permission or that you are
+ * the creator of the thread. Also requires the thread is not archived.
  *
  * @endpoint DELETE `/channels/{channel.id}/thread-members/{user.id}`
  */
-export type RemoveUserFromThread = { response: never };
+export type RemoveThreadMember = { response: never };
 
 /**
  * This endpoint is restricted according to whether the `GUILD_MEMBERS` Privileged Intent is enabled
  * for your application.
  *
- * @endpoint GET `/channels/{channel.id}/threads-members`
+ * @endpoint GET `/channels/{channel.id}/thread-members`
  */
 export type ListThreadMembers = { response: ThreadMember[] };
 
