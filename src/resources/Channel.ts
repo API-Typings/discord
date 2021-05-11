@@ -494,6 +494,12 @@ export interface Message {
 	application?: PartialApplication;
 
 	/**
+	 * If the message is a response to an Interaction, this is the ID of the interaction's
+	 * application.
+	 */
+	application_id?: Snowflake;
+
+	/**
 	 * Data showing the source of a crosspost, channel follow add, pin, or reply message.
 	 */
 	message_reference?: MessageReference;
