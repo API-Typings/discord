@@ -16,9 +16,14 @@ export interface Team {
 	id: Snowflake;
 
 	/**
-	 * The unique id of the team.
+	 * The members of the team.
 	 */
-	member: TeamMember[];
+	members: TeamMember[];
+
+	/**
+	 * The name of the team.
+	 */
+	name: string;
 
 	/**
 	 * The user ID of the current team owner.
@@ -34,11 +39,7 @@ export interface TeamMember {
 	 * The user's membership state on the team.
 	 */
 	membership_state: MembershipState;
-
-	/**
-	 * Will always be `["*"]`.
-	 */
-	permissions: ['*'];
+	permissions: readonly ['*'];
 
 	/**
 	 * The ID of the parent team of which they are a member.
