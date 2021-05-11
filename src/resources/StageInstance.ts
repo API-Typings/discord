@@ -47,6 +47,13 @@ export interface CreateStageInstance {
 }
 
 /**
+ * Gets the stage instance associated with the Stage channel, if it exists.
+ *
+ * @endpoint [GET](https://discord.com/developers/docs/resources/stage-instance#get-stage-instance) `/stage-instances/{channel.id}`
+ */
+export type GetStageInstance = { response: StageInstance };
+
+/**
  * Creates a new Stage instance associated to a Stage channel. Requires the user to be a moderator
  * of the Stage channel.
  *
