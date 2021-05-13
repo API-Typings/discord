@@ -85,7 +85,7 @@ export interface ApplicationCommand {
 	application_id: Snowflake;
 
 	/**
-	 * 1-32 character name matching `^[\w-]{1,32}$`.
+	 * 1-32 lowercase character name matching `^[\w-]{1,32}$`.
 	 */
 	name: string;
 
@@ -519,30 +519,7 @@ export type GetGlobalApplicationCommands = { response: ApplicationCommand[] };
  * @endpoint [POST](https://discord.com/developers/docs/interactions/slash-commands#create-global-application-command) `/applications/{application.id}/commands`
  */
 export interface CreateGlobalApplicationCommand {
-	body: {
-		/**
-		 * 1-32 character name matching `^[\w-]{1,32}$`.
-		 */
-		name: string;
-
-		/**
-		 * 1-100 character description.
-		 */
-		description: string;
-
-		/**
-		 * The parameters for the command.
-		 */
-		options?: ApplicationCommandOption[];
-
-		/**
-		 * Whether the command is enabled by default when the app is added to a guild.
-		 *
-		 * @defaultValue `true`
-		 */
-		default_permission?: boolean;
-	};
-
+	body: Omit<ApplicationCommand, 'id' | 'application_id'>;
 	response: ApplicationCommand;
 }
 
@@ -559,28 +536,11 @@ export type GetGlobalApplicationCommand = { response: ApplicationCommand };
  * @endpoint [PATCH](https://discord.com/developers/docs/interactions/slash-commands#edit-guild-application-command) `/applications/{application.id}/commands/{command.id}`
  */
 export interface EditGlobalApplicationCommand {
-	body: {
-		/**
-		 * 1-32 character name matching `^[\w-]{1,32}$`.
-		 */
-		name?: string;
-
-		/**
-		 * 1-100 character description.
-		 */
-		description?: string;
-
+	body: Partial<Omit<CreateGlobalApplicationCommand, 'options'>> & {
 		/**
 		 * The parameters for the command.
 		 */
 		options?: Nullable<ApplicationCommandOption>[];
-
-		/**
-		 * Whether the command is enabled by default when the app is added to a guild.
-		 *
-		 * @defaultValue `true`
-		 */
-		default_permission?: boolean;
 	};
 
 	response: ApplicationCommand;
