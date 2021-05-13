@@ -68,7 +68,8 @@ export enum SlashCommandLimit {
  * you are creating when you `POST` a new command.
  *
  * @remarks
- * A command, or each individual subcommand, can have a maximum of 25 `options`.
+ * - A command, or each individual subcommand, can have a maximum of 25 `options`.
+ * - Required `options` must be listed before optional `options`.
  *
  * @source {@link https://discord.com/developers/docs/interactions/slash-commands#applicationcommand|Slash Commands}
  */
