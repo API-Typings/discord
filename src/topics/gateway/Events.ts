@@ -755,7 +755,7 @@ export interface GuildMemberUpdate extends GatewayEventPayload<GatewayEvent.Guil
 		/**
 		 * When the user joined the guild.
 		 */
-		joined_at: string;
+		joined_at: Nullable<string>;
 
 		/**
 		 * When the user starting boosting the guild.
