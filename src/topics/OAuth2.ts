@@ -34,6 +34,49 @@ export enum OAuth2URL {
  */
 export enum OAuth2Scope {
 	/**
+	 * Allows your app to fetch data from a user's "Now Playing/Recently Played" list. Requires
+	 * Discord approval.
+	 */
+	ActivitiesRead = 'activities.read',
+
+	/**
+	 * Allows your app to update a user's activity. Requires Discord approval (NOT required for the
+	 * GameSDK Activity Manager).
+	 */
+	ActivitiesWrite = 'activities.write',
+
+	/**
+	 * Allows your app to read build data for a user's applications.
+	 */
+	ApplicationsBuildsRead = 'applications.builds.read',
+
+	/**
+	 * Allows your app to upload/update builds for a user's applications. Requires Discord approval.
+	 */
+	ApplicationsBuildsUpload = 'applications.builds.upload',
+
+	/**
+	 * Allows your app to use Slash Commands in a guild.
+	 */
+	ApplicationsCommands = 'applications.commands',
+
+	/**
+	 * Allows your app to update Slash Commands via bearer token. Client credentials grant only.
+	 */
+	ApplicationsCommandsUpdate = 'applications.commands.update',
+
+	/**
+	 * Allows your app to read entitlements for a user's applications.
+	 */
+	ApplicationsEntitlements = 'applications.entitlements',
+
+	/**
+	 * Allows your app to read and update store data (SKUs, store listings, achievements, etc.) for
+	 * a user's applications.
+	 */
+	ApplicationsStoreUpdate = 'applications.store.update',
+
+	/**
 	 * For OAuth2 bots, this puts the bot in the user's selected guild by default.
 	 *
 	 * @remarks
@@ -47,14 +90,14 @@ export enum OAuth2Scope {
 	Connections = 'connections',
 
 	/**
-	 * Enables `/users/@me` to return an `email`.
+	 * Allows `/users/@me` to return an `email`.
 	 */
 	Email = 'email',
 
 	/**
-	 * Allows `/users/@me` without `email`.
+	 * Allows your app to join users to a group DM.
 	 */
-	Identify = 'identify',
+	GroupDMJoin = 'gdm.join',
 
 	/**
 	 * Allows `/users/@me/guilds` to return basic information about all of a user's guilds.
@@ -71,9 +114,9 @@ export enum OAuth2Scope {
 	GuildsJoin = 'guilds.join',
 
 	/**
-	 * Allows your app to join users to a group dm.
+	 * Allows `/users/@me` without `email`.
 	 */
-	GroupDMJoin = 'gdm.join',
+	Identify = 'identify',
 
 	/**
 	 * For local RPC server API access, this allows you to read messages from all client channels
@@ -82,72 +125,46 @@ export enum OAuth2Scope {
 	MessagesRead = 'messages.read',
 
 	/**
+	 * Allows your app to know a user's friends and implicit relationships. Requires Discord
+	 * approval.
+	 */
+	RelationshipsRead = 'relationships.read',
+
+	/**
 	 * For local RPC server access, this allows you to control a user's local Discord client.
-	 * Whitelist only.
+	 * Requires Discord approval.
 	 */
 	RPC = 'rpc',
 
 	/**
-	 * For local RPC server API access, this allows you to receive notifications pushed out to the
-	 * user. Whitelist only.
+	 * For local RPC server access, this allows you to update a user's activity. Requires Discord
+	 * approval.
+	 */
+	RPCActivitiesWrite = 'rpc.activities.write',
+
+	/**
+	 * For local RPC server access, this allows you to receive notifications pushed out to the
+	 * user. Requires Discord approval.
 	 */
 	RPCNotificationsRead = 'rpc.notifications.read',
+
+	/**
+	 * For local RPC server access, this allows you to read a user's voice settings and listen for
+	 * voice events. Requires Discord approval.
+	 */
+	RPCVoiceRead = 'rpc.voice.read',
+
+	/**
+	 * For local RPC server access, this allows you to updates a user's voice settings. Requires
+	 * Discord approval.
+	 */
+	RPCVoiceWrite = 'rpc.voice.write',
 
 	/**
 	 * This generates a webhook that is returned in the oauth token response for authorization code
 	 * grants.
 	 */
-	WebhookIncoming = 'webhook.incoming',
-
-	/**
-	 * Allows your app to upload/update builds for a user's applications. Whitelist only.
-	 */
-	ApplicationsBuildsUpload = 'applications.builds.upload',
-
-	/**
-	 * Allows your app to read build data for a user's applications.
-	 */
-	ApplicationsBuildsRead = 'applications.builds.read',
-
-	/**
-	 * Allows your app to read and update store data (SKUs, store listings, achievements, etc.) for
-	 * a user's applications.
-	 */
-	ApplicationsStoreUpdate = 'applications.store.update',
-
-	/**
-	 * Allows your app to read entitlements for a user's applications.
-	 */
-	ApplicationsEntitlements = 'applications.entitlements',
-
-	/**
-	 * Allows your app to know a user's friends and implicit relationships. Whitelist only.
-	 */
-	RelationshipsRead = 'relationships.read',
-
-	/**
-	 * Allows your app to fetch data from a user's "Now Playing/Recently Played" list. Whitelist
-	 * only.
-	 */
-	ActivitiesRead = 'activities.read',
-
-	/**
-	 * Allows your app to update a user's activity. Whitelist only.
-	 *
-	 * @remarks
-	 * Whitelist is NOT required for the GameSDK Activity Manager.
-	 */
-	ActivitiesWrite = 'activities.write',
-
-	/**
-	 * Allows your app to use Slash Commands in a guild.
-	 */
-	ApplicationsCommands = 'applications.commands',
-
-	/**
-	 * Allows your app to update Slash Commands via bearer token.
-	 */
-	ApplicationsCommandsUpdate = 'applications.commands.update'
+	WebhookIncoming = 'webhook.incoming'
 }
 
 // ANCHOR Get Current Bot Application Information
