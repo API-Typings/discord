@@ -290,7 +290,7 @@ export interface Guild extends PartialGuild {
 	vanity_url_code: Nullable<string>;
 
 	/**
-	 * The description for the guild, if the guild is discoverable.
+	 * The description of a Community guild.
 	 */
 	description: Nullable<string>;
 
