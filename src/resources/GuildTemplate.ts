@@ -2,11 +2,11 @@ import type { Nullable } from 'extended-utility-types';
 import type { Guild, PartialGuild, Snowflake, User } from '../';
 
 /**
- * Represents a code that when used, creates a guild based on a snapshot of an existing one.
+ * Represents a code that when used, creates a guild based on a snapshot of an existing guild.
  *
- * @source {@link https://discord.com/developers/docs/resources/template#template-object-template-structure|Template}
+ * @source {@link https://discord.com/developers/docs/resources/template#template-object-template-structure|Guild Template}
  */
-export interface Template {
+export interface GuildTemplate {
 	/**
 	 * The template code (unique ID).
 	 */
@@ -66,19 +66,19 @@ export interface Template {
 // SECTION Endpoints
 
 /**
- * Returns a template object for the given code.
+ * Returns a guild template object for the given code.
  *
- * @endpoint [GET](https://discord.com/developers/docs/resources/template#get-template) `/guilds/template/{template.code}`
+ * @endpoint [GET](https://discord.com/developers/docs/resources/guild-template#get-guild-template) `/guilds/template/{template.code}`
  */
-export type GetTemplate = { response: Template };
+export type GetGuildTemplate = { response: GuildTemplate };
 
 /**
  * Create a new guild based on a template. This endpoint can be used only by bots in less than 10
  * guilds.
  *
- * @endpoint [POST](https://discord.com/developers/docs/resources/template#create-guild-from-template) `/guilds/templates/{template.code}`
+ * @endpoint [POST](https://discord.com/developers/docs/resources/guild-template#create-guild-from-guild-template) `/guilds/templates/{template.code}`
  */
-export interface CreateGuildFromTemplate {
+export interface CreateGuildFromGuildTemplate {
 	body: {
 		/**
 		 * Name of the guild (2-100 characters).
@@ -95,16 +95,16 @@ export interface CreateGuildFromTemplate {
 }
 
 /**
- * Returns an array of template objects. Requires the MANAGE_GUILD permission.
+ * Returns an array of guild template objects. Requires the `MANAGE_GUILD` permission.
  *
- * @endpoint [GET](https://discord.com/developers/docs/resources/template#get-guild-templates) `/guilds/{guild.id}/templates`
+ * @endpoint [GET](https://discord.com/developers/docs/resources/guild-template#get-guild-templates) `/guilds/{guild.id}/templates`
  */
-export type GetGuildTemplates = { response: Template[] };
+export type GetGuildTemplates = { response: GuildTemplate[] };
 
 /**
  * Creates a template for the guild. Requires the `MANAGE_GUILD` permission.
  *
- * @endpoint [POST](https://discord.com/developers/docs/resources/template#create-guild-template) `/guilds/{guild.id}/templates`
+ * @endpoint [POST](https://discord.com/developers/docs/resources/guild-template#create-guild-template) `/guilds/{guild.id}/templates`
  */
 export interface CreateGuildTemplate {
 	body: {
@@ -120,22 +120,22 @@ export interface CreateGuildTemplate {
 	};
 
 	/**
-	 * The created template object.
+	 * The created guild template object.
 	 */
-	response: Template;
+	response: GuildTemplate;
 }
 
 /**
  * Syncs the template to the guild's current state. Requires the `MANAGE_GUILD` permission.
  *
- * @endpoint [PUT](https://discord.com/developers/docs/resources/template#get-guild-templates) `/guilds/{guild.id}/templates/{template.code}`
+ * @endpoint [PUT](https://discord.com/developers/docs/resources/guild-template#get-guild-templates) `/guilds/{guild.id}/templates/{template.code}`
  */
-export type SyncGuildTemplate = { response: Template };
+export type SyncGuildTemplate = { response: GuildTemplate };
 
 /**
  * Modifies the template's metadata. Requires the `MANAGE_GUILD` permission.
  *
- * @endpoint [PATCH](https://discord.com/developers/docs/resources/template#modify-guild-template) `/guilds/{guild.id}/templates/{template.code}`
+ * @endpoint [PATCH](https://discord.com/developers/docs/resources/guild-template#modify-guild-template) `/guilds/{guild.id}/templates/{template.code}`
  */
 export interface ModifyGuildTemplate {
 	body: {
@@ -150,19 +150,19 @@ export interface ModifyGuildTemplate {
 		description?: Nullable<string>;
 	};
 
-	response: Template;
+	response: GuildTemplate;
 }
 
 /**
- * Deletes the template. Requires the MANAGE_GUILD permission.
+ * Deletes the template. Requires the `MANAGE_GUILD` permission.
  *
- * @endpoint [DELETE](https://discord.com/developers/docs/resources/template#delete-guild-template) `/guilds/{guild.id}/templates/{template.code}`
+ * @endpoint [DELETE](https://discord.com/developers/docs/resources/guild-template#delete-guild-template) `/guilds/{guild.id}/templates/{template.code}`
  */
 export type DeleteGuildTemplate = {
 	/**
-	 * The deleted template object.
+	 * The deleted guild template object.
 	 */
-	response: Template;
+	response: GuildTemplate;
 };
 
 // !SECTION
