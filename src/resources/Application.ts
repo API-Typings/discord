@@ -23,12 +23,6 @@ export interface PartialApplication {
 	 * The description of the app.
 	 */
 	description: string;
-
-	/**
-	 * If this application is a game sold on Discord, this field will be the summary field for the
-	 * store page of its primary SKU.
-	 */
-	summary: string;
 	hook: boolean;
 
 	/**
@@ -40,6 +34,12 @@ export interface PartialApplication {
 	 * When `true`, the app's bot will only join upon completion of the full OAuth2 code grant flow.
 	 */
 	bot_require_code_grant: boolean;
+
+	/**
+	 * If this application is a game sold on Discord, this field will be the summary field for the
+	 * store page of its primary SKU.
+	 */
+	summary: string;
 
 	/**
 	 * The hex encoded key for verification in interactions the GameSDK's `GetTicket`.
@@ -118,19 +118,8 @@ export enum ApplicationFlags {
 }
 
 export interface ApplicationAsset {
-	/**
-	 * The ID of the asset.
-	 */
 	id: Snowflake;
-
-	/**
-	 * The name of the asset.
-	 */
 	name: string;
-
-	/**
-	 * The type of the asset.
-	 */
 	type: number;
 }
 
