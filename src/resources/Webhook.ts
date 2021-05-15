@@ -19,12 +19,12 @@ export interface Webhook {
 	type: WebhookType;
 
 	/**
-	 * The guild ID this webhook is for.
+	 * The guild ID this webhook is for, if any.
 	 */
 	guild_id?: Snowflake;
 
 	/**
-	 * The channel ID this webhook is for.
+	 * The channel ID this webhook is for, if any.
 	 */
 	channel_id: Snowflake;
 
@@ -83,7 +83,12 @@ export enum WebhookType {
 	 * Channel Follower Webhooks are internal webhooks used with Channel Following to post new
 	 * messages into channels.
 	 */
-	ChannelFollower
+	ChannelFollower,
+
+	/**
+	 * Application webhooks are webhooks used with Interactions.
+	 */
+	Application
 }
 
 // SECTION Endpoints
