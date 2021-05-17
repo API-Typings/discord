@@ -28,7 +28,7 @@ export interface PartialChannel {
 	type: ChannelType;
 
 	/**
-	 * The name of the channel (2-100 characters).
+	 * The name of the channel (`2-100` characters).
 	 */
 	name: string;
 
@@ -61,7 +61,7 @@ export interface Channel extends PartialChannel {
 	permission_overwrites?: Overwrite[];
 
 	/**
-	 * The channel topic (0-1024 characters).
+	 * The channel topic (`0-1024` characters).
 	 */
 	topic?: Nullable<string>;
 
@@ -113,7 +113,8 @@ export interface Channel extends PartialChannel {
 	application_id?: Snowflake;
 
 	/**
-	 * ID of the parent category for a channel (each parent category can contain up to 50 channels).
+	 * ID of the parent category for a channel (each parent category can contain up to `50`
+	 * channels).
 	 */
 	parent_id?: Nullable<string>;
 
@@ -182,7 +183,7 @@ export enum ChannelType {
 	GroupDM,
 
 	/**
-	 * An organizational category that contains up to 50 channels.
+	 * An organizational category that contains up to `50` channels.
 	 */
 	GuildCategory,
 
@@ -780,7 +781,7 @@ export interface Overwrite {
 	id: Snowflake;
 
 	/**
-	 * Either 0 (role) or 1 (member).
+	 * Either `0` (role) or `1` (member).
 	 */
 	type: 0 | 1;
 
@@ -1190,39 +1191,12 @@ export interface AllowedMentions {
  * @source {@link https://discord.com/developers/docs/resources/channel#embed-limits-limits|Channel}
  */
 export enum EmbedLimit {
-	/**
-	 * 256 characters.
-	 */
 	Title = 256,
-
-	/**
-	 * 2048 characters.
-	 */
 	Description = 2048,
-
-	/**
-	 * Up to 25 field objects.
-	 */
 	Fields = 25,
-
-	/**
-	 * 256 characters.
-	 */
 	FieldName = 256,
-
-	/**
-	 * 1024 characters.
-	 */
 	FieldValue = 1024,
-
-	/**
-	 * 2048 characters.
-	 */
 	Footer = 2048,
-
-	/**
-	 * 256 characters.
-	 */
 	Author = 256
 }
 
@@ -1250,7 +1224,7 @@ export interface GetChannel {
 export interface ModifyGroupDMChannel {
 	body: {
 		/**
-		 * 2-100 character channel name.
+		 * `2-100` character channel name.
 		 */
 		name?: string;
 
@@ -1277,7 +1251,7 @@ export interface ModifyGroupDMChannel {
 export interface ModifyGuildChannel {
 	body: {
 		/**
-		 * 2-100 character channel name. Applies to all channel types.
+		 * `2-100` character channel name. Applies to all channel types.
 		 */
 		name?: string;
 
@@ -1293,7 +1267,7 @@ export interface ModifyGuildChannel {
 		position?: Nullable<number>;
 
 		/**
-		 * 0-1024 character channel topic. Applies to text or news channels.
+		 * `0-1024` character channel topic. Applies to text or news channels.
 		 */
 		topic?: Nullable<string>;
 
@@ -1310,13 +1284,13 @@ export interface ModifyGuildChannel {
 		rate_limit_per_user?: Nullable<number>;
 
 		/**
-		 * The bitrate (in bits) of the voice channel; 8000 to 96000 (128000 for VIP servers).
+		 * The bitrate (in bits) of the voice channel; `8000` to `96000` (`128000` for VIP servers).
 		 * Applies to voice channels.
 		 */
 		bitrate?: Nullable<number>;
 
 		/**
-		 * The user limit of the voice channel; 0 refers to no limit, 1 to 99 refers to a user
+		 * The user limit of the voice channel; `0` refers to no limit, `1` to `99` refers to a user
 		 * limit. Applies to voice channels.
 		 */
 		user_limit?: Nullable<Range<0, 99>>;
@@ -1362,7 +1336,7 @@ export interface ModifyThreadChannel {
 	body: Partial<Pick<ThreadMetadata, 'archived' | 'auto_archive_duration' | 'locked'>> &
 		Pick<ModifyGuildChannel['body'], 'rate_limit_per_user'> & {
 			/**
-			 * 2-100 character channel name.
+			 * `2-100` character channel name.
 			 */
 			name?: string;
 		};
@@ -1499,7 +1473,7 @@ export interface CreateMessage {
 	} & (
 		| {
 				/**
-				 * The message contents (up to 2000 characters).
+				 * The message contents (up to `2000` characters).
 				 */
 				content: string;
 		  }
@@ -1635,7 +1609,7 @@ export type DeleteAllEmojiReactions = { response: never };
 export interface EditMessage {
 	body: {
 		/**
-		 * The new message contents (up to 2000 characters),
+		 * The new message contents (up to `2000` characters),
 		 */
 		content?: Nullable<string>;
 
@@ -1684,7 +1658,7 @@ export type DeleteMessage = { response: never };
  * and requires the `MANAGE_MESSAGES` permission.
  *
  * Any message IDs given that do not exist or are invalid will count towards the minimum and
- * maximum message count (currently 2 and 100 respectively).
+ * maximum message count (currently `2` and `100` respectively).
  *
  * @remarks
  * This endpoint will not delete messages older than 2 weeks, and will fail with a `400 BAD REQUEST`
@@ -1695,7 +1669,7 @@ export type DeleteMessage = { response: never };
 export interface BulkDeleteMessages {
 	body: {
 		/**
-		 * An array of message IDs to delete (2-100).
+		 * An array of message IDs to delete (`2-100`).
 		 */
 		messages: Snowflake[];
 	};
@@ -1725,7 +1699,7 @@ export interface EditChannelPermissions {
 		deny?: string;
 
 		/**
-		 * 0 for a role or 1 for a member.
+		 * `0` for a role or `1` for a member.
 		 */
 		type?: 0 | 1;
 	};
@@ -1755,15 +1729,15 @@ export interface CreateChannelInvite {
 	body:
 		| {
 				/**
-				 * Duration of invite in seconds before expiry, or 0 for never. Between 0 and
-				 * 604800 (7 days).
+				 * Duration of invite in seconds before expiry, or `0` for never. Between `0` and
+				 * `604800` (7 days).
 				 *
 				 * @defaultValue `86400` (24 hours)
 				 */
 				max_age?: number;
 
 				/**
-				 * Max number of uses or 0 for unlimited. Between 0 and 100.
+				 * Max number of uses or `0` for unlimited.
 				 *
 				 * @defaultValue `0`
 				 */
@@ -1777,7 +1751,7 @@ export interface CreateChannelInvite {
 				temporary?: boolean;
 
 				/**
-				 * If true, don't try to reuse a similar invite (useful for creating many unique
+				 * If `true`, don't try to reuse a similar invite (useful for creating many unique
 				 * one time use invites).
 				 *
 				 * @defaultValue `false`

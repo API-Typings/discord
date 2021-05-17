@@ -32,7 +32,7 @@ export interface PartialGuild {
 	id: Snowflake;
 
 	/**
-	 * Guild name (2-100 characters, excluding trailing and leading whitespace).
+	 * Guild name (`2-100` characters, excluding trailing and leading whitespace).
 	 */
 	name: Nullable<string>;
 
@@ -416,12 +416,12 @@ export enum VerificationLevel {
 	Low,
 
 	/**
-	 * Must be registered on Discord for longer than 5 minutes.
+	 * Must be registered on Discord for longer than `5` minutes.
 	 */
 	Medium,
 
 	/**
-	 * Must be a member of the server for longer than 10 minutes.
+	 * Must be a member of the server for longer than `10` minutes.
 	 */
 	High,
 
@@ -981,8 +981,8 @@ export interface WelcomeScreenChannel {
 /**
  * In guilds with Membership Screening enabled, when a member joins, Guild Member Add will
  * be emitted but they will initially be restricted from doing any actions in the guild, and
- * `pending`will be true in the member object. When the member completes the screening, Guild
- * Member Update will be emitted and `pending` will be false.
+ * `pending` will be `true` in the member object. When the member completes the screening, Guild
+ * Member Update will be emitted and `pending` will be `false`.
  *
  * Giving the member a role will bypass Membership Screening as well as the guild's verification
  * level, giving the member immediate access to chat.
@@ -1045,14 +1045,14 @@ export enum ScreeningFieldType {
 // ANCHOR Create Guild
 
 /**
- * Create a new guild. This endpoint can be used only by bots in less than 10 guilds.
+ * Create a new guild. This endpoint can be used only by bots in less than `10` guilds.
  *
  * @endpoint [POST](https://discord.com/developers/docs/resources/guild#create-guild) `/guilds`
  */
 export interface CreateGuild {
 	body: {
 		/**
-		 * Name of the guild (2-100 characters).
+		 * Name of the guild (`2-100` characters).
 		 */
 		name: string;
 
@@ -1062,7 +1062,7 @@ export interface CreateGuild {
 		region?: string;
 
 		/**
-		 * Base64 128x128 image for the guild icon.
+		 * Base64 `128x128` image for the guild icon.
 		 */
 		icon?: string;
 
@@ -1205,7 +1205,7 @@ export interface ModifyGuild {
 		afk_timeout?: Nullable<number>;
 
 		/**
-		 * Base64 1024x1024 png/jpeg/gif image for the guild icon (can be animated gif when the
+		 * Base64 `1024x1024` PNG/JPEG/GIF image for the guild icon (can be animated GIF when the
 		 * server has `ANIMATED_ICON` feature).
 		 */
 		icon?: Nullable<string>;
@@ -1216,13 +1216,13 @@ export interface ModifyGuild {
 		owner_id?: Snowflake;
 
 		/**
-		 * Base64 16:9 png/jpeg image for the guild splash (when the server has `INVITE_SPLASH`
+		 * Base64 `16:9` PNG/JPEG image for the guild splash (when the server has `INVITE_SPLASH`
 		 * feature).
 		 */
 		splash?: Nullable<string>;
 
 		/**
-		 * Base64 16:9 png/jpeg image for the guild banner (when the server has `BANNER` feature).
+		 * Base64 `16:9` PNG/JPEG image for the guild banner (when the server has `BANNER` feature).
 		 */
 		banner?: Nullable<string>;
 
@@ -1298,7 +1298,7 @@ export type GetGuildChannels = { response: Channel[] };
 export interface CreateGuildChannel {
 	body: {
 		/**
-		 * Channel name (2-100 characters).
+		 * Channel name (`2-100` characters).
 		 */
 		name: string;
 
@@ -1308,7 +1308,7 @@ export interface CreateGuildChannel {
 		type?: ChannelType;
 
 		/**
-		 * Channel topic (0-1024 characters).
+		 * Channel topic (`0-1024` characters).
 		 */
 		topic?: string;
 
@@ -2053,7 +2053,7 @@ export interface ModifyGuildDiscoveryMetadata {
 		primary_category_id?: Nullable<number>;
 
 		/**
-		 * Up to 10 discovery search keywords.
+		 * Up to `10` discovery search keywords.
 		 *
 		 * @defaultValue `null`
 		 */

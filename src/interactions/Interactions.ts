@@ -20,43 +20,43 @@ import type {
  */
 export enum SlashCommandLimit {
 	/**
-	 * An app can have up to 100 top-level global commands with unique names.
+	 * An app can have up to `100` top-level global commands with unique names.
 	 */
 	GlobalCommands = 100,
 
 	/**
-	 * An app can have up to an additional 100 guild commands per guild.
+	 * An app can have up to an additional `100` guild commands per guild.
 	 */
 	GuildCommands = 100,
 
 	/**
-	 * An app can have up to 25 subcommand groups on a top-level command.
+	 * An app can have up to `25` subcommand groups on a top-level command.
 	 */
 	SubcommandGroups = 25,
 
 	/**
-	 * An app can have up to 25 subcommands within a subcommand group.
+	 * An app can have up to `25` subcommands within a subcommand group.
 	 */
 	Subcommands = 25,
 
 	/**
-	 * Commands can have up to 25 `options`.
+	 * Commands can have up to `25` `options`.
 	 */
 	CommandOptions = 25,
 
 	/**
-	 * Options can have up to 25 `choices`.
+	 * Options can have up to `25` `choices`.
 	 */
 	CommandOptionChoices = 25,
 
 	/**
-	 * Maximum of 4000 characters for combined name, description, and value properties for each
+	 * Maximum of `4000` characters for combined name, description, and value properties for each
 	 * command and its subcommands and groups.
 	 */
 	Characters = 4000,
 
 	/**
-	 * Global rate limit of 200 application command creates per day per guild.
+	 * Global rate limit of `200` application command creates per day per guild.
 	 */
 	GlobalRateLimit = 200
 }
@@ -68,7 +68,7 @@ export enum SlashCommandLimit {
  * you are creating when you `POST` a new command.
  *
  * @remarks
- * - A command, or each individual subcommand, can have a maximum of 25 `options`.
+ * - A command, or each individual subcommand, can have a maximum of `25` `options`.
  * - Required `options` must be listed before optional `options`.
  *
  * @source {@link https://discord.com/developers/docs/interactions/slash-commands#applicationcommand|Slash Commands}
@@ -85,12 +85,12 @@ export interface ApplicationCommand {
 	application_id: Snowflake;
 
 	/**
-	 * 1-32 lowercase character name matching `^[\w-]{1,32}$`.
+	 * `1-32` lowercase character name matching `^[\w-]{1,32}$`.
 	 */
 	name: string;
 
 	/**
-	 * 1-100 character description.
+	 * `1-100` character description.
 	 */
 	description: string;
 
@@ -109,18 +109,18 @@ export interface ApplicationCommand {
 
 /**
  * @remarks
- * You can specify a maximum of 25 `choices` per option.
+ * You can specify a maximum of `25` `choices` per option.
  *
  * @source {@link https://discord.com/developers/docs/interactions/slash-commands#applicationcommandoption|Slash Commands}
  */
 export type ApplicationCommandOption = {
 	/**
-	 * 1-32 character name matching `^[\w-]{1,32}$`
+	 * `1-32` character name matching `^[\w-]{1,32}$`
 	 */
 	name: string;
 
 	/**
-	 * 1-100 character description.
+	 * `1-100` character description.
 	 */
 	description: string;
 
@@ -178,12 +178,12 @@ export enum ApplicationCommandOptionType {
  */
 export interface ApplicationCommandOptionChoice {
 	/**
-	 * 1-100 character choice name.
+	 * `1-100` character choice name.
 	 */
 	name: string;
 
 	/**
-	 * Value of the choice, up to 100 characters if string.
+	 * Value of the choice, up to `100` characters if string.
 	 */
 	value: string | number;
 }
@@ -454,10 +454,6 @@ export interface InteractionApplicationCommandCallbackData {
 	 * Message content.
 	 */
 	content?: string;
-
-	/**
-	 * Supports up to 10 embeds.
-	 */
 	embeds?: [PartialEmbed, ...Partial<Tuple<PartialEmbed, 9>>];
 
 	/**
@@ -510,7 +506,7 @@ export interface MessageInteraction {
 export type GetGlobalApplicationCommands = { response: ApplicationCommand[] };
 
 /**
- * Creates a new global command. New global commands will be available in all guilds after 1 hour.
+ * Creates a new global command. New global commands will be available in all guilds after `1` hour.
  *
  * @remarks
  * Creating a command with the same name as an existing command for your application will overwrite
@@ -531,7 +527,7 @@ export interface CreateGlobalApplicationCommand {
 export type GetGlobalApplicationCommand = { response: ApplicationCommand };
 
 /**
- * Edit a global command. Updates will be available in all guilds after 1 hour.
+ * Edit a global command. Updates will be available in all guilds after `1` hour.
  *
  * @endpoint [PATCH](https://discord.com/developers/docs/interactions/slash-commands#edit-guild-application-command) `/applications/{application.id}/commands/{command.id}`
  */
@@ -562,7 +558,7 @@ export type GetGuildApplicationCommands = { response: ApplicationCommand[] };
 
 /**
  * Takes a list of application commands, overwriting existing commands that are registered globally
- * for this application. Updates will be available in all guilds after 1 hour.
+ * for this application. Updates will be available in all guilds after `1` hour.
  *
  * Commands that do not already exist will count toward your daily application command create limit.
  *

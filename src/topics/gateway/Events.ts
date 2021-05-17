@@ -811,7 +811,7 @@ export interface GuildMemberChunk extends GatewayEventPayload<GatewayEvent.Guild
 		not_found?: Snowflake[];
 
 		/**
-		 * If passing true to `REQUEST_GUILD_MEMBERS`, presences of the returned members will be
+		 * If passing `true` to `REQUEST_GUILD_MEMBERS`, presences of the returned members will be
 		 * here.
 		 */
 		presences?: PresenceUpdate['d'][];

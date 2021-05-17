@@ -140,24 +140,24 @@ export interface AchievementManager extends NodeJS.EventEmitter {
 // SECTION Endpoints
 
 /**
- * Returns all achievements for the given application. This endpoint has a rate limit of 5
- * requests per 5 seconds per application.
+ * Returns all achievements for the given application. This endpoint has a rate limit of `5`
+ * requests per `5` seconds per application.
  *
  * @endpoint [GET](https://discord.com/developers/docs/game-sdk/achievements#get-achievements) `/applications/{application.id}/achievements`
  */
 export type GetAchievements = { response: Achievement[] };
 
 /**
- * Returns the given achievement for the given application. This endpoint has a rate limit of 5
- * requests per 5 seconds per application.
+ * Returns the given achievement for the given application. This endpoint has a rate limit of `5`
+ * requests per `5` seconds per application.
  *
  * @endpoint [GET](https://discord.com/developers/docs/game-sdk/achievements#get-achievement) `/applications/{application.id}/achievements`
  */
 export type GetAchievement = { response: Achievement };
 
 /**
- * Creates a new achievement for your application. Applications can have a maximum of 1000
- * achievements. This endpoint has a rate limit of 5 requests per 5 seconds per application.
+ * Creates a new achievement for your application. Applications can have a maximum of `1000`
+ * achievements. This endpoint has a rate limit of `5` requests per `5` seconds per application.
  *
  * @endpoint [POST](https://discord.com/developers/docs/game-sdk/achievements#create-achievement) `/applications/{application.id}/achievements`
  */
@@ -174,16 +174,16 @@ export interface CreateAchievement {
 
 /**
  * Updates the achievement for **ALL USERS**. This is **NOT** to update a single user's achievement
- * progress; this is to edit the UserAchievement itself. This endpoint has a rate limit of 5
- * requests per 5 seconds per application.
+ * progress; this is to edit the UserAchievement itself. This endpoint has a rate limit of `5`
+ * requests per `5` seconds per application.
  *
  * @endpoint [PATCH](https://discord.com/developers/docs/game-sdk/achievements#update-achievement) `/applications/{application.id}/achievements/{achievement.id}`
  */
 export type UpdateAchievement = CreateAchievement;
 
 /**
- * Deletes the given achievement from your application. This endpoint has a rate limit of 5
- * requests per 5 seconds per application.
+ * Deletes the given achievement from your application. This endpoint has a rate limit of `5`
+ * requests per `5` seconds per application.
  *
  * @endpoint [DELETE](https://discord.com/developers/docs/game-sdk/achievements#delete-achievement) `/applications/{application.id}/achievements/{achievement.id}`
  */
@@ -191,8 +191,8 @@ export type DeleteAchievement = { response: never };
 
 /**
  * Updates the `UserAchievement` record for a given user. Use this endpoint to update secure
- * achievement progress for users. This endpoint has a rate limit of 5 requests per 5 seconds per
- * application.
+ * achievement progress for users. This endpoint has a rate limit of `5` requests per `5` seconds
+ * per application.
  *
  * @endpoint [PUT](https://discord.com/developers/docs/game-sdk/achievements#update-user-achievement) `/applications/{application.id}/achievements/{achievement.id}`
  */
@@ -209,7 +209,7 @@ export interface UpdateUserAchievement {
 
 /**
  * Returns a list of achievements for the user whose token you're making the request with. This
- * endpoint has a rate limit of 2 requests per 5 seconds per application per user.
+ * endpoint has a rate limit of `2` requests per `5` seconds per application per user.
  *
  * @endpoint [GET](https://discord.com/developers/docs/game-sdk/achievements#get-user-achievements) `/applications/{application.id}/achievements`
  */

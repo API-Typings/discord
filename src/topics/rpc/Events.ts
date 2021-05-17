@@ -313,7 +313,7 @@ export interface VoiceConnectionStatus extends EventPayload<Event.VoiceConnectio
 		hostname: string;
 
 		/**
-		 * Last 20 pings (in ms).
+		 * Last `20` pings (in ms).
 		 */
 		pings: Partial<Tuple<number, 20>>;
 

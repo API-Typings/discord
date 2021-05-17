@@ -287,12 +287,12 @@ export enum ActivityFlags {
  */
 export interface ActivityButton {
 	/**
-	 * The text shown on the button (1-32 characters).
+	 * The text shown on the button (`1-32` characters).
 	 */
 	label: string;
 
 	/**
-	 * The URL opened when clicking the button (1-512 characters).
+	 * The URL opened when clicking the button (`1-512` characters).
 	 */
 	url: string;
 }

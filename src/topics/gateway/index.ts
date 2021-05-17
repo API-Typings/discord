@@ -124,7 +124,7 @@ export interface SessionStartLimit {
 	reset_after: number;
 
 	/**
-	 * The number of identify requests allowed per 5 seconds.
+	 * The number of identify requests allowed per `5` seconds.
 	 */
 	max_concurrency: number;
 }

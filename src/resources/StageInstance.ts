@@ -24,7 +24,7 @@ export interface StageInstance {
 	channel_id: Snowflake;
 
 	/**
-	 * The topic of the Stage instance (1-120 characters).
+	 * The topic of the Stage instance (`1-120` characters).
 	 */
 	topic: string;
 }

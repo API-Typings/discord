@@ -55,7 +55,7 @@ export interface Emoji extends PartialEmoji {
 	managed?: boolean;
 
 	/**
-	 * Whether this emoji can be used, may be false due to loss of Server Boosts.
+	 * Whether this emoji can be used, may be `false` due to loss of Server Boosts.
 	 */
 	available?: boolean;
 }
@@ -94,7 +94,7 @@ export interface CreateGuildEmoji {
 		name: string;
 
 		/**
-		 * The 128x128 emoji image.
+		 * The `128x128` emoji image.
 		 */
 		image: string;
 

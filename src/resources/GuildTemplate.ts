@@ -81,12 +81,12 @@ export type GetGuildTemplate = { response: GuildTemplate };
 export interface CreateGuildFromGuildTemplate {
 	body: {
 		/**
-		 * Name of the guild (2-100 characters).
+		 * Name of the guild (`2-100` characters).
 		 */
 		name: string;
 
 		/**
-		 * Base64 128x128 image for the guild icon.
+		 * Base64 `128x128` image for the guild icon.
 		 */
 		icon?: string;
 	};
@@ -109,12 +109,12 @@ export type GetGuildTemplates = { response: GuildTemplate[] };
 export interface CreateGuildTemplate {
 	body: {
 		/**
-		 * Name of the template (1-100 characters).
+		 * Name of the template (`1-100` characters).
 		 */
 		name: string;
 
 		/**
-		 * Description for the template (0-120 characters).
+		 * Description for the template (`0-120` characters).
 		 */
 		description?: Nullable<string>;
 	};
@@ -138,18 +138,7 @@ export type SyncGuildTemplate = { response: GuildTemplate };
  * @endpoint [PATCH](https://discord.com/developers/docs/resources/guild-template#modify-guild-template) `/guilds/{guild.id}/templates/{template.code}`
  */
 export interface ModifyGuildTemplate {
-	body: {
-		/**
-		 * Name of the template (1-100 characters).
-		 */
-		name?: string;
-
-		/**
-		 * Description for the template (0-120 characters).
-		 */
-		description?: Nullable<string>;
-	};
-
+	body: Partial<CreateGuildTemplate['body']>;
 	response: GuildTemplate;
 }
 

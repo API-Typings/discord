@@ -106,7 +106,7 @@ export enum WebhookType {
 export interface CreateWebhook {
 	body: {
 		/**
-		 * Name of the webhook (1-80 characters).
+		 * Name of the webhook (`1-80` characters).
 		 */
 		name: string;
 
@@ -260,7 +260,7 @@ export interface ExecuteWebhook {
 	} & (
 		| {
 				/**
-				 * The message contents (up to 2000 characters).
+				 * The message contents (up to `2000` characters).
 				 */
 				content: string;
 		  }
@@ -309,7 +309,7 @@ export type GetWebhookMessage = { response: Message };
 export interface EditWebhookMessage {
 	body: {
 		/**
-		 * The message contents (up to 2000 characters).
+		 * The message contents (up to `2000` characters).
 		 */
 		content?: Nullable<string>;
 

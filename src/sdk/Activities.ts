@@ -204,8 +204,8 @@ export interface ActivityManager extends NodeJS.EventEmitter {
 	RegisterSteam(steamId: number): void;
 
 	/**
-	 * Sets a user's presence in Discord to a new activity. This has a rate limit of 5 updates per
-	 * 20 seconds.
+	 * Sets a user's presence in Discord to a new activity. This has a rate limit of `5` updates per
+	 * `20` seconds.
 	 *
 	 * @remarks
 	 * It is possible for users to hide their presence on Discord (User Settings -\> Game Activity).

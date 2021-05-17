@@ -40,7 +40,7 @@ export interface ConnectionProperties {
  * - If the payload is valid, the gateway will respond with a Ready event. Clients are limited
  * by maximum concurrency when Identifying; if they exceed this limit, the gateway will
  * respond with an Opcode 9 Invalid Session.
- * - Clients are limited to 1000 `IDENTIFY` calls to the websocket in a 24-hour period. This limit
+ * - Clients are limited to `1000` `IDENTIFY` calls to the websocket in a 24-hour period. This limit
  * is global and across all shards, but does not include `RESUME` calls. Upon hitting this limit,
  * all active sessions for the bot will be terminated, the bot's token will be reset, and the owner
  * will receive an email notification.
@@ -67,8 +67,8 @@ export interface Identify extends GatewayCommandPayload<GatewayOPCode.Identify> 
 		compress?: boolean;
 
 		/**
-		 * Value between 50 and 250, total number of members where the gateway will stop sending
-		 * offline members in the guild member list.
+		 * Total number of members where the gateway will stop sending offline members in the guild
+		 * member list.
 		 *
 		 * @defaultValue `50`
 		 */
@@ -145,12 +145,12 @@ export interface Heartbeat extends GatewayCommandPayload<GatewayOPCode.Heartbeat
  * are online, have a role, have a nickname, or are in a voice channel, and if it has under
  * `large_threshold` members, it will send all members.
  * - `GUILD_PRESENCES` intent is required to set `presences = true`. Otherwise, it will always be
- * false
+ * `false`
  * - `GUILD_MEMBERS` intent is required to request the entire member list—`(query=‘’, limit=0<=n)`
- * - You will be limited to requesting 1 `guild_id` per request
- * - Requesting a prefix (`query` parameter) will return a maximum of 100 members
- * - Requesting `user_ids` will continue to be limited to returning 100 members
- * - `nonce` can only be up to 32 bytes. If you send an invalid `nonce` it will be ignored and the
+ * - You will be limited to requesting `1` `guild_id` per request
+ * - Requesting a prefix (`query` parameter) will return a maximum of `100` members
+ * - Requesting `user_ids` will continue to be limited to returning `100` members
+ * - `nonce` can only be up to `32` bytes. If you send an invalid `nonce` it will be ignored and the
  * reply `member_chunk`(s) will not have a `nonce` set.
  *
  * @source {@link https://discord.com/developers/docs/topics/gateway#request-guild-members|Gateway}
@@ -230,7 +230,7 @@ export interface UpdateVoiceState {
 export interface UpdatePresence extends GatewayCommandPayload<GatewayOPCode.PresenceUpdate> {
 	d: {
 		/**
-		 * Unix time (in milliseconds) of when the client went idle, or null if the client is not
+		 * Unix time (in milliseconds) of when the client went idle, or `null` if the client is not
 		 * idle.
 		 */
 		since: Nullable<number>;
@@ -241,7 +241,7 @@ export interface UpdatePresence extends GatewayCommandPayload<GatewayOPCode.Pres
 		activities: Nullable<Activity[]>;
 
 		/**
-		 * The user's new status
+		 * The user's new status.
 		 */
 		status: StatusType;
 

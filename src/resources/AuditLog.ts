@@ -16,7 +16,8 @@ import type {
 
 /**
  * Whenever an admin action is performed on the API, an entry is added to the respective guild's
- * audit log.
+ * audit log. A reason can be specified by attaching the `X-Audit-Log-Reason` request header. This
+ * header supports URL encoded `UTF-8` characters.
  *
  * @source {@link https://discord.com/developers/docs/resources/audit-log#audit-log-object-audit-log-structure|Audit Log}
  */
@@ -47,7 +48,7 @@ export interface AuditLog {
  */
 export interface AuditLogEntry {
 	/**
-	 * ID of the affected entity (webhook, user, role, etc.).
+	 * ID of the affected entity.
 	 */
 	target_id: Nullable<Snowflake>;
 
@@ -79,7 +80,7 @@ export interface AuditLogEntry {
 	options?: AuditLogEntryInfo;
 
 	/**
-	 * The reason for the change (0-512 characters).
+	 * The reason for the change (`0-512` characters).
 	 */
 	reason?: string;
 }

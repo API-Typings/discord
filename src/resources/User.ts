@@ -304,9 +304,9 @@ export interface ModifyCurrentUser {
  * OAuth2 scope.
  *
  * @remarks
- * This endpoint returns 200 guilds by default, which is the maximum number of guilds a non-bot user
- * can join. Therefore, pagination is **not needed** for integrations that need to get a list of the
- * users' guilds.
+ * This endpoint returns `200` guilds by default, which is the maximum number of guilds a non-bot
+ * user can join. Therefore, pagination is **not needed** for integrations that need to get a list
+ * of the users' guilds.
  *
  * @endpoint [GET](https://discord.com/developers/docs/resources/user#get-current-user-guilds) `/users/@me/guilds`
  */
@@ -362,7 +362,7 @@ export interface CreateDM {
 }
 
 /**
- * Create a new group DM channel with multiple users. This endpoint is limited to 10 active group
+ * Create a new group DM channel with multiple users. This endpoint is limited to `10` active group
  * DMs.
  *
  * @endpoint [POST](https://discord.com/developers/docs/resources/user#create-dm) `/users/@me/channels`

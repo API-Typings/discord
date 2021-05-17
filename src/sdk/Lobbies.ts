@@ -239,8 +239,8 @@ export interface LobbyManager extends NodeJS.EventEmitter {
 	 * transaction.
 	 *
 	 * @remarks
-	 * This call has a rate limit of 10 updates per 5 seconds. If you fear you might hit that, it
-	 * may be a good idea to batch your lobby updates into transactions.
+	 * This call has a rate limit of `10` updates per `5` seconds. If you fear you might hit that,
+	 * it may be a good idea to batch your lobby updates into transactions.
 	 *
 	 * @param lobbyId - The lobby you want to change
 	 * @param transaction - The transaction with wanted changes
@@ -398,7 +398,7 @@ export interface LobbyManager extends NodeJS.EventEmitter {
 	 * Sends a message to the lobby on behalf of the current user. You must be connected to the
 	 * lobby you are messaging.
 	 *
-	 * This method has a rate limit of 10 messages per 5 seconds.
+	 * This method has a rate limit of `10` messages per `5` seconds.
 	 *
 	 * @remarks
 	 * You should use this function for message sending if you are *not* using the built in

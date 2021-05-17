@@ -16,7 +16,7 @@ export interface DiscoveryMetadata {
 	primary_category_id: number;
 
 	/**
-	 * Up to 10 discovery search keywords set for this guild.
+	 * Up to `10` discovery search keywords set for this guild.
 	 */
 	keywords: Nullable<Partial<Tuple<string, 10>>>;
 
@@ -37,7 +37,7 @@ export interface DiscoveryMetadata {
 	partner_application_timestamp: Nullable<string>;
 
 	/**
-	 * IDs of up to 5 discovery subcategories set for this guild.
+	 * IDs of up to `5` discovery subcategories set for this guild.
 	 */
 	category_ids: Partial<Tuple<number, 5>>;
 }
