@@ -1858,14 +1858,14 @@ export type GetPinnedMessages = { response: Message[] };
  *
  * @endpoint [PUT](https://discord.com/developers/docs/resources/channel#add-pinned-channel-message) `/channels/{channel.id}/pins/{message.id}`
  */
-export type AddPinnedChannelMessage = { response: never };
+export type PinMessage = { response: never };
 
 /**
- * Delete a pinned message in a channel. Requires the `MANAGE_MESSAGES` permission.
+ * Unpin a message in a channel. Requires the `MANAGE_MESSAGES` permission.
  *
  * @endpoint [DELETE](https://discord.com/developers/docs/resources/channel#delete-pinned-channel-message) `/channels/{channel.id}/pins/{message.id}`
  */
-export type DeletePinnedChannelMessage = { response: never };
+export type UnpinMessage = { response: never };
 
 /**
  * Adds a recipient to a Group DM using their access token.
