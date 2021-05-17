@@ -56,9 +56,33 @@ export enum ClientReleaseChannel {
 }
 
 /**
+ * Discord utilizes Twitter's snowflake format for uniquely identifiable descriptors (IDs). These
+ * IDs are guaranteed to be unique across all of Discord, except in some unique scenarios in which
+ * child objects share their parent's ID. Because Snowflake IDs are up to 64 bits in size, they are
+ * always returned as strings in the HTTP API to prevent integer overflows in some languages.
+ *
  * @source {@link https://discord.com/developers/docs/reference#snowflakes|Reference}
  */
 export type Snowflake = `${bigint}`;
+
+/**
+ * Discord utilizes a subset of markdown for rendering message content on its clients, while also
+ * adding some custom functionality to enable things like mentioning users and channels.
+ *
+ * Using the markdown for either users, roles, or channels will usually mention the target(s)
+ * accordingly, but this can be suppressed using the `allowed_mentions` parameter when creating a
+ * message. Standard emoji are currently rendered using Twemoji for Desktop/Android and Apple's
+ * native emoji on iOS.
+ *
+ * @source {@link https://discord.com/developers/docs/reference#message-formatting|Reference}
+ */
+export type MessageFormats =
+	| UserFormat
+	| UserNicknameFormat
+	| ChannelFormat
+	| RoleFormat
+	| CustomEmojiFormat
+	| CustomEmojiAnimatedFormat;
 
 export type UserFormat = `<@${bigint}>`;
 
