@@ -26,97 +26,97 @@ export interface CommandPayload<C extends Command> extends Omit<RPC.Payload, 'ev
  */
 export enum Command {
 	/**
-	 * Event dispatch
+	 * Event dispatch.
 	 */
 	Dispatch = 'DISPATCH',
 
 	/**
-	 * Used to authorize a new client with your app
+	 * Used to authorize a new client with your app.
 	 */
 	Authorize = 'AUTHORIZE',
 
 	/**
-	 * Used to authenticate an existing client with your app
+	 * Used to authenticate an existing client with your app.
 	 */
 	Authenticate = 'AUTHENTICATE',
 
 	/**
-	 * Used to retrieve guild information from the client
+	 * Used to retrieve guild information from the client.
 	 */
 	GetGuild = 'GET_GUILD',
 
 	/**
-	 * Used to retrieve a list of guilds from the client
+	 * Used to retrieve a list of guilds from the client.
 	 */
 	GetGuilds = 'GET_GUILDS',
 
 	/**
-	 * Used to retrieve channel information from the client
+	 * Used to retrieve channel information from the client.
 	 */
 	GetChannel = 'GET_CHANNEL',
 
 	/**
-	 * Used to retrieve a list of channels for a guild from the client
+	 * Used to retrieve a list of channels for a guild from the client.
 	 */
 	GetChannels = 'GET_CHANNELS',
 
 	/**
-	 * Used to subscribe to an RPC event
+	 * Used to subscribe to an RPC event.
 	 */
 	Subscribe = 'SUBSCRIBE',
 
 	/**
-	 * Used to unsubscribe from an RPC event
+	 * Used to unsubscribe from an RPC event.
 	 */
 	Unsubscribe = 'UNSUBSCRIBE',
 
 	/**
-	 * Used to change voice settings of users in voice channels
+	 * Used to change voice settings of users in voice channels.
 	 */
 	SetUserVoiceSettings = 'SET_USER_VOICE_SETTINGS',
 
 	/**
-	 * Used to join or leave a voice channel, group DM, or DM
+	 * Used to join or leave a voice channel, group DM, or DM.
 	 */
 	SelectVoiceChannel = 'SELECT_VOICE_CHANNEL',
 
 	/**
-	 * Used to get the current voice channel the client is in
+	 * Used to get the current voice channel the client is in.
 	 */
 	GetSelectedVoiceChannel = 'GET_SELECTED_VOICE_CHANNEL',
 
 	/**
-	 * Used to join or leave a voice channel, group DM, or DM
+	 * Used to join or leave a voice channel, group DM, or DM.
 	 */
 	SelectTextChannel = 'SELECT_TEXT_CHANNEL',
 
 	/**
-	 * Used to retrieve the client's voice settings
+	 * Used to retrieve the client's voice settings.
 	 */
 	GetVoiceSettings = 'GET_VOICE_SETTINGS',
 
 	/**
-	 * Used to set the client's voice settings
+	 * Used to set the client's voice settings.
 	 */
 	SetVoiceSettings = 'SET_VOICE_SETTINGS',
 
 	/**
-	 * Used to send info about certified hardware devices
+	 * Used to send info about certified hardware devices.
 	 */
 	SetCertifiedDevices = 'SET_CERTIFIED_DEVICES',
 
 	/**
-	 * Used to update a user's Rich Presence
+	 * Used to update a user's Rich Presence.
 	 */
 	SetActivity = 'SET_ACTIVITY',
 
 	/**
-	 * Used to consent to a Rich Presence Ask to Join request
+	 * Used to consent to a Rich Presence Ask to Join request.
 	 */
 	SendActivityJoinInvite = 'SEND_ACTIVITY_JOIN_INVITE',
 
 	/**
-	 * Used to reject a Rich Presence Ask to Join request
+	 * Used to reject a Rich Presence Ask to Join request.
 	 */
 	CloseActivityRequest = 'CLOSE_ACTIVITY_REQUEST'
 }

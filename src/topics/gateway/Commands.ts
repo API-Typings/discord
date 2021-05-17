@@ -85,7 +85,7 @@ export interface Identify extends GatewayCommandPayload<GatewayOPCode.Identify> 
 		presence?: UpdatePresence['d'];
 
 		/**
-		 * The Gateway Intents you wish to receive
+		 * The Gateway Intents you wish to receive.
 		 */
 		intents: number;
 	};

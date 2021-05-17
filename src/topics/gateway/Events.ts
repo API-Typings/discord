@@ -344,8 +344,8 @@ export interface Hello {
  * The ready event can be the largest and most complex event the gateway will send, as it contains
  * all the state required for a client to begin interacting with the rest of the platform.
  *
- * `guilds` are the guilds of which your bot is a member. They start out as unavailable when you
- * connect to the gateway. As they become available, your bot will be notified via Guild Create
+ * `guilds` are the guilds of which your bot is a member. They start out as unavailable when
+ * connecting to the gateway. As they become available, your bot will be notified via Guild Create
  * events.
  *
  * @source {@link https://discord.com/developers/docs/topics/gateway#ready|Gateway}

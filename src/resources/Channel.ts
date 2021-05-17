@@ -1152,9 +1152,8 @@ export type AllowedMentionsType = 'roles' | 'users' | 'everyone';
 
 /**
  * The allowed mention field allows for more granular control over mentions without various hacks
- * to the message content. This will always validate against message content to avoid phantom pings
- * (e.g. to ping everyone, you must still have `@everyone` in the message content), and check
- * against user/bot permissions.
+ * to the message content. This will always validate against message content to avoid phantom pings,
+ * and check against user/bot permissions.
  *
  * @source {@link https://discord.com/developers/docs/resources/channel#allowed-mentions-object-allowed-mentions-structure|Channel}
  */
@@ -1467,7 +1466,7 @@ export interface CreateMessage {
 		allowed_mentions?: AllowedMentions;
 
 		/**
-		 * Include to make your message a reply.
+		 * Include to make the message a reply.
 		 */
 		message_reference?: MessageReference;
 	} & (
@@ -1510,7 +1509,7 @@ export type CrosspostMessage = { response: Message };
  * user.
  *
  * The `emoji` must be URL Encoded or the request will fail with `10014: Unknown Emoji`. To use a
- * custom emoji, you must encode it in the format `name:id` with the emoji name and emoji ID.
+ * custom emoji, it must be encoded in the format `name:id` with the emoji name and emoji ID.
  *
  * @endpoint [PUT](https://discord.com/developers/docs/resources/channel#create-reaction) `/channels/{channel.id}/messages/{message.id}/reactions/{emoji}/@me`
  */
@@ -1520,7 +1519,7 @@ export type CreateReaction = { response: never };
  * Delete a reaction the current user has made for the message.
  *
  * The `emoji` must be URL Encoded or the request will fail with `10014: Unknown Emoji`. To use a
- * custom emoji, you must encode it in the format `name:id` with the emoji name and emoji ID.
+ * custom emoji, it must be encoded in the format `name:id` with the emoji name and emoji ID.
  *
  * @endpoint [DELETE](https://discord.com/developers/docs/resources/channel#delete-own-reaction) `/channels/{channel.id}/messages/{message.id}/reactions/{emoji}/@me`
  */
@@ -1531,7 +1530,7 @@ export type DeleteOwnReaction = { response: never };
  * present on the current user.
  *
  * The `emoji` must be URL Encoded or the request will fail with `10014: Unknown Emoji`. To use a
- * custom emoji, you must encode it in the format `name:id` with the emoji name and emoji ID.
+ * custom emoji, it must be encoded in the format `name:id` with the emoji name and emoji ID.
  *
  * @endpoint [DELETE](https://discord.com/developers/docs/resources/channel#delete-user-reaction) `/channels/{channel.id}/messages/{message.id}/reactions/{emoji}/{user.id}`
  */
@@ -1541,7 +1540,7 @@ export type DeleteUserReaction = { response: never };
  * Get a list of users that reacted with this emoji.
  *
  * The `emoji` must be URL Encoded or the request will fail with `10014: Unknown Emoji`. To use a
- * custom emoji, you must encode it in the format `name:id` with the emoji name and emoji ID.
+ * custom emoji, it must be encoded in the format `name:id` with the emoji name and emoji ID.
  *
  * @endpoint [GET](https://discord.com/developers/docs/resources/channel#get-reactions) `/channels/{channel.id}/messages/{message.id}/reactions/{emoji.id}`
  */
@@ -1579,7 +1578,7 @@ export type DeleteAllReactions = { response: never };
  * `MANAGE_MESSAGES` permission to be present on the current user.
  *
  * The `emoji` must be URL Encoded or the request will fail with `10014: Unknown Emoji`. To use a
- * custom emoji, you must encode it in the format `name:id` with the emoji name and emoji ID.
+ * custom emoji, it must be encoded in the format `name:id` with the emoji name and emoji ID.
  *
  * @endpoint [DELETE](https://discord.com/developers/docs/resources/channel#delete-all-reactions-for-emoji) `/channels/{channel.id}/messages/{message.id}/reactions/{emoji}`
  */
@@ -1718,10 +1717,6 @@ export type GetChannelInvites = { response: InviteMetadata[] };
 /**
  * Create a new invite object for the channel. Requires the `CREATE_INSTANT_INVITE` permission. Only
  * usable for guild channels.
- *
- * @remarks
- * All JSON parameters for this route are optional, however the request body is not. If you are not
- * sending any fields, you still have to send an empty JSON object (`{}`).
  *
  * @endpoint [POST](https://discord.com/developers/docs/resources/channel#create-channel-invite) `/channels/{channel.id}/invites`
  */

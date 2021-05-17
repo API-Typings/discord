@@ -767,7 +767,7 @@ export interface Integration extends PartialIntegration {
 	name: string;
 
 	/**
-	 * Integration type (twitch, youtube, or discord)
+	 * Integration type.
 	 */
 	type: IntegrationType;
 
@@ -1490,7 +1490,7 @@ export interface AddGuildMember {
 	body: {
 		/**
 		 * An OAuth2 access token granted with the `guilds.join` to the bot's application for the
-		 * user you want to add to the guild.
+		 * user to add to the guild.
 		 */
 		access_token: string;
 
@@ -1780,8 +1780,8 @@ export type DeleteGuildRole = { response: never };
  * Requires the `KICK_MEMBERS` permission.
  *
  * @remarks
- * By default, prune will not remove users with roles. You can optionally include specific roles in
- * your prune by providing the `include_roles` parameter. Any inactive user that has a subset of the
+ * By default, prune will not remove users with roles. Specific roles can optionally be included in
+ * the prune by providing the `include_roles` parameter. Any inactive user that has a subset of the
  * provided role(s) will be counted in the prune and users with additional roles will not.
  *
  * @endpoint [GET](https://discord.com/developers/docs/resources/guild#get-guild-prune-count) `/guilds/{guild.id}/prune`
@@ -1816,8 +1816,8 @@ export interface GetGuildPruneCount {
  * For large guilds it's recommended to set the `compute_prune_count` option to `false`, forcing
  * `pruned` to `null`.
  *
- * By default, prune will not remove users with roles. You can optionally include specific roles in
- * your prune by providing the `include_roles` parameter. Any inactive user that has a subset of
+ * By default, prune will not remove users with roles. Specific roles can optionally be included in
+ * the prune by providing the `include_roles` parameter. Any inactive user that has a subset of
  * the provided role(s) will be counted in the prune and users with additional roles will not.
  *
  * Supplying a reason in the body will override `X-Audit-Log-Reason` header if both are provided.

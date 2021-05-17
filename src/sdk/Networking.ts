@@ -73,7 +73,7 @@ export interface NetworkManager extends NodeJS.EventEmitter {
 	ClosePeer(peerId: bigint): void;
 
 	/**
-	 * Fires when you receive data from another user.
+	 * Fires when data is recieved from another user.
 	 *
 	 * @remarks
 	 * This callback will only fire if you already have an open channel with the user sending you
@@ -86,7 +86,7 @@ export interface NetworkManager extends NodeJS.EventEmitter {
 	on(event: 'Message', listener: (peerId: bigint, channelId: number, data: number) => void): this;
 
 	/**
-	 * Fires when your networking route has changed.
+	 * Fires when the networking route has changed.
 	 *
 	 * @remarks
 	 * You should broadcast to other users to whom you are connected that this has changed,

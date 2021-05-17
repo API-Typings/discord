@@ -64,8 +64,7 @@ export enum SlashCommandLimit {
 // SECTION Application Command
 
 /**
- * An application command is the base "command" model that belongs to an application. This is what
- * you are creating when you `POST` a new command.
+ * An application command is the base "command" model that belongs to an application.
  *
  * @remarks
  * - A command, or each individual subcommand, can have a maximum of `25` `options`.
@@ -109,7 +108,7 @@ export interface ApplicationCommand {
 
 /**
  * @remarks
- * You can specify a maximum of `25` `choices` per option.
+ * A maximum of `25` `choices` per option can be specified.
  *
  * @source {@link https://discord.com/developers/docs/interactions/slash-commands#applicationcommandoption|Slash Commands}
  */
@@ -172,7 +171,7 @@ export enum ApplicationCommandOptionType {
 }
 
 /**
- * If you specify `choices` for an option, they are the **only** valid values for a user to pick.
+ * If `choices` are specified for an option, they are the **only** valid values for a user to pick.
  *
  * @source {@link https://discord.com/developers/docs/interactions/slash-commands#applicationcommandoptionchoice|Slash Commands}
  */
@@ -218,7 +217,7 @@ export interface GuildApplicationCommandPermissions extends PartialGuildApplicat
 }
 
 /**
- * Application command permissions allow you to enable or disable commands for specific users or
+ * Application command permissions allow commands to be enabled or disabled for specific users or
  * roles within a guild.
  */
 export interface ApplicationCommandPermissions {
@@ -462,7 +461,7 @@ export interface InteractionApplicationCommandCallbackData {
 	allowed_mentions?: AllowedMentions;
 
 	/**
-	 * Set to `64` to make your response ephemeral.
+	 * Set to `64` to make the response ephemeral.
 	 */
 	flags?: number;
 }
@@ -560,7 +559,7 @@ export type GetGuildApplicationCommands = { response: ApplicationCommand[] };
  * Takes a list of application commands, overwriting existing commands that are registered globally
  * for this application. Updates will be available in all guilds after `1` hour.
  *
- * Commands that do not already exist will count toward your daily application command create limit.
+ * Commands that do not already exist will count toward the daily application command create limit.
  *
  * @endpoint PUT `/applications/{application.id}/commands`
  */
@@ -573,7 +572,7 @@ export interface BulkOverwriteGlobalApplicationCommands {
  * Create a new guild command. New guild commands will be available in the guild immediately.
  *
  * @remarks
- * - If the command did not already exist, it will count toward your daily application command
+ * - If the command did not already exist, it will count toward the daily application command
  * create limit.
  * - Creating a command with the same name as an existing command for your application will
  * overwrite the old command.

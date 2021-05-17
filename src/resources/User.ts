@@ -344,9 +344,9 @@ export type LeaveGuild = { response: never };
  * Create a new DM channel with a user.
  *
  * @remarks
- * You should not use this endpoint to DM everyone in a server about something. DMs should generally
- * be initiated by a user action. If you open a significant amount of DMs too quickly, your bot may
- * be rate limited or blocked from opening new ones.
+ * This endpoint should not be used to DM everyone in a server about something. DMs should generally
+ * be initiated by a user action. If a significant amount of DMs are opened too quickly, your bot
+ * may be rate limited or blocked from opening new ones.
  *
  * @endpoint [POST](https://discord.com/developers/docs/resources/user#create-dm) `/users/@me/channels`
  */

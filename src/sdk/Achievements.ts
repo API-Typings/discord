@@ -98,7 +98,7 @@ export interface AchievementManager extends NodeJS.EventEmitter {
 
 	/**
 	 * Loads a stable list of the current user's achievements to iterate over. If the user has any
-	 * achievements, do your iteration within the callback of this function.
+	 * achievements, do iteration within the callback of this function.
 	 *
 	 * @remarks
 	 * Remember to only iterate when there are results.

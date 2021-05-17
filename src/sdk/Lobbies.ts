@@ -103,8 +103,8 @@ export interface LobbyTransaction {
 	 * Sets a new owner for the lobby.
 	 *
 	 * @remarks
-	 * This method is only valid for `LobbyUpdateTransactions` and may cause issues if you set it on
-	 * a `LobbyCreateTransaction`.
+	 * This method is only valid for `LobbyUpdateTransactions` and may cause issues if set on a
+	 * `LobbyCreateTransaction`.
 	 *
 	 * @param userId - The new owner's user ID
 	 */
@@ -212,15 +212,15 @@ export interface LobbyManager extends NodeJS.EventEmitter {
 	/**
 	 * Gets a lobby transaction used for updating an existing lobby.
 	 *
-	 * @param lobbyId - The lobby you want to change
+	 * @param lobbyId - The lobby to change
 	 */
 	GetLobbyUpdateTransaction(lobbyId: bigint): Discord.LobbyTransaction;
 
 	/**
 	 * Gets a new member transaction for a lobby member in a given lobby.
 	 *
-	 * @param lobbyId - The lobby you want to change
-	 * @param userId - The user you want to change
+	 * @param lobbyId - The lobby to change
+	 * @param userId - The user to change
 	 */
 	GetMemberUpdateTransaction(lobbyId: bigint, userId: bigint): Discord.LobbyMemberTransaction;
 
@@ -242,7 +242,7 @@ export interface LobbyManager extends NodeJS.EventEmitter {
 	 * This call has a rate limit of `10` updates per `5` seconds. If you fear you might hit that,
 	 * it may be a good idea to batch your lobby updates into transactions.
 	 *
-	 * @param lobbyId - The lobby you want to change
+	 * @param lobbyId - The lobby to change
 	 * @param transaction - The transaction with wanted changes
 	 */
 	UpdateLobby(lobbyId: bigint, transaction: LobbyTransaction, callback: (result: Discord.Result) => void): void;
@@ -250,7 +250,7 @@ export interface LobbyManager extends NodeJS.EventEmitter {
 	/**
 	 * Deletes a given lobby.
 	 *
-	 * @param lobbyId - The lobby you want to delete
+	 * @param lobbyId - The lobby to delete
 	 */
 	DeleteLobby(lobbyId: bigint, callback: (result: Discord.Result) => void): void;
 
@@ -258,7 +258,7 @@ export interface LobbyManager extends NodeJS.EventEmitter {
 	 * Connects the current user to a given lobby. You can be connected to up to five lobbies at a
 	 * time.
 	 *
-	 * @param lobbyId - The lobby you want to connect to
+	 * @param lobbyId - The lobby to connect to
 	 * @param lobbySecret - The password for the lobby
 	 */
 	/* prettier-ignore */
@@ -282,14 +282,14 @@ export interface LobbyManager extends NodeJS.EventEmitter {
 	 * If you are creating lobbies from game clients, use this to easily interact with Rich Presence
 	 * invites. Set the returned secret to your activity's `JoinSecret`.
 	 *
-	 * @param lobbyId - The lobby you want to get the secret for
+	 * @param lobbyId - The lobby to get the secret for
 	 */
 	GetLobbyActivitySecret(lobbyId: bigint): string;
 
 	/**
 	 * Disconnects the current user from a lobby.
 	 *
-	 * @param lobbyId - The lobby you want to leave
+	 * @param lobbyId - The lobby to leave
 	 */
 	DisconnectLobby(lobbyId: bigint, callback: (result: Discord.Result) => void): void;
 
@@ -300,7 +300,7 @@ export interface LobbyManager extends NodeJS.EventEmitter {
 	 * You must first call `Search()` to build a stable list of lobbies. This function will
 	 * then query those lobbies for ones with a matching ID.
 	 *
-	 * @param lobbyId - The lobby you want to get
+	 * @param lobbyId - The lobby to get
 	 */
 	GetLobby(lobbyId: bigint): Discord.Lobby;
 
@@ -308,14 +308,14 @@ export interface LobbyManager extends NodeJS.EventEmitter {
 	 * Returns the number of metadata key/value pairs on a given lobby. Used for accessing metadata
 	 * by iterating over the list.
 	 *
-	 * @param lobbyId - The lobby you want to get metadata for
+	 * @param lobbyId - The lobby to get metadata for
 	 */
 	LobbyMetadataCount(lobbyId: bigint): number;
 
 	/**
 	 * Returns the key for the lobby metadata at the given index.
 	 *
-	 * @param lobbyId - The lobby you want to get metadata for
+	 * @param lobbyId - The lobby get metadata for
 	 * @param index - The index of lobby metadata to access
 	 */
 	GetLobbyMetadataKey(lobbyId: bigint, index: number): string;
@@ -324,7 +324,7 @@ export interface LobbyManager extends NodeJS.EventEmitter {
 	 * Returns lobby metadata value for a given key and ID. Can be used with iteration, or direct
 	 * access by keyname.
 	 *
-	 * @param lobbyId - The lobby you want to get metadata for
+	 * @param lobbyId - The lobby to get metadata for
 	 * @param key - The key name to access
 	 */
 	GetLobbyMetadataValue(lobbyId: bigint, key: string): string;
@@ -332,7 +332,7 @@ export interface LobbyManager extends NodeJS.EventEmitter {
 	/**
 	 * Get the number of members in a lobby.
 	 *
-	 * @param lobbyId - The lobby you want to get members for
+	 * @param lobbyId - The lobby to get members for
 	 */
 	MemberCount(lobbyId: bigint): number;
 
@@ -402,7 +402,7 @@ export interface LobbyManager extends NodeJS.EventEmitter {
 	 *
 	 * @remarks
 	 * You should use this function for message sending if you are *not* using the built in
-	 * networking layer for the lobby. If you are, you should use SendNetworkMessage instead
+	 * networking layer for the lobby. If you are, you should use `SendNetworkMessage` instead.
 	 *
 	 * @param lobbyId - The lobby the member belongs to
 	 * @param data - The data to send
@@ -451,7 +451,7 @@ export interface LobbyManager extends NodeJS.EventEmitter {
 	 * adjust the volume of other lobby members.
 	 *
 	 * You can also allow users to adjust voice settings for your game with Overlay
-	 * OpenVoiceSettings.
+	 * `OpenVoiceSettings`.
 	 *
 	 * @param lobbyId - Lobby to voice connect to
 	 */

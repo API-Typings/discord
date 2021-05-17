@@ -350,8 +350,8 @@ export type DeleteTestEntitlement = { response: never };
  * Creates a discount for the given user on their next purchase of the given SKU.
  *
  * @remarks
- * You should call this endpoint from your backend server just before calling StartPurchase for the
- * SKU you wish to discount. The user will then see a discounted price for that SKU at time of
+ * You should call this endpoint from your backend server just before calling `StartPurchase` for
+ * the SKU you wish to discount. The user will then see a discounted price for that SKU at time of
  * payment. The discount is automatically consumed after successful purchase or if the TTL expires.
  *
  * @endpoint [PUT](https://discord.com/developers/docs/game-sdk/store#create-purchase-discount) `/store/skus/{sku.id}/discounts/{user.id}`

@@ -13,12 +13,12 @@ export enum GatewayCloseCode {
 	UnknownOPCode,
 
 	/**
-	 * You sent an invalid payload.
+	 * An invalid payload was sent.
 	 */
 	DecodeError,
 
 	/**
-	 * You sent a payload prior to identifying.
+	 * A payload was sent prior to identifying.
 	 */
 	NotAuthenticated,
 
@@ -35,7 +35,7 @@ export enum GatewayCloseCode {
 	InvalidSequence = 4007,
 
 	/**
-	 * You're sending payloads too quickly. You will be disconnected on receiving this.
+	 * Payloads are being sent too quickly. You will be disconnected on receiving this.
 	 */
 	RateLimited,
 	SessionTimedOut,
@@ -446,7 +446,7 @@ export enum RPCCloseCode {
 	InvalidOrigin,
 
 	/**
-	 * You are being rate limited
+	 * You are being rate limited.
 	 */
 	RateLimited,
 
@@ -555,17 +555,17 @@ export enum VoiceCloseCode {
 	UnknownOPCode = 4001,
 
 	/**
-	 * You sent an invalid payload in your identifying to the Gateway.
+	 * An invalid payload was sent in your identifying to the Gateway.
 	 */
 	DecodeFailure,
 
 	/**
-	 * You sent a payload before identifying with the gateway.
+	 * A payload was sent before identifying with the gateway.
 	 */
 	NotAuthenticated,
 
 	/**
-	 * The token you sent in your identify payload is incorrect.
+	 * An incorrect token was sent in your identify payload.
 	 */
 	AuthenticationFailed,
 	AlreadyAuthenticated,

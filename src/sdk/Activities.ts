@@ -146,7 +146,7 @@ export interface ActivitySecrets {
 }
 
 /**
- * `ActivityType` is strictly for the purpose of handling events that you receive from Discord;
+ * `ActivityType` is strictly for the purpose of handling events that are received from Discord;
  * though the SDK/our API will not reject a payload with an `ActivityType` sent, it will be
  * discarded and will not change anything in the client.
  *
@@ -185,7 +185,7 @@ export interface ActivityManager extends NodeJS.EventEmitter {
 	/**
 	 * Registers a command by which Discord can launch your game. This might be a custom protocol,
 	 * like `my-awesome-game://`, or a path to an executable. It also supports any launch parameters
-	 * that may be needed, like `game.exe --full-screen`.
+	 * that may be needed.
 	 *
 	 * @remarks
 	 * On macOS, due to the way Discord registers executables, your game needs to be bundled for
@@ -196,8 +196,8 @@ export interface ActivityManager extends NodeJS.EventEmitter {
 	RegisterCommand(command: string): void;
 
 	/**
-	 * Used if you are distributing this SDK on Steam. Registers your game's Steam app ID for the
-	 * protocol `steam://run-game-id/<id>`.
+	 * Used if distributing this SDK on Steam. Registers your game's Steam app ID for the protocol
+	 * `steam://run-game-id/<id>`.
 	 *
 	 * @param steamId - Your game's Steam app ID
 	 */

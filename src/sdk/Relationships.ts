@@ -104,7 +104,7 @@ export interface RelationshipManager extends NodeJS.EventEmitter {
 	GetAt(index: number): Discord.Relationship;
 
 	/**
-	 * Get the number of relationships that match your `Filter()`.
+	 * Get the number of relationships that match `Filter()`.
 	 */
 	Count(): number;
 
