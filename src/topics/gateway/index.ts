@@ -158,6 +158,9 @@ export enum Intents {
 	 * - `THREAD_LIST_SYNC`
 	 * - `THREAD_MEMBER_UPDATE`
 	 * - `THREAD_MEMBERS_UPDATE`
+	 * - `STAGE_INSTANCE_CREATE`
+	 * - `STAGE_INSTANCE_UPDATE`
+	 * - `STAGE_INSTANCE_DELETE`
 	 */
 	Guilds = 1 << 0,
 
