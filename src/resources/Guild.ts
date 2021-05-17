@@ -285,7 +285,7 @@ export interface Guild extends PartialGuild {
 	max_members?: number;
 
 	/**
-	 * The vanity url code for the guild.
+	 * The vanity URL code for the guild.
 	 */
 	vanity_url_code: Nullable<string>;
 
@@ -1917,7 +1917,7 @@ export type GetGuildWidget = { response: GuildWidget };
  * Returns a partial invite object for guilds with that feature enabled. Requires the
  * `MANAGE_GUILD` permission.
  *
- * `code` will be null if a vanity url for the guild is not set.
+ * `code` will be `null` if a vanity URL for the guild is not set.
  *
  * @endpoint [GET](https://discord.com/developers/docs/resources/guild#get-guild-vanity-url) `/guilds/{guild.id}/vanity-url`
  */

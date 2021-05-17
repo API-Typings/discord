@@ -292,7 +292,7 @@ export interface ActivityButton {
 	label: string;
 
 	/**
-	 * The url opened when clicking the button (1-512 characters).
+	 * The URL opened when clicking the button (1-512 characters).
 	 */
 	url: string;
 }

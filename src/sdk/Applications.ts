@@ -26,7 +26,7 @@ export interface OAuth2Token {
  */
 export interface SignedAppTicket {
 	/**
-	 * The application id for the ticket.
+	 * The application ID for the ticket.
 	 */
 	application_id: bigint;
 

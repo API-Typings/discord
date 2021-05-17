@@ -90,7 +90,7 @@ export interface Application extends Omit<PartialApplication, 'hook'> {
 	guild_id?: Snowflake;
 
 	/**
-	 * If this application is a game sold on Discord, this field will be the id of the "Game SKU"
+	 * If this application is a game sold on Discord, this field will be the ID of the "Game SKU"
 	 * that is created, if exists.
 	 */
 	primary_sku_id?: Snowflake;

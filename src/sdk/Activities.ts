@@ -196,7 +196,7 @@ export interface ActivityManager extends NodeJS.EventEmitter {
 	RegisterCommand(command: string): void;
 
 	/**
-	 * Used if you are distributing this SDK on Steam. Registers your game's Steam app id for the
+	 * Used if you are distributing this SDK on Steam. Registers your game's Steam app ID for the
 	 * protocol `steam://run-game-id/<id>`.
 	 *
 	 * @param steamId - Your game's Steam app ID

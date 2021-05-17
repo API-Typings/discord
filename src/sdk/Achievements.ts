@@ -66,7 +66,7 @@ export interface UserAchievement {
 	UserId: bigint;
 
 	/**
-	 * The unique id of the achievement.
+	 * The unique ID of the achievement.
 	 */
 	AchievementId: bigint;
 
