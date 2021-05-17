@@ -4,7 +4,7 @@ export * from './topics';
 export * as Discord from './sdk';
 
 /**
- * Milliseconds since Discord Epoch, the first second of 2015 or `1420070400000`
+ * Milliseconds since Discord Epoch, the first second of `2015` or `1420070400000`.
  *
  * @source {@link https://discord.com/developers/docs/reference#snowflakes|Reference}
  */
@@ -14,7 +14,7 @@ export enum BaseURL {
 	/**
 	 * @source {@link https://discord.com/developers/docs/reference#api-reference-base-url|Reference}
 	 */
-	API = 'https://discord.com/api/v8',
+	API = 'https://discord.com/api/v9',
 
 	/**
 	 * @source {@link https://discord.com/developers/docs/reference#image-formatting-image-base-url|Reference}
@@ -25,9 +25,7 @@ export enum BaseURL {
 export enum ClientReleaseChannel {
 	Stable = 'stable',
 	Beta = 'ptb',
-	PublicTestBuild = 'ptb',
-	Alpha = 'canary',
-	Canary = 'canary'
+	Alpha = 'canary'
 }
 
 /**
