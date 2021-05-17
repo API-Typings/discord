@@ -30,8 +30,8 @@
 	"devDependencies": {
 		"@microsoft/tsdoc-config": "^0.15.2",
 		"@types/node": "^15.3.0",
-		"@typescript-eslint/eslint-plugin": "^4.23.0",
-		"@typescript-eslint/parser": "^4.23.0",
+		"@typescript-eslint/eslint-plugin": "^4.24.0",
+		"@typescript-eslint/parser": "^4.24.0",
 		"eslint": "^7.26.0",
 		"eslint-plugin-tsdoc": "^0.2.14",
 		"prettier": "^2.3.0",
