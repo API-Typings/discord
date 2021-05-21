@@ -27,6 +27,28 @@ export interface StageInstance {
 	 * The topic of the Stage instance (`1-120` characters).
 	 */
 	topic: string;
+
+	/**
+	 * The privacy level of the Stage instance.
+	 */
+	privacy_level: PrivacyLevel;
+
+	/**
+	 * Whether or not Stage discovery is disabled.
+	 */
+	discoverable_disabled: boolean;
+}
+
+export enum PrivacyLevel {
+	/**
+	 * The Stage instance is visible publicly.
+	 */
+	Public,
+
+	/**
+	 * The Stage instance is visible to only guild members.
+	 */
+	GuildOnly
 }
 
 // SECTION Endpoints
@@ -38,10 +60,16 @@ export interface StageInstance {
  * @endpoint [POST](https://discord.com/developers/docs/resources/stage-instance#create-stage-instance) `/stage-instances`
  */
 export interface CreateStageInstance {
-	body: Pick<StageInstance, 'channel_id' | 'topic'>;
+	body: Pick<StageInstance, 'channel_id' | 'topic'> & {
+		/**
+		 * The privacy level of the Stage instance.
+		 *
+		 * @defaultValue `GUILD_ONLY`
+		 */
+		privacy_level?: PrivacyLevel;
+	};
+
 	response: StageInstance & {
-		privacy_level: number;
-		discoverable_disabled: boolean;
 		guild_scheduled_event_id: Nullable<Snowflake>;
 	};
 }
@@ -60,7 +88,7 @@ export type GetStageInstance = { response: StageInstance };
  * @endpoint [PATCH](https://discord.com/developers/docs/resources/stage-instance#update-stage-instance) `/stage-instances/{channel.id}`
  */
 export interface UpdateStageInstance {
-	body: Pick<StageInstance, 'topic'>;
+	body: Partial<Pick<StageInstance, 'topic' | 'privacy_level'>>;
 	response: CreateStageInstance['response'];
 }
 
