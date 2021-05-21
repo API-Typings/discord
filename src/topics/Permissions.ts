@@ -232,7 +232,9 @@ export enum PermissionFlags {
 	UsePrivateThreads = 1 << 36
 }
 
-export type Permission = Uppercase<Delimit<CamelCase<keyof typeof PermissionFlags>, '_'>>;
+export type Permission =
+	| Uppercase<Delimit<CamelCase<Exclude<keyof typeof PermissionFlags, 'UseVAD'>>, '_'>>
+	| 'USE_VAD';
 
 // SECTION Roles
 
