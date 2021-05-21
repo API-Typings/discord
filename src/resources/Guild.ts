@@ -347,9 +347,9 @@ export interface Guild extends PartialGuild {
 	welcome_screen?: WelcomeScreen;
 
 	/**
-	 * `true` if this guild is designated as NSFW.
+	 * Guild NSFW level.
 	 */
-	nsfw: boolean;
+	nsfw_level: GuildNSFWLevel;
 
 	/**
 	 * Stage instances in the guild.
@@ -435,6 +435,13 @@ export enum VerificationLevel {
 	 * Must have a verified phone number.
 	 */
 	VeryHigh
+}
+
+export enum GuildNSFWLevel {
+	Default,
+	Explicit,
+	Safe,
+	AgeRestricted
 }
 
 /**
