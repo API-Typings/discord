@@ -111,7 +111,7 @@ export interface Guild extends PartialGuild {
 	owner_id: Snowflake;
 
 	/**
-	 * Total permissions for the user in the guild (excludes overrides).
+	 * Total permissions for the user in the guild (excludes overwrites).
 	 *
 	 * @remarks
 	 * This field is only sent when using the `GET Current User Guilds` endpoint and is
@@ -687,7 +687,7 @@ export interface PartialGuildMember {
 	pending?: boolean;
 
 	/**
-	 * Total permissions of the member in the channel, including overrides, returned when in the
+	 * Total permissions of the member in the channel, including overwrites, returned when in the
 	 * interaction object.
 	 */
 	permissions?: string;
