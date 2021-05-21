@@ -113,7 +113,7 @@ export interface CreateWebhook {
 		/**
 		 * Image for the default webhook avatar.
 		 */
-		avatar: Nullable<string>;
+		avatar?: Nullable<string>;
 	};
 
 	response: Webhook;
