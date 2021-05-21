@@ -13,6 +13,7 @@ import type {
 	PresenceUpdate,
 	Role,
 	Snowflake,
+	StageInstance,
 	StatusType,
 	ThreadChannel,
 	User,
@@ -349,6 +350,11 @@ export interface Guild extends PartialGuild {
 	 * `true` if this guild is designated as NSFW.
 	 */
 	nsfw: boolean;
+
+	/**
+	 * Stage instances in the guild.
+	 */
+	stage_instances?: StageInstance[];
 }
 
 /**
