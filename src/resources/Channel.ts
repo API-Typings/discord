@@ -1,5 +1,6 @@
 import type { ExclusiveOr, Nullable, Range, Tuple } from 'extended-utility-types';
 import type {
+	Component,
 	GuildMember,
 	Invite,
 	InviteMetadata,
@@ -536,6 +537,11 @@ export interface Message {
 	 * The thread that was started from this message, includes thread member object.
 	 */
 	thread?: ThreadChannel & Required<Pick<ThreadChannel, 'member'>>;
+
+	/**
+	 * Sent if the message contains components.
+	 */
+	components?: Component;
 }
 
 export interface UserMention extends User {

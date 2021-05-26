@@ -5,6 +5,7 @@ import type {
 	ExecuteWebhook,
 	GetWebhookMessage,
 	GuildMember,
+	Message,
 	PartialChannel,
 	PartialEmbed,
 	PartialGuildMember,
@@ -136,16 +137,24 @@ export type ApplicationCommandOption = {
 	  }
 	| {
 			type: 3;
-			choices: [{ name: string; value: string }, ...Partial<Tuple<{ name: string; value: string }, 24>>];
+			choices: ApplicationCommandOptionChoiceType<string>;
 	  }
 	| {
 			type: 4;
-			choices: [{ name: string; value: number }, ...Partial<Tuple<{ name: string; value: number }, 24>>];
+			choices: ApplicationCommandOptionChoiceType<number>;
 	  }
 	| {
 			type: Range<5, 9>;
 	  }
 );
+
+type ApplicationCommandOptionChoiceType<T> = [
+	{
+		name: string;
+		value: T;
+	},
+	...Partial<Tuple<{ name: string; value: T }, 24>>
+];
 
 /**
  * @source {@link https://discord.com/developers/docs/interactions/slash-commands#applicationcommandoptiontype|Application Command}
@@ -307,6 +316,13 @@ export type Interaction = {
 					user: User;
 			  }
 	  ))
+	| {
+			type: InteractionType.MessageComponent;
+			/**
+			 * The message the components were attached to.
+			 */
+			message: Message;
+	  }
 );
 
 /**
@@ -314,7 +330,8 @@ export type Interaction = {
  */
 export enum InteractionType {
 	Ping = 1,
-	ApplicationCommand
+	ApplicationCommand,
+	MessageComponent
 }
 
 /**
@@ -380,27 +397,23 @@ export type ApplicationCommandInteractionDataOption = {
 	name: string;
 } & (
 	| {
-			type: ApplicationCommandOptionType.SubCommand | ApplicationCommandOptionType.SubCommandGroup;
+			type: 1 | 2;
 			options: ApplicationCommandInteractionDataOption[];
 	  }
 	| {
-			type: ApplicationCommandOptionType.String;
+			type: 3;
 			value: string;
 	  }
 	| {
-			type: ApplicationCommandOptionType.Integer;
+			type: 4;
 			value: number;
 	  }
 	| {
-			type: ApplicationCommandOptionType.Boolean;
+			type: 5;
 			value: boolean;
 	  }
 	| {
-			type:
-				| ApplicationCommandOptionType.User
-				| ApplicationCommandOptionType.Channel
-				| ApplicationCommandOptionType.Role
-				| ApplicationCommandOptionType.Mentionable;
+			type: Range<6, 9>;
 			value: Snowflake;
 	  }
 );
@@ -437,7 +450,18 @@ export enum InteractionCallbackType {
 	/**
 	 * ACK an interaction and edit a response later, the user sees a loading state.
 	 */
-	DeferredChannelMessageSource
+	DeferredChannelMessageSource,
+
+	/**
+	 * For components, ACK an interaction and edit the original message later; the user sees a
+	 * loading state.
+	 */
+	DeferredUpdateMessage,
+
+	/**
+	 * For components, edit the message the component was attached to.
+	 */
+	UpdateMessage
 }
 
 /**

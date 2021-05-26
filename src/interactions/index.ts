@@ -1,1 +1,2 @@
-export * from './Interactions';
+export * from './MessageComponents';
+export * from './SlashCommands';
