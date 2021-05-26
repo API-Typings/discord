@@ -287,8 +287,20 @@ export enum GatewayEvent {
 	 * User was updated.
 	 */
 	PresenceUpdate = 'PRESENCE_UPDATE',
+
+	/**
+	 * Stage instance was created.
+	 */
 	StageInstanceCreate = 'STAGE_INSTANCE_CREATE',
+
+	/**
+	 * Stage instance was deleted or created.
+	 */
 	StageInstanceUpdate = 'STAGE_INSTANCE_UPDATE',
+
+	/**
+	 * Stage instance was updated.
+	 */
 	StageInstanceDelete = 'STAGE_INSTANCE_DELETE',
 
 	/**

@@ -1,27 +1,16 @@
-import { Nullable } from 'extended-utility-types';
-import { PartialUser, Snowflake, Team, User } from '../';
+import type { Nullable } from 'extended-utility-types';
+import type { PartialUser, Snowflake, Team, User } from '../';
 
 // ANCHOR Partial Application
 
 export interface PartialApplication {
-	/**
-	 * The ID of the app.
-	 */
 	id: Snowflake;
-
-	/**
-	 * The name of the app.
-	 */
 	name: string;
 
 	/**
 	 * The icon hash of the app.
 	 */
 	icon: Nullable<string>;
-
-	/**
-	 * The description of the app.
-	 */
 	description: string;
 	hook: boolean;
 

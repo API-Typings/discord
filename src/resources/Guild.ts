@@ -136,7 +136,7 @@ export interface Guild extends PartialGuild {
 	afk_timeout: number;
 
 	/**
-	 * True if the server widget is enabled.
+	 * `true` if the server widget is enabled.
 	 */
 	wdiget_enabled?: boolean;
 
@@ -144,25 +144,9 @@ export interface Guild extends PartialGuild {
 	 * The channel ID that the widget will generate an invite to, or `null` if set to no invite.
 	 */
 	widget_channel_id?: Nullable<Snowflake>;
-
-	/**
-	 * Verification level required for the guild.
-	 */
 	verification_level: VerificationLevel;
-
-	/**
-	 * Default message notifications level.
-	 */
 	default_message_notifications: DefaultMessageNotificationLevel;
-
-	/**
-	 * Explicit content filter level.
-	 */
 	explicit_content_filter: ExplicitContentFilterLevel;
-
-	/**
-	 * Roles in the guild.
-	 */
 	roles: Role[];
 
 	/**
@@ -190,10 +174,6 @@ export interface Guild extends PartialGuild {
 	 * posted.
 	 */
 	system_channel_id: Nullable<Snowflake>;
-
-	/**
-	 * System channel flags.
-	 */
 	system_channel_flags: SystemChannelFlags;
 
 	/**
@@ -202,15 +182,13 @@ export interface Guild extends PartialGuild {
 	rules_channel_id: Nullable<Snowflake>;
 
 	/**
-	 * When this guild was joined at.
-	 *
 	 * @remarks
 	 * This field is only sent within the `GUILD_CREATE` event.
 	 */
 	joined_at?: Nullable<string>;
 
 	/**
-	 * True if this is considered a large guild.
+	 * `true` if this is considered a large guild.
 	 *
 	 * @remarks
 	 * This field is only sent within the `GUILD_CREATE` event.
@@ -218,7 +196,7 @@ export interface Guild extends PartialGuild {
 	large?: boolean;
 
 	/**
-	 * True if this guild is unavailable due to an outage.
+	 * `true` if this guild is unavailable due to an outage.
 	 *
 	 * @remarks
 	 * This field is only sent within the `GUILD_CREATE` event.
@@ -234,7 +212,7 @@ export interface Guild extends PartialGuild {
 	member_count?: number;
 
 	/**
-	 * States of members currently in voice channels; lacks the `guild_id` key.
+	 * States of members currently in voice channels.
 	 *
 	 * @remarks
 	 * This field is only sent within the `GUILD_CREATE` event.
@@ -242,16 +220,12 @@ export interface Guild extends PartialGuild {
 	voice_states?: Omit<VoiceState, 'guild_id'>[];
 
 	/**
-	 * Users in the guild.
-	 *
 	 * @remarks
 	 * This field is only sent within the `GUILD_CREATE` event.
 	 */
 	members?: GuildMember[];
 
 	/**
-	 * Channels in the guild.
-	 *
 	 * @remarks
 	 * This field is only sent within the `GUILD_CREATE` event.
 	 */
@@ -311,7 +285,7 @@ export interface Guild extends PartialGuild {
 	premium_subscription_count?: number;
 
 	/**
-	 * The preferred locale of a Community guild; used in server discovery and notices from Discord;
+	 * The preferred locale of a Community guild; used in server discovery and notices from Discord.
 	 *
 	 * @defaultValue `en-US`
 	 */
@@ -322,10 +296,6 @@ export interface Guild extends PartialGuild {
 	 * Discord.
 	 */
 	public_updates_channel_id: Nullable<Snowflake>;
-
-	/**
-	 * The maximum amount of users in a video channel.
-	 */
 	max_video_channel_users?: number;
 
 	/**
@@ -345,15 +315,7 @@ export interface Guild extends PartialGuild {
 	 * object.
 	 */
 	welcome_screen?: WelcomeScreen;
-
-	/**
-	 * Guild NSFW level.
-	 */
 	nsfw_level: GuildNSFWLevel;
-
-	/**
-	 * Stage instances in the guild.
-	 */
 	stage_instances?: StageInstance[];
 }
 
@@ -742,19 +704,8 @@ export interface GuildMember extends PartialGuildMember {
  * @source {@link https://discord.com/developers/docs/resources/audit-log#audit-log-object-example-partial-integration-object}
  */
 export interface PartialIntegration {
-	/**
-	 * Integration ID.
-	 */
 	id: Snowflake;
-
-	/**
-	 * Integration name.
-	 */
 	name: string;
-
-	/**
-	 * Integration type (Twitch, YouTube, or Discord).
-	 */
 	type: IntegrationType;
 
 	/**
@@ -769,29 +720,9 @@ export interface PartialIntegration {
  * @source {@link https://discord.com/developers/docs/resources/guild#integration-object-integration-structure|Guild}
  */
 export interface Integration extends PartialIntegration {
-	/**
-	 * Integration ID.
-	 */
-	id: Snowflake;
-
-	/**
-	 * Integration name.
-	 */
-	name: string;
-
-	/**
-	 * Integration type.
-	 */
-	type: IntegrationType;
-
-	/**
-	 * Is this integration enabled.
-	 */
 	enabled: boolean;
 
 	/**
-	 * Is this integration syncing.
-	 *
 	 * @remarks
 	 * This field is not provided for discord bot integrations.
 	 */
@@ -852,10 +783,6 @@ export interface Integration extends PartialIntegration {
 	 * This field is not provided for discord bot integrations.
 	 */
 	subscriber_count?: number;
-
-	/**
-	 * Has this integration been revoked.
-	 */
 	revoked?: boolean;
 
 	/**
@@ -878,14 +805,7 @@ export enum IntegrationExpireBehavior {
  * @source {@link https://discord.com/developers/docs/resources/guild#integration-account-object-integration-account-structure|Guild}
  */
 export interface IntegrationAccount {
-	/**
-	 * ID of the account.
-	 */
 	id: Snowflake;
-
-	/**
-	 * Name of the account.
-	 */
 	name: string;
 }
 
@@ -893,29 +813,14 @@ export interface IntegrationAccount {
  * @source {@link https://discord.com/developers/docs/resources/guild#integration-application-object-integration-application-structure|Guild}
  */
 export interface IntegrationApplication {
-	/**
-	 * The ID of the app.
-	 */
 	id: Snowflake;
-
-	/**
-	 * The name of the app.
-	 */
 	name: string;
 
 	/**
-	 * The Icon hash of the app.
+	 * The icon hash of the app.
 	 */
 	icon: Nullable<string>;
-
-	/**
-	 * The description of the app.
-	 */
 	description: string;
-
-	/**
-	 * The description of the app.
-	 */
 	summary: string;
 
 	/**
@@ -930,19 +835,12 @@ export interface IntegrationApplication {
  * @source {@link https://discord.com/developers/docs/resources/guild#ban-object-ban-structure|Guild}
  */
 export interface GuildBan {
-	/**
-	 * The reason for the ban.
-	 */
 	reason: Nullable<string>;
 
 	/**
 	 * The banned user.
 	 */
 	user: User;
-}
-
-export interface Prune {
-	pruned: number;
 }
 
 // SECTION Welcome Screen
@@ -957,18 +855,15 @@ export interface WelcomeScreen {
 	description: Nullable<string>;
 
 	/**
-	 * The channels shown in the welcome screen, up to 5.
+	 * The channels shown in the welcome screen.
 	 */
-	welcome_channels: WelcomeScreenChannel[];
+	welcome_channels: Partial<Tuple<WelcomeScreenChannel, 5>>;
 }
 
 /**
  * @source {@link https://discord.com/developers/docs/resources/guild#welcome-screen-object-welcome-screen-channel-structure|Guild}
  */
 export interface WelcomeScreenChannel {
-	/**
-	 * The channel's ID.
-	 */
 	channel_id: Snowflake;
 
 	/**
@@ -1023,9 +918,6 @@ export interface MembershipScreening {
  * @source {@link https://discord.com/developers/docs/resources/guild#membership-screening-object-membership-screening-field-structure|Guild}
  */
 export interface ScreeningField {
-	/**
-	 * The type of field (currently `TERMS` is the only type).
-	 */
 	field_type: ScreeningFieldType;
 
 	/**
@@ -1078,20 +970,8 @@ export interface CreateGuild {
 		 * Base64 `128x128` image for the guild icon.
 		 */
 		icon?: string;
-
-		/**
-		 * Verification level.
-		 */
 		verification_level?: VerificationLevel;
-
-		/**
-		 * Default message notifications level.
-		 */
 		default_message_notifications?: DefaultMessageNotificationLevel;
-
-		/**
-		 * Explicit content filter level.
-		 */
 		explicit_content_filter?: ExplicitContentFilterLevel;
 
 		/**
@@ -1119,10 +999,6 @@ export interface CreateGuild {
 		 * category's `id` field. Category channels must be listed before any children.
 		 */
 		channels?: PartialChannel;
-
-		/**
-		 * ID for AFK channel.
-		 */
 		afk_channel_id?: Snowflake;
 
 		/**
@@ -1135,10 +1011,6 @@ export interface CreateGuild {
 		 * posted.
 		 */
 		system_channel_id?: Snowflake;
-
-		/**
-		 * System channel flags.
-		 */
 		system_channel_flags?: SystemChannelFlags;
 	};
 
@@ -1182,34 +1054,15 @@ export type GetGuildPreview = { response: GuildPreview };
  */
 export interface ModifyGuild {
 	body: {
-		/**
-		 * Guild name.
-		 */
 		name?: string;
 
 		/**
 		 * Guild voice region ID.
 		 */
 		region?: Nullable<string>;
-
-		/**
-		 * Verification level.
-		 */
 		verification_level?: Nullable<VerificationLevel>;
-
-		/**
-		 * Default message notifications level.
-		 */
 		default_message_notifications?: Nullable<DefaultMessageNotificationLevel>;
-
-		/**
-		 * Explicit content filter level.
-		 */
 		explicit_content_filter?: Nullable<ExplicitContentFilterLevel>;
-
-		/**
-		 * ID for AFK channel.
-		 */
 		afk_channel_id?: Nullable<Snowflake>;
 
 		/**
@@ -1244,10 +1097,6 @@ export interface ModifyGuild {
 		 * posted.
 		 */
 		system_channel_id?: Nullable<Snowflake>;
-
-		/**
-		 * System channel flags.
-		 */
 		system_channel_flags?: SystemChannelFlags;
 
 		/**
@@ -1263,7 +1112,7 @@ export interface ModifyGuild {
 
 		/**
 		 * The preferred locale of a Community guild used in server discovery and notices from
-		 * Discord
+		 * Discord.
 		 *
 		 * @defaultValue `en-US`
 		 */
@@ -1280,9 +1129,6 @@ export interface ModifyGuild {
 		description: Nullable<string>;
 	};
 
-	/**
-	 * The updated guild object.
-	 */
 	response: Guild;
 }
 
@@ -1314,10 +1160,6 @@ export interface CreateGuildChannel {
 		 * Channel name (`2-100` characters).
 		 */
 		name: string;
-
-		/**
-		 * The type of channel.
-		 */
 		type?: ChannelType;
 
 		/**
@@ -1355,16 +1197,9 @@ export interface CreateGuildChannel {
 		 * ID of the parent category for a channel.
 		 */
 		parent_id?: Snowflake;
-
-		/**
-		 * Whether the channel is NSFW.
-		 */
 		nsfw?: boolean;
 	};
 
-	/**
-	 * The new channel object.
-	 */
 	response: Channel;
 }
 
@@ -1376,9 +1211,6 @@ export interface CreateGuildChannel {
  */
 export interface ModifyGuildChannelPositions {
 	body: {
-		/**
-		 * Channel ID.
-		 */
 		id: Snowflake;
 
 		/**
@@ -1441,7 +1273,7 @@ export type GetGuildMember = { response: GuildMember };
 export interface ListGuildMembers {
 	query: {
 		/**
-		 * Max number of members to return (1-1000).
+		 * Max number of members to return.
 		 *
 		 * @defaultValue `1`
 		 */
@@ -1455,9 +1287,6 @@ export interface ListGuildMembers {
 		after?: Snowflake;
 	};
 
-	/**
-	 * An array of guild members, sorted by their ID in ascending order.
-	 */
 	response: GuildMember[];
 }
 
@@ -1472,16 +1301,13 @@ export interface SearchGuildMembers {
 		query: string;
 
 		/**
-		 * Max numbers of members to return (1-1000).
+		 * Max numbers of members to return.
 		 *
 		 * @defaultValue `1`
 		 */
 		limit?: Range<1, 1000>;
 	};
 
-	/**
-	 * An array of guild member objects whose username or nickname starts with a provided string.
-	 */
 	response: GuildMember[];
 }
 
@@ -1587,9 +1413,6 @@ export interface ModifyCurrentUserNick {
 		nick?: Nullable<string>;
 	};
 
-	/**
-	 * The nickname.
-	 */
 	response: string;
 }
 
@@ -1642,13 +1465,9 @@ export type GetGuildBan = GuildBan | never;
 export interface CreateGuildBan {
 	body: {
 		/**
-		 * Number of days to delete messages for (0-7).
+		 * Number of days to delete messages for.
 		 */
 		delete_messages_days?: Range<0, 7>;
-
-		/**
-		 * Reason for the ban.
-		 */
 		reason?: string;
 	};
 
@@ -1677,8 +1496,6 @@ export type GetGuildRoles = { response: Role[] };
 export interface CreateGuildRole {
 	body: {
 		/**
-		 * Name of the role.
-		 *
 		 * @defaultValue `new role`
 		 */
 		name?: string;
@@ -1712,9 +1529,6 @@ export interface CreateGuildRole {
 		mentionable?: boolean;
 	};
 
-	/**
-	 * The new role.
-	 */
 	response: Role;
 }
 
@@ -1726,9 +1540,6 @@ export interface CreateGuildRole {
  */
 export interface ModifyGuildRolePositions {
 	body: {
-		/**
-		 * Role.
-		 */
 		id: Snowflake;
 
 		/**
@@ -1737,9 +1548,6 @@ export interface ModifyGuildRolePositions {
 		position?: Nullable<number>;
 	}[];
 
-	/**
-	 * A list of all of the guild's role objects on success, sorted by their ID in ascending order.
-	 */
 	response: Role[];
 }
 
@@ -1750,9 +1558,6 @@ export interface ModifyGuildRolePositions {
  */
 export interface ModifyGuildRole {
 	body: {
-		/**
-		 * Name of the role.
-		 */
 		name?: Nullable<string>;
 
 		/**
@@ -1776,9 +1581,6 @@ export interface ModifyGuildRole {
 		mentionable?: Nullable<boolean>;
 	};
 
-	/**
-	 * The updated role.
-	 */
 	response: Role;
 }
 
@@ -1802,15 +1604,11 @@ export type DeleteGuildRole = { response: never };
 export interface GetGuildPruneCount {
 	query: {
 		/**
-		 * Number of days to count prune for (1-30).
+		 * Number of days to count prune for.
 		 *
 		 * @defaultValue `7`
 		 */
 		days?: Range<1, 30>;
-
-		/**
-		 * Role(s) to include.
-		 */
 		include_roles?: Snowflake[];
 	};
 
@@ -1838,29 +1636,13 @@ export interface GetGuildPruneCount {
  * @endpoint [POST](https://discord.com/developers/docs/resources/guild#begin-guild-prune)`/guilds/{guild.id}/prune`
  */
 export interface BeginGuildPrune {
-	body: {
-		/**
-		 * Number of days to prune (1-30).
-		 *
-		 * @defaultValue `7`
-		 */
-		days?: Range<1, 30>;
-
+	body: GetGuildPruneCount['query'] & {
 		/**
 		 * Whether `pruned` is returned, discouraged for large guilds.
 		 *
 		 * @defaultValue `true`
 		 */
 		compute_prune_count?: boolean;
-
-		/**
-		 * Role(s) to include.
-		 */
-		include_roles?: Snowflake[];
-
-		/**
-		 * Reason for the prune.
-		 */
 		reason?: string;
 	};
 
@@ -1912,10 +1694,6 @@ export type GetGuildWidgetSettings = GuildWidget;
  */
 export interface ModifyGuildWidget {
 	body: Partial<GuildWidget>;
-
-	/**
-	 * The updated guild widget object.
-	 */
 	response: GuildWidget;
 }
 
@@ -1989,9 +1767,6 @@ export interface ModifyGuildWelcomeScreen {
 		description?: Nullable<string>;
 	};
 
-	/**
-	 * The updated Welcome Screen object.
-	 */
 	response: WelcomeScreen;
 }
 
@@ -2066,7 +1841,7 @@ export interface ModifyGuildDiscoveryMetadata {
 		primary_category_id?: Nullable<number>;
 
 		/**
-		 * Up to `10` discovery search keywords.
+		 * Discovery search keywords.
 		 *
 		 * @defaultValue `null`
 		 */
@@ -2080,9 +1855,6 @@ export interface ModifyGuildDiscoveryMetadata {
 		emoji_discoverability_enabled?: Nullable<boolean>;
 	};
 
-	/**
-	 * The updated discovery metadata object.
-	 */
 	response: DiscoveryMetadata;
 }
 
@@ -2119,9 +1891,6 @@ export type RemoveGuildDiscoverySubcategory = { response: never };
  */
 export interface ModifyMembershipScreening {
 	body: {
-		/**
-		 * Whether Membership Screening is enabled.
-		 */
 		enabled?: boolean;
 
 		/**
@@ -2135,9 +1904,6 @@ export interface ModifyMembershipScreening {
 		description?: string;
 	};
 
-	/**
-	 * The updated Membership Screening object.
-	 */
 	response: MembershipScreening;
 }
 
