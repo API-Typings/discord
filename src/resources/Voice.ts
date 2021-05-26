@@ -23,9 +23,10 @@ export interface VoiceState {
 	user_id: Snowflake;
 
 	/**
-	 * The guild member this voice state is for.
+	 * The guild member this voice state is for, or `null` if the user is in a live stage but not
+	 * in the guild.
 	 */
-	member?: GuildMember;
+	member?: Nullable<GuildMember>;
 
 	/**
 	 * The session ID for this voice state.
