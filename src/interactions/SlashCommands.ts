@@ -448,13 +448,13 @@ export enum InteractionCallbackType {
 	ChannelMessageSource = 4,
 
 	/**
-	 * ACK an interaction and edit a response later, the user sees a loading state.
+	 * ACK an interaction and edit a response later; the user sees a loading state.
 	 */
 	DeferredChannelMessageSource,
 
 	/**
-	 * For components, ACK an interaction and edit the original message later; the user sees a
-	 * loading state.
+	 * For components, ACK an interaction and edit the original message later; the user does not see
+	 * a loading state.
 	 */
 	DeferredUpdateMessage,
 
