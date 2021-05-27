@@ -8,41 +8,46 @@ import type { PartialEmoji } from '../';
  */
 export interface Component {
 	/**
-	 * Valid for all types.
+	 * Valid for all components.
 	 */
 	type: ComponentType;
 
 	/**
-	 * Valid for button types.
+	 * Valid for Buttons.
 	 */
 	style?: ButtonStyle;
 
 	/**
-	 * Text that appears on the button, max 80 characters. Valid for button types.
+	 * Text that appears on the button, max 80 characters. Valid for Buttons.
 	 */
 	label?: string;
 
 	/**
-	 * Valid for button types.
+	 * Valid for Buttons.
 	 */
 	emoji?: PartialEmoji;
 
 	/**
-	 * A developer-defined identifier for the button, max 100 characters. Valid for button types.
+	 * A developer-defined identifier for the button, max 100 characters. Valid for Buttons.
 	 */
 	custom_id?: string;
 
 	/**
-	 * A URL for link-style buttons. Valid for button types.
+	 * A URL for link-style buttons. Valid for Buttons.
 	 */
 	url?: string;
 
 	/**
-	 * Whether the button is disabled. Valid for button types.
+	 * Whether the button is disabled. Valid for Buttons..
 	 *
 	 * @defaultValue `false`
 	 */
 	disabled?: boolean;
+
+	/**
+	 * A list of child components. Valid for Action Rows.
+	 */
+	components?: Component[];
 }
 
 /**
@@ -59,6 +64,11 @@ export enum ComponentType {
 	 */
 	Button,
 	Select
+}
+
+export interface ActionRow {
+	type: ComponentType.ActionRow;
+	components: Component[];
 }
 
 /**
