@@ -507,7 +507,7 @@ export interface Message {
 	/**
 	 * Sent if the message contains components.
 	 */
-	components?: Component;
+	components?: Component[];
 }
 
 export interface UserMention extends User {
