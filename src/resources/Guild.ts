@@ -502,6 +502,16 @@ export enum GuildFeature {
 	MemberVerificationGateEnabled = 'MEMBER_VERIFICATION_GATE_ENABLED',
 
 	/**
+	 * Guild has enabled monetization.
+	 */
+	MonetizationEnabled = 'MONETIZATION_ENABLED',
+
+	/**
+	 * Guild has increased custom sticker slots.
+	 */
+	MoreStickers = 'MORE_STICKERS',
+
+	/**
 	 * Guild has access to create news channels.
 	 */
 	News = 'NEWS',
@@ -515,6 +525,11 @@ export enum GuildFeature {
 	 * Guild can be previewed before joining via Membership Screening or the directory.
 	 */
 	PreviewEnabled = 'PREVIEW_ENABLED',
+
+	/**
+	 * Guild has enabled ticketed events.
+	 */
+	TicketedEventsEnabled = 'TICKETED_EVENTS_ENABLED',
 
 	/**
 	 * Guild has access to set a vanity URL.
