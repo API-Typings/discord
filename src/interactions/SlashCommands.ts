@@ -85,6 +85,11 @@ export interface ApplicationCommand {
 	application_id: Snowflake;
 
 	/**
+	 * Guild ID of the command, if not global.
+	 */
+	guild_id?: Snowflake;
+
+	/**
 	 * `1-32` lowercase character name matching `^[\w-]{1,32}$`.
 	 */
 	name: string;
