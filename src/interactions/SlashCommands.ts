@@ -722,7 +722,7 @@ export interface EditApplicationCommandPermissions {
 		/**
 		 * The permissions for the command in the guild.
 		 */
-		permissions: ApplicationCommandPermissions[];
+		permissions: Partial<Tuple<ApplicationCommandPermissions, 10>>;
 	};
 
 	response: GuildApplicationCommandPermissions;
@@ -737,7 +737,7 @@ export interface EditApplicationCommandPermissions {
  * @endpoint [PUT](https://discord.com/developers/docs/interactions/slash-commands#batch-edit-application-command-permissions) `/applications/{application.id}/guilds/{guild.id}/permissions`
  */
 export interface BatchEditApplicationCommandPermissions {
-	body: PartialGuildApplicationCommandPermissions[];
+	body: Partial<Tuple<PartialGuildApplicationCommandPermissions, 10>>;
 }
 
 // !SECTION
