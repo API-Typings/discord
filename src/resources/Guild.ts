@@ -121,11 +121,6 @@ export interface Guild extends PartialGuild {
 	permissions?: string;
 
 	/**
-	 * Voice region ID for the guild.
-	 */
-	region: VoiceRegion;
-
-	/**
 	 * ID of AFK channel.
 	 */
 	afk_channel_id: Nullable<Snowflake>;
@@ -977,11 +972,6 @@ export interface CreateGuild {
 		name: string;
 
 		/**
-		 * Voice region ID.
-		 */
-		region?: string;
-
-		/**
 		 * Base64 `128x128` image for the guild icon.
 		 */
 		icon?: string;
@@ -1070,11 +1060,6 @@ export type GetGuildPreview = { response: GuildPreview };
 export interface ModifyGuild {
 	body: {
 		name?: string;
-
-		/**
-		 * Guild voice region ID.
-		 */
-		region?: Nullable<string>;
 		verification_level?: Nullable<VerificationLevel>;
 		default_message_notifications?: Nullable<DefaultMessageNotificationLevel>;
 		explicit_content_filter?: Nullable<ExplicitContentFilterLevel>;
