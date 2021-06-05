@@ -843,7 +843,7 @@ export interface PartialEmbed {
 	/**
 	 * Fields information.
 	 */
-	fields?: [EmbedField, Partial<Tuple<EmbedField, 24>>];
+	fields?: [EmbedField, ...Partial<Tuple<EmbedField, 24>>];
 }
 
 /**
