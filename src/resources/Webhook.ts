@@ -1,5 +1,15 @@
 import type { Nullable, Tuple } from 'extended-utility-types';
-import type { AllowedMentions, Attachment, Channel, Guild, Message, PartialEmbed, Snowflake, User } from '../';
+import type {
+	AllowedMentions,
+	Attachment,
+	Channel,
+	Component,
+	Guild,
+	Message,
+	PartialEmbed,
+	Snowflake,
+	User
+} from '../';
 
 /**
  * Represents a low-effort way to post messages to channels. They do not require a bot user or
@@ -257,6 +267,11 @@ export interface ExecuteWebhook {
 		 * Allowed mentions for the message.
 		 */
 		allowed_mentions?: AllowedMentions;
+
+		/**
+		 * The components to include with the message.
+		 */
+		components?: Component[];
 	} & (
 		| {
 				/**
@@ -337,6 +352,11 @@ export interface EditWebhookMessage {
 		 * Attached files to keep.
 		 */
 		attachments?: Nullable<Attachment[]>;
+
+		/**
+		 * The components to include with the message.
+		 */
+		components?: Component[];
 	};
 
 	response: Message;

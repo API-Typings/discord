@@ -1404,6 +1404,11 @@ export interface CreateMessage {
 		 * Include to make the message a reply.
 		 */
 		message_reference?: MessageReference;
+
+		/**
+		 * The components to include with the message.
+		 */
+		components?: Component[];
 	} & (
 		| {
 				/**
@@ -1576,6 +1581,11 @@ export interface EditMessage {
 		 * Attached files to keep.
 		 */
 		attachments?: Nullable<Attachment[]>;
+
+		/**
+		 * The components to include with the message.
+		 */
+		components?: Component[];
 	};
 }
 
