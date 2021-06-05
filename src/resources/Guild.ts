@@ -1157,7 +1157,7 @@ export type GetGuildChannels = { response: Channel[] };
 export interface CreateGuildChannel {
 	body: {
 		/**
-		 * Channel name (`2-100` characters).
+		 * Channel name (`1-100` characters).
 		 */
 		name: string;
 		type?: ChannelType;

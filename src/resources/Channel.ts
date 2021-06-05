@@ -22,7 +22,7 @@ export interface PartialChannel {
 	type: ChannelType;
 
 	/**
-	 * The name of the channel (`2-100` characters).
+	 * The name of the channel (`1-100` characters).
 	 */
 	name: string;
 
