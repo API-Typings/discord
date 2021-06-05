@@ -8,6 +8,7 @@ import type {
 	Overwrite,
 	PartialIntegration,
 	PartialRole,
+	PrivacyLevel,
 	Snowflake,
 	User,
 	VerificationLevel,
@@ -119,7 +120,10 @@ export enum AuditLogEvent {
 	MessageUnpin,
 	IntegrationCreate = 80,
 	IntegrationUpdate,
-	IntegrationDelete
+	IntegrationDelete,
+	StageInstanceCreate,
+	StageInstanceUpdate,
+	StageInstanceDelete
 }
 
 /**
@@ -143,6 +147,9 @@ export interface AuditLogEntryInfo {
 	 * - `MESSAGE_PIN`
 	 * - `MESSAGE_UNPIN`
 	 * - `MESSAGE_DELETE`
+	 * - `STAGE_INSTANCE_CREATE`
+	 * - `STAGE_INSTANCE_UPDATE`
+	 * - `STAGE_INSTANCE_DELETE`
 	 */
 	channel_id: Snowflake;
 
@@ -486,6 +493,11 @@ export interface AuditLogChangeKey {
 	 * New user limit in a voice channel.
 	 */
 	user_limit: number;
+
+	/**
+	 * The privacy level of the stage instance.
+	 */
+	privacy_level: PrivacyLevel;
 }
 
 // SECTION Endpoints
