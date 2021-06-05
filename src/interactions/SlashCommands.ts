@@ -744,6 +744,7 @@ export interface EditApplicationCommandPermissions {
  */
 export interface BatchEditApplicationCommandPermissions {
 	body: Partial<Tuple<PartialGuildApplicationCommandPermissions, 10>>;
+	response: GuildApplicationCommandPermissions[];
 }
 
 // !SECTION
