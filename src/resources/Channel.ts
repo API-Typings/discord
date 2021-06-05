@@ -387,8 +387,9 @@ export interface Message {
 	 *
 	 * @remarks
 	 * The member object exists in `MESSAGE_CREATE` and `MESSAGE_UPDATE` events from
-	 * text-based guild channels. This allows bots to obtain real-time member data without
-	 * requiring bots to store member state in memory.
+	 * text-based guild channels, provided that the author off the message is not a webhook.
+	 * This allows bots to obtain real-time member data without requiring bots to store member
+	 * state in memory.
 	 */
 	member?: GuildMember;
 	content: string;
