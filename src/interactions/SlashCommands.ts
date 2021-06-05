@@ -366,7 +366,8 @@ export interface ApplicationCommandInteractionDataResolved {
 	users?: Record<string, User>;
 
 	/**
-	 * The IDs and partial Member objects.
+	 * The IDs and partial Member objects. If data for a member is included, data for its
+	 * corresponding user will also be included.
 	 */
 	members?: Record<string, PartialGuildMember>;
 
