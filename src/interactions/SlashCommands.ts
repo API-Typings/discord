@@ -585,7 +585,7 @@ export type GetGuildApplicationCommands = { response: ApplicationCommand[] };
  *
  * Commands that do not already exist will count toward the daily application command create limit.
  *
- * @endpoint PUT `/applications/{application.id}/commands`
+ * @endpoint [PUT](https://discord.com/developers/docs/interactions/slash-commands#bulk-overwrite-global-application-commands) `/applications/{application.id}/commands`
  */
 export interface BulkOverwriteGlobalApplicationCommands {
 	body: ApplicationCommand[];
@@ -635,7 +635,7 @@ export type DeleteGuildApplicationCommand = { response: never };
 /**
  * Takes a list of application commands, overwriting existing commands for the guild.
  *
- * @endpoint PUT `/applications/{application.id}/guilds/{guild.id}/commands`
+ * @endpoint [PUT](https://discord.com/developers/docs/interactions/slash-commands#bulk-overwrite-guild-application-commands) `/applications/{application.id}/guilds/{guild.id}/commands`
  */
 export type BulkOverwriteGuildApplicationCommands = BulkOverwriteGlobalApplicationCommands;
 
@@ -695,7 +695,7 @@ export type DeleteFollowupMessage = { response: never };
 /**
  * Fetches command permissions for all commands for your application in a guild.
  *
- * @endpoint GET `/applications/{application.id}/guilds/{guild.id}/commands/permissions`
+ * @endpoint [GET](https://discord.com/developers/docs/interactions/slash-commands#get-guild-application-command-permissions) `/applications/{application.id}/guilds/{guild.id}/commands/permissions`
  */
 export type GetGuildApplicationCommandPermissions = { response: GuildApplicationCommandPermissions[] };
 
@@ -703,7 +703,7 @@ export type GetGuildApplicationCommandPermissions = { response: GuildApplication
 /**
  * Fetches command permissions for a specific command for your application in a guild.
  *
- * @endpoint GET `/applications/{application.id}/guilds/{guild.id}/commands/{command.id}/permissions`
+ * @endpoint [GET](https://discord.com/developers/docs/interactions/slash-commands#get-application-command-permissions) `/applications/{application.id}/guilds/{guild.id}/commands/{command.id}/permissions`
  */
 export type GetApplicationCommandPermissions = { response: ApplicationCommandPermissions[] };
 
@@ -714,7 +714,7 @@ export type GetApplicationCommandPermissions = { response: ApplicationCommandPer
  * - This endpoint will overwrite existing permissions for the command in that guild.
  * - Deleting or renaming a command will permanently delete all permissions for that command.
  *
- * @endpoint PUT `/applications/{application.id}/guilds/{guild.id}/commands/{command.id}/permissions`
+ * @endpoint [PUT](https://discord.com/developers/docs/interactions/slash-commands#edit-application-command-permissions) `/applications/{application.id}/guilds/{guild.id}/commands/{command.id}/permissions`
  */
 /* eslint-enable max-len */
 export interface EditApplicationCommandPermissions {
@@ -734,7 +734,7 @@ export interface EditApplicationCommandPermissions {
  * @remarks
  * This endpoint will overwrite existing permissions for the command in that guild.
  *
- * @endpoint PUT `/applications/{application.id}/guilds/{guild.id}/permissions`
+ * @endpoint [PUT](https://discord.com/developers/docs/interactions/slash-commands#batch-edit-application-command-permissions) `/applications/{application.id}/guilds/{guild.id}/permissions`
  */
 export interface BatchEditApplicationCommandPermissions {
 	body: PartialGuildApplicationCommandPermissions[];

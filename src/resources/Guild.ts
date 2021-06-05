@@ -1782,7 +1782,7 @@ export interface ModifyGuildWelcomeScreen {
  * own request to speak.
  * - You are able to set `request_to_speak_timestamp` to any present or future time.
  *
- * @endpoint PATCH `/guilds/{guild.id}/voice-states/@me`
+ * @endpoint [PATCH](https://discord.com/developers/docs/resources/guild#update-current-user-voice-state) `/guilds/{guild.id}/voice-states/@me`
  */
 export interface UpdateCurrentUserVoiceState {
 	body: {
@@ -1815,7 +1815,7 @@ export interface UpdateCurrentUserVoiceState {
  * current time. Bot users will not.
  * - When suppressed, the user will have their `request_to_speak_timestamp` removed.
  *
- * @endpoint PATCH `/guilds/{guild.id}/voice-states/{user.id}`
+ * @endpoint [PATCH](https://discord.com/developers/docs/resources/guild#update-user-voice-state) `/guilds/{guild.id}/voice-states/{user.id}`
  */
 export type UpdateUserVoiceState = { body: Omit<UpdateCurrentUserVoiceState['body'], 'request_to_speak_timestamp'> };
 

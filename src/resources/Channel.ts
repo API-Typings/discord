@@ -1808,7 +1808,7 @@ export type GroupDMRemoveRecipient = { response: never };
  * same as the ID of the message, and as such a message can only have a single thread created from
  * it.
  *
- * @endpoint POST `/channels/{channel.id}/messages/{message.id}/threads`
+ * @endpoint [POST](https://discord.com/developers/docs/resources/channel#start-thread-with-message) `/channels/{channel.id}/messages/{message.id}/threads`
  */
 export interface StartThreadWithMessage {
 	body: Required<Pick<ModifyThreadChannel['body'], 'name' | 'auto_archive_duration'>>;
@@ -1819,14 +1819,14 @@ export interface StartThreadWithMessage {
  * Creates a new thread that is not connected to an existing message. The created thread is always
  * a `GUILD_PRIVATE_THREAD`
  *
- * @endpoint POST `/channels/{channel.id}/threads`
+ * @endpoint [POST](https://discord.com/developers/docs/resources/channel#start-thread-without-message) `/channels/{channel.id}/threads`
  */
 export type StartThreadWithoutMessage = StartThreadWithMessage;
 
 /**
  * Adds the current user to a thread. Requires the thread is not archived.
  *
- * @endpoint PUT `/channels/{channel.id}/thread-members/@me`
+ * @endpoint [PUT](https://discord.com/developers/docs/resources/channel#join-thread) `/channels/{channel.id}/thread-members/@me`
  */
 export type JoinThread = { response: never };
 
@@ -1834,14 +1834,14 @@ export type JoinThread = { response: never };
  * Adds another member to a thread. Requires the ability to send messages in the thread. Also
  * requires the thread is not archived.
  *
- * @endpoint PUT `/channels/{channel.id}/thread-members/{user.id}`
+ * @endpoint [PUT](https://discord.com/developers/docs/resources/channel#add-thread-member) `/channels/{channel.id}/thread-members/{user.id}`
  */
 export type AddThreadMember = { response: never };
 
 /**
  * Removes the current user from a thread.
  *
- * @endpoint DELETE `/channels/{channel.id}/thread-members/@me`
+ * @endpoint [DELETE](https://discord.com/developers/docs/resources/channel#leave-thread) `/channels/{channel.id}/thread-members/@me`
  */
 export type LeaveThread = { response: never };
 
@@ -1849,7 +1849,7 @@ export type LeaveThread = { response: never };
  * Removes another member from a thread. Requires the `MANAGE_MESSAGES` permission or that you are
  * the creator of the thread. Also requires the thread is not archived.
  *
- * @endpoint DELETE `/channels/{channel.id}/thread-members/{user.id}`
+ * @endpoint [DELETE](https://discord.com/developers/docs/resources/channel#remove-thread-member) `/channels/{channel.id}/thread-members/{user.id}`
  */
 export type RemoveThreadMember = { response: never };
 
@@ -1857,7 +1857,7 @@ export type RemoveThreadMember = { response: never };
  * This endpoint is restricted according to whether the `GUILD_MEMBERS` Privileged Intent is enabled
  * for your application.
  *
- * @endpoint GET `/channels/{channel.id}/thread-members`
+ * @endpoint [GET](https://discord.com/developers/docs/resources/channel#list-thread-members) `/channels/{channel.id}/thread-members`
  */
 export type ListThreadMembers = { response: ThreadMember[] };
 
@@ -1867,7 +1867,7 @@ export type ListThreadMembers = { response: ThreadMember[] };
  *
  * Threads are ordered by their `id`, in descending order.
  *
- * @endpoint GET `/channels/{channel.id}/threads/active`
+ * @endpoint [GET](https://discord.com/developers/docs/resources/channel#list-active-threads) `/channels/{channel.id}/threads/active`
  */
 export interface ListActiveThreads {
 	response: {
@@ -1898,7 +1898,7 @@ export interface ListActiveThreads {
  *
  * Threads are ordered by `archive_timestamp`, in descending order.
  *
- * @endpoint GET `/channels/{channel.id}/threads/archived/public`
+ * @endpoint [GET](https://discord.com/developers/docs/resources/channel#list-public-archived-threads) `/channels/{channel.id}/threads/archived/public`
  */
 export interface ListPublicArchivedThreads {
 	query: {
@@ -1922,7 +1922,7 @@ export interface ListPublicArchivedThreads {
  *
  * Threads are ordered by `archive_timestamp`, in descending order.
  *
- * @endpoint GET `/channels/{channel.id}/threads/archived/private`
+ * @endpoint [GET](https://discord.com/developers/docs/resources/channel#list-private-archived-threads) `/channels/{channel.id}/threads/archived/private`
  */
 export type ListPrivateArchivedThreads = ListPublicArchivedThreads;
 
@@ -1932,7 +1932,7 @@ export type ListPrivateArchivedThreads = ListPublicArchivedThreads;
  *
  * Threads are ordered by their `id`, in descending order.
  *
- * @endpoint GET `/channels/{channel.id}/users/@me/threads/archived/private`
+ * @endpoint [GET](https://discord.com/developers/docs/resources/channel#list-joined-private-archived-threads) `/channels/{channel.id}/users/@me/threads/archived/private`
  */
 export type ListJoinedPrivateArchivedThreads = ListPublicArchivedThreads;
 
