@@ -65,7 +65,7 @@ export interface Application extends Omit<PartialApplication, 'hook'> {
 	/**
 	 * Partial user object containing info on the owner of the application.
 	 */
-	owner: PartialUser & Pick<User, 'flags' | 'public_flags'>;
+	owner?: PartialUser & Pick<User, 'flags' | 'public_flags'>;
 
 	/**
 	 * If the application belongs to a team, this will be a list of the members of that team.
