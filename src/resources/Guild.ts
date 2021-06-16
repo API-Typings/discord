@@ -1785,7 +1785,7 @@ export interface ModifyGuildWelcomeScreen {
  *
  * @endpoint [PATCH](https://discord.com/developers/docs/resources/guild#update-current-user-voice-state) `/guilds/{guild.id}/voice-states/@me`
  */
-export interface UpdateCurrentUserVoiceState {
+export interface ModifyCurrentUserVoiceState {
 	body: {
 		/**
 		 * The ID of the channel the user is currently in.
@@ -1818,7 +1818,7 @@ export interface UpdateCurrentUserVoiceState {
  *
  * @endpoint [PATCH](https://discord.com/developers/docs/resources/guild#update-user-voice-state) `/guilds/{guild.id}/voice-states/{user.id}`
  */
-export type UpdateUserVoiceState = { body: Omit<UpdateCurrentUserVoiceState['body'], 'request_to_speak_timestamp'> };
+export type ModifyUserVoiceState = { body: Omit<ModifyCurrentUserVoiceState['body'], 'request_to_speak_timestamp'> };
 
 /**
  * Returns the discovery metadata object for the guild. Requires the `MANAGE_GUILD` permission.

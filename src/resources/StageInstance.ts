@@ -87,7 +87,7 @@ export type GetStageInstance = { response: StageInstance };
  *
  * @endpoint [PATCH](https://discord.com/developers/docs/resources/stage-instance#update-stage-instance) `/stage-instances/{channel.id}`
  */
-export interface UpdateStageInstance {
+export interface ModifyStageInstance {
 	body: Partial<Pick<StageInstance, 'topic' | 'privacy_level'>>;
 	response: CreateStageInstance['response'];
 }
