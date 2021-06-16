@@ -38,7 +38,7 @@ export interface PartialApplication {
 	/**
 	 * The application's public flags.
 	 */
-	flags: ApplicationFlags;
+	flags?: ApplicationFlags;
 }
 
 // ANCHOR Application
