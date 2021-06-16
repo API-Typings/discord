@@ -1046,7 +1046,8 @@ export interface GetGuild {
 /**
  * Returns the guild preview object for the given ID.
  *
- * If the user is not in the guild, then the guild must be Discoverable.
+ * If the user is not in the guild, then the guild must be lurkable (it must be Discoverable or
+ * have a live public stage.
  *
  * @endpoint [GET](https://discord.com/developers/docs/resources/guild#get-guild-preview) `/guilds/{guild.id}/preview`
  */

@@ -1,5 +1,6 @@
 import type { Nullable } from 'extended-utility-types';
 import type { PartialApplication, PartialChannel, PartialGuild, User } from '../';
+import { PartialGuildMember } from './Guild';
 
 // ANCHOR Partial Invite
 
@@ -73,6 +74,12 @@ export interface Invite extends Pick<PartialInvite, 'code'> {
 	 * `with_expiration` is `true`.
 	 */
 	expires_at?: Nullable<string>;
+
+	/**
+	 * Stage instance data if there is a public Stage instance in the Stage channel this invite is
+	 * for.
+	 */
+	stage_instance?: InviteStageInstance;
 }
 
 /**
@@ -108,6 +115,31 @@ export interface InviteMetadata extends Invite, Pick<PartialInvite, 'uses'> {
 	 * When this invite was created.
 	 */
 	created_at: string;
+}
+
+/**
+ * @source {@link https://discord.com/developers/docs/resources/invite#invite-stage-instance-object-invite-stage-instance-structure|Invite}
+ */
+export interface InviteStageInstance {
+	/**
+	 * The members speaking in the Stage.
+	 */
+	members: PartialGuildMember[];
+
+	/**
+	 * The number of users in the Stage.
+	 */
+	participant_count: number;
+
+	/**
+	 * The number os users speaking in the Stage.
+	 */
+	speaker_count: number;
+
+	/**
+	 * The topic of the Stage instance (1-120 characters).
+	 */
+	topic: string;
 }
 
 // SECTION Endpoints
