@@ -144,6 +144,12 @@ export interface Channel extends PartialChannel {
 	 * on certain API endpoints.
 	 */
 	member?: ThreadMember;
+
+	/**
+	 * Default duration for newly created threads, in minutes, to automatically archive the thread
+	 * after recent activity.
+	 */
+	default_auto_archive_duration?: 60 | 1440 | 4320 | 10080;
 }
 
 // ANCHOR Channel Type
@@ -343,6 +349,7 @@ export interface ThreadChannel
 				| 'member_count'
 				| 'thread_metadata'
 				| 'name'
+				| 'default_auto_archive_duration'
 			>
 		> {
 	type: ChannelType.GuildNewsThread | ChannelType.GuildPublicThread | ChannelType.GuildPrivateThread;
@@ -761,11 +768,6 @@ export interface ThreadMetadata {
 	 * Whether the thread is archived.
 	 */
 	archived: boolean;
-
-	/**
-	 * ID of the user that last archived or unarchived the thread.
-	 */
-	archiver_id?: Snowflake;
 
 	/**
 	 * Duration in minutes to automatically archive the thread after recent activity.
@@ -1269,10 +1271,11 @@ export interface ModifyGuildChannel {
 /**
  * Update a channel's settings.
  *
- * When setting `archived` to `false`, only the `SEND_MESSAGES` permission is required.
+ * When setting `archived` to `false`, when `locked` is also `false`, only the `SEND_MESSAGES`
+ * permission is required.
  *
- * Otherwise, requires the `MANAGE_MESSAGES` permission for the guild. Requires the thread to have
- * `archived` set to `false`.
+ * Otherwise, requires the `MANAGE_MESSAGES` permission. Requires the thread to have
+ * `archived` set to `false` or be set to `false` in the request.
  *
  * @endpoint [PATCH](https://discord.com/developers/docs/resources/channel#modify-channel) `/channels/{channel.id}`
  */
@@ -1866,8 +1869,8 @@ export type AddThreadMember = { response: never };
 export type LeaveThread = { response: never };
 
 /**
- * Removes another member from a thread. Requires the `MANAGE_MESSAGES` permission or that you are
- * the creator of the thread. Also requires the thread is not archived.
+ * Removes another member from a thread. Requires the `MANAGE_MESSAGES` permission, or the creator
+ * of the thread if it is a `GUILD_PRIVATE_THREAD`. Also requires the thread is not archived.
  *
  * @endpoint [DELETE](https://discord.com/developers/docs/resources/channel#remove-thread-member) `/channels/{channel.id}/thread-members/{user.id}`
  */
@@ -1882,8 +1885,7 @@ export type RemoveThreadMember = { response: never };
 export type ListThreadMembers = { response: ThreadMember[] };
 
 /**
- * Returns all active threads in the channel, including public and private threads. Requires the
- * `READ_MESSAGE_HISTORY` permission.
+ * Returns all active threads in the channel, including public and private threads.
  *
  * Threads are ordered by their `id`, in descending order.
  *
