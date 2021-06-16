@@ -1385,7 +1385,7 @@ export type GetChannelMessage = { response: Message };
  * - For a `file` attachment, the `Content-Disposition` subpart header MUST contain a `filename`
  * parameter.
  * - When uploading files, the `multipart/form-data` content type must be used. Note that in
- * multipart form data, the `embed` and `allowed_mentions` fields cannot be used.
+ * multipart form data, the `embeds` and `allowed_mentions` fields cannot be used.
  * - If `payload_json` is supplied, all fields except for `file` fields will be ignored in the form
  * data.
  *
@@ -1436,7 +1436,7 @@ export interface CreateMessage {
 				/**
 				 * Embedded `rich` content.
 				 */
-				embed: PartialEmbed;
+				embeds: PartialEmbed[];
 		  }
 	);
 
@@ -1538,7 +1538,7 @@ export type DeleteAllEmojiReactions = { response: never };
  * Edit a previously sent message.
  *
  * @remarks
- * - The fields `content`, `embed`, `allowed_mentions` and `flags` can be edited by the original
+ * - The fields `content`, `embeds`, `allowed_mentions` and `flags` can be edited by the original
  * message author. Other users can only edit `flags` and only if they have the `MANAGE_MESSAGES`
  * permission in the corresponding channel.
  * - When the `content` field is edited, the `mentions` array in the message object will be
@@ -1549,7 +1549,7 @@ export type DeleteAllEmojiReactions = { response: never };
  * - For a `file` attachment, the `Content-Disposition` subpart header MUST contain a `filename`
  * parameter.
  * - When uploading files, the `multipart/form-data` content type must be used. Note that in
- * multipart form data, the `embed` and `allowed_mentions` fields cannot be used.
+ * multipart form data, the `embeds` and `allowed_mentions` fields cannot be used.
  * - If `payload_json` is supplied, all fields except for `file` fields will be ignored in the form
  * data.
  *
@@ -1565,7 +1565,7 @@ export interface EditMessage {
 		/**
 		 * Embedded `rich` content,
 		 */
-		embed?: Nullable<PartialEmbed>;
+		embeds?: Nullable<PartialEmbed[]>;
 
 		/**
 		 * Edit the flags of a message (only `SUPPRESS_EMBEDS` can currently be set/unset).
