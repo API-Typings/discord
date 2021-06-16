@@ -787,7 +787,16 @@ export interface ThreadMetadata {
 // ANCHOR Thread Member
 
 export interface ThreadMember {
+	/**
+	 * @remarks
+	 * This field is omitted on the member sent within each thread in the `GUILD_CREATE` event.
+	 */
 	id: Snowflake;
+
+	/**
+	 * @remarks
+	 * This field is omitted on the member sent within each thread in the `GUILD_CREATE` event.
+	 */
 	user_id: Snowflake;
 
 	/**
