@@ -264,6 +264,7 @@ export enum JSONErrorCode {
 	 * Guild already has a template.
 	 */
 	GuildTemplateExists,
+	TooManyThreadMembers = 30033,
 
 	/**
 	 * Maximum number of bans for non-guild members have been exceeded.
@@ -355,7 +356,7 @@ export enum JSONErrorCode {
 	 */
 	InvalidChannelType,
 	InvalidOAuth2AccessToken,
-	InvalidOAuth2MisingScope,
+	InvalidOAuth2MissingScope,
 	InvalidWebhookToken,
 	InvalidRole,
 
@@ -390,8 +391,6 @@ export enum JSONErrorCode {
 	 */
 	RequiredCommunityChannel = 50074,
 	InvalidStickerSent = 50081,
-	MFAEnabled = 60001,
-	MFADisabled,
 
 	/**
 	 * Tried to perform an operation on an archived thread.
@@ -403,6 +402,8 @@ export enum JSONErrorCode {
 	 * `before` value is earlier than the thread creation date.
 	 */
 	InvalidBeforeThreadCreationDateValue,
+	MFAEnabled = 60001,
+	MFADisabled,
 	MFARequired,
 	MFAUnverified,
 	MFAInvalidSecret,
@@ -424,7 +425,11 @@ export enum JSONErrorCode {
 	ListingAlreadyJoined = 120000,
 	ListingTooManyMembers,
 	ListingJoinBlocked,
-	APIResourceOverloaded = 130000
+	APIResourceOverloaded = 130000,
+	ThreadAlreadyCreated = 160004,
+	ThreadLocked,
+	TooManyThreads,
+	TooManyAnnouncementThreads
 }
 
 // SECTION RPC Codes
