@@ -1,5 +1,6 @@
 import type { ExclusiveOr, Nullable, Range, Tuple } from 'extended-utility-types';
 import type {
+	ActionRow,
 	Component,
 	GuildMember,
 	Invite,
@@ -515,7 +516,7 @@ export interface Message {
 	/**
 	 * Sent if the message contains components.
 	 */
-	components?: Component[];
+	components?: [ActionRow, ...Partial<Tuple<ActionRow, 4>>];
 }
 
 export interface UserMention extends User {
