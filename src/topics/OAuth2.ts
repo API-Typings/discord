@@ -39,8 +39,7 @@ export enum OAuth2Scope {
 	ActivitiesRead = 'activities.read',
 
 	/**
-	 * Allows your app to update a user's activity. Requires Discord approval (NOT required for the
-	 * GameSDK Activity Manager).
+	 * Allows your app to update a user's activity. Requires Discord approval.
 	 */
 	ActivitiesWrite = 'activities.write',
 

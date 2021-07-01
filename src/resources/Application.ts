@@ -31,7 +31,7 @@ export interface PartialApplication {
 	summary: string;
 
 	/**
-	 * The hex encoded key for verification in interactions the GameSDK's `GetTicket`.
+	 * The hex encoded key for verification in interactions.
 	 */
 	verify_key: string;
 

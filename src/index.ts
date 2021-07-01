@@ -4,7 +4,6 @@ import type { JSONErrorCode } from './';
 export * from './interactions';
 export * from './resources';
 export * from './topics';
-export * as Discord from './sdk';
 
 /**
  * Milliseconds since Discord Epoch, the first second of `2015` or `1420070400000`.
