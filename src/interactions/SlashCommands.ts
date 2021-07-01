@@ -1,6 +1,8 @@
 import type { Nullable, Range, Tuple } from 'extended-utility-types';
 import type {
+	ActionRow,
 	AllowedMentions,
+	ComponentType,
 	EditWebhookMessage,
 	ExecuteWebhook,
 	GetWebhookMessage,
@@ -13,8 +15,6 @@ import type {
 	Snowflake,
 	User
 } from '../';
-
-// ANCHOR Slash Command Limits
 
 /**
  * @source {@link https://discord.com/developers/docs/interactions/slash-commands#a-quick-note-on-limits|Slash Commands}
@@ -61,8 +61,6 @@ export enum SlashCommandLimit {
 	 */
 	GlobalRateLimit = 200
 }
-
-// SECTION Application Command
 
 /**
  * An application command is the base "command" model that belongs to an application.
@@ -201,8 +199,6 @@ export interface ApplicationCommandOptionChoice {
 	value: string | number;
 }
 
-// ANCHOR Partial Guild Application Command Permissions
-
 export interface PartialGuildApplicationCommandPermissions {
 	/**
 	 * The ID of the command.
@@ -216,7 +212,9 @@ export interface PartialGuildApplicationCommandPermissions {
 }
 
 /**
- * Returns when fetching the permissions for a command in a guild.
+ * Returned when fetching the permissions for a command in a guild.
+ *
+ * @source {@link https://discord.com/developers/docs/interactions/slash-commands#application-command-permissions-object-guild-application-command-permissions-structure|Slash Commands}
  */
 export interface GuildApplicationCommandPermissions extends PartialGuildApplicationCommandPermissions {
 	/**
@@ -233,6 +231,8 @@ export interface GuildApplicationCommandPermissions extends PartialGuildApplicat
 /**
  * Application command permissions allow commands to be enabled or disabled for specific users or
  * roles within a guild.
+ *
+ * @source {@link https://discord.com/developers/docs/interactions/slash-commands#application-command-permissions-object-application-command-permissions-structure|Slash Commands}
  */
 export interface ApplicationCommandPermissions {
 	/**
@@ -251,14 +251,13 @@ export interface ApplicationCommandPermissions {
 	permission: boolean;
 }
 
+/**
+ * @source {@link https://discord.com/developers/docs/interactions/slash-commands#application-command-permissions-object-application-command-permission-type|Slash Commands}
+ */
 export enum ApplicationCommandPermissionType {
 	Role = 1,
 	User
 }
-
-// !SECTION
-
-// ANCHOR Interaction
 
 /**
  * An interaction is the base "thing" that is sent when a user invokes a command, and is the same
@@ -266,74 +265,62 @@ export enum ApplicationCommandPermissionType {
  *
  * @source {@link https://discord.com/developers/docs/interactions/slash-commands#interaction|Slash Commands}
  */
-export type Interaction = {
-	/**
-	 * ID of the interaction.
-	 */
+export type Interaction = GuildInteraction | DMInteraction;
+
+interface BaseInteraction {
 	id: Snowflake;
 
 	/**
 	 * ID of the application this interaction is for.
 	 */
 	application_id: Snowflake;
+	readonly type: InteractionRequestType;
 
 	/**
 	 * A continuation token for responding to the interaction.
 	 */
 	token: string;
+	readonly version: 1;
+}
+
+export interface GuildInteraction extends BaseInteraction {
+	/**
+	 * The command data payload.
+	 */
+	data: ApplicationCommandInteractionData;
 
 	/**
-	 * Read-only property, always `1`.
+	 * The guild it was sent from.
 	 */
-	readonly version: 1;
-} & (
-	| {
-			type: InteractionType.Ping;
-	  }
-	| ({
-			type: InteractionType.ApplicationCommand;
+	guild_id: Snowflake;
 
-			/**
-			 * The command data payload.
-			 */
-			data: ApplicationCommandInteractionData;
+	/**
+	 * The channel it was sent from.
+	 */
+	channel_id: Snowflake;
 
-			/**
-			 * The channel it was sent from.
-			 */
-			channel_id: Snowflake;
-	  } & (
-			| {
-					/**
-					 * The guild it was sent from.
-					 */
-					guild_id: Snowflake;
+	/**
+	 * Guild member data for the invoking user, including permissions.
+	 */
+	member: GuildMember;
 
-					/**
-					 * Guild member data for the invoking user, including permissions.
-					 */
-					member: GuildMember;
-			  }
-			| {
-					/**
-					 * User object for the invoking user, if invoked in a DM.
-					 */
-					user: User;
-			  }
-	  ))
-	| {
-			type: InteractionType.MessageComponent;
-			/**
-			 * The message the components were attached to.
-			 */
-			message: Message;
-	  }
-);
+	/**
+	 * For components, the message they were attached to.
+	 */
+	message?: Message;
+}
+
+export interface DMInteraction extends Omit<GuildInteraction, 'guild_id' | 'member'> {
+	/**
+	 * User object for the invoking user.
+	 */
+	user: User;
+}
 
 /**
  * @source {@link https://discord.com/developers/docs/interactions/slash-commands#interaction-interactiontype|Slash Commands}
  */
-export enum InteractionType {
+export enum InteractionRequestType {
 	Ping = 1,
 	ApplicationCommand,
 	MessageComponent
@@ -362,29 +349,26 @@ export interface ApplicationCommandInteractionData {
 	 * The params + values from the user.
 	 */
 	options?: ApplicationCommandInteractionDataOption[];
+
+	/**
+	 * For components, the `custom_id` of the component.
+	 */
+	custom_id?: string;
+
+	/**
+	 * For components, the `type` of the component.
+	 */
+	readonly component_type?: ComponentType;
 }
 
+/**
+ * @source {@link https://discord.com/developers/docs/interactions/slash-commands#interaction-object-application-command-interaction-data-resolved-structure|Slash Commands}
+ */
 export interface ApplicationCommandInteractionDataResolved {
-	/**
-	 * The IDs and User objects.
-	 */
-	users?: Record<string, User>;
-
-	/**
-	 * The IDs and partial Member objects. If data for a member is included, data for its
-	 * corresponding user will also be included.
-	 */
-	members?: Record<string, PartialGuildMember>;
-
-	/**
-	 * The IDs and Role objects.
-	 */
-	roles?: Record<string, Role>;
-
-	/**
-	 * The IDs and partial Channel objects.
-	 */
-	channels?: Record<string, PartialChannel>;
+	users?: Record<Snowflake, User>;
+	members?: Record<Snowflake, PartialGuildMember & Required<Pick<GuildMember, 'user'>>>;
+	roles?: Record<Snowflake, Role>;
+	channels?: Record<Snowflake, PartialChannel>;
 }
 
 /**
@@ -489,14 +473,19 @@ export interface InteractionApplicationCommandCallbackData {
 	 * Allowed mentions object.
 	 */
 	allowed_mentions?: AllowedMentions;
-
-	/**
-	 * Set to `64` to make the response ephemeral.
-	 */
 	flags?: number;
+	components?: [ActionRow, ...Partial<Tuple<ActionRow, 4>>];
 }
 
-// ANCHOR Message Interaction
+/**
+ * @source {@link https://discord.com/developers/docs/interactions/slash-commands#interaction-response-object-interaction-application-command-callback-data-flags|Slash Commands}
+ */
+export enum InteractionApplicationCommandCallbackDataFlags {
+	/**
+	 * Only the user receiving the message can see it.
+	 */
+	Ephemeral = 1 << 6
+}
 
 /**
  * This is sent on the message object when the message is a response to an Interaction.
@@ -512,7 +501,7 @@ export interface MessageInteraction {
 	/**
 	 * The type of interaction.
 	 */
-	type: InteractionType;
+	type: InteractionRequestType;
 
 	/**
 	 * The name of the `ApplicationCommand`.
@@ -535,7 +524,7 @@ export interface MessageInteraction {
 export type GetGlobalApplicationCommands = { response: ApplicationCommand[] };
 
 /**
- * Creates a new global command. New global commands will be available in all guilds after `1` hour.
+ * Creates a new global command. New global commands will be available in all guilds after 1 hour.
  *
  * @remarks
  * Creating a command with the same name as an existing command for your application will overwrite
