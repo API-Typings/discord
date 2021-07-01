@@ -144,3 +144,10 @@ export enum TimestampStyle {
 	 */
 	RelativeTime = 'R'
 }
+
+export interface Identifiable {
+	/**
+	 * The ID of the object.
+	 */
+	readonly id: Snowflake;
+}

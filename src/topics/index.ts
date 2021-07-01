@@ -1,8 +1,6 @@
 export * from './gateway';
 export * from './Codes';
-export * from './Devices';
 export * from './OAuth2';
-export * as RPC from './rpc';
 export * from './Permissions';
 export * from './Teams';
 

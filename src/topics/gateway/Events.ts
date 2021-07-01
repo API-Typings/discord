@@ -26,15 +26,11 @@ import type {
 	VoiceState
 } from '../../';
 
-// ANCHOR Event Payload
-
 export interface GatewayEventPayload<T extends GatewayEvent> {
 	op: GatewayOPCode.Dispatch;
 	s: number;
 	t: T;
 }
-
-// ANCHOR Heartbeat
 
 /**
  * Sent in response to receiving a heartbeat to acknowledge that it has been received.
@@ -44,8 +40,6 @@ export interface GatewayEventPayload<T extends GatewayEvent> {
 export interface HeartbeatAck {
 	op: GatewayOPCode.HeartbeatAck;
 }
-
-// ANCHOR Event Enum
 
 /**
  * Events are payloads sent over the socket to a client that correspond to events in Discord.
@@ -329,10 +323,6 @@ export enum GatewayEvent {
 	WebhooksUpdate = 'WEBHOOKS_UPDATE'
 }
 
-// SECTION Gateway Events
-
-// SECTION Connecting and Resuming
-
 /**
  * Sent on connection to the websocket. Defines the heartbeat interval that the client should
  * heartbeat to.
@@ -414,10 +404,6 @@ export interface InvalidSession {
 	d: boolean;
 }
 
-// !SECTION
-
-// SECTION Channels
-
 /**
  * Sent when a new guild channel is created, relevant to the current user.
  *
@@ -473,8 +459,6 @@ export interface ChannelPinsUpdate extends GatewayEventPayload<GatewayEvent.Chan
 		last_pin_timestamp?: Nullable<string>;
 	};
 }
-
-// SECTION Threads
 
 /**
  * Sent when a thread is created, relevant to the current user, or when the current user is added
@@ -570,12 +554,6 @@ export interface ThreadMembersUpdate extends GatewayEventPayload<GatewayEvent.Th
 		removed_member_ids?: Snowflake[];
 	};
 }
-
-// !SECTION
-
-// !SECTION
-
-// SECTION Guilds
 
 /**
  * This event can be sent in three different scenarios:
@@ -688,8 +666,6 @@ export interface GuildIntegrationsUpdate extends GatewayEventPayload<GatewayEven
 		guild_id: Snowflake;
 	};
 }
-
-// SECTION Guild Members
 
 /**
  * Sent when a new user joins a guild.
@@ -835,10 +811,6 @@ export interface GuildMemberChunk extends GatewayEventPayload<GatewayEvent.Guild
 	};
 }
 
-// !SECTION
-
-// SECTION Guild Roles
-
 /**
  * Sent when a guild role is created.
  *
@@ -896,12 +868,6 @@ export interface GuildRoleDelete extends GatewayEventPayload<GatewayEvent.GuildR
 	};
 }
 
-// !SECTION
-
-// !SECTION
-
-// SECTION Integrations
-
 /**
  * Sent when an integration is created.
  */
@@ -947,10 +913,6 @@ export interface IntegrationDelete extends GatewayEventPayload<GatewayEvent.Inte
 		application_id?: Snowflake;
 	};
 }
-
-// !SECTION
-
-// SECTION Invites
 
 /**
  * Sent when a new invite to a channel is created.
@@ -1035,10 +997,6 @@ export interface InviteDelete extends GatewayEventPayload<GatewayEvent.InviteDel
 		channel_id: Snowflake;
 	};
 }
-
-// !SECTION
-
-// SECTION Messages
 
 /**
  * Sent when a message is created.
@@ -1171,10 +1129,6 @@ export interface MessageReactionRemoveEmoji extends GatewayEventPayload<GatewayE
 	};
 }
 
-// !SECTION
-
-// ANCHOR Presence Update
-
 /**
  * Sent when a user's presence or info, such as name or avatar, is updated.
  *
@@ -1217,8 +1171,6 @@ export interface PresenceUpdate extends GatewayEventPayload<GatewayEvent.Presenc
 	};
 }
 
-// ANCHOR Typing Start
-
 /**
  * Sent when a user starts typing in a channel.
  *
@@ -1253,8 +1205,6 @@ export interface TypingStart extends GatewayEventPayload<GatewayEvent.TypingStar
 	};
 }
 
-// ANCHOR User Update
-
 /**
  * Sent when properties about the user change.
  *
@@ -1263,8 +1213,6 @@ export interface TypingStart extends GatewayEventPayload<GatewayEvent.TypingStar
 export interface UserUpdate extends GatewayEventPayload<GatewayEvent.UserUpdate> {
 	d: User;
 }
-
-// SECTION Voice
 
 /**
  * Sent when someone joins/leaves/moves voice channels.
@@ -1303,10 +1251,6 @@ export interface VoiceServerUpdate extends GatewayEventPayload<GatewayEvent.Voic
 	};
 }
 
-// !SECTION
-
-// ANCHOR Webhooks
-
 /**
  * Sent when a guild channel's webhook is created, updated, or deleted.
  *
@@ -1325,8 +1269,6 @@ export interface WebhooksUpdate extends GatewayEventPayload<GatewayEvent.Webhook
 		channel_id: Snowflake;
 	};
 }
-
-// SECTION Commands
 
 /**
  * Sent when a new Slash Command is created, relevant to the current user.
@@ -1370,10 +1312,6 @@ export interface ApplicationCommandUpdate extends GatewayEventPayload<GatewayEve
 	};
 }
 
-// !SECTION
-
-// ANCHOR Interaction
-
 /**
  * Sent when a user in a guild uses a Slash Command.
  *
@@ -1382,8 +1320,6 @@ export interface ApplicationCommandUpdate extends GatewayEventPayload<GatewayEve
 export interface InteractionCreate extends GatewayEventPayload<GatewayEvent.InteractionCreate> {
 	d: Interaction;
 }
-
-// SECTION Stage Instances
 
 /**
  * Sent when a Stage Instance is created.
@@ -1405,7 +1341,3 @@ export interface StageInstanceUpdate extends GatewayEventPayload<GatewayEvent.St
 export interface StageInstanceDelete extends GatewayEventPayload<GatewayEvent.StageInstanceCreate> {
 	d: StageInstance;
 }
-
-// !SECTION
-
-// !SECTION

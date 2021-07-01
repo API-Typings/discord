@@ -3,6 +3,7 @@ import type {
 	ActionRow,
 	Component,
 	GuildMember,
+	Identifiable,
 	Invite,
 	InviteMetadata,
 	InviteTargetType,
@@ -14,12 +15,7 @@ import type {
 	User
 } from '../';
 
-// SECTION Channel Types
-
-// ANCHOR Partial Channel
-
-export interface PartialChannel {
-	id: Snowflake;
+export interface PartialChannel extends Identifiable {
 	type: ChannelType;
 
 	/**
@@ -153,8 +149,6 @@ export interface Channel extends PartialChannel {
 	default_auto_archive_duration?: 60 | 1440 | 4320 | 10080;
 }
 
-// ANCHOR Channel Type
-
 /**
  * @source {@link https://discord.com/developers/docs/resources/channel#channel-object-channel-types|Channel}
  */
@@ -228,8 +222,6 @@ export enum VideoQualityMode {
 	Full
 }
 
-// ANCHOR Text Channel
-
 /**
  * @source {@link https://discord.com/developers/docs/resources/channel#channel-object-example-guild-text-|Channel}
  */
@@ -251,8 +243,6 @@ export interface TextChannel
 	type: ChannelType.GuildText;
 }
 
-// ANCHOR News Channel
-
 /**
  * Bots can post or publish messages in this type of channel if they have the proper permissions.
  *
@@ -261,8 +251,6 @@ export interface TextChannel
 export interface NewsChannel extends Omit<TextChannel, 'rate_limit_per_user' | 'type'> {
 	type: ChannelType.GuildNews;
 }
-
-// ANCHOR Voice Channel
 
 /**
  * @source {@link https://discord.com/developers/docs/resources/channel#channel-object-example-guild-voice-channel|Channel}
@@ -273,8 +261,6 @@ export interface VoiceChannel
 	type: ChannelType.GuildVoice;
 }
 
-// ANCHOR DM Channel
-
 /**
  * @source {@link https://discord.com/developers/docs/resources/channel#channel-object-example-dm-channel|Channel}
  */
@@ -284,8 +270,6 @@ export interface DMChannel
 	type: ChannelType.DM;
 	recipients: [User];
 }
-
-// ANCHOR Group DM Channel
 
 /**
  * @source {@link https://discord.com/developers/docs/resources/channel#channel-object-example-group-dm-channel|Channel}
@@ -298,16 +282,12 @@ export interface GroupDMChannel
 	recipients: [User, User, ...Partial<Tuple<User, 6>>];
 }
 
-// ANCHOR Channel Category
-
 /**
  * @source {@link https://discord.com/developers/docs/resources/channel#channel-object-example-channel-category|Channel}
  */
 export interface ChannelCategory extends Omit<NewsChannel, 'last_message_id' | 'type' | 'topic'> {
 	type: ChannelType.GuildCategory;
 }
-
-// ANCHOR Store Channel
 
 /**
  * Bots can neither send or read messages from this channel type (as it is a store page).
@@ -317,8 +297,6 @@ export interface ChannelCategory extends Omit<NewsChannel, 'last_message_id' | '
 export interface StoreChannel extends Omit<ChannelCategory, 'type'> {
 	type: ChannelType.GuildStore;
 }
-
-// ANCHOR Thread Channel
 
 /**
  * Threads can be either `archived` or `active`. Archived threads are generally immutable. To send a
@@ -356,18 +334,12 @@ export interface ThreadChannel
 	type: ChannelType.GuildNewsThread | ChannelType.GuildPublicThread | ChannelType.GuildPrivateThread;
 }
 
-// !SECTION
-
-// SECTION Message
-
 /**
  * Represents a message sent in a channel within Discord.
  *
  * @source {@link https://discord.com/developers/docs/resources/channel#message-object-message-structure|Channel}
  */
-export interface Message {
-	id: Snowflake;
-
+export interface Message extends Identifiable {
 	/**
 	 * ID of the channel the message was sent in.
 	 */
@@ -523,8 +495,6 @@ export interface UserMention extends User {
 	member?: Partial<Omit<GuildMember, 'user'>>;
 }
 
-// ANCHOR Message Type Enum
-
 /**
  * @source {@link https://discord.com/developers/docs/resources/channel#message-object-message-types|Channel}
  */
@@ -569,8 +539,6 @@ export interface MessageActivity {
 	party_id?: string;
 }
 
-// ANCHOR Message Reference
-
 /**
  * @source {@link https://discord.com/developers/docs/resources/channel#message-object-message-reference-structure|Channel}
  */
@@ -613,8 +581,6 @@ export enum MessageActivityType {
 	JoinRequest = 5
 }
 
-// ANCHOR Message Flags
-
 /**
  * @source {@link https://discord.com/developers/docs/resources/channel#message-object-message-flags|Channel}
  */
@@ -650,7 +616,7 @@ export enum MessageFlags {
 	HasThread = 1 << 5,
 
 	/**
-	 * This message is only visible to the user who did the Interaction.
+	 * This message is only visible to the user who invoked the Interaction.
 	 */
 	Ephemeral = 1 << 6,
 
@@ -660,13 +626,10 @@ export enum MessageFlags {
 	Loading = 1 << 7
 }
 
-// ANCHOR Sticker
-
 /**
  * @source {@link https://discord.com/developers/docs/resources/channel#message-object-message-sticker-structure|Channel}
  */
-export interface Sticker {
-	id: Snowflake;
+export interface Sticker extends Identifiable {
 	pack_id: Snowflake;
 	name: string;
 	description: string;
@@ -692,8 +655,6 @@ export enum StickerFormat {
 	LOTTIE
 }
 
-// !SECTION
-
 /**
  * @source {@link https://discord.com/developers/docs/resources/channel#followed-channel-object-followed-channel-structure|Channel}
  */
@@ -708,8 +669,6 @@ export interface FollowedChannel {
 	 */
 	webhook_id: Snowflake;
 }
-
-// ANCHOR Reaction
 
 /**
  * @source {@link https://discord.com/developers/docs/resources/channel#reaction-object-reaction-structure|Channel}
@@ -730,8 +689,6 @@ export interface Reaction {
 	 */
 	emoji: PartialEmoji;
 }
-
-// ANCHOR Overwrite
 
 /**
  * @source {@link https://discord.com/developers/docs/resources/channel#overwrite-object-overwrite-structure|Channel}
@@ -757,8 +714,6 @@ export interface Overwrite {
 	 */
 	deny: string;
 }
-
-// ANCHOR Thread Metadata
 
 /**
  * The thread metadata object contains a number of thread-specific channel fields that are not
@@ -787,8 +742,6 @@ export interface ThreadMetadata {
 	locked?: boolean;
 }
 
-// ANCHOR Thread Member
-
 export interface ThreadMember {
 	/**
 	 * @remarks
@@ -812,10 +765,6 @@ export interface ThreadMember {
 	 */
 	flags: number;
 }
-
-// SECTION Embed
-
-// ANCHOR Partial Embed
 
 export interface PartialEmbed {
 	title?: string;
@@ -1021,17 +970,10 @@ export interface EmbedField {
 	inline?: boolean;
 }
 
-// !SECTION
-
 /**
  * @source {@link https://discord.com/developers/docs/resources/channel#attachment-object-attachment-structure|Channel}
  */
-export interface Attachment {
-	/**
-	 * Attachment ID.
-	 */
-	id: Snowflake;
-
+export interface Attachment extends Identifiable {
 	/**
 	 * Name of file attached.
 	 */
@@ -1071,12 +1013,7 @@ export interface Attachment {
 /**
  * @source {@link https://discord.com/developers/docs/resources/channel#channel-mention-object-channel-mention-structure|Channel}
  */
-export interface ChannelMention {
-	/**
-	 * ID of the channel.
-	 */
-	id: Snowflake;
-
+export interface ChannelMention extends Identifiable {
 	/**
 	 * ID of the guild containing the channel.
 	 */
@@ -1129,8 +1066,6 @@ export interface AllowedMentions {
 	replied_user?: boolean;
 }
 
-// ANCHOR Embed Limits
-
 /**
  * All of the following limits are measured inclusively. Leading and trailing whitespace
  * characters are not included (they are trimmed automatically).
@@ -1161,8 +1096,6 @@ export interface GetChannel {
 	};
 }
 
-// ANCHOR Modify Group DM Channel
-
 /**
  * Update a channel's settings.
  *
@@ -1183,8 +1116,6 @@ export interface ModifyGroupDMChannel {
 
 	response: Channel;
 }
-
-// ANCHOR Modify Guild Channel
 
 /**
  * Update a channel's settings.
@@ -1262,12 +1193,16 @@ export interface ModifyGuildChannel {
 		 * The camera video quality mode of the voice channel. Applies to voice channels.
 		 */
 		video_quality_mode?: Nullable<VideoQualityMode>;
+
+		/**
+		 * The default duration for newly created threads in the channel, in minutes, to
+		 * automatically archive the thread after recent activity.
+		 */
+		default_auto_archive_duration?: 60 | 1440 | 4320 | 10080;
 	};
 
 	response: Channel;
 }
-
-// ANCHOR Modify Thread Channel
 
 /**
  * Update a channel's settings.
@@ -1306,7 +1241,9 @@ export interface ModifyThreadChannel {
  *
  * @endpoint [DELETE](https://discord.com/developers/docs/resources/channel#deleteclose-channel) `/channels/{channel.id}`
  */
-export type DeleteChannel = { response: Channel };
+export interface DeleteChannel {
+	response: Channel;
+}
 
 /**
  * Close a private message.
@@ -1316,7 +1253,9 @@ export type DeleteChannel = { response: Channel };
  *
  * @endpoint [DELETE](https://discord.com/developers/docs/resources/channel#deleteclose-channel) `/channels/{channel.id}`
  */
-export type CloseChannel = { response: Channel };
+export interface CloseChannel {
+	response: Channel;
+}
 
 /**
  * Returns the messages for a channel.
@@ -1373,9 +1312,9 @@ export interface GetChannelMessages {
  * If operating on a guild channel, this endpoint requires the `READ_MESSAGE_HISTORY` permission to
  * be present on the current user.
  */
-export type GetChannelMessage = { response: Message };
-
-// ANCHOR Create Message
+export interface GetChannelMessage {
+	response: Message;
+}
 
 /**
  * Post a message to a guild text or DM channel.
@@ -1454,7 +1393,9 @@ export interface CreateMessage {
  *
  * @endpoint [POST](https://discord.com/developers/docs/resources/channel#crosspost-message) `/channels/{channel.id}/messages/{message.id}/crosspost`
  */
-export type CrosspostMessage = { response: Message };
+export interface CrosspostMessage {
+	response: Message;
+}
 
 /**
  * Create a reaction for the message. This endpoint requires the `READ_MESSAGE_HISTORY` permission
@@ -1467,7 +1408,9 @@ export type CrosspostMessage = { response: Message };
  *
  * @endpoint [PUT](https://discord.com/developers/docs/resources/channel#create-reaction) `/channels/{channel.id}/messages/{message.id}/reactions/{emoji}/@me`
  */
-export type CreateReaction = { response: never };
+export interface CreateReaction {
+	response: never;
+}
 
 /**
  * Delete a reaction the current user has made for the message.
@@ -1477,7 +1420,9 @@ export type CreateReaction = { response: never };
  *
  * @endpoint [DELETE](https://discord.com/developers/docs/resources/channel#delete-own-reaction) `/channels/{channel.id}/messages/{message.id}/reactions/{emoji}/@me`
  */
-export type DeleteOwnReaction = { response: never };
+export interface DeleteOwnReaction {
+	response: never;
+}
 
 /**
  * Deletes another user's reaction. This endpoint requires the `MANAGE_MESSAGES` permission to be
@@ -1488,7 +1433,9 @@ export type DeleteOwnReaction = { response: never };
  *
  * @endpoint [DELETE](https://discord.com/developers/docs/resources/channel#delete-user-reaction) `/channels/{channel.id}/messages/{message.id}/reactions/{emoji}/{user.id}`
  */
-export type DeleteUserReaction = { response: never };
+export interface DeleteUserReaction {
+	response: never;
+}
 
 /**
  * Get a list of users that reacted with this emoji.
@@ -1525,7 +1472,9 @@ export interface GetReactions {
  *
  * @endpoint [DELETE](https://discord.com/developers/docs/resources/channel#delete-all-reactions) `/channels/{channel.id}/messages/{message.id}/reactions`
  */
-export type DeleteAllReactions = { response: never };
+export interface DeleteAllReactions {
+	response: never;
+}
 
 /**
  * Deletes all the reactions for a given emoji on a message. This endpoint requires the
@@ -1536,7 +1485,9 @@ export type DeleteAllReactions = { response: never };
  *
  * @endpoint [DELETE](https://discord.com/developers/docs/resources/channel#delete-all-reactions-for-emoji) `/channels/{channel.id}/messages/{message.id}/reactions/{emoji}`
  */
-export type DeleteAllEmojiReactions = { response: never };
+export interface DeleteAllEmojiReactions {
+	response: never;
+}
 
 /**
  * Edit a previously sent message.
@@ -1609,7 +1560,9 @@ export interface EditMessage {
  * If operating on a guild channel and trying to delete a message that was not sent by the current
  * user, this endpoint requires the `MANAGE_MESSAGES` permission.
  */
-export type DeleteMessage = { response: never };
+export interface DeleteMessage {
+	response: never;
+}
 
 /**
  * Delete multiple messages in a single request. This endpoint can only be used on guild channels
@@ -1671,7 +1624,9 @@ export interface EditChannelPermissions {
  *
  * @endpoint [GET](https://discord.com/developers/docs/resources/channel#get-channel-invites) `/channels/{channel.id}/invites`
  */
-export type GetChannelInvites = { response: InviteMetadata[] };
+export interface GetChannelInvites {
+	response: InviteMetadata[];
+}
 
 /**
  * Create a new invite object for the channel. Requires the `CREATE_INSTANT_INVITE` permission. Only
@@ -1740,7 +1695,9 @@ export interface CreateChannelInvite {
  *
  * @endpoint [DELETE](https://discord.com/developers/docs/resources/channel#delete-channel-permission) `/channels/{channel.id}/permissions/{overwrite.id}`
  */
-export type DeleteChannelPermission = { response: never };
+export interface DeleteChannelPermission {
+	response: never;
+}
 
 /**
  * Follow a News Channel to send messages to a target channel. Requires the `MANAGE_WEBHOOKS`
@@ -1769,14 +1726,18 @@ export interface FollowNewsChannel {
  *
  * @endpoint [POST](https://discord.com/developers/docs/resources/channel#trigger-typing-indicator) `/channels/{channel.id}/typing`
  */
-export type TriggerTypingIndicator = { response: never };
+export interface TriggerTypingIndicator {
+	response: never;
+}
 
 /**
  * Returns all pinned messages in the channel.
  *
  * @endpoint [GET](https://discord.com/developers/docs/resources/channel#get-pinned-messages) `/channels/{channel.id}/pins`
  */
-export type GetPinnedMessages = { response: Message[] };
+export interface GetPinnedMessages {
+	response: Message[];
+}
 
 /**
  * Pin a message in a channel. Requires the `MANAGE_MESSAGES` permission.
@@ -1786,14 +1747,18 @@ export type GetPinnedMessages = { response: Message[] };
  *
  * @endpoint [PUT](https://discord.com/developers/docs/resources/channel#add-pinned-channel-message) `/channels/{channel.id}/pins/{message.id}`
  */
-export type PinMessage = { response: never };
+export interface PinMessage {
+	response: never;
+}
 
 /**
  * Unpin a message in a channel. Requires the `MANAGE_MESSAGES` permission.
  *
  * @endpoint [DELETE](https://discord.com/developers/docs/resources/channel#delete-pinned-channel-message) `/channels/{channel.id}/pins/{message.id}`
  */
-export type UnpinMessage = { response: never };
+export interface UnpinMessage {
+	response: never;
+}
 
 /**
  * Adds a recipient to a Group DM using their access token.
@@ -1821,7 +1786,9 @@ export interface GroupDMAddRecipient {
  *
  * @endpoint [DELETE](https://discord.com/developers/docs/resources/channel#group-dm-delete-recipient) `/channels/{channel.id}/recipients/{user.id}`
  */
-export type GroupDMRemoveRecipient = { response: never };
+export interface GroupDMRemoveRecipient {
+	response: never;
+}
 
 /**
  * Creates a new public thread from an existing message.
@@ -1852,7 +1819,9 @@ export type StartThreadWithoutMessage = StartThreadWithMessage;
  *
  * @endpoint [PUT](https://discord.com/developers/docs/resources/channel#join-thread) `/channels/{channel.id}/thread-members/@me`
  */
-export type JoinThread = { response: never };
+export interface JoinThread {
+	response: never;
+}
 
 /**
  * Adds another member to a thread. Requires the ability to send messages in the thread. Also
@@ -1860,14 +1829,18 @@ export type JoinThread = { response: never };
  *
  * @endpoint [PUT](https://discord.com/developers/docs/resources/channel#add-thread-member) `/channels/{channel.id}/thread-members/{user.id}`
  */
-export type AddThreadMember = { response: never };
+export interface AddThreadMember {
+	response: never;
+}
 
 /**
  * Removes the current user from a thread.
  *
  * @endpoint [DELETE](https://discord.com/developers/docs/resources/channel#leave-thread) `/channels/{channel.id}/thread-members/@me`
  */
-export type LeaveThread = { response: never };
+export interface LeaveThread {
+	response: never;
+}
 
 /**
  * Removes another member from a thread. Requires the `MANAGE_MESSAGES` permission, or the creator
@@ -1875,7 +1848,9 @@ export type LeaveThread = { response: never };
  *
  * @endpoint [DELETE](https://discord.com/developers/docs/resources/channel#remove-thread-member) `/channels/{channel.id}/thread-members/{user.id}`
  */
-export type RemoveThreadMember = { response: never };
+export interface RemoveThreadMember {
+	response: never;
+}
 
 /**
  * This endpoint is restricted according to whether the `GUILD_MEMBERS` Privileged Intent is enabled
@@ -1883,7 +1858,9 @@ export type RemoveThreadMember = { response: never };
  *
  * @endpoint [GET](https://discord.com/developers/docs/resources/channel#list-thread-members) `/channels/{channel.id}/thread-members`
  */
-export type ListThreadMembers = { response: ThreadMember[] };
+export interface ListThreadMembers {
+	response: ThreadMember[];
+}
 
 /**
  * Returns all active threads in the channel, including public and private threads.

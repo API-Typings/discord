@@ -7,6 +7,7 @@ import type {
 	ExecuteWebhook,
 	GetWebhookMessage,
 	GuildMember,
+	Identifiable,
 	Message,
 	PartialChannel,
 	PartialEmbed,
@@ -71,12 +72,7 @@ export enum SlashCommandLimit {
  *
  * @source {@link https://discord.com/developers/docs/interactions/slash-commands#applicationcommand|Slash Commands}
  */
-export interface ApplicationCommand {
-	/**
-	 * Unique ID of the command.
-	 */
-	id: Snowflake;
-
+export interface ApplicationCommand extends Identifiable {
 	/**
 	 * Unique ID of the parent application.
 	 */
@@ -199,12 +195,7 @@ export interface ApplicationCommandOptionChoice {
 	value: string | number;
 }
 
-export interface PartialGuildApplicationCommandPermissions {
-	/**
-	 * The ID of the command.
-	 */
-	id: Snowflake;
-
+export interface PartialGuildApplicationCommandPermissions extends Identifiable {
 	/**
 	 * The permissions for the command in the guild.
 	 */
@@ -234,12 +225,7 @@ export interface GuildApplicationCommandPermissions extends PartialGuildApplicat
  *
  * @source {@link https://discord.com/developers/docs/interactions/slash-commands#application-command-permissions-object-application-command-permissions-structure|Slash Commands}
  */
-export interface ApplicationCommandPermissions {
-	/**
-	 * The ID of the role or user.
-	 */
-	id: Snowflake;
-
+export interface ApplicationCommandPermissions extends Identifiable {
 	/**
 	 * Role or user.
 	 */
@@ -267,9 +253,7 @@ export enum ApplicationCommandPermissionType {
  */
 export type Interaction = GuildInteraction | DMInteraction;
 
-interface BaseInteraction {
-	id: Snowflake;
-
+interface BaseInteraction extends Identifiable {
 	/**
 	 * ID of the application this interaction is for.
 	 */
@@ -329,12 +313,7 @@ export enum InteractionRequestType {
 /**
  * @source {@link https://discord.com/developers/docs/interactions/slash-commands#interaction-applicationcommandinteractiondata|Slash Commands}
  */
-export interface ApplicationCommandInteractionData {
-	/**
-	 * The ID of the invoked command.
-	 */
-	id: Snowflake;
-
+export interface ApplicationCommandInteractionData extends Identifiable {
 	/**
 	 * The name of the invoked command.
 	 */
@@ -473,7 +452,7 @@ export interface InteractionApplicationCommandCallbackData {
 	 * Allowed mentions object.
 	 */
 	allowed_mentions?: AllowedMentions;
-	flags?: number;
+	flags?: InteractionApplicationCommandCallbackDataFlags;
 	components?: [ActionRow, ...Partial<Tuple<ActionRow, 4>>];
 }
 
@@ -492,12 +471,7 @@ export enum InteractionApplicationCommandCallbackDataFlags {
  *
  * @source {@link https://discord.com/developers/docs/interactions/slash-commands#messageinteraction|Slash Commands}
  */
-export interface MessageInteraction {
-	/**
-	 * ID of the interaction.
-	 */
-	id: Snowflake;
-
+export interface MessageInteraction extends Identifiable {
 	/**
 	 * The type of interaction.
 	 */
@@ -521,7 +495,9 @@ export interface MessageInteraction {
  *
  * @endpoint [GET](https://discord.com/developers/docs/interactions/slash-commands#get-global-application-commands) `/applications/{application.id}/commands`
  */
-export type GetGlobalApplicationCommands = { response: ApplicationCommand[] };
+export interface GetGlobalApplicationCommands {
+	response: ApplicationCommand[];
+}
 
 /**
  * Creates a new global command. New global commands will be available in all guilds after 1 hour.
@@ -542,7 +518,9 @@ export interface CreateGlobalApplicationCommand {
  *
  * @endpoint [GET](https://discord.com/developers/docs/interactions/slash-commands#get-global-application-command) `/applications/{application.id}/commands/{command.id}`
  */
-export type GetGlobalApplicationCommand = { response: ApplicationCommand };
+export interface GetGlobalApplicationCommand {
+	response: ApplicationCommand;
+}
 
 /**
  * Edit a global command. Updates will be available in all guilds after `1` hour.
@@ -565,14 +543,18 @@ export interface EditGlobalApplicationCommand {
  *
  * @endpoint [DELETE](https://discord.com/developers/docs/interactions/slash-commands#delete-global-application-command) `/applications/{application.id}/commands/{command.id}`
  */
-export type DeleteGlobalApplicationCommand = { response: never };
+export interface DeleteGlobalApplicationCommand {
+	response: never;
+}
 
 /**
  * Fetch all of the guild commands for your application for a specific guild.
  *
  * @endpoint [GET](https://discord.com/developers/docs/interactions/slash-commands#get-guild-application-commands) `/applications/{application.id}/guilds/{guild.id}/commands`
  */
-export type GetGuildApplicationCommands = { response: ApplicationCommand[] };
+export interface GetGuildApplicationCommands {
+	response: ApplicationCommand[];
+}
 
 /**
  * Takes a list of application commands, overwriting existing commands that are registered globally
@@ -608,7 +590,9 @@ export interface CreateGuildApplicationCommand {
  *
  * @endpoint [GET](https://discord.com/developers/docs/interactions/slash-commands#get-guild-application-command) `/applications/{application.id}/guilds/{guild.id}/commands/{command.id}`
  */
-export type GetGuildApplicationCommand = { response: ApplicationCommand };
+export interface GetGuildApplicationCommand {
+	response: ApplicationCommand;
+}
 
 /**
  * Edit a guild command. Updates for guild commands will be available immediately.
@@ -625,7 +609,9 @@ export interface EditGuildApplicationCommand {
  *
  * @endpoint [DELETE](https://discord.com/developers/docs/interactions/slash-commands#delete-guild-application-command) `/applications/{application.id}/guilds/{guild.id}/commands/{command.id}`
  */
-export type DeleteGuildApplicationCommand = { response: never };
+export interface DeleteGuildApplicationCommand {
+	response: never;
+}
 
 /**
  * Takes a list of application commands, overwriting existing commands for the guild.
@@ -663,7 +649,9 @@ export type EditOriginalInteractionResponse = EditWebhookMessage;
  *
  * @endpoint [DELETE](https://discord.com/developers/docs/interactions/slash-commands#delete-original-interaction-response) `/webhooks/{application.id}/{interaction.token}/messages/@original`
  */
-export type DeleteOriginalInteractionResponse = { response: never };
+export interface DeleteOriginalInteractionResponse {
+	response: never;
+}
 
 /**
  * Create a followup message for an Interaction. The `thread_id` query parameter is not required
@@ -685,14 +673,18 @@ export type EditFollowupMessage = EditWebhookMessage;
  *
  * @endpoint [DELETE](https://discord.com/developers/docs/interactions/slash-commands#delete-followup-message) `/webhooks/{application.id}/{interaction.token}/messages/{message.id}`
  */
-export type DeleteFollowupMessage = { response: never };
+export interface DeleteFollowupMessage {
+	response: never;
+}
 
 /**
  * Fetches command permissions for all commands for your application in a guild.
  *
  * @endpoint [GET](https://discord.com/developers/docs/interactions/slash-commands#get-guild-application-command-permissions) `/applications/{application.id}/guilds/{guild.id}/commands/permissions`
  */
-export type GetGuildApplicationCommandPermissions = { response: GuildApplicationCommandPermissions[] };
+export interface GetGuildApplicationCommandPermissions {
+	response: GuildApplicationCommandPermissions[];
+}
 
 /* eslint-disable max-len */
 /**
@@ -700,7 +692,9 @@ export type GetGuildApplicationCommandPermissions = { response: GuildApplication
  *
  * @endpoint [GET](https://discord.com/developers/docs/interactions/slash-commands#get-application-command-permissions) `/applications/{application.id}/guilds/{guild.id}/commands/{command.id}/permissions`
  */
-export type GetApplicationCommandPermissions = { response: ApplicationCommandPermissions[] };
+export interface GetApplicationCommandPermissions {
+	response: ApplicationCommandPermissions[];
+}
 
 /**
  * Edits command permissions for a specific command for your application in a guild.

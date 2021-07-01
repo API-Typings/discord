@@ -1,8 +1,5 @@
 import type { Nullable } from 'extended-utility-types';
-import type { PartialApplication, PartialChannel, PartialGuild, User } from '../';
-import { PartialGuildMember } from './Guild';
-
-// ANCHOR Partial Invite
+import type { PartialApplication, PartialChannel, PartialGuild, PartialGuildMember, User } from '../';
 
 /**
  * @source {@link https://discord.com/developers/docs/resources/guild#get-guild-vanity-url-example-partial-invite-object|Guild}
@@ -18,8 +15,6 @@ export interface PartialInvite {
 	 */
 	uses: number;
 }
-
-// ANCHOR Invite
 
 /**
  * Represents a code that when used, adds a user to a guild or group DM channel.
@@ -171,6 +166,8 @@ export interface GetInvite {
  *
  * @endpoint [DELETE](https://discord.com/developers/docs/resources/invite#delete-invite) `/invites/{invite.code}`
  */
-export type DeleteInvite = { response: Invite };
+export interface DeleteInvite {
+	response: Invite;
+}
 
 // !SECTION

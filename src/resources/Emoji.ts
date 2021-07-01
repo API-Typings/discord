@@ -1,15 +1,10 @@
 import type { Nullable } from 'extended-utility-types';
 import type { Snowflake, User } from '../';
 
-// ANCHOR Partial Emoji
-
 /**
  * @source {@link https://discord.com/developers/docs/resources/emoji#emoji-object-gateway-reaction-standard-emoji-example|Emoji}
  */
 export interface PartialEmoji {
-	/**
-	 * Emoji ID.
-	 */
 	id: Nullable<Snowflake>;
 
 	/**
@@ -22,8 +17,6 @@ export interface PartialEmoji {
 	 */
 	animated?: boolean;
 }
-
-// ANCHOR Emoji
 
 /**
  * @remarks
@@ -67,14 +60,18 @@ export interface Emoji extends PartialEmoji {
  *
  * @endpoint [GET](https://discord.com/developers/docs/resources/emoji#list-guild-emojis) `/guilds/{guild.id}/emojis`
  */
-export type ListGuildEmojis = { response: Emoji[] };
+export interface ListGuildEmojis {
+	response: Emoji[];
+}
 
 /**
  * Returns an emoji object for the given guild and emoji IDs.
  *
  * @endpoint [GET](https://discord.com/developers/docs/resources/emoji#get-guild-emojis) `/guilds/{guild.id}/emojis/{emoji.id}`
  */
-export type GetGuildEmoji = { response: Emoji };
+export interface GetGuildEmoji {
+	response: Emoji;
+}
 
 /**
  * Create a new emoji for the guild. Requires the `MANAGE_EMOJIS` permission.
@@ -139,6 +136,8 @@ export interface ModifyGuildEmoji {
  *
  * @endpoint [DELETE](https://discord.com/developers/docs/resources/emoji#delete-guild-emoji) `/guilds/{guild.id}/emojis/{emoji.id}`
  */
-export type DeleteGuildEmoji = { response: never };
+export interface DeleteGuildEmoji {
+	response: never;
+}
 
 // !SECTION

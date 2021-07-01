@@ -70,7 +70,9 @@ export interface GuildTemplate {
  *
  * @endpoint [GET](https://discord.com/developers/docs/resources/guild-template#get-guild-template) `/guilds/template/{template.code}`
  */
-export type GetGuildTemplate = { response: GuildTemplate };
+export interface GetGuildTemplate {
+	response: GuildTemplate;
+}
 
 /**
  * Create a new guild based on a template. This endpoint can be used only by bots in less than 10
@@ -99,7 +101,9 @@ export interface CreateGuildFromGuildTemplate {
  *
  * @endpoint [GET](https://discord.com/developers/docs/resources/guild-template#get-guild-templates) `/guilds/{guild.id}/templates`
  */
-export type GetGuildTemplates = { response: GuildTemplate[] };
+export interface GetGuildTemplates {
+	response: GuildTemplate[];
+}
 
 /**
  * Creates a template for the guild. Requires the `MANAGE_GUILD` permission.
@@ -130,7 +134,9 @@ export interface CreateGuildTemplate {
  *
  * @endpoint [PUT](https://discord.com/developers/docs/resources/guild-template#get-guild-templates) `/guilds/{guild.id}/templates/{template.code}`
  */
-export type SyncGuildTemplate = { response: GuildTemplate };
+export interface SyncGuildTemplate {
+	response: GuildTemplate;
+}
 
 /**
  * Modifies the template's metadata. Requires the `MANAGE_GUILD` permission.
@@ -147,11 +153,8 @@ export interface ModifyGuildTemplate {
  *
  * @endpoint [DELETE](https://discord.com/developers/docs/resources/guild-template#delete-guild-template) `/guilds/{guild.id}/templates/{template.code}`
  */
-export type DeleteGuildTemplate = {
-	/**
-	 * The deleted guild template object.
-	 */
+export interface DeleteGuildTemplate {
 	response: GuildTemplate;
-};
+}
 
 // !SECTION

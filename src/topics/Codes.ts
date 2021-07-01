@@ -1,7 +1,3 @@
-// SECTION Gateway Codes
-
-// ANCHOR Close Codes
-
 /**
  * Your connection to the gateway may sometimes close. When it does, you will receive a close code
  * that tells you what happened.
@@ -45,8 +41,6 @@ export enum GatewayCloseCode {
 	InvalidIntents,
 	DisallowedIntents
 }
-
-// ANCHOR OP Codes
 
 /**
  * All gateway events in Discord are tagged with an opcode that denotes the payload type.
@@ -115,10 +109,6 @@ export enum GatewayOPCode {
 	 */
 	HeartbeatAck
 }
-
-// !SECTION
-
-// ANCHOR JSON Error Codes
 
 /**
  * The API can return more detailed error codes through a `code` key in a JSON error response.
@@ -432,10 +422,6 @@ export enum JSONErrorCode {
 	TooManyAnnouncementThreads
 }
 
-// SECTION RPC Codes
-
-// ANCHOR Close Codes
-
 /**
  * @source {@link https://discord.com/developers/docs/topics/opcodes-and-status-codes#rpc-rpc-close-event-codes|Opcodes and Status Codes}
  */
@@ -470,8 +456,6 @@ export enum RPCCloseCode {
 	 */
 	InvalidEncoding
 }
-
-// ANCHOR Error Codes
 
 /**
  * @source {@link https://discord.com/developers/docs/topics/opcodes-and-status-codes#rpc-rpc-error-codes|Opcodes and Status Codes}
@@ -523,10 +507,6 @@ export enum RPCErrorCode {
 	RateLimited
 }
 
-// !SECTION
-
-// ANCHOR Dispatch Error Codes
-
 export enum DispatchErrorCode {
 	ApplicationNotFound = 101,
 	DiskLow = 2022,
@@ -548,10 +528,6 @@ export enum DispatchErrorCode {
 	InvalidDrive,
 	DiskFull = 2080
 }
-
-// SECTION Voice Codes
-
-// ANCHOR Close Codes
 
 /**
  * @source {@link https://discord.com/developers/docs/topics/opcodes-and-status-codes#voice-voice-close-event-codes|Opcodes and Status Codes}
@@ -587,8 +563,6 @@ export enum VoiceCloseCode {
 	VoiceServerCrashed,
 	UnknownEncryptionMode
 }
-
-// ANCHOR OP Codes
 
 /**
  * @source {@link https://discord.com/developers/docs/topics/opcodes-and-status-codes#voice-voice-opcodes|Opcodes and Status Codes}
@@ -649,5 +623,3 @@ export enum VoiceOPCode {
 	 */
 	ClientDisconnect = 13
 }
-
-// !SECTION

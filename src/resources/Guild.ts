@@ -4,6 +4,7 @@ import type {
 	ChannelType,
 	DiscoveryMetadata,
 	Emoji,
+	Identifiable,
 	InviteMetadata,
 	Message,
 	Overwrite,
@@ -21,17 +22,10 @@ import type {
 	VoiceState
 } from '../';
 
-// ANCHOR Partial Guild
-
 /**
  * @source {@link https://discord.com/developers/docs/resources/user#get-current-user-guilds-example-partial-guild|User}
  */
-export interface PartialGuild {
-	/**
-	 * Guild ID.
-	 */
-	id: Snowflake;
-
+export interface PartialGuild extends Identifiable {
 	/**
 	 * Guild name (`2-100` characters, excluding trailing and leading whitespace).
 	 */
@@ -61,10 +55,6 @@ export interface PartialGuild {
 	 * Verification level required for the guild.
 	 */
 	verification_level?: VerificationLevel;
-
-	/**
-	 * The vanity URL code for the guild.
-	 */
 	vanity_url_code?: Nullable<string>;
 
 	/**
@@ -72,8 +62,6 @@ export interface PartialGuild {
 	 */
 	unavailable?: boolean;
 }
-
-// ANCHOR Guild
 
 /**
  * Represents an isolated collection of users and channels, and are often referred to as "servers"
@@ -119,10 +107,6 @@ export interface Guild extends PartialGuild {
 	 * relative to the request user.
 	 */
 	permissions?: string;
-
-	/**
-	 * ID of AFK channel.
-	 */
 	afk_channel_id: Nullable<Snowflake>;
 
 	/**
@@ -253,10 +237,6 @@ export interface Guild extends PartialGuild {
 	 * The maximum number of members for the guild.
 	 */
 	max_members?: number;
-
-	/**
-	 * The vanity URL code for the guild.
-	 */
 	vanity_url_code: Nullable<string>;
 
 	/**
@@ -558,15 +538,7 @@ export interface UnavailableGuild extends Pick<PartialGuild, 'id'> {
 /**
  * @source {@link https://discord.com/developers/docs/resources/guild#guild-preview-object-guild-preview-structure|Guild}
  */
-export interface GuildPreview {
-	/**
-	 * Guild ID.
-	 */
-	id: Snowflake;
-
-	/**
-	 * Guild name.
-	 */
+export interface GuildPreview extends Identifiable {
 	name: string;
 
 	/**
@@ -610,8 +582,6 @@ export interface GuildPreview {
 	description: Nullable<string>;
 }
 
-// SECTION Guild Widget
-
 /**
  * @source {@link https://discord.com/developers/docs/resources/guild#guild-widget-object-guild-widget-structure|Guild}
  */
@@ -630,21 +600,19 @@ export interface GuildWidgetSettings {
 /**
  * @source {@link https://discord.com/developers/docs/resources/guild#get-guild-widget-example-get-guild-widget|Guild}
  */
-export interface GuildWidget {
-	id: Snowflake;
+export interface GuildWidget extends Identifiable {
 	name: string;
 	instant_invite: string;
 	channels: Omit<PartialChannel, 'type'>[];
-	members: (PartialUser & {
-		status: StatusType;
-		avatar_url: string;
-	})[];
+	members: GuildWidgetMember[];
 	presence_count: number;
 }
 
-// !SECTION
+export interface GuildWidgetMember extends PartialUser {
+	status: StatusType;
+	avatar_url: string;
+}
 
-// ANCHOR Partial Guild Member
 export interface PartialGuildMember {
 	/**
 	 * This users guild nickname.
@@ -678,8 +646,6 @@ export interface PartialGuildMember {
 	permissions?: string;
 }
 
-// ANCHOR Guild Member
-
 /**
  * @remarks
  * - The field `user` won't be included in the member object attached to `MESSAGE_CREATE` and
@@ -706,15 +672,10 @@ export interface GuildMember extends PartialGuildMember {
 	mute: boolean;
 }
 
-// SECTION Integration
-
-// ANCHOR Partial Integration
-
 /**
- * @source {@link https://discord.com/developers/docs/resources/audit-log#audit-log-object-example-partial-integration-object}
+ * @source {@link https://discord.com/developers/docs/resources/audit-log#audit-log-object-example-partial-integration-object|Audit Log}
  */
-export interface PartialIntegration {
-	id: Snowflake;
+export interface PartialIntegration extends Identifiable {
 	name: string;
 	type: IntegrationType;
 
@@ -723,8 +684,6 @@ export interface PartialIntegration {
 	 */
 	account: IntegrationAccount;
 }
-
-// ANCHOR Integration
 
 /**
  * @source {@link https://discord.com/developers/docs/resources/guild#integration-object-integration-structure|Guild}
@@ -814,18 +773,14 @@ export enum IntegrationExpireBehavior {
 /**
  * @source {@link https://discord.com/developers/docs/resources/guild#integration-account-object-integration-account-structure|Guild}
  */
-export interface IntegrationAccount {
-	id: Snowflake;
+export interface IntegrationAccount extends Identifiable {
 	name: string;
 }
 
 /**
  * @source {@link https://discord.com/developers/docs/resources/guild#integration-application-object-integration-application-structure|Guild}
  */
-export interface IntegrationApplication {
-	id: Snowflake;
-	name: string;
-
+export interface IntegrationApplication extends IntegrationAccount {
 	/**
 	 * The icon hash of the app.
 	 */
@@ -839,8 +794,6 @@ export interface IntegrationApplication {
 	bot?: User;
 }
 
-// !SECTION
-
 /**
  * @source {@link https://discord.com/developers/docs/resources/guild#ban-object-ban-structure|Guild}
  */
@@ -852,8 +805,6 @@ export interface GuildBan {
 	 */
 	user: User;
 }
-
-// SECTION Welcome Screen
 
 /**
  * @source {@link https://discord.com/developers/docs/resources/guild#welcome-screen-object-welcome-screen-structure|Guild}
@@ -891,10 +842,6 @@ export interface WelcomeScreenChannel {
 	 */
 	emoji_name: Nullable<string>;
 }
-
-// !SECTION
-
-// SECTION Membership Screening
 
 /**
  * In guilds with Membership Screening enabled, when a member joins, Guild Member Add will
@@ -953,11 +900,7 @@ export enum ScreeningFieldType {
 	Terms = 'Server Rules'
 }
 
-// !SECTION
-
 // SECTION Endpoints
-
-// ANCHOR Create Guild
 
 /**
  * Create a new guild. This endpoint can be used only by bots in less than `10` guilds.
@@ -1051,7 +994,9 @@ export interface GetGuild {
  *
  * @endpoint [GET](https://discord.com/developers/docs/resources/guild#get-guild-preview) `/guilds/{guild.id}/preview`
  */
-export type GetGuildPreview = { response: GuildPreview };
+export interface GetGuildPreview {
+	response: GuildPreview;
+}
 
 /**
  * Modify a guild's settings. Requires the `MANAGE_GUILD` permission.
@@ -1138,14 +1083,18 @@ export interface ModifyGuild {
  *
  * @endpoint [DELETE](https://discord.com/developers/docs/resources/guild#delete-guild) `/guilds/{guild.id}`
  */
-export type DeleteGuild = { response: never };
+export interface DeleteGuild {
+	response: never;
+}
 
 /**
  * Returns a list of guild channel objects. Does not include threads.
  *
  * @endpoint [GET](https://discord.com/developers/docs/resources/guild#get-guild-channels) `/guilds/{guild.id}/channels`
  */
-export type GetGuildChannels = { response: Channel[] };
+export interface GetGuildChannels {
+	response: Channel[];
+}
 
 /**
  * Create a new channel object for the guild. Requires the `MANAGE_CHANNELS` permission.
@@ -1260,7 +1209,9 @@ export interface SearchGuildMessages {
  *
  * @endpoint [GET](https://discord.com/developers/docs/resources/guild#get-guild-member) `/guilds/{guild.id}/members/{user.id}`
  */
-export type GetGuildMember = { response: GuildMember };
+export interface GetGuildMember {
+	response: GuildMember;
+}
 
 /**
  * Returns a list of guild member objects that are members of the guild.
@@ -1422,21 +1373,27 @@ export interface ModifyCurrentUserNick {
  *
  * @endpoint [PUT](https://discord.com/developers/docs/resources/guild#add-guild-member-role) `/guilds/{guild.id}/members/{user.id}/roles/{role.id}`
  */
-export type AddGuildMemberRole = { response: never };
+export interface AddGuildMemberRole {
+	response: never;
+}
 
 /**
  * Removes a role from a guild member. Requires the `MANAGE_ROLES` permission.
  *
  * @endpoint [DELETE](https://discord.com/developers/docs/resources/guild#remove-guild-member-role) `/guilds/{guild.id}/members/{user.id}/roles/{role.id}`
  */
-export type RemoveGuildMemberRole = { response: never };
+export interface RemoveGuildMemberRole {
+	response: never;
+}
 
 /**
  * Remove a member from a guild. Requires `KICK_MEMBERS` permission.
  *
  * @endpoint [DELETE](https://discord.com/developers/docs/resources/guild#remove-guild-member) `/guilds/{guild.id}/members/{user.id}`
  */
-export type RemoveGuildMember = { response: never };
+export interface RemoveGuildMember {
+	response: never;
+}
 
 /**
  * Returns a list of ban objects for the users banned from this guild. Requires the `BAN_MEMBERS`
@@ -1480,14 +1437,18 @@ export interface CreateGuildBan {
  *
  * @endpoint [DELETE](https://discord.com/developers/docs/resources/guild#remove-guild-ban) `/guilds/{guild.id}/bans/{user.id}`
  */
-export type RemoveGuildBan = { response: never };
+export interface RemoveGuildBan {
+	response: never;
+}
 
 /**
  * Returns a list of role objects for the guild.
  *
  * @endpoint [GET](https://discord.com/developers/docs/resources/guild#get-guild-roles) `/guilds/{guild.id}/roles`
  */
-export type GetGuildRoles = { response: Role[] };
+export interface GetGuildRoles {
+	response: Role[];
+}
 
 /**
  * Create a new role for the guild. Requires the `MANAGE_ROLES` permission.
@@ -1590,7 +1551,9 @@ export interface ModifyGuildRole {
  *
  * @endpoint [DELETE](https://discord.com/developers/docs/resources/guild#delete-guild-role) `/guilds/{guild.id}/roles/{role.id}`
  */
-export type DeleteGuildRole = { response: never };
+export interface DeleteGuildRole {
+	response: never;
+}
 
 /**
  * Requires the `KICK_MEMBERS` permission.
@@ -1657,7 +1620,9 @@ export interface BeginGuildPrune {
  *
  * @endpoint [GET](https://discord.com/developers/docs/resources/guild#get-guild-voice-regions) `/guilds/{guild.id}/regions`
  */
-export type GetGuildVoiceRegions = { response: VoiceRegion[] };
+export interface GetGuildVoiceRegions {
+	response: VoiceRegion[];
+}
 
 /**
  * Returns a list of invite objects (with invite metadata) for the guild. Requires the
@@ -1665,21 +1630,27 @@ export type GetGuildVoiceRegions = { response: VoiceRegion[] };
  *
  * @endpoint [GET](https://discord.com/developers/docs/resources/guild#get-guild-invites) `/guilds/{guild.id}/invites`
  */
-export type GetGuildInvites = { response: InviteMetadata[] };
+export interface GetGuildInvites {
+	response: InviteMetadata[];
+}
 
 /**
  * Returns a list of integration objects for the guild. Requires the `MANAGE_GUILD` permission.
  *
  * @endpoint [GET](https://discord.com/developers/docs/resources/guild#get-guild-integrations) `/guilds/{guild.id}/integrations`
  */
-export type GetGuildIntegrations = { response: Integration[] };
+export interface GetGuildIntegrations {
+	response: Integration[];
+}
 
 /**
  * Sync an integration. Requires the `MANAGE_GUILD` permission.
  *
  * @endpoint [POST](https://discord.com/developers/docs/resources/guild#sync-guild-integration) `/guilds/{guild.id}/integrations/{integration.id}/sync`
  */
-export type SyncGuildIntegration = { response: never };
+export interface SyncGuildIntegration {
+	response: never;
+}
 
 /**
  * Returns a guild widget object.
@@ -1703,7 +1674,9 @@ export interface ModifyGuildWidget {
  *
  * @endpoint [GET](https://discord.com/developers/docs/resources/guild#get-guild-widget) `/guilds/{guild.id}/widget.json`
  */
-export type GetGuildWidget = { response: GuildWidget };
+export interface GetGuildWidget {
+	response: GuildWidget;
+}
 
 /**
  * Returns a partial invite object for guilds with that feature enabled. Requires the
@@ -1713,7 +1686,9 @@ export type GetGuildWidget = { response: GuildWidget };
  *
  * @endpoint [GET](https://discord.com/developers/docs/resources/guild#get-guild-vanity-url) `/guilds/{guild.id}/vanity-url`
  */
-export type GetGuildVanityURL = { response: PartialInvite };
+export interface GetGuildVanityURL {
+	response: PartialInvite;
+}
 
 /**
  * Returns a PNG image widget for the guild. Requires no permissions or authentication.
@@ -1743,7 +1718,9 @@ export type WidgetStyle = 'shield' | 'banner1' | 'banner2' | 'banner3' | 'banner
  *
  * @endpoint [GET](https://discord.com/developers/docs/resources/guild#get-guild-welcome-screen) `/guilds/{guild.id}/welcome-screen`
  */
-export type GetGuildWelcomeScreen = { response: WelcomeScreen };
+export interface GetGuildWelcomeScreen {
+	response: WelcomeScreen;
+}
 
 /**
  * Modify the guild's Welcome Screen. Requires the `MANAGE_GUILD` permission.
@@ -1825,7 +1802,9 @@ export type ModifyUserVoiceState = { body: Omit<ModifyCurrentUserVoiceState['bod
  *
  * @endpoint GET `/guilds/{guild.id}/discovery-metadata`
  */
-export type GetGuildDiscoveryMetadata = { response: DiscoveryMetadata };
+export interface GetGuildDiscoveryMetadata {
+	response: DiscoveryMetadata;
+}
 
 /**
  * Modify the discovery metadata for the guild. Requires the `MANAGE_GUILD` permission.
@@ -1883,7 +1862,9 @@ export interface AddGuildDiscoverySubcategory {
  *
  * @endpoint DELETE `/guilds/{guild.id}/discovery-categories/{category.id}`
  */
-export type RemoveGuildDiscoverySubcategory = { response: never };
+export interface RemoveGuildDiscoverySubcategory {
+	response: never;
+}
 
 /**
  * Modify the guild's Membership Screening form. Requires the `MANAGE_GUILD` permission.

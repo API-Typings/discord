@@ -3,6 +3,7 @@ import type {
 	ChannelType,
 	DefaultMessageNotificationLevel,
 	ExplicitContentFilterLevel,
+	Identifiable,
 	IntegrationExpireBehavior,
 	MFALevel,
 	Overwrite,
@@ -47,7 +48,7 @@ export interface AuditLog {
 /**
  * @source {@link https://discord.com/developers/docs/resources/audit-log#audit-log-entry-object-audit-log-entry-structure|Audit Log}
  */
-export interface AuditLogEntry {
+export interface AuditLogEntry extends Identifiable {
 	/**
 	 * ID of the affected entity.
 	 */
@@ -64,7 +65,6 @@ export interface AuditLogEntry {
 	 * The user who made the changes.
 	 */
 	user_id: Nullable<Snowflake>;
-	id: Snowflake;
 
 	/**
 	 * Type of action that occurred.

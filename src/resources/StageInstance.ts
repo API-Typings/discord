@@ -1,18 +1,13 @@
 import type { Nullable } from 'extended-utility-types';
-import type { Snowflake } from '../';
+import type { Identifiable, Snowflake } from '../';
 
 /**
- * A *Stage Instance* holds information about a live stage. When a Stage channel has no speakers for
+ * A Stage Instance holds information about a live stage. When a Stage channel has no speakers for
  * a certain period of time (on the order of minutes) it will be automatically deleted.
  *
  * @source {@link https://discord.com/developers/docs/resources/stage-instance#stage-instance-structure|Channel}
  */
-export interface StageInstance {
-	/**
-	 * The ID of this Stage instance.
-	 */
-	id: Snowflake;
-
+export interface StageInstance extends Identifiable {
 	/**
 	 * The guild ID of the associated Stage channel.
 	 */
@@ -79,7 +74,9 @@ export interface CreateStageInstance {
  *
  * @endpoint [GET](https://discord.com/developers/docs/resources/stage-instance#get-stage-instance) `/stage-instances/{channel.id}`
  */
-export type GetStageInstance = { response: StageInstance };
+export interface GetStageInstance {
+	response: StageInstance;
+}
 
 /**
  * Creates a new Stage instance associated to a Stage channel. Requires the user to be a moderator
@@ -97,6 +94,8 @@ export interface ModifyStageInstance {
  *
  * @endpoint [DELETE](https://discord.com/developers/docs/resources/stage-instance#delete-stage-instance) `/stage-instances/{channel.id}`
  */
-export type DeleteStageInstance = { response: never };
+export interface DeleteStageInstance {
+	response: never;
+}
 
 // !SECTION

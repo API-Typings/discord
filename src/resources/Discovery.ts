@@ -78,7 +78,9 @@ export interface DiscoveryCategoryName {
  *
  * @endpoint GET `/discovery/categories`
  */
-export type ListDiscoveryCategories = { response: DiscoveryCategory[] };
+export interface ListDiscoveryCategories {
+	response: DiscoveryCategory[];
+}
 
 /**
  * Checks if a discovery search term is valid.

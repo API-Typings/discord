@@ -1,5 +1,5 @@
 import type { Nullable } from 'extended-utility-types';
-import type { GuildMember, Snowflake } from '../';
+import type { GuildMember, Identifiable, Snowflake } from '../';
 
 /**
  * Represents a user's voice connection status.
@@ -77,24 +77,14 @@ export interface VoiceState {
 /**
  * @source {@link https://discord.com/developers/docs/resources/voice#voice-region-object-voice-region-structure|Voice}
  */
-export interface VoiceRegion {
+export interface VoiceRegion extends Identifiable {
 	/**
-	 * Unique ID for the region.
-	 */
-	id: Snowflake;
-
-	/**
-	 * Name of the region.
-	 */
-	name: string;
-
-	/**
-	 * True if this is a VIP-only server.
+	 * `rue` if this is a VIP-only server.
 	 */
 	vip: boolean;
 
 	/**
-	 * True for a single server that is closest to the current user's client.
+	 * `true` for a single server that is closest to the current user's client.
 	 */
 	optimal: boolean;
 
@@ -116,6 +106,8 @@ export interface VoiceRegion {
  *
  * @endpoint [GET](https://discord.com/developers/docs/resources/voice#list-voice-regions) `/voice/regions`
  */
-export type ListVoiceRegions = { response: VoiceRegion[] };
+export interface ListVoiceRegions {
+	response: VoiceRegion[];
+}
 
 // !SECTION

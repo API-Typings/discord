@@ -1,7 +1,5 @@
 import type { Nullable, Range } from 'extended-utility-types';
-import type { DMChannel, PartialGuild, PartialIntegration, Snowflake } from '../';
-
-// ANCHOR Partial User
+import type { DMChannel, Identifiable, PartialGuild, PartialIntegration, Snowflake } from '../';
 
 export interface PartialUser {
 	/**
@@ -24,8 +22,6 @@ export interface PartialUser {
 	 */
 	avatar: Nullable<string>;
 }
-
-// ANCHOR User
 
 /**
  * Represents a base entity that can spawn across the entire platform, be members of guilds,
@@ -86,8 +82,6 @@ export interface User extends PartialUser {
 	public_flags?: UserFlags;
 }
 
-// ANCHOR User Flags
-
 /**
  * @source {@link https://discord.com/developers/docs/resources/user#user-object-user-flags|User}
  */
@@ -121,23 +115,17 @@ export enum PremiumType {
 
 export interface Profile {
 	user: User;
-	mutual_guilds: {
-		id: Snowflake;
-		nick: Nullable<string>;
-	}[];
+	mutual_guilds: MutualGuild[];
 	connected_accounts: PartialConnection[];
 	premium_since: Nullable<string>;
 	premium_guild_since: Nullable<string>;
 }
 
-// ANCHOR Partial Connection
+export interface MutualGuild extends Identifiable {
+	nick: Nullable<string>;
+}
 
-export interface PartialConnection {
-	/**
-	 * ID of the connection account.
-	 */
-	id: Snowflake;
-
+export interface PartialConnection extends Identifiable {
 	/**
 	 * The username of the connection account.
 	 */
@@ -153,8 +141,6 @@ export interface PartialConnection {
 	 */
 	verified: boolean;
 }
-
-// ANCHOR Connection
 
 /**
  * The connection object that the user has attached.
@@ -220,8 +206,7 @@ export enum VisibilityType {
 	Everyone
 }
 
-export interface Relationship {
-	id: Snowflake;
+export interface Relationship extends Identifiable {
 	type: RelationshipType;
 	nickname: Nullable<string>;
 	user: User;
@@ -270,14 +255,18 @@ export enum RelationshipType {
  *
  * @endpoint [GET](https://discord.com/developers/docs/resources/user#get-current-user) `/users/@me`
  */
-export type GetCurrentUser = { response: User };
+export interface GetCurrentUser {
+	response: User;
+}
 
 /**
  * Returns a user object for a given user ID.
  *
  * @endpoint [GET](https://discord.com/developers/docs/resources/user#get-user) `/users/{user.id}`
  */
-export type GetUser = { response: User };
+export interface GetUser {
+	response: User;
+}
 
 /**
  * Modify the requester's user account settings.
@@ -339,7 +328,9 @@ export interface GetCurrentUserGuilds {
  *
  * @endpoint [DELETE](https://discord.com/developers/docs/resources/user#leave-guild) `/users/@me/guilds/{guild.id}`
  */
-export type LeaveGuild = { response: never };
+export interface LeaveGuild {
+	response: never;
+}
 
 /**
  * Create a new DM channel with a user.
@@ -389,16 +380,22 @@ export interface CreateGroupDM {
  *
  * @endpoint [GET](https://discord.com/developers/docs/resources/user#get-user-connections) `/users/@me/connections`
  */
-export type GetUserConnections = { response: Connection[] };
+export interface GetUserConnections {
+	response: Connection[];
+}
 
 /**
  * @endpoint GET `/users/@me/relationships`
  */
-export type GetCurrentUserRelationships = { response: Relationship[] };
+export interface GetCurrentUserRelationships {
+	response: Relationship[];
+}
 
 /**
  * @endpoint GET `/users/{user.id}/profile`
  */
-export type GetUserProfile = { response: Profile };
+export interface GetUserProfile {
+	response: Profile;
+}
 
 // !SECTION

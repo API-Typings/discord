@@ -1,7 +1,5 @@
-import { CamelCase, Delimit } from 'extended-utility-types';
-import type { Snowflake } from '../';
-
-// ANCHOR Permission Flags
+import type { CamelCase, Delimit } from 'extended-utility-types';
+import type { Identifiable, Snowflake } from '../';
 
 /**
  * Permissions in Discord are a way to limit and grant certain abilities to users. A set of base
@@ -236,26 +234,12 @@ export type Permission =
 	| Uppercase<Delimit<CamelCase<Exclude<keyof typeof PermissionFlags, 'UseVAD'>>, '_'>>
 	| 'USE_VAD';
 
-// SECTION Roles
-
-// ANCHOR Partial Role
-
 /**
  * @source {@link https://discord.com/developers/docs/resources/audit-log#audit-log-change-object-example-partial-role-object|Audit Log}
  */
-export interface PartialRole {
-	/**
-	 * Role ID.
-	 */
-	id: Snowflake;
-
-	/**
-	 * Role name.
-	 */
+export interface PartialRole extends Identifiable {
 	name: string;
 }
-
-// ANCHOR Role
 
 /**
  * Roles represent a set of permissions attached to a group of users. Roles have unique names,
@@ -325,5 +309,3 @@ export interface RoleTag {
 	 */
 	premium_subscriber?: null;
 }
-
-// !SECTION

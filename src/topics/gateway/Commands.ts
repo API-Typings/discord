@@ -1,8 +1,6 @@
 import type { Nullable, Range } from 'extended-utility-types';
 import type { Activity, GatewayOPCode, Snowflake } from '../../';
 
-// ANCHOR Command Payload
-
 export interface GatewayCommandPayload<T extends GatewayOPCode> {
 	op: T;
 	t: null;
@@ -28,10 +26,6 @@ export interface ConnectionProperties {
 	 */
 	$device: string;
 }
-
-// SECTION Gateway Commands
-
-// ANCHOR Identify
 
 /**
  * Used to trigger the initial handshake with the gateway.
@@ -91,8 +85,6 @@ export interface Identify extends GatewayCommandPayload<GatewayOPCode.Identify> 
 	};
 }
 
-// ANCHOR Resume
-
 /**
  * Used to replay missed events when a disconnected client resumes.
  *
@@ -116,8 +108,6 @@ export interface Resume extends GatewayCommandPayload<GatewayOPCode.Resume> {
 	};
 }
 
-// ANCHOR Heartbeat
-
 /**
  * Used to maintain an active gateway connection.
  *
@@ -131,8 +121,6 @@ export interface Resume extends GatewayCommandPayload<GatewayOPCode.Resume> {
 export interface Heartbeat extends GatewayCommandPayload<GatewayOPCode.Heartbeat> {
 	d: Nullable<number>;
 }
-
-// ANCHOR Request Guild Members
 
 /**
  * Used to request all members for a guild or a list of guilds.
@@ -191,8 +179,6 @@ export interface RequestGuildMembers extends GatewayCommandPayload<GatewayOPCode
 	};
 }
 
-// ANCHOR Update Voice State
-
 /**
  * Sent when a client wants to join, move, or disconnect from a voice channel.
  *
@@ -219,8 +205,6 @@ export interface UpdateVoiceState {
 	 */
 	self_deaf: boolean;
 }
-
-// ANCHOR Update Status
 
 /**
  * Sent by the client to indicate a presence or status update.
@@ -256,5 +240,3 @@ export interface UpdatePresence extends GatewayCommandPayload<GatewayOPCode.Pres
  * @source {@link https://discord.com/developers/docs/topics/gateway#update-status-status-types|Gateway}
  */
 export type StatusType = 'idle' | 'dnd' | 'online' | 'offline' | 'invisbile';
-
-// !SECTION

@@ -5,6 +5,7 @@ import type {
 	Channel,
 	Component,
 	Guild,
+	Identifiable,
 	Message,
 	PartialEmbed,
 	Snowflake,
@@ -17,12 +18,7 @@ import type {
  *
  * @source {@link https://discord.com/developers/docs/resources/webhook#webhook-object-webhook-structure|Webhook}
  */
-export interface Webhook {
-	/**
-	 * The ID of the webhook.
-	 */
-	id: Snowflake;
-
+export interface Webhook extends Identifiable {
 	/**
 	 * The type of the webhook.
 	 */
@@ -134,21 +130,27 @@ export interface CreateWebhook {
  *
  * @endpoint [GET](https://discord.com/developers/docs/resources/webhook#get-channel-webhooks) `/channels/{channel.id}/webhooks`
  */
-export type GetChannelWebhooks = { response: Webhook[] };
+export interface GetChannelWebhooks {
+	response: Webhook[];
+}
 
 /**
  * Returns a list of guild webhook objects. Requires the `MANAGE_WEBHOOKS` permission.
  *
  * @endpoint [GET](https://discord.com/developers/docs/resources/webhook#get-guild-webhooks) `/guilds/{guild.id}/webhooks`
  */
-export type GetGuildWebhooks = { response: Webhook[] };
+export interface GetGuildWebhooks {
+	response: Webhook[];
+}
 
 /**
  * Returns the new webhook object for the given ID.
  *
  * @endpoint [GET](https://discord.com/developers/docs/resources/webhook#get-webhook) `/webhooks/{webhook.id}`
  */
-export type GetWebhook = { response: Webhook };
+export interface GetWebhook {
+	response: Webhook;
+}
 
 /**
  * Returns the new webhook object for the given ID, except this call does not require authentication
@@ -156,7 +158,9 @@ export type GetWebhook = { response: Webhook };
  *
  * @endpoint [GET](https://discord.com/developers/docs/resources/webhook#get-webhook-with-token) `/webhooks/{webhook.id}/{webhook.token}`
  */
-export type GetWebookWithToken = { response: Omit<Webhook, 'user'> };
+export interface GetWebookWithToken {
+	response: Omit<Webhook, 'user'>;
+}
 
 /**
  * Modify a webhook. Requires the `MANAGE_WEBHOOKS` permission.
@@ -203,14 +207,18 @@ export interface ModifyWebhookWithToken {
  *
  * @endpoint [DELETE](https://discord.com/developers/docs/resources/webhook#delete-webhook) `/webhooks/{webhook.id}`
  */
-export type DeleteWebhook = { response: never };
+export interface DeleteWebhook {
+	response: never;
+}
 
 /**
  * Delete a webhook permanently, except this call does not require authentication.
  *
  * @endpoint [DELETE](https://discord.com/developers/docs/resources/webhook#delete-webhook-with-token) `/webhooks/{webhook.id}/{webhook.token}`
  */
-export type DeleteWebhookWithToken = { response: never };
+export interface DeleteWebhookWithToken {
+	response: never;
+}
 
 /**
  * @remarks
@@ -301,7 +309,9 @@ export interface ExecuteWebhook {
  *
  * @endpoint [GET](https://discord.com/developers/docs/resources/webhook#get-webhook-message) `/webhooks/{webhook.id}/{webhook.token}/messages/{message.id}`
  */
-export type GetWebhookMessage = { response: Message };
+export interface GetWebhookMessage {
+	response: Message;
+}
 
 /**
  * Edits a previously-sent webhook message from the same token.
@@ -367,6 +377,8 @@ export interface EditWebhookMessage {
  *
  * @endpoint [DELETE](https://discord.com/developers/docs/resources/webhook#delete-webhook-message) `/webhooks/{webhook.id}/{webhook.token}/messages/{message.id}`
  */
-export type DeleteWebhookMessage = { response: never };
+export interface DeleteWebhookMessage {
+	response: never;
+}
 
 // !SECTION

@@ -1,7 +1,5 @@
 import type { Nullable } from 'extended-utility-types';
-import type { Snowflake, StatusType } from '../../';
-
-// ANCHOR Client Status
+import type { Identifiable, Snowflake, StatusType } from '../../';
 
 /**
  * Active sessions are indicated with an `online`, `idle`, or `dnd` string per platform. If a user
@@ -28,8 +26,6 @@ export interface ClientStatus {
 
 export type ClientStatusType = Omit<StatusType, 'offline' | 'invisible'>;
 
-// SECTION Activity
-
 /**
  * @remarks
  * Bots are only able to send `name`, `type`, and optionally `url`.
@@ -53,7 +49,7 @@ export interface Activity {
 	type: ActivityType;
 
 	/**
-	 * Stream url, is validated when type is `1`.
+	 * Stream URL, is validated when type is `1`.
 	 */
 	url?: Nullable<string>;
 
@@ -144,32 +140,32 @@ export type ActivityGamePlatform = 'desktop' | 'samsung' | 'xbox' | 'ios' | 'and
  */
 export enum ActivityType {
 	/**
-	 * Playing \{name\}
+	 * @example 'Playing \{name\}'
 	 */
 	Game,
 
 	/**
-	 * Streaming \{details\}
+	 * @example 'Streaming \{details\}'
 	 */
 	Streaming,
 
 	/**
-	 * Listening to \{name\}
+	 * @example 'Listening to \{name\}'
 	 */
 	Listening,
 
 	/**
-	 * Watching \{name\}
+	 * @example 'Watching \{name\}'
 	 */
 	Watching,
 
 	/**
-	 * \{emoji\} \{name\}
+	 * @example '\{emoji\} \{name\}'
 	 */
 	Custom,
 
 	/**
-	 * Competing in \{name\}
+	 * @example 'Competing in \{name\}'
 	 */
 	Competing
 }
@@ -192,16 +188,11 @@ export interface ActivityTimestamps {
 /**
  * @source {@link https://discord.com/developers/docs/topics/gateway#activity-object-activity-emoji|Gateway}
  */
-export interface ActivityEmoji {
+export interface ActivityEmoji extends Partial<Identifiable> {
 	/**
 	 * The name of the emoji.
 	 */
 	name: string;
-
-	/**
-	 * The ID of the emoji.
-	 */
-	id?: Snowflake;
 
 	/**
 	 * Whether this emoji is animated.
@@ -212,12 +203,7 @@ export interface ActivityEmoji {
 /**
  * @source {@link https://discord.com/developers/docs/topics/gateway#activity-object-activity-party|Gateway}
  */
-export interface ActivityParty {
-	/**
-	 * The ID of the party.
-	 */
-	id?: string;
-
+export interface ActivityParty extends Partial<Identifiable> {
 	/**
 	 * Used to show the party's current and maximum size.
 	 */
@@ -296,5 +282,3 @@ export interface ActivityButton {
 	 */
 	url: string;
 }
-
-// !SECTION

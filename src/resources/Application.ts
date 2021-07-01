@@ -1,10 +1,7 @@
 import type { Nullable } from 'extended-utility-types';
-import type { PartialUser, Snowflake, Team, User } from '../';
+import type { Identifiable, PartialUser, Snowflake, Team, User } from '../';
 
-// ANCHOR Partial Application
-
-export interface PartialApplication {
-	id: Snowflake;
+export interface PartialApplication extends Identifiable {
 	name: string;
 
 	/**
@@ -40,8 +37,6 @@ export interface PartialApplication {
 	 */
 	flags?: ApplicationFlags;
 }
-
-// ANCHOR Application
 
 /**
  * @source {@link https://discord.com/developers/docs/resources/application#application-object-application-structure|Application}
@@ -106,8 +101,7 @@ export enum ApplicationFlags {
 	Embedded = 1 << 17
 }
 
-export interface ApplicationAsset {
-	id: Snowflake;
+export interface ApplicationAsset extends Identifiable {
 	name: string;
 	type: number;
 }
@@ -117,16 +111,22 @@ export interface ApplicationAsset {
 /**
  * @endpoint [GET](https://discord.com/developers/docs/resources/application#get-current-bot-application-information) `/oauth2/applications/@me`
  */
-export type GetCurrentBotApplicationInformation = { response: Omit<Application, 'flags'> };
+export interface GetCurrentBotApplicationInformation {
+	response: Omit<Application, 'flags'>;
+}
 
 /**
  * @endpoint [GET](https://discord.com/developers/docs/resources/application#get-application-information) `/applications/{application.id}/rpc`
  */
-export type GetApplicationInformation = { response: PartialApplication };
+export interface GetApplicationInformation {
+	response: PartialApplication;
+}
 
 /**
  * @endpoint [GET](https://discord.com/developers/docs/resources/application#get-application-assets) `/oauth2/applications/{application.id}/assets`
  */
-export type GetApplicationAssets = { response: ApplicationAsset[] };
+export interface GetApplicationAssets {
+	response: ApplicationAsset[];
+}
 
 // !SECTION
