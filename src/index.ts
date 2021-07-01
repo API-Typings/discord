@@ -10,7 +10,7 @@ export * from './topics';
  *
  * @source {@link https://discord.com/developers/docs/reference#snowflakes|Reference}
  */
-export const DiscordEpoch = 1420070400000;
+export const DiscordEpoch = 1_420_070_400_000;
 
 export enum BaseURL {
 	/**
@@ -73,6 +73,8 @@ export type Snowflake = `${bigint}`;
  * message. Standard emoji are currently rendered using Twemoji for Desktop/Android and Apple's
  * native emoji on iOS.
  *
+ * Timestamps will display the given timestamp in the user's timezone and locale.
+ *
  * @source {@link https://discord.com/developers/docs/reference#message-formatting|Reference}
  */
 export type MessageFormats =
@@ -81,7 +83,9 @@ export type MessageFormats =
 	| ChannelFormat
 	| RoleFormat
 	| CustomEmojiFormat
-	| CustomEmojiAnimatedFormat;
+	| CustomEmojiAnimatedFormat
+	| UnixTimestampFormat
+	| UnixTimestampStyledFormat;
 
 export type UserFormat = `<@${bigint}>`;
 
@@ -94,3 +98,47 @@ export type RoleFormat = `<@&${bigint}>`;
 export type CustomEmojiFormat = `<:${string}:${bigint}>`;
 
 export type CustomEmojiAnimatedFormat = `<a:${string}:${bigint}>`;
+
+export type UnixTimestampFormat = `<t:${number}>`;
+
+export type UnixTimestampStyledFormat = `<t:${number}:${TimestampStyle}>`;
+
+/**
+ * @source {@link https://discord.com/developers/docs/reference#message-formatting-timestamp-styles|Reference}
+ */
+export enum TimestampStyle {
+	/**
+	 * @example '16:20'
+	 */
+	ShortTime = 't',
+
+	/**
+	 * @example '16:20:30'
+	 */
+	LongTime = 'T',
+
+	/**
+	 * @example '20/04/2021'
+	 */
+	ShortDate = 'd',
+
+	/**
+	 * @example '20 April 2021'
+	 */
+	LongDate = 'D',
+
+	/**
+	 * @example '20 April 2021 16:20'
+	 */
+	ShortDateTime = 'f',
+
+	/**
+	 * @example 'Tuesday, 20 April 2021 16:20'
+	 */
+	LongDateTime = 'F',
+
+	/**
+	 * @example '2 months ago'
+	 */
+	RelativeTime = 'R'
+}
