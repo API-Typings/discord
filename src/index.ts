@@ -39,14 +39,16 @@ export interface ErrorResponse {
 /**
  * @source {@link https://discord.com/developers/docs/reference#error-messages-array-error|Reference}
  */
-export type ArrayError = { readonly [index: string]: ObjectError };
+export interface ArrayError {
+	readonly [index: `${number}`]: ObjectError;
+}
 
 /**
  * @source {@link https://discord.com/developers/docs/reference#error-messages-object-error|Reference}
  */
-export type ObjectError = DeepReadonly<{
-	[field: string]: { _errors: { code: string; message: string }[] };
-}>;
+export interface ObjectError {
+	readonly [field: string]: ArrayError | DeepReadonly<{ _errors: { code: string; message: string }[] }>;
+}
 
 export enum ClientReleaseChannel {
 	Stable = 'stable',
