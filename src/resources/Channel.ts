@@ -10,7 +10,6 @@ import type {
 	MessageInteraction,
 	PartialApplication,
 	PartialEmoji,
-	PartialUser,
 	Snowflake,
 	User
 } from '../';
@@ -34,119 +33,46 @@ export interface PartialChannel extends Identifiable {
  *
  * @source {@link https://discord.com/developers/docs/resources/channel#channel-object-channel-structure|Channel}
  */
-export interface Channel extends PartialChannel {
-	/**
-	 * The ID of the guild (may be missing for some channel objects received over gateway guild
-	 * dispatches).
-	 */
-	guild_id?: Snowflake;
+export type Channel =
+	| TextChannel
+	| DMChannel
+	| VoiceChannel
+	| ChannelCategory
+	| NewsChannel
+	| StoreChannel
+	| ThreadChannel
+	| StageChannel;
+
+export interface BaseChannel extends Identifiable {
+	guild_id: Snowflake;
 
 	/**
 	 * Sorting position of the channel.
 	 */
-	position?: number;
+	position: number;
 
 	/**
-	 * Explicit permission overwrites for members and roles.
+	 * Explicit permission overwrites for members and roles
 	 */
-	permission_overwrites?: Overwrite[];
+	permission_overwrites: Overwrite[];
 
 	/**
-	 * The channel topic (`0-1024` characters).
+	 * The name of the channel (`1-100` characters).
 	 */
-	topic?: Nullable<string>;
-	nsfw?: boolean;
-
-	/**
-	 * The ID of the last message sent in this channel (may not point to an existing or valid
-	 * message).
-	 */
-	last_message_id?: Nullable<Snowflake>;
-
-	/**
-	 * The bitrate (in bits) of the voice channel.
-	 */
-	bitrate?: number;
-
-	/**
-	 * The user limit of the voice channel.
-	 */
-	user_limit?: number;
-
-	/**
-	 * Amount of seconds a user has to wait before sending another message (0-21600); bots, as
-	 * well as users with the permission `manage_messages` or `manage_channel`, are unaffected.
-	 */
-	rate_limit_per_user?: number;
-
-	/**
-	 * The recipients of a DM.
-	 */
-	recipients?: PartialUser[];
-
-	/**
-	 * Icon hash.
-	 */
-	icon?: Nullable<string>;
-
-	/**
-	 * ID of the creator of the group DM or thread.
-	 */
-	owner_id?: Snowflake;
-
-	/**
-	 * Application ID of the group DM creator if it is bot-created.
-	 */
-	application_id?: Snowflake;
+	name: string;
+	nsfw: boolean;
 
 	/**
 	 * ID of the parent category for a channel (each parent category can contain up to `50`
 	 * channels).
 	 */
-	parent_id?: Nullable<string>;
+	parent_id: Snowflake;
 
 	/**
 	 * When the last pinned message was pinned. This may be `null` in events such as `GUILD_CREATE`
 	 * when a message is not pinned.
 	 */
 	last_pin_timestamp?: Nullable<string>;
-
-	/**
-	 * Voice region ID for the voice channel, automatic when set to `null`.
-	 */
-	rtc_region?: Nullable<string>;
-
-	/**
-	 * The camera video quality mode of the voice channel, `1` when not present.
-	 */
-	video_quality_mode?: VideoQualityMode;
-
-	/**
-	 * An approximate count of messages in a thread.
-	 */
-	message_count?: Range<0, 50>;
-
-	/**
-	 * An approximate count of users in a thread.
-	 */
-	member_count?: Range<0, 50>;
-
-	/**
-	 * Thread-specific fields not needed by other channels.
-	 */
-	thread_metadata?: ThreadMetadata;
-
-	/**
-	 * Thread member object for the current user, if they have joined the thread, only included
-	 * on certain API endpoints.
-	 */
-	member?: ThreadMember;
-
-	/**
-	 * Default duration for newly created threads, in minutes, to automatically archive the thread
-	 * after recent activity.
-	 */
-	default_auto_archive_duration?: 60 | 1440 | 4320 | 10080;
 }
 
 /**
@@ -225,22 +151,94 @@ export enum VideoQualityMode {
 /**
  * @source {@link https://discord.com/developers/docs/resources/channel#channel-object-example-guild-text-|Channel}
  */
-export interface TextChannel
-	extends Omit<PartialChannel, 'permissions'>,
-		Required<
-			Pick<
-				Channel,
-				| 'guild_id'
-				| 'position'
-				| 'permission_overwrites'
-				| 'rate_limit_per_user'
-				| 'nsfw'
-				| 'topic'
-				| 'last_message_id'
-				| 'parent_id'
-			>
-		> {
-	type: ChannelType.GuildText;
+export interface TextChannel extends BaseChannel {
+	readonly type: ChannelType.GuildText;
+
+	/**
+	 * The channel topic (`0-1024` characters).
+	 */
+	topic: string;
+
+	/**
+	 * The ID of the last message sent in this channel (may not point to an existing or valid
+	 * message).
+	 */
+	last_message_id: Snowflake;
+
+	/**
+	 * Amount of seconds a user has to wait before sending another message (`0-21600`); bots, as
+	 * well as users with the permission `manage_messages` or `manage_channel`, are unaffected.
+	 *
+	 * This also applies to thread creation. Users can send one message and create one thread
+	 * during each `rate_limit_per_user` interval.
+	 */
+	rate_limit_per_user: number;
+
+	/**
+	 * Default duration for newly created threads, in minutes, to automatically archive the thread
+	 * after recent activity.
+	 */
+	default_auto_archive_duration: 60 | 1440 | 4320 | 10080;
+}
+
+/**
+ * @source {@link https://discord.com/developers/docs/resources/channel#channel-object-example-dm-channel|Channel}
+ */
+export interface DMChannel extends Identifiable, Pick<TextChannel, 'last_message_id' | 'last_pin_timestamp'> {
+	readonly type: ChannelType.DM;
+
+	/**
+	 * The recipient of the DM.
+	 */
+	recipients: [User];
+}
+
+/**
+ * @source {@link https://discord.com/developers/docs/resources/channel#channel-object-example-guild-voice-channel|Channel}
+ */
+export interface VoiceChannel extends Omit<BaseChannel, 'last_pin_timestamp'> {
+	readonly type: ChannelType.GuildVoice;
+	bitrate: number;
+	user_limit: number;
+
+	/**
+	 * Voice region ID for the voice channel, automatic when set to `null`.
+	 */
+	rtc_region: Nullable<string>;
+
+	/**
+	 * The camera video quality mode of the voice channel, `1` when not present.
+	 */
+	video_quality_mode?: VideoQualityMode;
+}
+
+/**
+ * @source {@link https://discord.com/developers/docs/resources/channel#channel-object-example-group-dm-channel|Channel}
+ */
+export interface GroupDMChannel extends Omit<DMChannel, 'recipients'>, Pick<BaseChannel, 'name'> {
+	/**
+	 * The recipients of the DM.
+	 */
+	recipients: [User, User, ...Partial<Tuple<User, 6>>];
+
+	/**
+	 * Icon hash.
+	 */
+	icon: Nullable<string>;
+
+	/**
+	 * ID of the creator of the group DM.
+	 */
+	owner_id: Snowflake;
+}
+
+/**
+ * @source {@link https://discord.com/developers/docs/resources/channel#channel-object-example-channel-category|Channel}
+ */
+export interface ChannelCategory
+	extends Omit<BaseChannel, 'last_pin_timestamp'>,
+		Nullable<Pick<BaseChannel, 'parent_id'>> {
+	readonly type: ChannelType.GuildCategory;
 }
 
 /**
@@ -248,45 +246,8 @@ export interface TextChannel
  *
  * @source {@link https://discord.com/developers/docs/resources/channel#channel-object-example-guild-news-channel|Channel}
  */
-export interface NewsChannel extends Omit<TextChannel, 'rate_limit_per_user' | 'type'> {
-	type: ChannelType.GuildNews;
-}
-
-/**
- * @source {@link https://discord.com/developers/docs/resources/channel#channel-object-example-guild-voice-channel|Channel}
- */
-export interface VoiceChannel
-	extends Omit<NewsChannel, 'last_message_id' | 'type' | 'topic'>,
-		Required<Pick<Channel, 'bitrate' | 'user_limit' | 'rtc_region'>> {
-	type: ChannelType.GuildVoice;
-}
-
-/**
- * @source {@link https://discord.com/developers/docs/resources/channel#channel-object-example-dm-channel|Channel}
- */
-export interface DMChannel
-	extends Required<Pick<Channel, 'id' | 'last_message_id' | 'recipients'>>,
-		Pick<Channel, 'last_pin_timestamp'> {
-	type: ChannelType.DM;
-	recipients: [User];
-}
-
-/**
- * @source {@link https://discord.com/developers/docs/resources/channel#channel-object-example-group-dm-channel|Channel}
- */
-export interface GroupDMChannel
-	extends Omit<DMChannel, 'type' | 'recipients'>,
-		Nullable<Pick<Channel, 'name' | 'icon'>>,
-		Required<Pick<Channel, 'owner_id'>> {
-	type: ChannelType.GroupDM;
-	recipients: [User, User, ...Partial<Tuple<User, 6>>];
-}
-
-/**
- * @source {@link https://discord.com/developers/docs/resources/channel#channel-object-example-channel-category|Channel}
- */
-export interface ChannelCategory extends Omit<NewsChannel, 'last_message_id' | 'type' | 'topic'> {
-	type: ChannelType.GuildCategory;
+export interface NewsChannel extends Omit<Text, 'type' | 'rate_limit_per_user'> {
+	readonly type: ChannelType.GuildNews;
 }
 
 /**
@@ -294,8 +255,8 @@ export interface ChannelCategory extends Omit<NewsChannel, 'last_message_id' | '
  *
  * @source {@link https://discord.com/developers/docs/resources/channel#channel-object-example-store-channel|Channel}
  */
-export interface StoreChannel extends Omit<ChannelCategory, 'type'> {
-	type: ChannelType.GuildStore;
+export interface StoreChannel extends Omit<NewsChannel, 'type'> {
+	readonly type: ChannelType.GuildStore;
 }
 
 /**
@@ -316,22 +277,43 @@ export interface StoreChannel extends Omit<ChannelCategory, 'type'> {
  * reached additional threads cannot be created or unarchived, and users cannot be added.
  */
 export interface ThreadChannel
-	extends Pick<Channel, 'last_message_id' | 'member' | 'rate_limit_per_user'>,
-		Required<
-			Pick<
-				Channel,
-				| 'id'
-				| 'guild_id'
-				| 'parent_id'
-				| 'owner_id'
-				| 'message_count'
-				| 'member_count'
-				| 'thread_metadata'
-				| 'name'
-				| 'default_auto_archive_duration'
-			>
-		> {
-	type: ChannelType.GuildNewsThread | ChannelType.GuildPublicThread | ChannelType.GuildPrivateThread;
+	extends Pick<TextChannel, 'guild_id' | 'name' | 'last_message_id' | 'rate_limit_per_user' | 'last_pin_timestamp'> {
+	readonly type: ChannelType.GuildNewsThread | ChannelType.GuildPublicThread | ChannelType.GuildPrivateThread;
+
+	/**
+	 * ID of the creator of the thread.
+	 */
+	owner_id: Snowflake;
+
+	/**
+	 * ID of the text channel this thread was created in.
+	 */
+	parent_id: Snowflake;
+
+	/**
+	 * An approximate count of messages in a thread.
+	 */
+	message_count: Range<0, 50>;
+
+	/**
+	 * An approximate count of users in a thread.
+	 */
+	member_count: Range<0, 50>;
+
+	/**
+	 * Thread-specific fields not needed by other channels.
+	 */
+	thread_metadata: ThreadMetadata;
+
+	/**
+	 * Thread member object for the current user, if they have joined the thread, only included
+	 * on certain API endpoints.
+	 */
+	member?: ThreadMember;
+}
+
+export interface StageChannel extends Omit<VoiceChannel, 'type' | 'video_quality_mode'> {
+	readonly type: ChannelType.GuildStageVoice;
 }
 
 /**
