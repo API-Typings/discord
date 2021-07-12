@@ -668,6 +668,11 @@ export interface GuildMember extends PartialGuildMember {
 	user?: User;
 
 	/**
+	 * The member's guild avatar hash.
+	 */
+	avatar: Nullable<string>;
+
+	/**
 	 * Whether the user is deafened in voice channels.
 	 */
 	deaf: boolean;
@@ -1359,14 +1364,14 @@ export interface ModifyGuildMember {
 }
 
 /**
- * Modifies the nickname of the current user in a guild.
+ * Modifies the current member in a guild.
  *
- * @endpoint [PATCH](https://discord.com/developers/docs/resources/guild#modify-current-user-nick) `/guilds/{guild.id}/members/@me`
+ * @endpoint [PATCH](https://discord.com/developers/docs/resources/guild#modify-current-member) `/guilds/{guild.id}/members/@me`
  */
-export interface ModifyCurrentUserNick {
+export interface ModifyCurrentMember {
 	body: {
 		/**
-		 * Value to set users nickname to. Requires the `CHANGE_NICKNAME` permission.
+		 * Value to set user's nickname to. Requires the `CHANGE_NICKNAME` permission.
 		 */
 		nick?: Nullable<string>;
 	};

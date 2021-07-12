@@ -761,6 +761,11 @@ export interface GuildMemberUpdate extends GatewayEventPayload<GatewayEvent.Guil
 		nick?: Nullable<string>;
 
 		/**
+		 * The member's guild avatar hash.
+		 */
+		avatar: Nullable<string>;
+
+		/**
 		 * When the user joined the guild.
 		 */
 		joined_at: Nullable<string>;
