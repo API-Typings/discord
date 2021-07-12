@@ -19,6 +19,7 @@ import type {
 	Role,
 	Snowflake,
 	StageInstance,
+	Sticker,
 	ThreadChannel,
 	ThreadMember,
 	UnavailableGuild,
@@ -166,6 +167,11 @@ export enum GatewayEvent {
 	 * Guild emojis were updated.
 	 */
 	GuildEmojisUpdate = 'GUILD_EMOJIS_UPDATE',
+
+	/**
+	 * Guild stickers were updated.
+	 */
+	GuildStickersUpdate = 'GUILD_STICKERS_UPDATE',
 
 	/**
 	 * Guild integration was updated.
@@ -650,6 +656,23 @@ export interface GuildEmojisUpdate extends GatewayEventPayload<GatewayEvent.Guil
 		 * Array of emojis.
 		 */
 		emojis: Emoji[];
+	};
+}
+
+/**
+ * Sent when a guild's stickers have been updated.
+ */
+export interface GuildStickersUpdate extends GatewayEventPayload<GatewayEvent.GuildStickersUpdate> {
+	d: {
+		/**
+		 * ID of the guild.
+		 */
+		guild_id: Snowflake;
+
+		/**
+		 * Array of stickers.
+		 */
+		stickers: Sticker[];
 	};
 }
 

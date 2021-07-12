@@ -195,8 +195,8 @@ export enum JSONErrorCode {
 	ChannelRateLimited = 20_028,
 
 	/**
-	 * The Stage topic, server name, server description, or channel names contain
-	 * words that are not allowed.
+	 * The Stage topic, server name, server description, or channel names contain words that are not
+	 * allowed.
 	 */
 	InvalidWords = 20_031,
 
@@ -388,6 +388,12 @@ export enum JSONErrorCode {
 	 */
 	InvalidGuildInvite,
 	InvalidAPIVersion = 50_041,
+
+	/**
+	 * File uploaded exceeds the maximum size.
+	 */
+	InvalidFileSize = 50_045,
+	InvalidFileUploaded,
 	InvalidGiftRedemptionExhausted = 50_050,
 	InvalidGiftRedemptionOwned,
 	InvalidGiftSelfRedemption = 50_054,
@@ -437,7 +443,17 @@ export enum JSONErrorCode {
 	ThreadAlreadyCreated = 160_004,
 	ThreadLocked,
 	TooManyThreads,
-	TooManyAnnouncementThreads
+	TooManyAnnouncementThreads,
+
+	/**
+	 * Invalid JSON for uploaded Lottie file.
+	 */
+	InvalidLottieJSON = 170_001,
+
+	/**
+	 * Lottie animation maximum dimensions exceeded.
+	 */
+	InvalidLottieAnimationDimensions = 170_005
 }
 
 /**

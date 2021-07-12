@@ -16,6 +16,7 @@ import type {
 	Snowflake,
 	StageInstance,
 	StatusType,
+	Sticker,
 	ThreadChannel,
 	User,
 	VoiceRegion,
@@ -292,6 +293,11 @@ export interface Guild extends PartialGuild {
 	welcome_screen?: WelcomeScreen;
 	nsfw_level: GuildNSFWLevel;
 	stage_instances?: StageInstance[];
+
+	/**
+	 * Custom guild stickers.
+	 */
+	stickers?: Sticker[];
 }
 
 /**

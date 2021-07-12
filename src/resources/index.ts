@@ -7,6 +7,7 @@ export * from './Guild';
 export * from './GuildTemplate';
 export * from './Invite';
 export * from './StageInstance';
+export * from './Sticker';
 export * from './User';
 export * from './Voice';
 export * from './Webhook';

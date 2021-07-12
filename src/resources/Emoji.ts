@@ -74,7 +74,7 @@ export interface GetGuildEmoji {
 }
 
 /**
- * Create a new emoji for the guild. Requires the `MANAGE_EMOJIS` permission.
+ * Create a new emoji for the guild. Requires the `MANAGE_EMOJIS_AND_STICKERS` permission.
  *
  * @remarks
  * Emojis and animated emojis have a maximum file size of 256kb. Attempting to upload an emoji
@@ -108,7 +108,7 @@ export interface CreateGuildEmoji {
 }
 
 /**
- * Modify the given emoji. Requires the `MANAGE_EMOJIS` permission.
+ * Modify the given emoji. Requires the `MANAGE_EMOJIS_AND_STICKERS` permission.
  *
  * @endpoint [PATCH](https://discord.com/developers/docs/resources/emoji#modify-guild-emoji) `/guilds/{guild.id}/emojis/{emoji.id}`
  */
@@ -132,7 +132,7 @@ export interface ModifyGuildEmoji {
 }
 
 /**
- * Delete the given emoji. Requires the `MANAGE_EMOJIS` permission.
+ * Delete the given emoji. Requires the `MANAGE_EMOJIS_AND_STICKERS` permission.
  *
  * @endpoint [DELETE](https://discord.com/developers/docs/resources/emoji#delete-guild-emoji) `/guilds/{guild.id}/emojis/{emoji.id}`
  */

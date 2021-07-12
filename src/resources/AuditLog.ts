@@ -15,6 +15,7 @@ import type {
 	VerificationLevel,
 	Webhook
 } from '../';
+import { StickerFormatType } from './Sticker';
 
 /**
  * Whenever an admin action is performed on the API, an entry is added to the respective guild's
@@ -123,7 +124,10 @@ export enum AuditLogEvent {
 	IntegrationDelete,
 	StageInstanceCreate,
 	StageInstanceUpdate,
-	StageInstanceDelete
+	StageInstanceDelete,
+	StickerCreate = 90,
+	StickerUpdate,
+	StickerDelete
 }
 
 /**
@@ -498,6 +502,26 @@ export interface AuditLogChangeKey {
 	 * The privacy level of the stage instance.
 	 */
 	privacy_level: PrivacyLevel;
+
+	/**
+	 * Related emoji of sticker changed.
+	 */
+	tags: string;
+
+	/**
+	 * Format type of sticker changed.
+	 */
+	format_type: StickerFormatType;
+
+	/**
+	 * Availability of sticker changed.
+	 */
+	available: boolean;
+
+	/**
+	 * The guild the sticker is in changed.
+	 */
+	guild_id: Snowflake;
 }
 
 // SECTION Endpoints

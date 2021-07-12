@@ -181,10 +181,11 @@ export enum Intents {
 	GuildBans = 1 << 2,
 
 	/**
-	 * GUILD_EMOJIS (1 \<\< 3)
+	 * GUILD_EMOJIS_AND_STICKERS (1 \<\< 3)
 	 * - `GUILD_EMOJIS_UPDATE`
+	 * - `GUILD_STICKERS_UPDATE`
 	 */
-	GuildEmojis = 1 << 3,
+	GuildEmojisAndStickers = 1 << 3,
 
 	/**
 	 * GUILD_INTEGRATIONS (1 \<\< 4)

@@ -196,13 +196,13 @@ export enum PermissionFlags {
 	ManageWebhooks = 1 << 29,
 
 	/**
-	 * Allows management and editing of emojis.
+	 * Allows management and editing of emojis and stickers.
 	 *
 	 * @remarks
 	 * This permissions requires the owner account to use two-factor authentication when used on a
 	 * guild that has server-wide 2FA enabled.
 	 */
-	ManageEmojis = 1 << 30,
+	ManageEmojisAndStickers = 1 << 30,
 
 	/**
 	 * Allows members to use slash commands in text channels. Applies to text channels.
@@ -231,7 +231,8 @@ export enum PermissionFlags {
 }
 
 export type Permission =
-	| Uppercase<Delimit<CamelCase<Exclude<keyof typeof PermissionFlags, 'UseVAD'>>, '_'>>
+	| Uppercase<Delimit<CamelCase<Exclude<keyof typeof PermissionFlags, 'UseVAD' | 'SendTTSMessages'>>, '_'>>
+	| 'SEND_TTS_MESSAGES'
 	| 'USE_VAD';
 
 /**

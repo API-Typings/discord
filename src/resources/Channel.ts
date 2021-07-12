@@ -10,6 +10,7 @@ import type {
 	PartialApplication,
 	PartialEmoji,
 	Snowflake,
+	StickerItem,
 	User
 } from '../';
 
@@ -443,12 +444,6 @@ export interface Message extends Identifiable {
 	flags?: MessageFlags;
 
 	/**
-	 * The stickers sent with the message (bots currently can only receive messages with stickers,
-	 * not send).
-	 */
-	stickers?: Sticker[];
-
-	/**
 	 * The message associated with the `message_reference`.
 	 *
 	 * @remarks
@@ -473,6 +468,11 @@ export interface Message extends Identifiable {
 	 * Sent if the message contains components.
 	 */
 	components?: [ActionRow, ...Partial<Tuple<ActionRow, 4>>];
+
+	/**
+	 * Sent if the message contains stickers.
+	 */
+	sticker_items?: StickerItem[];
 }
 
 export interface UserMention extends User {
@@ -608,35 +608,6 @@ export enum MessageFlags {
 	 * This message is an `InteractionResponse` and the bot is "thinking".
 	 */
 	Loading = 1 << 7
-}
-
-/**
- * @source {@link https://discord.com/developers/docs/resources/channel#message-object-message-sticker-structure|Channel}
- */
-export interface Sticker extends Identifiable {
-	pack_id: Snowflake;
-	name: string;
-	description: string;
-
-	/**
-	 * A comma-separated list of tags for the sticker.
-	 */
-	tags?: string;
-
-	/**
-	 * Sticker asset hash.
-	 */
-	asset: string;
-	format_type: StickerFormat;
-}
-
-/**
- * @source {@link https://discord.com/developers/docs/resources/channel#message-object-message-sticker-format-types|Channel}
- */
-export enum StickerFormat {
-	PNG = 1,
-	APNG,
-	LOTTIE
 }
 
 /**
@@ -1359,6 +1330,12 @@ export interface CreateMessage {
 				 * Embedded `rich` content.
 				 */
 				embeds: [PartialEmbed, ...Partial<Tuple<PartialEmbed, 9>>];
+		  }
+		| {
+				/**
+				 * IDs of up to 3 stickers in the server to send in the message.
+				 */
+				sticker_ids: [Snowflake, ...Partial<Tuple<Snowflake, 2>>];
 		  }
 	);
 
