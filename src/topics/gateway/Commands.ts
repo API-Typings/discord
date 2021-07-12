@@ -1,12 +1,14 @@
 import type { Nullable, Range } from 'extended-utility-types';
 import type { Activity, GatewayOPCode, Snowflake } from '../../';
-import type { GuildIdentifiable } from '../../__internal__';
+import type { CommandPayload, GuildIdentifiable } from '../../__internal__';
 
-export interface GatewayCommandPayload<T extends GatewayOPCode> {
-	op: T;
-	t: null;
-	s: null;
-}
+export type GatewayCommandPayload =
+	| Identify
+	| Resume
+	| Heartbeat
+	| RequestGuildMembers
+	| UpdateVoiceState
+	| UpdatePresence;
 
 /**
  * @source {@link https://discord.com/developers/docs/topics/gateway#identify-identify-connection-properties|Gateway}
@@ -42,7 +44,7 @@ export interface ConnectionProperties {
  *
  * @source {@link https://discord.com/developers/docs/topics/gateway#identify|Gateway}
  */
-export interface Identify extends GatewayCommandPayload<GatewayOPCode.Identify> {
+export interface Identify extends CommandPayload<GatewayOPCode.Identify> {
 	d: {
 		/**
 		 * Authentication token.
@@ -91,7 +93,7 @@ export interface Identify extends GatewayCommandPayload<GatewayOPCode.Identify> 
  *
  * @source {@link https://discord.com/developers/docs/topics/gateway#resume|Gateway}
  */
-export interface Resume extends GatewayCommandPayload<GatewayOPCode.Resume> {
+export interface Resume extends CommandPayload<GatewayOPCode.Resume> {
 	d: {
 		/**
 		 * Session token.
@@ -119,7 +121,7 @@ export interface Resume extends GatewayCommandPayload<GatewayOPCode.Resume> {
  *
  * @source {@link https://discord.com/developers/docs/topics/gateway#heartbeat|Gateway}
  */
-export interface Heartbeat extends GatewayCommandPayload<GatewayOPCode.Heartbeat> {
+export interface Heartbeat extends CommandPayload<GatewayOPCode.Heartbeat> {
 	d: Nullable<number>;
 }
 
@@ -145,7 +147,7 @@ export interface Heartbeat extends GatewayCommandPayload<GatewayOPCode.Heartbeat
  * @source {@link https://discord.com/developers/docs/topics/gateway#request-guild-members|Gateway}
  */
 // prettier-ignore
-export interface RequestGuildMembers extends GatewayCommandPayload<GatewayOPCode.RequestGuildMembers>,
+export interface RequestGuildMembers extends CommandPayload<GatewayOPCode.RequestGuildMembers>,
 	GuildIdentifiable {
 	d: {
 		/**
@@ -181,21 +183,23 @@ export interface RequestGuildMembers extends GatewayCommandPayload<GatewayOPCode
  *
  * @source {@link https://discord.com/developers/docs/topics/gateway#update-voice-state|Gateway}
  */
-export interface UpdateVoiceState extends GuildIdentifiable {
-	/**
-	 * ID of the voice channel client wants to join (`null` if disconnecting).
-	 */
-	channel_id: Nullable<Snowflake>;
+export interface UpdateVoiceState extends CommandPayload<GatewayOPCode.VoiceStateUpdate> {
+	d: GuildIdentifiable & {
+		/**
+		 * ID of the voice channel client wants to join (`null` if disconnecting).
+		 */
+		channel_id: Nullable<Snowflake>;
 
-	/**
-	 * Is the client muted.
-	 */
-	self_mute: boolean;
+		/**
+		 * Is the client muted.
+		 */
+		self_mute: boolean;
 
-	/**
-	 * Is the client deafened.
-	 */
-	self_deaf: boolean;
+		/**
+		 * Is the client deafened.
+		 */
+		self_deaf: boolean;
+	};
 }
 
 /**
@@ -203,7 +207,7 @@ export interface UpdateVoiceState extends GuildIdentifiable {
  *
  * @source {@link https://discord.com/developers/docs/topics/gateway#update-presence|Gateway}
  */
-export interface UpdatePresence extends GatewayCommandPayload<GatewayOPCode.PresenceUpdate> {
+export interface UpdatePresence extends CommandPayload<GatewayOPCode.PresenceUpdate> {
 	d: {
 		/**
 		 * Unix time (in milliseconds) of when the client went idle, or `null` if the client is not

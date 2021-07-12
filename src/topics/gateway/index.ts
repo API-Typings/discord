@@ -1,5 +1,4 @@
-import type { Nullable } from 'extended-utility-types';
-import type { GatewayEvent, GatewayOPCode } from '../../';
+import type { GatewayCommandPayload, GatewayEventPayload } from './';
 
 export * from './Activity';
 export * from './Commands';
@@ -8,37 +7,7 @@ export * from './Events';
 /**
  * @source {@link https://discord.com/developers/docs/topics/gateway#payloads-gateway-payload-structure|Gateway}
  */
-export type GatewayPayload = {
-	/**
-	 * Event data.
-	 */
-	d: Nullable<unknown>;
-} & (
-	| {
-			/**
-			 * OPCode for the payload.
-			 */
-			op: GatewayOPCode.Dispatch;
-
-			/**
-			 * Sequence number, used for resuming sessions and heartbeats.
-			 */
-			s: number;
-
-			/**
-			 * The event name for this payload.
-			 */
-			t: GatewayEvent;
-	  }
-	| {
-			/**
-			 * OPCode for the payload.
-			 */
-			op: Exclude<GatewayOPCode, GatewayOPCode.Dispatch>;
-			s: null;
-			t: null;
-	  }
-);
+export type GatewayPayload = GatewayCommandPayload | GatewayEventPayload;
 
 /**
  * @source {@link https://discord.com/developers/docs/topics/gateway#connecting-gateway-url-params|Gateway}

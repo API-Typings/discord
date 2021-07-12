@@ -1,7 +1,6 @@
 import type { Nullable } from 'extended-utility-types';
 import type { ComponentType, InteractionRequestType, Overwrite, PartialEmoji, Snowflake, StickerItem } from '../';
-import type { Identifiable } from './';
-import type { GuildIdentifiable, WithType } from './common';
+import type { GuildIdentifiable, Identifiable, WithType } from './';
 
 export interface BaseButton extends WithType<ComponentType.Button> {
 	/**
