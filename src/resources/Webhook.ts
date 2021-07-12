@@ -1,8 +1,9 @@
 import type { Nullable, Tuple } from 'extended-utility-types';
 import type {
+	ActionRow,
 	AllowedMentions,
 	Attachment,
-	Channel,
+	BaseChannel,
 	Guild,
 	Identifiable,
 	Message,
@@ -10,7 +11,6 @@ import type {
 	Snowflake,
 	User
 } from '../';
-import { ActionRow } from '../interactions';
 
 /**
  * Represents a low-effort way to post messages to channels. They do not require a bot user or
@@ -68,7 +68,7 @@ export interface Webhook extends Identifiable {
 	/**
 	 * The channel that this webhook is following (returned for Channel Follower Webhooks).
 	 */
-	source_channel?: Pick<Channel, 'id' | 'name'>;
+	source_channel?: Pick<BaseChannel, 'id' | 'name'>;
 
 	/**
 	 * The URL used for executing the webhook (returned by the Webhooks OAuth2 flow).
