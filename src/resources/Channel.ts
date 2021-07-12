@@ -276,7 +276,10 @@ export interface StoreChannel extends Omit<NewsChannel, 'type'> {
  * reached additional threads cannot be created or unarchived, and users cannot be added.
  */
 export interface ThreadChannel
-	extends Pick<TextChannel, 'guild_id' | 'name' | 'last_message_id' | 'rate_limit_per_user' | 'last_pin_timestamp'> {
+	extends Pick<
+		TextChannel,
+		'id' | 'guild_id' | 'name' | 'last_message_id' | 'rate_limit_per_user' | 'last_pin_timestamp'
+	> {
 	readonly type: ChannelType.GuildNewsThread | ChannelType.GuildPublicThread | ChannelType.GuildPrivateThread;
 
 	/**
