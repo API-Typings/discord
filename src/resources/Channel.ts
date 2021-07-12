@@ -1,7 +1,6 @@
 import type { ExclusiveOr, Nullable, Range, Tuple } from 'extended-utility-types';
 import type {
 	ActionRow,
-	Component,
 	GuildMember,
 	Identifiable,
 	Invite,
@@ -1343,7 +1342,7 @@ export interface CreateMessage {
 		/**
 		 * The components to include with the message.
 		 */
-		components?: Component[];
+		components?: [ActionRow, ...Partial<Tuple<ActionRow, 4>>];
 	} & (
 		| {
 				/**
@@ -1532,7 +1531,7 @@ export interface EditMessage {
 		/**
 		 * The components to include with the message.
 		 */
-		components?: Component[];
+		components?: [ActionRow, ...Partial<Tuple<ActionRow, 4>>];
 	};
 }
 

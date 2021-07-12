@@ -3,7 +3,6 @@ import type {
 	AllowedMentions,
 	Attachment,
 	Channel,
-	Component,
 	Guild,
 	Identifiable,
 	Message,
@@ -11,6 +10,7 @@ import type {
 	Snowflake,
 	User
 } from '../';
+import { ActionRow } from '../interactions';
 
 /**
  * Represents a low-effort way to post messages to channels. They do not require a bot user or
@@ -278,8 +278,11 @@ export interface ExecuteWebhook {
 
 		/**
 		 * The components to include with the message.
+		 *
+		 * @remarks
+		 * Requires an application-owned webhook.
 		 */
-		components?: Component[];
+		components?: [ActionRow, ...Partial<Tuple<ActionRow, 4>>];
 	} & (
 		| {
 				/**
@@ -366,7 +369,7 @@ export interface EditWebhookMessage {
 		/**
 		 * The components to include with the message.
 		 */
-		components?: Component[];
+		components?: [ActionRow, ...Partial<Tuple<ActionRow, 4>>];
 	};
 
 	response: Message;
