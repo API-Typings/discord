@@ -1085,7 +1085,7 @@ export interface GetChannel {
 export interface ModifyGroupDMChannel {
 	body: {
 		/**
-		 * `2-100` character channel name.
+		 * `1-100` character channel name.
 		 */
 		name?: string;
 
@@ -1110,7 +1110,7 @@ export interface ModifyGroupDMChannel {
 export interface ModifyGuildChannel {
 	body: {
 		/**
-		 * `2-100` character channel name. Applies to all channel types.
+		 * `1-100` character channel name. Applies to all channel types.
 		 */
 		name?: string;
 
@@ -1198,12 +1198,7 @@ export interface ModifyGuildChannel {
  */
 export interface ModifyThreadChannel {
 	body: Partial<Pick<ThreadMetadata, 'archived' | 'auto_archive_duration' | 'locked'>> &
-		Pick<ModifyGuildChannel['body'], 'rate_limit_per_user'> & {
-			/**
-			 * `2-100` character channel name.
-			 */
-			name?: string;
-		};
+		Pick<ModifyGuildChannel['body'], 'rate_limit_per_user' | 'name'>;
 
 	response: Channel;
 }
