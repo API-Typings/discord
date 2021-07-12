@@ -333,6 +333,7 @@ export interface ApplicationCommandInteractionData extends Identifiable {
 	 * For components, the `custom_id` of the component.
 	 */
 	custom_id?: string;
+	values?: string[];
 
 	/**
 	 * For components, the `type` of the component.
