@@ -121,7 +121,7 @@ export enum JSONErrorCode {
 	 * General error (such as a malformed request body, amongst other things).
 	 */
 	General,
-	UnknownAccount = 10001,
+	UnknownAccount = 10_001,
 	UnknownApplication,
 	UnknownChannel,
 	UnknownGuild,
@@ -138,7 +138,7 @@ export enum JSONErrorCode {
 	UnknownWebhook,
 	UnknownWebhookService,
 	UnknownSession,
-	UnknownBan = 10026,
+	UnknownBan = 10_026,
 	UnknownSKU,
 	UnknownStoreListing,
 	UnknownEntitlement,
@@ -146,18 +146,22 @@ export enum JSONErrorCode {
 	UnknownLobby,
 	UnknownBranch,
 	UnknownStoreDirectoryLayout,
-	UnknownRedistributable = 10036,
-	UnknownGiftCode = 10038,
-	UnknownGuildTemplate = 10057,
-	UnknownDiscoveryCategory = 10059,
-	UnknownInteraction = 10062,
+	UnknownRedistributable = 10_036,
+	UnknownGiftCode = 10_038,
+	UnknownGuildTemplate = 10_057,
+	UnknownDiscoveryCategory = 10_059,
+	UnknownSticker,
+	UnknownInteraction = 10_062,
 	UnknownApplicationCommand,
 	UnknownApplicationCommandPermissions,
+	UnknownStageInstance = 10_067,
+	UnknownGuildMemberVerificationForm,
+	UnknownGuildWelcomeScreen,
 
 	/**
 	 * Bots cannot use this endpoint.
 	 */
-	BotDisallowed = 20001,
+	BotDisallowed = 20_001,
 
 	/**
 	 * Only bots can use this endpoint.
@@ -168,32 +172,43 @@ export enum JSONErrorCode {
 	/**
 	 * Explicit content cannot be sent to the desired recipient(s).
 	 */
-	ExplicitContent = 20009,
-	AccountScheduledForDeletion = 20011,
+	ExplicitContent = 20_009,
+	AccountScheduledForDeletion = 20_011,
 	UserUnauthorizedForApplication,
 	AccountDisabled,
-	SlowmodeRateLimited = 20016,
+	SlowmodeRateLimited = 20_016,
 
 	/**
 	 * Only the owner of this account can perform this action.
 	 */
-	InvalidAccountOwner = 20018,
+	InvalidAccountOwner = 20_018,
 
 	/**
 	 * This message cannot be edited due to announcement rate limits.
 	 */
-	ChannelFollowingRateLimited = 20022,
-	UnderMinimumAge = 20024,
+	ChannelFollowingRateLimited = 20_022,
+	UnderMinimumAge = 20_024,
 
 	/**
 	 * The channel you are writing has hit the write rate limit.
 	 */
-	ChannelRateLimited = 20028,
+	ChannelRateLimited = 20_028,
+
+	/**
+	 * The Stage topic, server name, server description, or channel names contain
+	 * words that are not allowed.
+	 */
+	InvalidWords = 20_031,
+
+	/**
+	 * Guild premium subscription level too low.
+	 */
+	InvalidGuildPremiumSubscriptionLevel = 20_035,
 
 	/**
 	 * Maximum number of guilds reached (100).
 	 */
-	TooManyGuilds = 30001,
+	TooManyGuilds = 30_001,
 
 	/**
 	 * Maximum number of friends reached (1000).
@@ -225,25 +240,30 @@ export enum JSONErrorCode {
 	/**
 	 * Maximum number of reactions reached (20).
 	 */
-	TooManyReactions = 30010,
+	TooManyReactions = 30_010,
 
 	/**
 	 * Maximum number of channels reached (500).
 	 */
-	TooManyChannels = 30013,
+	TooManyChannels = 30_013,
 
 	/**
 	 * Maximum number of attachments in a message reached (10).
 	 */
-	TooManyAttachments = 30015,
+	TooManyAttachments = 30_015,
 
 	/**
 	 * Maximum number of invites reached (1000).
 	 */
 	TooManyInvites,
-	TooManyAnimatedEmojis = 30018,
+	TooManyAnimatedEmojis = 30_018,
 	GuildAtCapacity,
-	NotEnoughGuildMembers = 30029,
+	NotEnoughGuildMembers = 30_029,
+
+	/**
+	 * Maximum number of server categories has been reached (5).
+	 */
+	TooManyGuildCategories,
 
 	/**
 	 * Maximum number of guild discovery subcategories has been reached (5).
@@ -254,26 +274,27 @@ export enum JSONErrorCode {
 	 * Guild already has a template.
 	 */
 	GuildTemplateExists,
-	TooManyThreadMembers = 30033,
+	TooManyThreadMembers = 30_033,
 
 	/**
 	 * Maximum number of bans for non-guild members have been exceeded.
 	 */
-	TooManyNonGuildMemberBans = 30035,
-	TooManyBanFetches = 30037,
-	Unauthorized = 40001,
+	TooManyNonGuildMemberBans = 30_035,
+	TooManyBanFetches = 30_037,
+	TooManyStickers = 30_039,
+	Unauthorized = 40_001,
 	EmailVerificationRequired,
 	DMOpenRateLimited,
 	SendMessageTemporarilyDisabled,
 	RequestEntityTooLarge,
 	FeatureTemporarilyDisabled,
 	UserBanned,
-	ConnectionRevoked = 40012,
-	DeleteAccountTransferTeamOwnership = 40028,
-	UserNotConnectedToVoice = 400032,
+	ConnectionRevoked = 40_012,
+	DeleteAccountTransferTeamOwnership = 40_028,
+	UserNotConnectedToVoice = 40_032,
 	MessageAlreadyCrossposted,
-	ApplicationCommandNameExists = 40041,
-	InvalidAccess = 50001,
+	ApplicationCommandNameExists = 40_041,
+	InvalidAccess = 50_001,
 	InvalidAccountType,
 
 	/**
@@ -349,11 +370,7 @@ export enum JSONErrorCode {
 	InvalidOAuth2MissingScope,
 	InvalidWebhookToken,
 	InvalidRole,
-
-	/**
-	 * Invalid recipient(s).
-	 */
-	InvalidRecipients = 50033,
+	InvalidRecipients = 50_033,
 
 	/**
 	 * A message provided was too old to bulk delete (\> 14 days).
@@ -370,29 +387,29 @@ export enum JSONErrorCode {
 	 * An invite was accepted to a guild the application's bot is not in.
 	 */
 	InvalidGuildInvite,
-	InvalidAPIVersion = 50041,
-	InvalidGiftRedemptionExhausted = 50050,
+	InvalidAPIVersion = 50_041,
+	InvalidGiftRedemptionExhausted = 50_050,
 	InvalidGiftRedemptionOwned,
-	InvalidGiftSelfRedemption = 50054,
-	InvalidGiftPaymentSourceRequired = 500070,
+	InvalidGiftSelfRedemption = 50_054,
+	InvalidGiftPaymentSourceRequired = 50_070,
 
 	/**
 	 * Cannot delete a channel required for Community guilds.
 	 */
-	RequiredCommunityChannel = 50074,
-	InvalidStickerSent = 50081,
+	RequiredCommunityChannel = 50_074,
+	InvalidStickerSent = 50_081,
 
 	/**
 	 * Tried to perform an operation on an archived thread.
 	 */
-	InvalidThreadArchiveState = 50083,
+	InvalidThreadArchiveState = 50_083,
 	InvalidThreadNotificationSettings,
 
 	/**
 	 * `before` value is earlier than the thread creation date.
 	 */
 	InvalidBeforeThreadCreationDateValue,
-	MFAEnabled = 60001,
+	MFAEnabled = 60_001,
 	MFADisabled,
 	MFARequired,
 	MFAUnverified,
@@ -400,23 +417,24 @@ export enum JSONErrorCode {
 	MFAInvalidTicket,
 	MFAInvalidCode,
 	MFAInvalidSession,
-	PhoneNumberUnableToSend = 70003,
-	PhoneVerificationRequired = 70007,
-	RelationshipIncomingDisabled = 80000,
+	PhoneNumberUnableToSend = 70_003,
+	PhoneVerificationRequired = 70_007,
+	RelationshipIncomingDisabled = 80_000,
 	RelationshipIncomingBlocked,
 	RelationshipInvalidUserBot,
 	RelationshipInvalidSelf,
 	RelationshipInvalidDiscordTag,
-	RelationshipAlreadyFriends = 80007,
-	ReactionBlocked = 90001,
-	InvalidGiftRedemptionSubscriptionManaged = 100021,
-	InvalidGiftRedemptionSubscriptionIncompatible = 100023,
+	RelationshipAlreadyFriends = 80_007,
+	ReactionBlocked = 90_001,
+	InvalidGiftRedemptionSubscriptionManaged = 100_021,
+	InvalidGiftRedemptionSubscriptionIncompatible = 100_023,
 	InvalidGiftRedemptionInvoiceOpen,
-	ListingAlreadyJoined = 120000,
+	ListingAlreadyJoined = 120_000,
 	ListingTooManyMembers,
 	ListingJoinBlocked,
-	APIResourceOverloaded = 130000,
-	ThreadAlreadyCreated = 160004,
+	APIResourceOverloaded = 130_000,
+	StageAlreadyOpen = 150_006,
+	ThreadAlreadyCreated = 160_004,
 	ThreadLocked,
 	TooManyThreads,
 	TooManyAnnouncementThreads
