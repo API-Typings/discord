@@ -2,7 +2,6 @@ import type { ExclusiveOr, Nullable, Range, Tuple } from 'extended-utility-types
 import type {
 	ActionRow,
 	GuildMember,
-	Identifiable,
 	Invite,
 	InviteMetadata,
 	InviteTargetType,
@@ -13,10 +12,9 @@ import type {
 	StickerItem,
 	User
 } from '../';
+import type { BaseChannel, GuildIdentifiable, Identifiable, PartialTuple, WithType } from '../__internal__';
 
-export interface PartialChannel extends Identifiable {
-	type: ChannelType;
-
+export interface PartialChannel extends Identifiable, WithType<ChannelType> {
 	/**
 	 * The name of the channel (`1-100` characters).
 	 */
@@ -42,38 +40,6 @@ export type Channel =
 	| StoreChannel
 	| ThreadChannel
 	| StageChannel;
-
-export interface BaseChannel extends Identifiable {
-	guild_id: Snowflake;
-
-	/**
-	 * Sorting position of the channel.
-	 */
-	position: number;
-
-	/**
-	 * Explicit permission overwrites for members and roles
-	 */
-	permission_overwrites: Overwrite[];
-
-	/**
-	 * The name of the channel (`1-100` characters).
-	 */
-	name: string;
-	nsfw: boolean;
-
-	/**
-	 * ID of the parent category for a channel (each parent category can contain up to `50`
-	 * channels).
-	 */
-	parent_id: Snowflake;
-
-	/**
-	 * When the last pinned message was pinned. This may be `null` in events such as `GUILD_CREATE`
-	 * when a message is not pinned.
-	 */
-	last_pin_timestamp?: Nullable<string>;
-}
 
 /**
  * @source {@link https://discord.com/developers/docs/resources/channel#channel-object-channel-types|Channel}
@@ -151,9 +117,7 @@ export enum VideoQualityMode {
 /**
  * @source {@link https://discord.com/developers/docs/resources/channel#channel-object-example-guild-text-|Channel}
  */
-export interface TextChannel extends BaseChannel {
-	readonly type: ChannelType.GuildText;
-
+export interface TextChannel extends BaseChannel, WithType<ChannelType.GuildText> {
 	/**
 	 * The channel topic (`0-1024` characters).
 	 */
@@ -184,9 +148,10 @@ export interface TextChannel extends BaseChannel {
 /**
  * @source {@link https://discord.com/developers/docs/resources/channel#channel-object-example-dm-channel|Channel}
  */
-export interface DMChannel extends Identifiable, Pick<TextChannel, 'last_message_id' | 'last_pin_timestamp'> {
-	readonly type: ChannelType.DM;
-
+export interface DMChannel
+	extends Identifiable,
+		WithType<ChannelType.DM>,
+		Pick<TextChannel, 'last_message_id' | 'last_pin_timestamp'> {
 	/**
 	 * The recipient of the DM.
 	 */
@@ -196,8 +161,7 @@ export interface DMChannel extends Identifiable, Pick<TextChannel, 'last_message
 /**
  * @source {@link https://discord.com/developers/docs/resources/channel#channel-object-example-guild-voice-channel|Channel}
  */
-export interface VoiceChannel extends Omit<BaseChannel, 'last_pin_timestamp'> {
-	readonly type: ChannelType.GuildVoice;
+export interface VoiceChannel extends WithType<ChannelType.GuildVoice>, Omit<BaseChannel, 'last_pin_timestamp'> {
 	bitrate: number;
 	user_limit: number;
 
@@ -219,7 +183,7 @@ export interface GroupDMChannel extends Omit<DMChannel, 'recipients'>, Pick<Base
 	/**
 	 * The recipients of the DM.
 	 */
-	recipients: [User, User, ...Partial<Tuple<User, 6>>];
+	recipients: PartialTuple<User, 6, 2>;
 
 	/**
 	 * Icon hash.
@@ -235,29 +199,23 @@ export interface GroupDMChannel extends Omit<DMChannel, 'recipients'>, Pick<Base
 /**
  * @source {@link https://discord.com/developers/docs/resources/channel#channel-object-example-channel-category|Channel}
  */
-export interface ChannelCategory
-	extends Omit<BaseChannel, 'last_pin_timestamp'>,
-		Nullable<Pick<BaseChannel, 'parent_id'>> {
-	readonly type: ChannelType.GuildCategory;
-}
+export type ChannelCategory = WithType<ChannelType.GuildCategory> &
+	Omit<BaseChannel, 'last_pin_timestamp'> &
+	Nullable<Pick<BaseChannel, 'parent_id'>>;
 
 /**
  * Bots can post or publish messages in this type of channel if they have the proper permissions.
  *
  * @source {@link https://discord.com/developers/docs/resources/channel#channel-object-example-guild-news-channel|Channel}
  */
-export interface NewsChannel extends Omit<Text, 'type' | 'rate_limit_per_user'> {
-	readonly type: ChannelType.GuildNews;
-}
+export type NewsChannel = WithType<ChannelType.GuildNews> & Omit<Text, 'type' | 'rate_limit_per_user'>;
 
 /**
  * Bots can neither send or read messages from this channel type (as it is a store page).
  *
  * @source {@link https://discord.com/developers/docs/resources/channel#channel-object-example-store-channel|Channel}
  */
-export interface StoreChannel extends Omit<NewsChannel, 'type'> {
-	readonly type: ChannelType.GuildStore;
-}
+export type StoreChannel = WithType<ChannelType.GuildStore> & Omit<NewsChannel, 'type'>;
 
 /**
  * Threads can be either `archived` or `active`. Archived threads are generally immutable. To send a
@@ -277,12 +235,11 @@ export interface StoreChannel extends Omit<NewsChannel, 'type'> {
  * reached additional threads cannot be created or unarchived, and users cannot be added.
  */
 export interface ThreadChannel
-	extends Pick<
-		TextChannel,
-		'id' | 'guild_id' | 'name' | 'last_message_id' | 'rate_limit_per_user' | 'last_pin_timestamp'
-	> {
-	readonly type: ChannelType.GuildNewsThread | ChannelType.GuildPublicThread | ChannelType.GuildPrivateThread;
-
+	extends WithType<ChannelType.GuildNewsThread | ChannelType.GuildPublicThread | ChannelType.GuildPrivateThread>,
+		Pick<
+			TextChannel,
+			'id' | 'guild_id' | 'name' | 'last_message_id' | 'rate_limit_per_user' | 'last_pin_timestamp'
+		> {
 	/**
 	 * ID of the creator of the thread.
 	 */
@@ -315,25 +272,18 @@ export interface ThreadChannel
 	member?: ThreadMember;
 }
 
-export interface StageChannel extends Omit<VoiceChannel, 'type' | 'video_quality_mode'> {
-	readonly type: ChannelType.GuildStageVoice;
-}
+export type StageChannel = WithType<ChannelType.GuildStageVoice> & Omit<VoiceChannel, 'type' | 'video_quality_mode'>;
 
 /**
  * Represents a message sent in a channel within Discord.
  *
  * @source {@link https://discord.com/developers/docs/resources/channel#message-object-message-structure|Channel}
  */
-export interface Message extends Identifiable {
+export interface Message extends Identifiable, WithType<MessageType>, Partial<GuildIdentifiable> {
 	/**
 	 * ID of the channel the message was sent in.
 	 */
 	channel_id: Snowflake;
-
-	/**
-	 * ID of the guild the message was sent in.
-	 */
-	guild_id?: Snowflake;
 
 	/**
 	 * The author of this message (not guaranteed to be a valid user).
@@ -415,7 +365,6 @@ export interface Message extends Identifiable {
 	 * If the message is generated by a webhook, this is the webhook's ID.
 	 */
 	webhook_id?: Snowflake;
-	type: MessageType;
 
 	/**
 	 * Sent with Rich Presence-related chat embeds.
@@ -467,7 +416,7 @@ export interface Message extends Identifiable {
 	/**
 	 * Sent if the message contains components.
 	 */
-	components?: [ActionRow, ...Partial<Tuple<ActionRow, 4>>];
+	components?: PartialTuple<ActionRow, 4>;
 
 	/**
 	 * Sent if the message contains stickers.
@@ -511,12 +460,7 @@ export enum MessageType {
 /**
  * @source {@link https://discord.com/developers/docs/resources/channel#message-object-message-activity-structure|Channel}
  */
-export interface MessageActivity {
-	/**
-	 * Type of message activity.
-	 */
-	type: MessageActivityType;
-
+export interface MessageActivity extends WithType<MessageActivityType> {
 	/**
 	 * `party_id` from a Rich Presence event.
 	 */
@@ -526,7 +470,7 @@ export interface MessageActivity {
 /**
  * @source {@link https://discord.com/developers/docs/resources/channel#message-object-message-reference-structure|Channel}
  */
-export interface MessageReference {
+export interface MessageReference extends Partial<GuildIdentifiable> {
 	/**
 	 * ID of the originating message.
 	 */
@@ -540,11 +484,6 @@ export interface MessageReference {
 	 * event/response that includes this data model.
 	 */
 	channel_id?: Snowflake;
-
-	/**
-	 * ID of the originating message's guild.
-	 */
-	guild_id?: Snowflake;
 
 	/**
 	 * When sending, whether to error if the referenced message doesn't exist instead of sending as
@@ -759,7 +698,7 @@ export interface PartialEmbed {
 	/**
 	 * Fields information.
 	 */
-	fields?: [EmbedField, ...Partial<Tuple<EmbedField, 24>>];
+	fields?: PartialTuple<EmbedField, 24>;
 }
 
 /**
@@ -968,17 +907,7 @@ export interface Attachment extends Identifiable {
 /**
  * @source {@link https://discord.com/developers/docs/resources/channel#channel-mention-object-channel-mention-structure|Channel}
  */
-export interface ChannelMention extends Identifiable {
-	/**
-	 * ID of the guild containing the channel.
-	 */
-	guild_id: Snowflake;
-
-	/**
-	 * The type of Channel.
-	 */
-	type: ChannelType;
-
+export interface ChannelMention extends Identifiable, GuildIdentifiable, WithType<ChannelType> {
 	/**
 	 * The name of the channel.
 	 */
@@ -1006,12 +935,12 @@ export interface AllowedMentions {
 	/**
 	 * Array of `role_id`s to mention.
 	 */
-	roles: [Snowflake, ...Partial<Tuple<Snowflake, 99>>];
+	roles: PartialTuple<Snowflake, 99>;
 
 	/**
 	 * Array of `user_id`s to mention.
 	 */
-	users: [Snowflake, ...Partial<Tuple<Snowflake, 99>>];
+	users: PartialTuple<Snowflake, 99>;
 
 	/**
 	 * For replies, whether to mention the author of the message being replied to.
@@ -1311,7 +1240,7 @@ export interface CreateMessage {
 		/**
 		 * The components to include with the message.
 		 */
-		components?: [ActionRow, ...Partial<Tuple<ActionRow, 4>>];
+		components?: PartialTuple<ActionRow, 4>;
 	} & (
 		| {
 				/**
@@ -1329,13 +1258,13 @@ export interface CreateMessage {
 				/**
 				 * Embedded `rich` content.
 				 */
-				embeds: [PartialEmbed, ...Partial<Tuple<PartialEmbed, 9>>];
+				embeds: PartialTuple<PartialEmbed, 9>;
 		  }
 		| {
 				/**
 				 * IDs of up to 3 stickers in the server to send in the message.
 				 */
-				sticker_ids: [Snowflake, ...Partial<Tuple<Snowflake, 2>>];
+				sticker_ids: PartialTuple<Snowflake, 2>;
 		  }
 	);
 
@@ -1476,7 +1405,7 @@ export interface EditMessage {
 		/**
 		 * Embedded `rich` content,
 		 */
-		embeds?: Nullable<[PartialEmbed, ...Partial<Tuple<PartialEmbed, 9>>]>;
+		embeds?: Nullable<PartialTuple<PartialEmbed, 9>>;
 
 		/**
 		 * Edit the flags of a message (only `SUPPRESS_EMBEDS` can currently be set/unset).
@@ -1506,7 +1435,7 @@ export interface EditMessage {
 		/**
 		 * The components to include with the message.
 		 */
-		components?: [ActionRow, ...Partial<Tuple<ActionRow, 4>>];
+		components?: Nullable<PartialTuple<ActionRow, 4>>;
 	};
 }
 
@@ -1538,7 +1467,7 @@ export interface BulkDeleteMessages {
 		/**
 		 * An array of message IDs to delete (`2-100`).
 		 */
-		messages: [Snowflake, Snowflake, ...Partial<Tuple<Snowflake, 98>>];
+		messages: PartialTuple<Snowflake, 98, 2>;
 	};
 
 	response: never;

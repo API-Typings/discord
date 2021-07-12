@@ -3,7 +3,6 @@ import type {
 	ChannelType,
 	DefaultMessageNotificationLevel,
 	ExplicitContentFilterLevel,
-	Identifiable,
 	IntegrationExpireBehavior,
 	MFALevel,
 	Overwrite,
@@ -11,11 +10,12 @@ import type {
 	PartialRole,
 	PrivacyLevel,
 	Snowflake,
+	StickerFormatType,
 	User,
 	VerificationLevel,
 	Webhook
 } from '../';
-import { StickerFormatType } from './Sticker';
+import type { Identifiable } from '../__internal__';
 
 /**
  * Whenever an admin action is performed on the API, an entry is added to the respective guild's

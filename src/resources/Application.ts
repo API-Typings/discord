@@ -1,5 +1,6 @@
 import type { Nullable } from 'extended-utility-types';
-import type { Identifiable, PartialUser, Snowflake, Team, User } from '../';
+import type { PartialUser, Snowflake, Team, User } from '../';
+import type { Identifiable } from '../__internal__';
 
 export interface PartialApplication extends Identifiable {
 	name: string;

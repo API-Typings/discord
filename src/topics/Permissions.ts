@@ -1,5 +1,6 @@
 import type { CamelCase, Delimit } from 'extended-utility-types';
-import type { Identifiable, Snowflake } from '../';
+import type { Snowflake } from '../';
+import type { Identifiable } from '../__internal__';
 
 /**
  * Permissions in Discord are a way to limit and grant certain abilities to users. A set of base

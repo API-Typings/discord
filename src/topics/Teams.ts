@@ -1,19 +1,15 @@
 import type { Nullable } from 'extended-utility-types';
 import type { PartialUser, Snowflake } from '../';
+import type { Identifiable } from '../__internal__';
 
 /**
  * @source {@link https://discord.com/developers/docs/topics/teams#data-models-team-object|Teams}
  */
-export interface Team {
+export interface Team extends Identifiable {
 	/**
 	 * A hash of the image of the team's icon.
 	 */
 	icon: Nullable<string>;
-
-	/**
-	 * The unique ID of the team.
-	 */
-	id: Snowflake;
 
 	/**
 	 * The members of the team.

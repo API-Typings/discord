@@ -1,16 +1,6 @@
-import type { Nullable, Tuple } from 'extended-utility-types';
-import type {
-	ActionRow,
-	AllowedMentions,
-	Attachment,
-	BaseChannel,
-	Guild,
-	Identifiable,
-	Message,
-	PartialEmbed,
-	Snowflake,
-	User
-} from '../';
+import type { Nullable } from 'extended-utility-types';
+import type { ActionRow, AllowedMentions, Attachment, Guild, Message, PartialEmbed, Snowflake, User } from '../';
+import type { BaseChannel, GuildIdentifiable, Identifiable, PartialTuple, WithType } from '../__internal__';
 
 /**
  * Represents a low-effort way to post messages to channels. They do not require a bot user or
@@ -18,17 +8,7 @@ import type {
  *
  * @source {@link https://discord.com/developers/docs/resources/webhook#webhook-object-webhook-structure|Webhook}
  */
-export interface Webhook extends Identifiable {
-	/**
-	 * The type of the webhook.
-	 */
-	type: WebhookType;
-
-	/**
-	 * The guild ID this webhook is for, if any.
-	 */
-	guild_id?: Snowflake;
-
+export interface Webhook extends Identifiable, Partial<GuildIdentifiable>, WithType<WebhookType> {
 	/**
 	 * The channel ID this webhook is for, if any.
 	 */
@@ -282,7 +262,7 @@ export interface ExecuteWebhook {
 		 * @remarks
 		 * Requires an application-owned webhook.
 		 */
-		components?: [ActionRow, ...Partial<Tuple<ActionRow, 4>>];
+		components?: PartialTuple<ActionRow, 4>;
 	} & (
 		| {
 				/**
@@ -300,7 +280,7 @@ export interface ExecuteWebhook {
 				/**
 				 * Embedded `rich` content.
 				 */
-				embeds: [PartialEmbed, ...Partial<Tuple<PartialEmbed, 9>>];
+				embeds: PartialTuple<PartialEmbed, 9>;
 		  }
 	);
 
@@ -344,7 +324,7 @@ export interface EditWebhookMessage {
 		/**
 		 * Embedded `rich` content.
 		 */
-		embeds?: Nullable<[PartialEmbed, ...Partial<Tuple<PartialEmbed, 9>>]>;
+		embeds?: Nullable<PartialTuple<PartialEmbed, 9>>;
 
 		/**
 		 * The contents of the file being sent/edited.
@@ -369,7 +349,7 @@ export interface EditWebhookMessage {
 		/**
 		 * The components to include with the message.
 		 */
-		components?: [ActionRow, ...Partial<Tuple<ActionRow, 4>>];
+		components?: PartialTuple<ActionRow, 4>;
 	};
 
 	response: Message;

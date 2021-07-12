@@ -7,7 +7,6 @@ import type {
 	ExecuteWebhook,
 	GetWebhookMessage,
 	GuildMember,
-	Identifiable,
 	Message,
 	PartialChannel,
 	PartialEmbed,
@@ -16,6 +15,7 @@ import type {
 	Snowflake,
 	User
 } from '../';
+import type { BaseInteraction, GuildIdentifiable, Identifiable, PartialTuple } from '../__internal__';
 
 /**
  * @source {@link https://discord.com/developers/docs/interactions/slash-commands#a-quick-note-on-limits|Slash Commands}
@@ -72,16 +72,11 @@ export enum SlashCommandLimit {
  *
  * @source {@link https://discord.com/developers/docs/interactions/slash-commands#applicationcommand|Slash Commands}
  */
-export interface ApplicationCommand extends Identifiable {
+export interface ApplicationCommand extends Identifiable, Partial<GuildIdentifiable> {
 	/**
 	 * Unique ID of the parent application.
 	 */
 	application_id: Snowflake;
-
-	/**
-	 * Guild ID of the command, if not global.
-	 */
-	guild_id?: Snowflake;
 
 	/**
 	 * `1-32` lowercase character name matching `^[\w-]{1,32}$`.
@@ -96,7 +91,7 @@ export interface ApplicationCommand extends Identifiable {
 	/**
 	 * The parameters for the command.
 	 */
-	options?: [ApplicationCommandOption, ...Partial<Tuple<ApplicationCommandOption, 24>>];
+	options?: PartialTuple<ApplicationCommandOption, 24>;
 
 	/**
 	 * Whether the command is enabled by default when the app is added to a guild.
@@ -132,7 +127,7 @@ export type ApplicationCommandOption = {
 } & (
 	| {
 			type: 1 | 2;
-			options: [ApplicationCommandOption, ...Partial<Tuple<ApplicationCommandOption, 24>>];
+			options: PartialTuple<ApplicationCommandOption, 24>;
 	  }
 	| {
 			type: 3;
@@ -147,13 +142,7 @@ export type ApplicationCommandOption = {
 	  }
 );
 
-type ApplicationCommandOptionChoiceType<T> = [
-	{
-		name: string;
-		value: T;
-	},
-	...Partial<Tuple<{ name: string; value: T }, 24>>
-];
+type ApplicationCommandOptionChoiceType<T> = PartialTuple<{ name: string; value: T }, 24>;
 
 /**
  * @source {@link https://discord.com/developers/docs/interactions/slash-commands#applicationcommandoptiontype|Application Command}
@@ -207,16 +196,13 @@ export interface PartialGuildApplicationCommandPermissions extends Identifiable 
  *
  * @source {@link https://discord.com/developers/docs/interactions/slash-commands#application-command-permissions-object-guild-application-command-permissions-structure|Slash Commands}
  */
-export interface GuildApplicationCommandPermissions extends PartialGuildApplicationCommandPermissions {
+export interface GuildApplicationCommandPermissions
+	extends PartialGuildApplicationCommandPermissions,
+		GuildIdentifiable {
 	/**
 	 * The ID of the application the command belongs to.
 	 */
 	application_id: Snowflake;
-
-	/**
-	 * The ID of the guild.
-	 */
-	guild_id: Snowflake;
 }
 
 /**
@@ -253,30 +239,11 @@ export enum ApplicationCommandPermissionType {
  */
 export type Interaction = GuildInteraction | DMInteraction;
 
-interface BaseInteraction extends Identifiable {
-	/**
-	 * ID of the application this interaction is for.
-	 */
-	application_id: Snowflake;
-	readonly type: InteractionRequestType;
-
-	/**
-	 * A continuation token for responding to the interaction.
-	 */
-	token: string;
-	readonly version: 1;
-}
-
-export interface GuildInteraction extends BaseInteraction {
+export interface GuildInteraction extends BaseInteraction, GuildIdentifiable {
 	/**
 	 * The command data payload.
 	 */
 	data: ApplicationCommandInteractionData;
-
-	/**
-	 * The guild it was sent from.
-	 */
-	guild_id: Snowflake;
 
 	/**
 	 * The channel it was sent from.
@@ -327,7 +294,7 @@ export interface ApplicationCommandInteractionData extends Identifiable {
 	/**
 	 * The params + values from the user.
 	 */
-	options?: [ApplicationCommandInteractionDataOption, ...Partial<Tuple<ApplicationCommandInteractionDataOption, 24>>];
+	options?: PartialTuple<ApplicationCommandInteractionDataOption, 24>;
 
 	/**
 	 * For components, the `custom_id` of the component.
@@ -447,14 +414,14 @@ export interface InteractionApplicationCommandCallbackData {
 	 * Message content.
 	 */
 	content?: string;
-	embeds?: [PartialEmbed, ...Partial<Tuple<PartialEmbed, 9>>];
+	embeds?: PartialTuple<PartialEmbed, 9>;
 
 	/**
 	 * Allowed mentions object.
 	 */
 	allowed_mentions?: AllowedMentions;
 	flags?: InteractionApplicationCommandCallbackDataFlags;
-	components?: [ActionRow, ...Partial<Tuple<ActionRow, 4>>];
+	components?: PartialTuple<ActionRow, 5>;
 }
 
 /**

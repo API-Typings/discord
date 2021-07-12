@@ -1,5 +1,6 @@
 import type { Nullable, Range } from 'extended-utility-types';
-import type { DMChannel, Identifiable, PartialGuild, PartialIntegration, Snowflake } from '../';
+import type { DMChannel, PartialGuild, PartialIntegration, Snowflake } from '../';
+import type { Identifiable, WithType } from '../__internal__';
 
 export interface PartialUser {
 	/**
@@ -125,16 +126,11 @@ export interface MutualGuild extends Identifiable {
 	nick: Nullable<string>;
 }
 
-export interface PartialConnection extends Identifiable {
+export interface PartialConnection extends Identifiable, WithType<PlatformType> {
 	/**
 	 * The username of the connection account.
 	 */
 	name: string;
-
-	/**
-	 * The service of the connection.
-	 */
-	type: PlatformType;
 
 	/**
 	 * Whether the connection is verified.
@@ -206,8 +202,7 @@ export enum VisibilityType {
 	Everyone
 }
 
-export interface Relationship extends Identifiable {
-	type: RelationshipType;
+export interface Relationship extends Identifiable, WithType<RelationshipType> {
 	nickname: Nullable<string>;
 	user: User;
 }

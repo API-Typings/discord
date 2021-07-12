@@ -1,17 +1,13 @@
 import type { Nullable } from 'extended-utility-types';
-import type { GuildMember, Identifiable, Snowflake } from '../';
+import type { GuildMember, Snowflake } from '../';
+import type { GuildIdentifiable, Identifiable } from '../__internal__';
 
 /**
  * Represents a user's voice connection status.
  *
  * @source {@link https://discord.com/developers/docs/resources/voice#voice-state-object-voice-state-structure|Voice}
  */
-export interface VoiceState {
-	/**
-	 * The guild ID this voice state is for.
-	 */
-	guild_id?: Snowflake;
-
+export interface VoiceState extends Partial<GuildIdentifiable> {
 	/**
 	 * The channel ID this user is connected to.
 	 */

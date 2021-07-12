@@ -4,7 +4,6 @@ import type {
 	ChannelType,
 	DiscoveryMetadata,
 	Emoji,
-	Identifiable,
 	InviteMetadata,
 	Message,
 	Overwrite,
@@ -22,6 +21,7 @@ import type {
 	VoiceRegion,
 	VoiceState
 } from '../';
+import type { GuildIdentifiable, Identifiable, WithType } from '../__internal__';
 
 /**
  * @source {@link https://discord.com/developers/docs/resources/user#get-current-user-guilds-example-partial-guild|User}
@@ -686,9 +686,8 @@ export interface GuildMember extends PartialGuildMember {
 /**
  * @source {@link https://discord.com/developers/docs/resources/audit-log#audit-log-object-example-partial-integration-object|Audit Log}
  */
-export interface PartialIntegration extends Identifiable {
+export interface PartialIntegration extends Identifiable, WithType<IntegrationType> {
 	name: string;
-	type: IntegrationType;
 
 	/**
 	 * Integration account information.
@@ -1859,12 +1858,7 @@ export interface ModifyGuildDiscoveryMetadata {
  * @endpoint POST `/guilds/{guild.id}/discovery-categories/{category.id}`
  */
 export interface AddGuildDiscoverySubcategory {
-	response: {
-		/**
-		 * The guild ID the subcategory was added to.
-		 */
-		guild_id: Snowflake;
-
+	response: GuildIdentifiable & {
 		/**
 		 * The ID of the subcategory added.
 		 */

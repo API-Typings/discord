@@ -1,5 +1,6 @@
 import type { Nullable } from 'extended-utility-types';
-import type { Identifiable, Snowflake, StatusType } from '../../';
+import type { Snowflake, StatusType } from '../../';
+import type { Identifiable, WithType } from '../../__internal__';
 
 /**
  * Active sessions are indicated with an `online`, `idle`, or `dnd` string per platform. If a user
@@ -32,7 +33,7 @@ export type ClientStatusType = Omit<StatusType, 'offline' | 'invisible'>;
  *
  * @source {@link https://discord.com/developers/docs/topics/gateway#activity-object-activity-structure|Gateway}
  */
-export interface Activity {
+export interface Activity extends WithType<ActivityType> {
 	/**
 	 * The activity's ID.
 	 */
@@ -42,11 +43,6 @@ export interface Activity {
 	 * The activity's name.
 	 */
 	name: string;
-
-	/**
-	 * Activity type.
-	 */
-	type: ActivityType;
 
 	/**
 	 * Stream URL, is validated when type is `1`.

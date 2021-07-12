@@ -1,5 +1,6 @@
 import type { Nullable } from 'extended-utility-types';
-import type { Identifiable, Snowflake } from '../';
+import type { Snowflake } from '../';
+import type { GuildIdentifiable, Identifiable } from '../__internal__';
 
 /**
  * A Stage Instance holds information about a live stage. When a Stage channel has no speakers for
@@ -7,12 +8,7 @@ import type { Identifiable, Snowflake } from '../';
  *
  * @source {@link https://discord.com/developers/docs/resources/stage-instance#stage-instance-structure|Channel}
  */
-export interface StageInstance extends Identifiable {
-	/**
-	 * The guild ID of the associated Stage channel.
-	 */
-	guild_id: Snowflake;
-
+export interface StageInstance extends Identifiable, GuildIdentifiable {
 	/**
 	 * The ID of the associated Stage channel.
 	 */

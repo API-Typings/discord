@@ -1,5 +1,6 @@
 import type { Nullable, Range } from 'extended-utility-types';
 import type { Activity, GatewayOPCode, Snowflake } from '../../';
+import type { GuildIdentifiable } from '../../__internal__';
 
 export interface GatewayCommandPayload<T extends GatewayOPCode> {
 	op: T;
@@ -144,13 +145,9 @@ export interface Heartbeat extends GatewayCommandPayload<GatewayOPCode.Heartbeat
  * @source {@link https://discord.com/developers/docs/topics/gateway#request-guild-members|Gateway}
  */
 // prettier-ignore
-export interface RequestGuildMembers extends GatewayCommandPayload<GatewayOPCode.RequestGuildMembers> {
+export interface RequestGuildMembers extends GatewayCommandPayload<GatewayOPCode.RequestGuildMembers>,
+	GuildIdentifiable {
 	d: {
-		/**
-		 * ID of the guild to get members for.
-		 */
-		guild_id: Snowflake;
-
 		/**
 		 * String that username starts with, or an empty string to return all members.
 		 */
@@ -184,12 +181,7 @@ export interface RequestGuildMembers extends GatewayCommandPayload<GatewayOPCode
  *
  * @source {@link https://discord.com/developers/docs/topics/gateway#update-voice-state|Gateway}
  */
-export interface UpdateVoiceState {
-	/**
-	 * ID of the guild.
-	 */
-	guild_id: Snowflake;
-
+export interface UpdateVoiceState extends GuildIdentifiable {
 	/**
 	 * ID of the voice channel client wants to join (`null` if disconnecting).
 	 */

@@ -1,18 +1,13 @@
 import type { Nullable } from 'extended-utility-types';
-import type { Identifiable, Snowflake, User } from '../';
+import type { Snowflake, User } from '../';
+import type { BaseSticker, GuildIdentifiable, Identifiable, WithType } from '../__internal__';
 
 /**
  * Represents a sticker that can be sent in messages.
  */
 export type Sticker = GuildSticker | StandardSticker;
 
-export interface BaseSticker extends StickerItem {
-	description: string;
-}
-
-export interface GuildSticker extends BaseSticker {
-	readonly type: StickerType.Guild;
-
+export interface GuildSticker extends BaseSticker, GuildIdentifiable, WithType<StickerType.Guild> {
 	/**
 	 * The Discord name of a unicode emoji representing the sticker's expression.
 	 */
@@ -22,7 +17,6 @@ export interface GuildSticker extends BaseSticker {
 	 * Whether this guild sticker can be used; may be `false` due to loss of Server boosts.
 	 */
 	available: boolean;
-	guild_id: Snowflake;
 
 	/**
 	 * The user that uploaded the guild sticker.
@@ -30,8 +24,7 @@ export interface GuildSticker extends BaseSticker {
 	user?: User;
 }
 
-export interface StandardSticker extends BaseSticker {
-	readonly type: StickerType.Standard;
+export interface StandardSticker extends BaseSticker, WithType<StickerType.Standard> {
 	pack_id: Snowflake;
 
 	/**

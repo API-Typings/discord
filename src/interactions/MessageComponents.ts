@@ -1,5 +1,6 @@
-import type { Range, Tuple } from 'extended-utility-types';
+import type { Range } from 'extended-utility-types';
 import type { PartialEmoji } from '../';
+import type { BaseButton, PartialTuple, WithType } from '../__internal__';
 
 /**
  * Message components are a framework for adding interactive elements to the messages your app or
@@ -38,13 +39,11 @@ export enum ComponentType {
  *
  * @source {@link https://discord.com/developers/docs/interactions/message-components#action-rows|Message Components}
  */
-export interface ActionRow {
-	readonly type: ComponentType.ActionRow;
-
+export interface ActionRow extends WithType<ComponentType.ActionRow> {
 	/**
 	 * A list of child components.
 	 */
-	components: [Button, ...Partial<Tuple<Button, 4>>] | [SelectMenu];
+	components: PartialTuple<Button, 4> | [SelectMenu];
 }
 
 /**
@@ -59,23 +58,6 @@ export interface ActionRow {
  * @source {@link https://discord.com/developers/docs/interactions/message-components#buttons-button-object|Message Components}
  */
 export type Button = NonLinkButton | LinkButton;
-
-export interface BaseButton {
-	readonly type: ComponentType.Button;
-
-	/**
-	 * Text that appears on the button, max 80 characters.
-	 */
-	label?: string;
-	emoji?: PartialEmoji;
-
-	/**
-	 * Whether the button is disabled.
-	 *
-	 * @defaultValue `false`
-	 */
-	disabled?: boolean;
-}
 
 export interface NonLinkButton extends BaseButton {
 	style: Exclude<ButtonStyle, ButtonStyle.Link>;
@@ -111,17 +93,17 @@ export enum ButtonStyle {
  */
 export interface SelectMenu {
 	/**
-	 * A developer-defined identifier for the select menu, max 100 characters.
+	 * A developer-defined identifier for the select menu; max `100` characters.
 	 */
 	custom_id: string;
 
 	/**
 	 * The choices in the select.
 	 */
-	options: [SelectOption, ...Partial<Tuple<SelectOption, 24>>];
+	options: PartialTuple<SelectOption, 24>;
 
 	/**
-	 * Custom placeholder text if nothing is selected, max 100 characters.
+	 * Custom placeholder text if nothing is selected; max `100` characters.
 	 */
 	placeholder?: string;
 
@@ -150,17 +132,17 @@ export interface SelectMenu {
  */
 export interface SelectOption {
 	/**
-	 * The user-facing name of the option, max 25 characters.
+	 * The user-facing name of the option; max `25` characters.
 	 */
 	label: string;
 
 	/**
-	 * The developer-defined value of the option, max 100 characters.
+	 * The developer-defined value of the option; max `100` characters.
 	 */
 	value: string;
 
 	/**
-	 * An additional description of the option, max 50 characters.
+	 * An additional description of the option; max `50` characters.
 	 */
 	description?: string;
 	emoji?: PartialEmoji;

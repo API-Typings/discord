@@ -5,8 +5,6 @@ export * from './Activity';
 export * from './Commands';
 export * from './Events';
 
-// ANCHOR Gateway Payload
-
 /**
  * @source {@link https://discord.com/developers/docs/topics/gateway#payloads-gateway-payload-structure|Gateway}
  */
@@ -74,12 +72,12 @@ export interface GatewayURL {
 export type EncodingType = 'json' | 'etf';
 
 /**
- * @endpoint [GET](https://discord.com/developers/docs/topics/gateway#get-gateway-bot) `/gateway/bot`
- *
  * @remarks
  * - Unlike the Get Gateway, this route should not be cached for extended periods of time as the
  * value is not guaranteed to be the same per-call, and changes as the bot joins/leaves guilds.
  * - This endpoint requires authentication using a valid bot token.
+ *
+ * @endpoint [GET](https://discord.com/developers/docs/topics/gateway#get-gateway-bot) `/gateway/bot`
  */
 export interface GetGatewayBot {
 	/**
@@ -129,8 +127,6 @@ export interface SessionStartLimit {
 	max_concurrency: number;
 }
 
-// ANCHOR Gateway Intents
-
 /**
  * When identifying to the gateway, you can specify an `intents` parameter which allows you to
  * conditionally subscribe to pre-defined "intents", groups of events defined by Discord. If you do
@@ -141,7 +137,6 @@ export interface SessionStartLimit {
  */
 export enum Intents {
 	/**
-	 * GUILDS (1 \<\< 0)
 	 * - `GUILD_CREATE`
 	 * - `GUILD_UPDATE`
 	 * - `GUILD_DELETE`
@@ -165,7 +160,6 @@ export enum Intents {
 	Guilds = 1 << 0,
 
 	/**
-	 * GUILD_MEMBERS (1 \<\< 1)
 	 * - `GUILD_MEMBER_ADD`
 	 * - `GUILD_MEMBER_UPDATE`
 	 * - `GUILD_MEMBER_REMOVE`
@@ -174,21 +168,18 @@ export enum Intents {
 	GuildMembers = 1 << 1,
 
 	/**
-	 * GUILD_BANS (1 \<\< 2)
 	 * - `GUILD_BAN_ADD`
 	 * - `GUILD_BAN_REMOVE`
 	 */
 	GuildBans = 1 << 2,
 
 	/**
-	 * GUILD_EMOJIS_AND_STICKERS (1 \<\< 3)
 	 * - `GUILD_EMOJIS_UPDATE`
 	 * - `GUILD_STICKERS_UPDATE`
 	 */
 	GuildEmojisAndStickers = 1 << 3,
 
 	/**
-	 * GUILD_INTEGRATIONS (1 \<\< 4)
 	 * - `GUILD_INTEGRATIONS_UPDATE`
 	 * - `INTEGRATION_CREATE`
 	 * - `INTEGRATION_UPDATE`
@@ -197,32 +188,27 @@ export enum Intents {
 	GuildIntegrations = 1 << 4,
 
 	/**
-	 * GUILD_WEBHOOKS (1 \<\< 5)
 	 * - `WEBHOOKS_UPDATE`
 	 */
 	GuildWebhooks = 1 << 5,
 
 	/**
-	 * GUILD_INVITES (1 \<\< 6)
 	 * - `INVITE_CREATE`
 	 * - `INVITE_DELETE`
 	 */
 	GuildInvites = 1 << 6,
 
 	/**
-	 * GUILD_VOICE_STATES (1 \<\< 7)
 	 * - `VOICE_STATE_UPDATE`
 	 */
 	GuildVoiceStates = 1 << 7,
 
 	/**
-	 * GUILD_PRESENCES (1 \<\< 8)
 	 * - `PRESENCE_UPDATE`
 	 */
 	GuildPresences = 1 << 8,
 
 	/**
-	 * GUILD_MESSAGES (1 \<\< 9)
 	 * - `MESSAGE_CREATE`
 	 * - `MESSAGE_UPDATE`
 	 * - `MESSAGE_DELETE`
@@ -231,7 +217,6 @@ export enum Intents {
 	GuildMessages = 1 << 9,
 
 	/**
-	 * GUILD_MESSAGE_REACTIONS (1 \<\< 10)
 	 * - `MESSAGE_REACTION_REMOVE`
 	 * - `MESSAGE_REACTION_ADD`
 	 * - `MESSAGE_REACTION_REMOVE_ALL`
@@ -240,13 +225,11 @@ export enum Intents {
 	GuildMessageReactions = 1 << 10,
 
 	/**
-	 * GUILD_MESSAGE_TYPING (1 \<\< 11)
 	 * - `TYPING_START`
 	 */
 	GuildMessageTyping = 1 << 11,
 
 	/**
-	 * DIRECT_MESSAGES (1 \<\< 12)
 	 * - `MESSAGE_CREATE`
 	 * - `MESSAGE_UPDATE`
 	 * - `MESSAGE_DELETE`
@@ -255,7 +238,6 @@ export enum Intents {
 	DirectMessages = 1 << 12,
 
 	/**
-	 * DIRECT_MESSAGE_REACTIONS (1 \<\< 13)
 	 * - `MESSAGE_REACTION_ADD`
 	 * - `MESSAGE_REACTION_REMOVE`
 	 * - `MESSAGE_REACTION_REMOVE_ALL`
@@ -264,9 +246,7 @@ export enum Intents {
 	DirectMessageReactions = 1 << 13,
 
 	/**
-	 * DIRECT_MESSAGE_TYPING (1 \<\< 14)
 	 * - `TYPING_START`
 	 */
-	DirectMessageTyping = 1 << 14,
-	All = (1 << 15) - 1
+	DirectMessageTyping = 1 << 14
 }

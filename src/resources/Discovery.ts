@@ -1,15 +1,10 @@
 import type { Nullable, Tuple } from 'extended-utility-types';
-import type { Snowflake } from '../';
+import type { GuildIdentifiable } from '../__internal__';
 
 /**
  * Used to represent a guild's Discovery settings.
  */
-export interface DiscoveryMetadata {
-	/**
-	 * The guild ID.
-	 */
-	guild_id: Snowflake;
-
+export interface DiscoveryMetadata extends GuildIdentifiable {
 	/**
 	 * The ID of the primary discovery category set for this guild..
 	 */
