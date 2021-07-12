@@ -60,7 +60,7 @@ export interface ActionRow {
  */
 export type Button = NonLinkButton | LinkButton;
 
-interface BaseButton {
+export interface BaseButton {
 	readonly type: ComponentType.Button;
 
 	/**
@@ -138,6 +138,11 @@ export interface SelectMenu {
 	 * @defaultValue `1`
 	 */
 	max_values?: Range<1, 25>;
+
+	/**
+	 * @defaultValue `false`
+	 */
+	disabled?: boolean;
 }
 
 /**
