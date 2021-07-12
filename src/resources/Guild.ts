@@ -1401,7 +1401,9 @@ export interface RemoveGuildMember {
  *
  * @endpoint [GET](https://discord.com/developers/docs/resources/guild#get-guild-bans) `/guilds/{guild.id}/bans`
  */
-export type GetGuildBans = GuildBan[];
+export interface GetGuildBans {
+	response: GuildBan[];
+}
 
 /**
  * Returns a ban object for the given user or a `404 NOT FOUND` if the ban cannot be found. Requires
@@ -1409,7 +1411,9 @@ export type GetGuildBans = GuildBan[];
  *
  * @endpoint [GET](https://discord.com/developers/docs/resources/guild#get-guild-ban) `/guilds/{guild.id}/bans/{user.id}`
  */
-export type GetGuildBan = GuildBan | never;
+export interface GetGuildBan {
+	response: GuildBan;
+}
 
 /**
  * Create a guild ban, and optionally delete previous messages sent by the banned user. Requires

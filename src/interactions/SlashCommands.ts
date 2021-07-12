@@ -327,7 +327,7 @@ export interface ApplicationCommandInteractionData extends Identifiable {
 	/**
 	 * The params + values from the user.
 	 */
-	options?: ApplicationCommandInteractionDataOption[];
+	options?: [ApplicationCommandInteractionDataOption, ...Partial<Tuple<ApplicationCommandInteractionDataOption, 24>>];
 
 	/**
 	 * For components, the `custom_id` of the component.

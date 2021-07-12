@@ -401,8 +401,8 @@ export interface Message extends Identifiable {
 	 * Any attached files.
 	 */
 	attachments: Attachment[];
-	embeds: Embed[];
-	reactions?: Reaction[];
+	embeds: Partial<Tuple<Embed, 10>>;
+	reactions?: Partial<Tuple<Reaction, 20>>;
 
 	/**
 	 * Used for validating a message was sent.
@@ -1033,14 +1033,14 @@ export interface AllowedMentions {
 	parse: AllowedMentionsType[];
 
 	/**
-	 * Array of `role_id`s to mention (max size of 100).
+	 * Array of `role_id`s to mention.
 	 */
-	roles: Snowflake[];
+	roles: [Snowflake, ...Partial<Tuple<Snowflake, 99>>];
 
 	/**
-	 * Array of `user_id`s to mention (max size of 100).
+	 * Array of `user_id`s to mention.
 	 */
-	users: Snowflake[];
+	users: [Snowflake, ...Partial<Tuple<Snowflake, 99>>];
 
 	/**
 	 * For replies, whether to mention the author of the message being replied to.
@@ -1358,7 +1358,7 @@ export interface CreateMessage {
 				/**
 				 * Embedded `rich` content.
 				 */
-				embeds: PartialEmbed[];
+				embeds: [PartialEmbed, ...Partial<Tuple<PartialEmbed, 9>>];
 		  }
 	);
 
@@ -1499,7 +1499,7 @@ export interface EditMessage {
 		/**
 		 * Embedded `rich` content,
 		 */
-		embeds?: Nullable<PartialEmbed[]>;
+		embeds?: Nullable<[PartialEmbed, ...Partial<Tuple<PartialEmbed, 9>>]>;
 
 		/**
 		 * Edit the flags of a message (only `SUPPRESS_EMBEDS` can currently be set/unset).
@@ -1561,7 +1561,7 @@ export interface BulkDeleteMessages {
 		/**
 		 * An array of message IDs to delete (`2-100`).
 		 */
-		messages: Snowflake[];
+		messages: [Snowflake, Snowflake, ...Partial<Tuple<Snowflake, 98>>];
 	};
 
 	response: never;
@@ -1715,7 +1715,7 @@ export interface TriggerTypingIndicator {
  * @endpoint [GET](https://discord.com/developers/docs/resources/channel#get-pinned-messages) `/channels/{channel.id}/pins`
  */
 export interface GetPinnedMessages {
-	response: Message[];
+	response: Partial<Tuple<Message, 50>>;
 }
 
 /**
