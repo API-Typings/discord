@@ -183,7 +183,7 @@ export interface GroupDMChannel extends Omit<DMChannel, 'recipients'>, Pick<Base
 	/**
 	 * The recipients of the DM.
 	 */
-	recipients: PartialTuple<User, 6, 2>;
+	recipients: PartialTuple<User, 8, 2>;
 
 	/**
 	 * Icon hash.
