@@ -1,4 +1,4 @@
-import type { Nullable, Range } from 'extended-utility-types';
+import type { Nullable } from 'extended-utility-types';
 import type {
 	ChannelType,
 	DefaultMessageNotificationLevel,
@@ -36,7 +36,7 @@ export interface AuditLog {
 	users: User[];
 
 	/**
-	 * List of audit log entries, sorted by ID in descending order.
+	 * List of audit log entries.
 	 */
 	audit_log_entries: AuditLogEntry[];
 
@@ -138,12 +138,12 @@ export interface AuditLogEntryInfo {
 	 * Number of days after which inactive members were kicked. Only present on `MEMBER_PRUNE`
 	 * actions.
 	 */
-	delete_member_days: string;
+	delete_member_days?: string;
 
 	/**
 	 * Number of members removed by the prune. Only present on `MEMBER_PRUNE` actions.
 	 */
-	members_removed: string;
+	members_removed?: string;
 
 	/**
 	 * Channel in which the entities were targeted. Present on the following actions:
@@ -155,14 +155,14 @@ export interface AuditLogEntryInfo {
 	 * - `STAGE_INSTANCE_UPDATE`
 	 * - `STAGE_INSTANCE_DELETE`
 	 */
-	channel_id: Snowflake;
+	channel_id?: Snowflake;
 
 	/**
 	 * ID of the message that was targeted. Present on the following actions:
 	 * - `MESSAGE_PIN`
 	 * - `MESSAGE_UNPIN`
 	 */
-	message_id: Snowflake;
+	message_id?: Snowflake;
 
 	/**
 	 * Number of entities that were targeted. Present on the following actions:
@@ -171,7 +171,7 @@ export interface AuditLogEntryInfo {
 	 * - `MEMBER_DISCONNECT`
 	 * - `MEMBER_MOVE`
 	 */
-	count: string;
+	count?: string;
 
 	/**
 	 * ID of the overwritten entity. Present on the following actions:
@@ -179,25 +179,25 @@ export interface AuditLogEntryInfo {
 	 * - `CHANNEL_OVERWRITE_UPDATE`
 	 * - `CHANNEL_OVERWRITE_DELETE`
 	 */
-	id: Snowflake;
+	id?: Snowflake;
 
 	/**
-	 * Type of overwritten entity–`0` for `role` or `1` for `member`. Present on the following
+	 * Type of overwritten entity–`'0'` for `role` or `'1'` for `member`. Present on the following
 	 * actions:
 	 * - `CHANNEL_OVERWRITE_CREATE`
 	 * - `CHANNEL_OVERWRITE_UPDATE`
 	 * - `CHANNEL_OVERWRITE_DELETE`
 	 */
-	type: '0' | '1';
+	type?: '0' | '1';
 
 	/**
-	 * Name of the role if type is `0` (not present if type is `1`). Present on the following
+	 * Name of the role if type is `'0'` (not present if type is `'1'`). Present on the following
 	 * actions:
 	 * - `CHANNEL_OVERWRITE_CREATE`
 	 * - `CHANNEL_OVERWRITE_UPDATE`
 	 * - `CHANNEL_OVERWRITE_DELETE`
 	 */
-	role_name: string;
+	role_name?: string;
 }
 
 /**
@@ -354,12 +354,12 @@ export interface AuditLogChangeKey {
 	position: number;
 
 	/**
-	 * Text channel topic changed.
+	 * Text channel or stage instance topic changed.
 	 */
 	topic: string;
 
 	/**
-	 * Coice channel bitrate changed.
+	 * Voice channel bitrate changed.
 	 */
 	bitrate: number;
 
@@ -523,40 +523,3 @@ export interface AuditLogChangeKey {
 	 */
 	guild_id: Snowflake;
 }
-
-// SECTION Endpoints
-
-/**
- * Requires the `VIEW_AUDIT_LOG` permission.
- *
- * @endpoint [GET](https://discord.com/developers/docs/resources/audit-log#get-guild-audit-log) `/guilds/{guild.id}/audit-logs`
- */
-export interface GetGuildAuditLog {
-	query: {
-		/**
-		 * Filter the log for actions made by a user.
-		 */
-		user_id?: Snowflake;
-
-		/**
-		 * The type of audit log event.
-		 */
-		action_type?: AuditLogEvent;
-
-		/**
-		 * Filter the log before a certain entry ID.
-		 */
-		before?: Snowflake;
-
-		/**
-		 * How many entries are returned.
-		 *
-		 * @defaultValue `50`
-		 */
-		limit?: Range<1, 100>;
-	};
-
-	response: AuditLog;
-}
-
-// !SECTION

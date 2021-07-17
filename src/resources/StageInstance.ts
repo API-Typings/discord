@@ -1,4 +1,3 @@
-import type { Nullable } from 'extended-utility-types';
 import type { Snowflake } from '../';
 import type { GuildIdentifiable, Identifiable } from '../__internal__';
 
@@ -30,6 +29,9 @@ export interface StageInstance extends Identifiable, GuildIdentifiable {
 	discoverable_disabled: boolean;
 }
 
+/**
+ * @source {@link https://discord.com/developers/docs/resources/stage-instance#stage-instance-object-privacy-level|Stage Instance}
+ */
 export enum PrivacyLevel {
 	/**
 	 * The Stage instance is visible publicly.
@@ -41,57 +43,3 @@ export enum PrivacyLevel {
 	 */
 	GuildOnly
 }
-
-// SECTION Endpoints
-
-/**
- * Creates a new Stage instance associated to a Stage channel. Requires the user to be a moderator
- * of the Stage channel.
- *
- * @endpoint [POST](https://discord.com/developers/docs/resources/stage-instance#create-stage-instance) `/stage-instances`
- */
-export interface CreateStageInstance {
-	body: Pick<StageInstance, 'channel_id' | 'topic'> & {
-		/**
-		 * The privacy level of the Stage instance.
-		 *
-		 * @defaultValue `GUILD_ONLY`
-		 */
-		privacy_level?: PrivacyLevel;
-	};
-
-	response: StageInstance & {
-		guild_scheduled_event_id: Nullable<Snowflake>;
-	};
-}
-
-/**
- * Gets the stage instance associated with the Stage channel, if it exists.
- *
- * @endpoint [GET](https://discord.com/developers/docs/resources/stage-instance#get-stage-instance) `/stage-instances/{channel.id}`
- */
-export interface GetStageInstance {
-	response: StageInstance;
-}
-
-/**
- * Creates a new Stage instance associated to a Stage channel. Requires the user to be a moderator
- * of the Stage channel.
- *
- * @endpoint [PATCH](https://discord.com/developers/docs/resources/stage-instance#update-stage-instance) `/stage-instances/{channel.id}`
- */
-export interface ModifyStageInstance {
-	body: Partial<Pick<StageInstance, 'topic' | 'privacy_level'>>;
-	response: CreateStageInstance['response'];
-}
-
-/**
- * Deletes the Stage instance. Requires the user to be a moderator of the Stage channel.
- *
- * @endpoint [DELETE](https://discord.com/developers/docs/resources/stage-instance#delete-stage-instance) `/stage-instances/{channel.id}`
- */
-export interface DeleteStageInstance {
-	response: never;
-}
-
-// !SECTION

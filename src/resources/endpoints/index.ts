@@ -1,4 +1,3 @@
-export * from './endpoints';
 export * from './Application';
 export * from './AuditLog';
 export * from './Channel';

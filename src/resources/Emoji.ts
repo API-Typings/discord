@@ -8,7 +8,7 @@ export interface PartialEmoji {
 	id: Nullable<Snowflake>;
 
 	/**
-	 * Emoji name.
+	 * Emoji name (can be `null` only in reaction emoji objects).
 	 */
 	name: Nullable<string>;
 
@@ -30,7 +30,7 @@ export interface Emoji extends PartialEmoji {
 	/**
 	 * Roles this emoji is whitelisted to.
 	 */
-	roles?: string[];
+	roles?: Snowflake[];
 
 	/**
 	 * User that created this emoji.
@@ -52,92 +52,3 @@ export interface Emoji extends PartialEmoji {
 	 */
 	available?: boolean;
 }
-
-// SECTION Endpoints
-
-/**
- * Returns a list of emoji objects for the given guild.
- *
- * @endpoint [GET](https://discord.com/developers/docs/resources/emoji#list-guild-emojis) `/guilds/{guild.id}/emojis`
- */
-export interface ListGuildEmojis {
-	response: Emoji[];
-}
-
-/**
- * Returns an emoji object for the given guild and emoji IDs.
- *
- * @endpoint [GET](https://discord.com/developers/docs/resources/emoji#get-guild-emojis) `/guilds/{guild.id}/emojis/{emoji.id}`
- */
-export interface GetGuildEmoji {
-	response: Emoji;
-}
-
-/**
- * Create a new emoji for the guild. Requires the `MANAGE_EMOJIS_AND_STICKERS` permission.
- *
- * @remarks
- * Emojis and animated emojis have a maximum file size of 256kb. Attempting to upload an emoji
- * larger than this limit will fail and return `400 BAD REQUEST` and an error message, but not a
- * JSON status code.
- *
- * @endpoint [POST](https://discord.com/developers/docs/resources/emoji#create-guild-emoji) `/guilds/{guild.id}/emojis`
- */
-export interface CreateGuildEmoji {
-	body: {
-		/**
-		 * Name of the emoji.
-		 */
-		name: string;
-
-		/**
-		 * The `128x128` emoji image.
-		 */
-		image: string;
-
-		/**
-		 * Roles for which this emoji will be whitelisted.
-		 */
-		roles: Snowflake[];
-	};
-
-	/**
-	 * The new emoji object.
-	 */
-	response: Emoji;
-}
-
-/**
- * Modify the given emoji. Requires the `MANAGE_EMOJIS_AND_STICKERS` permission.
- *
- * @endpoint [PATCH](https://discord.com/developers/docs/resources/emoji#modify-guild-emoji) `/guilds/{guild.id}/emojis/{emoji.id}`
- */
-export interface ModifyGuildEmoji {
-	body: {
-		/**
-		 * Name of the emoji.
-		 */
-		name?: string;
-
-		/**
-		 * Roles for which this emoji will be whitelisted.
-		 */
-		roles?: Nullable<Snowflake[]>;
-	};
-
-	/**
-	 * The updated emoji object.
-	 */
-	response: Emoji;
-}
-
-/**
- * Delete the given emoji. Requires the `MANAGE_EMOJIS_AND_STICKERS` permission.
- *
- * @endpoint [DELETE](https://discord.com/developers/docs/resources/emoji#delete-guild-emoji) `/guilds/{guild.id}/emojis/{emoji.id}`
- */
-export interface DeleteGuildEmoji {
-	response: never;
-}
-
-// !SECTION

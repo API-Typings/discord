@@ -1,14 +1,8 @@
-import type { Nullable, Range, Tuple } from 'extended-utility-types';
+import type { Nullable, Tuple } from 'extended-utility-types';
 import type {
 	Channel,
-	ChannelType,
-	DiscoveryMetadata,
 	Emoji,
-	InviteMetadata,
-	Message,
-	Overwrite,
 	PartialChannel,
-	PartialInvite,
 	PartialUser,
 	PresenceUpdate,
 	Role,
@@ -18,10 +12,9 @@ import type {
 	Sticker,
 	ThreadChannel,
 	User,
-	VoiceRegion,
 	VoiceState
 } from '../';
-import type { GuildIdentifiable, Identifiable, WithType } from '../__internal__';
+import type { Identifiable, WithType } from '../__internal__';
 
 /**
  * @source {@link https://discord.com/developers/docs/resources/user#get-current-user-guilds-example-partial-guild|User}
@@ -59,7 +52,7 @@ export interface PartialGuild extends Identifiable {
 	vanity_url_code?: Nullable<string>;
 
 	/**
-	 * True if this guild is unavailable due to an outage.
+	 * `true` if this guild is unavailable due to an outage.
 	 */
 	unavailable?: boolean;
 }
@@ -87,17 +80,13 @@ export interface Guild extends PartialGuild {
 	discovery_splash: Nullable<string>;
 
 	/**
-	 * True if the user is the owner of the guild.
+	 * `true` if the user is the owner of the guild.
 	 *
 	 * @remarks
 	 * This field is only sent when using the `GET Current User Guilds` endpoint and is
 	 * relative to the request user.
 	 */
 	owner?: boolean;
-
-	/**
-	 * ID of owner
-	 */
 	owner_id: Snowflake;
 
 	/**
@@ -128,20 +117,12 @@ export interface Guild extends PartialGuild {
 	default_message_notifications: DefaultMessageNotificationLevel;
 	explicit_content_filter: ExplicitContentFilterLevel;
 	roles: Role[];
-
-	/**
-	 * Custom guild emojis.
-	 */
 	emojis: Emoji[];
 
 	/**
 	 * Enabled guild features.
 	 */
 	features: `${GuildFeature}`[];
-
-	/**
-	 * Required MFA level for the guild.
-	 */
 	mfa_level: MFALevel;
 
 	/**
@@ -229,7 +210,7 @@ export interface Guild extends PartialGuild {
 	presences?: Partial<PresenceUpdate['d']>[];
 
 	/**
-	 * The maximum number of presences for the guild (the default value, currently 25000, is in
+	 * The maximum number of presences for the guild (the default value, currently `25000`, is in
 	 * effect when `null` is returned).
 	 */
 	max_presences?: Nullable<number>;
@@ -244,11 +225,6 @@ export interface Guild extends PartialGuild {
 	 * The description of a Community guild.
 	 */
 	description: Nullable<string>;
-
-	/**
-	 * Banner hash.
-	 */
-	banner?: Nullable<string>;
 
 	/**
 	 * Premium tier (server Boost level).
@@ -320,19 +296,19 @@ export enum DefaultMessageNotificationLevel {
  */
 export enum ExplicitContentFilterLevel {
 	/**
-	 * No media content will be scanned.
+	 * Media content will not be scanned.
 	 */
 	Disabled,
 
 	/**
 	 * Media content sent by members without any roles will be scanned.
 	 */
-	GuildMembersWithoutRoles,
+	MembersWithoutRoles,
 
 	/**
 	 * Media content sent by any member will be scanned.
 	 */
-	AllGuildMembers
+	AllMembers
 }
 
 /**
@@ -340,7 +316,7 @@ export enum ExplicitContentFilterLevel {
  */
 export enum MFALevel {
 	/**
-	 * Guild has no MFA/2FA requirement.
+	 * Guild has no MFA/2FA requirement for moderation actions.
 	 */
 	None,
 
@@ -360,7 +336,7 @@ export enum VerificationLevel {
 	None,
 
 	/**
-	 * Must have verified email on account.
+	 * Must have a verified email on account.
 	 */
 	Low,
 
@@ -397,17 +373,17 @@ export enum PremiumTier {
 	None,
 
 	/**
-	 * Guild has unlocked Server Boost level 1 perks (2+ boosts).
+	 * Guild has unlocked Server Boost level 1 perks.
 	 */
 	Tier1,
 
 	/**
-	 * Guild has unlocked Server Boost level 2 perks (15+ boosts).
+	 * Guild has unlocked Server Boost level 2 perks.
 	 */
 	Tier2,
 
 	/**
-	 * Guild has unlocked Server Boost level 3 perks (30+ boosts).
+	 * Guild has unlocked Server Boost level 3 perks.
 	 */
 	Tier3
 }
@@ -508,6 +484,21 @@ export enum GuildFeature {
 	PreviewEnabled = 'PREVIEW_ENABLED',
 
 	/**
+	 * Guild has access to create private threads.
+	 */
+	PrivateThreads = 'PRIVATE_THREADS',
+
+	/**
+	 * Guild has access to the seven day archive time for threads.
+	 */
+	SevenDayThreadArchive = 'SEVEN_DAY_THREAD_ARCHIVE',
+
+	/**
+	 * Guild has access to the three day archive time for threads.
+	 */
+	ThreeDayThreadArchive = 'THREE_DAY_THREAD_ARCHIVE',
+
+	/**
 	 * Guild has enabled ticketed events.
 	 */
 	TicketedEventsEnabled = 'TICKETED_EVENTS_ENABLED',
@@ -536,8 +527,10 @@ export enum GuildFeature {
 /**
  * Represents an Offline Guild, or a Guild whose information has not been provided through Guild
  * Create events during the Gateway connect.
+ *
+ * @source {@link https://discord.com/developers/docs/resources/guild#unavailable-guild-object-example-unavailable-guild|Guild}
  */
-export interface UnavailableGuild extends Pick<PartialGuild, 'id'> {
+export interface UnavailableGuild extends Identifiable {
 	unavailable: true;
 }
 
@@ -561,10 +554,6 @@ export interface GuildPreview extends Identifiable {
 	 * Discovery splash hash.
 	 */
 	discovery_splash: Nullable<string>;
-
-	/**
-	 * Custom guild emojis.
-	 */
 	emojis: Emoji[];
 
 	/**
@@ -807,7 +796,7 @@ export interface IntegrationApplication extends IntegrationAccount {
 /**
  * @source {@link https://discord.com/developers/docs/resources/guild#ban-object-ban-structure|Guild}
  */
-export interface GuildBan {
+export interface Ban {
 	reason: Nullable<string>;
 
 	/**
@@ -909,993 +898,3 @@ export interface ScreeningField {
 export enum ScreeningFieldType {
 	Terms = 'Server Rules'
 }
-
-// SECTION Endpoints
-
-/**
- * Create a new guild. This endpoint can be used only by bots in less than `10` guilds.
- *
- * @endpoint [POST](https://discord.com/developers/docs/resources/guild#create-guild) `/guilds`
- */
-export interface CreateGuild {
-	body: {
-		/**
-		 * Name of the guild (`2-100` characters).
-		 */
-		name: string;
-
-		/**
-		 * Base64 `128x128` image for the guild icon.
-		 */
-		icon?: string;
-		verification_level?: VerificationLevel;
-		default_message_notifications?: DefaultMessageNotificationLevel;
-		explicit_content_filter?: ExplicitContentFilterLevel;
-
-		/**
-		 * New guild roles.
-		 *
-		 * @remarks
-		 * When using the `roles` parameter:
-		 * - The first member of the array is used to change properties of the guild's `@everyone`
-		 * role. If you are trying to bootstrap a guild with additional roles, keep this in mind.
-		 * - The required `id` field within each role object is an integer placeholder, and will be
-		 * replaced by the API upon consumption. Its purpose is to allow you to overwrite a role's
-		 * permissions in a channel when also passing in channels with the channels array.
-		 */
-		roles?: Role[];
-
-		/**
-		 * New guild's channels.
-		 *
-		 * @remarks
-		 * When using the `channels` parameter:
-		 * - The `position` field is ignored, and none of the default channels are created.
-		 * - The `id` field within each channel object may be set to an integer placeholder, and
-		 * will be replaced by the API upon consumption. Its purpose is to allow you to create
-		 * `GUILD_CATEGORY` channels by setting the `parent_id` field on any children to the
-		 * category's `id` field. Category channels must be listed before any children.
-		 */
-		channels?: PartialChannel;
-		afk_channel_id?: Snowflake;
-
-		/**
-		 * AFK timeout in seconds.
-		 */
-		afk_timeout?: number;
-
-		/**
-		 * The ID of the channel where guild notices such as welcome messages and boost events are
-		 * posted.
-		 */
-		system_channel_id?: Snowflake;
-		system_channel_flags?: SystemChannelFlags;
-	};
-
-	response: Guild;
-}
-
-/**
- * Returns the guild object for the given ID.
- *
- * If `with_counts` is set to `true`, this endpoint will also return `approximate_member_count` and
- * `approximate_presence_count` for the guild.
- *
- * @endpoint [GET](https://discord.com/developers/docs/resources/guild#get-guild) `/guilds/{guild.id}`
- */
-export interface GetGuild {
-	query: {
-		/**
-		 * When `true`, will return approximate member and presence counts for the guild.
-		 *
-		 * @defaultValue `false`
-		 */
-		with_counts?: boolean;
-	};
-
-	response: Guild;
-}
-
-/**
- * Returns the guild preview object for the given ID.
- *
- * If the user is not in the guild, then the guild must be lurkable (it must be Discoverable or
- * have a live public stage.
- *
- * @endpoint [GET](https://discord.com/developers/docs/resources/guild#get-guild-preview) `/guilds/{guild.id}/preview`
- */
-export interface GetGuildPreview {
-	response: GuildPreview;
-}
-
-/**
- * Modify a guild's settings. Requires the `MANAGE_GUILD` permission.
- *
- * @endpoint [PATCH](https://discord.com/developers/docs/resources/guild#modify-guild) `/guilds/{guild.id}`
- */
-export interface ModifyGuild {
-	body: {
-		name?: string;
-		verification_level?: Nullable<VerificationLevel>;
-		default_message_notifications?: Nullable<DefaultMessageNotificationLevel>;
-		explicit_content_filter?: Nullable<ExplicitContentFilterLevel>;
-		afk_channel_id?: Nullable<Snowflake>;
-
-		/**
-		 * AFK timeout in seconds.
-		 */
-		afk_timeout?: Nullable<number>;
-
-		/**
-		 * Base64 `1024x1024` PNG/JPEG/GIF image for the guild icon (can be animated GIF when the
-		 * server has `ANIMATED_ICON` feature).
-		 */
-		icon?: Nullable<string>;
-
-		/**
-		 * User ID to transfer guild ownership to (must be owner).
-		 */
-		owner_id?: Snowflake;
-
-		/**
-		 * Base64 `16:9` PNG/JPEG image for the guild splash (when the server has `INVITE_SPLASH`
-		 * feature).
-		 */
-		splash?: Nullable<string>;
-
-		/**
-		 * Base64 `16:9` PNG/JPEG image for the guild banner (when the server has `BANNER` feature).
-		 */
-		banner?: Nullable<string>;
-
-		/**
-		 * The ID of the channel where guild notices such as welcome messages and boost events are
-		 * posted.
-		 */
-		system_channel_id?: Nullable<Snowflake>;
-		system_channel_flags?: SystemChannelFlags;
-
-		/**
-		 * The ID of the channel where Community guilds display rules and/or guidelines.
-		 */
-		rules_channel_id?: Nullable<Snowflake>;
-
-		/**
-		 * The ID of the channel where admins and moderators of Community guilds receive notices
-		 * from Discord.
-		 */
-		public_updates_channel_id?: Nullable<Snowflake>;
-
-		/**
-		 * The preferred locale of a Community guild used in server discovery and notices from
-		 * Discord.
-		 *
-		 * @defaultValue `en-US`
-		 */
-		preferred_locale?: Nullable<string>;
-
-		/**
-		 * Enabled guild features.
-		 */
-		features?: `${GuildFeature}`[];
-
-		/**
-		 * The description for the guild, if the guild is discoverable.
-		 */
-		description: Nullable<string>;
-	};
-
-	response: Guild;
-}
-
-/**
- * Delete a guild permanently. User must be owner.
- *
- * @endpoint [DELETE](https://discord.com/developers/docs/resources/guild#delete-guild) `/guilds/{guild.id}`
- */
-export interface DeleteGuild {
-	response: never;
-}
-
-/**
- * Returns a list of guild channel objects. Does not include threads.
- *
- * @endpoint [GET](https://discord.com/developers/docs/resources/guild#get-guild-channels) `/guilds/{guild.id}/channels`
- */
-export interface GetGuildChannels {
-	response: Channel[];
-}
-
-/**
- * Create a new channel object for the guild. Requires the `MANAGE_CHANNELS` permission.
- *
- * If setting permission overwrites, only permissions your bot has in the guild can be allowed/
- * denied. Setting `MANAGE_ROLES` permission in channels is only possible for guild administrators.
- *
- * @endpoint [POST](https://discord.com/developers/docs/resources/guild#create-guild-channel) `/guilds/{guild.id}/channels`
- */
-export interface CreateGuildChannel {
-	body: {
-		/**
-		 * Channel name (`1-100` characters).
-		 */
-		name: string;
-		type?: ChannelType;
-
-		/**
-		 * Channel topic (`0-1024` characters).
-		 */
-		topic?: string;
-
-		/**
-		 * The bitrate (in bits) of the voice channel (voice only).
-		 */
-		bitrate?: number;
-
-		/**
-		 * The user limit of the voice channel (voice only).
-		 */
-		user_limit?: number;
-
-		/**
-		 * Amount of seconds a user has to wait before sending another message (0-21600); bots, as
-		 * well as users with the permission `manage_messages` or `manage_channel`, are unaffected.
-		 */
-		rate_limit_per_user?: number;
-
-		/**
-		 * Sorting position of the channel.
-		 */
-		position?: number;
-
-		/**
-		 * The channel's permission overwrites.
-		 */
-		permission_overwrites?: Overwrite[];
-
-		/**
-		 * ID of the parent category for a channel.
-		 */
-		parent_id?: Snowflake;
-		nsfw?: boolean;
-	};
-
-	response: Channel;
-}
-
-/**
- * Modify the positions of a set of channel objects for the guild. Requires `MANAGE_CHANNELS`
- * permission.
- *
- * @endpoint [PATCH](https://discord.com/developers/docs/resources/guild#modify-guild-channel-positions) `/guilds/{guild.id}/channels`
- */
-export interface ModifyGuildChannelPositions {
-	body: {
-		id: Snowflake;
-
-		/**
-		 * Sorting position of the channel.
-		 */
-		position: Nullable<number>;
-
-		/**
-		 * Syncs the permission overwrites with the new parent, if moving to a new category.
-		 */
-		lock_permissions: Nullable<boolean>;
-
-		/**
-		 * The new parent ID for the channel that is moved.
-		 */
-		parent_id: Nullable<Snowflake>;
-	};
-
-	response: never;
-}
-
-/**
- * @endpoint GET `/guilds/{guild.id}/messages`
- */
-export interface SearchGuildMessages {
-	query: {
-		content: string;
-		author_id?: Snowflake;
-		mentions?: Snowflake;
-		has?: 'link' | 'embed' | 'video' | 'image' | 'file' | 'sound';
-		max_id?: Snowflake;
-		min_id?: Snowflake;
-		channel_id?: Snowflake;
-		sort_by?: 'timestamp' | 'relevance';
-		sort_order?: 'asc' | 'desc';
-	};
-
-	response: {
-		messages: [Message & { hit: boolean }][];
-		total_results: number;
-	};
-}
-
-/**
- * Returns a guild member object for the specified user.
- *
- * @endpoint [GET](https://discord.com/developers/docs/resources/guild#get-guild-member) `/guilds/{guild.id}/members/{user.id}`
- */
-export interface GetGuildMember {
-	response: GuildMember;
-}
-
-/**
- * Returns a list of guild member objects that are members of the guild.
- *
- * @remarks
- * This endpoint is restricted according to whether the `GUILD_MEMBERS` Privileged Intent is
- * enabled for your appliation.
- *
- * @endpoint [GET](https://discord.com/developers/docs/resources/guild#list-guild-members) `/guilds/{guild.id}/members`
- */
-export interface ListGuildMembers {
-	query: {
-		/**
-		 * Max number of members to return.
-		 *
-		 * @defaultValue `1`
-		 */
-		limit?: Range<1, 1000>;
-
-		/**
-		 * The highest user ID in the previous page.
-		 *
-		 * @defaultValue `0`
-		 */
-		after?: Snowflake;
-	};
-
-	response: GuildMember[];
-}
-
-/**
- * @endpoint [GET](https://discord.com/developers/docs/resources/guild#search-guild-members) `/guilds/{guild.id}/members/search`
- */
-export interface SearchGuildMembers {
-	query: {
-		/**
-		 * Query string to match username(s) and nickname(s) against.
-		 */
-		query: string;
-
-		/**
-		 * Max numbers of members to return.
-		 *
-		 * @defaultValue `1`
-		 */
-		limit?: Range<1, 1000>;
-	};
-
-	response: GuildMember[];
-}
-
-/**
- * Adds a user to the guild, provided you have a valid OAuth2 access token for the user with the
- * `guilds.join` scope.
- *
- * @remarks
- * - For guilds with Membership Screening enabled, this endpoint will default to adding new members
- * as `pending` in the guild member object. Members that are `pending` will have to complete
- * membership screening before they become full members that can talk.
- * - The Authorization header must be a Bot token (belonging to the same application used for
- * authorization), and the bot must be a member of the guild with `CREATE_INSTANT_INVITE`
- * permission.
- *
- * @endpoint [PUT](https://discord.com/developers/docs/resources/guild#add-guild-member) `/guilds/{guild.id}/members/{user.id}`
- */
-export interface AddGuildMember {
-	body: {
-		/**
-		 * An OAuth2 access token granted with the `guilds.join` to the bot's application for the
-		 * user to add to the guild.
-		 */
-		access_token: string;
-
-		/**
-		 * Value to set users nickname to. Requires the `MANAGE_NICKNAMES` permission.
-		 */
-		nick?: string;
-
-		/**
-		 * Array of role ids the member is assigned. Requires the `MANAGE_ROLES` permission.
-		 */
-		roles?: Snowflake[];
-
-		/**
-		 * Whether the user is muted in voice channels. Requires the `MUTE_MEMBERS` permission.
-		 */
-		mute?: boolean;
-
-		/**
-		 * Whether the user is deafened in voice channels. Requires the `DEAFEN_MEMBERS` permission.
-		 */
-		deaf?: boolean;
-	};
-
-	response: GuildMember | never;
-}
-
-/**
- * Modify attributes of a guild member.
- *
- * @remarks
- * - If the `channel_id` is set to `null`, this will force the target user to be disconnected from
- * voice.
- * - When moving members to channels, the API user *must* have permissions to both connect to the
- * channel and have the `MOVE_MEMBERS` permission.
- *
- * @endpoint [PATCH](https://discord.com/developers/docs/resources/guild#modify-guild-member) `/guilds/{guild.id}/members/{user.id}`
- */
-export interface ModifyGuildMember {
-	body: {
-		/**
-		 * Value to set users nickname to. Requires the `MANAGE_NICKNAMES` permission.
-		 */
-		nick?: Nullable<string>;
-
-		/**
-		 * Array of role IDs the member is assigned. Requires the `MANAGE_ROLES` permission.
-		 */
-		roles?: Nullable<Snowflake[]>;
-
-		/**
-		 * Whether the user is muted in voice channels. Requires the `MUTE_MEMBERS` permission.
-		 */
-		mute?: Nullable<boolean>;
-
-		/**
-		 * Whether the user is deafened in voice channels. Requires the `DEAFEN_MEMBERS` permission.
-		 */
-		deaf?: Nullable<boolean>;
-
-		/**
-		 * ID of channel to move user to (if they are connected to voice). Requires the
-		 * `MOVE_MEMBERS` permission.
-		 */
-		channel_id?: Nullable<Snowflake>;
-	};
-
-	response: GuildMember;
-}
-
-/**
- * Modifies the current member in a guild.
- *
- * @endpoint [PATCH](https://discord.com/developers/docs/resources/guild#modify-current-member) `/guilds/{guild.id}/members/@me`
- */
-export interface ModifyCurrentMember {
-	body: {
-		/**
-		 * Value to set user's nickname to. Requires the `CHANGE_NICKNAME` permission.
-		 */
-		nick?: Nullable<string>;
-	};
-
-	response: string;
-}
-
-/**
- * Adds a role to a guild member. Requires the `MANAGE_ROLES` permission.
- *
- * @endpoint [PUT](https://discord.com/developers/docs/resources/guild#add-guild-member-role) `/guilds/{guild.id}/members/{user.id}/roles/{role.id}`
- */
-export interface AddGuildMemberRole {
-	response: never;
-}
-
-/**
- * Removes a role from a guild member. Requires the `MANAGE_ROLES` permission.
- *
- * @endpoint [DELETE](https://discord.com/developers/docs/resources/guild#remove-guild-member-role) `/guilds/{guild.id}/members/{user.id}/roles/{role.id}`
- */
-export interface RemoveGuildMemberRole {
-	response: never;
-}
-
-/**
- * Remove a member from a guild. Requires `KICK_MEMBERS` permission.
- *
- * @endpoint [DELETE](https://discord.com/developers/docs/resources/guild#remove-guild-member) `/guilds/{guild.id}/members/{user.id}`
- */
-export interface RemoveGuildMember {
-	response: never;
-}
-
-/**
- * Returns a list of ban objects for the users banned from this guild. Requires the `BAN_MEMBERS`
- * permission.
- *
- * @endpoint [GET](https://discord.com/developers/docs/resources/guild#get-guild-bans) `/guilds/{guild.id}/bans`
- */
-export interface GetGuildBans {
-	response: GuildBan[];
-}
-
-/**
- * Returns a ban object for the given user or a `404 NOT FOUND` if the ban cannot be found. Requires
- * the `BAN_MEMBERS` permission.
- *
- * @endpoint [GET](https://discord.com/developers/docs/resources/guild#get-guild-ban) `/guilds/{guild.id}/bans/{user.id}`
- */
-export interface GetGuildBan {
-	response: GuildBan;
-}
-
-/**
- * Create a guild ban, and optionally delete previous messages sent by the banned user. Requires
- * the `BAN_MEMBERS` permission.
- *
- * @remarks
- * Supplying a reason in the body will override `X-Audit-Log-Reason` header if both are provided.
- *
- * @endpoint [PUT](https://discord.com/developers/docs/resources/guild#create-guild-ban) `/guilds/{guild.id}/bans/{user.id}`
- */
-export interface CreateGuildBan {
-	body: {
-		/**
-		 * Number of days to delete messages for.
-		 */
-		delete_messages_days?: Range<0, 7>;
-		reason?: string;
-	};
-
-	response: never;
-}
-
-/**
- * Remove the ban for a user. Requires the `BAN_MEMBERS` permissions.
- *
- * @endpoint [DELETE](https://discord.com/developers/docs/resources/guild#remove-guild-ban) `/guilds/{guild.id}/bans/{user.id}`
- */
-export interface RemoveGuildBan {
-	response: never;
-}
-
-/**
- * Returns a list of role objects for the guild.
- *
- * @endpoint [GET](https://discord.com/developers/docs/resources/guild#get-guild-roles) `/guilds/{guild.id}/roles`
- */
-export interface GetGuildRoles {
-	response: Role[];
-}
-
-/**
- * Create a new role for the guild. Requires the `MANAGE_ROLES` permission.
- *
- * @endpoint [POST](https://discord.com/developers/docs/resources/guild#create-guild-role) `/guilds/{guild.id}/roles`
- */
-export interface CreateGuildRole {
-	body: {
-		/**
-		 * @defaultValue `new role`
-		 */
-		name?: string;
-
-		/**
-		 * Bitwise value of the enabled/disabled permissions.
-		 *
-		 * @defaultValue `@everyone` permissions in guild
-		 */
-		permissions?: string;
-
-		/**
-		 * RGB color value.
-		 *
-		 * @defaultValue `0`
-		 */
-		color?: number;
-
-		/**
-		 * Whether the role should be displayed separately in the sidebar.
-		 *
-		 * @defaultValue `false`
-		 */
-		hoist?: boolean;
-
-		/**
-		 * Whether the role should be mentionable.
-		 *
-		 * @defaultValue `false`
-		 */
-		mentionable?: boolean;
-	};
-
-	response: Role;
-}
-
-/**
- * Modify the positions of a set of role objects for the guild. Requires the `MANAGE_ROLES`
- * permission.
- *
- * @endpoint [PATCH](https://discord.com/developers/docs/resources/guild#modify-guild-role-positions) `/guilds/{guild.id}/roles`
- */
-export interface ModifyGuildRolePositions {
-	body: {
-		id: Snowflake;
-
-		/**
-		 * Sorting position of the role.
-		 */
-		position?: Nullable<number>;
-	}[];
-
-	response: Role[];
-}
-
-/**
- * Modify a guild role. Requires the `MANAGE_ROLES` permission.
- *
- * @endpoint [PATCH](https://discord.com/developers/docs/resources/guild#modify-guild-role) `/guilds/{guild.id}/roles/{role.id}`
- */
-export interface ModifyGuildRole {
-	body: {
-		name?: Nullable<string>;
-
-		/**
-		 * Bitwise value of the enabled/disabled permissions.
-		 */
-		permissions?: Nullable<string>;
-
-		/**
-		 * RGB color value.
-		 */
-		color?: Nullable<number>;
-
-		/**
-		 * Whether the role should be displayed separately in the sidebar.
-		 */
-		hoist?: Nullable<boolean>;
-
-		/**
-		 * Whether the role should be mentionable.
-		 */
-		mentionable?: Nullable<boolean>;
-	};
-
-	response: Role;
-}
-
-/**
- * Delete a guild role. Requires the `MANAGE_ROLES` permission.
- *
- * @endpoint [DELETE](https://discord.com/developers/docs/resources/guild#delete-guild-role) `/guilds/{guild.id}/roles/{role.id}`
- */
-export interface DeleteGuildRole {
-	response: never;
-}
-
-/**
- * Requires the `KICK_MEMBERS` permission.
- *
- * @remarks
- * By default, prune will not remove users with roles. Specific roles can optionally be included in
- * the prune by providing the `include_roles` parameter. Any inactive user that has a subset of the
- * provided role(s) will be counted in the prune and users with additional roles will not.
- *
- * @endpoint [GET](https://discord.com/developers/docs/resources/guild#get-guild-prune-count) `/guilds/{guild.id}/prune`
- */
-export interface GetGuildPruneCount {
-	query: {
-		/**
-		 * Number of days to count prune for.
-		 *
-		 * @defaultValue `7`
-		 */
-		days?: Range<1, 30>;
-		include_roles?: Snowflake[];
-	};
-
-	response: {
-		/**
-		 * The number of members that would be removed in a prune operation.
-		 */
-		pruned: number;
-	};
-}
-
-/**
- * Begin a prune operation. Requires the `KICK_MEMBERS` permission.
- *
- * @remarks
- * For large guilds it's recommended to set the `compute_prune_count` option to `false`, forcing
- * `pruned` to `null`.
- *
- * By default, prune will not remove users with roles. Specific roles can optionally be included in
- * the prune by providing the `include_roles` parameter. Any inactive user that has a subset of
- * the provided role(s) will be counted in the prune and users with additional roles will not.
- *
- * Supplying a reason in the body will override `X-Audit-Log-Reason` header if both are provided.
- *
- * @endpoint [POST](https://discord.com/developers/docs/resources/guild#begin-guild-prune)`/guilds/{guild.id}/prune`
- */
-export interface BeginGuildPrune {
-	body: GetGuildPruneCount['query'] & {
-		/**
-		 * Whether `pruned` is returned, discouraged for large guilds.
-		 *
-		 * @defaultValue `true`
-		 */
-		compute_prune_count?: boolean;
-		reason?: string;
-	};
-
-	response: GetGuildPruneCount['response'];
-}
-
-/**
- * Returns a list of voice region objects for the guild.
- *
- * Unlike the similar `/voice` route, this returns VIP servers when the guild is VIP-enabled.
- *
- * @endpoint [GET](https://discord.com/developers/docs/resources/guild#get-guild-voice-regions) `/guilds/{guild.id}/regions`
- */
-export interface GetGuildVoiceRegions {
-	response: VoiceRegion[];
-}
-
-/**
- * Returns a list of invite objects (with invite metadata) for the guild. Requires the
- * `MANAGE_GUILD` permission.
- *
- * @endpoint [GET](https://discord.com/developers/docs/resources/guild#get-guild-invites) `/guilds/{guild.id}/invites`
- */
-export interface GetGuildInvites {
-	response: InviteMetadata[];
-}
-
-/**
- * Returns a list of integration objects for the guild. Requires the `MANAGE_GUILD` permission.
- *
- * @endpoint [GET](https://discord.com/developers/docs/resources/guild#get-guild-integrations) `/guilds/{guild.id}/integrations`
- */
-export interface GetGuildIntegrations {
-	response: Integration[];
-}
-
-/**
- * Sync an integration. Requires the `MANAGE_GUILD` permission.
- *
- * @endpoint [POST](https://discord.com/developers/docs/resources/guild#sync-guild-integration) `/guilds/{guild.id}/integrations/{integration.id}/sync`
- */
-export interface SyncGuildIntegration {
-	response: never;
-}
-
-/**
- * Returns a guild widget object.
- *
- * @endpoint [GET](https://discord.com/developers/docs/resources/guild#get-guild-widget-settings) `/guilds/{guild.id}/widget`
- */
-export type GetGuildWidgetSettings = GuildWidget;
-
-/**
- * Modify a guild widget object for the guild. Requires the `MANAGE_GUILD` permission.
- *
- * @endpoint [PATCH](https://discord.com/developers/docs/resources/guild#modify-guild-widget) `/guilds/{guild.id}/widget`
- */
-export interface ModifyGuildWidget {
-	body: Partial<GuildWidget>;
-	response: GuildWidget;
-}
-
-/**
- * Returns the widget for the guild.
- *
- * @endpoint [GET](https://discord.com/developers/docs/resources/guild#get-guild-widget) `/guilds/{guild.id}/widget.json`
- */
-export interface GetGuildWidget {
-	response: GuildWidget;
-}
-
-/**
- * Returns a partial invite object for guilds with that feature enabled. Requires the
- * `MANAGE_GUILD` permission.
- *
- * `code` will be `null` if a vanity URL for the guild is not set.
- *
- * @endpoint [GET](https://discord.com/developers/docs/resources/guild#get-guild-vanity-url) `/guilds/{guild.id}/vanity-url`
- */
-export interface GetGuildVanityURL {
-	response: PartialInvite;
-}
-
-/**
- * Returns a PNG image widget for the guild. Requires no permissions or authentication.
- *
- * @endpoint [GET](https://discord.com/developers/docs/resources/guild#get-guild-widget-image) `/guilds/{guild.id}/widget.png`
- */
-export interface GetWidgetImage {
-	query: {
-		/**
-		 * Style of the widget image returned.
-		 *
-		 * @defaultValue `shield`
-		 */
-		style?: WidgetStyle;
-	};
-
-	response: unknown;
-}
-
-/**
- * @source {@link https://discord.com/developers/docs/resources/guild#get-guild-widget-image-widget-style-options|Guild}
- */
-export type WidgetStyle = 'shield' | 'banner1' | 'banner2' | 'banner3' | 'banner4';
-
-/**
- * Returns the Welcome Screen object for the guild.
- *
- * @endpoint [GET](https://discord.com/developers/docs/resources/guild#get-guild-welcome-screen) `/guilds/{guild.id}/welcome-screen`
- */
-export interface GetGuildWelcomeScreen {
-	response: WelcomeScreen;
-}
-
-/**
- * Modify the guild's Welcome Screen. Requires the `MANAGE_GUILD` permission.
- *
- * @endpoint [PATCH](https://discord.com/developers/docs/resources/guild#modify-guild-welcome-screen) `/guilds/{guild.id}/welcome-screen`
- */
-export interface ModifyGuildWelcomeScreen {
-	body: {
-		/**
-		 * Whether the welcome screen is enabled.
-		 */
-		enabled?: Nullable<boolean>;
-
-		/**
-		 * Channels linked in the welcome screen and their display options.
-		 */
-		welcome_channels?: Nullable<WelcomeScreenChannel[]>;
-
-		/**
-		 * The server description to show in the welcome screen.
-		 */
-		description?: Nullable<string>;
-	};
-
-	response: WelcomeScreen;
-}
-
-/**
- * Updates the current user's voice state.
- *
- * @remarks
- * - `channel_id` must currently point to a stage channel.
- * - The current user must already have joined `channel_id`.
- * - You must have the `MUTE_MEMBERS` permission to unsuppress yourself. You can always suppress
- * yourself.
- * - You must have the `REQUEST_TO_SPEAK` permission to request to speak. You can always clear your
- * own request to speak.
- * - You are able to set `request_to_speak_timestamp` to any present or future time.
- *
- * @endpoint [PATCH](https://discord.com/developers/docs/resources/guild#update-current-user-voice-state) `/guilds/{guild.id}/voice-states/@me`
- */
-export interface ModifyCurrentUserVoiceState {
-	body: {
-		/**
-		 * The ID of the channel the user is currently in.
-		 */
-		channel_id: Snowflake;
-
-		/**
-		 * Toggles the user's suppress state.
-		 */
-		suppress?: boolean;
-
-		/**
-		 * Sets the user's request to speak.
-		 */
-		request_to_speak_timestamp?: Nullable<string>;
-	};
-}
-
-/**
- * Updates another user's voice state.
- *
- * @remarks
- * - `channel_id` must currently point to a stage channel.
- * - User must already have joined `channel_id`.
- * - You must have the `MUTE_MEMBERS` permission (since suppression is the only thing that is
- * available currently).
- * - When unsuppressed, non-bot users will have their `request_to_speak_timestamp` set to the
- * current time. Bot users will not.
- * - When suppressed, the user will have their `request_to_speak_timestamp` removed.
- *
- * @endpoint [PATCH](https://discord.com/developers/docs/resources/guild#update-user-voice-state) `/guilds/{guild.id}/voice-states/{user.id}`
- */
-export type ModifyUserVoiceState = { body: Omit<ModifyCurrentUserVoiceState['body'], 'request_to_speak_timestamp'> };
-
-/**
- * Returns the discovery metadata object for the guild. Requires the `MANAGE_GUILD` permission.
- *
- * @endpoint GET `/guilds/{guild.id}/discovery-metadata`
- */
-export interface GetGuildDiscoveryMetadata {
-	response: DiscoveryMetadata;
-}
-
-/**
- * Modify the discovery metadata for the guild. Requires the `MANAGE_GUILD` permission.
- *
- * @endpoint PATCH `/guilds/{guild.id}/discovery-metadata`
- */
-export interface ModifyGuildDiscoveryMetadata {
-	body: {
-		/**
-		 * The ID of the primary discovery category.
-		 *
-		 * @defaultValue `0`
-		 */
-		primary_category_id?: Nullable<number>;
-
-		/**
-		 * Discovery search keywords.
-		 *
-		 * @defaultValue `null`
-		 */
-		keywords?: Nullable<Partial<Tuple<string, 10>>>;
-
-		/**
-		 * Whether guild info is shown when custom emojis are clicked.
-		 *
-		 * @defaultValue `true`
-		 */
-		emoji_discoverability_enabled?: Nullable<boolean>;
-	};
-
-	response: DiscoveryMetadata;
-}
-
-/**
- * Add a discovery subcategory to the guild. Requires the `MANAGE_GUILD` permission.
- *
- * @endpoint POST `/guilds/{guild.id}/discovery-categories/{category.id}`
- */
-export interface AddGuildDiscoverySubcategory {
-	response: GuildIdentifiable & {
-		/**
-		 * The ID of the subcategory added.
-		 */
-		category_id: number;
-	};
-}
-
-/**
- * Removes a discovery subcategory from the guild. Requires the `MANAGE_GUILD` permission.
- *
- * @endpoint DELETE `/guilds/{guild.id}/discovery-categories/{category.id}`
- */
-export interface RemoveGuildDiscoverySubcategory {
-	response: never;
-}
-
-/**
- * Modify the guild's Membership Screening form. Requires the `MANAGE_GUILD` permission.
- *
- * @endpoint PATCH `/guilds/{guild.id}/member-verification`
- */
-export interface ModifyMembershipScreening {
-	body: {
-		enabled?: boolean;
-
-		/**
-		 * Array of field objects serialized in a string.
-		 */
-		form_fields?: string;
-
-		/**
-		 * The server description to show in the screening form.
-		 */
-		description?: string;
-	};
-
-	response: MembershipScreening;
-}
-
-// !SECTION

@@ -75,7 +75,7 @@ export interface VoiceState extends Partial<GuildIdentifiable> {
  */
 export interface VoiceRegion extends Identifiable {
 	/**
-	 * `rue` if this is a VIP-only server.
+	 * `true` if this is a VIP-only server.
 	 */
 	vip: boolean;
 
@@ -90,20 +90,7 @@ export interface VoiceRegion extends Identifiable {
 	deprecated: boolean;
 
 	/**
-	 * Whether this is a custom voice region (used for events/etc.).
+	 * Whether this is a custom voice region.
 	 */
 	custom: boolean;
 }
-
-// SECTION Endpoints
-
-/**
- * Returns an array of voice region objects that can be used when creating servers.
- *
- * @endpoint [GET](https://discord.com/developers/docs/resources/voice#list-voice-regions) `/voice/regions`
- */
-export interface ListVoiceRegions {
-	response: VoiceRegion[];
-}
-
-// !SECTION
