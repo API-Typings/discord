@@ -1,6 +1,6 @@
 import type { Nullable } from 'extended-utility-types';
-import type { Guild, Snowflake, User } from '../';
-import type { BaseChannel, GuildIdentifiable, Identifiable, WithType } from '../__internal__';
+import type { Guild, Snowflake } from '../';
+import type { BaseChannel, BaseWebhook, WithType } from '../__internal__';
 
 /**
  * Represents a low-effort way to post messages to channels. They do not require a bot user or
@@ -8,52 +8,62 @@ import type { BaseChannel, GuildIdentifiable, Identifiable, WithType } from '../
  *
  * @source {@link https://discord.com/developers/docs/resources/webhook#webhook-object-webhook-structure|Webhook}
  */
-export interface Webhook extends Identifiable, Partial<GuildIdentifiable>, WithType<WebhookType> {
+export type Webhook = IncomingWebhook | ChannelFollowerWebhook | ApplicationWebhook;
+
+/**
+ * @source {@link https://discord.com/developers/docs/resources/webhook#webhook-object-example-incoming-webhook|Webhook}
+ */
+export interface IncomingWebhook extends BaseWebhook, WithType<WebhookType.Incoming> {
 	/**
-	 * The channel ID this webhook is for, if any.
+	 * The guild ID this webhook is for.
 	 */
-	channel_id: Nullable<Snowflake>;
+	guild_id: Snowflake;
 
 	/**
-	 * The user this webhook was created by (not returned when getting a webhook with its token).
+	 * The channel ID this webhook is for.
 	 */
-	user?: User;
+	channel_id: Snowflake;
 
 	/**
-	 * The default name of the webhook.
+	 * The secure token of the webhook.
 	 */
-	name: Nullable<string>;
-
-	/**
-	 * The default user avatar hash of the webhook.
-	 */
-	avatar: Nullable<string>;
-
-	/**
-	 * The secure token of the webhook (returned for Incoming Webhooks).
-	 */
-	token?: string;
+	token: string;
 
 	/**
 	 * The bot/OAuth2 application that created this webhook.
 	 */
 	application_id: Nullable<Snowflake>;
+}
+
+/**
+ * @source {@link https://discord.com/developers/docs/resources/webhook#webhook-object-example-channel-follower-webhook|Webhook}
+ */
+export interface ChannelFollowerWebhook
+	extends BaseWebhook,
+		WithType<WebhookType.ChannelFollower>,
+		Omit<IncomingWebhook, 'type' | 'token'> {
+	/**
+	 * The guild of the channel that this webhook is following.
+	 */
+	source_guild: Pick<Guild, 'id' | 'name' | 'icon'>;
 
 	/**
-	 * The guild of the channel that this webhook is following (returned for Channel Follower
-	 * Webhooks).
+	 * The channel that this webhook is following.
 	 */
-	source_guild?: Pick<Guild, 'id' | 'name' | 'icon'>;
+	source_channel: Pick<BaseChannel, 'id' | 'name'>;
+}
+
+/**
+ * @source {@link https://discord.com/developers/docs/resources/webhook#webhook-object-example-application-webhook|Webhook}
+ */
+export interface ApplicationWebhook extends Omit<BaseWebhook, 'user'>, WithType<WebhookType.Application> {
+	guild_id?: null;
+	channel_id: null;
 
 	/**
-	 * The channel that this webhook is following (returned for Channel Follower Webhooks).
+	 * The bot/OAuth2 application that created this webhook.
 	 */
-	source_channel?: Pick<BaseChannel, 'id' | 'name'>;
-
-	/**
-	 * The URL used for executing the webhook (returned by the Webhooks OAuth2 flow).
-	 */
-	url?: WebhookURL;
+	application_id: Snowflake;
 }
 
 export type WebhookURL = `https://discord.com/api/webhooks/${Snowflake}/${string}`;

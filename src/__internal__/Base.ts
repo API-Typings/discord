@@ -1,5 +1,14 @@
 import type { Nullable } from 'extended-utility-types';
-import type { ComponentType, InteractionRequestType, Overwrite, PartialEmoji, Snowflake, StickerItem } from '../';
+import type {
+	ComponentType,
+	InteractionRequestType,
+	Overwrite,
+	PartialEmoji,
+	Snowflake,
+	StickerItem,
+	User,
+	WebhookURL
+} from '../';
 import type { GuildIdentifiable, Identifiable, WithType } from './';
 
 export interface BaseButton extends WithType<ComponentType.Button> {
@@ -62,4 +71,26 @@ export interface BaseInteraction extends Identifiable, WithType<InteractionReque
 
 export interface BaseSticker extends StickerItem {
 	description: string;
+}
+
+export interface BaseWebhook extends Identifiable {
+	/**
+	 * The user this webhook was created by (not returned when getting a webhook with its token).
+	 */
+	user?: User;
+
+	/**
+	 * The default name of the webhook.
+	 */
+	name: Nullable<string>;
+
+	/**
+	 * The default user avatar hash of the webhook.
+	 */
+	avatar: Nullable<string>;
+
+	/**
+	 * The URL used for executing the webhook (returned by the webhooks OAuth2 flow).
+	 */
+	url?: WebhookURL;
 }
