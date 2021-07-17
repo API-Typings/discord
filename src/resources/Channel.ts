@@ -145,7 +145,7 @@ export interface TextChannel extends BaseChannel, WithType<ChannelType.GuildText
 	 * Default duration for newly created threads, in minutes, to automatically archive the thread
 	 * after recent activity.
 	 */
-	default_auto_archive_duration: 60 | 1440 | 4320 | 10080;
+	default_auto_archive_duration: AutoArchiveDuration;
 }
 
 /**
